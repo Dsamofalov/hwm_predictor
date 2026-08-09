@@ -1,0 +1,51 @@
+{
+  "warid": "1629982434",
+  "show": "N2H5oWnk",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629982434&show=N2H5oWnk",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629982434\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629982434&lastturn=-3&show=N2H5oWnk",
+        "status_code": 200,
+        "bytes": 50407,
+        "elapsed_ms": 2634.7,
+        "sha256": "e0c852c15bca55a3d047621c243165f4fc7832c2305879a18c57404baca4b599",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629982434&lastturn=-3&show=N2H5oWnk"
+      }
+    ],
+    "bytes": 50407,
+    "sha256": "e0c852c15bca55a3d047621c243165f4fc7832c2305879a18c57404baca4b599",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629982434\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629982434&lastturn=0&show=N2H5oWnk",
+        "status_code": 200,
+        "bytes": 5394,
+        "elapsed_ms": 257.9,
+        "sha256": "2f7fbf31010111c6fc104c9866e990ab35d26180728dc84de5dec3f5b3f3376f",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629982434&lastturn=0&show=N2H5oWnk"
+      }
+    ],
+    "bytes": 5394,
+    "sha256": "2f7fbf31010111c6fc104c9866e990ab35d26180728dc84de5dec3f5b3f3376f",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278248.5197353
+}

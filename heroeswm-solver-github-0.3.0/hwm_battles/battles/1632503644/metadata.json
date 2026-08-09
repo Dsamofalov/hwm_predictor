@@ -1,0 +1,37 @@
+{
+  "warid": "1632503644",
+  "show": "NDAdKa1I",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632503644&show=NDAdKa1I",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632503644\\init.txt",
+    "bytes": 34197,
+    "sha256": "991c2f8f3522c7a1d5f5356600f72f8c0ad2a7d1ffa68bc5c58547a3da0ffc5d"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632503644\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632503644&lastturn=0&show=NDAdKa1I",
+        "status_code": 200,
+        "bytes": 4054,
+        "elapsed_ms": 439.7,
+        "sha256": "2aa80edb365ff8a05bbcd3f067b00893c9ed18c0d8942777aa56c6c6aa569836",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632503644&lastturn=0&show=NDAdKa1I"
+      }
+    ],
+    "bytes": 4054,
+    "sha256": "2aa80edb365ff8a05bbcd3f067b00893c9ed18c0d8942777aa56c6c6aa569836",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278177.5633433
+}

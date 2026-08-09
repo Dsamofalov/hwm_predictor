@@ -1,0 +1,37 @@
+{
+  "warid": "1632243389",
+  "show": "NpYLReo9",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632243389&show=NpYLReo9",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632243389\\init.txt",
+    "bytes": 31312,
+    "sha256": "f157298424bd2b99fda95ad86f21375b89e97221d98b791f5eec0250e74e3232"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632243389\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632243389&lastturn=0&show=NpYLReo9",
+        "status_code": 200,
+        "bytes": 3321,
+        "elapsed_ms": 501.4,
+        "sha256": "4ed49d01f5ca5cd100df9b54e7a7a1576e40ae01c300f669ce08390017bf63b6",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632243389&lastturn=0&show=NpYLReo9"
+      }
+    ],
+    "bytes": 3321,
+    "sha256": "4ed49d01f5ca5cd100df9b54e7a7a1576e40ae01c300f669ce08390017bf63b6",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278179.6089394
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1632010686",
+  "show": "NJomeazT",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632010686&show=NJomeazT",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632010686\\init.txt",
+    "bytes": 32590,
+    "sha256": "bb047cbcba65233f9c828a469de0680dd7edd013d4ad24480095d672bf5684a0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632010686\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632010686&lastturn=0&show=NJomeazT",
+        "status_code": 200,
+        "bytes": 5908,
+        "elapsed_ms": 274.2,
+        "sha256": "99bb3bd63977e7d73af82073ac64cb8863130d2eb5fe2bd244106a403858de94",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632010686&lastturn=0&show=NJomeazT"
+      }
+    ],
+    "bytes": 5908,
+    "sha256": "99bb3bd63977e7d73af82073ac64cb8863130d2eb5fe2bd244106a403858de94",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278216.246783
+}

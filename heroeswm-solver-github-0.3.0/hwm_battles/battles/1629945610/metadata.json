@@ -1,0 +1,51 @@
+{
+  "warid": "1629945610",
+  "show": "NBIK8CTD",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629945610&show=NBIK8CTD",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629945610\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629945610&lastturn=-3&show=NBIK8CTD",
+        "status_code": 200,
+        "bytes": 55650,
+        "elapsed_ms": 2125.2,
+        "sha256": "4022bcfea646757345e1f72066349b885320ed9230540c87f5e8fac857141952",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629945610&lastturn=-3&show=NBIK8CTD"
+      }
+    ],
+    "bytes": 55650,
+    "sha256": "4022bcfea646757345e1f72066349b885320ed9230540c87f5e8fac857141952",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629945610\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629945610&lastturn=0&show=NBIK8CTD",
+        "status_code": 200,
+        "bytes": 10781,
+        "elapsed_ms": 2067.1,
+        "sha256": "72530f19d4ae82d163b2bda3783bdbe7b46db50dc3a49138a99875d567ea01fc",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629945610&lastturn=0&show=NBIK8CTD"
+      }
+    ],
+    "bytes": 10781,
+    "sha256": "72530f19d4ae82d163b2bda3783bdbe7b46db50dc3a49138a99875d567ea01fc",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278244.8538108
+}

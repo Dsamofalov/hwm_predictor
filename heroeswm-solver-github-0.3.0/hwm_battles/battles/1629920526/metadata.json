@@ -1,0 +1,51 @@
+{
+  "warid": "1629920526",
+  "show": "NvTu_uEp",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629920526&show=NvTu_uEp",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629920526\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629920526&lastturn=-3&show=NvTu_uEp",
+        "status_code": 200,
+        "bytes": 32200,
+        "elapsed_ms": 1328.4,
+        "sha256": "67df345bd3e14fc941aff0f3c3856097c06932697dc44728860d8fbf3042cdbb",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629920526&lastturn=-3&show=NvTu_uEp"
+      }
+    ],
+    "bytes": 32200,
+    "sha256": "67df345bd3e14fc941aff0f3c3856097c06932697dc44728860d8fbf3042cdbb",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629920526\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629920526&lastturn=0&show=NvTu_uEp",
+        "status_code": 200,
+        "bytes": 4759,
+        "elapsed_ms": 1219.8,
+        "sha256": "6a0c8dfe5a30ed94bec1a947907d86c24038cc184893ca9de69417a016dd9286",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629920526&lastturn=0&show=NvTu_uEp"
+      }
+    ],
+    "bytes": 4759,
+    "sha256": "6a0c8dfe5a30ed94bec1a947907d86c24038cc184893ca9de69417a016dd9286",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278238.6419332
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1631786049",
+  "show": "Npvhl-ZY",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631786049&show=Npvhl-ZY",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631786049\\init.txt",
+    "bytes": 29131,
+    "sha256": "93359fad3df881ccd5f394185eeb923b289dfe96899a742c2b8aef4c7f82086e"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631786049\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631786049&lastturn=0&show=Npvhl-ZY",
+        "status_code": 200,
+        "bytes": 2436,
+        "elapsed_ms": 209.5,
+        "sha256": "c97eeeadf6a554f8bbcfdf5c012bbf63847c9f19b31531865c18cefaa03c3941",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631786049&lastturn=0&show=Npvhl-ZY"
+      }
+    ],
+    "bytes": 2436,
+    "sha256": "c97eeeadf6a554f8bbcfdf5c012bbf63847c9f19b31531865c18cefaa03c3941",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278196.090205
+}

@@ -1,0 +1,43 @@
+{
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "accepted_train_rows": 41944,
+  "creature_side_profiles": 781,
+  "global": {
+    "PLAYER": {
+      "MELEE_ATTACK": 10258,
+      "RANGED_ATTACK": 5947,
+      "HERO_ACTION": 3132,
+      "MOVE": 2634,
+      "WAIT": 2358,
+      "CAST_OR_ABILITY": 1202,
+      "ABILITY": 813,
+      "DEFEND": 1473
+    },
+    "PVE": {
+      "MELEE_ATTACK": 5175,
+      "HERO_ACTION": 1751,
+      "RANGED_ATTACK": 2718,
+      "WAIT": 548,
+      "ABILITY": 846,
+      "MOVE": 2466,
+      "CAST_OR_ABILITY": 442,
+      "DEFEND": 181
+    }
+  },
+  "heldout_metrics": {
+    "PLAYER": {
+      "rows": 6785,
+      "top1_action_type": 0.7075902726602801,
+      "top3_action_type": 0.9345615327929255,
+      "nll": 0.8869598184968611
+    },
+    "PVE": {
+      "rows": 3625,
+      "top1_action_type": 0.6281379310344828,
+      "top3_action_type": 0.961103448275862,
+      "nll": 0.9201708874976302
+    }
+  },
+  "out": "models/policy_priors.csv"
+}

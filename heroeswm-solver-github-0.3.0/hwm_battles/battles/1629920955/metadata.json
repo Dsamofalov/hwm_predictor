@@ -1,0 +1,51 @@
+{
+  "warid": "1629920955",
+  "show": "NKQETGts",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629920955&show=NKQETGts",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629920955\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629920955&lastturn=-3&show=NKQETGts",
+        "status_code": 200,
+        "bytes": 38144,
+        "elapsed_ms": 469.7,
+        "sha256": "dca90b9a5424b0a466dd777bf9d91faa3ac2e8af7db831ddc39417e06a0f9d34",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629920955&lastturn=-3&show=NKQETGts"
+      }
+    ],
+    "bytes": 38144,
+    "sha256": "dca90b9a5424b0a466dd777bf9d91faa3ac2e8af7db831ddc39417e06a0f9d34",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629920955\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629920955&lastturn=0&show=NKQETGts",
+        "status_code": 200,
+        "bytes": 5704,
+        "elapsed_ms": 272.9,
+        "sha256": "d7d9853abcfabe14c0948dc783c37d395b19cd10f9d6ee53bedb2ee96a3324e3",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629920955&lastturn=0&show=NKQETGts"
+      }
+    ],
+    "bytes": 5704,
+    "sha256": "d7d9853abcfabe14c0948dc783c37d395b19cd10f9d6ee53bedb2ee96a3324e3",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278237.032325
+}

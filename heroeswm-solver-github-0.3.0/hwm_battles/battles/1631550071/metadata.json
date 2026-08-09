@@ -1,0 +1,37 @@
+{
+  "warid": "1631550071",
+  "show": "NyyoauL-",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631550071&show=NyyoauL-",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631550071\\init.txt",
+    "bytes": 46948,
+    "sha256": "1a37548addb93ef68edce66c8da4db9745630e621b7e1d1c05ee38f1764cd547"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631550071\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631550071&lastturn=0&show=NyyoauL-",
+        "status_code": 200,
+        "bytes": 6428,
+        "elapsed_ms": 224.4,
+        "sha256": "9598145c042913f5cafafe26608c33541641dfbf272d1990f2f39bf821255435",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631550071&lastturn=0&show=NyyoauL-"
+      }
+    ],
+    "bytes": 6428,
+    "sha256": "9598145c042913f5cafafe26608c33541641dfbf272d1990f2f39bf821255435",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278182.6095603
+}

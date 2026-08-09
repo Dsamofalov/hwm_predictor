@@ -1,0 +1,37 @@
+{
+  "warid": "1632081239",
+  "show": "NohsiVMI",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632081239&show=NohsiVMI",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632081239\\init.txt",
+    "bytes": 49469,
+    "sha256": "d22853ea55c4a867857746e7635441a2f004b6cd32275f5a20f069597ea1215d"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632081239\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632081239&lastturn=0&show=NohsiVMI",
+        "status_code": 200,
+        "bytes": 4145,
+        "elapsed_ms": 2124.0,
+        "sha256": "d6bf7c577f53c3376f8c463aef0ea73da3df7f88619f8ffac9dd324e2fc6cdf5",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632081239&lastturn=0&show=NohsiVMI"
+      }
+    ],
+    "bytes": 4145,
+    "sha256": "d6bf7c577f53c3376f8c463aef0ea73da3df7f88619f8ffac9dd324e2fc6cdf5",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278169.6344824
+}

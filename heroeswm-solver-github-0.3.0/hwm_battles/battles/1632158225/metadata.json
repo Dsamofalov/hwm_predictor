@@ -1,0 +1,37 @@
+{
+  "warid": "1632158225",
+  "show": "Ngfl569t",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632158225&show=Ngfl569t",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632158225\\init.txt",
+    "bytes": 34745,
+    "sha256": "be9400d139fda40f50fe74b8cb58a0872ff7a8711fba21e42c39b4d1f2e173f3"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632158225\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632158225&lastturn=0&show=Ngfl569t",
+        "status_code": 200,
+        "bytes": 8060,
+        "elapsed_ms": 210.4,
+        "sha256": "69233ac0f7b9f682c36710c2c7274e8942f8e1f8ddaa3010418cd30240ef1160",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632158225&lastturn=0&show=Ngfl569t"
+      }
+    ],
+    "bytes": 8060,
+    "sha256": "69233ac0f7b9f682c36710c2c7274e8942f8e1f8ddaa3010418cd30240ef1160",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278211.754533
+}

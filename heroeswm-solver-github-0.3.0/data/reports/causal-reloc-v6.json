@@ -1,0 +1,1614 @@
+[
+  {
+    "battle": "1632611001",
+    "idx": 5,
+    "actor": 15,
+    "cid": 314,
+    "from": [
+      2,
+      10
+    ],
+    "dest": [
+      12,
+      9
+    ],
+    "dist": 10,
+    "speed": 5.0,
+    "type": "MOVE",
+    "raw": "m0151209l015morale^i0150050",
+    "special": [],
+    "prev": {
+      "idx": 4,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "RANGED_ATTACK",
+      "target": 3,
+      "special": [
+        "rag"
+      ],
+      "raw": "m0120202Srag012000500050000d0120030000000972l012morale^i0120050"
+    }
+  },
+  {
+    "battle": "1632626086",
+    "idx": 24,
+    "actor": 10,
+    "cid": 89,
+    "from": [
+      2,
+      4
+    ],
+    "dest": [
+      8,
+      4
+    ],
+    "dist": 6,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0100804Srag010001500100000d0100030000000234d0030100000001040Sra20100000-1500031i0010000Sraa001001000300000i0100100",
+    "special": [
+      "rag",
+      "ra2",
+      "raa"
+    ],
+    "prev": {
+      "idx": 23,
+      "actor": 8,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 5,
+      "special": [
+        "rag",
+        "ral",
+        "blt",
+        "raa"
+      ],
+      "raw": "m0081102Srag008002250100000Sral008110000000000l008luck^d0080050000002418Sblt011100000000008Sraa001001000200000i0080100"
+    }
+  },
+  {
+    "battle": "1632629367",
+    "idx": 4,
+    "actor": 12,
+    "cid": 89,
+    "from": [
+      2,
+      10
+    ],
+    "dest": [
+      12,
+      9
+    ],
+    "dist": 10,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0121209Srag012001000100000d0120070000000081l012morale^i0120050",
+    "special": [
+      "rag"
+    ],
+    "prev": {
+      "idx": 3,
+      "actor": 14,
+      "side": "PLAYER",
+      "type": "CAST_OR_ABILITY",
+      "target": null,
+      "special": [
+        "slw",
+        "rag"
+      ],
+      "raw": "m0140110Sslw014007040200020Srag014000400040000l014morale^i0140050"
+    }
+  },
+  {
+    "battle": "1632629367",
+    "idx": 13,
+    "actor": 14,
+    "cid": 545,
+    "from": [
+      1,
+      10
+    ],
+    "dest": [
+      11,
+      10
+    ],
+    "dist": 10,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0141110Srag014001400100000d0140060000000008d0060140000000524Senr010100000000001i0010000Sraa001001000300000Srag010000600030000i0140100",
+    "special": [
+      "rag",
+      "enr",
+      "raa",
+      "rag"
+    ],
+    "prev": {
+      "idx": 12,
+      "actor": 3,
+      "side": "PVE",
+      "type": "MELEE_ATTACK",
+      "target": 11,
+      "special": [
+        "ra2",
+        "slw"
+      ],
+      "raw": "m0030803d0030110000000093Sra20110151-3800023d0110030000000241Sslw011003000300030i0030100"
+    }
+  },
+  {
+    "battle": "1632638597",
+    "idx": 1,
+    "actor": 16,
+    "cid": 89,
+    "from": [
+      2,
+      2
+    ],
+    "dest": [
+      12,
+      2
+    ],
+    "dist": 10,
+    "speed": 4.0,
+    "type": "MOVE",
+    "raw": "m0161202i0160100",
+    "special": [],
+    "prev": {
+      "idx": 0,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "car"
+      ],
+      "raw": "m0110103Scar011016010309010l011morale^i0110050"
+    }
+  },
+  {
+    "battle": "1632659676",
+    "idx": 4,
+    "actor": 11,
+    "cid": 89,
+    "from": [
+      2,
+      2
+    ],
+    "dest": [
+      12,
+      1
+    ],
+    "dist": 10,
+    "speed": 4.0,
+    "type": "MOVE",
+    "raw": "m0111201i0110100",
+    "special": [],
+    "prev": {
+      "idx": 3,
+      "actor": 10,
+      "side": "PLAYER",
+      "type": "RANGED_ATTACK",
+      "target": 3,
+      "special": [
+        "rag"
+      ],
+      "raw": "m0100101Srag010000500050000d0100030000002686l010morale^i0100050"
+    }
+  },
+  {
+    "battle": "1632700291",
+    "idx": 94,
+    "actor": 13,
+    "cid": 587,
+    "from": [
+      6,
+      1
+    ],
+    "dest": [
+      1,
+      2
+    ],
+    "dist": 5,
+    "speed": 4.0,
+    "type": "MOVE",
+    "raw": "m0130102i0130100",
+    "special": [],
+    "prev": {
+      "idx": 93,
+      "actor": 2,
+      "side": "PLAYER",
+      "type": "HERO_ACTION",
+      "target": null,
+      "special": [
+        "ltn"
+      ],
+      "raw": "m0020002Sltn002021005000495i0020100"
+    }
+  },
+  {
+    "battle": "1632715976",
+    "idx": 5,
+    "actor": 10,
+    "cid": 162,
+    "from": [
+      1,
+      5
+    ],
+    "dest": [
+      9,
+      5
+    ],
+    "dist": 8,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0100905d0100080000001296b0081105I0080010d0080100000000701l010morale^i0100050Srn2010000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 4,
+      "actor": 10,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0100105Srn2010002100100000"
+    }
+  },
+  {
+    "battle": "1632715976",
+    "idx": 66,
+    "actor": 15,
+    "cid": 165,
+    "from": [
+      1,
+      4
+    ],
+    "dest": [
+      7,
+      5
+    ],
+    "dist": 6,
+    "speed": 3.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0150705d0150210000000568d0210150000000050i0150100",
+    "special": [],
+    "prev": {
+      "idx": 65,
+      "actor": 21,
+      "side": "PVE",
+      "type": "MELEE_ATTACK",
+      "target": 10,
+      "special": [],
+      "raw": "m0210706d0210100000000104d0100210000000464i0210100"
+    }
+  },
+  {
+    "battle": "1632719202",
+    "idx": 8,
+    "actor": 12,
+    "cid": 168,
+    "from": [
+      1,
+      9
+    ],
+    "dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120909d0120030000000272d0030120000000039Ssld012003000006000i0030000i0120100Srn2012000000000000",
+    "special": [
+      "sld",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 7,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0120109Srn2012001100100000"
+    }
+  },
+  {
+    "battle": "1632719202",
+    "idx": 16,
+    "actor": 16,
+    "cid": 163,
+    "from": [
+      2,
+      1
+    ],
+    "dest": [
+      10,
+      5
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0161005l016luck^d0160070000000000d0070160000000813Senr010100000000002i0160100Srn2016000000000000",
+    "special": [
+      "enr",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 15,
+      "actor": 16,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0160201Srn2016001100000000"
+    }
+  },
+  {
+    "battle": "1632870335",
+    "idx": 5,
+    "actor": 11,
+    "cid": 166,
+    "from": [
+      1,
+      7
+    ],
+    "dest": [
+      10,
+      9
+    ],
+    "dist": 9,
+    "speed": 8.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0111009l011luck^d0110090000001802Ssld009011000259000i0110000d0090110000000051i0110100Srn2011000000000000",
+    "special": [
+      "sld",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 4,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0110107Srn2011002100100000"
+    }
+  },
+  {
+    "battle": "1632883907",
+    "idx": 2,
+    "actor": 14,
+    "cid": 163,
+    "from": [
+      2,
+      2
+    ],
+    "dest": [
+      10,
+      6
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "ABILITY",
+    "raw": "m0141006i0140100Srn2014000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 1,
+      "actor": 14,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0140202Srn2014001100100000"
+    }
+  },
+  {
+    "battle": "1632883907",
+    "idx": 7,
+    "actor": 11,
+    "cid": 160,
+    "from": [
+      2,
+      8
+    ],
+    "dest": [
+      10,
+      8
+    ],
+    "dist": 8,
+    "speed": 4.0,
+    "type": "ABILITY",
+    "raw": "m0111008i0110100Srn2011000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 6,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0110208Srn2011001100000000"
+    }
+  },
+  {
+    "battle": "1633069748",
+    "idx": 3,
+    "actor": 15,
+    "cid": 163,
+    "from": [
+      1,
+      8
+    ],
+    "dest": [
+      10,
+      10
+    ],
+    "dist": 9,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0151010d0150090000000214d0090150000000159i0150100Srn2015000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 2,
+      "actor": 15,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0150108Srn2015001100100000"
+    }
+  },
+  {
+    "battle": "1633079975",
+    "idx": 5,
+    "actor": 11,
+    "cid": 162,
+    "from": [
+      1,
+      9
+    ],
+    "dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0110909l011luck^d0110090000002896Sat3001000000000000l011morale^i0110050Srn2011000000000000",
+    "special": [
+      "at3",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 4,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0110109Srn2011001100100000"
+    }
+  },
+  {
+    "battle": "1633096129",
+    "idx": 26,
+    "actor": 12,
+    "cid": 168,
+    "from": [
+      1,
+      2
+    ],
+    "dest": [
+      5,
+      8
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120508d0120080000000110Sra20080113-1300024i0120100Srn2012000000000000",
+    "special": [
+      "ra2",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 25,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0120102Srn2012002100100000"
+    }
+  },
+  {
+    "battle": "1633111164",
+    "idx": 10,
+    "actor": 15,
+    "cid": 163,
+    "from": [
+      2,
+      8
+    ],
+    "dest": [
+      11,
+      8
+    ],
+    "dist": 9,
+    "speed": 5.0,
+    "type": "ABILITY",
+    "raw": "m0151108i0150100Srn2015000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 9,
+      "actor": 15,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0150208Srn2015001100100000"
+    }
+  },
+  {
+    "battle": "1633111164",
+    "idx": 23,
+    "actor": 12,
+    "cid": 160,
+    "from": [
+      4,
+      7
+    ],
+    "dest": [
+      11,
+      7
+    ],
+    "dist": 7,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0121107d0120050000000023m0051209i0050000Smga00505-500000000d0050120000001691Senr009100000000003d0050020000002515d0050030000003210i0120100Srn2012000000000000",
+    "special": [
+      "mga",
+      "enr",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 22,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0120407Srn2012001100000000"
+    }
+  },
+  {
+    "battle": "1633145140",
+    "idx": 36,
+    "actor": 12,
+    "cid": 333,
+    "from": [
+      1,
+      6
+    ],
+    "dest": [
+      7,
+      6
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120706Srag012008990150000d0120060000001151i0120100",
+    "special": [
+      "rag"
+    ],
+    "prev": {
+      "idx": 35,
+      "actor": 13,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 7,
+      "special": [
+        "rag",
+        "raa"
+      ],
+      "raw": "m0131204Srag013009090150000d0130070000001767Sraa001001000300000i0130100"
+    }
+  },
+  {
+    "battle": "1633190004",
+    "idx": 1,
+    "actor": 16,
+    "cid": 163,
+    "from": [
+      2,
+      11
+    ],
+    "dest": [
+      10,
+      11
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0160211Sbsr016000000000000m0161011l016luck^d0160070000004388l016morale^i0160050Srn2016000000000000",
+    "special": [
+      "bsr",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 0,
+      "actor": 16,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0160211Srn2016001100100000"
+    }
+  },
+  {
+    "battle": "1633190004",
+    "idx": 3,
+    "actor": 12,
+    "cid": 162,
+    "from": [
+      1,
+      2
+    ],
+    "dest": [
+      9,
+      2
+    ],
+    "dist": 8,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120902l012luck^d0120030000003053Sat3001000000000000i0120100Srn2012000000000000",
+    "special": [
+      "at3",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 2,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0120102Srn2012001100000000"
+    }
+  },
+  {
+    "battle": "1633312629",
+    "idx": 19,
+    "actor": 11,
+    "cid": 168,
+    "from": [
+      1,
+      7
+    ],
+    "dest": [
+      6,
+      1
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0110601d0110020000000435d0020110000000412Ssff002011003800009Ssld011002000082000i0020000i0110100Srn2011000000000000",
+    "special": [
+      "sff",
+      "sld",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 18,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0110107Srn2011001100100000"
+    }
+  },
+  {
+    "battle": "1633411108",
+    "idx": 8,
+    "actor": 15,
+    "cid": 160,
+    "from": [
+      2,
+      9
+    ],
+    "dest": [
+      8,
+      9
+    ],
+    "dist": 6,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0150809l015luck^d0150100000000020d0100150000000620Senr012100000000001Sraa004002000200000i0150100Srn2015000000000000",
+    "special": [
+      "enr",
+      "raa",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 7,
+      "actor": 15,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0150209Srn2015003100100000"
+    }
+  },
+  {
+    "battle": "1633411108",
+    "idx": 10,
+    "actor": 14,
+    "cid": 168,
+    "from": [
+      1,
+      3
+    ],
+    "dest": [
+      5,
+      9
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0140509d0140010000000487d0140100000000268i0140100Srn2014000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 9,
+      "actor": 14,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0140103Srn2014003100000000"
+    }
+  },
+  {
+    "battle": "1633421405",
+    "idx": 1,
+    "actor": 13,
+    "cid": 163,
+    "from": [
+      2,
+      10
+    ],
+    "dest": [
+      10,
+      10
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0130210Sbsr013000000000000m0131010d0130030000002526Senr004100000000001Senr005100000000001i0130100Srn2013000000000000",
+    "special": [
+      "bsr",
+      "enr",
+      "enr",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 0,
+      "actor": 13,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0130210Srn2013001100100000"
+    }
+  },
+  {
+    "battle": "1633421405",
+    "idx": 10,
+    "actor": 11,
+    "cid": 168,
+    "from": [
+      1,
+      8
+    ],
+    "dest": [
+      10,
+      7
+    ],
+    "dist": 9,
+    "speed": 5.0,
+    "type": "ABILITY",
+    "raw": "m0111007i0110100Srn2011000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 9,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0110108Srn2011001100000000"
+    }
+  },
+  {
+    "battle": "1633428036",
+    "idx": 16,
+    "actor": 15,
+    "cid": 163,
+    "from": [
+      2,
+      1
+    ],
+    "dest": [
+      11,
+      1
+    ],
+    "dist": 9,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0151101d0150060000000480d0060150000000158l015morale^i0150050Srn2015000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 15,
+      "actor": 15,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0150201Srn2015002100100000"
+    }
+  },
+  {
+    "battle": "1633429841",
+    "idx": 1,
+    "actor": 13,
+    "cid": 163,
+    "from": [
+      2,
+      1
+    ],
+    "dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0130201Sbsr013000000000000m0131001d0130020000001498i0130100Srn2013000000000000",
+    "special": [
+      "bsr",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 0,
+      "actor": 13,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0130201Srn2013001100100000"
+    }
+  },
+  {
+    "battle": "1633429841",
+    "idx": 3,
+    "actor": 9,
+    "cid": 162,
+    "from": [
+      1,
+      2
+    ],
+    "dest": [
+      11,
+      3
+    ],
+    "dist": 10,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0091103l009luck^d0090020000002380b0021101I0020009i0090100Srn2009000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 2,
+      "actor": 9,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0090102Srn2009001100000000"
+    }
+  },
+  {
+    "battle": "1633867107",
+    "idx": 68,
+    "actor": 15,
+    "cid": 160,
+    "from": [
+      3,
+      1
+    ],
+    "dest": [
+      11,
+      1
+    ],
+    "dist": 8,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0151101l015luck^d0150030000001903Ssld003015000197000i0150000i0150100Srn2015000000000000",
+    "special": [
+      "sld",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 67,
+      "actor": 15,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0150301Srn2015001100200000"
+    }
+  },
+  {
+    "battle": "1634112955",
+    "idx": 42,
+    "actor": 18,
+    "cid": 920,
+    "from": [
+      10,
+      1
+    ],
+    "dest": [
+      11,
+      8
+    ],
+    "dist": 7,
+    "speed": 4.0,
+    "type": "MOVE",
+    "raw": "m0181108l018morale^i0180050",
+    "special": [],
+    "prev": {
+      "idx": 41,
+      "actor": 22,
+      "side": "PLAYER",
+      "type": "RANGED_ATTACK",
+      "target": 14,
+      "special": [],
+      "raw": "m0220204d0220140000000070l022morale^i0220050u018"
+    }
+  },
+  {
+    "battle": "1634112955",
+    "idx": 54,
+    "actor": 18,
+    "cid": 920,
+    "from": [
+      11,
+      8
+    ],
+    "dest": [
+      11,
+      13
+    ],
+    "dist": 5,
+    "speed": 4.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0181113l018luck^d0180120000002706Spsc012018000039003Ssld012018000020000i0180000i0180100",
+    "special": [
+      "psc",
+      "sld"
+    ],
+    "prev": {
+      "idx": 53,
+      "actor": 20,
+      "side": "PLAYER",
+      "type": "MOVE",
+      "target": null,
+      "special": [],
+      "raw": "m0200608l020morale^i0200050"
+    }
+  },
+  {
+    "battle": "1634474950",
+    "idx": 67,
+    "actor": 12,
+    "cid": 320,
+    "from": [
+      5,
+      8
+    ],
+    "dest": [
+      11,
+      10
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0121110Srag012015280100000d0120090000002047d0090120000000120Sra20121317-2100378l012morale^i0120050",
+    "special": [
+      "rag",
+      "ra2"
+    ],
+    "prev": {
+      "idx": 66,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 3,
+      "special": [
+        "rag",
+        "ral"
+      ],
+      "raw": "m0110208Srag011002800100000Sral011110000000000d0110030000000106i0110100"
+    }
+  },
+  {
+    "battle": "1634733940",
+    "idx": 0,
+    "actor": 14,
+    "cid": 333,
+    "from": [
+      3,
+      6
+    ],
+    "dest": [
+      10,
+      6
+    ],
+    "dist": 7,
+    "speed": 6.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0141006Srag014004500150000d0140050000000931d0050140000000187Sra20140354-9600052i0140100Sab3014000000000000Sab3014000000000000Sab3016000001000000",
+    "special": [
+      "rag",
+      "ra2",
+      "ab3",
+      "ab3",
+      "ab3"
+    ],
+    "prev": null
+  },
+  {
+    "battle": "1634733940",
+    "idx": 8,
+    "actor": 13,
+    "cid": 330,
+    "from": [
+      3,
+      5
+    ],
+    "dest": [
+      9,
+      6
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0130906Srag013005100150000Sral013210000000000d0130040000002833Sraa001001000300000Sat3001000000000000i0130100Sab3013000000000000Sab3013000000000000",
+    "special": [
+      "rag",
+      "ral",
+      "raa",
+      "at3",
+      "ab3",
+      "ab3"
+    ],
+    "prev": {
+      "idx": 7,
+      "actor": 11,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 8,
+      "special": [
+        "ab3"
+      ],
+      "raw": "m0111008d0110080000000303d0110070000000291d0110090000000339d0080110000000034i0110100Sab3013000001000000"
+    }
+  },
+  {
+    "battle": "1635086431",
+    "idx": 83,
+    "actor": 21,
+    "cid": 320,
+    "from": [
+      5,
+      2
+    ],
+    "dest": [
+      11,
+      2
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0211102Srag021004960100000d0210090000001530d0090210000000005Sra20210478-1800015l021morale^i0210050",
+    "special": [
+      "rag",
+      "ra2"
+    ],
+    "prev": {
+      "idx": 82,
+      "actor": 5,
+      "side": "PVE",
+      "type": "MOVE",
+      "target": null,
+      "special": [],
+      "raw": "m0050201i0050100"
+    }
+  },
+  {
+    "battle": "1635086941",
+    "idx": 29,
+    "actor": 20,
+    "cid": 433,
+    "from": [
+      3,
+      4
+    ],
+    "dest": [
+      9,
+      4
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0200904Srag020001900100000d0200040000000367d0200090000000637d0200230000000010Sra20230651-1900027d0040200000000013Sra20200122-6800038Sraa001001000200000i0200100",
+    "special": [
+      "rag",
+      "ra2",
+      "ra2",
+      "raa"
+    ],
+    "prev": {
+      "idx": 28,
+      "actor": 21,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 6,
+      "special": [
+        "rag",
+        "raa"
+      ],
+      "raw": "m0210312Srag021003740100000l021luck^d0210060000004394Sraa001001000200000l021morale^i0210050"
+    }
+  },
+  {
+    "battle": "1635086941",
+    "idx": 61,
+    "actor": 23,
+    "cid": 335,
+    "from": [
+      11,
+      2
+    ],
+    "dest": [
+      11,
+      11
+    ],
+    "dist": 9,
+    "speed": 7.0,
+    "type": "MOVE",
+    "raw": "m0231111l023morale^i0230050",
+    "special": [],
+    "prev": {
+      "idx": 60,
+      "actor": 22,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 13,
+      "special": [
+        "rag"
+      ],
+      "raw": "m0220412Srag022004900100000d0220130000000044i0220100"
+    }
+  },
+  {
+    "battle": "1635152341",
+    "idx": 0,
+    "actor": 22,
+    "cid": 333,
+    "from": [
+      3,
+      16
+    ],
+    "dest": [
+      10,
+      16
+    ],
+    "dist": 7,
+    "speed": 6.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0221016d0120220000000057Sra20220271-2900016d0150220000000057Sra20220242-2900016Srag022003920150000Sfbd010011010000200Sfbd010012000000200Sfbd010013000000200Sfbd010014000000200Sfbd010015000000200Sfbd010016000000200Sfbd010017000000200d0220140000002131Sraa001001000300000i0220100Sab3022000000000000Sab3022000000000000Sab3024000001000000",
+    "special": [
+      "ra2",
+      "ra2",
+      "rag",
+      "fbd",
+      "fbd",
+      "fbd",
+      "fbd",
+      "fbd",
+      "fbd",
+      "fbd",
+      "raa",
+      "ab3",
+      "ab3",
+      "ab3"
+    ],
+    "prev": null
+  },
+  {
+    "battle": "1635152341",
+    "idx": 12,
+    "actor": 21,
+    "cid": 330,
+    "from": [
+      3,
+      15
+    ],
+    "dest": [
+      10,
+      15
+    ],
+    "dist": 7,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0211015Srag021005700150000Sral021210000000000d0210120000004094Sraa001001000300000l021morale^i0210050Sab3021000000000000Sab3021000000000000",
+    "special": [
+      "rag",
+      "ral",
+      "raa",
+      "ab3",
+      "ab3"
+    ],
+    "prev": {
+      "idx": 11,
+      "actor": 16,
+      "side": "PVE",
+      "type": "RANGED_ATTACK",
+      "target": 22,
+      "special": [
+        "ra2",
+        "ab3"
+      ],
+      "raw": "m0161211d0160220000000035Sra20220252-2600009i0160100Sab3021000001000000"
+    }
+  },
+  {
+    "battle": "1635152341",
+    "idx": 30,
+    "actor": 20,
+    "cid": 399,
+    "from": [
+      9,
+      12
+    ],
+    "dest": [
+      1,
+      12
+    ],
+    "dist": 8,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0200112Srag020005090150000Sral020210000000000d0200040000000731Seye020004003000000l004unluck^d0040200000000004l020morale^i0200050",
+    "special": [
+      "rag",
+      "ral",
+      "eye"
+    ],
+    "prev": {
+      "idx": 29,
+      "actor": 21,
+      "side": "PLAYER",
+      "type": "MELEE_ATTACK",
+      "target": 3,
+      "special": [
+        "rag",
+        "ral",
+        "raa"
+      ],
+      "raw": "m0210911Srag021011160150000Sral021310000000000d0210030000002350Sraa001001000300000i0210100"
+    }
+  },
+  {
+    "battle": "1635405232",
+    "idx": 5,
+    "actor": 12,
+    "cid": 169,
+    "from": [
+      1,
+      8
+    ],
+    "dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120909l012luck^d0120070000000884d0120090000001398d0070120000000034Ssld012007000011000i0070000i0120100Srn2012000000000000",
+    "special": [
+      "sld",
+      "rn2"
+    ],
+    "prev": {
+      "idx": 4,
+      "actor": 12,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0120108Srn2012001100200000"
+    }
+  },
+  {
+    "battle": "1635523549",
+    "idx": 11,
+    "actor": 20,
+    "cid": 169,
+    "from": [
+      1,
+      13
+    ],
+    "dest": [
+      9,
+      11
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0200911l020luck^d0200110000001703d0200160000001603Sat3001000000000000i0200100Srn2020000000000000Sspi006000000000000",
+    "special": [
+      "at3",
+      "rn2",
+      "spi"
+    ],
+    "prev": {
+      "idx": 10,
+      "actor": 20,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0200113Srn2020001100200000"
+    }
+  },
+  {
+    "battle": "1635523549",
+    "idx": 26,
+    "actor": 18,
+    "cid": 162,
+    "from": [
+      4,
+      17
+    ],
+    "dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "speed": 7.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0180909d0180070000000982b0070710I0070018i0180100Srn2018000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 25,
+      "actor": 18,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2",
+        "ato"
+      ],
+      "raw": "Srn2018001100100000Sato001000000000000"
+    }
+  },
+  {
+    "battle": "1635568303",
+    "idx": 51,
+    "actor": 12,
+    "cid": 320,
+    "from": [
+      5,
+      1
+    ],
+    "dest": [
+      11,
+      1
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0121101Srag012004190100000d0120060000001012Sraa001001000200000i0120100",
+    "special": [
+      "rag",
+      "raa"
+    ],
+    "prev": {
+      "idx": 50,
+      "actor": 9,
+      "side": "PVE",
+      "type": "RANGED_ATTACK",
+      "target": 13,
+      "special": [
+        "ra2",
+        "frz"
+      ],
+      "raw": "m0091210d0090130000000018Sra20130001-1100006Sfrz0090130000087.6i0090100"
+    }
+  },
+  {
+    "battle": "1635568303",
+    "idx": 58,
+    "actor": 12,
+    "cid": 320,
+    "from": [
+      11,
+      1
+    ],
+    "dest": [
+      11,
+      8
+    ],
+    "dist": 7,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0121108Srag012005590100000Sral012210000000000d0120080000001454d0080120000000004Sra20120554-0500009Sfrz008012000000100i0120000Srag012006540100000Sass012000000000000d0120080000001641Sraa001001000200000Sat3001000000000000l012morale^i0120050",
+    "special": [
+      "rag",
+      "ral",
+      "ra2",
+      "frz",
+      "rag",
+      "ass",
+      "raa",
+      "at3"
+    ],
+    "prev": {
+      "idx": 57,
+      "actor": 4,
+      "side": "PVE",
+      "type": "MELEE_ATTACK",
+      "target": 13,
+      "special": [
+        "lep",
+        "ra2"
+      ],
+      "raw": "Slep004013030700000d0040130000000013Sra20130000-2000007i0040100"
+    }
+  },
+  {
+    "battle": "1635568303",
+    "idx": 85,
+    "actor": 12,
+    "cid": 320,
+    "from": [
+      5,
+      9
+    ],
+    "dest": [
+      6,
+      3
+    ],
+    "dist": 6,
+    "speed": 5.0,
+    "type": "MELEE_ATTACK",
+    "raw": "m0120603Srag012009840100000d0120030000000675d0030120000000040Sra20120909-7500127l012morale^i0120050Sra20130147-1600031Sral013000000000000Spss-01013000000011",
+    "special": [
+      "rag",
+      "ra2",
+      "ra2",
+      "ral",
+      "pss"
+    ],
+    "prev": {
+      "idx": 84,
+      "actor": 3,
+      "side": "PVE",
+      "type": "MELEE_ATTACK",
+      "target": 11,
+      "special": [
+        "ra2"
+      ],
+      "raw": "m0030703d0030110000000107Sra20110000-1400100m0111001i0110000d0110030000000092i0030100l005badmorale^i0050050"
+    }
+  },
+  {
+    "battle": "1635622876",
+    "idx": 15,
+    "actor": 16,
+    "cid": 163,
+    "from": [
+      2,
+      1
+    ],
+    "dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "speed": 5.0,
+    "type": "ABILITY",
+    "raw": "m0161001i0160100Srn2016000000000000",
+    "special": [
+      "rn2"
+    ],
+    "prev": {
+      "idx": 14,
+      "actor": 16,
+      "side": "PLAYER",
+      "type": "ABILITY",
+      "target": null,
+      "special": [
+        "rn2"
+      ],
+      "raw": "m0160201Srn2016001100200000"
+    }
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "source": "independently decoded raw init.txt + turns0.txt; old historical parser not used",
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "train_attack_rows": 23473,
+  "heldout_attack_rows": 6201,
+  "profiles": 589,
+  "global_multiplier": {
+    "MELEE_ATTACK": 1.1918722614852697,
+    "RANGED_ATTACK": 1.3356521739130436
+  },
+  "heldout_metrics": {
+    "generic": {
+      "median_abs_log_error": 0.37529969377643857,
+      "mean_abs_log_error": 0.4939787675488342,
+      "median_absolute_percentage_error": 0.3574168797953965
+    },
+    "learned": {
+      "median_abs_log_error": 0.29012894438548376,
+      "mean_abs_log_error": 0.3962108545317913,
+      "median_absolute_percentage_error": 0.2947254954427589
+    }
+  },
+  "out": "models/damage_model_v8_exact.csv",
+  "note": "Robust multiplicative residual on top of generic damage formula; intended for speculative rollouts only."
+}

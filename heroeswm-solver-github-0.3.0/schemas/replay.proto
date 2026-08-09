@@ -1,0 +1,4 @@
+syntax = "proto3";
+package hwm;
+message RawBattleEnvelope { string battle_id=1; uint64 captured_at_ms=2; string source=3; string url_kind=4; uint64 sequence_hint=5; bytes body=6; string url=7; }
+message BattleEvent { uint64 seq=1; string type=2; uint64 actor_uid=3; uint64 target_uid=4; repeated int64 ints=5; repeated double floats=6; string raw=7; }

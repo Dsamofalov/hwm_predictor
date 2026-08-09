@@ -1,0 +1,3 @@
+export type RawBattleEnvelope={battleId:string,capturedAt:number,source:"fetch"|"xhr"|"runtime",urlKind:string,sequenceHint:number,body:string,url:string};
+export function isBattleUrl(u:string){try{const x=new URL(u,location.href);return /\/(battle|war|warlog)\.php$/.test(x.pathname)}catch{return false}}
+export function battleIdFrom(u:string){try{return new URL(u,location.href).searchParams.get("warid")??""}catch{return ""}}

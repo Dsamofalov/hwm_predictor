@@ -1,0 +1,37 @@
+{
+  "warid": "1632516994",
+  "show": "NRSM8Kip",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632516994&show=NRSM8Kip",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632516994\\init.txt",
+    "bytes": 42930,
+    "sha256": "8705ecaac496914088051be973bacc75f9a4f8023c7a962d923e63f071d38783"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632516994\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632516994&lastturn=0&show=NRSM8Kip",
+        "status_code": 200,
+        "bytes": 7695,
+        "elapsed_ms": 2666.8,
+        "sha256": "0065c1500ca5141026ac2d583d8a25204d01626155f1a996a8655d3798eaff83",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632516994&lastturn=0&show=NRSM8Kip"
+      }
+    ],
+    "bytes": 7695,
+    "sha256": "0065c1500ca5141026ac2d583d8a25204d01626155f1a996a8655d3798eaff83",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278178.9106054
+}

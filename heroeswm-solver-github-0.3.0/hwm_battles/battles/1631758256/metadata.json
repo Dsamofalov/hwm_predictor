@@ -1,0 +1,37 @@
+{
+  "warid": "1631758256",
+  "show": "NwmTel4n",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631758256&show=NwmTel4n",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631758256\\init.txt",
+    "bytes": 40557,
+    "sha256": "58271041562086b459b07012334149071cfbba3e84817e5afc4d413b8e8733a0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631758256\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631758256&lastturn=0&show=NwmTel4n",
+        "status_code": 200,
+        "bytes": 7078,
+        "elapsed_ms": 212.3,
+        "sha256": "8f3850bdb15773cd0c907baaaf625b2dc51d62bf68360afb00a1d459d81456e7",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631758256&lastturn=0&show=NwmTel4n"
+      }
+    ],
+    "bytes": 7078,
+    "sha256": "8f3850bdb15773cd0c907baaaf625b2dc51d62bf68360afb00a1d459d81456e7",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278197.9507568
+}

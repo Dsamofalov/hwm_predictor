@@ -1,0 +1,37 @@
+{
+  "warid": "1631818265",
+  "show": "Nkmalyc-",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631818265&show=Nkmalyc-",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631818265\\init.txt",
+    "bytes": 28450,
+    "sha256": "a9ec6bea595b60c7fbeb075f9b727acd43a5e2bf872d7bf1162de4d734fb8632"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631818265\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631818265&lastturn=0&show=Nkmalyc-",
+        "status_code": 200,
+        "bytes": 3763,
+        "elapsed_ms": 224.3,
+        "sha256": "fee2affc39a37a02a278ddff1b2efb6b3d60ed3f6fbc3499f1e89542f47e666b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631818265&lastturn=0&show=Nkmalyc-"
+      }
+    ],
+    "bytes": 3763,
+    "sha256": "fee2affc39a37a02a278ddff1b2efb6b3d60ed3f6fbc3499f1e89542f47e666b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278194.4541283
+}

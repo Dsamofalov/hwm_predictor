@@ -1,0 +1,18 @@
+{
+  "abilities": 421,
+  "support_counts": {
+    "unresolved": 79,
+    "exact_search": 74,
+    "modeled_collateral": 5,
+    "reference_only": 32,
+    "learned_damage": 187,
+    "identity": 4,
+    "modeled_proc": 8,
+    "partial_exact": 18,
+    "dynamic_spellbook": 1,
+    "exact_targeting": 11,
+    "modeled_kill_trigger": 2
+  },
+  "json": "data/catalog/ability_registry.json",
+  "csv": "data/catalog/ability_registry.csv"
+}

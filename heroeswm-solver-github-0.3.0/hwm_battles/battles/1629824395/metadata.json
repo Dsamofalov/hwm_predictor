@@ -1,0 +1,51 @@
+{
+  "warid": "1629824395",
+  "show": "NFdu2_3J",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629824395&show=NFdu2_3J",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629824395\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629824395&lastturn=-3&show=NFdu2_3J",
+        "status_code": 200,
+        "bytes": 21672,
+        "elapsed_ms": 650.4,
+        "sha256": "8faf9a73dedee859a164eeb1c0d24e6f0d5a135661d949ed2079eb81510c4334",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629824395&lastturn=-3&show=NFdu2_3J"
+      }
+    ],
+    "bytes": 21672,
+    "sha256": "8faf9a73dedee859a164eeb1c0d24e6f0d5a135661d949ed2079eb81510c4334",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629824395\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629824395&lastturn=0&show=NFdu2_3J",
+        "status_code": 200,
+        "bytes": 2536,
+        "elapsed_ms": 2188.3,
+        "sha256": "5e6368edeeb77fff22bcd47dd01c9c098539a8eb599e143536b1af258ca7abd0",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629824395&lastturn=0&show=NFdu2_3J"
+      }
+    ],
+    "bytes": 2536,
+    "sha256": "5e6368edeeb77fff22bcd47dd01c9c098539a8eb599e143536b1af258ca7abd0",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278236.818652
+}

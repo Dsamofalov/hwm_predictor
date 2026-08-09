@@ -1,0 +1,37 @@
+n 28
+train all 24 8
+train eligible1 16 8
+train eligible_ret 16 8
+details
+{'battle': '1625085706', 'reverse': True, 'shots': 5, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1625085706', 'reverse': True, 'shots': 4, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1629825295', 'reverse': True, 'shots': 6, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1629825295', 'reverse': False, 'shots': 6, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1629825295', 'reverse': False, 'shots': 5, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1630704034', 'reverse': True, 'shots': 6, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1630704034', 'reverse': True, 'shots': 6, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1630704034', 'reverse': False, 'shots': 6, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1630704034', 'reverse': True, 'shots': 5, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1631752011', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1631816320', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1631816320', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1631816320', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1631816320', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632009288', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632126640', 'reverse': True, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632126640', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632251110', 'reverse': True, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632251110', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632251110', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632251110', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632502319', 'reverse': False, 'shots': 6, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632502319', 'reverse': False, 'shots': 6, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1632502319', 'reverse': False, 'shots': 6, 'shooter': True, 'blocked': True, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+heldout all 4 2
+heldout eligible1 4 2
+heldout eligible_ret 4 2
+details
+{'battle': '1633431602', 'reverse': True, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1633431602', 'reverse': True, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1633431602', 'reverse': False, 'shots': 15, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}
+{'battle': '1633431602', 'reverse': False, 'shots': 14, 'shooter': True, 'blocked': False, 'ret': None, 'actor_magicattack': False, 'actor_noret': False}

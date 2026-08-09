@@ -1,0 +1,37 @@
+{
+  "warid": "1632251546",
+  "show": "Nes-20xG",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632251546&show=Nes-20xG",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632251546\\init.txt",
+    "bytes": 34499,
+    "sha256": "3f673815ffef618781c74441ed70c2bfb8cca13334fc8c3ddfa461ec680af5a2"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632251546\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632251546&lastturn=0&show=Nes-20xG",
+        "status_code": 200,
+        "bytes": 3667,
+        "elapsed_ms": 215.3,
+        "sha256": "d264433b259efec99cdf4e45a1765340bdb9fc24cba9f82477ce914f1cf11eda",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632251546&lastturn=0&show=Nes-20xG"
+      }
+    ],
+    "bytes": 3667,
+    "sha256": "d264433b259efec99cdf4e45a1765340bdb9fc24cba9f82477ce914f1cf11eda",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278179.7588928
+}

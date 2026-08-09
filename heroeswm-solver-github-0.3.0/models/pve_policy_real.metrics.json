@@ -1,0 +1,96 @@
+{
+  "mode": "real",
+  "side": "PVE",
+  "train_rows": 14926,
+  "epochs": 4,
+  "checkpoint": "models/pve_policy_real.pt",
+  "config": {
+    "d_model": 32,
+    "layers": 1,
+    "heads": 4,
+    "numeric_dim": 16,
+    "action_dim": 12,
+    "side": "PVE"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 3.612772938362734,
+      "train_policy_loss": 3.4004909720351195,
+      "train_value_loss": 0.6065199329588539,
+      "val": {
+        "rows": 1354,
+        "policy_top1": 0.013293943870014771,
+        "policy_top3": 0.14549483013293943,
+        "policy_nll": 3.35826365528642,
+        "value_battles": 87,
+        "value_brier": 0.13769247433541573,
+        "value_constant_base_brier": 0.09274673008323427,
+        "pwin_mean": 0.6903218293538065,
+        "outcome_mean": 0.896551724137931
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.43522314058621,
+      "train_policy_loss": 3.333803524077138,
+      "train_value_loss": 0.2897703508764973,
+      "val": {
+        "rows": 1354,
+        "policy_top1": 0.014771048744460856,
+        "policy_top3": 0.1189069423929099,
+        "policy_nll": 3.279699508689531,
+        "value_battles": 87,
+        "value_brier": 0.09386905071246583,
+        "value_constant_base_brier": 0.09274673008323427,
+        "pwin_mean": 0.9118740531485537,
+        "outcome_mean": 0.896551724137931
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.330497473953525,
+      "train_policy_loss": 3.258864062250611,
+      "train_value_loss": 0.2046669001124363,
+      "val": {
+        "rows": 1354,
+        "policy_top1": 0.0258493353028065,
+        "policy_top3": 0.16691285081240767,
+        "policy_nll": 3.2034577633112535,
+        "value_battles": 87,
+        "value_brier": 0.09616692494972238,
+        "value_constant_base_brier": 0.09274673008323427,
+        "pwin_mean": 0.950667326808197,
+        "outcome_mean": 0.896551724137931
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 3.2608056004526915,
+      "train_policy_loss": 3.1906137891002944,
+      "train_value_loss": 0.20054803972555424,
+      "val": {
+        "rows": 1354,
+        "policy_top1": 0.048005908419497784,
+        "policy_top3": 0.21122599704579026,
+        "policy_nll": 3.133887421961549,
+        "value_battles": 87,
+        "value_brier": 0.09572022175243484,
+        "value_constant_base_brier": 0.09274673008323427,
+        "pwin_mean": 0.9460835401855641,
+        "outcome_mean": 0.896551724137931
+      }
+    }
+  ],
+  "test": {
+    "rows": 2117,
+    "policy_top1": 0.038261691072272085,
+    "policy_top3": 0.13273500236183278,
+    "policy_nll": 3.146377736462362,
+    "value_battles": 87,
+    "value_brier": 0.12558694956736752,
+    "value_constant_base_brier": 0.11890606420927471,
+    "pwin_mean": 0.9476762477346612,
+    "outcome_mean": 0.8620689655172413
+  }
+}

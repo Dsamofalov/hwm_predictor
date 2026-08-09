@@ -1,0 +1,37 @@
+{
+  "warid": "1631519532",
+  "show": "NSDYs1FS",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631519532&show=NSDYs1FS",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631519532\\init.txt",
+    "bytes": 47880,
+    "sha256": "697d92a400a6754ad4baf826f398284913e02a5a19c9d2fdf47cc03767e6bedc"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631519532\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631519532&lastturn=0&show=NSDYs1FS",
+        "status_code": 200,
+        "bytes": 4097,
+        "elapsed_ms": 2289.7,
+        "sha256": "534fac92ebef9f70ea1941e9c784725423179f577fd75d069e4601c566377d14",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631519532&lastturn=0&show=NSDYs1FS"
+      }
+    ],
+    "bytes": 4097,
+    "sha256": "534fac92ebef9f70ea1941e9c784725423179f577fd75d069e4601c566377d14",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278192.1412835
+}

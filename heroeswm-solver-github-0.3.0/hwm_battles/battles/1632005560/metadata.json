@@ -1,0 +1,37 @@
+{
+  "warid": "1632005560",
+  "show": "NTibsL89",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632005560&show=NTibsL89",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632005560\\init.txt",
+    "bytes": 30424,
+    "sha256": "4f2dd2f9ead547e661fd81f77bdf285fc51ff775a88d2fb4eecd910dbd99454d"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632005560\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632005560&lastturn=0&show=NTibsL89",
+        "status_code": 200,
+        "bytes": 3854,
+        "elapsed_ms": 201.8,
+        "sha256": "2f1cfe796484f9353d22d9d9143e865b68dd2c3777ef4aa5c1ba975e5b943be6",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632005560&lastturn=0&show=NTibsL89"
+      }
+    ],
+    "bytes": 3854,
+    "sha256": "2f1cfe796484f9353d22d9d9143e865b68dd2c3777ef4aa5c1ba975e5b943be6",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278210.339936
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1631795884",
+  "show": "NBSsxSoi",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631795884&show=NBSsxSoi",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631795884\\init.txt",
+    "bytes": 37447,
+    "sha256": "bd5523dd8289acde1ef63f6d9d3330a0a4d6350fc312db3767a309decbc5a5a2"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631795884\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631795884&lastturn=0&show=NBSsxSoi",
+        "status_code": 200,
+        "bytes": 5374,
+        "elapsed_ms": 198.9,
+        "sha256": "d06e95d7e86192357d4f182b3788162a7d54efbf46ccadec763add9efabe2e1d",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631795884&lastturn=0&show=NBSsxSoi"
+      }
+    ],
+    "bytes": 5374,
+    "sha256": "d06e95d7e86192357d4f182b3788162a7d54efbf46ccadec763add9efabe2e1d",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278188.1902802
+}

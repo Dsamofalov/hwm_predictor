@@ -1,0 +1,20 @@
+{
+  "schema": "hwm-caster-spell-damage-v3-normalized",
+  "source": "server spellbook-validated raw S-records normalized by exact target resistances; historical parser/state dumps not used",
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "train_samples": 501,
+  "heldout_samples": 208,
+  "spells": [
+    "icebolt",
+    "lighting",
+    "magicarrow",
+    "magicfist",
+    "swarm"
+  ],
+  "rows": 564,
+  "heldout_mae": 142.125,
+  "heldout_median_relative_error": 0.3288201160541586,
+  "heldout_mean_relative_error": 0.8986350883870724,
+  "out": "models/hero_spell_damage.csv"
+}

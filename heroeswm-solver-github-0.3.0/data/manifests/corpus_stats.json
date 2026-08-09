@@ -1,0 +1,11 @@
+{
+  "battles": 866,
+  "unique_battle_ids": 866,
+  "with_show": 618,
+  "without_show": 248,
+  "endpoint_counts": {
+    "war.php": 797,
+    "warlog.php": 69
+  },
+  "manifest_sha256": "45bd059a563ec329163362eee95fdcb0450d3233528bf734fd805ca3e7972e6f"
+}

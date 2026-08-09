@@ -1,0 +1,51 @@
+{
+  "warid": "1632027595",
+  "show": "NXtIXReI",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632027595&show=NXtIXReI",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632027595\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632027595&lastturn=-3&show=NXtIXReI",
+        "status_code": 200,
+        "bytes": 31326,
+        "elapsed_ms": 583.8,
+        "sha256": "7be466355891a3b34fb91d28a1b754cebb45736cd58992cb050ac7e754bae48a",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632027595&lastturn=-3&show=NXtIXReI"
+      }
+    ],
+    "bytes": 31326,
+    "sha256": "7be466355891a3b34fb91d28a1b754cebb45736cd58992cb050ac7e754bae48a",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632027595\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632027595&lastturn=0&show=NXtIXReI",
+        "status_code": 200,
+        "bytes": 3462,
+        "elapsed_ms": 395.0,
+        "sha256": "08656faf06ec523e58b67a7e9484379043350ee19eab8e0eb6db9d205d9cd390",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632027595&lastturn=0&show=NXtIXReI"
+      }
+    ],
+    "bytes": 3462,
+    "sha256": "08656faf06ec523e58b67a7e9484379043350ee19eab8e0eb6db9d205d9cd390",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278232.879089
+}

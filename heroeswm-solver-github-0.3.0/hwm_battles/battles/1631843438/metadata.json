@@ -1,0 +1,37 @@
+{
+  "warid": "1631843438",
+  "show": "NcVr90IR",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631843438&show=NcVr90IR",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631843438\\init.txt",
+    "bytes": 21382,
+    "sha256": "39b7c92ca6431c0e5c3955a5044e26295d539cc2f7155c7521bcf4bcbfd88167"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631843438\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631843438&lastturn=0&show=NcVr90IR",
+        "status_code": 200,
+        "bytes": 2238,
+        "elapsed_ms": 1848.6,
+        "sha256": "aa240a041d41a35f847c2f4908c5e49b4c39c0335683033bf3c3641cb253ef92",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631843438&lastturn=0&show=NcVr90IR"
+      }
+    ],
+    "bytes": 2238,
+    "sha256": "aa240a041d41a35f847c2f4908c5e49b4c39c0335683033bf3c3641cb253ef92",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278194.6669683
+}

@@ -1,0 +1,51 @@
+{
+  "warid": "1632029154",
+  "show": "NmWiSZUQ",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632029154&show=NmWiSZUQ",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632029154\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632029154&lastturn=-3&show=NmWiSZUQ",
+        "status_code": 200,
+        "bytes": 31834,
+        "elapsed_ms": 1012.7,
+        "sha256": "be6734bd6f3278c57fdc5017a9c91bda01df08c43710ce43270d9075575fbf98",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632029154&lastturn=-3&show=NmWiSZUQ"
+      }
+    ],
+    "bytes": 31834,
+    "sha256": "be6734bd6f3278c57fdc5017a9c91bda01df08c43710ce43270d9075575fbf98",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632029154\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632029154&lastturn=0&show=NmWiSZUQ",
+        "status_code": 200,
+        "bytes": 4169,
+        "elapsed_ms": 1828.2,
+        "sha256": "b76769e466e81935f93bd4fd304f67098842e8aeee5985e1d8af0a64f283e022",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632029154&lastturn=0&show=NmWiSZUQ"
+      }
+    ],
+    "bytes": 4169,
+    "sha256": "b76769e466e81935f93bd4fd304f67098842e8aeee5985e1d8af0a64f283e022",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278235.515351
+}

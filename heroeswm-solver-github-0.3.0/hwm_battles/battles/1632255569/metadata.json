@@ -1,0 +1,37 @@
+{
+  "warid": "1632255569",
+  "show": "NyAnffOW",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632255569&show=NyAnffOW",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632255569\\init.txt",
+    "bytes": 27136,
+    "sha256": "7261e488f2788e7414b6f2d40ca37a3ed8cb3fe4383ee2a0f92d9618f33e9f00"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632255569\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632255569&lastturn=0&show=NyAnffOW",
+        "status_code": 200,
+        "bytes": 3638,
+        "elapsed_ms": 518.2,
+        "sha256": "a9aef1744722fcb988e7705147ae88bcd8a6be9c69a22bb19466fa0d48887155",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632255569&lastturn=0&show=NyAnffOW"
+      }
+    ],
+    "bytes": 3638,
+    "sha256": "a9aef1744722fcb988e7705147ae88bcd8a6be9c69a22bb19466fa0d48887155",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278180.2832823
+}

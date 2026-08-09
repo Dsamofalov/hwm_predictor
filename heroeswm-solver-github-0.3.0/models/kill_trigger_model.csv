@@ -1,0 +1,3 @@
+ability_code,event,train_n,train_hits,train_probability,heldout_n,heldout_hits,heldout_probability,abs_drift,increment,enabled,train_delta_median,heldout_delta_median
+enraged,friendly_stack_death,2269,2125,0.9365359189070075,702,657,0.9358974358974359,0.0006384830095715888,1,1,1.0,1.0
+bloodlust,enemy_stack_death_by_our_side,1317,1256,0.9536826119969628,210,178,0.8476190476190476,0.1060635643779152,1,0,1.0,1.0

@@ -1,0 +1,37 @@
+{
+  "warid": "1631549803",
+  "show": "NIMTHuOK",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631549803&show=NIMTHuOK",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631549803\\init.txt",
+    "bytes": 52278,
+    "sha256": "28dd4853848bdee5ffa28ab8b97184f99f3f44cc5fa708a6e09c55208119f059"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631549803\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631549803&lastturn=0&show=NIMTHuOK",
+        "status_code": 200,
+        "bytes": 4701,
+        "elapsed_ms": 2289.2,
+        "sha256": "8886d94ccf6aa4374a3ee149175c0d3989319f220597cd818c620b9ad2a4cf89",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631549803&lastturn=0&show=NIMTHuOK"
+      }
+    ],
+    "bytes": 4701,
+    "sha256": "8886d94ccf6aa4374a3ee149175c0d3989319f220597cd818c620b9ad2a4cf89",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278184.572639
+}

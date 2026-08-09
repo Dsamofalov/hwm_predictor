@@ -1,0 +1,37 @@
+{
+  "warid": "1631550488",
+  "show": "NougmtMr",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631550488&show=NougmtMr",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631550488\\init.txt",
+    "bytes": 54366,
+    "sha256": "08f6e69cfc594cb7d3c53e135747000659548b2a92312771e5866f0666923b71"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631550488\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631550488&lastturn=0&show=NougmtMr",
+        "status_code": 200,
+        "bytes": 7865,
+        "elapsed_ms": 3398.3,
+        "sha256": "9f05a0c15f9bd7a8b950a7506900c2deb1a56ee7790a233ff0875db2ec34c8a8",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631550488&lastturn=0&show=NougmtMr"
+      }
+    ],
+    "bytes": 7865,
+    "sha256": "9f05a0c15f9bd7a8b950a7506900c2deb1a56ee7790a233ff0875db2ec34c8a8",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278185.892212
+}

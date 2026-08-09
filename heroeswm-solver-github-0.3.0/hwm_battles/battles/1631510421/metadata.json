@@ -1,0 +1,37 @@
+{
+  "warid": "1631510421",
+  "show": "NRNKAU-f",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631510421&show=NRNKAU-f",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631510421\\init.txt",
+    "bytes": 27895,
+    "sha256": "49a38aad444e4c20699a9a7005d27e7b8391983e90fd4ec125797b9bf4b41ef0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631510421\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631510421&lastturn=0&show=NRNKAU-f",
+        "status_code": 200,
+        "bytes": 3947,
+        "elapsed_ms": 210.7,
+        "sha256": "8a104a36ca48fa3208ec5d6b55a372af1b43b8dae1a33a131bd0aa266373c1d0",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631510421&lastturn=0&show=NRNKAU-f"
+      }
+    ],
+    "bytes": 3947,
+    "sha256": "8a104a36ca48fa3208ec5d6b55a372af1b43b8dae1a33a131bd0aa266373c1d0",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278197.7317786
+}

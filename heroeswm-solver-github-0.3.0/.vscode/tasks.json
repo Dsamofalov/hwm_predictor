@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label":"CMake: configure debug","type":"shell","command":"cmake --preset debug"},
+    {"label":"CMake: build debug","type":"shell","command":"cmake --build --preset debug","dependsOn":"CMake: configure debug","group":"build"},
+    {"label":"C++: tests","type":"shell","command":"ctest --preset debug --output-on-failure","dependsOn":"CMake: build debug"},
+    {"label":"Python: tests","type":"shell","command":"python -m pytest -q"},
+    {"label":"Extension: build","type":"shell","command":"npm run build","options":{"cwd":"${workspaceFolder}/extension"}},
+    {"label":"Corpus: manifest","type":"shell","command":"python -m hwm_solver.cli manifest data/input/battle_urls.txt data/manifests/battles.jsonl","options":{"env":{"PYTHONPATH":"${workspaceFolder}/python"}}},
+    {
+      "label":"Validate all",
+      "type":"shell",
+      "command":"bash ./scripts/validate_linux.sh",
+      "windows":{"command":"powershell -ExecutionPolicy Bypass -File .\\scripts\\validate_windows.ps1"},
+      "group":{"kind":"test","isDefault":true}
+    }
+  ]
+}

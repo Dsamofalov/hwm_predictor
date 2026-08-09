@@ -1,0 +1,37 @@
+{
+  "warid": "1632013141",
+  "show": "NtEQshix",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632013141&show=NtEQshix",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632013141\\init.txt",
+    "bytes": 41973,
+    "sha256": "7f97a3fa3d4bce5083c16adf94ff687a6a514b882e178434ea751217995ac7b7"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632013141\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632013141&lastturn=0&show=NtEQshix",
+        "status_code": 200,
+        "bytes": 8035,
+        "elapsed_ms": 208.6,
+        "sha256": "aedcf8140969d4049c6a3dacf5d57a7a13f7a30aa1c87e84cd3e896b64a771ef",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632013141&lastturn=0&show=NtEQshix"
+      }
+    ],
+    "bytes": 8035,
+    "sha256": "aedcf8140969d4049c6a3dacf5d57a7a13f7a30aa1c87e84cd3e896b64a771ef",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278217.2295463
+}

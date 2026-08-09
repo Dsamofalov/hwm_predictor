@@ -1,0 +1,2213 @@
+{
+  "schema_version": 1,
+  "source": "raw corpus only; ability composition residual on top of fixed battle-balanced numeric value baseline",
+  "baseline": "models/value_linear.json",
+  "min_support": 30,
+  "alpha": 3000.0,
+  "coefficients": [
+    {
+      "ability_id": 1641293189,
+      "code": "absolutepurity",
+      "samples": 181,
+      "coefficient": 0.00013091249791509415
+    },
+    {
+      "ability_id": 4144301207,
+      "code": "acid_breath",
+      "samples": 1945,
+      "coefficient": -0.0015200713237028109
+    },
+    {
+      "ability_id": 3014145002,
+      "code": "advancedrepair",
+      "samples": 78,
+      "coefficient": 0.000125091879937629
+    },
+    {
+      "ability_id": 1991142818,
+      "code": "agilesteed",
+      "samples": 454,
+      "coefficient": -0.0006741938428532695
+    },
+    {
+      "ability_id": 3146823992,
+      "code": "agility",
+      "samples": 751,
+      "coefficient": -0.00496655319997499
+    },
+    {
+      "ability_id": 3248709623,
+      "code": "aimedshot",
+      "samples": 32,
+      "coefficient": 0.0014149825663832656
+    },
+    {
+      "ability_id": 1532340742,
+      "code": "alive",
+      "samples": 13039,
+      "coefficient": 0.02238301024462664
+    },
+    {
+      "ability_id": 3477036370,
+      "code": "allaroundslash",
+      "samples": 387,
+      "coefficient": -0.00022107158645181356
+    },
+    {
+      "ability_id": 4175406173,
+      "code": "allslash",
+      "samples": 169,
+      "coefficient": -0.00014702647059139547
+    },
+    {
+      "ability_id": 412596046,
+      "code": "amorale",
+      "samples": 253,
+      "coefficient": -0.0001892155147952505
+    },
+    {
+      "ability_id": 3360073780,
+      "code": "amphibian",
+      "samples": 2389,
+      "coefficient": 0.020224706397996017
+    },
+    {
+      "ability_id": 2450932601,
+      "code": "arachnidjump",
+      "samples": 71,
+      "coefficient": 0.0026990154708507424
+    },
+    {
+      "ability_id": 4087910980,
+      "code": "armordamage10",
+      "samples": 110,
+      "coefficient": -0.00028504360229400033
+    },
+    {
+      "ability_id": 1706033535,
+      "code": "armordamage20",
+      "samples": 150,
+      "coefficient": 0.00032423699631788403
+    },
+    {
+      "ability_id": 1622145440,
+      "code": "armordamage25",
+      "samples": 94,
+      "coefficient": -7.741003980014912e-05
+    },
+    {
+      "ability_id": 3799163979,
+      "code": "armorpiercing",
+      "samples": 1785,
+      "coefficient": 0.029041528274686264
+    },
+    {
+      "ability_id": 2697986656,
+      "code": "armoured",
+      "samples": 3137,
+      "coefficient": 0.003169224189486807
+    },
+    {
+      "ability_id": 1716878860,
+      "code": "assault",
+      "samples": 2405,
+      "coefficient": 0.003468050975527272
+    },
+    {
+      "ability_id": 4243958869,
+      "code": "attentive",
+      "samples": 470,
+      "coefficient": -0.00033383455119621945
+    },
+    {
+      "ability_id": 4139836548,
+      "code": "auraofairvul",
+      "samples": 314,
+      "coefficient": -6.865531436426819e-05
+    },
+    {
+      "ability_id": 778265518,
+      "code": "auraofbravery",
+      "samples": 1160,
+      "coefficient": 0.00044257380719072044
+    },
+    {
+      "ability_id": 1424378918,
+      "code": "auraofdarkresistance",
+      "samples": 141,
+      "coefficient": -1.4077030986144375e-05
+    },
+    {
+      "ability_id": 1283175630,
+      "code": "auraoffirevul",
+      "samples": 754,
+      "coefficient": -2.3463102505805543e-05
+    },
+    {
+      "ability_id": 321009311,
+      "code": "auraofres",
+      "samples": 3258,
+      "coefficient": -0.007167267552179664
+    },
+    {
+      "ability_id": 774192337,
+      "code": "auraofwatervul",
+      "samples": 314,
+      "coefficient": -6.865531436426819e-05
+    },
+    {
+      "ability_id": 1267294959,
+      "code": "balefulgaze",
+      "samples": 1779,
+      "coefficient": -0.001737355024205868
+    },
+    {
+      "ability_id": 2328674597,
+      "code": "battledive",
+      "samples": 765,
+      "coefficient": 0.0003763199444233658
+    },
+    {
+      "ability_id": 562048169,
+      "code": "battlefrenzy",
+      "samples": 990,
+      "coefficient": -0.0014155223147665908
+    },
+    {
+      "ability_id": 901750387,
+      "code": "battlethirst",
+      "samples": 304,
+      "coefficient": -0.0013129635487151136
+    },
+    {
+      "ability_id": 174647527,
+      "code": "bearroar",
+      "samples": 423,
+      "coefficient": 8.783598601917905e-05
+    },
+    {
+      "ability_id": 1528801399,
+      "code": "berserkerrage",
+      "samples": 1315,
+      "coefficient": 0.0001509388263455032
+    },
+    {
+      "ability_id": 1405799865,
+      "code": "big",
+      "samples": 25154,
+      "coefficient": -0.031788915990414494
+    },
+    {
+      "ability_id": 481590696,
+      "code": "bindingstrike",
+      "samples": 79,
+      "coefficient": -0.0007853977942391535
+    },
+    {
+      "ability_id": 3229713574,
+      "code": "bindshot",
+      "samples": 343,
+      "coefficient": -0.00014426497845844286
+    },
+    {
+      "ability_id": 1142836594,
+      "code": "bladeofepiphany",
+      "samples": 181,
+      "coefficient": 0.00013091249791509415
+    },
+    {
+      "ability_id": 2537456544,
+      "code": "bladeofhatred",
+      "samples": 708,
+      "coefficient": 7.219923207782074e-05
+    },
+    {
+      "ability_id": 2893263832,
+      "code": "bladeofjudgment",
+      "samples": 338,
+      "coefficient": 0.001042580701848746
+    },
+    {
+      "ability_id": 410342760,
+      "code": "bladeofmercy",
+      "samples": 207,
+      "coefficient": 0.0009116682039336523
+    },
+    {
+      "ability_id": 2395534473,
+      "code": "bladeofslaughter",
+      "samples": 209,
+      "coefficient": -2.4027564716051172e-05
+    },
+    {
+      "ability_id": 3155083709,
+      "code": "blindedbyrage",
+      "samples": 708,
+      "coefficient": 7.219923207782074e-05
+    },
+    {
+      "ability_id": 3323157113,
+      "code": "blinding_attack",
+      "samples": 5280,
+      "coefficient": -0.009643606974013865
+    },
+    {
+      "ability_id": 3995052496,
+      "code": "blindingcharge",
+      "samples": 365,
+      "coefficient": 0.0006168057865276465
+    },
+    {
+      "ability_id": 2105228953,
+      "code": "bloodfrenzy",
+      "samples": 644,
+      "coefficient": 0.000721851229965752
+    },
+    {
+      "ability_id": 1032884251,
+      "code": "bloodlust",
+      "samples": 7567,
+      "coefficient": -0.010044647461970228
+    },
+    {
+      "ability_id": 2995736475,
+      "code": "bombshooter",
+      "samples": 78,
+      "coefficient": -0.00013439749679201757
+    },
+    {
+      "ability_id": 3475031270,
+      "code": "boundlesshate",
+      "samples": 341,
+      "coefficient": -0.00015226165634914257
+    },
+    {
+      "ability_id": 864615248,
+      "code": "bravery",
+      "samples": 4432,
+      "coefficient": 0.0012005302456675703
+    },
+    {
+      "ability_id": 737051599,
+      "code": "brittle",
+      "samples": 516,
+      "coefficient": -0.00035335133675976234
+    },
+    {
+      "ability_id": 2451728847,
+      "code": "burningfootsteps",
+      "samples": 220,
+      "coefficient": -0.00025393320602689126
+    },
+    {
+      "ability_id": 981873305,
+      "code": "burningrage",
+      "samples": 484,
+      "coefficient": 0.001988051355298103
+    },
+    {
+      "ability_id": 3543283432,
+      "code": "burstofenergy",
+      "samples": 836,
+      "coefficient": -0.003701948480080068
+    },
+    {
+      "ability_id": 3904433841,
+      "code": "calllightning",
+      "samples": 65,
+      "coefficient": 0.0002087235302521046
+    },
+    {
+      "ability_id": 793609651,
+      "code": "callofbeast",
+      "samples": 155,
+      "coefficient": 0.0009881328546984057
+    },
+    {
+      "ability_id": 3609468151,
+      "code": "carrier",
+      "samples": 4612,
+      "coefficient": 0.0002955425436944647
+    },
+    {
+      "ability_id": 2782428153,
+      "code": "caster",
+      "samples": 17782,
+      "coefficient": 0.009700247161224834
+    },
+    {
+      "ability_id": 2673819758,
+      "code": "chainshot",
+      "samples": 85,
+      "coefficient": -0.0001633517968833086
+    },
+    {
+      "ability_id": 15175742,
+      "code": "challenge",
+      "samples": 1112,
+      "coefficient": 0.007558282742496826
+    },
+    {
+      "ability_id": 3006188029,
+      "code": "chameleon",
+      "samples": 176,
+      "coefficient": 0.00023641242429949286
+    },
+    {
+      "ability_id": 1430751702,
+      "code": "championcharge",
+      "samples": 698,
+      "coefficient": -0.00045949459217986186
+    },
+    {
+      "ability_id": 995521460,
+      "code": "channeling",
+      "samples": 1015,
+      "coefficient": 0.0004786753450427827
+    },
+    {
+      "ability_id": 3234472817,
+      "code": "charge",
+      "samples": 750,
+      "coefficient": -0.00024991862093816077
+    },
+    {
+      "ability_id": 2371448693,
+      "code": "childofthelight",
+      "samples": 2555,
+      "coefficient": -0.0015701384095142608
+    },
+    {
+      "ability_id": 3272193771,
+      "code": "cleansinglight",
+      "samples": 550,
+      "coefficient": -0.001160447470990245
+    },
+    {
+      "ability_id": 1981509355,
+      "code": "cleansingstrike",
+      "samples": 79,
+      "coefficient": -0.0007853977942391535
+    },
+    {
+      "ability_id": 3896273609,
+      "code": "cleave",
+      "samples": 2891,
+      "coefficient": -0.005369686330214095
+    },
+    {
+      "ability_id": 3360041683,
+      "code": "cleavestrike",
+      "samples": 71,
+      "coefficient": -0.0005278738257585839
+    },
+    {
+      "ability_id": 4268977587,
+      "code": "commandingpresence",
+      "samples": 381,
+      "coefficient": 0.0006604214910449375
+    },
+    {
+      "ability_id": 1179922742,
+      "code": "concentration",
+      "samples": 112,
+      "coefficient": -0.00027796053182740704
+    },
+    {
+      "ability_id": 2949271329,
+      "code": "confusionstrike",
+      "samples": 433,
+      "coefficient": -8.649571116730475e-05
+    },
+    {
+      "ability_id": 429466286,
+      "code": "corpseeater",
+      "samples": 487,
+      "coefficient": 0.0008138357829154282
+    },
+    {
+      "ability_id": 2793852128,
+      "code": "cowardice",
+      "samples": 515,
+      "coefficient": 0.0002005101452922911
+    },
+    {
+      "ability_id": 2637081570,
+      "code": "crashingleap",
+      "samples": 497,
+      "coefficient": -0.0009011478876965941
+    },
+    {
+      "ability_id": 3580932229,
+      "code": "cripplingtraps",
+      "samples": 1839,
+      "coefficient": 0.0008531967142304976
+    },
+    {
+      "ability_id": 1292550398,
+      "code": "cripplingwound",
+      "samples": 4849,
+      "coefficient": -0.00851110446287173
+    },
+    {
+      "ability_id": 160827735,
+      "code": "crossfire",
+      "samples": 1695,
+      "coefficient": 0.0015220790241317651
+    },
+    {
+      "ability_id": 624471117,
+      "code": "cruelty",
+      "samples": 109,
+      "coefficient": -4.8395937601796285e-05
+    },
+    {
+      "ability_id": 422885816,
+      "code": "crushblow",
+      "samples": 731,
+      "coefficient": 0.0005899892257854763
+    },
+    {
+      "ability_id": 1514246415,
+      "code": "crushingleadership",
+      "samples": 71,
+      "coefficient": -0.0005278738257585839
+    },
+    {
+      "ability_id": 282356714,
+      "code": "cursingattack",
+      "samples": 3020,
+      "coefficient": -0.009041076199815206
+    },
+    {
+      "ability_id": 2565772863,
+      "code": "dampenmagic",
+      "samples": 387,
+      "coefficient": -0.0007887196405288346
+    },
+    {
+      "ability_id": 3450007442,
+      "code": "dancecombo",
+      "samples": 1251,
+      "coefficient": -0.0036785141545956856
+    },
+    {
+      "ability_id": 1052649597,
+      "code": "darkattack",
+      "samples": 464,
+      "coefficient": 1.4770785426068494e-05
+    },
+    {
+      "ability_id": 862729441,
+      "code": "darkshadow",
+      "samples": 62,
+      "coefficient": -3.764250382832543e-05
+    },
+    {
+      "ability_id": 24764149,
+      "code": "dash",
+      "samples": 272,
+      "coefficient": -0.0009621657751703746
+    },
+    {
+      "ability_id": 1138012059,
+      "code": "deadflesh",
+      "samples": 564,
+      "coefficient": -0.0001722956287824771
+    },
+    {
+      "ability_id": 3298954165,
+      "code": "deathattack",
+      "samples": 431,
+      "coefficient": -0.0008911674892882643
+    },
+    {
+      "ability_id": 3926577654,
+      "code": "deathcloud",
+      "samples": 1823,
+      "coefficient": 0.0001220725275693945
+    },
+    {
+      "ability_id": 1141059188,
+      "code": "deathstare",
+      "samples": 2387,
+      "coefficient": -0.007680847925961042
+    },
+    {
+      "ability_id": 2167695767,
+      "code": "deathstrike",
+      "samples": 223,
+      "coefficient": -0.000742326191473697
+    },
+    {
+      "ability_id": 2605269424,
+      "code": "deathwail",
+      "samples": 980,
+      "coefficient": 0.0022723318592920306
+    },
+    {
+      "ability_id": 2210396922,
+      "code": "defender",
+      "samples": 606,
+      "coefficient": 0.009437985966033048
+    },
+    {
+      "ability_id": 1040539733,
+      "code": "defiledcreature",
+      "samples": 607,
+      "coefficient": -0.00032083648077771155
+    },
+    {
+      "ability_id": 233134182,
+      "code": "demon_resurrection",
+      "samples": 324,
+      "coefficient": -0.00043219788553167614
+    },
+    {
+      "ability_id": 3781682416,
+      "code": "demonic",
+      "samples": 1594,
+      "coefficient": -0.005785655787391343
+    },
+    {
+      "ability_id": 659366501,
+      "code": "demoniclineage",
+      "samples": 2058,
+      "coefficient": 0.010525575787766906
+    },
+    {
+      "ability_id": 1915570931,
+      "code": "disorientingscreech",
+      "samples": 112,
+      "coefficient": -2.663427152577232e-05
+    },
+    {
+      "ability_id": 3307888879,
+      "code": "divingassault",
+      "samples": 354,
+      "coefficient": 0.00035457025898154743
+    },
+    {
+      "ability_id": 590107600,
+      "code": "dodge",
+      "samples": 100,
+      "coefficient": -0.00020391343327856907
+    },
+    {
+      "ability_id": 4115105943,
+      "code": "doubleshoot",
+      "samples": 3051,
+      "coefficient": -0.0007785401905165227
+    },
+    {
+      "ability_id": 3679573250,
+      "code": "doublestrike",
+      "samples": 5253,
+      "coefficient": -0.0014556792777787938
+    },
+    {
+      "ability_id": 3088722968,
+      "code": "dragoncurse",
+      "samples": 107,
+      "coefficient": -5.7162444440335235e-05
+    },
+    {
+      "ability_id": 2639357090,
+      "code": "dualforms",
+      "samples": 1779,
+      "coefficient": -0.001737355024205868
+    },
+    {
+      "ability_id": 4043768160,
+      "code": "eaterofdarkness",
+      "samples": 441,
+      "coefficient": -0.0011081735116001792
+    },
+    {
+      "ability_id": 792595297,
+      "code": "eateroflight",
+      "samples": 570,
+      "coefficient": -0.0020395743628594987
+    },
+    {
+      "ability_id": 3097515518,
+      "code": "eclipse",
+      "samples": 430,
+      "coefficient": 4.5254129308442186e-05
+    },
+    {
+      "ability_id": 1010774474,
+      "code": "elemental",
+      "samples": 4039,
+      "coefficient": 0.0008620539947966465
+    },
+    {
+      "ability_id": 3230102754,
+      "code": "enchantedarmor",
+      "samples": 78,
+      "coefficient": -0.0001226767186011405
+    },
+    {
+      "ability_id": 3980462502,
+      "code": "endurance",
+      "samples": 689,
+      "coefficient": -0.00031740348605531086
+    },
+    {
+      "ability_id": 3106511444,
+      "code": "energychannel",
+      "samples": 131,
+      "coefficient": -0.0002557313239368071
+    },
+    {
+      "ability_id": 3418675989,
+      "code": "enraged",
+      "samples": 17492,
+      "coefficient": -0.04118498863967123
+    },
+    {
+      "ability_id": 100188900,
+      "code": "entrenchment",
+      "samples": 213,
+      "coefficient": -0.0009422684867924707
+    },
+    {
+      "ability_id": 1371576935,
+      "code": "entroots",
+      "samples": 5422,
+      "coefficient": -0.01754815593291017
+    },
+    {
+      "ability_id": 1665321496,
+      "code": "evileye",
+      "samples": 442,
+      "coefficient": 0.0023680852031402427
+    },
+    {
+      "ability_id": 2757393894,
+      "code": "explodingspikes",
+      "samples": 596,
+      "coefficient": -0.0009081583893436252
+    },
+    {
+      "ability_id": 1675583761,
+      "code": "eyeofgluttony",
+      "samples": 1031,
+      "coefficient": 0.0038571351935101123
+    },
+    {
+      "ability_id": 2804223612,
+      "code": "eyesofthemedusa",
+      "samples": 650,
+      "coefficient": -0.001618834043016622
+    },
+    {
+      "ability_id": 3986489711,
+      "code": "fearattack",
+      "samples": 1197,
+      "coefficient": -0.0018835180543330659
+    },
+    {
+      "ability_id": 3429790271,
+      "code": "feralcharge",
+      "samples": 375,
+      "coefficient": -0.00027018782385788265
+    },
+    {
+      "ability_id": 1908720239,
+      "code": "ferociouswound",
+      "samples": 3995,
+      "coefficient": -0.004199144230096091
+    },
+    {
+      "ability_id": 2339956315,
+      "code": "festeringaura",
+      "samples": 1577,
+      "coefficient": -0.0031230854303335395
+    },
+    {
+      "ability_id": 1011864507,
+      "code": "fierceretaliation",
+      "samples": 555,
+      "coefficient": 0.002292356462269447
+    },
+    {
+      "ability_id": 1830970580,
+      "code": "fire_breath",
+      "samples": 3325,
+      "coefficient": -0.0013108189062180843
+    },
+    {
+      "ability_id": 4122227553,
+      "code": "fireattack",
+      "samples": 2423,
+      "coefficient": -0.0012448360854888734
+    },
+    {
+      "ability_id": 2945385176,
+      "code": "fireproof25",
+      "samples": 1074,
+      "coefficient": 0.001440099824358318
+    },
+    {
+      "ability_id": 2860364248,
+      "code": "fireproof50",
+      "samples": 304,
+      "coefficient": -0.0002474148636368145
+    },
+    {
+      "ability_id": 2252159050,
+      "code": "fireprskin",
+      "samples": 2118,
+      "coefficient": 0.02192453562506221
+    },
+    {
+      "ability_id": 16487548,
+      "code": "fireshield",
+      "samples": 1769,
+      "coefficient": 0.00040279645037289216
+    },
+    {
+      "ability_id": 3653296507,
+      "code": "firewallshooter",
+      "samples": 69,
+      "coefficient": -1.4910154807602809e-05
+    },
+    {
+      "ability_id": 3464367009,
+      "code": "firstshot",
+      "samples": 196,
+      "coefficient": -4.507629634729073e-05
+    },
+    {
+      "ability_id": 167778586,
+      "code": "flamestrike",
+      "samples": 441,
+      "coefficient": 4.4244495257471886e-05
+    },
+    {
+      "ability_id": 4230544161,
+      "code": "flamewave",
+      "samples": 441,
+      "coefficient": 4.4244495257471886e-05
+    },
+    {
+      "ability_id": 67400405,
+      "code": "flyer",
+      "samples": 22793,
+      "coefficient": -0.017274146883893938
+    },
+    {
+      "ability_id": 906575436,
+      "code": "forbiddenspell",
+      "samples": 193,
+      "coefficient": -0.0003511193883888658
+    },
+    {
+      "ability_id": 1117383717,
+      "code": "forcearrow",
+      "samples": 2487,
+      "coefficient": 0.0005294571589690504
+    },
+    {
+      "ability_id": 646697541,
+      "code": "fourwaves",
+      "samples": 758,
+      "coefficient": 0.003381119962108475
+    },
+    {
+      "ability_id": 1271578069,
+      "code": "freezingshot",
+      "samples": 98,
+      "coefficient": -0.00015191546761999784
+    },
+    {
+      "ability_id": 176500674,
+      "code": "frightful_aura",
+      "samples": 2190,
+      "coefficient": -0.006007571591882078
+    },
+    {
+      "ability_id": 1115499600,
+      "code": "frozencaress",
+      "samples": 563,
+      "coefficient": 9.024566244238086e-05
+    },
+    {
+      "ability_id": 3957486794,
+      "code": "frozentouch",
+      "samples": 761,
+      "coefficient": 0.004146298879712201
+    },
+    {
+      "ability_id": 3950043109,
+      "code": "giantkiller",
+      "samples": 2222,
+      "coefficient": -0.001545883808422018
+    },
+    {
+      "ability_id": 1852507577,
+      "code": "goblinthrower",
+      "samples": 1173,
+      "coefficient": 0.0029580744289257155
+    },
+    {
+      "ability_id": 2042835215,
+      "code": "gribbomb",
+      "samples": 139,
+      "coefficient": -0.0006996664750204114
+    },
+    {
+      "ability_id": 1600631019,
+      "code": "hailstormaura",
+      "samples": 668,
+      "coefficient": 0.0018779348370117658
+    },
+    {
+      "ability_id": 1113813550,
+      "code": "harmtouch",
+      "samples": 2156,
+      "coefficient": 0.0002196068371688888
+    },
+    {
+      "ability_id": 2214775874,
+      "code": "harpoonstrike",
+      "samples": 502,
+      "coefficient": 0.00011818245231841519
+    },
+    {
+      "ability_id": 2530505866,
+      "code": "hatefulretaliation",
+      "samples": 708,
+      "coefficient": 7.219923207782074e-05
+    },
+    {
+      "ability_id": 1641428266,
+      "code": "heal5",
+      "samples": 330,
+      "coefficient": 0.0028865036309258926
+    },
+    {
+      "ability_id": 1624650647,
+      "code": "heal6",
+      "samples": 275,
+      "coefficient": 0.0002913663276367327
+    },
+    {
+      "ability_id": 3894280194,
+      "code": "heavystep",
+      "samples": 230,
+      "coefficient": -0.0009798479155245599
+    },
+    {
+      "ability_id": 1307244642,
+      "code": "hexingattack",
+      "samples": 991,
+      "coefficient": 0.00227512835977356
+    },
+    {
+      "ability_id": 4128829753,
+      "code": "hidden",
+      "samples": 2872,
+      "coefficient": -0.000837626777921846
+    },
+    {
+      "ability_id": 3037085555,
+      "code": "holdground",
+      "samples": 253,
+      "coefficient": -0.00016525802676442222
+    },
+    {
+      "ability_id": 2574783457,
+      "code": "hollowbones",
+      "samples": 3436,
+      "coefficient": 0.0009239511627882674
+    },
+    {
+      "ability_id": 4052522160,
+      "code": "iair",
+      "samples": 392,
+      "coefficient": -0.0009216796424361352
+    },
+    {
+      "ability_id": 1059089875,
+      "code": "iblind",
+      "samples": 2424,
+      "coefficient": -0.0019149769529066192
+    },
+    {
+      "ability_id": 795195454,
+      "code": "icedbreath",
+      "samples": 1473,
+      "coefficient": 0.003022290641736888
+    },
+    {
+      "ability_id": 250089078,
+      "code": "icold",
+      "samples": 1227,
+      "coefficient": -0.00014189915234603796
+    },
+    {
+      "ability_id": 1758341920,
+      "code": "iearth",
+      "samples": 2307,
+      "coefficient": -0.003832394343434409
+    },
+    {
+      "ability_id": 3651557544,
+      "code": "ifire",
+      "samples": 6211,
+      "coefficient": 0.0020232830845522214
+    },
+    {
+      "ability_id": 1584319202,
+      "code": "ifrenzy",
+      "samples": 587,
+      "coefficient": -0.0002602524175872921
+    },
+    {
+      "ability_id": 2973282433,
+      "code": "ignoreattack20",
+      "samples": 445,
+      "coefficient": 0.0015620200143243359
+    },
+    {
+      "ability_id": 3041378647,
+      "code": "ignoreattack40",
+      "samples": 448,
+      "coefficient": 0.0008415615398907359
+    },
+    {
+      "ability_id": 2260520888,
+      "code": "ignoredefence10",
+      "samples": 252,
+      "coefficient": -0.0006257400075341587
+    },
+    {
+      "ability_id": 2344408983,
+      "code": "ignoredefence15",
+      "samples": 299,
+      "coefficient": -0.0001954178075862434
+    },
+    {
+      "ability_id": 4173610739,
+      "code": "ignoredefence20",
+      "samples": 3453,
+      "coefficient": -0.0033617487548269266
+    },
+    {
+      "ability_id": 4223943596,
+      "code": "ignoredefence25",
+      "samples": 655,
+      "coefficient": -0.0003295049082053247
+    },
+    {
+      "ability_id": 2462146506,
+      "code": "ignoredefence30",
+      "samples": 1421,
+      "coefficient": -0.004795304266243653
+    },
+    {
+      "ability_id": 80269061,
+      "code": "ignoredefence40",
+      "samples": 3162,
+      "coefficient": -0.005056293733502371
+    },
+    {
+      "ability_id": 4274423548,
+      "code": "ignoredefence50",
+      "samples": 199,
+      "coefficient": -0.0007601658554154065
+    },
+    {
+      "ability_id": 2429429911,
+      "code": "ignoredefence60",
+      "samples": 1539,
+      "coefficient": -0.0003913250664231582
+    },
+    {
+      "ability_id": 1861252832,
+      "code": "ilighting",
+      "samples": 1485,
+      "coefficient": 0.0032616218913205956
+    },
+    {
+      "ability_id": 1194077332,
+      "code": "imind",
+      "samples": 2452,
+      "coefficient": -0.0005807042891629459
+    },
+    {
+      "ability_id": 111001938,
+      "code": "immaterial",
+      "samples": 1911,
+      "coefficient": -0.000254397489729609
+    },
+    {
+      "ability_id": 1996858014,
+      "code": "immunetoweakness",
+      "samples": 1168,
+      "coefficient": -0.00022229349971308928
+    },
+    {
+      "ability_id": 1713374871,
+      "code": "immunity",
+      "samples": 1518,
+      "coefficient": -0.0006786464565086623
+    },
+    {
+      "ability_id": 3492637061,
+      "code": "impervioustopain",
+      "samples": 1150,
+      "coefficient": 0.004250753165503776
+    },
+    {
+      "ability_id": 1394307025,
+      "code": "incinerate",
+      "samples": 338,
+      "coefficient": 8.03187117991239e-05
+    },
+    {
+      "ability_id": 2355935035,
+      "code": "incorporeal",
+      "samples": 4324,
+      "coefficient": -0.011712424245263852
+    },
+    {
+      "ability_id": 3891120878,
+      "code": "invisibility",
+      "samples": 1011,
+      "coefficient": 0.0010474545399471605
+    },
+    {
+      "ability_id": 4019827025,
+      "code": "islow",
+      "samples": 1991,
+      "coefficient": -0.00600920130003269
+    },
+    {
+      "ability_id": 697908594,
+      "code": "jousting",
+      "samples": 1660,
+      "coefficient": -0.00017211441580696908
+    },
+    {
+      "ability_id": 1565158729,
+      "code": "layhands",
+      "samples": 587,
+      "coefficient": -0.0002602524175872921
+    },
+    {
+      "ability_id": 273197747,
+      "code": "leap",
+      "samples": 260,
+      "coefficient": 0.00014175562856513581
+    },
+    {
+      "ability_id": 660893535,
+      "code": "leap6",
+      "samples": 484,
+      "coefficient": -0.0005463933622213476
+    },
+    {
+      "ability_id": 406688247,
+      "code": "lifedrain",
+      "samples": 3401,
+      "coefficient": 0.00015729925807289713
+    },
+    {
+      "ability_id": 2683136385,
+      "code": "lifeguardmembrane",
+      "samples": 513,
+      "coefficient": 0.0003138880014289087
+    },
+    {
+      "ability_id": 1194501870,
+      "code": "lighting_attack",
+      "samples": 1578,
+      "coefficient": 0.001500765892255645
+    },
+    {
+      "ability_id": 4135954951,
+      "code": "lightningbreath",
+      "samples": 487,
+      "coefficient": 0.0008138357829154282
+    },
+    {
+      "ability_id": 3889975280,
+      "code": "lighttheft",
+      "samples": 118,
+      "coefficient": -9.257821035759437e-05
+    },
+    {
+      "ability_id": 1548348682,
+      "code": "liquidflamebreath",
+      "samples": 440,
+      "coefficient": -0.00013066454882820308
+    },
+    {
+      "ability_id": 3888369907,
+      "code": "lizardbite",
+      "samples": 2714,
+      "coefficient": 0.00017781397851224522
+    },
+    {
+      "ability_id": 3599035170,
+      "code": "lshield",
+      "samples": 4107,
+      "coefficient": -0.011365610165236104
+    },
+    {
+      "ability_id": 2328072797,
+      "code": "madshot",
+      "samples": 124,
+      "coefficient": -3.701918269623828e-05
+    },
+    {
+      "ability_id": 4037216884,
+      "code": "mag",
+      "samples": 7892,
+      "coefficient": 0.0026258468813277797
+    },
+    {
+      "ability_id": 3292368904,
+      "code": "magicattack",
+      "samples": 526,
+      "coefficient": -0.0013391205500496667
+    },
+    {
+      "ability_id": 183346239,
+      "code": "magicmine",
+      "samples": 293,
+      "coefficient": -0.00032792845487092734
+    },
+    {
+      "ability_id": 45033811,
+      "code": "magicproof10",
+      "samples": 101,
+      "coefficient": -0.0002671449688125504
+    },
+    {
+      "ability_id": 2426911256,
+      "code": "magicproof20",
+      "samples": 217,
+      "coefficient": -0.0005983404954714986
+    },
+    {
+      "ability_id": 2510799351,
+      "code": "magicproof25",
+      "samples": 1014,
+      "coefficient": -0.00159654252999832
+    },
+    {
+      "ability_id": 2495007470,
+      "code": "magicproof40",
+      "samples": 99,
+      "coefficient": -0.00012760304737806835
+    },
+    {
+      "ability_id": 2595820279,
+      "code": "magicproof50",
+      "samples": 3572,
+      "coefficient": -0.0004422436783656969
+    },
+    {
+      "ability_id": 2054882979,
+      "code": "magmashield",
+      "samples": 915,
+      "coefficient": -0.0012512237980406519
+    },
+    {
+      "ability_id": 3231420778,
+      "code": "magnetism",
+      "samples": 78,
+      "coefficient": -0.0001226767186011405
+    },
+    {
+      "ability_id": 1494735018,
+      "code": "manacurser",
+      "samples": 240,
+      "coefficient": 0.00022448180474249693
+    },
+    {
+      "ability_id": 496427704,
+      "code": "manadrain",
+      "samples": 3037,
+      "coefficient": -0.012792713704621154
+    },
+    {
+      "ability_id": 350440535,
+      "code": "manaeater",
+      "samples": 43,
+      "coefficient": -4.925154742442609e-05
+    },
+    {
+      "ability_id": 3273432050,
+      "code": "manafeed",
+      "samples": 3206,
+      "coefficient": 0.0016266478376375905
+    },
+    {
+      "ability_id": 4101454259,
+      "code": "manaleech",
+      "samples": 1461,
+      "coefficient": 0.0029295058719618953
+    },
+    {
+      "ability_id": 60838358,
+      "code": "manastealer",
+      "samples": 120,
+      "coefficient": 4.818868502144199e-05
+    },
+    {
+      "ability_id": 1869368502,
+      "code": "maneuver",
+      "samples": 2204,
+      "coefficient": -0.004433326768367987
+    },
+    {
+      "ability_id": 3655556722,
+      "code": "maniaclaughter",
+      "samples": 725,
+      "coefficient": 0.0035805518956194423
+    },
+    {
+      "ability_id": 3845000677,
+      "code": "markoffire",
+      "samples": 1938,
+      "coefficient": 0.001217935307785108
+    },
+    {
+      "ability_id": 3701607922,
+      "code": "mechanical",
+      "samples": 2071,
+      "coefficient": 0.002279454659408012
+    },
+    {
+      "ability_id": 4078531002,
+      "code": "menacinglook",
+      "samples": 190,
+      "coefficient": -0.005682842193156904
+    },
+    {
+      "ability_id": 782454662,
+      "code": "mightyslam",
+      "samples": 1701,
+      "coefficient": 0.0020280360361853815
+    },
+    {
+      "ability_id": 1035969365,
+      "code": "mobileshooter",
+      "samples": 752,
+      "coefficient": 0.0005793632541161712
+    },
+    {
+      "ability_id": 1404966839,
+      "code": "moraler",
+      "samples": 428,
+      "coefficient": -7.4066734697139e-05
+    },
+    {
+      "ability_id": 2430009902,
+      "code": "morecruelty",
+      "samples": 62,
+      "coefficient": -0.000123735487695402
+    },
+    {
+      "ability_id": 2849121180,
+      "code": "netshooter",
+      "samples": 30,
+      "coefficient": -1.7377063411643002e-05
+    },
+    {
+      "ability_id": 2552246656,
+      "code": "netshooterlight",
+      "samples": 40,
+      "coefficient": -4.040640990998258e-05
+    },
+    {
+      "ability_id": 1325065232,
+      "code": "nonshiftable",
+      "samples": 402,
+      "coefficient": 0.0009780017436822018
+    },
+    {
+      "ability_id": 3420412055,
+      "code": "nopenalty",
+      "samples": 10791,
+      "coefficient": -0.0053856248240586185
+    },
+    {
+      "ability_id": 2196185760,
+      "code": "norangepenalty",
+      "samples": 10318,
+      "coefficient": 0.02974452081065157
+    },
+    {
+      "ability_id": 1379533033,
+      "code": "noretalation",
+      "samples": 12653,
+      "coefficient": -0.00013665954491803064
+    },
+    {
+      "ability_id": 1588051915,
+      "code": "noselfret",
+      "samples": 1805,
+      "coefficient": -0.001398514886925239
+    },
+    {
+      "ability_id": 1505242890,
+      "code": "omnipresentgaze",
+      "samples": 145,
+      "coefficient": -0.0010741801358740378
+    },
+    {
+      "ability_id": 3082404139,
+      "code": "orderofchief",
+      "samples": 381,
+      "coefficient": 0.0006604214910449375
+    },
+    {
+      "ability_id": 2431002037,
+      "code": "organicarmor",
+      "samples": 714,
+      "coefficient": 0.00027512253504310144
+    },
+    {
+      "ability_id": 2159989345,
+      "code": "packboss",
+      "samples": 516,
+      "coefficient": -0.0026881015818947503
+    },
+    {
+      "ability_id": 1368539324,
+      "code": "packdefence",
+      "samples": 154,
+      "coefficient": -0.00013176097892686082
+    },
+    {
+      "ability_id": 2006965922,
+      "code": "packenrage",
+      "samples": 219,
+      "coefficient": -0.002969958491051942
+    },
+    {
+      "ability_id": 210071150,
+      "code": "packhunter",
+      "samples": 390,
+      "coefficient": -0.0003938473980093863
+    },
+    {
+      "ability_id": 682265273,
+      "code": "packpower",
+      "samples": 1082,
+      "coefficient": -0.007119018981335472
+    },
+    {
+      "ability_id": 315996912,
+      "code": "packraid",
+      "samples": 1082,
+      "coefficient": -0.007119018981335472
+    },
+    {
+      "ability_id": 2347347950,
+      "code": "packrevenge",
+      "samples": 163,
+      "coefficient": -0.000476983386384684
+    },
+    {
+      "ability_id": 3642873755,
+      "code": "packwisdom",
+      "samples": 30,
+      "coefficient": -7.330565749280542e-05
+    },
+    {
+      "ability_id": 3432167282,
+      "code": "painmirror",
+      "samples": 887,
+      "coefficient": 0.004769823519111884
+    },
+    {
+      "ability_id": 707599606,
+      "code": "paralyzing",
+      "samples": 385,
+      "coefficient": -0.00011491374176066919
+    },
+    {
+      "ability_id": 40209030,
+      "code": "patience",
+      "samples": 196,
+      "coefficient": -0.0012064068398442305
+    },
+    {
+      "ability_id": 2887662221,
+      "code": "pawstrike",
+      "samples": 2083,
+      "coefficient": 1.3965043673693848e-05
+    },
+    {
+      "ability_id": 2369447438,
+      "code": "perseverance",
+      "samples": 221,
+      "coefficient": -2.6359237109874466e-05
+    },
+    {
+      "ability_id": 818299305,
+      "code": "piercingbolt",
+      "samples": 1676,
+      "coefficient": 0.01983923808614568
+    },
+    {
+      "ability_id": 3026372832,
+      "code": "pirate",
+      "samples": 3593,
+      "coefficient": 0.026213072344809345
+    },
+    {
+      "ability_id": 3794297053,
+      "code": "pleasureinpain",
+      "samples": 1148,
+      "coefficient": 0.0013745939242929739
+    },
+    {
+      "ability_id": 3092031241,
+      "code": "poisonattack",
+      "samples": 1257,
+      "coefficient": -0.0009611253231201344
+    },
+    {
+      "ability_id": 353131915,
+      "code": "portal",
+      "samples": 859,
+      "coefficient": -0.0015276602326186504
+    },
+    {
+      "ability_id": 1506458051,
+      "code": "powerfulrecoil",
+      "samples": 276,
+      "coefficient": -9.645873368380074e-05
+    },
+    {
+      "ability_id": 2083325212,
+      "code": "powerstrike",
+      "samples": 3767,
+      "coefficient": -0.001728125194627857
+    },
+    {
+      "ability_id": 667354010,
+      "code": "preciseshot",
+      "samples": 961,
+      "coefficient": 0.0008922849292478067
+    },
+    {
+      "ability_id": 4124703765,
+      "code": "prismaticbreath",
+      "samples": 720,
+      "coefficient": -0.00010044008988193818
+    },
+    {
+      "ability_id": 1442065589,
+      "code": "proliferation",
+      "samples": 952,
+      "coefficient": 0.0023070089646382683
+    },
+    {
+      "ability_id": 1626471940,
+      "code": "purge",
+      "samples": 1264,
+      "coefficient": -0.0027836086575553894
+    },
+    {
+      "ability_id": 1212503018,
+      "code": "pygmykiller",
+      "samples": 327,
+      "coefficient": 0.000987985387292239
+    },
+    {
+      "ability_id": 1608520283,
+      "code": "pyromancer",
+      "samples": 679,
+      "coefficient": -0.0004534403784919122
+    },
+    {
+      "ability_id": 3511553011,
+      "code": "rageagainsttheliving",
+      "samples": 437,
+      "coefficient": 5.88726620576641e-05
+    },
+    {
+      "ability_id": 2645649997,
+      "code": "rageoftheforest",
+      "samples": 1219,
+      "coefficient": -0.004175963931095277
+    },
+    {
+      "ability_id": 915498833,
+      "code": "ragingblood",
+      "samples": 1816,
+      "coefficient": 0.0024011996827400252
+    },
+    {
+      "ability_id": 2135299822,
+      "code": "random_blessing",
+      "samples": 53,
+      "coefficient": 0.00017334020610047294
+    },
+    {
+      "ability_id": 3606092906,
+      "code": "randomcasterd",
+      "samples": 53,
+      "coefficient": 0.00017334020610047294
+    },
+    {
+      "ability_id": 163581660,
+      "code": "rangedretaliation",
+      "samples": 327,
+      "coefficient": -0.0005833884597213576
+    },
+    {
+      "ability_id": 1909037775,
+      "code": "rangepenalty",
+      "samples": 1354,
+      "coefficient": 0.0024924687353624075
+    },
+    {
+      "ability_id": 887361475,
+      "code": "raptureinagony",
+      "samples": 1011,
+      "coefficient": 0.00019733903238077893
+    },
+    {
+      "ability_id": 599042684,
+      "code": "rebirth25",
+      "samples": 75,
+      "coefficient": -4.290726985584636e-05
+    },
+    {
+      "ability_id": 649522636,
+      "code": "rebirth50",
+      "samples": 179,
+      "coefficient": -0.00026976380672144037
+    },
+    {
+      "ability_id": 1816987862,
+      "code": "regeneration",
+      "samples": 1798,
+      "coefficient": 0.0005860529122754261
+    },
+    {
+      "ability_id": 4273381350,
+      "code": "resistanttocurses",
+      "samples": 301,
+      "coefficient": -0.00020553423481811488
+    },
+    {
+      "ability_id": 1966801462,
+      "code": "resurrection",
+      "samples": 525,
+      "coefficient": -0.0004236508610055964
+    },
+    {
+      "ability_id": 550417429,
+      "code": "retractablespikes",
+      "samples": 667,
+      "coefficient": 0.004547641721069789
+    },
+    {
+      "ability_id": 3641144791,
+      "code": "ridercharge",
+      "samples": 2476,
+      "coefficient": 0.0002374874770551906
+    },
+    {
+      "ability_id": 2309032048,
+      "code": "runaway",
+      "samples": 253,
+      "coefficient": -0.0001892155147952505
+    },
+    {
+      "ability_id": 3202765793,
+      "code": "rushdave",
+      "samples": 990,
+      "coefficient": -0.0014155223147665908
+    },
+    {
+      "ability_id": 2920039777,
+      "code": "sacredweapon",
+      "samples": 80,
+      "coefficient": -0.0005136000669221982
+    },
+    {
+      "ability_id": 2377085669,
+      "code": "sacrificegoblin",
+      "samples": 1313,
+      "coefficient": 0.0025391779073058807
+    },
+    {
+      "ability_id": 458315755,
+      "code": "safeposition",
+      "samples": 601,
+      "coefficient": -0.0012934449948243708
+    },
+    {
+      "ability_id": 982090474,
+      "code": "scarablarvae",
+      "samples": 80,
+      "coefficient": -4.259529442204563e-05
+    },
+    {
+      "ability_id": 434388999,
+      "code": "scarablarvaeup",
+      "samples": 237,
+      "coefficient": 0.00020622377284167822
+    },
+    {
+      "ability_id": 2500167329,
+      "code": "scattershot",
+      "samples": 360,
+      "coefficient": -5.597513827323592e-05
+    },
+    {
+      "ability_id": 2354801659,
+      "code": "scavenger",
+      "samples": 278,
+      "coefficient": -0.0006414619494803581
+    },
+    {
+      "ability_id": 367340517,
+      "code": "searingaura",
+      "samples": 118,
+      "coefficient": 6.011662118765175e-05
+    },
+    {
+      "ability_id": 1443060943,
+      "code": "selfbomb",
+      "samples": 71,
+      "coefficient": 0.002710329920277501
+    },
+    {
+      "ability_id": 867841781,
+      "code": "setsnares",
+      "samples": 40,
+      "coefficient": 2.463151348981263e-05
+    },
+    {
+      "ability_id": 3465531449,
+      "code": "shadowattack",
+      "samples": 229,
+      "coefficient": -0.00015058811770030667
+    },
+    {
+      "ability_id": 254719310,
+      "code": "shieldbash",
+      "samples": 3688,
+      "coefficient": -0.010722587819693277
+    },
+    {
+      "ability_id": 2533417393,
+      "code": "shielded",
+      "samples": 3827,
+      "coefficient": 0.007214254799319513
+    },
+    {
+      "ability_id": 2062676501,
+      "code": "shieldguard",
+      "samples": 715,
+      "coefficient": 0.009517438105279243
+    },
+    {
+      "ability_id": 2934136738,
+      "code": "shieldother",
+      "samples": 1478,
+      "coefficient": -0.004062724542905444
+    },
+    {
+      "ability_id": 2730951492,
+      "code": "shieldwall",
+      "samples": 465,
+      "coefficient": -0.0012903994391613985
+    },
+    {
+      "ability_id": 2169441806,
+      "code": "shootbash",
+      "samples": 2287,
+      "coefficient": -0.002319365476877065
+    },
+    {
+      "ability_id": 3733667271,
+      "code": "shooter",
+      "samples": 25025,
+      "coefficient": 0.03288597515063
+    },
+    {
+      "ability_id": 1086286306,
+      "code": "shootonly",
+      "samples": 1805,
+      "coefficient": -0.001398514886925239
+    },
+    {
+      "ability_id": 3962776753,
+      "code": "siegewalls",
+      "samples": 1568,
+      "coefficient": 0.000766072313365919
+    },
+    {
+      "ability_id": 2660897719,
+      "code": "six_heads",
+      "samples": 1086,
+      "coefficient": 0.0005760461836506207
+    },
+    {
+      "ability_id": 1940149940,
+      "code": "slam",
+      "samples": 1532,
+      "coefficient": 0.013524896291124603
+    },
+    {
+      "ability_id": 2409362801,
+      "code": "snakereflexes",
+      "samples": 444,
+      "coefficient": -0.0005935320219169538
+    },
+    {
+      "ability_id": 3488926642,
+      "code": "songtimes",
+      "samples": 77,
+      "coefficient": -1.054935311895801e-05
+    },
+    {
+      "ability_id": 3696751218,
+      "code": "sorcererslayer",
+      "samples": 73,
+      "coefficient": -0.0006115576369695633
+    },
+    {
+      "ability_id": 3621209207,
+      "code": "sorrowstrike",
+      "samples": 995,
+      "coefficient": 0.001369934586961669
+    },
+    {
+      "ability_id": 3872240405,
+      "code": "spectrecold",
+      "samples": 32,
+      "coefficient": -1.409348614005428e-05
+    },
+    {
+      "ability_id": 3575864363,
+      "code": "speedoflight",
+      "samples": 614,
+      "coefficient": -0.0012167163669212055
+    },
+    {
+      "ability_id": 1763204872,
+      "code": "spider",
+      "samples": 721,
+      "coefficient": -0.000364135752064825
+    },
+    {
+      "ability_id": 3325022696,
+      "code": "spirit",
+      "samples": 3765,
+      "coefficient": 0.0038212545857891096
+    },
+    {
+      "ability_id": 3583799049,
+      "code": "spiritbond",
+      "samples": 451,
+      "coefficient": 0.00022268798054917208
+    },
+    {
+      "ability_id": 2893303736,
+      "code": "spiritlink",
+      "samples": 493,
+      "coefficient": 0.004547135538562712
+    },
+    {
+      "ability_id": 999704682,
+      "code": "spray",
+      "samples": 4612,
+      "coefficient": -0.000678879735651202
+    },
+    {
+      "ability_id": 3146817030,
+      "code": "statix",
+      "samples": 2402,
+      "coefficient": -0.0022039122183422316
+    },
+    {
+      "ability_id": 3443838355,
+      "code": "stealammunition",
+      "samples": 1096,
+      "coefficient": 0.0013343722564506128
+    },
+    {
+      "ability_id": 3357104378,
+      "code": "stone",
+      "samples": 341,
+      "coefficient": -0.0007178103843378513
+    },
+    {
+      "ability_id": 83914847,
+      "code": "stonegarden",
+      "samples": 152,
+      "coefficient": -0.00026553994998181665
+    },
+    {
+      "ability_id": 904039197,
+      "code": "stoning",
+      "samples": 345,
+      "coefficient": -0.0005373888710244019
+    },
+    {
+      "ability_id": 3588878545,
+      "code": "stormbolt",
+      "samples": 944,
+      "coefficient": 0.0006719830517537173
+    },
+    {
+      "ability_id": 3665111373,
+      "code": "stormcaller",
+      "samples": 97,
+      "coefficient": -0.00025102959268155205
+    },
+    {
+      "ability_id": 2139848908,
+      "code": "stormstrike",
+      "samples": 975,
+      "coefficient": 0.0006968691174133885
+    },
+    {
+      "ability_id": 412307598,
+      "code": "strikeandreturn",
+      "samples": 5612,
+      "coefficient": 0.007103334747731669
+    },
+    {
+      "ability_id": 1162211515,
+      "code": "strikewithoutwarning",
+      "samples": 199,
+      "coefficient": -0.0001393772637012015
+    },
+    {
+      "ability_id": 3668730177,
+      "code": "summonpitlords",
+      "samples": 180,
+      "coefficient": -0.0017036105969371617
+    },
+    {
+      "ability_id": 2120212528,
+      "code": "sunsteed",
+      "samples": 365,
+      "coefficient": 0.0006168057865276465
+    },
+    {
+      "ability_id": 870939855,
+      "code": "swallowgoblin",
+      "samples": 1201,
+      "coefficient": 0.0029570420567977215
+    },
+    {
+      "ability_id": 1092599556,
+      "code": "swiftattack",
+      "samples": 2151,
+      "coefficient": 0.005454993616571608
+    },
+    {
+      "ability_id": 2313717076,
+      "code": "swiftdash",
+      "samples": 102,
+      "coefficient": -3.111257090176932e-05
+    },
+    {
+      "ability_id": 3045542303,
+      "code": "symbiosis",
+      "samples": 2379,
+      "coefficient": -0.0009418313730909489
+    },
+    {
+      "ability_id": 973044163,
+      "code": "takeroots",
+      "samples": 2537,
+      "coefficient": -0.009671356121869404
+    },
+    {
+      "ability_id": 452400815,
+      "code": "tasteofblood",
+      "samples": 940,
+      "coefficient": 0.0019915186147935115
+    },
+    {
+      "ability_id": 2957278354,
+      "code": "tasteofdarkness",
+      "samples": 123,
+      "coefficient": -6.614518124435047e-05
+    },
+    {
+      "ability_id": 2779825981,
+      "code": "tasteofpain",
+      "samples": 986,
+      "coefficient": 0.003639483331726159
+    },
+    {
+      "ability_id": 3164374115,
+      "code": "taunt",
+      "samples": 572,
+      "coefficient": 0.002490439833773545
+    },
+    {
+      "ability_id": 3289626814,
+      "code": "teleport",
+      "samples": 6784,
+      "coefficient": -0.0026187081218809207
+    },
+    {
+      "ability_id": 1760291292,
+      "code": "teleportother",
+      "samples": 140,
+      "coefficient": 4.848108238870916e-05
+    },
+    {
+      "ability_id": 957153465,
+      "code": "threehead",
+      "samples": 695,
+      "coefficient": -0.0015038808400848634
+    },
+    {
+      "ability_id": 3654232171,
+      "code": "torpor",
+      "samples": 1416,
+      "coefficient": 0.0004071450734217962
+    },
+    {
+      "ability_id": 545477270,
+      "code": "trapexpert",
+      "samples": 48,
+      "coefficient": -4.027620805369258e-05
+    },
+    {
+      "ability_id": 3790772767,
+      "code": "triplestrike",
+      "samples": 1526,
+      "coefficient": 0.0013264073788325933
+    },
+    {
+      "ability_id": 2685539149,
+      "code": "twistedmind",
+      "samples": 1395,
+      "coefficient": 0.009495272796061657
+    },
+    {
+      "ability_id": 1770511744,
+      "code": "undead",
+      "samples": 8157,
+      "coefficient": -0.02331115964368581
+    },
+    {
+      "ability_id": 3735942199,
+      "code": "undeadkiller",
+      "samples": 203,
+      "coefficient": 0.0001153599652103487
+    },
+    {
+      "ability_id": 4174746585,
+      "code": "unprotectedtarget",
+      "samples": 277,
+      "coefficient": -0.00039899252675416544
+    },
+    {
+      "ability_id": 2302307931,
+      "code": "uretalation",
+      "samples": 4642,
+      "coefficient": 0.005452176536179585
+    },
+    {
+      "ability_id": 2678690826,
+      "code": "venom",
+      "samples": 1161,
+      "coefficient": -0.0005206636687926157
+    },
+    {
+      "ability_id": 1084876075,
+      "code": "viciousstrike",
+      "samples": 1232,
+      "coefficient": -0.0007652033864550532
+    },
+    {
+      "ability_id": 2708751777,
+      "code": "vigilantscout",
+      "samples": 1132,
+      "coefficient": -0.00040973309521427235
+    },
+    {
+      "ability_id": 123166536,
+      "code": "voracious",
+      "samples": 572,
+      "coefficient": 0.0024479843642826148
+    },
+    {
+      "ability_id": 3479500452,
+      "code": "vulnerabilitytoair",
+      "samples": 2389,
+      "coefficient": 0.020224706397996017
+    },
+    {
+      "ability_id": 592515092,
+      "code": "vulnerabilitytofire",
+      "samples": 307,
+      "coefficient": -0.001133312411248114
+    },
+    {
+      "ability_id": 4168439332,
+      "code": "vulnerabilitytolight",
+      "samples": 4621,
+      "coefficient": 0.021086908847140356
+    },
+    {
+      "ability_id": 3768612675,
+      "code": "vulnerabletoshadowmagic",
+      "samples": 550,
+      "coefficient": -0.001160447470990245
+    },
+    {
+      "ability_id": 234089846,
+      "code": "wailofthenetherworld",
+      "samples": 1687,
+      "coefficient": -0.0001727637684994645
+    },
+    {
+      "ability_id": 3985648207,
+      "code": "wardingarrows",
+      "samples": 5079,
+      "coefficient": 0.00048806748230111865
+    },
+    {
+      "ability_id": 1436051361,
+      "code": "warfury",
+      "samples": 700,
+      "coefficient": -0.0004912594103096959
+    },
+    {
+      "ability_id": 33591792,
+      "code": "waterflowsfreely",
+      "samples": 1038,
+      "coefficient": 0.002311915740522288
+    },
+    {
+      "ability_id": 491028915,
+      "code": "waterproof25",
+      "samples": 570,
+      "coefficient": -0.0020395743628594987
+    },
+    {
+      "ability_id": 440548963,
+      "code": "waterproof50",
+      "samples": 2585,
+      "coefficient": 0.01901829955815179
+    },
+    {
+      "ability_id": 3736284296,
+      "code": "wavesofrenewal",
+      "samples": 1028,
+      "coefficient": 0.0009475235814607896
+    },
+    {
+      "ability_id": 647150360,
+      "code": "weakeningstrike",
+      "samples": 1936,
+      "coefficient": -0.0014613611008912444
+    },
+    {
+      "ability_id": 1942543773,
+      "code": "webbingspears",
+      "samples": 1775,
+      "coefficient": -0.00042176215785315135
+    },
+    {
+      "ability_id": 211009592,
+      "code": "wheelingattack",
+      "samples": 615,
+      "coefficient": 0.0002555847804022018
+    },
+    {
+      "ability_id": 3610071014,
+      "code": "wheeloffortune",
+      "samples": 252,
+      "coefficient": -0.0006763487889809984
+    },
+    {
+      "ability_id": 2055597041,
+      "code": "whipstrike",
+      "samples": 2542,
+      "coefficient": 0.001201713465105174
+    },
+    {
+      "ability_id": 1817317601,
+      "code": "whirlwind",
+      "samples": 130,
+      "coefficient": -0.001228397284984557
+    },
+    {
+      "ability_id": 847890070,
+      "code": "widesweep",
+      "samples": 516,
+      "coefficient": -0.0026881015818947503
+    }
+  ],
+  "metrics": {
+    "train": {
+      "baseline": {
+        "rows": 25805,
+        "battles": 692,
+        "brier_rows": 0.026548293277276185,
+        "brier_battles": 0.02008816162249633,
+        "auc_battles": 0.9902587519025875,
+        "logloss_battles": 0.07272178162005342
+      },
+      "ability": {
+        "rows": 25805,
+        "battles": 692,
+        "brier_rows": 0.026162898104260417,
+        "brier_battles": 0.01966774130510908,
+        "auc_battles": 0.9913459447706022,
+        "logloss_battles": 0.07179852141271491
+      }
+    },
+    "val": {
+      "baseline": {
+        "rows": 3311,
+        "battles": 87,
+        "brier_rows": 0.07407347599709135,
+        "brier_battles": 0.05987042816496424,
+        "auc_battles": 0.9772079772079771,
+        "logloss_battles": 0.1729548988500151
+      },
+      "ability": {
+        "rows": 3311,
+        "battles": 87,
+        "brier_rows": 0.07430535997646626,
+        "brier_battles": 0.06012041006788218,
+        "auc_battles": 0.9772079772079771,
+        "logloss_battles": 0.17406294197551905
+      }
+    },
+    "test": {
+      "baseline": {
+        "rows": 3387,
+        "battles": 87,
+        "brier_rows": 0.07177741204065104,
+        "brier_battles": 0.05253737136142613,
+        "auc_battles": 0.9877777777777776,
+        "logloss_battles": 0.16130900520943578
+      },
+      "ability": {
+        "rows": 3387,
+        "battles": 87,
+        "brier_rows": 0.07140334480337569,
+        "brier_battles": 0.05210558649094132,
+        "auc_battles": 0.9877777777777776,
+        "logloss_battles": 0.16075182573866678
+      }
+    }
+  }
+}

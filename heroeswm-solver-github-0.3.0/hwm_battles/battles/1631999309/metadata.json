@@ -1,0 +1,37 @@
+{
+  "warid": "1631999309",
+  "show": "Nazea-Nz",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631999309&show=Nazea-Nz",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631999309\\init.txt",
+    "bytes": 24397,
+    "sha256": "7af86a02035156ceacf58fe5557693589e0d1d88a35ec562197afc10ce2fb417"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631999309\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631999309&lastturn=0&show=Nazea-Nz",
+        "status_code": 200,
+        "bytes": 6549,
+        "elapsed_ms": 1160.3,
+        "sha256": "a0c160b6de5cf5d882fb6ccf2d534b1280da1593158ec4ac10c0ce1b56573dab",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631999309&lastturn=0&show=Nazea-Nz"
+      }
+    ],
+    "bytes": 6549,
+    "sha256": "a0c160b6de5cf5d882fb6ccf2d534b1280da1593158ec4ac10c0ce1b56573dab",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278211.7211146
+}

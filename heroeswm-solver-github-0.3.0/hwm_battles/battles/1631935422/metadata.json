@@ -1,0 +1,37 @@
+{
+  "warid": "1631935422",
+  "show": "NAVMgmbP",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631935422&show=NAVMgmbP",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631935422\\init.txt",
+    "bytes": 36214,
+    "sha256": "9de9928163dbeb0e0c00f42a65440d62b43ab7048a3963dfcac09aec74e7d013"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631935422\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631935422&lastturn=0&show=NAVMgmbP",
+        "status_code": 200,
+        "bytes": 4902,
+        "elapsed_ms": 1527.3,
+        "sha256": "4fc67a3fec732b72d8ada23ee28b5681f2a92ff2e684ce6167236b5a43e78ab7",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631935422&lastturn=0&show=NAVMgmbP"
+      }
+    ],
+    "bytes": 4902,
+    "sha256": "4fc67a3fec732b72d8ada23ee28b5681f2a92ff2e684ce6167236b5a43e78ab7",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278189.7213154
+}

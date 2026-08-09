@@ -1,0 +1,74 @@
+{
+  "source": "independently decoded 866-battle raw corpus + exact physical baseline; old historical parser not used",
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "train_rows": 23473,
+  "heldout_rows": 6201,
+  "min_support": 20,
+  "ridge_alpha": 80.0,
+  "ability_coefficients": 794,
+  "evaluation": {
+    "all": {
+      "generic": {
+        "rows": 6201,
+        "median_abs_log_error": 0.36361799817266416,
+        "mean_abs_log_error": 0.48553150690287744,
+        "median_absolute_percentage_error": 0.34482758620689646
+      },
+      "creature": {
+        "rows": 6201,
+        "median_abs_log_error": 0.28232340712598436,
+        "mean_abs_log_error": 0.38693678771163253,
+        "median_absolute_percentage_error": 0.28675320730791537
+      },
+      "creature_plus_ability": {
+        "rows": 6201,
+        "median_abs_log_error": 0.2874225059509712,
+        "mean_abs_log_error": 0.37576293632517127,
+        "median_absolute_percentage_error": 0.2909541315888691
+      }
+    },
+    "rare_creature_le_20": {
+      "generic": {
+        "rows": 1010,
+        "median_abs_log_error": 0.2729871061266347,
+        "mean_abs_log_error": 0.38822782503907255,
+        "median_absolute_percentage_error": 0.275766997057457
+      },
+      "creature": {
+        "rows": 1010,
+        "median_abs_log_error": 0.28059728808588646,
+        "mean_abs_log_error": 0.37184208819120845,
+        "median_absolute_percentage_error": 0.29830008390305174
+      },
+      "creature_plus_ability": {
+        "rows": 1010,
+        "median_abs_log_error": 0.25488209768147196,
+        "mean_abs_log_error": 0.34294486783927064,
+        "median_absolute_percentage_error": 0.26230846271686303
+      }
+    },
+    "unseen_creature": {
+      "generic": {
+        "rows": 42,
+        "median_abs_log_error": 0.16800386289334668,
+        "mean_abs_log_error": 0.31193550989289387,
+        "median_absolute_percentage_error": 0.17802859510331265
+      },
+      "creature": {
+        "rows": 42,
+        "median_abs_log_error": 0.16800386289334668,
+        "mean_abs_log_error": 0.31193550989289387,
+        "median_absolute_percentage_error": 0.17802859510331265
+      },
+      "creature_plus_ability": {
+        "rows": 42,
+        "median_abs_log_error": 0.19843544983608785,
+        "mean_abs_log_error": 0.31120639243821296,
+        "median_absolute_percentage_error": 0.18239295936187253
+      }
+    }
+  },
+  "out": "models/ability_damage_model_v2.csv",
+  "note": "Ability coefficients are a regularized residual after exact mechanics + creature profile. Runtime should multiply them only once and keep unsupported perks in uncertainty accounting."
+}

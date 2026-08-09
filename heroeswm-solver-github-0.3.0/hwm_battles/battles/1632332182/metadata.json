@@ -1,0 +1,37 @@
+{
+  "warid": "1632332182",
+  "show": "NBp_9K1v",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632332182&show=NBp_9K1v",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632332182\\init.txt",
+    "bytes": 43252,
+    "sha256": "fbb4333789ba53bc6eb2f2b40b941591122bee96608864e3cba3ba5a847cc742"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632332182\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632332182&lastturn=0&show=NBp_9K1v",
+        "status_code": 200,
+        "bytes": 4458,
+        "elapsed_ms": 218.9,
+        "sha256": "2a1898e13cacb3c0cce3d47e587937c5855cb1e4ef6b274533a432df8018bd02",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632332182&lastturn=0&show=NBp_9K1v"
+      }
+    ],
+    "bytes": 4458,
+    "sha256": "2a1898e13cacb3c0cce3d47e587937c5855cb1e4ef6b274533a432df8018bd02",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278174.933923
+}

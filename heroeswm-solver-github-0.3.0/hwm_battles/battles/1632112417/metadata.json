@@ -1,0 +1,37 @@
+{
+  "warid": "1632112417",
+  "show": "Nrx4-4Eq",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632112417&show=Nrx4-4Eq",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632112417\\init.txt",
+    "bytes": 35858,
+    "sha256": "543d59b0ff85ee9bb8ab1e9bb05a9026d772ba1955f210422b9cbedb199fad41"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632112417\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632112417&lastturn=0&show=Nrx4-4Eq",
+        "status_code": 200,
+        "bytes": 5554,
+        "elapsed_ms": 796.5,
+        "sha256": "41978bbb097ef8b201c21414f0c58f65be84c692a362c411e2ec0ffa43900ad0",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632112417&lastturn=0&show=Nrx4-4Eq"
+      }
+    ],
+    "bytes": 5554,
+    "sha256": "41978bbb097ef8b201c21414f0c58f65be84c692a362c411e2ec0ffa43900ad0",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278181.5320797
+}

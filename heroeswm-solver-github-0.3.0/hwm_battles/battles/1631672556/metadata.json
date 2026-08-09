@@ -1,0 +1,37 @@
+{
+  "warid": "1631672556",
+  "show": "NgD-6gSD",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631672556&show=NgD-6gSD",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631672556\\init.txt",
+    "bytes": 28061,
+    "sha256": "5a9e09248981c256329c22e5e86b642801dde512a174ac1fbcea88d21334f59b"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631672556\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631672556&lastturn=0&show=NgD-6gSD",
+        "status_code": 200,
+        "bytes": 3516,
+        "elapsed_ms": 210.4,
+        "sha256": "d19ac036022b62918d2c68fa173395fc08df870059d847e747a2fa07dd934c43",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631672556&lastturn=0&show=NgD-6gSD"
+      }
+    ],
+    "bytes": 3516,
+    "sha256": "d19ac036022b62918d2c68fa173395fc08df870059d847e747a2fa07dd934c43",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278199.6019228
+}

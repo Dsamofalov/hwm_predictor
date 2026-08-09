@@ -1,0 +1,37 @@
+{
+  "warid": "1633353730",
+  "show": "NIcum74W",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1633353730&show=NIcum74W",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1633353730\\init.txt",
+    "bytes": 49430,
+    "sha256": "f79a39b675993c5cde69d5e11045cedd2b1f76d8c22299b26006b91ca74d6a89"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1633353730\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1633353730&lastturn=0&show=NIcum74W",
+        "status_code": 200,
+        "bytes": 3479,
+        "elapsed_ms": 214.6,
+        "sha256": "66af637ec87c616446d67078dde924a6e65a4108b0f2bbcc0859e4894e3a4f36",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1633353730&lastturn=0&show=NIcum74W"
+      }
+    ],
+    "bytes": 3479,
+    "sha256": "66af637ec87c616446d67078dde924a6e65a4108b0f2bbcc0859e4894e3a4f36",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278204.5412798
+}

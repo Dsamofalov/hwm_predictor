@@ -1,0 +1,37 @@
+{
+  "warid": "1631519821",
+  "show": "NosGGEjk",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631519821&show=NosGGEjk",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631519821\\init.txt",
+    "bytes": 34034,
+    "sha256": "647311c66790eff460e9d64382df0c7b640b0e33270de5e9f8ff205a3d8226f6"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631519821\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631519821&lastturn=0&show=NosGGEjk",
+        "status_code": 200,
+        "bytes": 3098,
+        "elapsed_ms": 530.7,
+        "sha256": "319111505f27f93742c758704a78822de226733a3647f01484e96f2f0c5efa8b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631519821&lastturn=0&show=NosGGEjk"
+      }
+    ],
+    "bytes": 3098,
+    "sha256": "319111505f27f93742c758704a78822de226733a3647f01484e96f2f0c5efa8b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278189.3958533
+}

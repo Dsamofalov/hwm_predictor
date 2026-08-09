@@ -1,0 +1,37 @@
+{
+  "warid": "1633105941",
+  "show": "NH530DmW",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1633105941&show=NH530DmW",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1633105941\\init.txt",
+    "bytes": 37639,
+    "sha256": "3a65ae35f9a3ff5404f1d17365fcc86fcc62052de62d066c9de4199b385eff31"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1633105941\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1633105941&lastturn=0&show=NH530DmW",
+        "status_code": 200,
+        "bytes": 5571,
+        "elapsed_ms": 516.2,
+        "sha256": "15b9731050f23e414883214ef3b2d980790c461623816cae718eac5565cecbea",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1633105941&lastturn=0&show=NH530DmW"
+      }
+    ],
+    "bytes": 5571,
+    "sha256": "15b9731050f23e414883214ef3b2d980790c461623816cae718eac5565cecbea",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278208.446983
+}

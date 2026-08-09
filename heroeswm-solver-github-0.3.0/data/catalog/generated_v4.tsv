@@ -1,0 +1,645 @@
+creature_id	name	sprite	is_hero	ability_codes
+1	Скелеты#Skeletons	sceletonani	0	undead
+2	Лучники#Bowmen	archerani	0	alive|scattershot|shooter
+3	Грифоны#Griffins	griffonani	0	alive|big|flyer|iblind|uretalation
+4	Крестьяне#Farmers	paesantani	0	alive
+5	Зомби#Zombies	zombieani	0	enraged|undead
+6	Stealth	pers_ani	1	hero|shooter
+8	Каменные горгульи#Gargoyles	gargolyani	0	elemental|enraged|flyer|ilighting
+10	Пехотинцы#Swordsmen	footmanani	0	alive|enraged|lshield|shieldbash
+11	Привидения#Ghosts	ghostani	0	flyer|incorporeal|undead
+12	Железные големы#Golems	golemani	0	islow|magicproof50|mechanical
+13	13	hata2ani	1	hero|rock
+14	Гоблины#Goblins	goblinani	0	alive
+16	Маги#Magi	mageani	0	alive|caster|mag|magicattack|norangepenalty|shooter
+17	Феи#Faeries	ppani	0	alive|flyer|noretalation|spray
+18	Наездники на волках#Wolf Riders	wolfriderani	0	alive|big|doublestrike
+19	Эльфийские лучники#Elven bowmen	elfani	0	alive|doubleshoot|shooter
+20	Стрелки-наёмники#Mercenary archers	mercarcherani	0	alive|enraged|norangepenalty|shooter
+21	Воины-наёмники#Mercenary warriors	mercfootmanani	0	alive|enraged|lshield|shieldbash|uretalation
+23	Орки#Orcs	orcani	0	alive|bloodlust|nopenalty|shooter
+24	Огры#Ogres	ogreani	0	alive|enraged|powerstrike
+26	Друиды#Druids	dd_ani	0	alive|caster|mag|shooter
+27	Степные волки#Plains wolves	swolfani	0	alive|packhunter
+28	Скелеты-лучники#Skeletal bowmen	sceletonarcherani	0	shooter|undead
+29	Личи#Liches	lichani	0	big|deathcloud|shooter|undead
+30	Роки#Rocs	rocani	0	alive|big|carrier|flyer
+31	Дриады#Sprites	spriteani	0	alive|caster|flyer|noretalation|spray
+32	Старшие гремлины#Gremlin engineers	mastergremlinani	0	alive|repair|shooter
+33	Хобгоблины#Hobgoblins	hobgoblinani	0	alive
+34	Ополченцы#Recruits	conscriptani	0	alive|shieldbash
+36	Боевые грифоны#Frenzied griffins	battlegriffinani	0	alive|big|flyer|iblind|uretalation
+37	Монахи#Monks	priestani	0	alive|nopenalty|shooter
+38	Единороги#Unicorns	unicornani	0	alive|auraofres|big
+40	Чумные зомби#Infected zombies	plaguezombieani	0	enraged|undead|weakeningstrike
+41	Танцующие со смертью#Elite forest keepers	bladedancerani	0	alive|dancecombo
+42	Арбалетчики#Crossbowmen	marksmanani	0	alive|preciseshot|shooter
+43	Налётчики на волках#Wolf Raiders	hobwolfriderani	0	alive|big|triplestrike
+44	Обсидиановые горгульи#Enchanted gargoyles	obsgargolyani	0	elemental|enraged|flyer|icold|ifire|ilighting
+45	Гигантские ящеры#Giant lizards	lizardani	0	alive|big
+46	Детёныши ящера#Lizard cubs	smalllizardani	0	alive|packhunter
+47	Кровавые ящеры#Vampiric lizards	redlizardani	0	alive|big|lifedrain
+48	NaRuTiX97	pers_elfani	1	hero|shooter
+49	Бестии#Rogues	maidenani	0	alive|strikeandreturn
+51	Наездники на ящерах#Lizard cavalry	lizardriderani	0	alive|big|ridercharge
+53	Фурии#Shrews	furyani	0	alive|noretalation|strikeandreturn
+54	NaRuTiX97	pers_darkelfani	1	hero|shooter
+55	Минотавры#Tamed minotaurs	minotaurani	0	alive|bravery
+56	Ассасины#Poisoners	assasinani	0	alive|nopenalty|poisonattack|rangepenalty|shooter
+57	Philosopher	pers_barbani	1	hero|shooter
+58	---БариН---	pers_necrani	1	hero|shooter
+59	dlc	pers_mageani	1	hero|shooter
+60	Anastasyja007	wpers_ani	1	hero|shooter
+63	Nadya2229	wpers_elfani	1	hero|shooter
+64	Rainbow	wpers_barbani	1	hero|shooter
+65	Nadya2229	wpers_darkelfani	1	hero|shooter
+68	Призраки#Apparitions	spectreani	0	flyer|incorporeal|manadrain|undead
+69	Стальные големы#Modern golems	steelgolemani	0	islow|magicproof75|mechanical|uretalation
+70	Минотавры-стражи#Minotaur soldiers	minotaurguard_ani	0	alive|bravery|doublestrike
+71	Латники#Guardians	swordmanani	0	alive|burstofenergy|enraged|lshield|shieldbash|shieldother
+72	Мастера лука#Grandmaster bowmen	hunterelfani	0	alive|doubleshoot|shooter|wardingarrows
+73	Орки-вожди#Orc chiefs	orcchiefani	0	alive|bloodlust|nopenalty|shooter|wardingarrows
+74	Адские псы#Wolfhounds	demondogani	0	alive|demonic
+75	Церберы#Cerberi	cerberusani	0	alive|demonic|noretalation|threehead
+76	Адские жеребцы#Hell horses	nightmareani	0	alive|big|demonic|fearattack
+77	Рогатые демоны#Demons	hdemonani	0	alive|demonic|enraged
+78	Бесы#Imps	impani	0	alive|demonic|manadestroyer
+80	Черти#Spawns	familiarani	0	alive|demonic|manastealer
+81	Суккубы#Succubi	succubani	0	alive|demonic|rangedretaliation|shooter
+82	Дьяволы#Devils	devilani	0	alive|big|demonic|flyer|teleport
+83	Пещерные демоны#Cave demons	pitfiend_ani	0	alive|big|caster|demonic|mag
+84	*ONAISGZANIR*	pers_demonani	1	hero|shooter
+89	Циклопы#Cyclops	cyclopani	0	alive|shooter
+90	Рыцари#Cavalry	knightani	0	alive|big|jousting
+91	Умертвия#Death envoys	wightani	0	big|undead
+92	Энты#Treefolk	entani	0	alive|big|enraged|entroots
+93	Принцессы ракшас#Sphynx guardians	rakshasani	0	alive|big|noretalation
+94	Сумеречные ведьмы#Dark witches	witchani	0	alive|caster|shooter
+100	Изумрудные драконы#Jade dragons	emeralddragonani	0	acid_breath|alive|big|flyer|iearth
+101	Чёрные драконы#Black dragons	blackdragonani	0	alive|big|fire_breath|flyer|immunity
+102	Сумеречные драконы#Twilight dragons	shadowdragonani	0	alive|big|fire_breath|flyer
+103	Зелёные драконы#Green dragons	greendragonani	0	acid_breath|alive|big|flyer
+104	Архимаги#Lorekeepers	archmageani	0	alive|caster|energychannel|mag|magicattack|norangepenalty|shooter
+105	Джинны-султаны#Senior genies	djinn_sultanani	0	alive|big|caster|flyer|magicproof50|random_blessing|randomcasterd
+106	Колоссы#Giants	colossusani	0	alive|big|imind
+107	Титаны#Titans	titanani	0	alive|big|calllightning|imind|nopenalty|shooter
+108	Раджи ракшас#Sphynx warriors	rakshasa_rajaani	0	alive|big|dash|noretalation
+117	Имперские грифоны#Royal griffins	impergriffinani	0	alive|battledive|big|flyer|iblind|uretalation
+118	Высшие вампиры#Vampire counts	vampirelordani	0	flyer|lifedrain|noretalation|teleport|undead
+119	Огры-маги#Ogre magi	ogremagiani	0	alive|caster|enraged|powerstrike
+120	Верховные друиды#Anchorites	ddeldani	0	alive|caster|mag|manafeed|shooter
+121	Тёмные всадники#Lizard assailants	grimriderani	0	alive|big|lizardbite|ridercharge
+122	Демонессы#Mistresses	succubusmani	0	alive|chainshot|demonic|rangedretaliation|shooter
+123	Воры-разведчики#Renegade scouts	thiefwarriorani	0	alive|noretalation
+124	Воры-убийцы#Renegade thugs	thiefarcherani	0	alive|nopenalty|poisonattack|shooter
+125	Воры-колдуны#Renegade magicians	thiefmageani	0	alive|caster|mag
+126	Чародеи-наёмники#Mercenary sorcerers	mercwizardani	0	alive|caster|mag|shooter
+131	Бегемоты#Behemoths	behemothani	0	alive|big|ignoredefence40
+132	Ангелы#Angels	angelani	0	alive|big|flyer
+133	Костяные драконы#Skeletal dragons	bonedragonani	0	big|flyer|undead
+145	Инквизиторы#Clerics	inquisitorani	0	alive|caster|nopenalty|shooter
+146	Архиличи#Archliches	archlichani	0	big|caster|deathcloud|mag|shooter|undead
+147	Боевые единороги#Brilliant unicorns	silverunicornani	0	alive|auraofres|big|blinding_attack
+148	Птицы грома#Thunderbirds	thunderbirdani	0	alive|big|carrier|flyer|lighting_attack
+149	Пещерные гидры#Ladons	deephydraani	0	alive|big|enraged|noretalation|regeneration|six_heads
+150	Кошмары#Nightmares	stallionani	0	alive|big|demonic|fearattack|frightful_aura
+153	Воздушные элементали#Air elementals	airani	0	elemental|flyer|iair|noretalation
+154	Земные элементали#Earth elementals	earthani	0	elemental|iearth|magicproof50|uretalation
+155	Огненные элементали#Fire elementals	fireani	0	elemental|fireshield|ifire|shooter
+156	Водные элементали#Water elementals	waterani	0	caster|elemental|icold|mag
+157	Защитники гор#Sentries	defenderani	0	alive|armoured|enraged|lshield
+158	Воители#Veterans	shieldguardani	0	alive|armoured|enraged|lshield|shieldwall
+159	Метатели копья#Spearmen	spearwielderani	0	alive|cripplingwound|shooter
+160	Мастера копья#Master spearmen	skirmesherani	0	alive|cripplingwound|nopenalty|shooter
+161	Наездники на медведях#Dwarven ursary	bearriderani	0	alive|big|enraged
+162	Хозяева медведей#Frontier ursary	blackbearriderani	0	alive|armoured|big|enraged|pawstrike
+163	Берсерки#Berserkers	berserkerani	0	alive|berserkerrage|imind
+164	Жрецы рун#Priests	runepriestani	0	alive|caster|fireproof50|markoffire|shooter
+165	Старейшины рун#Patriarchs	runepatriarchani	0	alive|caster|crossfire|ifire|mag|markoffire|shooter
+166	Таны#Dreadbanes	thaneani	0	alive|big|flyer|ilighting|stormstrike|teleport
+167	Громовержцы#Invokers	thunderlordani	0	alive|big|flyer|ilighting|stormbolt|stormstrike|teleport
+168	Огненные драконы#Lava dragons	firedragonani	0	big|elemental|fire_breath|fireshield|ifire
+169	Магма драконы#Magma dragons	magmadragonani	0	big|elemental|fire_breath|ifire|magmashield
+170	NaRuTiX97	pers_gnomani	1	hero|shooter
+171	Anastasyja007	wpers_gnomani	1	hero|shooter
+172	Медведи#Bears	bearani	0	alive|big|enraged|pawstrike
+198	Пауки#Spiders	spiderani	0	alive|entroots|spider
+199	Ядовитые пауки#Venomous spiders	spiderpoisani	0	alive|entroots|poisonattack|spider
+200	Гарпии#Harpies	harpyani	0	alive|flyer|strikeandreturn
+201	Гарпии-ведьмы#Raiding harpies	harpyhagani	0	alive|flyer|noretalation|strikeandreturn
+202	Камнееды#Stoneeaters	kamneedani	0	alive|shieldbash
+203	Камнегрызы#Stonegnawers	kamnegryzani	0	alive|cripplingwound|enraged|magicproof25|shieldbash
+204	Тролли#Trolls	trollani	0	alive|big|bloodlust|lshield
+205	Черные тролли#Crazed trolls	blacktrollani	0	alive|big|bloodlust|lshield|magicproof25
+207	Бехолдеры#Beholders	beholderani	0	alive|enraged|nopenalty|shooter
+208	Злобные глаза#Evil eyes	evileyeani	0	alive|enraged|nopenalty|shooter|wardingarrows
+209	Сирены#Sirens	sirenani	0	alive|caster|imind
+210	Сирены-искусительницы#Seducing sirens	upsirenani	0	alive|caster|imind
+211	Морские черти#Anglerfish	seamonsterani	0	alive|big|deathstrike
+212	Глубоководные черти#Voracious anglerfish	upseamonsterani	0	alive|big|deathstrike|regeneration
+213	Левиафаны#Leviathans	leviathanani	0	alive|big|icold|ignoredefence30
+214	Великие левиафаны#Great leviathans	upleviathanani	0	alive|big|icold|ignoredefence50
+217	Костяные гидры#Skeletal hydras	bonehydraani	0	big|enraged|noretalation|threehead|undead
+234	Паладины#Paladins	paladinani	0	alive|big|ifrenzy|jousting|layhands
+235	Вестники смерти#Death heralds	wraithani	0	big|harmtouch|undead
+236	Пещерные владыки#Pit demons	pitlord_ani	0	alive|big|caster|demonic|mag|vorpalsword
+237	Циклопы-короли#Cyclop kings	cyclopkingani	0	alive|shooter|siegewalls
+238	Древние энты#Ironroot treefolk	ancienentani	0	alive|big|enraged|entroots|takeroots
+239	Владычицы тени#Dark sibyls	matriarchani	0	alive|caster|shooter|whipstrike
+249	Архангелы#Archangels	archangelani	0	alive|big|flyer|resurrection
+253	Гремлины-вредители#Gremlin wreckers	saboteurgremlinani	0	alive|magicmine|shooter
+254	Головорезы#Brutes	bruteani	0	alive|assault
+255	Нимфы#Dryads	dryad_ani	0	alive|flyer|noretalation|spray|symbiosis
+256	Стихийные горгульи#Grotesques	elgargolyani	0	auraofairvul|auraoffirevul|auraofwatervul|elemental|enraged|flyer
+257	Стрелки#Wardens	crossbowmanani	0	alive|norangepenalty|shooter
+258	Танцующие с ветром#Forest brethren	winddancerani	0	agility|alive
+259	Магнитные големы#Lodestone golems	magneticgolemani	0	enchantedarmor|magnetism|mechanical
+260	Защитники веры#Crusaders	vindicatorani	0	alive|cleave|enraged|lshield
+261	Лесные снайперы#Sharpshooters	arcaneelfani	0	alive|forcearrow|norangepenalty|shooter
+267	Скелеты-воины#Skeletal legionnaires	sceletonwarani	0	lshield|magicproof25|shieldbash|shieldother|undead
+268	Мумии#Mummies	mummyani	0	caster|hexingattack|undead
+269	Мумии фараонов#Sphynx mummies	pharaohani	0	caster|hexingattack|undead
+270	Гниющие зомби#Ghouls	rotzombieani	0	enraged|festeringaura|undead
+272	Рыцари тьмы#Black knights	blackknightani	0	big|cursingattack|undead
+273	Рыцари смерти#Unholy knights	deadknightani	0	big|cursingattack|deathattack|undead
+280	Ифриты#Efreeti	efreetiani	0	alive|big|caster|demonic|flyer|ifire|mag
+281	Дьяволята#Vermins	verminani	0	alive|demonic|siphonmana
+282	Ифриты султаны#Efreeti sultans	efreetisultanani	0	alive|big|caster|demonic|fireshield|flyer|ifire|mag
+285	Гоги#Gogs	gogani	0	alive|demonic|shooter
+286	Врата ада#Hell gate	hellgateani	0	big|demonic|portal|warmachine
+287	Магоги#Magogs	magogani	0	alive|demonic|pyromancer|shooter
+288	Огненные гончие#Blazing hounds	firehoundani	0	alive|demonic|fire_breath|noretalation|threehead
+289	Старшие демоны#Fiends	jdemonani	0	alive|demonic|enraged|leap
+290	Кони преисподней#Searing horses	hellstallionani	0	alive|big|demonic|fearattack|searingaura
+291	Пещерные отродья#Abyss demons	pitspawnani	0	alive|big|bladeofslaughter|demonic|magicproof50
+292	Архидьяволы#Archdevils	archdevilani	0	alive|big|demonic|flyer|summonpitlords|teleport
+293	Архидемоны#Antichrists	archdemonani	0	alive|big|demonic|flyer|teleport|teleportother
+300	Призрачные драконы#Shadow dragons	spectraldragonani	0	big|cursingattack|deathstare|flyer|undead
+301	Древние бегемоты#Ancient Behemoths	abehemothani	0	alive|big|ignoredefence60
+309	Боевые кентавры#Tempered centaurs	mcentaurani	0	alive|big|nopenalty|ragingblood|shooter
+310	Кентавры#Centaurs	fcentaurani	0	alive|big|maneuver|ragingblood|shooter
+311	Кочевые кентавры#Centaur outriders	ncentaurani	0	alive|big|maneuver|ragingblood|shooter
+314	Гоблины-лучники#Goblin archers	goblinarcherani	0	alive|shooter
+315	Мегеры#Termagants	bloodsisterani	0	alive|immunetoweakness|noretalation|strikeandreturn
+316	Проворные наездники#Lizard chargers	briskriderani	0	alive|big|lizardbite|ridercharge|wheelingattack
+317	Минотавры-надсмотрщики#Minotaur gladiators	taskmasterani	0	alive|auraofbravery
+318	Наездники на кабанах#Boar riders	boarriderani	0	alive|big|ignoredefence20
+320	Степные бойцы#Enforcers	maulerani	0	alive|assault|enraged|ragingblood
+323	Слоны#Elephants	elephantani	0	alive|big
+324	Буйволы#Buffaloes	buffaloani	0	alive|big|bloodlust|enraged
+325	Жеребцы#Stallions	horseani	0	alive|big
+326	*ISPU*	keeperani	1	hero|shooter
+330	Вармонгеры#Protectors	warmongani	0	alive|enraged|fierceretaliation|ragingblood|taunt
+331	Шаманки#Shamans	shamanessani	0	alive|caster|ragingblood
+332	Дочери неба#Sky shamans	sdaughterani	0	alive|caster|ragingblood|sacrificegoblin
+333	Дочери земли#Earth shamans	eadaughterani	0	alive|caster|hexingattack|ragingblood|sacrificegoblin|swiftattack
+334	Убийцы#Commanders	slayerani	0	alive|cleave|ragingblood
+335	Палачи#Warlords	executionerani	0	alive|bravery|cleave|frightful_aura|ragingblood
+336	Виверны#Tamed wyverns	wyvernani	0	alive|big|flyer|regeneration
+337	Тёмные виверны#Venomous wyverns	foulwyvernani	0	alive|big|flyer|regeneration|venom
+340	Скелеты-арбалетчики#Skeletal crossbowmen	skmarksmanani	0	preciseshot|shooter|undead
+341	Высшие личи#Demiliches	masterlichani	0	big|caster|shooter|undead
+352	Стражи#Sentinels	sentinelani	0	alive|shielded|shieldguard
+353	Гвардейцы#Praetorians	praetorianani	0	alive|defender|shielded|shieldguard
+355	Арбалетчики света#Marksmen	cmanani	0	alive|armorpiercing|norangepenalty|shooter
+356	Арбалетчики солнца#Templar marksmen	marksani	0	alive|armorpiercing|norangepenalty|piercingbolt|shooter
+357	Послушницы#Novices	sisterani	0	alive|heal5
+358	Весталки#Vestals	vestalani	0	alive|blinding_attack|heal6
+359	Всадники солнца#Sun chargers	sunriderani	0	alive|big|charge
+360	Крестоносцы солнца#Champions	suncrusaderani	0	alive|big|blindingcharge|sunsteed
+361	Грифоны света#Tamed griffins	griffinani	0	alive|battledive|big|flyer|uretalation
+362	Грифоны солнца#Templar griffins	igriffinani	0	alive|big|divingassault|flyer|uretalation
+363	Сияние#Blessed spirits	radiantgloryani	0	alive|cleansinglight|flyer|noretalation|speedoflight|spirit|strikeandreturn|teleport|vulnerabletoshadowmagic
+364	Лучезарное сияние#Beaming spirits	blazinggloryani	0	alive|cleansinglight|flyer|noretalation|speedoflight|spirit|strikeandreturn|teleport|vulnerabletoshadowmagic
+366	*ZUISKAMPAR*	leader1aani	1	hero|shooter
+367	*SINGOMCHE*	leader1wani	1	hero|shooter
+370	Небесные воители#Celestials	celestialani	0	alive|big|bladeofjudgment|bladeofmercy|flyer
+371	Серафимы#Seraphs	seraphani	0	absolutepurity|alive|big|bladeofepiphany|bladeofjudgment|flyer
+378	Гарпунеры#Harpooners	harpoonerani	0	alive|armoured|harpoonstrike|shooter
+384	NightScorpion98	pers_svani	1	hero|shooter
+386	Гоблины-трапперы#Goblin trappers	trapperani	0	alive|cowardice|ragingblood|setsnares
+388	Громилы#Maulers	mauler6ani	0	alive|demoniclineage|shielded|tasteofblood
+389	Крушилы#Crushers	crusher6ani	0	alive|demoniclineage|doublestrike|shielded|tasteofblood
+390	Непокорные гоблины#Wild goblins	goblin6ani	0	alive|cripplingtraps|demoniclineage|shooter
+391	Гоблины-охотники#Goblin hunters	goblinhunter6ani	0	alive|cripplingtraps|demoniclineage|shooter|viciousstrike
+392	Непокорные гарпии#Unruly harpies	harpy6ani	0	alive|flyer|strikeandreturn
+393	Сирины#Frenzied harpies	fury6ani	0	alive|flyer|noretalation|strikeandreturn
+397	Степные циклопы#Tribal cyclops	cyclopusani	0	alive|big|ragingblood|swallowgoblin
+399	Кровоглазые циклопы#Tribal beholders	bloodeyecycani	0	alive|big|evileye|goblinthrower|ragingblood|rangepenalty|swallowgoblin
+401	Непокорные кентавры#Nomad centaurs	centaur6ani	0	alive|big|maneuver|norangepenalty|shooter|vigilantscout
+402	Кентавры-мародёры#Marauding centaurs	mcentaur6ani	0	alive|big|maneuver|mobileshooter|norangepenalty|shooter|vigilantscout
+403	Воины-ягуары#Worshippers	jaguar6ani	0	alive|big|demoniclineage|feralcharge|warfury
+404	Воины-пантеры#Fetishists	panther6ani	0	alive|allaroundslash|big|demoniclineage|warfury
+405	Сноходцы#Dreamwalkers	dreamwalker6ani	0	alive|caster|demoniclineage
+406	Ловцы снов#Dreamreavers	dreamreaver6ani	0	alive|caster|demoniclineage
+409	*SPEBRIRAM*	leadernpani	1	hero|shooter
+410	*VSNIRIN*	leadernpwani	1	hero|shooter
+411	*KAONAPOK*	leadernp1ani	1	hero|shooter
+412	*ARSMADNIR*	leadernpw1ani	1	hero|shooter
+413	Акульи стражи#Ichthys guard	sharkguardani	0	alive|amphibian|ferociouswound|vulnerabilitytoair|waterproof50
+414	Акульи бойцы#Ichthys fighters	wanizameani	0	alive|amphibian|bloodfrenzy|ferociouswound|vulnerabilitytoair|waterproof50
+415	Коралловые жрицы#Coral priestesses	coralpani	0	alive|amphibian|norangepenalty|shooter|vulnerabilitytoair|waterproof50|wavesofrenewal
+416	Жемчужные жрицы#Pearl priestesses	pearlpani	0	alive|amphibian|eyesofthemedusa|norangepenalty|shooter|vulnerabilitytoair|waterproof50|wavesofrenewal
+417	Каппы#Kappas	kappaani	0	alive|amphibian|leap6|vulnerabilitytoair|waterproof50
+418	Могучие каппы#Mighty kappas	kappashoyaani	0	alive|amphibian|crashingleap|vulnerabilitytoair|waterproof50
+419	Духи ручьёв#Spring spirits	springspiritani	0	alive|amphibian|painmirror|spirit|spiritlink|vulnerabilitytoair|waterproof50
+420	Духи морей#Spring custodians	mizukamiani	0	alive|amphibian|lifeguardmembrane|painmirror|spirit|spiritbond|vulnerabilitytoair|waterproof50
+421	Снежные девы#Snow maidens	snowmaidenani	0	alive|amphibian|frozentouch|norangepenalty|shooter|vulnerabilitytoair|waterproof50
+422	Ледяные девы#Frost maidens	yukionnaani	0	alive|amphibian|frozencaress|norangepenalty|shooter|vulnerabilitytoair|waterproof50
+423	Кэнши#Tritons	kenshiani	0	alive|amphibian|big|challenge|uretalation|vulnerabilitytoair|waterproof50
+424	Кэнсэи#Myrmidons	kenseiani	0	alive|amphibian|big|challenge|fourwaves|uretalation|vulnerabilitytoair|waterproof50
+427	*DAZTONPAR*	leaderinkani	1	hero|shooter
+428	*VSRAM*	leaderinkwani	1	hero|shooter
+429	*KOKAGOMKA*	leader41ani	1	hero|shooter
+430	*KIMTINLENADO*	leader41wani	1	hero|shooter
+431	*GROMUREVAKIM*	leader42ani	1	hero|shooter
+432	*MURDUNACHMO*	leader42wani	1	hero|shooter
+433	Свободные циклопы#Unfettered cyclops	untamedcycani	0	alive|big|crushblow|goblinthrower|ragingblood|rangepenalty|swallowgoblin
+434	Непокорные циклопы#Wild cyclops	cyclop6ani	0	alive|big|demoniclineage|impervioustopain|slam
+435	Разъяренные циклопы#Raging cyclops	ecyclop6ani	0	alive|big|burningrage|demoniclineage|impervioustopain|mightyslam|nopenalty|shooter
+436	Вожаки#Chieftains	chieftainani	0	alive|commandingpresence|orderofchief|ragingblood
+438	*MURTIN*	leader2ani	1	hero|shooter
+439	*DZEMAO*	leader2wani	1	hero|shooter
+440	Кирины#Aquatic serpents	kirinani	0	alive|amphibian|big|spirit|vulnerabilitytoair|waterflowsfreely|waterproof50
+441	Священные кирины#Aquatic drakes	sacredkirinani	0	alive|amphibian|big|hailstormaura|spirit|vulnerabilitytoair|waterflowsfreely|waterproof50
+442	Помешанные#Maniacs	maniacani	0	alive|fireprskin|twistedmind|vulnerabilitytolight
+443	Безумцы#Demented	dementedani	0	alive|fireprskin|maniaclaughter|twistedmind|vulnerabilitytolight
+444	Адские гончие#Hellhounds	hellhound6ani	0	alive|big|eyeofgluttony|fireprskin|uretalation|vulnerabilitytolight
+445	Адские церберы#Hell cerberi	cerberani	0	alive|big|eyeofgluttony|fireprskin|uretalation|voracious|vulnerabilitytolight
+446	Адские суккубы#Demonesses	succubus6ani	0	alive|fireprskin|flyer|norangepenalty|pleasureinpain|shooter|vulnerabilitytolight
+447	Лилимы#Infernal succubi	lilimani	0	alive|fireprskin|flyer|norangepenalty|raptureinagony|shooter|vulnerabilitytolight
+448	Породительницы#Breeders	breederani	0	alive|big|fireprskin|manaleech|shooter|vulnerabilitytolight
+449	Матки-породительницы#Heinous breeders	mbreederani	0	alive|big|fireprskin|manaleech|proliferation|shooter|vulnerabilitytolight
+485	Искусительницы#Temptresses	seducerani	0	alive|demonic|immunetohypnos|seduction|shooter
+493	Штурмовые грифоны#Wild griffins	battlegriffonani	0	alive|battlefrenzy|big|flyer|iblind|rushdave|uretalation
+494	Адепты#Exorcists	zealotani	0	alive|caster|nopenalty|purge|shooter
+495	Чемпионы#Chargers	championani	0	alive|big|championcharge|jousting
+496	Высшие ангелы#Thrones	seraph2ani	0	alive|big|caster|flyer
+504	Anastasyja007	wpers_aani	1	hero|shooter
+505	Тетя Наташа	pers_aani	1	hero|shooter
+512	Духи#Poltergeists	poltergeistani	0	flyer|incorporeal|stealammunition|undead
+513	Князья вампиров#Dreadlords	vampireprinceani	0	flyer|lifedrain|teleport|torpor|undead
+514	Астральные драконы#Mirage dragons	ghostdragonani	0	big|flyer|sorrowstrike|undead
+515	Баньши#Death proclaimers	bansheeani	0	big|deathwail|undead
+517	Philosopher	pers_anecrani	1	hero|shooter
+520	Големы смерти#Death golems	dgolemani	0	big|magicproof40|nopenalty|shooter|undead
+521	Могильные големы#Sepulcher golems	dgolemupani	0	big|fearattack|frightful_aura|magicproof50|nopenalty|shooter|undead
+522	Ведьмы-призраки#Cursed witches	cursed_ani	0	flyer|incorporeal|lifedrain|spirit|undead
+534	Орки-тираны#Orc tyrants	orcrubakani	0	alive|bloodlust|doublestrike|nopenalty|shooter
+535	Огры-ветераны#Ogre trophy-hunters	ogrebrutalani	0	alive|cripplingwound|enraged|powerstrike
+536	Огненные птицы#Firebirds	firebird_ani	0	alive|big|carrier|fireattack|flyer|ifire
+537	Циклопы-генералы#Cyclop generals	cyclopod_ani	0	alive|shootbash|shooter
+538	Свирепые бегемоты#Infuriated behemoths	dbehemothani	0	alive|big|ferociouswound|ignoredefence40
+544	Птицы тьмы#Dark rocs	darkbirdani	0	alive|big|carrier|darkattack|flyer
+545	Гоблины-маги#Goblin warlocks	goblinmagani	0	alive|caster
+546	Орки-шаманы#Orc shamans	orcshamanani	0	alive|bloodlust|caster|nopenalty|shooter
+547	sergeyg968	pers_abarbani	1	hero|shooter
+548	Мемхотеп	pers_bbarbani	1	hero|shooter
+549	Rainbow	wpers_abarbani	1	hero|shooter
+550	Rainbow	wpers_bbarbani	1	hero|shooter
+567	Садисты#Tormentors	tormentorani	0	alive|fireprskin|retractablespikes|tasteofpain|vulnerabilitytolight
+568	Изверги#Torturers	laceratorani	0	alive|explodingspikes|fireprskin|tasteofpain|vulnerabilitytolight
+571	Демоны бездны#Wrath demons	pitfiend6ani	0	alive|big|bladeofhatred|blindedbyrage|fireprskin|flyer|hatefulretaliation|teleport|vulnerabilitytolight
+572	Владыки бездны#Hatred demons	pitlord6ani	0	alive|big|bladeofhatred|blindedbyrage|boundlesshate|fireprskin|flyer|hatefulretaliation|teleport|vulnerabilitytolight
+578	Боевые маги#Battlemagi	battlemageani	0	alive|caster|dampenmagic|mag|magicattack|norangepenalty|shooter
+579	Визири джиннов#Fortune genies	djinn_vizierani	0	alive|big|flyer|iair|magicproof25|wheeloffortune
+580	Кшатрии ракшасы#Sphynx immortals	rakshasa_kshatraani	0	alive|big|dash|whirlwind
+581	Титаны шторма#Stormcallers	stormtitanani	0	alive|big|imind|nopenalty|shooter|stormcaller
+582	dlc	pers_amageani	1	hero|shooter
+587	Старшие друиды#High Druids	ddhighani	0	alive|caster|channeling|shooter
+588	Светлые единороги#Pristine Unicorns	pristineunicornani	0	alive|big|blinding_attack|childofthelight
+589	Дикие энты#Savage Treant	savageentani	0	alive|big|enraged|entroots|islow|rageoftheforest
+590	Кристальные драконы#Crystal Dragons	crystaldragonani	0	alive|big|flyer|prismaticbreath
+591	Бочка#Barrel	bochkaani	0	statix|warmachine
+596	Ящик#Crate	yaschikani	0	statix|warmachine
+599	Пироманьяки#Pyromaniacs	piromanani	0	alive|firewallshooter|shooter
+600	Ретиарии#Retiarius	gladiatorani	0	alive|netshooter|nopenalty|rangepenalty|shooter
+601	Силачи#Strongmen	kachokani	0	alive|damtodefence
+604	Скелеты-пираты#Skeletal pirates	dpirateani	0	maneuver|piercingbolt|pirate|undead
+606	Скелеты-корсары#Skeletal corsairs	dpirateupani	0	maneuver|nopenalty|piercingbolt|pirate|shooter|undead
+607	Пушка#Cannon	cannonani	0	giantkiller|ignoredefence20|mechanical|noselfret|shooter|shootonly
+608	Сундук#Chest	chestani	0	statix|stone
+609	Золотые драконы#Gold dragons	golddragonani	0	alive|big|fire_breath|flyer|magicproof50|undeadkiller
+611	Абордажники#Pirate Fighters	bpirateani	0	alive|leap|pirate
+612	Корсары#Corsairs	apirateani	0	alive|cleave|pirate
+622	Santremus	pers_aelfani	1	hero|shooter
+623	Nadya2229	wpers_aelfani	1	hero|shooter
+624	Хищные растения#Waspworts	plantani	0	alive|nopenalty|shooter|venom
+626	Сатиры#Satyrs	satyrani	0	alive|moraler
+627	Духи леса#Spirits of forest	spiritani	0	alive|flyer|noretalation|speedoflight|spirit|strikeandreturn|teleport
+628	Пожиратели плоти#Flesh-eating trees	hungerplantani	0	alive|cursingattack|nopenalty|shooter|venom
+630	Волшебные драконы#Faerie dragons	faeriedragonani	0	alive|big|caster|fire_breath|flyer|mag|magicmirror|magicproof50
+631	Белые тигры#White tigers	whitetigerani	0	alive|big|concentration
+633	*MARIS*	leader3aani	1	hero|shooter
+634	*ZUCHEDUNGRO*	leader3bani	1	hero|shooter
+635	Костяные воины#Skeletal warriors	skeleton6ani	0	hidden|hollowbones|shooter|undead|vulnerabilitytolight
+636	Костяные копейщики#Skeletal Spearmen	skeletons6ani	0	hidden|hollowbones|shooter|undead|vulnerabilitytolight|webbingspears
+637	Упыри#Ghouls	ghoulani	0	deadflesh|hidden|undead|vulnerabilitytolight
+638	Ненасытные упыри#Ravenous ghouls	ravenousghoulani	0	deadflesh|hidden|rageagainsttheliving|undead|vulnerabilitytolight
+639	Привидения прошлого#Ghosts of past	ghost6ani	0	flyer|hidden|immaterial|undead|vulnerabilitytolight|wailofthenetherworld
+640	Призраки прошлого#Specters of past	spectre6ani	0	flyer|hidden|immaterial|undead|vulnerabilitytolight|wailofthenetherworld
+641	Прядильщицы судеб#Fate spinners	fatespinnerani	0	balefulgaze|big|dualforms|hidden|spirit|undead|vulnerabilitytolight
+644	Морские дьяволы#Sailors` devil	piratemonsterani	0	alive|big|fearattack|magicproof50|organicarmor|pirate
+645	Пираты Ктулху#Pirates of Cthulhu	piratemonsterupani	0	alive|big|fearattack|flyer|magicproof50|organicarmor|pirate|teleport
+646	Буканиры#Buccaneers	shootpirateani	0	alive|ignoredefence20|norangepenalty|pirate|shooter
+647	Флибустьеры#Flibustiers	shootpirateupani	0	alive|ignoredefence30|norangepenalty|pirate|shooter
+648	рыбкин	pers_pirateani	1	hero|shooter|pirate
+649	Пиратки#Women pirates	piratkaani	0	alive|assault|pirate|strikeandreturn
+650	Корсарки#Women corsairs	piratkaupani	0	alive|assault|noretalation|pirate|strikeandreturn
+651	Толстяки#Fatso	fatpirateani	0	alive|big|pirate|slam
+652	Одноглазые пираты#One-eyed pirates	fatpirateupani	0	alive|big|mightyslam|pirate
+660	Алмазные големы#Diamond golems	diamondgolemani	0	diamondarmor|elemental|magicproof95
+661	Черные вдовы#Black widows	blackwidowani	0	alive|noretalation|shadowattack|shooter
+662	Магические элементали#Magic elementals	magicelani	0	allslash|elemental|immunity|noretalation
+672	Крестоносцы#Templars	crusaderani	0	alive|doublestrike|lshield|undeadkiller
+676	рыбкин	pers_necrpirateani	1	hero|shooter
+677	Скелеты-моряки#Skeleton sailor	cpirateani	0	cleave|enraged|pirate|undead
+678	Призраки пираток#Ghosts of pirates	gpiratkaani	0	flyer|incorporeal|lifedrain|pirate|strikeandreturn|undead
+679	Пираты зомби#Zombie pirates	zpirateani	0	big|festeringaura|magicproof50|pirate|shieldbash|undead|weakeningstrike
+690	Кабаны#Boars	boarani	0	alive|big|bloodlust|charge
+691	Древние кабаны#Ancient boars	ancientpigani	0	alive|big|charge|ignoredefence20
+692	Боевые кабаны#Battle boars	battlepigani	0	alive|big|charge|uretalation
+693	Баррикада#Barricade	barrierani	0	big|ignoreattack20|statix|warmachine
+696	Ловчие#Stalkers	stalkerani	0	alive|invisibility|poisonattack
+701	Ледяные элементали#Ice elementals	iceelani	0	elemental|flyer|icold|vulnerabilitytofire
+703	Снежные воины#Snow warriors	chuvakani	0	alive|enraged|icold|magicproof10|vulnerabilitytofire
+704	Йети#Yeties	yetiani	0	alive|big|enraged|icold
+705	Снежные королевы#Ice queens	icequeenani	0	alive|caster|cruelty|icold|mag|shooter|vulnerabilitytofire
+713	*TONKAMONERGRO*	brigand2ani	1	hero|shooter
+714	*ISLEN*	brigand3ani	1	hero|shooter
+717	Костяные ящеры#Bone lizards	bonelizardani	0	big|lizardbite|undead
+721	Блуждающие огни#Will-O-Wisps	wispani	0	flyer|immaterial|spirit|undead
+722	Тёмные горгульи#Dark Gargoyles	burbulyani	0	bloodlust|elemental|flyer|perseverance|shielded
+723	Проклятые горгульи#Cursed Gargoyles	hgargani	0	armoured|cripplingwound|elemental|flyer
+724	Гигантские пауки#Giant Spiders	bigspiderani	0	alive|big|torpor
+725	Рубаки#Vagabonds	brigandani	0	alive|cruelty
+726	Дозорные#Outriders	robberani	0	alive|cowardice|shooter
+727	Колдуны-ренегаты#Turncoat Mages	outlawani	0	alive|caster|iearth|mag
+728	Молотобойцы#Warhammerers	gnomonani	0	alive|bravery|giantkiller
+729	Лазутчицы#Infiltrators	banditkaani	0	agility|alive|poisonattack
+730	Вышибалы#Bruisers	highwaymanani	0	alive|big|taunt
+731	Пустынные налетчики#Desert Raiders	vultureani	0	alive|big|flyer|scavenger
+737	*HILONERSIN*	banditbarbani	1	hero|shooter
+738	*PAREVATON*	banditgnomani	1	hero|shooter
+743	Мемхотеп	pers_adarkelfani	1	hero|shooter
+744	Nadya2229	wpers_adarkelfani	1	hero|shooter
+745	Хозяйки ночи#Shadow mistresses	mistressani	0	alive|caster|invisibility|whipstrike
+747	Красные драконы#Red dragons	reddragonani	0	alive|big|fire_breath|flyer|incinerate
+750	Троглодиты#Troglodytes	troglodyteani	0	alive|iblind
+751	Адские троглодиты#Infernal Troglodytes	troglodyteupani	0	alive|frightful_aura|iblind
+752	Медузы#Medusas	medusaani	0	alive|big|nopenalty|shooter|stoning
+753	Медузы королевы#Medusas Queens	medusaupani	0	alive|big|nopenalty|shooter|stoning
+754	Мантикоры#Manticores	manticoreani	0	alive|big|flyer|venom
+755	Скорпикоры#Scorpicores	manticoreupani	0	alive|big|flyer|paralyzing
+760	Клетка#Cell	kletkabigani	0	big|magicproof80|statix
+761	Сеткомёт#Net thrower	setkometani	0	magicproof50|mechanical|netshooterlight|noselfret|shooter|shootonly|warmachine
+770	Одержимые#Demoniacs	demoniacani	0	alive|bloodlust
+771	Сектанты#Cultists	adeptusani	0	alive|caster|markoffire|shooter|twistedmind
+781	*DUNELTGOMNAM*	banditsvani	1	hero|shooter
+782	*GROZU*	banditnecrani	1	hero|shooter
+783	*DUNADOMAR*	banditdemonani	1	hero|shooter
+784	*TINSINIKA*	banditdarkelfani	1	hero|shooter
+785	*GROKITIN*	banditelfani	1	hero|shooter
+786	*DAZKAZU*	banditmageani	1	hero|shooter
+787	*KIMADOVS*	banditknightani	1	hero|shooter
+789	Башня лучников#Archer tower	archtowerani	0	ballista|shooter|warmachine
+790	Дровосеки#Lumbermen	lumbermanani	0	alive|shieldbash
+791	Мобильные баллисты#Mobile ballista	cbalani	0	alive|big|forcearrow|shooter
+792	Великаны#Trashers	giantani	0	alive|big|bloodlust|mightyslam|siegewalls
+793	Тэнгу#Tengu	tenguani	0	alive|deathattack|fierceretaliation|flyer
+796	Ледяные драконы#Iced dragons	icedragonani	0	big|elemental|flyer|icedbreath|icold|vulnerabilitytofire
+817	Великаны-лучники#Giant archers	giantarchani	0	alive|big|bloodlust|norangepenalty|shooter
+847	Ассиды#Ayssids	oceanani	0	alive|bloodlust|flyer|icedbreath|magicproof50|swiftattack
+848	Духи океана#Ocean spirits	assidaani	0	alive|flyer|icedbreath|magicproof50|swiftattack
+849	Матросы-чужеземцы#Sailors-strangers	negroani	0	alive|doublestrike|pirate
+850	Никсы#Nixes	reptiloidani	0	alive|ignoreattack20|lshield
+851	Никсы-воины#Nix warriors	reptiloidupani	0	alive|ignoreattack40|lshield|shieldother
+852	Жрицы моря#Sea priestesses	priestessani	0	alive|caster|pirate|shooter
+853	Ведьмы моря#Sea witches	priestessupani	0	alive|caster|pirate|shooter
+855	Огры-шаманы#Ogre shamans	ogreshamanani	0	alive|caster|enraged|powerstrike
+859	Наездники на гиенах#Hyena riders	hyenariderani	0	alive|big|weakeningstrike
+860	Циклопы-шаманы#Cyclops shamans	cyclopshamanani	0	alive|caster|shooter
+861	Проклятые бегемоты#Cursed behemoths	bbehemothani	0	alive|big|frightful_aura|ignoredefence40
+895	Лесные хоббиты#Forest hobbits	bobbitani	0	alive|giantkiller|shooter
+896	Чародеи-ренегаты#Turncoat Warmages	outlawupani	0	alive|caster|iearth|mag
+897	Кочевники#Nomads	nomadani	0	alive|big|ignoredefence15
+917	Слуги Анубиса#Anubis avatars	anubisani	0	alive|big|fireproof25|imind|nopenalty|scarablarvae|shooter
+918	Воины Анубиса#Anubis warriors	anubisupani	0	alive|big|deathcloud|fireproof25|flyer|imind|nopenalty|scarablarvaeup|shooter|teleport
+920	Налетчики на верблюдах#Camel raiders	dromadupani	0	alive|big|endurance|fireproof25|ignoredefence30
+921	Пустынные рейдеры#Dune raiders	duneraiderani	0	alive|armordamage10|chameleon|fireproof25|shooter
+922	Пустынные убийцы#Dune assassins	duneraiderupani	0	alive|armordamage20|chameleon|fireproof25|noretalation|shooter
+924	Черные скорпионы#Black scorpions	scorpupani	0	alive|fireproof25|poisonattack
+925	Шакалы#Jackals	shakalani	0	alive|fireproof25|rebirth25|shielded
+926	Шакалы-воины#Jackals-warriors	shakalupani	0	alive|fireproof25|rebirth50|shielded
+928	Священные скарабеи#Sacred scarabs	scarabupani	0	alive|childofthelight|confusionstrike|fireproof25|flyer
+930	Жрицы солнца#Sun Priestesses	zhricaupani	0	alive|caster|eclipse|fireproof25|shooter
+932	Штурмовые слоны#Assault elephants	slonupani	0	alive|big|fireproof25|nonshiftable|powerstrike|pygmykiller
+933	Древние мумии#Ancient mummies	amummyani	0	caster|songtimes|undead
+936	Шпионки#Spies	banditkaupani	0	agility|alive|cleave|poisonattack
+937	Ямабуси Тэнгу#Yamabushi Tengu	tenguupani	0	alive|armordamage10|deathattack|fierceretaliation|flyer
+938	Гунны#Huns	nomadupani	0	alive|big|bravery|ignoredefence20
+939	Алмасты#Almases	yetiupani	0	alive|big|bloodlust|enraged|fearattack|icold
+942	Снежные волки#Snow wolves	snowwolfani	0	alive|bravery|packhunter|uretalation
+946	Ледяные воины#Ice warriors	chuvakupani	0	alive|enraged|frozentouch|icold|magicproof20|vulnerabilitytofire
+952	*DUNACHRAM*	pers_egani	1	hero|shooter
+953	*MOGRO*	wpers_egani	1	hero|shooter
+958	Ярлы#Punishers	flamelordani	0	alive|big|flamestrike|flamewave|flyer|ifire|teleport
+959	Северные наездники#Rearguard ursary	whitebearriderani	0	alive|bearroar|big|enraged
+960	Воины ярости#Beastslayers	battleragerani	0	alive|battlerage|giantslayer|imind|shieldbash
+961	Жрецы пламени#Ascetics	runekeeperani	0	alive|auraoffirevul|caster|ifire|shooter
+962	Лавовые драконы#Core dragons	lavadragonani	0	big|elemental|ifire|liquidflamebreath
+972	nipnip	nipnipani	1	hero|shooter
+982	Воители гор#Dwarf warriors	armorgnomani	0	alive|armoured|defender|shielded|shieldother
+983	A-MeTeOr-	pers_agnomani	1	hero|shooter
+984	Anastasyja007	wpers_agnomani	1	hero|shooter
+985	Громоглавы#Thunderheads	axegnomani	0	alive|enraged|ignoredefence10
+987	Жрицы огня#Priestesses of fire	gnomkaani	0	alive|caster|norangepenalty|pyromancer|shooter
+993	Метатели молота#Warhammermen	throwgnomani	0	alive|shieldbash|shootbash|shooter
+1000	Лесные шаманы#Forest shamans	shamanani	0	alive|caster|islow|magicproof30|shielded
+1004	Копейщики#Pikemen	pikemanani	0	alive|ignoredefence60
+1011	Дроны#Drones	mechdronani	0	armoured|flyer|ignoredefence10|islow|mechanical
+1012	Боты-пауки#Spider-bots	mechspiderani	0	armoured|mechanical|selfbomb
+1013	Механики#Mechanics	bazukerani	0	advancedrepair|alive|cripplingwound|shooter
+1015	Алхимики#Alchemists	alchemistani	0	alive|caster|lifeguardmembrane|mag
+1016	Паровые танки#Steam tanks	mechtankani	0	aimedshot|armoured|big|ignoreattack20|mechanical|shooter
+1021	Элитные арбалетчики#Elite crossbowmen	mundusani	0	alive|armoured|preciseshot|shooter
+1029	Goodley	goodleyani	1	hero|shooter
+1036	Реаниматоры#Reanimators	reanimatorani	0	alive|demonic
+1037	Адские реаниматоры#Infernal reanimators	reanimatorupani	0	alive|demon_resurrection|demonic
+1038	Душегубы#Murderers	brigandupani	0	alive|bloodlust|morecruelty
+1040	Маги-изгнанники#Exiled mages	exileani	0	alive|caster|forbiddenspell|norangepenalty|rangedretaliation|shooter
+1041	Гноллы#Gnolls	gnollani	0	alive|packpower|packraid
+1042	Метатели боласов#Bolas throwers	gnollumani	0	alive|bindshot|nopenalty|packpower|packraid|shooter
+1043	Браконьеры#Poachers	poacherani	0	alive|callofbeast|shooter
+1044	Соглядатаи#Snoopers	robberupani	0	alive|cowardice|firstshot|shielded|shooter
+1045	Изменники#Traitors	traitorani	0	alive|amorale|runaway|shooter
+1046	Загонщики на варанах#Varan beaters	varanani	0	alive|big|bombshooter|nopenalty|shooter
+1047	Засадники#Ambushers	zasadani	0	alive|invisibility|paralyzing|venom
+1050	Утопленники#Drowned men	drownedani	0	flyer|pirate|teleport|undead
+1053	Могучие зомби#Mighty zombies	zpirateupani	0	big|festeringaura|magicproof50|mightyslam|pirate|shieldbash|undead|weakeningstrike
+1054	Призраки корсарок#Spectres of corsairs	gpiratkaupani	0	flyer|incorporeal|lifedrain|pirate|spectrecold|strikeandreturn|undead
+1055	Утопшие канониры#Drowned gunners	pushkarani	0	giantkiller|ignoredefence20|pirate|powerfulrecoil|shooter|undead
+1056	Обречённые бомбардиры#Doomed bombers	pushkarupani	0	giantkiller|ignoredefence20|madshot|pirate|powerfulrecoil|shooter|undead
+1060	Угонщики верблюдов#Camel thieves	verbludani	0	agilesteed|alive|big|endurance|safeposition
+1062	Сехметиты#Sekhmetites	sekhmetani	0	alive|burningfootsteps|fireproof50|pyromancer|shooter
+1064	Расхитители гробниц#Tomb raiders	tombraiderupani	0	alive|entrenchment|resistanttocurses|trapexpert
+1065	Заклинатели змей#Snake charmers	charmerani	0	alive|noretalation|poisonattack|snakereflexes|unprotectedtarget|uretalation
+1066	Повелители змей#Snake masters	charmerupani	0	alive|noretalation|poisonattack|snakereflexes|strikewithoutwarning|unprotectedtarget|uretalation
+1067	Служители оазисов#Oasis acolytes	krokodilani	0	alive|big|eateroflight|shielded|waterproof25
+1068	Стражи оазисов#Oasis guards	krokodilupani	0	alive|big|eaterofdarkness|eateroflight|shielded|waterproof25
+1081	Стальные исполины#Steel giants	mechgolemani	0	armoured|big|heavystep|mechanical|mightyslam|nonshiftable|shieldbash
+1082	Боты-арахниды#Arachnid-bots	mechspiderupani	0	arachnidjump|armoured|mechanical|selfbomb
+1083	Пила-терминаторы#Saw-terminators	mechguardupani	0	armoured|disorientingscreech|ferociouswound|ignoredefence25|mechanical|sawmachine
+1089	Гноллы-шаманы#Gnolls-shamans	gnollshani	0	alive|caster|mag|packpower|packraid|packwisdom
+1091	Логово бандитов#Bandits lair	logovo1ani	0	big|islow|portal|statix
+1092	Логово бандитов#Bandits lair	logovo2ani	0	big|islow|portal|statix
+1093	Логово бандитов#Bandits lair	logovo3ani	0	big|islow|portal|statix
+1094	Завод механиков#Mechanics factory	sbor1ani	0	big|islow|portal|statix
+1095	Мастера клинка#Blade masters	mmasterani	0	alive|cleavestrike|crushingleadership
+1114	Прибрежные налётчики#Coastal raiders	jpirateani	0	alive|bravery|pirate|shooter
+1119	Pu-239	rickani	1	hero|shooter
+1130	Ракушки#Shells	shellani	0	alive|armoured|shielded|shooter
+1131	Моллюски#Clam-monster	shellmonsterani	0	alive|armoured|big|cripplingwound|ignoredefence30|shielded
+1132	Стражи поднебесья#Guardians of heaven	gatekeeperani	0	alive|flyer|magicproof50|sacredweapon|shielded|shieldother
+1137	*ORATONZI*	persgnollani	1	hero|shooter
+1138	Яростные гноллы#Furious gnolls	gnollupani	0	alive|packenrage|packpower|packraid
+1139	Дочери стаи#Daughters of gnolls	gnollkaani	0	alive|packpower|packraid|packrevenge
+1140	Гноллы-вожаки#Gnoll Leaders	gnollbossani	0	alive|big|packboss|packpower|packraid|widesweep
+1144	*ONERGSACHE*	pers_mechani	1	hero|shooter
+1145	Драконлинги#Dragonlings	mikrodragonani	0	alive|dragoncurse
+1146	Дрэйки#Drakes	minidragonani	0	alive|dodge|flyer
+1154	Искариоты#Iscariots	deserterupani	0	alive|amorale|lshield|runaway
+1156	Повозка бандитов#Bandits wagon	logovo4ani	0	big|islow|portal|statix
+1165	Полярные волки#Polar wolves	snowwolfupani	0	agility|alive|bravery|cripplingwound|packhunter|uretalation
+1167	Ледниковые элементали#Glacial elementals	iceelupani	0	elemental|flyer|icold|ignoreattack20|vulnerabilitytofire
+1174	*KIMOGZAEM*	yuantiani	1	hero|shooter
+1176	Эбиры#Ebirahs	krevetkoani	0	alive|big|doublestrike|frightful_aura|imind
+1177	Муратавры#Antauruses	antani	0	alive|paralyzing|venom
+1180	Клыколиски#Fangolisks	zergani	0	alive|big|enraged|organicarmor|powerstrike
+1184	Туманник#Foggy	drakonidani	0	alive|blinding_attack|demonic|flyer|frightful_aura|spirit
+1187	Боровики#Boletuses	gribani	0	alive|entrenchment
+1188	Поганцы#Toadstooler	gribokani	0	alive|entrenchment|poisonattack|shooter
+1189	Мухоморища#Amanitas	mushroomani	0	alive|big|entrenchment|impervioustopain|mightyslam|safeposition
+1191	Споровики#Sporeballs	boletusani	0	alive|flyer|gribbomb
+1192	Грибоманты#Mushroommancers	fungusani	0	alive|caster|confusionstrike|entrenchment|mag|manaeater
+1193	Гоблины-шаманы#Goblin shamans	witchdoctorani	0	alive|caster|cowardice|manacurser|ragingblood
+1194	Безглазые виверны#Eyeless wyverns	paokaiani	0	alive|big|corpseeater|flyer|iblind|lightningbreath
+1201	dragon g	p1aani	1	hero|shooter
+1203	Deadtime	p2aani	1	hero|shooter
+1204	*INVSGZA*	p2awani	1	hero|shooter
+1205	Mageblood	p3aani	1	hero|shooter
+1206	*GZACHE*	p3awani	1	hero|shooter
+1207	Deadtime	p4aani	1	hero|shooter
+1208	oxotnik102rus	p4awani	1	hero|shooter
+1209	Deadtime	p5aani	1	hero|shooter
+1212	oxotnik102rus	p6awani	1	hero|shooter
+1214	*JIRKIELT*	p7awani	1	hero|shooter
+1215	Lux Aeternae	p8aani	1	hero|shooter
+1218	*IKASPENIR*	p9awani	1	hero|shooter
+1219	*DZEKI*	p10aani	1	hero|shooter
+1221	Еретики#Heretics	monkani	0	alive|caster|shooter
+1223	Надзиратели#Prison guards	wardenani	0	alive|bindingstrike|cleansingstrike|menacinglook
+1224	*HILKO*	banditwbarbani	1	hero|shooter
+1225	*ONADZEEM*	banditwgnomani	1	hero|shooter
+1226	*SINCHEGOM*	banditwsvani	1	hero|shooter
+1227	*BRIPAR*	banditwnecrani	1	hero|shooter
+1228	*DUNKI*	banditwdemonani	1	hero|shooter
+1229	*ISACHCHE*	banditwdarkelfani	1	hero|shooter
+1230	*GROADOKAMNIR*	banditwelfani	1	hero|shooter
+1233	*DAZMARLEN*	banditwegani	1	hero|shooter
+1235	*NIRIN*	banditgnomani	1	hero|shooter
+1247	*ISTINSIN*	p1bani	1	hero|shooter
+1248	D A B L	p2bani	1	hero|shooter
+1249	*ELTEMSIN*	p3bani	1	hero|shooter
+1250	eichkh	p4bani	1	hero|shooter
+1251	A-MeTeOr-	p5bani	1	hero|shooter
+1252	Mageblood	p6bani	1	hero|shooter
+1253	Mageblood	p7bani	1	hero|shooter
+1254	*KOONANAMGZA*	p8bani	1	hero|shooter
+1258	*ISTINPUGIKA*	mermaidani	1	hero|shooter
+1259	Башня магов#Mage tower	magtowerani	0	armoured|ballista|islow|mag|nonshiftable|warmachine
+1261	*ONERINONAMTNI*	p1cani	1	hero|shooter
+1262	*DAZMOZIBRI*	p1cwani	1	hero|shooter
+1263	Mageblood	p2cani	1	hero|shooter
+1264	*INOTNIDAZDUN*	p2cwani	1	hero|shooter
+1265	*GZABRIRAMDUN*	p3cani	1	hero|shooter
+1266	*KIMSIN*	p3cwani	1	hero|shooter
+1268	Rainbow	p4cwani	1	hero|shooter
+1269	Mageblood	p5cani	1	hero|shooter
+1271	Dzhugan	p6cani	1	hero|shooter
+1273	dlc	p7cani	1	hero|shooter
+1274	*GZAONAEVA*	p7cwani	1	hero|shooter
+1277	*VSKIMINO*	p9cani	1	hero|shooter
+1279	*MARINZIZI*	p10cani	1	hero|shooter
+1281	*INOMAODAZTIN*	gribnukani	1	hero|shooter
+1282	Воровки#Shadow thieves	vorovkaani	0	alive|invisibility|strikeandreturn|weakeningstrike
+1287	Ткачи смерти#Deathweavers	necromancerani	0	caster|shooter|undead
+1291	Песчаное логово#Sand lair	sknorani	0	islow|portal|statix
+1295	Василиски#Basilisks	basiliskani	0	alive|big|stoning
+1296	Древние василиски#Ancient basilisks	basiliskupani	0	alive|big|stonegarden|stoning
+1297	Птероящеры#Pterolizards	pteroani	0	alive|carrier|flyer
+1298	Матриархи птероящеров#Pterolizards matriarchs	pteroupani	0	alive|carrier|disorientingscreech|flyer
+1299	Вараны#Varans	yascherani	0	alive|big|deathattack|fireproof50
+1300	Огнедышащие вараны#Fire-breathing varans	yascherupani	0	alive|big|burningstrike|deathattack|fireproof75
+1301	Ядоплюи#Venomspitters	gekkonani	0	alive|nopenalty|poisonattack|rangepenalty|shooter
+1302	Гремучие ядоплюи#Rattlesnake venomspitters	gekkonupani	0	alive|nopenalty|rangepenalty|shooter|venom
+1303	Дикие звероловы#Wild beasthunters	gnollumupani	0	alive|bindshot|nopenalty|packdefence|packpower|packraid|shooter
+1310	Жрецы оазисов#Oasis priests	krokodilmagani	0	alive|big|caster|eaterofdarkness|eateroflight|nopenalty|rangepenalty|shooter|waterproof25
+1311	Сумрачные следопыты#Twilight hunters	blackarcherani	0	shooter|shroudofdarkness|undead
+1313	Чёрные стражи#Black guards	blackfootmanani	0	holdground|lshield|resistanttocurses|shieldwall|undead
+1314	Тёмные бастионы#Dark bastions	deadfootmanani	0	auraofdarkresistance|holdground|lshield|resistanttocurses|shieldwall|undead
+1315	Тёмные проклинатели#Dark hexers	blackmageani	0	caster|shooter|undead|witchcraftgift
+1316	Ваятели проклятий#Сursing thaumaturges	deadmageani	0	caster|shooter|undead|witchcraftgift
+1317	Снежные совы#Snow owls	snowowlani	0	alive|big|flyer|omnipresentgaze
+1318	Полярные совы#Polar owls	snowowlupani	0	alive|big|flyer|omnipresentgaze|shielded
+1319	Полярные охотники#Polar hunters	snowarcherani	0	alive|freezingshot|norangepenalty|shooter
+1324	Могильные псы#Grave hounds	blackdogani	0	tasteofdarkness|undead
+1325	Сумрачные гончие#Twilight hounds	deaddogani	0	swiftdash|tasteofdarkness|undead
+1326	*TINTIN*	frostheroani	1	hero|shooter
+1327	*PUGMUR*	reptiloidheroani	1	hero|shooter
+1328	*ORAPUTONKIM*	mumrani	1	hero|shooter
+1329	Проклятые костеглоды#Damned bonegobblers	blackpticani	0	big|flyer|rageagainsttheliving|scavenger|undead
+1330	Предвестники тьмы#Harbingers of darkness	deadpticani	0	big|darkshadow|flyer|rageagainsttheliving|scavenger|undead
+1334	*TINPOKTONGSA*	wpers_mechani	1	hero|shooter
+1336	Белые медведи#White bears	wbearani	0	alive|big|enraged|patience|pawstrike|waterproof50
+1337	Скитальцы#Wanderers	nomadbowani	0	alive|big|ignoredefence15|mobileshooter|nopenalty|shooter
+1338	Бревно#Log	brevnoani	0	big|islow|portal|statix
+1339	Дом#House	witchhouseani	0	big|islow|portal|statix
+1340	Костяные смотрители#Bone sentinels	skgiantarchani	0	big|brittle|norangepenalty|shielded|shooter|undead
+1341	Каменные гиганты#Stone giants	stonemanani	0	big|elemental|heavystep|iearth|nopenalty|norangepenalty|shootbash|shooter
+1343	Крылатые змии#Serpent flyers	serpentflyani	0	alive|flyer|purge
+1344	Стрекозы#Dragon flyers	dragonflyani	0	alive|cursingattack|flyer|purge
+1345	Наездники на варгах#Varg riders	vargani	0	alive|big|bloodlust|enraged|ignoredefence30|menacinglook
+1346	Орочьи воины#Orc warriors	orkani	0	alive|assault|battlethirst|bloodlust|shielded|tasteofblood
+1347	*TINGOM*	naemani	1	hero|shooter
+1348	Костяные гиганты#Bone giants	skgiantani	0	attentive|big|brittle|ferociouswound|shielded|undead
+1349	Нора#Den	vdutlani	0	big|islow|portal|statix
+1350	Дерево#Tree	derevoani	0	big|islow|portal|statix
+1351	Дом#House	house1ani	0	big|islow|portal|statix
+1352	Дом#House	house2ani	0	big|islow|portal|statix
+1353	Дом#House	house3ani	0	big|islow|portal|statix
+1356	*JIRPUGONA*	pers_iceani	1	hero|shooter
+1361	Заклинатели штормов#Storm warlocks	bokoporani	0	alive|caster|mag|master_of_fire10|master_of_storms10|pirate
+1363	Костяные левиафаны#Bone leviathans	dleviathanani	0	big|defiledcreature|hollowbones|ignoredefence25|immunetoweakness|undead
+1368	Охотники на ведьм#Witch hunters	witchhunterani	0	alive|imind|magicproof50|maneuver|shooter|sorcererslayer
+1371	Изобретатели#Inventors	alchemistupani	0	alive|auraofperfection|caster|lifeguardmembrane|mag
+1381	Блудницы#Mystic courtesans	bludani	0	alive|lighttheft|noretalation
+1392	Кислотники#Acidspitters	klopani	0	alive|armordamage25|iearth|shooter
+1400	Коррозийные драконы#Rust dragons	rustdragonani	0	acid_breath|alive|big|corrosivestrike|flyer
+1405	Santremus	pers_asvani	1	hero|shooter
+1408	Винная бочка#Wine barrel	bochkawani	0	auraofres|statix|warmachine
+1409	Бочка эля#Ale barrel	bochkaeani	0	auraofbravery|statix|warmachine
+1410	Проклятые сокровища#Cursed treasures	chestnani	0	festeringaura|statix|stone
+1428	*TINGROACH*	p1dwani	1	hero|shooter
+1431	Deadtime	p3dani	1	hero|shooter
+1433	Сутулая Кошка	p4dani	1	hero|shooter
+1434	*ACHHILDAZ*	p4dwani	1	hero|shooter
+1437	Strange_Elf	p6dani	1	hero|shooter
+1439	*RAMGSAONA*	p7dani	1	hero|shooter
+1441	Mageblood	p8dani	1	hero|shooter
+1443	Strange_Elf	p9dani	1	hero|shooter
+1444	*TONHILEVA*	p9dwani	1	hero|shooter
+1447	*JIRTONSINIS*	p1bwani	1	hero|shooter
+1448	*MADNIRPU*	p2bwani	1	hero|shooter
+1451	oxotnik102rus	p5bwani	1	hero|shooter
+1459	Кобальтовые змеи#Cobalt snakes	kobraani	0	alive|snakereflexes|swiftattack|venom

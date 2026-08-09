@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source": "new raw corpus only; old parser not used",
+  "split": 0.8,
+  "rows": [
+    {
+      "ability_code": "enraged",
+      "event": "friendly_stack_death",
+      "train_n": 2269,
+      "train_hits": 2125,
+      "train_probability": 0.9365359189070075,
+      "heldout_n": 702,
+      "heldout_hits": 657,
+      "heldout_probability": 0.9358974358974359,
+      "abs_drift": 0.0006384830095715888,
+      "increment": 1,
+      "enabled": 1,
+      "train_delta_median": 1.0,
+      "heldout_delta_median": 1.0
+    },
+    {
+      "ability_code": "bloodlust",
+      "event": "enemy_stack_death_by_our_side",
+      "train_n": 1317,
+      "train_hits": 1256,
+      "train_probability": 0.9536826119969628,
+      "heldout_n": 210,
+      "heldout_hits": 178,
+      "heldout_probability": 0.8476190476190476,
+      "abs_drift": 0.1060635643779152,
+      "increment": 1,
+      "enabled": 0,
+      "train_delta_median": 1.0,
+      "heldout_delta_median": 1.0
+    }
+  ],
+  "note": "Only temporally stable kill-trigger probabilities are enabled. Increment is conservative observed lower bound."
+}

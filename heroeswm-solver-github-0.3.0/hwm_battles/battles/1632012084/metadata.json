@@ -1,0 +1,37 @@
+{
+  "warid": "1632012084",
+  "show": "NPgl-z8w",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632012084&show=NPgl-z8w",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632012084\\init.txt",
+    "bytes": 47516,
+    "sha256": "b1a76b31bcd1c665288a7c2d65060e986c1a927461f5973444b514e4e16ae39c"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632012084\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632012084&lastturn=0&show=NPgl-z8w",
+        "status_code": 200,
+        "bytes": 8006,
+        "elapsed_ms": 261.9,
+        "sha256": "e7aeb4a6ddafcf48950d69d3b2007b6383d4f2b39ea51730b49017f4f6c4be42",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632012084&lastturn=0&show=NPgl-z8w"
+      }
+    ],
+    "bytes": 8006,
+    "sha256": "e7aeb4a6ddafcf48950d69d3b2007b6383d4f2b39ea51730b49017f4f6c4be42",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278184.9081414
+}

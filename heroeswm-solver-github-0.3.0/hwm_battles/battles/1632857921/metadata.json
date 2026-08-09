@@ -1,0 +1,37 @@
+{
+  "warid": "1632857921",
+  "show": "Ni1zFPAn",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632857921&show=Ni1zFPAn",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632857921\\init.txt",
+    "bytes": 41597,
+    "sha256": "fbe2603962286b804f0ce67d5b7509a08259759465fd7c0f3b2e6cbb93ad23cd"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632857921\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632857921&lastturn=0&show=Ni1zFPAn",
+        "status_code": 200,
+        "bytes": 8885,
+        "elapsed_ms": 658.1,
+        "sha256": "dd19ddfb6ea8e49c270440220ac4fd16c76be9d7b391817d0c19fbda986da391",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632857921&lastturn=0&show=Ni1zFPAn"
+      }
+    ],
+    "bytes": 8885,
+    "sha256": "dd19ddfb6ea8e49c270440220ac4fd16c76be9d7b391817d0c19fbda986da391",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278173.401681
+}

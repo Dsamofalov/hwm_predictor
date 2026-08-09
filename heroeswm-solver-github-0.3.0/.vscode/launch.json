@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "solver-daemon (Windows / MSVC)",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\build\\debug\\solver-daemon.exe",
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {"name": "HWM_CAPTURE_DIR", "value": "${workspaceFolder}\\data\\captured-live"}
+      ],
+      "preLaunchTask": "CMake: build debug"
+    },
+    {
+      "name": "solver-daemon (Linux / WSL)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/solver-daemon",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "environment": [
+        {"name": "HWM_CAPTURE_DIR", "value": "${workspaceFolder}/data/captured-live"}
+      ],
+      "preLaunchTask": "CMake: build debug"
+    },
+    {
+      "name": "Python: corpus manifest",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "hwm_solver.cli",
+      "args": ["manifest", "data/input/battle_urls.txt", "data/manifests/battles.jsonl"],
+      "env": {"PYTHONPATH": "${workspaceFolder}/python"}
+    }
+  ]
+}

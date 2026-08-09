@@ -1,0 +1,51 @@
+{
+  "warid": "1629978298",
+  "show": "NALTJo7v",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629978298&show=NALTJo7v",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629978298\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629978298&lastturn=-3&show=NALTJo7v",
+        "status_code": 200,
+        "bytes": 39493,
+        "elapsed_ms": 876.6,
+        "sha256": "598ac4163e99f67bfaf0ecc6ba3c714384cc9e229b8eed12ed35dcf67d84d1d1",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629978298&lastturn=-3&show=NALTJo7v"
+      }
+    ],
+    "bytes": 39493,
+    "sha256": "598ac4163e99f67bfaf0ecc6ba3c714384cc9e229b8eed12ed35dcf67d84d1d1",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629978298\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629978298&lastturn=0&show=NALTJo7v",
+        "status_code": 200,
+        "bytes": 3898,
+        "elapsed_ms": 1686.9,
+        "sha256": "a14a2ffd392315714ec296e637515b52cb0a9f98d719938dc838dc7de1fe9838",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629978298&lastturn=0&show=NALTJo7v"
+      }
+    ],
+    "bytes": 3898,
+    "sha256": "a14a2ffd392315714ec296e637515b52cb0a9f98d719938dc838dc7de1fe9838",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278247.5463948
+}

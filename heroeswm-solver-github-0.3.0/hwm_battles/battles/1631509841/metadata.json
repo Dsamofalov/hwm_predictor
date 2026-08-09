@@ -1,0 +1,37 @@
+{
+  "warid": "1631509841",
+  "show": "NpB71-ln",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631509841&show=NpB71-ln",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631509841\\init.txt",
+    "bytes": 39612,
+    "sha256": "e9722ce66966371fe57abda370db7fe2c7a56d89fa1bc7e404b098c7bac41ce5"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631509841\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631509841&lastturn=0&show=NpB71-ln",
+        "status_code": 200,
+        "bytes": 2249,
+        "elapsed_ms": 880.4,
+        "sha256": "0052567be51df680d9a327c59d5034f42ecbc7a39022325c52b6ac7b9c69467b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631509841&lastturn=0&show=NpB71-ln"
+      }
+    ],
+    "bytes": 2249,
+    "sha256": "0052567be51df680d9a327c59d5034f42ecbc7a39022325c52b6ac7b9c69467b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278191.4395838
+}

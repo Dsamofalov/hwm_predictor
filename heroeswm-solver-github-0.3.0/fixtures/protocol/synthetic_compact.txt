@@ -1,0 +1,1 @@
+t=000turns=>11:m013^luck^M007^M012^damage=35^unknown_ability_blob

@@ -1,0 +1,37 @@
+{
+  "warid": "1631521302",
+  "show": "NyfuBBAL",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631521302&show=NyfuBBAL",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631521302\\init.txt",
+    "bytes": 29699,
+    "sha256": "73f5fc1fcb5eef912c80aa4ebb0eaa169ec27e24cbb5e8e94e6d8a05befac04f"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631521302\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631521302&lastturn=0&show=NyfuBBAL",
+        "status_code": 200,
+        "bytes": 3677,
+        "elapsed_ms": 1232.7,
+        "sha256": "570d58793bda5db466a5c2c99bc82b31a44977e12249d638ab87e28846d1caac",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631521302&lastturn=0&show=NyfuBBAL"
+      }
+    ],
+    "bytes": 3677,
+    "sha256": "570d58793bda5db466a5c2c99bc82b31a44977e12249d638ab87e28846d1caac",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278191.0465682
+}

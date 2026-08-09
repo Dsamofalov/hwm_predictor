@@ -1,0 +1,37 @@
+{
+  "warid": "1632649586",
+  "show": "Nes03iFn",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632649586&show=Nes03iFn",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632649586\\init.txt",
+    "bytes": 37721,
+    "sha256": "bf40a3104fa7a88a1dc19cb6d5fa42b7cce728699c1d8d742f714db392bf3472"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632649586\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632649586&lastturn=0&show=Nes03iFn",
+        "status_code": 200,
+        "bytes": 4304,
+        "elapsed_ms": 891.0,
+        "sha256": "f19216bc73cd611eeb66b71cdbe89ead643b0e94c7eb086b00c4d31c9b4dde85",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632649586&lastturn=0&show=Nes03iFn"
+      }
+    ],
+    "bytes": 4304,
+    "sha256": "f19216bc73cd611eeb66b71cdbe89ead643b0e94c7eb086b00c4d31c9b4dde85",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278171.6465094
+}

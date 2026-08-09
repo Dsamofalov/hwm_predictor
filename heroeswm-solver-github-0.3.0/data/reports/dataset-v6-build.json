@@ -1,0 +1,84 @@
+{
+  "schema_version": 5,
+  "source": "independently decoded raw init.txt + turns0.txt",
+  "builder": "one-pass-bounded-preallocated",
+  "battles": 866,
+  "splits": {
+    "train": 41947,
+    "val": 4892,
+    "test": 5518
+  },
+  "capacity_by_split": {
+    "train": 43395,
+    "val": 5066,
+    "test": 5706
+  },
+  "accepted_decisions": 52357,
+  "observed_decisions": 52375,
+  "rejected": {
+    "forced_or_nonpolicy_event": 17,
+    "noop_pass": 1
+  },
+  "action_counts_observed": {
+    "MELEE_ATTACK": 19801,
+    "RANGED_ATTACK": 10642,
+    "HERO_ACTION": 6112,
+    "MOVE": 6222,
+    "WAIT": 3447,
+    "ABILITY": 2177,
+    "CAST_OR_ABILITY": 2040,
+    "DEFEND": 1916,
+    "FORCED_EVENT": 17,
+    "PASS": 1
+  },
+  "side_counts_observed": {
+    "PLAYER": 34619,
+    "PVE": 17756
+  },
+  "outcomes": {
+    "True": 810,
+    "False": 56
+  },
+  "commands": {
+    "SPECIAL": 51062,
+    "ACTIVATE": 53301,
+    "MOVE": 51680,
+    "DAMAGE": 47208,
+    "STATE": 59602,
+    "PROC": 16746,
+    "FORCED_POSITION": 535,
+    "OPAQUE_EFFECT": 300,
+    "HIDE_OR_DEATH": 607,
+    "I_RECORD": 841,
+    "RESULT": 866,
+    "WAIT": 3447,
+    "DEFEND": 1918,
+    "T_RECORD": 675,
+    "P_RECORD": 506,
+    "SPAWN_ENTITY": 506,
+    "OPAQUE_SHORT": 459,
+    "U_RECORD": 131,
+    "R_RECORD": 114,
+    "SPAWN_POSITION": 62,
+    "Z_RECORD": 34,
+    "X_RECORD": 18,
+    "F_RECORD": 29,
+    "TELEPORT": 3,
+    "W_RECORD": 357,
+    "OPAQUE_A": 7,
+    "V_RECORD": 96,
+    "Y_RECORD": 68
+  },
+  "unknown_command_count": 0,
+  "unknown_command_rate": 0.0,
+  "creature_ids": 644,
+  "ability_tags": 386,
+  "tooltip_ability_codes": 362,
+  "special_codes": 191,
+  "max_entities_observed": 30,
+  "max_entities_encoded": 32,
+  "candidate_actions": 32,
+  "action_dim": 13,
+  "split_policy": "chronological by numeric warid; 80/10/10; never split within battle",
+  "safety": "Tokenizer-unknown rows are excluded by default; structurally known but semantically unresolved mechanics are retained with explicit uncertainty counters; forced/server-only events are excluded from policy targets; old historical state dumps are not labels or ground truth."
+}

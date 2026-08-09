@@ -1,0 +1,37 @@
+{
+  "warid": "1632502319",
+  "show": "NMOFMbaz",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632502319&show=NMOFMbaz",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632502319\\init.txt",
+    "bytes": 34067,
+    "sha256": "ae13953016ccb906723d19a4ddfbf0d30d93b6023ad98b58aee1a8372110ef4c"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632502319\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632502319&lastturn=0&show=NMOFMbaz",
+        "status_code": 200,
+        "bytes": 3192,
+        "elapsed_ms": 643.6,
+        "sha256": "51116794ba53e1933c7ac36430b395bf97741e4146f78ebcf3dbd7dd639e9497",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632502319&lastturn=0&show=NMOFMbaz"
+      }
+    ],
+    "bytes": 3192,
+    "sha256": "51116794ba53e1933c7ac36430b395bf97741e4146f78ebcf3dbd7dd639e9497",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278176.2395248
+}

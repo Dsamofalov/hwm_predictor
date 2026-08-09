@@ -1,0 +1,37 @@
+{
+  "warid": "1632501215",
+  "show": "NLeWELSv",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632501215&show=NLeWELSv",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632501215\\init.txt",
+    "bytes": 33882,
+    "sha256": "4889d7d8b7a4a24cae5329f5120be8c92b229222d235d33a1d2be86ccde7b9f7"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632501215\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632501215&lastturn=0&show=NLeWELSv",
+        "status_code": 200,
+        "bytes": 3900,
+        "elapsed_ms": 246.3,
+        "sha256": "0241fad25085c64776bb3a85895c18aa09d4e9091fb06f9ca8074eed98d87eb2",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632501215&lastturn=0&show=NLeWELSv"
+      }
+    ],
+    "bytes": 3900,
+    "sha256": "0241fad25085c64776bb3a85895c18aa09d4e9091fb06f9ca8074eed98d87eb2",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278177.3330286
+}

@@ -1,0 +1,51 @@
+{
+  "warid": "1629996310",
+  "show": "NP7LAPTi",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629996310&show=NP7LAPTi",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629996310\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629996310&lastturn=-3&show=NP7LAPTi",
+        "status_code": 200,
+        "bytes": 46550,
+        "elapsed_ms": 263.8,
+        "sha256": "67f0ec990199914ce14cffaad341cad3c3ef86842e6d4cde3735c22606e6ed7d",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629996310&lastturn=-3&show=NP7LAPTi"
+      }
+    ],
+    "bytes": 46550,
+    "sha256": "67f0ec990199914ce14cffaad341cad3c3ef86842e6d4cde3735c22606e6ed7d",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629996310\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629996310&lastturn=0&show=NP7LAPTi",
+        "status_code": 200,
+        "bytes": 3585,
+        "elapsed_ms": 512.5,
+        "sha256": "3e81f7279929e4e562332f132e46f49fc244b29c81c5f6e5c20d8ceab4e1343b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629996310&lastturn=0&show=NP7LAPTi"
+      }
+    ],
+    "bytes": 3585,
+    "sha256": "3e81f7279929e4e562332f132e46f49fc244b29c81c5f6e5c20d8ceab4e1343b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278249.3008444
+}

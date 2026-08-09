@@ -1,0 +1,422 @@
+ability_id,code,support,risk_weight,categories,observed_entity_tags,name
+1641293189,absolutepurity,unresolved,0.7000,immunity,13,Непорочность.
+1889185700,accuracy,exact_search,0.0000,offense,0,Меткость.
+4144301207,acid_breath,modeled_collateral,0.3800,offense|targeting,169,Кислотное дыхание.
+2797248136,acidblood,reference_only,0.4500,identity,0,Кислотная кровь
+3014145002,advancedrepair,unresolved,0.6200,offense,5,Эксперт починки.
+1991142818,agilesteed,exact_search,0.0000,offense,27,Норовистый скакун.
+3146823992,agility,learned_damage,0.3000,ranged|defense,68,Ловкость.
+3248709623,aimedshot,unresolved,0.7500,ranged|offense|targeting,8,Прицельный выстрел.
+1532340742,alive,identity,0.0000,identity,10460,alive
+3477036370,allaroundslash,learned_damage,0.7500,movement|ranged|offense|retaliation|targeting,41,Бойня.
+4175406173,allslash,learned_damage,0.7500,offense|targeting,26,Круговой удар.
+412596046,amorale,unresolved,0.7500,control,13,Аморальность.
+3360073780,amphibian,identity,0.0000,movement|immunity|casting,536,Амфибия.
+2450932601,arachnidjump,unresolved,0.7500,movement|ranged|offense|retaliation,5,Прыжок арахнида.
+1529988549,armordamage,reference_only,0.6200,offense|defense,0,Повреждение доспехов
+4087910980,armordamage10,unresolved,0.4500,identity,13,armordamage10
+1706033535,armordamage20,learned_damage,0.2500,identity,12,armordamage20
+1622145440,armordamage25,unresolved,0.4500,identity,6,armordamage25
+3799163979,armorpiercing,exact_search,0.0000,ranged|offense|defense,206,Бронебойный выстрел.
+2697986656,armoured,exact_search,0.0000,defense|immunity|casting,207,Броня.
+1716878860,assault,learned_damage,0.3000,offense|retaliation,152,Штурм.
+4243958869,attentive,exact_search,0.0000,offense|defense|retaliation,27,Внимательный.
+4139836548,auraofairvul,exact_search,0.0000,offense|casting|targeting,28,Аура уязвимости к воздуху.
+778265518,auraofbravery,exact_search,0.0000,offense|targeting,45,Аура храбрости.
+1424378918,auraofdarkresistance,learned_damage,0.7500,defense|targeting,7,Аура тёмного сопротивления.
+1283175630,auraoffirevul,learned_damage,0.7500,offense|casting|targeting,45,Аура уязвимости к огню.
+308560558,auraofperfection,unresolved,0.7500,offense|targeting,3,Аура совершенства.
+321009311,auraofres,exact_search,0.0000,defense|casting|targeting,144,Аура магического сопротивления.
+774192337,auraofwatervul,exact_search,0.0000,offense|casting|targeting,28,Аура уязвимости к воде.
+1267294959,balefulgaze,learned_damage,0.7500,offense|casting,192,Гибельный взгляд.
+4036530155,ballista,unresolved,0.4500,identity,5,ballista
+2328674597,battledive,learned_damage,0.7500,movement|offense,42,Удар с небес.
+562048169,battlefrenzy,learned_damage,0.3000,offense,31,Боевые рефлексы.
+4245984710,battlerage,unresolved,0.7500,offense|control,16,Боевая ярость.
+901750387,battlethirst,exact_search,0.0000,offense,29,Жажда битвы.
+174647527,bearroar,learned_damage,0.7500,offense|targeting,16,Медвежий рев.
+1528801399,berserkerrage,learned_damage,0.7500,movement|offense|defense|retaliation,129,Ярость берсерка.
+1405799865,big,exact_search,0.0000,identity,4666,Большое существо.
+481590696,bindingstrike,unresolved,0.7500,movement|offense|control,3,Сковывающий удар.
+3229713574,bindshot,learned_damage,0.7500,movement|ranged|offense|control,23,Сковывающий выстрел.
+88452866,blacklabel,reference_only,0.4500,identity,0,Черная метка
+1142836594,bladeofepiphany,unresolved,0.7500,offense|summon|control,13,Клинок откровения.
+2537456544,bladeofhatred,learned_damage,0.3000,offense,57,Клинок ненависти.
+2893263832,bladeofjudgment,learned_damage,0.3000,offense,38,Клинок воздаяния.
+410342760,bladeofmercy,unresolved,0.7500,offense|casting|summon,25,Клинок милосердия.
+2395534473,bladeofslaughter,unresolved,0.6200,offense,8,Убойный клинок.
+3155083709,blindedbyrage,learned_damage,0.7500,ranged|immunity|control,57,Ослепленный яростью.
+3323157113,blinding_attack,modeled_proc,0.2800,offense|immunity|casting|control,275,Ослепление.
+3995052496,blindingcharge,exact_search,0.0000,movement|offense|retaliation|control,30,Ослепительный разбег.
+2105228953,bloodfrenzy,exact_search,0.0000,offense,44,Кровавое безумие.
+1032884251,bloodlust,partial_exact,0.2500,offense,513,Жажда крови.
+2995736475,bombshooter,unresolved,0.7500,ranged|offense|summon,8,Взрывной выстрел.
+3475031270,boundlesshate,learned_damage,0.3000,offense,26,Безграничная ненависть.
+864615248,bravery,learned_damage,0.2500,identity,192,Храбрость.
+737051599,brittle,exact_search,0.0000,offense,47,Ветхость.
+2451728847,burningfootsteps,learned_damage,0.7500,movement|offense,17,Выжигающая поступь.
+981873305,burningrage,learned_damage,0.3000,ranged,30,Испепеляющая ярость.
+1459674602,burningstrike,unresolved,0.6200,offense,1,Обжигающий удар.
+3543283432,burstofenergy,learned_damage,0.7500,movement|offense,24,Прилив сил.
+3904433841,calllightning,unresolved,0.7500,offense|casting,3,Зов молний.
+793609651,callofbeast,unresolved,0.7500,offense|summon,26,Зов зверя.
+3609468151,carrier,exact_search,0.0000,offense,243,Переносчик.
+2782428153,caster,dynamic_spellbook,0.1000,offense|casting,1677,Колдун.
+2673819758,chainshot,unresolved,0.6200,ranged|offense,7,Цепной выстрел.
+15175742,challenge,learned_damage,0.7500,offense|targeting,107,Вызов.
+3006188029,chameleon,learned_damage,0.3000,offense|defense,13,Хамелеон.
+1430751702,championcharge,learned_damage,0.7500,offense|targeting,30,Турнирный удар.
+995521460,channeling,learned_damage,0.7500,offense|casting,44,Канал.
+3234472817,charge,exact_search,0.0000,movement|offense,63,Разбег.
+2371448693,childofthelight,learned_damage,0.7500,offense|casting|summon,137,Дитя Света.
+3272193771,cleansinglight,learned_damage,0.7500,movement|offense|targeting,52,Очищающий свет.
+1981509355,cleansingstrike,unresolved,0.6200,offense,3,Очищающий удар.
+3896273609,cleave,learned_damage,0.3000,offense,132,Колун.
+3360041683,cleavestrike,unresolved,0.7500,offense|targeting,2,Рассекающий удар.
+4268977587,commandingpresence,learned_damage,0.7500,offense|control|targeting,16,Присутствие командира.
+1179922742,concentration,exact_search,0.0000,offense|defense,6,Хищные рефлексы.
+2949271329,confusionstrike,learned_damage,0.7500,offense|casting,38,Прикосновение времени.
+429466286,corpseeater,learned_damage,0.2500,identity,18,Трупоед.
+3314408119,corrosivestrike,unresolved,0.6200,offense|defense,1,Коррозийный удар.
+2793852128,cowardice,learned_damage,0.7500,offense|retaliation|targeting,23,Трусость.
+2637081570,crashingleap,learned_damage,0.7500,movement|ranged|offense|retaliation|casting,37,Мощный скачок.
+3580932229,cripplingtraps,learned_damage,0.3000,offense,155,Калечащие капканы.
+1292550398,cripplingwound,learned_damage,0.7500,movement|offense|control,245,Калечащее ранение.
+160827735,crossfire,learned_damage,0.7500,offense|targeting,75,Перекрестная атака.
+624471117,cruelty,unresolved,0.6200,offense,6,Жестокость.
+422885816,crushblow,learned_damage,0.3000,offense,33,Сокрушающий удар.
+1514246415,crushingleadership,unresolved,0.6200,offense|defense,2,Сокрушающий дух.
+282356714,cursingattack,modeled_proc,0.2800,offense|casting,143,Наложение проклятия.
+2565772863,dampenmagic,learned_damage,0.7500,ranged|casting|targeting,24,Приглушение магии.
+3878353276,damtodefence,learned_damage,0.3000,offense|defense,8,Окаменевшая кровь.
+3450007442,dancecombo,learned_damage,0.7500,offense|retaliation|targeting,91,Боевое па.
+1052649597,darkattack,learned_damage,0.7500,offense|casting|control,22,Покров тьмы.
+679944242,darkembrace,reference_only,0.4500,identity,0,Объятия тьмы
+862729441,darkshadow,unresolved,0.7500,offense|casting|targeting,5,Тень тьмы.
+24764149,dash,learned_damage,0.7500,control,12,Натиск.
+1138012059,deadflesh,exact_search,0.0000,offense,38,Мертвая плоть.
+3298954165,deathattack,learned_damage,0.3000,offense,40,Смертельная атака.
+3926577654,deathcloud,modeled_collateral,0.3800,ranged|offense|targeting,118,Смертоносное облако.
+1141059188,deathstare,learned_damage,0.3000,offense,75,Смертельный взгляд.
+2167695767,deathstrike,exact_search,0.0000,offense|immunity,12,Смертельный удар.
+2605269424,deathwail,learned_damage,0.7500,offense|targeting,34,Скорбный вопль.
+2210396922,defender,learned_damage,0.3000,offense,32,Надзор.
+1882519550,defensivestance,reference_only,0.4500,identity,0,Оборонительная позиция
+1040539733,defiledcreature,learned_damage,0.7500,offense|casting|control,28,Осквернённое существо.
+233134182,demon_resurrection,learned_damage,0.3000,offense,27,Воззидание.
+3781682416,demonic,identity,0.0000,identity,259,Демоническое существо.
+659366501,demoniclineage,exact_search,0.0000,defense|casting,387,Демоническая кровь.
+1500139822,diamondarmor,exact_search,0.0000,ranged|offense|defense,6,Алмазная броня.
+1915570931,disorientingscreech,unresolved,0.6200,offense|defense,10,Дезориентирующий визг.
+3307888879,divingassault,unresolved,0.7500,movement|offense,29,Нападение с небес.
+590107600,dodge,unresolved,0.6200,offense,7,Увёртливый.
+4115105943,doubleshoot,exact_search,0.0000,ranged|targeting,154,Двойной выстрел.
+3679573250,doublestrike,exact_search,0.0000,offense|retaliation|targeting,233,Двойной удар.
+3088722968,dragoncurse,learned_damage,0.7500,offense|targeting,7,Проклятие дракона.
+2639357090,dualforms,learned_damage,0.2500,identity,192,Два облика.
+4043768160,eaterofdarkness,learned_damage,0.7500,offense|casting|summon,28,Пожиратель тьмы.
+792595297,eateroflight,learned_damage,0.7500,offense|casting|summon,41,Пожиратель света.
+3097515518,eclipse,learned_damage,0.7500,offense|defense|control,47,Затмение.
+1010774474,elemental,exact_targeting,0.0000,offense|immunity|casting|summon|control,386,Элементаль.
+3230102754,enchantedarmor,learned_damage,0.7500,offense|immunity|casting|targeting,7,Зачарованный доспех.
+3980462502,endurance,learned_damage,0.7500,movement,40,Выносливость.
+3106511444,energychannel,learned_damage,0.7500,casting|summon,25,Энергетический канал.
+3418675989,enraged,modeled_kill_trigger,0.2000,offense,1056,Ярость.
+100188900,entrenchment,exact_search,0.0000,offense|defense,45,Окопаться.
+1371576935,entroots,modeled_proc,0.2800,movement|offense,298,Оплетающие корни.
+1665321496,evileye,learned_damage,0.7500,offense|casting|targeting,18,Сглаз.
+2757393894,explodingspikes,learned_damage,0.7500,offense|retaliation|targeting,32,Разрывные шипы.
+45817824,explosion,reference_only,0.4500,identity,0,Взрыв
+1675583761,eyeofgluttony,learned_damage,0.3000,offense,72,Голодный взгляд.
+2804223612,eyesofthemedusa,learned_damage,0.7500,offense|control,40,Взгляд медузы.
+3986489711,fearattack,learned_damage,0.7500,offense|immunity|casting|control,55,Атака страхом.
+2375624493,fearofstrong,reference_only,0.6200,offense,0,Боязнь сильных.
+3429790271,feralcharge,learned_damage,0.7500,movement|ranged|offense|retaliation,37,Зверская атака.
+1908720239,ferociouswound,modeled_proc,0.2800,movement|offense,206,Ужасная рана.
+2339956315,festeringaura,exact_search,0.0000,offense|defense|immunity|targeting,82,Отравляющая аура.
+1011864507,fierceretaliation,exact_search,0.0000,offense|retaliation,35,Свирепое возмездие.
+1830970580,fire_breath,modeled_collateral,0.3800,offense|targeting,164,Огненное дыхание.
+4122227553,fireattack,exact_search,0.0000,offense,105,Атака огнем.
+1359369501,fireproof,reference_only,0.7500,offense|defense|casting,0,Непробиваемость огнем
+2945385176,fireproof25,partial_exact,0.2500,identity,162,fireproof25
+2860364248,fireproof50,partial_exact,0.2500,identity,24,fireproof50
+864224945,fireproof75,partial_exact,0.2500,identity,1,fireproof75
+2252159050,fireprskin,exact_search,0.0000,offense|defense,541,Огнеупорная кожа.
+16487548,fireshield,exact_search,0.0000,offense,68,Огненный щит.
+3653296507,firewallshooter,learned_damage,0.7500,ranged|offense|summon,22,Воспламеняющийся выстрел.
+3464367009,firstshot,learned_damage,0.7500,ranged|casting|control,13,Первый выстрел.
+167778586,flamestrike,learned_damage,0.3000,offense,13,Удар пламенем.
+4230544161,flamewave,learned_damage,0.3000,offense|defense,13,Волна огня.
+67400405,flyer,exact_search,0.0000,movement,2987,Летающее существо.
+906575436,forbiddenspell,learned_damage,0.7500,offense|casting,22,Запретные чары.
+1117383717,forcearrow,partial_exact,0.2500,ranged|offense|defense|targeting,251,Усиленная стрела.
+646697541,fourwaves,learned_damage,0.3000,offense,62,Четыре волны.
+1271578069,freezingshot,unresolved,0.7500,ranged|offense|targeting,19,Знобящий выстрел.
+176500674,frightful_aura,exact_search,0.0000,control|targeting,135,Аура страха.
+1115499600,frozencaress,learned_damage,0.7500,movement|offense|control|targeting,40,Ледяные ласки.
+3957486794,frozentouch,learned_damage,0.7500,movement|offense,41,Ледяное касание.
+3950043109,giantkiller,exact_search,0.0000,offense,158,Убийца гигантов.
+424724072,giantslayer,unresolved,0.6200,offense|defense,16,Победитель гигантов.
+1852507577,goblinthrower,learned_damage,0.7500,offense|targeting,51,Метание гоблинов.
+2042835215,gribbomb,unresolved,0.6200,offense,13,Взрыв спор.
+1600631019,hailstormaura,learned_damage,0.7500,offense|retaliation|casting,50,Покров из града.
+1113813550,harmtouch,learned_damage,0.7500,offense|casting,82,Смертельная хватка.
+2214775874,harpoonstrike,learned_damage,0.7500,offense|targeting,24,Удар гарпуном.
+2530505866,hatefulretaliation,learned_damage,0.3000,offense|retaliation,57,Затаенная ненависть.
+979982427,heal,reference_only,0.6200,offense,0,Исцеление.
+1641428266,heal5,learned_damage,0.2500,identity,23,heal5
+1624650647,heal6,learned_damage,0.2500,identity,14,heal6
+3894280194,heavystep,learned_damage,0.3000,offense|retaliation,50,Тяжелый шаг.
+456875097,hero,unresolved,0.4500,identity,1483,hero
+1307244642,hexingattack,learned_damage,0.7500,offense|casting|control,88,Колдовской удар.
+4128829753,hidden,exact_search,0.0000,identity,698,hidden
+3037085555,holdground,learned_damage,0.2500,identity,18,Ни шагу назад.
+2574783457,hollowbones,exact_search,0.0000,ranged|offense,292,Полые кости.
+4052522160,iair,exact_targeting,0.0000,immunity|casting,38,Иммунитет к воздуху.
+1059089875,iblind,exact_targeting,0.0000,immunity|casting|control,107,Иммунитет к ослеплению.
+795195454,icedbreath,learned_damage,0.7500,movement|offense|targeting,125,Ледяное дыхание.
+250089078,icold,exact_targeting,0.0000,immunity|casting,94,Иммунитет к холоду.
+1758341920,iearth,exact_targeting,0.0000,immunity|casting,195,Иммунитет к магии земли.
+3651557544,ifire,partial_exact,0.2500,immunity|casting,356,Иммунитет к огню.
+1584319202,ifrenzy,learned_damage,0.7500,immunity|casting,26,Иммунитет к заклинанию Берсерк.
+166140987,ignoreattack,reference_only,0.6200,offense,0,Игнорирование атаки
+2973282433,ignoreattack20,exact_search,0.0000,identity,30,ignoreattack20
+3041378647,ignoreattack40,exact_search,0.0000,identity,17,ignoreattack40
+1045750137,ignoredefence,reference_only,0.6200,offense|defense,0,Игнорирование защиты
+2260520888,ignoredefence10,exact_search,0.0000,identity,20,ignoredefence10
+2344408983,ignoredefence15,exact_search,0.0000,identity,21,ignoredefence15
+4173610739,ignoredefence20,exact_search,0.0000,identity,257,ignoredefence20
+4223943596,ignoredefence25,exact_search,0.0000,identity,29,ignoredefence25
+2462146506,ignoredefence30,exact_search,0.0000,identity,86,ignoredefence30
+80269061,ignoredefence40,exact_search,0.0000,identity,135,ignoredefence40
+4274423548,ignoredefence50,exact_search,0.0000,identity,10,ignoredefence50
+2429429911,ignoredefence60,exact_search,0.0000,identity,63,ignoredefence60
+1990799056,ignoredefence90,exact_search,0.0000,defense,0,Игнорирование защиты 90%
+1861252832,ilighting,exact_targeting,0.0000,immunity|casting,117,Иммунитет к молниям.
+1194077332,imind,exact_targeting,0.0000,immunity|casting|control,243,Иммунитет к влиянию на разум.
+111001938,immaterial,exact_search,0.0000,offense,223,Нематериальность.
+3564298010,immunetohypnos,unresolved,0.7500,immunity|casting,2,Иммунитет к гипнозам.
+1996858014,immunetoweakness,learned_damage,0.7500,immunity|casting,56,Иммунитет к ослаблению.
+1713374871,immunity,exact_targeting,0.0000,immunity|casting,78,Невосприимчивость магии.
+3492637061,impervioustopain,exact_search,0.0000,offense,83,Нечувствительность.
+1394307025,incinerate,learned_damage,0.7500,offense|retaliation|targeting,16,Сжигание.
+2355935035,incorporeal,exact_search,0.0000,offense,283,Бестелесное существо.
+3891120878,invisibility,learned_damage,0.7500,offense|casting|targeting,71,Невидимость.
+4019827025,islow,exact_targeting,0.0000,immunity|casting|control,113,Иммунитет к замедлению.
+697908594,jousting,exact_search,0.0000,movement|offense,77,Рыцарский разбег.
+1565158729,layhands,learned_damage,0.7500,offense|casting|summon,26,Возложение рук.
+273197747,leap,learned_damage,0.7500,movement|ranged|offense,16,Прыжок.
+660893535,leap6,learned_damage,0.7500,movement|ranged|offense|retaliation,33,Скачок.
+406688247,lifedrain,learned_damage,0.3000,offense,147,Осушение.
+2683136385,lifeguardmembrane,exact_search,0.0000,offense|defense|targeting,26,Защитная оболочка.
+1194501870,lighting_attack,learned_damage,0.7500,offense|casting,91,Удар молнией.
+4135954951,lightningbreath,learned_damage,0.7500,offense|targeting,18,Электрическое дыхание.
+3889975280,lighttheft,unresolved,0.7500,offense|casting,7,Похищение Света.
+1548348682,liquidflamebreath,learned_damage,0.7500,offense|targeting,19,Жидкое пламя.
+3888369907,lizardbite,exact_search,0.0000,offense|retaliation|targeting,116,Укус ящера.
+3599035170,lshield,exact_search,0.0000,ranged|offense,233,Большой щит.
+1636655815,lucker,reference_only,0.4500,identity,0,Дарующий удачу
+2328072797,madshot,unresolved,0.6200,ranged,11,Безрассудный залп.
+4037216884,mag,learned_damage,0.2500,identity,545,mag
+3292368904,magicattack,learned_damage,0.7500,ranged|offense|casting|targeting,81,Магический выстрел.
+183346239,magicmine,learned_damage,0.7500,offense|casting,21,Магическая ловушка.
+3351289263,magicmirror,unresolved,0.7500,offense|casting,2,Волшебное зеркало.
+3304887130,magicproof,reference_only,0.7500,offense|defense|casting,0,Сопротивление магии
+45033811,magicproof10,partial_exact,0.2500,identity,4,magicproof10
+2426911256,magicproof20,partial_exact,0.2500,identity,8,magicproof20
+2510799351,magicproof25,partial_exact,0.2500,identity,73,magicproof25
+380292001,magicproof30,partial_exact,0.2500,identity,9,magicproof30
+2495007470,magicproof40,partial_exact,0.2500,identity,6,magicproof40
+2595820279,magicproof50,partial_exact,0.2500,identity,263,magicproof50
+2310306566,magicproof75,partial_exact,0.2500,identity,5,magicproof75
+211382978,magicproof80,partial_exact,0.2500,identity,2,magicproof80
+312195787,magicproof90,partial_exact,0.2500,defense|casting,0,Сопротивление магии 90%
+362528644,magicproof95,partial_exact,0.2500,identity,6,magicproof95
+2054882979,magmashield,exact_search,0.0000,offense|casting,31,Магма щит.
+3231420778,magnetism,learned_damage,0.7500,offense|casting|targeting,7,Магнетизм.
+1494735018,manacurser,unresolved,0.7500,offense|casting,8,Порча магии.
+284465491,manadestroyer,unresolved,0.6200,offense,2,Уничтожитель маны.
+496427704,manadrain,exact_search,0.0000,offense|casting|summon,152,Осушение маны.
+350440535,manaeater,unresolved,0.4500,identity,3,Пожиратель маны.
+3273432050,manafeed,learned_damage,0.3000,offense,168,Передача маны.
+4101454259,manaleech,learned_damage,0.3000,offense,127,Поглощение маны.
+60838358,manastealer,unresolved,0.6200,offense,9,Крадущий ману.
+1869368502,maneuver,learned_damage,0.3000,ranged|offense,154,Маневрирование.
+3655556722,maniaclaughter,learned_damage,0.3000,offense,38,Безумный смех.
+3845000677,markoffire,learned_damage,0.3000,ranged|offense,101,Знак Огня.
+1705957361,massshot,reference_only,0.6200,ranged,0,Взрывной выстрел
+3883238050,master_of_fire,reference_only,0.7500,defense|casting,0,Повелитель огня
+3063055131,master_of_fire10,unresolved,0.4500,identity,4,master_of_fire10
+990989660,master_of_storms,reference_only,0.7500,casting,0,Повелитель бурь
+1373162725,master_of_storms10,unresolved,0.4500,identity,4,master_of_storms10
+3701607922,mechanical,exact_targeting,0.0000,identity,152,Механизм.
+4078531002,menacinglook,learned_damage,0.7500,offense|targeting,18,Грозный взгляд.
+782454662,mightyslam,learned_damage,0.7500,offense|retaliation|targeting,102,Могучий удар.
+1035969365,mobileshooter,learned_damage,0.3000,ranged,45,Расторопность.
+1404966839,moraler,learned_damage,0.3000,offense,26,Весельчак.
+2430009902,morecruelty,unresolved,0.6200,offense,3,Чрезмерная жестокость.
+2849121180,netshooter,unresolved,0.7500,movement|offense,2,Метающий сеть.
+2552246656,netshooterlight,unresolved,0.7500,movement|offense,1,Сетеметатель.
+1325065232,nonshiftable,learned_damage,0.2500,identity,21,Несдвигаемый.
+3420412055,nopenalty,exact_search,0.0000,ranged|targeting,718,Нет штрафов в ближнем бою.
+2196185760,norangepenalty,exact_search,0.0000,ranged|targeting,1183,Стрельба без штрафов.
+1379533033,noretalation,exact_search,0.0000,offense|defense,963,Враг не сопротивляется.
+1588051915,noselfret,exact_search,0.0000,offense|retaliation,116,Без ответа.
+3551299567,ohotabonus,reference_only,0.4500,identity,0,Прогресс на охоте
+1505242890,omnipresentgaze,unresolved,0.6200,ranged|offense,12,Вездесущий взор.
+1106680788,oppressionofweak,reference_only,0.6200,offense,0,Угнетение слабых.
+3082404139,orderofchief,learned_damage,0.3000,offense,16,Приказ вожака.
+2431002037,organicarmor,exact_search,0.0000,defense|immunity|casting,38,Живая броня.
+3826786019,outoftime,reference_only,0.4500,identity,0,Вне времени
+2159989345,packboss,learned_damage,0.2500,identity,27,Вожак стаи.
+1368539324,packdefence,unresolved,0.6200,defense,9,Защита стаи.
+2006965922,packenrage,modeled_kill_trigger,0.2000,offense,12,Ярость стаи.
+210071150,packhunter,learned_damage,0.7500,offense|targeting,38,Атака стаей.
+682265273,packpower,learned_damage,0.2500,identity,96,Сила стаи.
+315996912,packraid,learned_damage,0.7500,offense|targeting,96,Налёт стаи.
+2347347950,packrevenge,unresolved,0.6200,offense|retaliation,13,Месть стаи.
+3642873755,packwisdom,unresolved,0.4500,identity,2,Мудрость стаи.
+3432167282,painmirror,exact_search,0.0000,offense,43,Отражение боли.
+707599606,paralyzing,learned_damage,0.7500,offense|casting,22,Паралич.
+40209030,patience,learned_damage,0.3000,offense,8,Выжидание.
+2887662221,pawstrike,learned_damage,0.7500,offense|targeting,90,Удар лапой.
+2369447438,perseverance,unresolved,0.7500,offense|immunity|casting,16,Упорство.
+818299305,piercingbolt,learned_damage,0.3000,ranged|offense,142,Стрельба насквозь.
+3026372832,pirate,identity,0.0000,offense,599,Пират.
+3794297053,pleasureinpain,exact_search,0.0000,offense|targeting,79,Наслаждение болью.
+3092031241,poisonattack,learned_damage,0.3000,offense,108,Отравляющий удар.
+3658158506,poisonous,reference_only,0.6200,offense,0,Ядовитое существо
+353131915,portal,learned_damage,0.2500,identity,56,portal
+1506458051,powerfulrecoil,learned_damage,0.3000,ranged|offense,30,Мощная отдача.
+2083325212,powerstrike,learned_damage,0.7500,offense|retaliation|control,164,Отбрасывающий удар.
+667354010,preciseshot,learned_damage,0.3000,ranged|offense|defense,59,Точный выстрел.
+4124703765,prismaticbreath,learned_damage,0.7500,offense|targeting,45,Призменное дыхание.
+1442065589,proliferation,learned_damage,0.3000,offense,70,Размножение.
+1626471940,purge,learned_damage,0.3000,offense,104,Очищение.
+1212503018,pygmykiller,unresolved,0.6200,offense,12,Убийца пигмеев.
+1608520283,pyromancer,learned_damage,0.7500,ranged|offense|targeting,52,Пиромант.
+3511553011,rageagainsttheliving,learned_damage,0.3000,ranged|offense,28,Ненависть к живым.
+2645649997,rageoftheforest,learned_damage,0.7500,defense|control,37,Ярость леса.
+915498833,ragingblood,learned_damage,0.2500,identity,326,Бурлящая кровь.
+2135299822,random_blessing,unresolved,0.7500,casting|targeting,3,Случайное заклятие тьмы и света.
+3606092906,randomcasterd,unresolved,0.7500,casting|targeting,3,Случайное заклинание тьмы.
+163581660,rangedretaliation,learned_damage,0.7500,ranged|offense|retaliation|casting,34,Ответный выстрел.
+1909037775,rangepenalty,exact_search,0.0000,ranged|offense|targeting,70,Штраф за стрельбу.
+887361475,raptureinagony,exact_search,0.0000,offense|targeting,71,Упоение страданиями.
+225815241,rebirth,reference_only,0.7500,offense|targeting,0,Возрождение
+599042684,rebirth25,unresolved,0.4500,identity,6,rebirth25
+649522636,rebirth50,learned_damage,0.2500,identity,9,rebirth50
+1816987862,regeneration,learned_damage,0.3000,offense,89,Регенерация.
+693242804,repair,unresolved,0.6200,offense,1,Починка.
+4273381350,resistanttocurses,learned_damage,0.7500,casting,20,Устойчивость к проклятиям.
+1966801462,resurrection,learned_damage,0.7500,offense|summon,23,Воскрешение.
+550417429,retractablespikes,learned_damage,0.7500,offense|retaliation|targeting,35,Втягиваемые шипы.
+3641144791,ridercharge,exact_search,0.0000,movement|offense|defense,101,Удар с разбега.
+974867124,rock,unresolved,0.4500,identity,1,rock
+2309032048,runaway,unresolved,0.7500,offense|targeting,13,Побег.
+3202765793,rushdave,learned_damage,0.7500,movement|offense|retaliation|targeting,31,Губительное пике.
+2920039777,sacredweapon,learned_damage,0.7500,offense|defense|casting,5,Священное оружие.
+2377085669,sacrificegoblin,learned_damage,0.7500,offense|targeting,105,Жертвоприношение гоблинами.
+458315755,safeposition,exact_search,0.0000,offense,49,Надёжная позиция.
+151274019,sawmachine,unresolved,0.7500,movement|offense,1,Пиломашина.
+982090474,scarablarvae,learned_damage,0.3000,offense,10,Личинки скарабеев.
+434388999,scarablarvaeup,learned_damage,0.3000,offense,16,Личинки священных скарабеев.
+2500167329,scattershot,learned_damage,0.7500,ranged|offense|targeting,49,Стрельба навесом.
+2354801659,scavenger,learned_damage,0.3000,offense,18,Падальщик.
+367340517,searingaura,unresolved,0.6200,offense,7,Иссушающая аура.
+3548255069,seduction,unresolved,0.7500,offense|immunity|casting|control,2,Соблазнение.
+1443060943,selfbomb,unresolved,0.6200,offense,6,Самоуничтожение.
+867841781,setsnares,unresolved,0.4500,identity,1,Установка капканов.
+3465531449,shadowattack,learned_damage,0.7500,offense|targeting,22,Теневая атака.
+254719310,shieldbash,modeled_proc,0.2800,offense|retaliation|immunity|control,344,Оглушающий удар.
+2533417393,shielded,exact_search,0.0000,ranged|offense|defense,295,Защита от стрел.
+2062676501,shieldguard,learned_damage,0.7500,offense|defense|targeting,44,Защитник.
+2934136738,shieldother,exact_search,0.0000,ranged|offense|defense|immunity|targeting,65,Защита союзников.
+2730951492,shieldwall,exact_search,0.0000,offense,35,Стена из щитов.
+2169441806,shootbash,learned_damage,0.7500,ranged|offense|retaliation|immunity|control,145,Оглушающий выстрел.
+3733667271,shooter,exact_search,0.0000,ranged|offense|defense|targeting,5938,Стрелок.
+1086286306,shootonly,exact_search,0.0000,offense,116,Без ближнего боя.
+1307986454,shroudofdarkness,unresolved,0.7500,offense|casting,4,Пелена тьмы.
+3962776753,siegewalls,learned_damage,0.3000,offense,58,Осада стен.
+3804471243,siphonmana,unresolved,0.7500,offense|casting,11,Откачивание маны.
+2660897719,six_heads,modeled_collateral,0.3800,offense|targeting,45,Удар шестью головами.
+1940149940,slam,learned_damage,0.3000,offense|retaliation,57,Сильный удар.
+87789842,slowstrike,reference_only,0.4500,identity,0,Укус времени
+2409362801,snakereflexes,learned_damage,0.3000,offense|defense,38,Змеиные рефлексы.
+3488926642,songtimes,unresolved,0.7500,control|targeting,6,Песнь времён.
+3696751218,sorcererslayer,learned_damage,0.7500,offense|casting,5,Убийца колдунов.
+3621209207,sorrowstrike,learned_damage,0.7500,offense|casting|targeting,30,Удар скорби.
+3872240405,spectrecold,unresolved,0.7500,movement|offense|casting|targeting,3,Призрачный холод.
+3575864363,speedoflight,learned_damage,0.7500,movement|offense|retaliation,54,Скорость света.
+1763204872,spider,learned_damage,0.7500,movement|offense,89,Паутина.
+3325022696,spirit,exact_search,0.0000,offense|defense,454,Дух.
+3583799049,spiritbond,learned_damage,0.7500,offense|defense|summon|targeting,19,Духовные узы.
+2893303736,spiritlink,learned_damage,0.7500,offense|summon|targeting,24,Духовная связь.
+2924833324,spmult,reference_only,0.7500,casting,0,Увеличение силы магии.
+999704682,spray,modeled_collateral,0.3800,offense,372,Убийственные брызги.
+3146817030,statix,exact_search,0.0000,identity,147,statix
+3443838355,stealammunition,learned_damage,0.3000,offense,102,Кража боеприпасов.
+3357104378,stone,unresolved,0.4500,identity,17,stone
+83914847,stonegarden,unresolved,0.7500,offense|targeting,17,Каменный сад.
+904039197,stoning,modeled_proc,0.2800,offense|casting,57,Окаменение.
+3588878545,stormbolt,learned_damage,0.7500,offense|targeting,51,Нежданная буря.
+3665111373,stormcaller,unresolved,0.7500,ranged|offense|casting|summon,5,Призывающий бурю.
+2139848908,stormstrike,learned_damage,0.7500,offense|casting|targeting,69,Удар бури.
+412307598,strikeandreturn,exact_search,0.0000,movement|offense,419,Удар и возврат.
+1162211515,strikewithoutwarning,unresolved,0.7500,movement|offense|targeting,13,Удар без предупреждения.
+3668730177,summonpitlords,unresolved,0.7500,offense|summon|targeting,7,Призыв пещерных владык.
+2120212528,sunsteed,learned_damage,0.7000,ranged|offense|immunity,30,Солнечный скакун.
+870939855,swallowgoblin,learned_damage,0.7500,offense|targeting,53,Пожирание гоблинов.
+1092599556,swiftattack,exact_search,0.0000,offense|casting|control,183,Стремительная атака.
+2313717076,swiftdash,unresolved,0.6200,offense|defense|retaliation,7,Стремительный бросок.
+3045542303,symbiosis,learned_damage,0.3000,offense,154,Симбиоз.
+973044163,takeroots,exact_search,0.0000,offense|defense,80,Укоренение.
+452400815,tasteofblood,exact_search,0.0000,offense,74,Вкус крови.
+2957278354,tasteofdarkness,learned_damage,0.7500,offense|casting,10,Вкус тьмы.
+2779825981,tasteofpain,learned_damage,0.3000,offense,67,Вкус боли.
+3164374115,taunt,learned_damage,0.7500,offense|targeting,25,Задира.
+2047547092,tauntingpresence,reference_only,0.7500,offense|defense|targeting,0,Вызывающий облик.
+3289626814,teleport,learned_damage,0.2500,identity,386,teleport
+1760291292,teleportother,unresolved,0.7500,movement|offense,4,Телепортация других.
+3819171239,teleportskill,reference_only,0.7500,movement,0,Телепортация.
+957153465,threehead,learned_damage,0.7500,offense|targeting,38,Удар тремя головами.
+3654232171,torpor,modeled_proc,0.2800,offense|targeting,94,Оцепенение.
+545477270,trapexpert,unresolved,0.6200,offense,2,Эксперт по ловушкам.
+1974081888,trapmaster,reference_only,0.6200,offense,0,Мастер по ловушкам.
+3812869988,treachery,reference_only,0.4500,identity,0,Предательство
+3790772767,triplestrike,exact_search,0.0000,offense|retaliation|targeting,64,Тройной удар.
+2685539149,twistedmind,learned_damage,0.7500,immunity|control,90,Извращенный разум.
+1770511744,undead,exact_targeting,0.0000,offense|casting|control,2184,Нежить.
+3735942199,undeadkiller,learned_damage,0.3000,offense,18,Уничтожитель нежити.
+4174746585,unprotectedtarget,learned_damage,0.7500,ranged|offense|targeting,20,Незащищённая цель.
+677623258,unstoppablecharge,reference_only,0.6200,offense|retaliation,0,Неудержимый натиск.
+2302307931,uretalation,exact_search,0.0000,offense|defense|retaliation,391,Бесконечный отпор.
+4184517007,vampiricembrace,reference_only,0.4500,identity,0,Объятия вампира
+3884392901,vampiricgrasp,reference_only,0.4500,identity,0,Хватка вампира
+2678690826,venom,learned_damage,0.3000,offense,94,Животный яд.
+2915798782,venomoustouch,reference_only,0.7500,offense|casting,0,Ядовитое существо.
+1084876075,viciousstrike,learned_damage,0.3000,offense,79,Подлые удары.
+2708751777,vigilantscout,learned_damage,0.3000,ranged,92,Бдительность.
+123166536,voracious,learned_damage,0.3000,offense,44,Прожорливость.
+2452126190,vorpalsword,unresolved,0.6200,offense,2,Разящий меч.
+3479500452,vulnerabilitytoair,exact_search,0.0000,offense|casting,536,Уязвимость к воздуху.
+592515092,vulnerabilitytofire,learned_damage,0.7500,offense|casting,16,Уязвимость к огню.
+4168439332,vulnerabilitytolight,learned_damage,0.7500,offense|casting,1239,Уязвимость к Свету.
+3768612675,vulnerabletoshadowmagic,learned_damage,0.7500,offense|casting,52,Уязвимость к магии Тьмы.
+234089846,wailofthenetherworld,learned_damage,0.7500,offense|targeting,204,Загробный вопль.
+3985648207,wardingarrows,modeled_proc,0.2800,ranged|offense|control,285,Останавливающий выстрел.
+1436051361,warfury,learned_damage,0.7500,offense|immunity|control,78,Воин ярости.
+4175914798,warmachine,exact_search,0.0000,ranged|offense|retaliation|targeting,82,Боевая машина.
+33591792,waterflowsfreely,learned_damage,0.7500,ranged|immunity|control,93,Свободное течение.
+2324956142,waterproof,reference_only,0.7500,offense|defense|casting,0,Непробиваемость водой
+491028915,waterproof25,partial_exact,0.2500,identity,41,waterproof25
+440548963,waterproof50,partial_exact,0.2500,identity,544,waterproof50
+3736284296,wavesofrenewal,learned_damage,0.3000,offense,64,Волны обновления.
+647150360,weakeningstrike,exact_search,0.0000,offense|defense,102,Ослабляющий удар.
+1942543773,webbingspears,learned_damage,0.7500,ranged|offense|targeting,122,Костяные путы.
+211009592,wheelingattack,learned_damage,0.3000,offense|retaliation,21,Попутная атака.
+3610071014,wheeloffortune,unresolved,0.6200,offense,14,Колесо удачи.
+2055597041,whipstrike,learned_damage,0.7500,offense|immunity|casting|control,162,Удар хлыстом.
+1817317601,whirlwind,unresolved,0.6200,offense,6,Вихрь.
+847890070,widesweep,learned_damage,0.7500,offense|targeting,27,Широкий взмах.
+4220082728,witchcraftgift,unresolved,0.6200,defense,5,Колдовской дар.

@@ -1,0 +1,37 @@
+{
+  "warid": "1632046809",
+  "show": "Nq21OfKG",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632046809&show=Nq21OfKG",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632046809\\init.txt",
+    "bytes": 34868,
+    "sha256": "9cb53e31465677616305fe0ff38a9420c4e6a9cd447b45864b4ae6be39fa5817"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632046809\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632046809&lastturn=0&show=Nq21OfKG",
+        "status_code": 200,
+        "bytes": 3825,
+        "elapsed_ms": 198.6,
+        "sha256": "897565835b6dcd8b775178169fef45528f4c5ea74690390cbc46a3b0889a314b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632046809&lastturn=0&show=Nq21OfKG"
+      }
+    ],
+    "bytes": 3825,
+    "sha256": "897565835b6dcd8b775178169fef45528f4c5ea74690390cbc46a3b0889a314b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278218.972
+}

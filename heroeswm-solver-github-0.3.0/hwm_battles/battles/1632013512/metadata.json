@@ -1,0 +1,51 @@
+{
+  "warid": "1632013512",
+  "show": "NG87OSmz",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632013512&show=NG87OSmz",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632013512\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632013512&lastturn=-3&show=NG87OSmz",
+        "status_code": 200,
+        "bytes": 44713,
+        "elapsed_ms": 2259.7,
+        "sha256": "4104eaa5a25378e534112491ba3904fd133f1e18f846abd1e485c6b79be3b89b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632013512&lastturn=-3&show=NG87OSmz"
+      }
+    ],
+    "bytes": 44713,
+    "sha256": "4104eaa5a25378e534112491ba3904fd133f1e18f846abd1e485c6b79be3b89b",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632013512\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632013512&lastturn=0&show=NG87OSmz",
+        "status_code": 200,
+        "bytes": 3032,
+        "elapsed_ms": 508.8,
+        "sha256": "a3dc75de1cf1115a8acad8b1d9f1c0a2ec0d0e1dd2e785a34fe40be1c0b49434",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632013512&lastturn=0&show=NG87OSmz"
+      }
+    ],
+    "bytes": 3032,
+    "sha256": "a3dc75de1cf1115a8acad8b1d9f1c0a2ec0d0e1dd2e785a34fe40be1c0b49434",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278233.3291647
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+:root{color-scheme:dark}body{font:14px system-ui;background:#111;color:#eee;margin:14px;min-width:300px}.card{background:#1d1d1d;border:1px solid #333;border-radius:8px;padding:12px;margin:10px 0}.action{font-size:16px;font-weight:650}.metric{display:inline-block;margin-right:12px}.ok{color:#8fd694}.warn{color:#ffd166}.bad{color:#ff7b7b}.muted{opacity:.7;font-size:12px}pre{white-space:pre-wrap;background:#181818;padding:10px;border-radius:6px;max-height:30vh;overflow:auto}button{padding:8px 12px;border-radius:6px;border:1px solid #555;background:#2d2d2d;color:#fff}details{margin-top:10px}
+</style>
+<h2>HeroesWM Solver</h2>
+<div id="health">daemon...</div>
+<p class="muted">Read-only advisor. You execute moves manually; every new captured state triggers replanning.</p>
+<div class="card">
+  <div class="muted">CURRENT RECOMMENDATION <span id="recommendationTime"></span></div>
+  <div id="mainRecommendation" class="action">Waiting for battle state…</div>
+  <div id="metrics" class="muted"></div>
+  <div id="alternatives"></div>
+</div>
+<button id="recommend">Recalculate now</button>
+<details><summary>Raw recommendation JSON</summary><pre id="recommendation">-</pre></details>
+<details><summary>Session diagnostics</summary><pre id="status">-</pre></details>
+<script type="module" src="sidepanel.js"></script>

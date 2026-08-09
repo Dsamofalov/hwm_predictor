@@ -1,0 +1,31 @@
+{
+  "source": "new raw init.txt + turns0.txt only; historical parser/state dumps not used",
+  "mechanic": "Raise Dead / Srsd",
+  "observations": 434,
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "train_rows": 345,
+  "heldout_rows": 89,
+  "actor_creature_ids_train": 15,
+  "model": "ridge log-linear + actor creature-id bias",
+  "ridge": 0.01,
+  "raw_prediction_heldout": {
+    "rows": 89,
+    "median_relative_error": 0.02324162675789832,
+    "mean_relative_error": 0.17044210565347365,
+    "p90_relative_error": 0.24046993554673848,
+    "overestimate_rate": 0.3146067415730337,
+    "median_prediction_ratio": 0.9924988142856068
+  },
+  "conservative_factor": 0.95,
+  "conservative_heldout": {
+    "rows": 89,
+    "median_relative_error": 0.060178276301916626,
+    "mean_relative_error": 0.19430719769477414,
+    "p90_relative_error": 0.2241186516730719,
+    "overestimate_rate": 0.07865168539325842,
+    "median_prediction_ratio": 0.9428738735713265
+  },
+  "note": "Speculative rollout model only. Observed Srsd uses authoritative heal6 from the wire payload exactly.",
+  "out": "models/raise_dead_model.csv"
+}

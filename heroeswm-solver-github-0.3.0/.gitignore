@@ -1,0 +1,25 @@
+build/
+out/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+extension/dist/
+data/raw/
+data/corpus/
+data/datasets/
+models/*.onnx
+models/*.pt
+logs/
+*.log
+.DS_Store
+# Local/raw research artifacts
+data/real_dataset_v*/
+data/captured-live/
+data/raw-from-har/
+*.har
+cookie.txt
+*.part

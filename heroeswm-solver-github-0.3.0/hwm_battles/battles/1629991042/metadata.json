@@ -1,0 +1,51 @@
+{
+  "warid": "1629991042",
+  "show": "Nyl46tYy",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629991042&show=Nyl46tYy",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629991042\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629991042&lastturn=-3&show=Nyl46tYy",
+        "status_code": 200,
+        "bytes": 51358,
+        "elapsed_ms": 807.9,
+        "sha256": "ea1a19a41462ca7922a10bdcdd3285a3f409e68c926d3665d47d2fec52ae14c4",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629991042&lastturn=-3&show=Nyl46tYy"
+      }
+    ],
+    "bytes": 51358,
+    "sha256": "ea1a19a41462ca7922a10bdcdd3285a3f409e68c926d3665d47d2fec52ae14c4",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629991042\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629991042&lastturn=0&show=Nyl46tYy",
+        "status_code": 200,
+        "bytes": 3858,
+        "elapsed_ms": 1729.7,
+        "sha256": "b3ee31588f63633dcc3d9460bda2e769a1bc1ecb2a53992c66f39775987132a2",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629991042&lastturn=0&show=Nyl46tYy"
+      }
+    ],
+    "bytes": 3858,
+    "sha256": "b3ee31588f63633dcc3d9460bda2e769a1bc1ecb2a53992c66f39775987132a2",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278249.9016147
+}

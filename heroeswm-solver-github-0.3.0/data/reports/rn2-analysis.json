@@ -1,0 +1,2123 @@
+[
+  {
+    "battle": "1625710142",
+    "actor": 18,
+    "in_run_modifier": true,
+    "activation_raw": "m0180612Srn2018001100200000",
+    "rn": [
+      "Srn2018001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      6,
+      12
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      10
+    ],
+    "dist": 3,
+    "next_raw": "m0180910l018luck^d0180060000001552d0180080000001205i0180100Srn2018000000000000"
+  },
+  {
+    "battle": "1625710142",
+    "actor": 21,
+    "in_run_modifier": true,
+    "activation_raw": "m0210509Srn2021001100100000",
+    "rn": [
+      "Srn2021001100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      5,
+      9
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      4,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0210401l021luck^d0210040000003334i0210100Srn2021000000000000"
+  },
+  {
+    "battle": "1626169655",
+    "actor": 18,
+    "in_run_modifier": true,
+    "activation_raw": "m0180202Srn2018001100200000",
+    "rn": [
+      "Srn2018001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      2
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      6
+    ],
+    "dist": 8,
+    "next_raw": "m0181006i0180100Srn2018000000000000Sspi005000000000000"
+  },
+  {
+    "battle": "1626578405",
+    "actor": 19,
+    "in_run_modifier": true,
+    "activation_raw": "m0190103Srn2019001100200000",
+    "rn": [
+      "Srn2019001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0190203Scpt009019001220303i0090000Ssnu019030310090000i0090000m0190903d0190040000000745d0190090000000770d0040190000000066Ssld019004000018000i0040000i0190100Srn2019000000000000"
+  },
+  {
+    "battle": "1627593546",
+    "actor": 24,
+    "in_run_modifier": true,
+    "activation_raw": "m0240202Srn2024001100200000",
+    "rn": [
+      "Srn2024001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      8,
+      7
+    ],
+    "dist": 6,
+    "next_raw": "m0240807l024luck^d0240040000000018l024morale^i0240050Srn2024000000000000Sspi013000000000000"
+  },
+  {
+    "battle": "1627981142",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0110909l011luck^d0110060000001260d0110080000001144i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1628093826",
+    "actor": 24,
+    "in_run_modifier": true,
+    "activation_raw": "m0240814Srn2024001100200000",
+    "rn": [
+      "Srn2024001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      8,
+      14
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      11,
+      20
+    ],
+    "dist": 6,
+    "next_raw": "m0241120i0240100Srn2024000000000000"
+  },
+  {
+    "battle": "1629824833",
+    "actor": 3,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2003002100000000",
+    "rn": [
+      "Srn2003002100000000"
+    ],
+    "speed": 6.0,
+    "from": [
+      11,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      3,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0030303Sspt013000000000000Sspt013000000000000d0030130000000222i0030100Srn2003000000000000"
+  },
+  {
+    "battle": "1630075138",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0110909d0110060000000639d0110080000000607d0060110000000183Ssld011006000112000i0060000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1630520470",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0110903d0110040000000752d0110090000000792m0040601i0040000d0040110000000002Sat3001000000000000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1630814572",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0110903d0110030000000791Spsc003011000117003Ssld003011000000000i0110000d0030110000000081Spsc003011000091003Ssld003011000000000i0110000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1630814572",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "m0140508Srn2014001100100000",
+    "rn": [
+      "Srn2014001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      5,
+      8
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      12,
+      9
+    ],
+    "dist": 7,
+    "next_raw": "m0141209i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1631563801",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110103Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0110903d0110070000001842d0110080000001967d0070110000000005Ssld011007000002000i0070000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1631563801",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130201Srn2013001100100000",
+    "rn": [
+      "Srn2013001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      7,
+      4
+    ],
+    "dist": 5,
+    "next_raw": "m0130704l013luck^d0130040000000257d0040130000000509Senr010100000000001i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631564795",
+    "actor": 10,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2010001100200000",
+    "rn": [
+      "Srn2010001100200000"
+    ],
+    "speed": 7.0,
+    "from": [
+      7,
+      6
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      5,
+      7
+    ],
+    "dist": 2,
+    "next_raw": "m0100507d0100050000001751d0050100000000331l010morale^i0100050Srn2010000000000000"
+  },
+  {
+    "battle": "1631564795",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2011001100100000",
+    "rn": [
+      "Srn2011001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      6,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      5,
+      9
+    ],
+    "dist": 5,
+    "next_raw": "m0110509l011luck^d0110050000003987i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1631565469",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120102Srn2012001100200000",
+    "rn": [
+      "Srn2012001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      4
+    ],
+    "dist": 9,
+    "next_raw": "m0121004d0120090000001501i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1631574804",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150201Srn2015001100200000",
+    "rn": [
+      "Srn2015001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      8,
+      5
+    ],
+    "dist": 6,
+    "next_raw": "m0150805d0150040000000060d0040150000000478Senr010100000000004d0040110000000000Ssld011004000001000i0040000i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1631744981",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110103Srn2011001100200000",
+    "rn": [
+      "Srn2011001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0110903d0110030000000816d0110070000001070Ssld003011000000000i0110000d0030110000000137Ssld011003000000000i0030000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1631744981",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130201Srn2013001100100000",
+    "rn": [
+      "Srn2013001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      3
+    ],
+    "dist": 9,
+    "next_raw": "m0131103d0130050000000016d0050130000000030Senr010100000000003i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631747828",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2014001100200000",
+    "rn": [
+      "Srn2014001100200000"
+    ],
+    "speed": 3.0,
+    "from": [
+      1,
+      10
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      7,
+      10
+    ],
+    "dist": 6,
+    "next_raw": "m0140710l014luck^d0140030000001395d0030140000000006i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1631799466",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130208Srn2013002100200000",
+    "rn": [
+      "Srn2013002100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      6,
+      4
+    ],
+    "dist": 4,
+    "next_raw": "m0130208Sbsr013000000000000m0130604l013luck^d0130010000000586i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631799466",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2012002100100000",
+    "rn": [
+      "Srn2012002100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      3,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      2
+    ],
+    "dist": 7,
+    "next_raw": "m0121002l012luck^d0120180000000782d0120010000001535d0180120000000041Ssld012018000004000i0180000i0120100Srn2012000000000000Sspi018000000000000"
+  },
+  {
+    "battle": "1631800006",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120104Srn2012002100200000",
+    "rn": [
+      "Srn2012002100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      6,
+      9
+    ],
+    "dist": 5,
+    "next_raw": "m0120609l012luck^d0120060000001331d0120080000002011Senr001100000000002d0060120000000097Ssld012006000019000i0060000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1631800867",
+    "actor": 10,
+    "in_run_modifier": true,
+    "activation_raw": "m0100104Srn2010001100200000",
+    "rn": [
+      "Srn2010001100200000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      8
+    ],
+    "dist": 10,
+    "next_raw": "m0101108d0100030000000560b0030908I0030010i0100100Srn2010000000000000"
+  },
+  {
+    "battle": "1631800867",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "m0140102Srn2014001100100000",
+    "rn": [
+      "Srn2014001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      2
+    ],
+    "dist": 9,
+    "next_raw": "m0141002d0140040000000319d0040140000000082Ssld014004000025000i0040000i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1631800867",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2016001100000000",
+    "rn": [
+      "Srn2016001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0161001d0160040000000069i0160100Srn2016000000000000"
+  },
+  {
+    "battle": "1631801392",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2013001100200000Sato001000000000000",
+    "rn": [
+      "Srn2013001100200000"
+    ],
+    "speed": 4.0,
+    "from": [
+      1,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      1,
+      7
+    ],
+    "dist": 6,
+    "next_raw": "m0130107l013luck^d0130040000001440Senr006100000000014Senr009100000000014l013morale^i0130050Srn2013000000000000"
+  },
+  {
+    "battle": "1631844886",
+    "actor": 18,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2018002100200000",
+    "rn": [
+      "Srn2018002100200000"
+    ],
+    "speed": 3.0,
+    "from": [
+      1,
+      12
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      1,
+      6
+    ],
+    "dist": 6,
+    "next_raw": "m0180106l018luck^d0180040000000903i0180100Srn2018000000000000"
+  },
+  {
+    "battle": "1631845993",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130210Srn2013001100200000",
+    "rn": [
+      "Srn2013001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      10
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      10
+    ],
+    "dist": 8,
+    "next_raw": "m0130210Sbsr013000000000000m0131010l013luck^d0130090000000220Senr003100000000001Senr004100000000001Senr005100000000001Senr006100000000001i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631845993",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150201Srn2015001100100000",
+    "rn": [
+      "Srn2015001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 7,
+    "next_raw": "m0150903l015luck^d0150030000000025d0030150000000934Senr010100000000004i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1631848584",
+    "actor": 10,
+    "in_run_modifier": true,
+    "activation_raw": "m0100201Srn2010001100200000",
+    "rn": [
+      "Srn2010001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0100201Sbsr010000000000000m0101001d0100050000000216i0100100Srn2010000000000000"
+  },
+  {
+    "battle": "1631848584",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150107Srn2015001100100000",
+    "rn": [
+      "Srn2015001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0150909l015luck^d0150060000001812d0150040000001309d0060150000000045Ssld015006000007000i0060000i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1631848584",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2014001100000000",
+    "rn": [
+      "Srn2014001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      9
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 7,
+    "next_raw": "m0140903l014morale^i0140050Srn2014000000000000"
+  },
+  {
+    "battle": "1631849674",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130105Srn2013001100200000",
+    "rn": [
+      "Srn2013001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      5
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      7
+    ],
+    "dist": 8,
+    "next_raw": "m0130907d0130080000000978d0130070000000793d0080130000000062Ssld013008000012000i0080000i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631849674",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2015001100100000",
+    "rn": [
+      "Srn2015001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      9
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      11,
+      9
+    ],
+    "dist": 9,
+    "next_raw": "m0151109i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1631849674",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2014001100000000",
+    "rn": [
+      "Srn2014001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0141003d0140030000000170d0030140000000043i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1631850967",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130201Srn2013002100200000",
+    "rn": [
+      "Srn2013002100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      2
+    ],
+    "dist": 8,
+    "next_raw": "m0130201Sbsr013000000000000m0131002Sinv008011010000000l013luck^d0130040000000414i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1631850967",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110104Srn2011002100100000",
+    "rn": [
+      "Srn2011002100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      5
+    ],
+    "dist": 8,
+    "next_raw": "m0110905l011luck^d0110090000001420b0091205I0090011i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1631850967",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "m0140102Srn2014002100000000",
+    "rn": [
+      "Srn2014002100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0140901l014luck^d0140080000000699d0080140000000053W008014Ssld014008000008000i0080000i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1632007191",
+    "actor": 5,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2005004100100000",
+    "rn": [
+      "Srn2005004100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      11,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      3,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0050303Srag01700000-020000d0050170000000543b0170202I0170005l017luck^d0170050000000198i0050100Srn2005000000000000"
+  },
+  {
+    "battle": "1632007191",
+    "actor": 7,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2007004100000000",
+    "rn": [
+      "Srn2007004100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      11,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      2,
+      3
+    ],
+    "dist": 9,
+    "next_raw": "m0070203d0070180000000010Sra20180015-0500002i0070100Srn2007000000000000"
+  },
+  {
+    "battle": "1632007925",
+    "actor": 3,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2003002100200000",
+    "rn": [
+      "Srn2003002100200000"
+    ],
+    "speed": 4.0,
+    "from": [
+      11,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      3,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0030301d0030100000000740l010critical^d0100030000000645i0030100Srn2003000000000000"
+  },
+  {
+    "battle": "1632007925",
+    "actor": 7,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2007002100100000",
+    "rn": [
+      "Srn2007002100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      11,
+      6
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      2,
+      6
+    ],
+    "dist": 9,
+    "next_raw": "m0070206d0070120000000021l012luck^l012critical^d0120070000002791Senr004100000000004Senr005100000000004d0120110000001145i0070100Srn2007000000000000"
+  },
+  {
+    "battle": "1632007925",
+    "actor": 4,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2004002100000000",
+    "rn": [
+      "Srn2004002100000000"
+    ],
+    "speed": 4.0,
+    "from": [
+      11,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      3,
+      8
+    ],
+    "dist": 8,
+    "next_raw": "m0040308d0040120000000852Senr011100000000003i0040100Sat3001000000000000Srn2004000000000000"
+  },
+  {
+    "battle": "1632023448",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120208Srn2012002100200000",
+    "rn": [
+      "Srn2012002100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      4
+    ],
+    "dist": 8,
+    "next_raw": "m0121004d0120090000000240l012morale^i0120050Srn2012000000000000"
+  },
+  {
+    "battle": "1632023595",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130210Srn2013001100200000",
+    "rn": [
+      "Srn2013001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      10
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      11,
+      10
+    ],
+    "dist": 9,
+    "next_raw": "m0131110l013morale^i0130050Srn2013000000000000"
+  },
+  {
+    "battle": "1632023595",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120304Srn2012001100100000",
+    "rn": [
+      "Srn2012001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      3,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      8
+    ],
+    "dist": 8,
+    "next_raw": "m0121108l012luck^d0120080000001606Senr002100000000002Senr004100000000002Senr005100000000002i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1632024503",
+    "actor": 9,
+    "in_run_modifier": true,
+    "activation_raw": "m0090102Srn2009001100200000",
+    "rn": [
+      "Srn2009001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      6
+    ],
+    "dist": 8,
+    "next_raw": "m0090906l009luck^d0090080000001835d0090050000001546i0090100Srn2009000000000000"
+  },
+  {
+    "battle": "1632024503",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2014001100100000Sato001000000000000",
+    "rn": [
+      "Srn2014001100100000"
+    ],
+    "speed": 3.0,
+    "from": [
+      6,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 4,
+    "next_raw": "m0141001d0140020000000739d0020140000000012i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1632025293",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "m0160107Srn2016001100200000",
+    "rn": [
+      "Srn2016001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0160903d0160020000001013d0160040000000805d0020160000000669Ssld016002000133000i0020000i0160100Srn2016000000000000"
+  },
+  {
+    "battle": "1632025663",
+    "actor": 10,
+    "in_run_modifier": true,
+    "activation_raw": "m0100109Srn2010001100200000",
+    "rn": [
+      "Srn2010001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      9
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      7,
+      9
+    ],
+    "dist": 6,
+    "next_raw": "m0100709l010luck^d0100050000001774d0100060000001694d0050100000000011Ssld010005000002000i0050000i0100100Srn2010000000000000"
+  },
+  {
+    "battle": "1632026147",
+    "actor": 17,
+    "in_run_modifier": true,
+    "activation_raw": "m0170107Srn2017001100200000",
+    "rn": [
+      "Srn2017001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      11
+    ],
+    "dist": 8,
+    "next_raw": "m0170911d0170120000000397d0170110000000475Sdat012000000000000d0120170000000465Ssff012017001700007Ssld017012000080000i0120000i0170100Srn2017000000000000"
+  },
+  {
+    "battle": "1632026147",
+    "actor": 22,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2022001100100000Sato001000000000000",
+    "rn": [
+      "Srn2022001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      11
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 7,
+    "next_raw": "m0220909l022luck^d0220140000000000d0140220000000145Senr018100000000003i0220100Srn2022000000000000"
+  },
+  {
+    "battle": "1632027005",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150105Srn2015001100200000",
+    "rn": [
+      "Srn2015001100200000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      5
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      2
+    ],
+    "dist": 10,
+    "next_raw": "m0151102l015luck^d0150030000004266b0031105I0030015Sat3001000000000000i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1632027005",
+    "actor": 9,
+    "in_run_modifier": true,
+    "activation_raw": "m0090103Srn2009001100100000",
+    "rn": [
+      "Srn2009001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      5
+    ],
+    "dist": 8,
+    "next_raw": "m0090905d0090030000000908d0030090000000329W003009Ssld009003000065000i0030000i0090100Srn2009000000000000"
+  },
+  {
+    "battle": "1632027005",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2011001100000000",
+    "rn": [
+      "Srn2011001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      7,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      6
+    ],
+    "dist": 5,
+    "next_raw": "m0111106d0110030000000237l011morale^i0110050Srn2011000000000000"
+  },
+  {
+    "battle": "1632027406",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130201Srn2013001100200000",
+    "rn": [
+      "Srn2013001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0130201Sbsr013000000000000m0131001d0130070000000259i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1632027406",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100100000",
+    "rn": [
+      "Srn2011001100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      9
+    ],
+    "dist": 9,
+    "next_raw": "m0111009d0110080000000893Sat3001000000000000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1632027406",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2016001100000000",
+    "rn": [
+      "Srn2016001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      10
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      6
+    ],
+    "dist": 8,
+    "next_raw": "m0161006i0160100Srn2016000000000000"
+  },
+  {
+    "battle": "1632027528",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150203Srn2015001100200000",
+    "rn": [
+      "Srn2015001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      3
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      11,
+      1
+    ],
+    "dist": 9,
+    "next_raw": "m0151101i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1632027528",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130104Srn2013001100100000",
+    "rn": [
+      "Srn2013001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      3
+    ],
+    "dist": 8,
+    "next_raw": "m0130903d0130030000000964d0130060000000899d0030130000000022Ssld013003000004000i0030000Sat3001000000000000i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1632027528",
+    "actor": 9,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2009001100000000",
+    "rn": [
+      "Srn2009001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      4
+    ],
+    "dist": 8,
+    "next_raw": "m0091004d0090040000000047d0040090000000291Senr011100000000003i0090100Srn2009000000000000"
+  },
+  {
+    "battle": "1632027766",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120107Srn2012001100200000",
+    "rn": [
+      "Srn2012001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      8
+    ],
+    "dist": 8,
+    "next_raw": "m0120908d0120020000000759d0120030000000683d0020120000000556Ssld012002000111000i0020000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1632027766",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2011001100100000Sato001000000000000",
+    "rn": [
+      "Srn2011001100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      8,
+      1
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      1,
+      2
+    ],
+    "dist": 7,
+    "next_raw": "m0110102l011morale^i0110050Srn2011000000000000"
+  },
+  {
+    "battle": "1632050106",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120104Srn2012001100200000",
+    "rn": [
+      "Srn2012001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      4
+    ],
+    "dist": 8,
+    "next_raw": "m0120904d0120030000001303d0030120000000340Ssld012003000074000i0030000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1632225954",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "m0160105Srn2016001100200000",
+    "rn": [
+      "Srn2016001100200000"
+    ],
+    "speed": 8.0,
+    "from": [
+      1,
+      5
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      7
+    ],
+    "dist": 10,
+    "next_raw": "m0161107l016luck^d0160060000001525d0160070000000732d0160090000000591d0160080000000763i0160100Srn2016000000000000"
+  },
+  {
+    "battle": "1632225954",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120107Srn2012001100100000",
+    "rn": [
+      "Srn2012001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0120909d0120070000000598d0120090000000572i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1632697506",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130103Srn2013002100100000",
+    "rn": [
+      "Srn2013002100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      4,
+      4
+    ],
+    "dist": 3,
+    "next_raw": "m0130404i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1632715976",
+    "actor": 10,
+    "in_run_modifier": true,
+    "activation_raw": "m0100105Srn2010002100100000",
+    "rn": [
+      "Srn2010002100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      5
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      5
+    ],
+    "dist": 8,
+    "next_raw": "m0100905d0100080000001296b0081105I0080010d0080100000000701l010morale^i0100050Srn2010000000000000"
+  },
+  {
+    "battle": "1632715976",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150104Srn2015002100000000",
+    "rn": [
+      "Srn2015002100000000"
+    ],
+    "speed": 3.0,
+    "from": [
+      1,
+      4
+    ],
+    "next_type": "CAST_OR_ABILITY",
+    "next_dest": [
+      null,
+      null
+    ],
+    "dist": null,
+    "next_raw": "m0150704l015morale^i0150050Srn2015000000000000"
+  },
+  {
+    "battle": "1632719202",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120109Srn2012001100100000",
+    "rn": [
+      "Srn2012001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      9
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0120909d0120030000000272d0030120000000039Ssld012003000006000i0030000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1632719202",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "m0160201Srn2016001100000000",
+    "rn": [
+      "Srn2016001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      5
+    ],
+    "dist": 8,
+    "next_raw": "m0161005l016luck^d0160070000000000d0070160000000813Senr010100000000002i0160100Srn2016000000000000"
+  },
+  {
+    "battle": "1632870335",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011002100100000",
+    "rn": [
+      "Srn2011002100100000"
+    ],
+    "speed": 8.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      9
+    ],
+    "dist": 9,
+    "next_raw": "m0111009l011luck^d0110090000001802Ssld009011000259000i0110000d0090110000000051i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1632883907",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "m0140202Srn2014001100100000",
+    "rn": [
+      "Srn2014001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      2
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      6
+    ],
+    "dist": 8,
+    "next_raw": "m0141006i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1632883907",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110208Srn2011001100000000",
+    "rn": [
+      "Srn2011001100000000"
+    ],
+    "speed": 4.0,
+    "from": [
+      2,
+      8
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      8
+    ],
+    "dist": 8,
+    "next_raw": "m0111008i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1633069748",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150108Srn2015001100100000",
+    "rn": [
+      "Srn2015001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      10
+    ],
+    "dist": 9,
+    "next_raw": "m0151010d0150090000000214d0090150000000159i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1633079975",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110109Srn2011001100100000",
+    "rn": [
+      "Srn2011001100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      9
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0110909l011luck^d0110090000002896Sat3001000000000000l011morale^i0110050Srn2011000000000000"
+  },
+  {
+    "battle": "1633096129",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120102Srn2012002100100000",
+    "rn": [
+      "Srn2012002100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      5,
+      8
+    ],
+    "dist": 6,
+    "next_raw": "m0120508d0120080000000110Sra20080113-1300024i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1633111164",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150208Srn2015001100100000",
+    "rn": [
+      "Srn2015001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      8
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      11,
+      8
+    ],
+    "dist": 9,
+    "next_raw": "m0151108i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1633111164",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120407Srn2012001100000000",
+    "rn": [
+      "Srn2012001100000000"
+    ],
+    "speed": 4.0,
+    "from": [
+      4,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      7
+    ],
+    "dist": 7,
+    "next_raw": "m0121107d0120050000000023m0051209i0050000Smga00505-500000000d0050120000001691Senr009100000000003d0050020000002515d0050030000003210i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1633190004",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "m0160211Srn2016001100100000",
+    "rn": [
+      "Srn2016001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      11
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      11
+    ],
+    "dist": 8,
+    "next_raw": "m0160211Sbsr016000000000000m0161011l016luck^d0160070000004388l016morale^i0160050Srn2016000000000000"
+  },
+  {
+    "battle": "1633190004",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120102Srn2012001100000000",
+    "rn": [
+      "Srn2012001100000000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      2
+    ],
+    "dist": 8,
+    "next_raw": "m0120902l012luck^d0120030000003053Sat3001000000000000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1633312629",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110107Srn2011001100100000",
+    "rn": [
+      "Srn2011001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      7
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      6,
+      1
+    ],
+    "dist": 6,
+    "next_raw": "m0110601d0110020000000435d0020110000000412Ssff002011003800009Ssld011002000082000i0020000i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1633365978",
+    "actor": 7,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2007002100200000",
+    "rn": [
+      "Srn2007002100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      11,
+      10
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      2,
+      10
+    ],
+    "dist": 9,
+    "next_raw": "m0070210i0070100Srn2007000000000000"
+  },
+  {
+    "battle": "1633365978",
+    "actor": 5,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2005002100100000",
+    "rn": [
+      "Srn2005002100100000"
+    ],
+    "speed": 4.0,
+    "from": [
+      11,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      3
+    ],
+    "dist": 5,
+    "next_raw": "m0051103d0050120000000658Senr011100000000002i0050100Srn2005000000000000Sadp001000009000000"
+  },
+  {
+    "battle": "1633365978",
+    "actor": 3,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2003002100000000",
+    "rn": [
+      "Srn2003002100000000"
+    ],
+    "speed": 4.0,
+    "from": [
+      11,
+      6
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      3,
+      6
+    ],
+    "dist": 8,
+    "next_raw": "m0030306d0030100000000402d0100030000000438i0030100Srn2003000000000000Sadp001000013000000"
+  },
+  {
+    "battle": "1633411108",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150209Srn2015003100100000",
+    "rn": [
+      "Srn2015003100100000"
+    ],
+    "speed": 4.0,
+    "from": [
+      2,
+      9
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      8,
+      9
+    ],
+    "dist": 6,
+    "next_raw": "m0150809l015luck^d0150100000000020d0100150000000620Senr012100000000001Sraa004002000200000i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1633411108",
+    "actor": 14,
+    "in_run_modifier": true,
+    "activation_raw": "m0140103Srn2014003100000000",
+    "rn": [
+      "Srn2014003100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      3
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      5,
+      9
+    ],
+    "dist": 6,
+    "next_raw": "m0140509d0140010000000487d0140100000000268i0140100Srn2014000000000000"
+  },
+  {
+    "battle": "1633421405",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130210Srn2013001100100000",
+    "rn": [
+      "Srn2013001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      10
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      10
+    ],
+    "dist": 8,
+    "next_raw": "m0130210Sbsr013000000000000m0131010d0130030000002526Senr004100000000001Senr005100000000001i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1633421405",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110108Srn2011001100000000",
+    "rn": [
+      "Srn2011001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      8
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      7
+    ],
+    "dist": 9,
+    "next_raw": "m0111007i0110100Srn2011000000000000"
+  },
+  {
+    "battle": "1633428036",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150201Srn2015002100100000",
+    "rn": [
+      "Srn2015002100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      1
+    ],
+    "dist": 9,
+    "next_raw": "m0151101d0150060000000480d0060150000000158l015morale^i0150050Srn2015000000000000"
+  },
+  {
+    "battle": "1633428036",
+    "actor": 11,
+    "in_run_modifier": true,
+    "activation_raw": "m0110105Srn2011002100000000",
+    "rn": [
+      "Srn2011002100000000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      5
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      8,
+      2
+    ],
+    "dist": 7,
+    "next_raw": "m0110802d0110080000000513b0080901I0080011d0080110000000343l011morale^i0110050Srn2011000000000000"
+  },
+  {
+    "battle": "1633429841",
+    "actor": 13,
+    "in_run_modifier": true,
+    "activation_raw": "m0130201Srn2013001100100000",
+    "rn": [
+      "Srn2013001100100000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0130201Sbsr013000000000000m0131001d0130020000001498i0130100Srn2013000000000000"
+  },
+  {
+    "battle": "1633429841",
+    "actor": 9,
+    "in_run_modifier": true,
+    "activation_raw": "m0090102Srn2009001100000000",
+    "rn": [
+      "Srn2009001100000000"
+    ],
+    "speed": 7.0,
+    "from": [
+      1,
+      2
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      3
+    ],
+    "dist": 10,
+    "next_raw": "m0091103l009luck^d0090020000002380b0021101I0020009i0090100Srn2009000000000000"
+  },
+  {
+    "battle": "1633867107",
+    "actor": 15,
+    "in_run_modifier": true,
+    "activation_raw": "m0150301Srn2015001100200000",
+    "rn": [
+      "Srn2015001100200000"
+    ],
+    "speed": 4.0,
+    "from": [
+      3,
+      1
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0151101l015luck^d0150030000001903Ssld003015000197000i0150000i0150100Srn2015000000000000"
+  },
+  {
+    "battle": "1635405232",
+    "actor": 12,
+    "in_run_modifier": true,
+    "activation_raw": "m0120108Srn2012001100200000",
+    "rn": [
+      "Srn2012001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      8
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0120909l012luck^d0120070000000884d0120090000001398d0070120000000034Ssld012007000011000i0070000i0120100Srn2012000000000000"
+  },
+  {
+    "battle": "1635523549",
+    "actor": 20,
+    "in_run_modifier": true,
+    "activation_raw": "m0200113Srn2020001100200000",
+    "rn": [
+      "Srn2020001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      1,
+      13
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      11
+    ],
+    "dist": 8,
+    "next_raw": "m0200911l020luck^d0200110000001703d0200160000001603Sat3001000000000000i0200100Srn2020000000000000Sspi006000000000000"
+  },
+  {
+    "battle": "1635523549",
+    "actor": 18,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2018001100100000Sato001000000000000",
+    "rn": [
+      "Srn2018001100100000"
+    ],
+    "speed": 7.0,
+    "from": [
+      4,
+      17
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      9,
+      9
+    ],
+    "dist": 8,
+    "next_raw": "m0180909d0180070000000982b0070710I0070018i0180100Srn2018000000000000"
+  },
+  {
+    "battle": "1635523549",
+    "actor": 21,
+    "in_run_modifier": true,
+    "activation_raw": "Srn2021001100000000",
+    "rn": [
+      "Srn2021001100000000"
+    ],
+    "speed": 5.0,
+    "from": [
+      7,
+      14
+    ],
+    "next_type": "MELEE_ATTACK",
+    "next_dest": [
+      11,
+      11
+    ],
+    "dist": 4,
+    "next_raw": "m0211111l021luck^d0210090000002002d0090210000000229i0210100Srn2021000000000000"
+  },
+  {
+    "battle": "1635622876",
+    "actor": 16,
+    "in_run_modifier": true,
+    "activation_raw": "m0160201Srn2016001100200000",
+    "rn": [
+      "Srn2016001100200000"
+    ],
+    "speed": 5.0,
+    "from": [
+      2,
+      1
+    ],
+    "next_type": "ABILITY",
+    "next_dest": [
+      10,
+      1
+    ],
+    "dist": 8,
+    "next_raw": "m0161001i0160100Srn2016000000000000"
+  }
+]

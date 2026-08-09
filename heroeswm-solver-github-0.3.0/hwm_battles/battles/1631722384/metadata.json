@@ -1,0 +1,37 @@
+{
+  "warid": "1631722384",
+  "show": "NaopOFIC",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631722384&show=NaopOFIC",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631722384\\init.txt",
+    "bytes": 32910,
+    "sha256": "41a7c1d04bb6c610b70f84e3fba204cf113d0314522443e6dce63dada87ad01c"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631722384\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631722384&lastturn=0&show=NaopOFIC",
+        "status_code": 200,
+        "bytes": 6134,
+        "elapsed_ms": 727.4,
+        "sha256": "748faba6a75f51a764ceb629bc8440c9de1ccac78f977a54a7fc50be0da06bcb",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631722384&lastturn=0&show=NaopOFIC"
+      }
+    ],
+    "bytes": 6134,
+    "sha256": "748faba6a75f51a764ceb629bc8440c9de1ccac78f977a54a7fc50be0da06bcb",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278184.0970998
+}

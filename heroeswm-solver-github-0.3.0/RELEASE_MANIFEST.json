@@ -1,0 +1,58 @@
+{
+  "version": "0.3.0",
+  "date": "2026-08-09",
+  "snapshot": "github-source",
+  "tests": {
+    "cpp_ctest": "1/1 PASS",
+    "python": "39/39 PASS",
+    "typescript": "PASS",
+    "extension_build": "PASS"
+  },
+  "corpus": {
+    "battles": 866,
+    "structural_ready": 847,
+    "semantic_safe": 790,
+    "coverage_mean": 1.0,
+    "incremental_final_match": 866
+  },
+  "heldout": {
+    "battles": 174,
+    "player_nonhero_states": 5476,
+    "structural_ready": 5351,
+    "strict_safe": 4979,
+    "basic_action_available": 5338,
+    "basic_action_representability": 0.9802955665
+  },
+  "dataset": {
+    "accepted_decisions": 52357,
+    "observed_decisions": 52375,
+    "creature_ids": 644
+  },
+  "ability_registry": {
+    "ability_codes": 421,
+    "exact_search": 81,
+    "exact_targeting": 11,
+    "partial_exact": 18,
+    "modeled_proc": 8,
+    "modeled_collateral": 5,
+    "modeled_kill_trigger": 2,
+    "unresolved": 78,
+    "risk_mean": 0.23886319394,
+    "risk_p90": 0.39779697746
+  },
+  "excluded_from_github_archive": [
+    "build/",
+    ".pytest_cache/",
+    "**/__pycache__/",
+    "data/real_dataset_v3/",
+    "data/real_dataset_v4/",
+    "data/real_dataset_v5/",
+    "data/real_dataset_v6/",
+    "raw 866-battle corpus (external)",
+    "*.part"
+  ],
+  "notes": [
+    "Life Drain remains in-progress and is not marked exact in this snapshot.",
+    "Live active-battle Chromium E2E is not yet validated."
+  ]
+}

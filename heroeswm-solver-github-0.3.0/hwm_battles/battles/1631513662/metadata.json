@@ -1,0 +1,37 @@
+{
+  "warid": "1631513662",
+  "show": "NDCZ_yKa",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631513662&show=NDCZ_yKa",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631513662\\init.txt",
+    "bytes": 35920,
+    "sha256": "c7b1e91c6f68866d0edccf5522b44f878865d62a694d5759c2299d9ef4316ff0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631513662\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631513662&lastturn=0&show=NDCZ_yKa",
+        "status_code": 200,
+        "bytes": 7631,
+        "elapsed_ms": 275.5,
+        "sha256": "c4968d3068da110d5a68c3ce8756b12ba5ca6b4a2c95ae36311d1a14371bd2bb",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631513662&lastturn=0&show=NDCZ_yKa"
+      }
+    ],
+    "bytes": 7631,
+    "sha256": "c4968d3068da110d5a68c3ce8756b12ba5ca6b4a2c95ae36311d1a14371bd2bb",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278201.8189065
+}

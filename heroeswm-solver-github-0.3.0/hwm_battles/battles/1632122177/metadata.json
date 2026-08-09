@@ -1,0 +1,37 @@
+{
+  "warid": "1632122177",
+  "show": "NE8mR-C8",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632122177&show=NE8mR-C8",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632122177\\init.txt",
+    "bytes": 53874,
+    "sha256": "7987eaf2ff57dd0a592408e99dd555a0d4349da6041a543a292371d85cb9bbe5"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632122177\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632122177&lastturn=0&show=NE8mR-C8",
+        "status_code": 200,
+        "bytes": 6252,
+        "elapsed_ms": 1860.6,
+        "sha256": "c1b47c3f3039c2737477092cced041f99c9c79fe85019e991c209daac5d130f6",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632122177&lastturn=0&show=NE8mR-C8"
+      }
+    ],
+    "bytes": 6252,
+    "sha256": "c1b47c3f3039c2737477092cced041f99c9c79fe85019e991c209daac5d130f6",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278182.9377782
+}

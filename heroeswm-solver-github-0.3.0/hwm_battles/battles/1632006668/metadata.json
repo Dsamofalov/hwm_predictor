@@ -1,0 +1,51 @@
+{
+  "warid": "1632006668",
+  "show": "NKo94XDz",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632006668&show=NKo94XDz",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632006668\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632006668&lastturn=-3&show=NKo94XDz",
+        "status_code": 200,
+        "bytes": 33479,
+        "elapsed_ms": 236.0,
+        "sha256": "84f130cafeb4d3b4f9503d55e5ac4d35497705c13ae28c201d4b7170dca00d40",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632006668&lastturn=-3&show=NKo94XDz"
+      }
+    ],
+    "bytes": 33479,
+    "sha256": "84f130cafeb4d3b4f9503d55e5ac4d35497705c13ae28c201d4b7170dca00d40",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632006668\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632006668&lastturn=0&show=NKo94XDz",
+        "status_code": 200,
+        "bytes": 4869,
+        "elapsed_ms": 2589.1,
+        "sha256": "bc375f2825ee3854a8bbdcc4408d3aa6e8d863b9e654ef86045d787536280a2f",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632006668&lastturn=0&show=NKo94XDz"
+      }
+    ],
+    "bytes": 4869,
+    "sha256": "bc375f2825ee3854a8bbdcc4408d3aa6e8d863b9e654ef86045d787536280a2f",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278223.6905296
+}

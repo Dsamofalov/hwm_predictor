@@ -1,0 +1,51 @@
+{
+  "warid": "1629934646",
+  "show": "NnJbuJal",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629934646&show=NnJbuJal",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629934646\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629934646&lastturn=-3&show=NnJbuJal",
+        "status_code": 200,
+        "bytes": 36807,
+        "elapsed_ms": 296.3,
+        "sha256": "734dd8d925075bc5e4f7b56160616cfbb060e3b8394ac8a8eb7b87aaf222483f",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629934646&lastturn=-3&show=NnJbuJal"
+      }
+    ],
+    "bytes": 36807,
+    "sha256": "734dd8d925075bc5e4f7b56160616cfbb060e3b8394ac8a8eb7b87aaf222483f",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629934646\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629934646&lastturn=0&show=NnJbuJal",
+        "status_code": 200,
+        "bytes": 3546,
+        "elapsed_ms": 732.4,
+        "sha256": "9e8dc78ceb520f54856ca42e51379de7f5f1a5eb23e0aad7b0b017fbaa01391c",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629934646&lastturn=0&show=NnJbuJal"
+      }
+    ],
+    "bytes": 3546,
+    "sha256": "9e8dc78ceb520f54856ca42e51379de7f5f1a5eb23e0aad7b0b017fbaa01391c",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278239.6739383
+}

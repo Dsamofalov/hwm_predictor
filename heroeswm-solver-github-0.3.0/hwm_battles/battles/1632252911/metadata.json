@@ -1,0 +1,37 @@
+{
+  "warid": "1632252911",
+  "show": "NNIC-q5v",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632252911&show=NNIC-q5v",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632252911\\init.txt",
+    "bytes": 44125,
+    "sha256": "f8d258233bad1fc32e0ab0c635e2df35beb4858f8cb081f968628a80a42ad588"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632252911\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632252911&lastturn=0&show=NNIC-q5v",
+        "status_code": 200,
+        "bytes": 9882,
+        "elapsed_ms": 480.0,
+        "sha256": "c65f6cff343b09e5dc2765b207219a2a8c48a666158883dbb128f4ecc07dea19",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632252911&lastturn=0&show=NNIC-q5v"
+      }
+    ],
+    "bytes": 9882,
+    "sha256": "c65f6cff343b09e5dc2765b207219a2a8c48a666158883dbb128f4ecc07dea19",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278180.0932226
+}

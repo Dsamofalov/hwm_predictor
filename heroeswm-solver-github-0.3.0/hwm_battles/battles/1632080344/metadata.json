@@ -1,0 +1,37 @@
+{
+  "warid": "1632080344",
+  "show": "NhoqB-21",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632080344&show=NhoqB-21",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632080344\\init.txt",
+    "bytes": 40922,
+    "sha256": "10409ddc9669dd579ea37864b6cefdcb570f9541ad43b181145241ef4df650b1"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632080344\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632080344&lastturn=0&show=NhoqB-21",
+        "status_code": 200,
+        "bytes": 5152,
+        "elapsed_ms": 696.0,
+        "sha256": "51ac3cb0da9d45080f4a577fba580e8ba4882b445bcab3bad20ad4d1d51dc682",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632080344&lastturn=0&show=NhoqB-21"
+      }
+    ],
+    "bytes": 5152,
+    "sha256": "51ac3cb0da9d45080f4a577fba580e8ba4882b445bcab3bad20ad4d1d51dc682",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278168.2059538
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1632957179",
+  "show": "NgVaKBfX",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632957179&show=NgVaKBfX",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632957179\\init.txt",
+    "bytes": 32060,
+    "sha256": "f791d9a34a6aac0e0bdaad0f6939575451ecb811d048a4ed0b3eb9e83639b5d4"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632957179\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632957179&lastturn=0&show=NgVaKBfX",
+        "status_code": 200,
+        "bytes": 5587,
+        "elapsed_ms": 550.1,
+        "sha256": "b6b91cdff1956c829b355cd9bc0e78cc5169c59d4e027bb4f47c40517e5896be",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632957179&lastturn=0&show=NgVaKBfX"
+      }
+    ],
+    "bytes": 5587,
+    "sha256": "b6b91cdff1956c829b355cd9bc0e78cc5169c59d4e027bb4f47c40517e5896be",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278170.337557
+}

@@ -1,0 +1,51 @@
+{
+  "warid": "1631758617",
+  "show": "NRqX3Nyn",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631758617&show=NRqX3Nyn",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631758617\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631758617&lastturn=-3&show=NRqX3Nyn",
+        "status_code": 200,
+        "bytes": 26071,
+        "elapsed_ms": 465.7,
+        "sha256": "03370fbf9f34d61e8aecabf3ab7588061c8e876dad6a4d6dcd24c8a89292242e",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631758617&lastturn=-3&show=NRqX3Nyn"
+      }
+    ],
+    "bytes": 26071,
+    "sha256": "03370fbf9f34d61e8aecabf3ab7588061c8e876dad6a4d6dcd24c8a89292242e",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631758617\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631758617&lastturn=0&show=NRqX3Nyn",
+        "status_code": 200,
+        "bytes": 3219,
+        "elapsed_ms": 277.7,
+        "sha256": "4545d5783cb794764560b765cdea18726e27e8a6a6e18a3fce6f7f56ada8a883",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631758617&lastturn=0&show=NRqX3Nyn"
+      }
+    ],
+    "bytes": 3219,
+    "sha256": "4545d5783cb794764560b765cdea18726e27e8a6a6e18a3fce6f7f56ada8a883",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278223.4572067
+}

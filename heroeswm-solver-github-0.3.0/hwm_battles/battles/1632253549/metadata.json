@@ -1,0 +1,37 @@
+{
+  "warid": "1632253549",
+  "show": "NOvPVZ-W",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632253549&show=NOvPVZ-W",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632253549\\init.txt",
+    "bytes": 49924,
+    "sha256": "0f4d5c7498a45ef123db6312b30a9a21cb469e1e0e587700d6581809fc0cbaf0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632253549\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632253549&lastturn=0&show=NOvPVZ-W",
+        "status_code": 200,
+        "bytes": 6564,
+        "elapsed_ms": 200.5,
+        "sha256": "1adcb4fb3de21c79ee8b7d3b73c157d3e14b962d17533f8b82ea2a6ddd61b75a",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632253549&lastturn=0&show=NOvPVZ-W"
+      }
+    ],
+    "bytes": 6564,
+    "sha256": "1adcb4fb3de21c79ee8b7d3b73c157d3e14b962d17533f8b82ea2a6ddd61b75a",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278178.7738535
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1632642077",
+  "show": "N--KRyFa",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632642077&show=N--KRyFa",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632642077\\init.txt",
+    "bytes": 34295,
+    "sha256": "3d0dd360c15b7031b4d7f23bf67104817144f63c6cb1859a14ebaa32b8081f53"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632642077\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632642077&lastturn=0&show=N--KRyFa",
+        "status_code": 200,
+        "bytes": 4464,
+        "elapsed_ms": 546.5,
+        "sha256": "cafd020ee7a0fc644b611ae1482be99dacda6edfa886bbc2af202f54f07fd2f3",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632642077&lastturn=0&show=N--KRyFa"
+      }
+    ],
+    "bytes": 4464,
+    "sha256": "cafd020ee7a0fc644b611ae1482be99dacda6edfa886bbc2af202f54f07fd2f3",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278171.5443642
+}

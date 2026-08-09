@@ -1,0 +1,51 @@
+{
+  "warid": "1632027005",
+  "show": "Ny5_CFp9",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632027005&show=Ny5_CFp9",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632027005\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632027005&lastturn=-3&show=Ny5_CFp9",
+        "status_code": 200,
+        "bytes": 39775,
+        "elapsed_ms": 2351.8,
+        "sha256": "6fa47c2409006f88b78c3201c21b4f5234c8c828341d13ec87e83530817e10a9",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632027005&lastturn=-3&show=Ny5_CFp9"
+      }
+    ],
+    "bytes": 39775,
+    "sha256": "6fa47c2409006f88b78c3201c21b4f5234c8c828341d13ec87e83530817e10a9",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632027005\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632027005&lastturn=0&show=Ny5_CFp9",
+        "status_code": 200,
+        "bytes": 3761,
+        "elapsed_ms": 1650.3,
+        "sha256": "bad32c5dd3aaa3f460eb3db73961a164acee3d54598d0b265c398f34fe8853af",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632027005&lastturn=0&show=Ny5_CFp9"
+      }
+    ],
+    "bytes": 3761,
+    "sha256": "bad32c5dd3aaa3f460eb3db73961a164acee3d54598d0b265c398f34fe8853af",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278232.2976465
+}

@@ -1,0 +1,51 @@
+{
+  "warid": "1631801392",
+  "show": "NKRYSO7n",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631801392&show=NKRYSO7n",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631801392\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631801392&lastturn=-3&show=NKRYSO7n",
+        "status_code": 200,
+        "bytes": 43529,
+        "elapsed_ms": 252.4,
+        "sha256": "0da860cadd80b5347c40d7b3c5948670bdc30026d756a393fac512ea0a6f6e0d",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631801392&lastturn=-3&show=NKRYSO7n"
+      }
+    ],
+    "bytes": 43529,
+    "sha256": "0da860cadd80b5347c40d7b3c5948670bdc30026d756a393fac512ea0a6f6e0d",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631801392\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631801392&lastturn=0&show=NKRYSO7n",
+        "status_code": 200,
+        "bytes": 3184,
+        "elapsed_ms": 1066.0,
+        "sha256": "ce3dcf76dbc600132bd14fcda02f7ca16f1291dcff5a8546679da4c1b01dd380",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631801392&lastturn=0&show=NKRYSO7n"
+      }
+    ],
+    "bytes": 3184,
+    "sha256": "ce3dcf76dbc600132bd14fcda02f7ca16f1291dcff5a8546679da4c1b01dd380",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278226.9880478
+}

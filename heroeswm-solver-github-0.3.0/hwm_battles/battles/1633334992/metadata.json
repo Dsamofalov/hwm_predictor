@@ -1,0 +1,37 @@
+{
+  "warid": "1633334992",
+  "show": "NYOCfhAL",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1633334992&show=NYOCfhAL",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1633334992\\init.txt",
+    "bytes": 35353,
+    "sha256": "a6e157d3c95972d82124139267dfcd9e4a508273b19f5d0d9c10bd05d21c8612"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1633334992\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1633334992&lastturn=0&show=NYOCfhAL",
+        "status_code": 200,
+        "bytes": 6255,
+        "elapsed_ms": 1228.1,
+        "sha256": "b6503a33bdf8f1c3c1f7b8b459582b5e93f77da93f00eb8fe12d48fc08d8ece5",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1633334992&lastturn=0&show=NYOCfhAL"
+      }
+    ],
+    "bytes": 6255,
+    "sha256": "b6503a33bdf8f1c3c1f7b8b459582b5e93f77da93f00eb8fe12d48fc08d8ece5",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278205.8466783
+}

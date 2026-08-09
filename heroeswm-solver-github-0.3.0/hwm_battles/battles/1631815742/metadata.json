@@ -1,0 +1,37 @@
+{
+  "warid": "1631815742",
+  "show": "N53ViT8t",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631815742&show=N53ViT8t",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631815742\\init.txt",
+    "bytes": 32700,
+    "sha256": "3d0e5830daa65bdbbab40c1030429f3e51d87c5ea6f0cd1e40330ce0e9db2bfb"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631815742\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631815742&lastturn=0&show=N53ViT8t",
+        "status_code": 200,
+        "bytes": 4542,
+        "elapsed_ms": 510.1,
+        "sha256": "846c04d9b44a7bf0dfe36b836c48f04a957778e100f1d4d44d5331ee1f4d7263",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631815742&lastturn=0&show=N53ViT8t"
+      }
+    ],
+    "bytes": 4542,
+    "sha256": "846c04d9b44a7bf0dfe36b836c48f04a957778e100f1d4d44d5331ee1f4d7263",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278214.6762364
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1632249271",
+  "show": "NGJOKaAu",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632249271&show=NGJOKaAu",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632249271\\init.txt",
+    "bytes": 42610,
+    "sha256": "d3f342a9aa02def64bf564cf65277de9a81f34158c066027a988e1ef6f954382"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632249271\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632249271&lastturn=0&show=NGJOKaAu",
+        "status_code": 200,
+        "bytes": 8104,
+        "elapsed_ms": 665.6,
+        "sha256": "ecb16647d1e04337a3397b6f71575fb17c9d44034761cc3bca7eab64f2d24c65",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632249271&lastturn=0&show=NGJOKaAu"
+      }
+    ],
+    "bytes": 8104,
+    "sha256": "ecb16647d1e04337a3397b6f71575fb17c9d44034761cc3bca7eab64f2d24c65",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278220.2972853
+}

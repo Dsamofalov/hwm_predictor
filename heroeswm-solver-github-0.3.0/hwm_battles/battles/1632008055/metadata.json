@@ -1,0 +1,37 @@
+{
+  "warid": "1632008055",
+  "show": "NUGS5Vip",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632008055&show=NUGS5Vip",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632008055\\init.txt",
+    "bytes": 35370,
+    "sha256": "ff3535c1827ee5c58b8400a5e7fb6f9e9de4df50df498bfb20b6230b49d46861"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632008055\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632008055&lastturn=0&show=NUGS5Vip",
+        "status_code": 200,
+        "bytes": 9179,
+        "elapsed_ms": 258.1,
+        "sha256": "acf9f7059cc1c0bbdc8f12f711b2bc4c63a0a80ee4e3d7aa8d330fa7d7269e5b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632008055&lastturn=0&show=NUGS5Vip"
+      }
+    ],
+    "bytes": 9179,
+    "sha256": "acf9f7059cc1c0bbdc8f12f711b2bc4c63a0a80ee4e3d7aa8d330fa7d7269e5b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278216.6799712
+}

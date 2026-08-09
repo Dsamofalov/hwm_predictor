@@ -1,0 +1,44 @@
+{
+  "train": {
+    "battles": 692,
+    "player_decisions": 27833,
+    "basic_actions_evaluated": 22675,
+    "observed_action_representable": 22229,
+    "coverage": 0.9803307607497244,
+    "types": {
+      "MELEE_ATTACK": 10257,
+      "RANGED_ATTACK": 5948,
+      "MOVE": 2633,
+      "WAIT": 2358,
+      "DEFEND": 1479
+    },
+    "failure_reasons": {
+      "target_not_adjacent_after_move": 160,
+      "melee_destination_not_reachable": 180,
+      "hero_unsupported": 48,
+      "move_not_reachable": 39,
+      "shooter_blocked": 19
+    }
+  },
+  "heldout": {
+    "battles": 174,
+    "player_decisions": 6786,
+    "basic_actions_evaluated": 5474,
+    "observed_action_representable": 5327,
+    "coverage": 0.9731457800511509,
+    "types": {
+      "WAIT": 462,
+      "RANGED_ATTACK": 1381,
+      "MELEE_ATTACK": 2845,
+      "DEFEND": 190,
+      "MOVE": 596
+    },
+    "failure_reasons": {
+      "move_not_reachable": 8,
+      "melee_destination_not_reachable": 84,
+      "hero_unsupported": 6,
+      "target_not_adjacent_after_move": 45,
+      "shooter_blocked": 4
+    }
+  }
+}

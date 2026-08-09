@@ -1,0 +1,37 @@
+{
+  "warid": "1632866202",
+  "show": "NJJViHon",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632866202&show=NJJViHon",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632866202\\init.txt",
+    "bytes": 26305,
+    "sha256": "e4ad9c68d38031a893eb85db5c49bd6503247e0808542b4e183426069ebc73cd"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632866202\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632866202&lastturn=0&show=NJJViHon",
+        "status_code": 200,
+        "bytes": 3129,
+        "elapsed_ms": 1468.6,
+        "sha256": "7304cf98ffc7093a9a79825fdd3c1b11e8e77f1cc3c7fe33007aec351c3ec366",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632866202&lastturn=0&show=NJJViHon"
+      }
+    ],
+    "bytes": 3129,
+    "sha256": "7304cf98ffc7093a9a79825fdd3c1b11e8e77f1cc3c7fe33007aec351c3ec366",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278174.3784888
+}

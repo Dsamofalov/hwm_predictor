@@ -1,0 +1,51 @@
+{
+  "warid": "1631865955",
+  "show": "NTVbXNMW",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631865955&show=NTVbXNMW",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631865955\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631865955&lastturn=-3&show=NTVbXNMW",
+        "status_code": 200,
+        "bytes": 46715,
+        "elapsed_ms": 759.5,
+        "sha256": "ba0ab7fd054ac6e12bb527859e58ccda1fe38352c03aaf8a67769d3effe2b158",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631865955&lastturn=-3&show=NTVbXNMW"
+      }
+    ],
+    "bytes": 46715,
+    "sha256": "ba0ab7fd054ac6e12bb527859e58ccda1fe38352c03aaf8a67769d3effe2b158",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631865955\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631865955&lastturn=0&show=NTVbXNMW",
+        "status_code": 200,
+        "bytes": 5552,
+        "elapsed_ms": 801.9,
+        "sha256": "57aeed66c2da0cda6aaf9c8429dd3ee9a8af075e4fbe02836f6b760e7621cc27",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631865955&lastturn=0&show=NTVbXNMW"
+      }
+    ],
+    "bytes": 5552,
+    "sha256": "57aeed66c2da0cda6aaf9c8429dd3ee9a8af075e4fbe02836f6b760e7621cc27",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278225.026096
+}

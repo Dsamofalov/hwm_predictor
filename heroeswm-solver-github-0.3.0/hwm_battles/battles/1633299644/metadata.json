@@ -1,0 +1,37 @@
+{
+  "warid": "1633299644",
+  "show": "Nfogt-Kc",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1633299644&show=Nfogt-Kc",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1633299644\\init.txt",
+    "bytes": 27416,
+    "sha256": "3886b64f8dfef69bce83643fd2f6f777916a6b52deb04bc697c3efd16e3b84bb"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1633299644\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1633299644&lastturn=0&show=Nfogt-Kc",
+        "status_code": 200,
+        "bytes": 6943,
+        "elapsed_ms": 2614.9,
+        "sha256": "05d6f313c61cf76b3ab41b809e0b279cf4f3abb0198bbb65d93c7aad5b6ed992",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1633299644&lastturn=0&show=Nfogt-Kc"
+      }
+    ],
+    "bytes": 6943,
+    "sha256": "05d6f313c61cf76b3ab41b809e0b279cf4f3abb0198bbb65d93c7aad5b6ed992",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278207.9260938
+}

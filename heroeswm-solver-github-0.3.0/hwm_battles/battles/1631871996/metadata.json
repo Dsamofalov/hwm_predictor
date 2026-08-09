@@ -1,0 +1,51 @@
+{
+  "warid": "1631871996",
+  "show": "NAGRVUYn",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631871996&show=NAGRVUYn",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631871996\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631871996&lastturn=-3&show=NAGRVUYn",
+        "status_code": 200,
+        "bytes": 27492,
+        "elapsed_ms": 1040.2,
+        "sha256": "1caa30e1381709e7a19d9a1094c0f5cd67cd74af1bb16b7e63af5b8d4af8bd30",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631871996&lastturn=-3&show=NAGRVUYn"
+      }
+    ],
+    "bytes": 27492,
+    "sha256": "1caa30e1381709e7a19d9a1094c0f5cd67cd74af1bb16b7e63af5b8d4af8bd30",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631871996\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631871996&lastturn=0&show=NAGRVUYn",
+        "status_code": 200,
+        "bytes": 4113,
+        "elapsed_ms": 664.2,
+        "sha256": "e51df755a5dea25f8c53797b546a5cc17247d8226dd263243c9aac144f01fdcd",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631871996&lastturn=0&show=NAGRVUYn"
+      }
+    ],
+    "bytes": 4113,
+    "sha256": "e51df755a5dea25f8c53797b546a5cc17247d8226dd263243c9aac144f01fdcd",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278225.851636
+}

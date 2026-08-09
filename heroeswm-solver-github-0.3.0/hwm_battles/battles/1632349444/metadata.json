@@ -1,0 +1,37 @@
+{
+  "warid": "1632349444",
+  "show": "NEaYn-qi",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632349444&show=NEaYn-qi",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632349444\\init.txt",
+    "bytes": 42613,
+    "sha256": "be9444d9a0e968db60fc03e0fb76e90980f364f0dc47ac9bf127a6b72f45b6db"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632349444\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632349444&lastturn=0&show=NEaYn-qi",
+        "status_code": 200,
+        "bytes": 3497,
+        "elapsed_ms": 479.1,
+        "sha256": "8b159e823d315ab634328c5d43e92049a1ea355169ea475f4111d0fdb89717f3",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632349444&lastturn=0&show=NEaYn-qi"
+      }
+    ],
+    "bytes": 3497,
+    "sha256": "8b159e823d315ab634328c5d43e92049a1ea355169ea475f4111d0fdb89717f3",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278175.8049395
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1632882364",
+  "show": "Nzdrijjd",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632882364&show=Nzdrijjd",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632882364\\init.txt",
+    "bytes": 59519,
+    "sha256": "d3379eff9bea305997e60596e69c9c36b0e36b5077d73e2045b032d729933f03"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632882364\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632882364&lastturn=0&show=Nzdrijjd",
+        "status_code": 200,
+        "bytes": 8222,
+        "elapsed_ms": 484.5,
+        "sha256": "a680659695a791ede484d9114446f833a9009c7babf13e4e4766479453c13c6f",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632882364&lastturn=0&show=Nzdrijjd"
+      }
+    ],
+    "bytes": 8222,
+    "sha256": "a680659695a791ede484d9114446f833a9009c7babf13e4e4766479453c13c6f",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278209.3658564
+}

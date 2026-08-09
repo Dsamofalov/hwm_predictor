@@ -1,0 +1,37 @@
+{
+  "warid": "1631782355",
+  "show": "NDasRJKA",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631782355&show=NDasRJKA",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631782355\\init.txt",
+    "bytes": 37352,
+    "sha256": "8d4b7a13d270cd043e0ede940c0c8ab707c1b22b26c9098230f4046c7dd67f2b"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631782355\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631782355&lastturn=0&show=NDasRJKA",
+        "status_code": 200,
+        "bytes": 5838,
+        "elapsed_ms": 200.8,
+        "sha256": "8303d13ef44fc741ba4e50637cc47568e1bc64fb39f564a0d7bdadc2c88b383b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631782355&lastturn=0&show=NDasRJKA"
+      }
+    ],
+    "bytes": 5838,
+    "sha256": "8303d13ef44fc741ba4e50637cc47568e1bc64fb39f564a0d7bdadc2c88b383b",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278195.5397346
+}

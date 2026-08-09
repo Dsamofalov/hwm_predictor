@@ -1,0 +1,32 @@
+[project]
+name = "heroeswm-solver"
+version = "0.3.0"
+description = "HeroesWM PvE battle advisor research/runtime tooling"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "numpy>=2.0",
+  "pyyaml>=6.0",
+  "torch>=2.5",
+  "scikit-learn>=1.5,<2"
+]
+
+[project.optional-dependencies]
+data = ["polars>=1.20", "pyarrow>=18", "duckdb>=1.1"]
+onnx = ["onnx>=1.17", "onnxruntime>=1.20"]
+dev = ["pytest>=8.3", "ruff>=0.9"]
+
+[project.scripts]
+hwm = "hwm_solver.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["python"]
+testpaths = ["python/tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.setuptools]
+package-dir = {"" = "python"}
+
+[tool.setuptools.packages.find]
+where = ["python"]

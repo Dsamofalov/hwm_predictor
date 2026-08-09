@@ -1,0 +1,23 @@
+runtime:
+  bind: 127.0.0.1
+  port: 38471
+  threads: auto
+planner:
+  profile: NORMAL
+  time_budget_ms: 5000
+  simulation_budget: 100000
+  max_depth: 18
+  enemy_mass_threshold: 0.98
+  self_top_k: 12
+  risk_mode: SAFE
+inference:
+  provider: auto
+  batch_max: 256
+  batch_wait_us: 500
+capture:
+  store_raw: false
+  allowed_hosts: [www.heroeswm.ru, heroeswm.ru]
+  max_body_bytes: 4194304
+ui:
+  show_principal_variation: true
+  alternatives: 4

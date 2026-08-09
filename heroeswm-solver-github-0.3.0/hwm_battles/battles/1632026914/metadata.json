@@ -1,0 +1,51 @@
+{
+  "warid": "1632026914",
+  "show": "NZK2Bo8L",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632026914&show=NZK2Bo8L",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632026914\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632026914&lastturn=-3&show=NZK2Bo8L",
+        "status_code": 200,
+        "bytes": 43416,
+        "elapsed_ms": 960.9,
+        "sha256": "d3d4aa12eaf2ab09339b718bc25c4be81317ee708d565bedcc12aedf05d9dbb4",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632026914&lastturn=-3&show=NZK2Bo8L"
+      }
+    ],
+    "bytes": 43416,
+    "sha256": "d3d4aa12eaf2ab09339b718bc25c4be81317ee708d565bedcc12aedf05d9dbb4",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632026914\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632026914&lastturn=0&show=NZK2Bo8L",
+        "status_code": 200,
+        "bytes": 9237,
+        "elapsed_ms": 5484.3,
+        "sha256": "96829d2be498ac65dddbad86edb43acce0044164e841fd3f7b2c555c1aa46a29",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632026914&lastturn=0&show=NZK2Bo8L"
+      }
+    ],
+    "bytes": 9237,
+    "sha256": "96829d2be498ac65dddbad86edb43acce0044164e841fd3f7b2c555c1aa46a29",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278237.914578
+}

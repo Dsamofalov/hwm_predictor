@@ -1,0 +1,39 @@
+invalid 1631822419: overlap
+  uid=1 side=2 c=1 xy=7,9 hero=0
+  uid=4 side=2 c=2 xy=2,6 hero=0
+  uid=5 side=2 c=1 xy=2,2 hero=0
+  uid=6 side=2 c=5 xy=3,8 hero=0
+  uid=7 side=2 c=34 xy=3,10 hero=0
+  uid=8 side=2 c=11 xy=2,1 hero=0
+  uid=12 side=1 c=3 xy=2,4 hero=0
+  uid=13 side=1 c=423 xy=1,10 hero=0
+  uid=14 side=1 c=57 xy=1,6 hero=0
+  uid=15 side=1 c=34 xy=2,6 hero=0
+invalid 1631764434: overlap overlap
+  uid=9 side=1 c=4 xy=4,2 hero=0
+  uid=10 side=1 c=5 xy=8,1 hero=0
+  uid=11 side=1 c=68 xy=8,2 hero=0
+  uid=12 side=1 c=134 xy=1,7 hero=0
+  uid=14 side=1 c=17 xy=2,7 hero=0
+invalid 1632093386: overlap
+  uid=6 side=2 c=154 xy=11,6 hero=0
+  uid=9 side=1 c=4 xy=9,9 hero=0
+  uid=10 side=1 c=361 xy=11,6 hero=0
+  uid=12 side=1 c=26 xy=10,8 hero=0
+  uid=13 side=1 c=8 xy=12,6 hero=0
+  uid=15 side=1 c=5 xy=11,7 hero=0
+  uid=16 side=2 c=34 xy=10,7 hero=0
+  uid=17 side=2 c=141 xy=11,5 hero=0
+invalid 1629824050: overlap overlap overlap overlap
+  uid=1 side=1 c=1 xy=4,1 hero=0
+  uid=2 side=2 c=25 xy=11,6 hero=0
+  uid=3 side=2 c=1 xy=11,6 hero=0
+  uid=12 side=1 c=11 xy=1,11 hero=0
+  uid=13 side=1 c=8 xy=1,12 hero=0
+  uid=14 side=1 c=12 xy=1,10 hero=0
+  uid=15 side=1 c=7 xy=2,11 hero=0
+  uid=18 side=2 c=4 xy=7,3 hero=0
+invalid 1625534409: overlap
+  uid=20 side=1 c=3 xy=9,19 hero=0
+  uid=22 side=1 c=51 xy=9,19 hero=0
+invariants: overlap=42

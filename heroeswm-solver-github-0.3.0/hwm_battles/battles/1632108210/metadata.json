@@ -1,0 +1,37 @@
+{
+  "warid": "1632108210",
+  "show": "NE21Z-tG",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632108210&show=NE21Z-tG",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632108210\\init.txt",
+    "bytes": 42932,
+    "sha256": "a08624012bc37047dd8a4b8f911391c11c0dc0a1b34b92672eb6c2d32c5d77a5"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632108210\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632108210&lastturn=0&show=NE21Z-tG",
+        "status_code": 200,
+        "bytes": 5550,
+        "elapsed_ms": 1969.5,
+        "sha256": "bcdd8786358c6debe3ce3284462ee56c91627a0fa0f8c209856faf05f17bc3f6",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632108210&lastturn=0&show=NE21Z-tG"
+      }
+    ],
+    "bytes": 5550,
+    "sha256": "bcdd8786358c6debe3ce3284462ee56c91627a0fa0f8c209856faf05f17bc3f6",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278182.4882932
+}

@@ -1,0 +1,21 @@
+{
+  "unique_battles": 866,
+  "complete_init_and_turns0": 866,
+  "init_only": 0,
+  "turns0_only": 0,
+  "missing_both": 0,
+  "init_bytes": 37365821,
+  "turns0_bytes": 4456333,
+  "complete_percent": 100.0,
+  "elapsed_seconds": 158.65,
+  "workers": 10,
+  "request_interval": 0.1,
+  "input": {
+    "lines": 866,
+    "blank_or_comment": 0,
+    "invalid": 0,
+    "duplicates": 0
+  },
+  "successful_results_this_run": 866,
+  "failed_results_this_run": 0
+}

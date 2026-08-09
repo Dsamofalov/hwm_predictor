@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install system build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Configure C++
+        run: cmake --preset debug
+
+      - name: Build C++
+        run: cmake --build build/debug --parallel 2
+
+      - name: C++ tests
+        run: ctest --test-dir build/debug --output-on-failure
+
+      - name: Install Python package
+        run: python -m pip install -e '.[dev]'
+
+      - name: Python tests
+        run: python -m pytest python/tests -q
+
+      - name: Install extension dependencies
+        working-directory: extension
+        run: npm install --no-audit --no-fund
+
+      - name: TypeScript typecheck
+        working-directory: extension
+        run: npm run typecheck
+
+      - name: Build extension
+        working-directory: extension
+        run: npm run build

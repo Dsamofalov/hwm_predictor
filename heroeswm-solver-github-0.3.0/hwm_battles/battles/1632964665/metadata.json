@@ -1,0 +1,37 @@
+{
+  "warid": "1632964665",
+  "show": "NDzfkrIN",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632964665&show=NDzfkrIN",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632964665\\init.txt",
+    "bytes": 27136,
+    "sha256": "ef1c3f5729e5d279efa4a1bbd93b73367cadefc2cd9dace70c5bf9946eb129f2"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632964665\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632964665&lastturn=0&show=NDzfkrIN",
+        "status_code": 200,
+        "bytes": 2587,
+        "elapsed_ms": 546.4,
+        "sha256": "87cf79164be9ec42a58946263977cce1d77c50f0301140c612a63776c19be194",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632964665&lastturn=0&show=NDzfkrIN"
+      }
+    ],
+    "bytes": 2587,
+    "sha256": "87cf79164be9ec42a58946263977cce1d77c50f0301140c612a63776c19be194",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278170.2288628
+}

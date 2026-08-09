@@ -1,0 +1,51 @@
+{
+  "warid": "1632025663",
+  "show": "Nc90zhhw",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632025663&show=Nc90zhhw",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632025663\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632025663&lastturn=-3&show=Nc90zhhw",
+        "status_code": 200,
+        "bytes": 40730,
+        "elapsed_ms": 231.2,
+        "sha256": "f0eddbb74d4867290d4366f2953359a4e084bbc3c2ba555aedd9c96229ba5caf",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632025663&lastturn=-3&show=Nc90zhhw"
+      }
+    ],
+    "bytes": 40730,
+    "sha256": "f0eddbb74d4867290d4366f2953359a4e084bbc3c2ba555aedd9c96229ba5caf",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632025663\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632025663&lastturn=0&show=Nc90zhhw",
+        "status_code": 200,
+        "bytes": 4517,
+        "elapsed_ms": 3898.8,
+        "sha256": "b68ee259e4eb99fef0968fdf1bb4134e8bb41c39bd87aa7724cdfc817eec9584",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632025663&lastturn=0&show=Nc90zhhw"
+      }
+    ],
+    "bytes": 4517,
+    "sha256": "b68ee259e4eb99fef0968fdf1bb4134e8bb41c39bd87aa7724cdfc817eec9584",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278232.003655
+}

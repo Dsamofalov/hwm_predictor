@@ -1,0 +1,16 @@
+{
+  "manifest_version":3,
+  "minimum_chrome_version":"111",
+  "name":"HeroesWM Solver Bridge",
+  "version":"0.3.0",
+  "description":"Read-only observer bridge for the local HeroesWM PvE advisor",
+  "permissions":["storage","sidePanel"],
+  "host_permissions":["https://www.heroeswm.ru/*","https://heroeswm.ru/*","http://127.0.0.1:38471/*"],
+  "background":{"service_worker":"service_worker.js"},
+  "content_scripts":[
+    {"matches":["https://www.heroeswm.ru/*","https://heroeswm.ru/*"],"js":["main_world.js"],"run_at":"document_start","world":"MAIN"},
+    {"matches":["https://www.heroeswm.ru/*","https://heroeswm.ru/*"],"js":["content.js"],"run_at":"document_start","world":"ISOLATED"}
+  ],
+  "side_panel":{"default_path":"sidepanel.html"},
+  "action":{"default_title":"HeroesWM Solver"}
+}

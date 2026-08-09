@@ -1,0 +1,495 @@
+{
+  "heldout_battles": 174,
+  "sampled_player_states": 1748,
+  "risk_mean": 0.2653555449112328,
+  "risk_p50": 0.2517011124823958,
+  "risk_p90": 0.420946126087749,
+  "risk_p99": 0.5498661177740843,
+  "top_contributors": [
+    {
+      "code": "caster",
+      "name": "Колдун.",
+      "support": "dynamic_spellbook",
+      "risk_weight": 0.1,
+      "state_occurrences": 2425,
+      "weighted_contribution": 1163452.5918281302,
+      "categories": [
+        "offense",
+        "casting"
+      ]
+    },
+    {
+      "code": "enraged",
+      "name": "Ярость.",
+      "support": "modeled_kill_trigger",
+      "risk_weight": 0.2,
+      "state_occurrences": 2070,
+      "weighted_contribution": 1140574.189500004,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "cripplingwound",
+      "name": "Калечащее ранение.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 312,
+      "weighted_contribution": 633228.9783750003,
+      "categories": [
+        "movement",
+        "offense",
+        "control"
+      ]
+    },
+    {
+      "code": "shieldbash",
+      "name": "Оглушающий удар.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 538,
+      "weighted_contribution": 623678.6852099991,
+      "categories": [
+        "offense",
+        "retaliation",
+        "immunity",
+        "control"
+      ]
+    },
+    {
+      "code": "mightyslam",
+      "name": "Могучий удар.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 181,
+      "weighted_contribution": 485605.29206250096,
+      "categories": [
+        "offense",
+        "retaliation",
+        "targeting"
+      ]
+    },
+    {
+      "code": "pawstrike",
+      "name": "Удар лапой.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 218,
+      "weighted_contribution": 376013.8276875002,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "manadrain",
+      "name": "Осушение маны.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 297,
+      "weighted_contribution": 357537.2518124997,
+      "categories": [
+        "offense",
+        "casting",
+        "summon"
+      ]
+    },
+    {
+      "code": "bloodlust",
+      "name": "Жажда крови.",
+      "support": "learned_damage",
+      "risk_weight": 0.3,
+      "state_occurrences": 481,
+      "weighted_contribution": 343149.3072000005,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "powerstrike",
+      "name": "Отбрасывающий удар.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 163,
+      "weighted_contribution": 312165.22500000015,
+      "categories": [
+        "offense",
+        "retaliation",
+        "control"
+      ]
+    },
+    {
+      "code": "entroots",
+      "name": "Оплетающие корни.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 667,
+      "weighted_contribution": 287199.005309999,
+      "categories": [
+        "movement",
+        "offense"
+      ]
+    },
+    {
+      "code": "waterproof50",
+      "name": "waterproof50",
+      "support": "partial_exact",
+      "risk_weight": 0.25,
+      "state_occurrences": 647,
+      "weighted_contribution": 283316.63962500053,
+      "categories": [
+        "identity"
+      ]
+    },
+    {
+      "code": "stoning",
+      "name": "Окаменение.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 154,
+      "weighted_contribution": 282401.34174,
+      "categories": [
+        "offense",
+        "casting"
+      ]
+    },
+    {
+      "code": "ifire",
+      "name": "Иммунитет к огню.",
+      "support": "partial_exact",
+      "risk_weight": 0.25,
+      "state_occurrences": 622,
+      "weighted_contribution": 278500.91906249995,
+      "categories": [
+        "immunity",
+        "casting"
+      ]
+    },
+    {
+      "code": "auraoffirevul",
+      "name": "Аура уязвимости к огню.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 68,
+      "weighted_contribution": 262383.867,
+      "categories": [
+        "offense",
+        "casting",
+        "targeting"
+      ]
+    },
+    {
+      "code": "gribbomb",
+      "name": "Взрыв спор.",
+      "support": "unresolved",
+      "risk_weight": 0.62,
+      "state_occurrences": 38,
+      "weighted_contribution": 254058.62202000007,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "demoniclineage",
+      "name": "Демоническая кровь.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 333,
+      "weighted_contribution": 248294.80293749974,
+      "categories": [
+        "defense",
+        "casting"
+      ]
+    },
+    {
+      "code": "taunt",
+      "name": "Задира.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 63,
+      "weighted_contribution": 247121.42512500004,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "spider",
+      "name": "Паутина.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 86,
+      "weighted_contribution": 247107.02568750002,
+      "categories": [
+        "movement",
+        "offense"
+      ]
+    },
+    {
+      "code": "childofthelight",
+      "name": "Дитя Света.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 268,
+      "weighted_contribution": 233930.1110624998,
+      "categories": [
+        "offense",
+        "casting",
+        "summon"
+      ]
+    },
+    {
+      "code": "hexingattack",
+      "name": "Колдовской удар.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 134,
+      "weighted_contribution": 229914.49050000004,
+      "categories": [
+        "offense",
+        "casting",
+        "control"
+      ]
+    },
+    {
+      "code": "entrenchment",
+      "name": "Окопаться.",
+      "support": "learned_damage",
+      "risk_weight": 0.3,
+      "state_occurrences": 120,
+      "weighted_contribution": 222824.5523999998,
+      "categories": [
+        "offense",
+        "defense"
+      ]
+    },
+    {
+      "code": "magicproof50",
+      "name": "magicproof50",
+      "support": "partial_exact",
+      "risk_weight": 0.25,
+      "state_occurrences": 136,
+      "weighted_contribution": 214464.5583749998,
+      "categories": [
+        "identity"
+      ]
+    },
+    {
+      "code": "cursingattack",
+      "name": "Наложение проклятия.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 282,
+      "weighted_contribution": 207920.4447600001,
+      "categories": [
+        "offense",
+        "casting"
+      ]
+    },
+    {
+      "code": "vulnerabilitytolight",
+      "name": "Уязвимость к Свету.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 267,
+      "weighted_contribution": 199190.2168124999,
+      "categories": [
+        "offense",
+        "casting"
+      ]
+    },
+    {
+      "code": "deathwail",
+      "name": "Скорбный вопль.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 96,
+      "weighted_contribution": 192166.23262499995,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "blinding_attack",
+      "name": "Ослепление.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 606,
+      "weighted_contribution": 186666.87186000048,
+      "categories": [
+        "offense",
+        "immunity",
+        "casting",
+        "control"
+      ]
+    },
+    {
+      "code": "portal",
+      "name": "portal",
+      "support": "learned_damage",
+      "risk_weight": 0.25,
+      "state_occurrences": 177,
+      "weighted_contribution": 179553.26306250005,
+      "categories": [
+        "identity"
+      ]
+    },
+    {
+      "code": "swiftattack",
+      "name": "Стремительная атака.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 99,
+      "weighted_contribution": 176570.15343750018,
+      "categories": [
+        "offense",
+        "casting",
+        "control"
+      ]
+    },
+    {
+      "code": "ragingblood",
+      "name": "Бурлящая кровь.",
+      "support": "learned_damage",
+      "risk_weight": 0.25,
+      "state_occurrences": 732,
+      "weighted_contribution": 169360.78949999987,
+      "categories": [
+        "identity"
+      ]
+    },
+    {
+      "code": "shootbash",
+      "name": "Оглушающий выстрел.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 112,
+      "weighted_contribution": 167467.3228125002,
+      "categories": [
+        "ranged",
+        "offense",
+        "retaliation",
+        "immunity",
+        "control"
+      ]
+    },
+    {
+      "code": "ferociouswound",
+      "name": "Ужасная рана.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 249,
+      "weighted_contribution": 166423.35023999994,
+      "categories": [
+        "movement",
+        "offense"
+      ]
+    },
+    {
+      "code": "packhunter",
+      "name": "Атака стаей.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 52,
+      "weighted_contribution": 163536.13631250008,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "purge",
+      "name": "Очищение.",
+      "support": "learned_damage",
+      "risk_weight": 0.3,
+      "state_occurrences": 236,
+      "weighted_contribution": 163266.05294999995,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "six_heads",
+      "name": "Удар шестью головами.",
+      "support": "modeled_collateral",
+      "risk_weight": 0.38,
+      "state_occurrences": 135,
+      "weighted_contribution": 160870.89280500007,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "impervioustopain",
+      "name": "Нечувствительность.",
+      "support": "learned_damage",
+      "risk_weight": 0.3,
+      "state_occurrences": 130,
+      "weighted_contribution": 160375.3033500002,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "jousting",
+      "name": "Рыцарский разбег.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 71,
+      "weighted_contribution": 156701.25506249996,
+      "categories": [
+        "movement",
+        "offense"
+      ]
+    },
+    {
+      "code": "teleport",
+      "name": "teleport",
+      "support": "learned_damage",
+      "risk_weight": 0.25,
+      "state_occurrences": 599,
+      "weighted_contribution": 156510.38362500013,
+      "categories": [
+        "identity"
+      ]
+    },
+    {
+      "code": "venom",
+      "name": "Животный яд.",
+      "support": "learned_damage",
+      "risk_weight": 0.3,
+      "state_occurrences": 175,
+      "weighted_contribution": 156253.6608749999,
+      "categories": [
+        "offense"
+      ]
+    },
+    {
+      "code": "torpor",
+      "name": "Оцепенение.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 191,
+      "weighted_contribution": 154734.45623999988,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "shieldguard",
+      "name": "Защитник.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 80,
+      "weighted_contribution": 153302.04618750006,
+      "categories": [
+        "offense",
+        "defense",
+        "targeting"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "warid": "1629919378",
+  "show": "NEdt-xd1",
+  "source_url": "https://www.heroeswm.ru/warlog.php?lt=-1&warid=1629919378&show=NEdt-xd1",
+  "success": true,
+  "init": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629919378\\init.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629919378&lastturn=-3&show=NEdt-xd1",
+        "status_code": 200,
+        "bytes": 27390,
+        "elapsed_ms": 244.4,
+        "sha256": "57494560968e016a2f781ec60c47cc11877f13eded1a5faba1a25085576be57b",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629919378&lastturn=-3&show=NEdt-xd1"
+      }
+    ],
+    "bytes": 27390,
+    "sha256": "57494560968e016a2f781ec60c47cc11877f13eded1a5faba1a25085576be57b",
+    "validation": "turns_marker"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1629919378\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1629919378&lastturn=0&show=NEdt-xd1",
+        "status_code": 200,
+        "bytes": 3618,
+        "elapsed_ms": 624.3,
+        "sha256": "2f27d3eb42b8ee0cb1bb0caaf6905fa54acac009225b84d6bcb07c6670583724",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1629919378&lastturn=0&show=NEdt-xd1"
+      }
+    ],
+    "bytes": 3618,
+    "sha256": "2f27d3eb42b8ee0cb1bb0caaf6905fa54acac009225b84d6bcb07c6670583724",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278236.389829
+}

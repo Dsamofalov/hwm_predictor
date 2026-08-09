@@ -1,0 +1,17 @@
+kind,side,footprint,dx,dy,value
+placement,E,1,-1,0,25
+placement,E,1,0,-1,12
+placement,E,1,-1,-1,2
+placement,E,1,0,1,1
+atb,E,1,0,0,46.075
+placement,P,1,1,0,39
+placement,P,1,0,-1,35
+placement,P,1,-1,0,28
+placement,P,1,0,1,21
+placement,P,1,1,-1,2
+placement,P,1,1,1,2
+atb,P,1,0,0,44.7559055118
+placement,P,2,-2,0,3
+placement,P,2,0,-2,1
+atb,P,2,0,0,45.6
+atb,*,0,0,0,45.0842105263

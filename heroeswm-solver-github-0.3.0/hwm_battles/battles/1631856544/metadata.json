@@ -1,0 +1,37 @@
+{
+  "warid": "1631856544",
+  "show": "NiiPS-Ye",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1631856544&show=NiiPS-Ye",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1631856544\\init.txt",
+    "bytes": 37568,
+    "sha256": "cbfe6babfbbc9d210ceecc2330a55ad853ce1fe32fdaa13600d12aac8bebaf6e"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1631856544\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1631856544&lastturn=0&show=NiiPS-Ye",
+        "status_code": 200,
+        "bytes": 5224,
+        "elapsed_ms": 496.8,
+        "sha256": "f842fd04b19f74a5298959713a621575859e0e7a666baa27237560c628e4a418",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1631856544&lastturn=0&show=NiiPS-Ye"
+      }
+    ],
+    "bytes": 5224,
+    "sha256": "f842fd04b19f74a5298959713a621575859e0e7a666baa27237560c628e4a418",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278192.6353507
+}

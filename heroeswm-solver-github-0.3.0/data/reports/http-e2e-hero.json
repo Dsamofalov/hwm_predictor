@@ -1,0 +1,23 @@
+{
+  "battle_id": "1635579702",
+  "server_turn": 3,
+  "actor_kind": "hero",
+  "active_entity_uid": 1,
+  "semantic_safety_tier": "guarded",
+  "semantic_unresolved_ratio": 0.1,
+  "state_hash": "980ce7c742b04ad3",
+  "recommendation_status": "ok",
+  "best_action": {
+    "action_id": 1,
+    "actor_uid": 1,
+    "type": "HERO_ACTION",
+    "target_uid": 3,
+    "source": "raw-corpus-hero-basic-attack"
+  },
+  "simulations": 250,
+  "elapsed_ms": 94.3867,
+  "warnings": [
+    "GUARDED semantic state: a small fraction of mechanics is unresolved; confidence is risk-adjusted",
+    "hero action space is partial: standard basic attack, WAIT/DEFEND and independently decoded single-target damage spells are modeled; buffs, summons and faction talents are not yet searched"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "warid": "1633096129",
+  "show": "N-VeocxB",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1633096129&show=N-VeocxB",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1633096129\\init.txt",
+    "bytes": 50770,
+    "sha256": "3b9c6ba8a4053952bbc41dd9cc3ba7baf2d960b348f66949a13b25014ea2cca5"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1633096129\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1633096129&lastturn=0&show=N-VeocxB",
+        "status_code": 200,
+        "bytes": 3477,
+        "elapsed_ms": 5031.4,
+        "sha256": "2b801dec6409f3cbd8f6f34a5a25c0bdcca7b47b985f2a2e8e73a258fbc6b422",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1633096129&lastturn=0&show=N-VeocxB"
+      }
+    ],
+    "bytes": 3477,
+    "sha256": "2b801dec6409f3cbd8f6f34a5a25c0bdcca7b47b985f2a2e8e73a258fbc6b422",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278213.0708735
+}

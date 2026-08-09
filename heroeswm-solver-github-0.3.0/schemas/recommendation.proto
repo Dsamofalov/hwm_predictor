@@ -1,0 +1,7 @@
+syntax = "proto3";
+package hwm;
+import "battle.proto";
+enum ActionType { ACTION_UNKNOWN=0; MOVE=1; MELEE_ATTACK=2; RANGED_ATTACK=3; WAIT=4; DEFEND=5; CAST=6; ABILITY=7; HERO_ACTION=8; SPECIAL=9; PASS=10; }
+message Action { uint64 action_id=1; uint64 actor_uid=2; ActionType type=3; optional uint64 target_uid=10; optional Cell destination=11; optional uint32 ability_id=12; optional uint32 spell_id=13; optional uint32 direction=14; repeated Cell area=15; string source=20; }
+message Candidate { Action action=1; double score=2; double p_win=3; double uncertainty=4; }
+message Recommendation { string battle_id=1; uint64 state_seq=2; string state_hash=3; Candidate best=4; repeated Candidate alternatives=5; repeated Action principal_variation=6; string status=7; repeated string warnings=8; }

@@ -1,0 +1,37 @@
+{
+  "warid": "1632105501",
+  "show": "NiVIfnmu",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632105501&show=NiVIfnmu",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632105501\\init.txt",
+    "bytes": 35578,
+    "sha256": "4f730e14c3bb7b387046de87bd26fe36b60cba850d003668bd9524c738576bb0"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632105501\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632105501&lastturn=0&show=NiVIfnmu",
+        "status_code": 200,
+        "bytes": 4978,
+        "elapsed_ms": 1655.8,
+        "sha256": "48194fcf90278f8efe04fcb165f833289d5c6496b50ce2bc56b56cf3f6d701f8",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632105501&lastturn=0&show=NiVIfnmu"
+      }
+    ],
+    "bytes": 4978,
+    "sha256": "48194fcf90278f8efe04fcb165f833289d5c6496b50ce2bc56b56cf3f6d701f8",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278181.8967094
+}

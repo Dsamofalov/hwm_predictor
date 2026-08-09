@@ -1,0 +1,42 @@
+{
+  "source": "new raw init.txt + turns0.txt only; historical parser/state dumps not used",
+  "mechanic": "Phantom Forces / Sphm",
+  "observations": 250,
+  "battles_with_spell": 150,
+  "train_battles": 692,
+  "heldout_battles": 174,
+  "train_rows": 171,
+  "heldout_rows": 79,
+  "wire_invariants": {
+    "trailer_zero": 250,
+    "source_alive": 250,
+    "source_nonhero": 250,
+    "source_nonphantom": 250,
+    "clone_phantom": 250,
+    "same_owner": 250,
+    "same_creature_id": 250,
+    "clone_count_equals_source_all": 246,
+    "semantic_exact_before_rows": 19,
+    "clone_count_equals_source_exact_before": 19
+  },
+  "train": {
+    "rows": 171,
+    "observed_placement_in_legal_candidates": 170,
+    "placement_top1": 0.5964912280701754,
+    "placement_top3": 0.9941520467836257,
+    "clone_atb_mae": 2.90713726573652,
+    "clone_atb_median_abs_error": 3.075000000000003
+  },
+  "heldout": {
+    "rows": 79,
+    "observed_placement_in_legal_candidates": 79,
+    "placement_top1": 0.6075949367088608,
+    "placement_top3": 1.0,
+    "clone_atb_mae": 2.8522376158676366,
+    "clone_atb_median_abs_error": 2.7559055118110223
+  },
+  "placement_model": "train-only empirical offset weights conditioned on Player/PvE side and 1x1/2x2 footprint; sampled only among currently legal adjacent anchors",
+  "atb_model": "train-only group mean conditioned on side+footprint",
+  "note": "Placement is modeled as chance; it is not exposed as a user-selectable destination. Clone stats/count are copied from source only in structurally/semantically safe speculative states.",
+  "out": "models/phantom_forces_model.csv"
+}

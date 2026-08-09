@@ -1,0 +1,37 @@
+{
+  "warid": "1632645884",
+  "show": "NczasI9L",
+  "source_url": "https://www.heroeswm.ru/war.php?lt=-1&warid=1632645884&show=NczasI9L",
+  "success": true,
+  "init": {
+    "success": true,
+    "skipped": true,
+    "adopted_from_v1": true,
+    "path": "hwm_battles\\battles\\1632645884\\init.txt",
+    "bytes": 58770,
+    "sha256": "8a29adff37340a4dd0339271730316d889f71a7896f22bffbef77b4537a091dd"
+  },
+  "turns0": {
+    "success": true,
+    "path": "hwm_battles\\battles\\1632645884\\turns0.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "url": "https://www.heroeswm.ru/battle.php?warid=1632645884&lastturn=0&show=NczasI9L",
+        "status_code": 200,
+        "bytes": 13567,
+        "elapsed_ms": 1330.8,
+        "sha256": "db00a2c2b71d8483274e6c742d81482a58e25347db607d378237ebb4d83b9538",
+        "content_type": "text/html; charset=UTF-8",
+        "valid": true,
+        "validation": "turns_marker",
+        "error": null,
+        "final_url": "https://www.heroeswm.ru/battle.php?warid=1632645884&lastturn=0&show=NczasI9L"
+      }
+    ],
+    "bytes": 13567,
+    "sha256": "db00a2c2b71d8483274e6c742d81482a58e25347db607d378237ebb4d83b9538",
+    "validation": "turns_marker"
+  },
+  "downloaded_at_unix": 1786278172.2185552
+}
