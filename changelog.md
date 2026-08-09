@@ -81,3 +81,13 @@ This file is the development diary for repository changes performed against the 
   - Expanded regression coverage for 3-creature 9/12/15 HP healing and the 10-creature 50 HP cap.
   - Updated the active Markdown specification formula. Ability Registry counts remain 83 exact-search / 179 learned-damage / 78 unresolved.
   - C++ Debug build and CTest passed before commit.
+
+### Ability decision corpus probe
+
+- Commit: `0346b7befb70ac3d47540ed60f4d857016c9ddbe`
+  - Added `scripts/ability_probe.py`, a read-only analyzer built on the canonical `iter_battle_decisions()` replay stream.
+- Commit: `2f8ffc8f7ef92cc531b77e60c7b099af68368203`
+  - Ran the probe over the repository `hwm_battles` corpus for `manafeed` and stored `data/reports/manafeed_probe.json`.
+  - Matched decisions: **730** across **125** battles; mechanic-like candidates: **243**.
+  - The report preserves raw decision records/opcodes and already-decoded mana deltas for evidence-driven wire decoding.
+  - Probe parse errors: **0**.
