@@ -511,7 +511,12 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
                !t->shoot_only&&!t->is_warmachine&&!has_tag(*t,"noselfret")&&t->retaliation_available&&
                footprints_adjacent(*actor,actor->anchor,*t,t->anchor)){
                 const int rdmg=std::max(1,(int)std::llround(roll_damage(tr.state,*t,*actor,1.0-std::clamp(roll,0.0,1.0),false,true)*damage_.multiplier(t->creature_id,ActionType::MeleeAttack)*ability_transfer_multiplier(damage_,ability_damage_,*t,*actor,ActionType::MeleeAttack)));
+                const int retaliation_target_hp_before=total_hp(*actor);
+                const bool retaliation_target_was_phantom=actor->is_phantom;
                 deal_damage(*actor,rdmg);
+                const int retaliation_actual_damage=std::max(0,retaliation_target_hp_before-total_hp(*actor));
+                const int retaliation_drain_damage=(retaliation_target_was_phantom&&retaliation_actual_damage>0)?std::min(rdmg,retaliation_target_hp_before):retaliation_actual_damage;
+                if(retaliation_drain_damage>0&&has_tag(*t,"lifedrain"))restore_hp(*t,retaliation_drain_damage/2);
                 if(has_tag(*t,"battlethirst"))set_proc_effect(*t,"btt",10000,0.0f,"exact:battlethirst retaliation reset");
                 const bool rooted_unlimited=t->defending&&has_tag(*t,"takeroots");
                 if(!t->unlimited_retaliation&&!rooted_unlimited)t->retaliation_available=false;
@@ -524,8 +529,15 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
                 const bool incorporeal_miss=has_tag(*t,"incorporeal")&&proc_roll(hit_roll,actor->uid,t->uid,stable_tag_id("incorporeal"))>=0.50;
                 const int dmg=incorporeal_miss?0:std::max(1,(int)std::llround(roll_damage(tr.state,*actor,*t,hit_roll,ranged,false,moved_cells)*damage_.multiplier(actor->creature_id,a.type)*ability_transfer_multiplier(damage_,ability_damage_,*actor,*t,a.type)));
                 const int target_hp_before=total_hp(*t);
+                const bool target_was_phantom=t->is_phantom;
                 if(dmg>0)deal_damage(*t,dmg);
                 const int actual_damage=std::max(0,target_hp_before-total_hp(*t));
+                // Life Drain: restore 50% of physical damage actually inflicted. The
+                // existing helper also resurrects creatures up to max_count.
+                // Phantom stacks dissipate on any positive hit; cap their drain basis by
+                // the rolled hit so disappearance of the whole phantom stack cannot heal.
+                const int drain_damage=(target_was_phantom&&actual_damage>0)?std::min(dmg,target_hp_before):actual_damage;
+                if(drain_damage>0&&has_tag(*actor,"lifedrain"))restore_hp(*actor,drain_damage/2);
                 // Lizard Bite: when another friendly stack makes a melee attack against
                 // a target adjacent to this creature, the lizard immediately assists for
                 // half of its ordinary melee damage and receives no retaliation.  Raw
@@ -640,7 +652,12 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
                 const bool attentive_override = has_tag(*t,"attentive");
                 if(!ranged&&hit==0&&!concentration_preempted&&t->alive&&actor->alive&&!retaliation_suppressed(*t)&&!swift_no_retaliation&&!charge_no_retaliation&&(!actor->no_retaliation||attentive_override)&&!t->shoot_only&&!t->is_warmachine&&!has_tag(*t,"noselfret")&&t->retaliation_available&&footprints_adjacent(*actor,actor->anchor,*t,t->anchor)){
                     const int rdmg=std::max(1,(int)std::llround(roll_damage(tr.state,*t,*actor,1.0-std::clamp(roll,0.0,1.0),false,true)*damage_.multiplier(t->creature_id,ActionType::MeleeAttack)*ability_transfer_multiplier(damage_,ability_damage_,*t,*actor,ActionType::MeleeAttack)));
+                    const int retaliation_target_hp_before=total_hp(*actor);
+                    const bool retaliation_target_was_phantom=actor->is_phantom;
                     deal_damage(*actor,rdmg);
+                    const int retaliation_actual_damage=std::max(0,retaliation_target_hp_before-total_hp(*actor));
+                    const int retaliation_drain_damage=(retaliation_target_was_phantom&&retaliation_actual_damage>0)?std::min(rdmg,retaliation_target_hp_before):retaliation_actual_damage;
+                    if(retaliation_drain_damage>0&&has_tag(*t,"lifedrain"))restore_hp(*t,retaliation_drain_damage/2);
                     if(has_tag(*t,"battlethirst"))set_proc_effect(*t,"btt",10000,0.0f,"exact:battlethirst retaliation reset");
                     const bool rooted_unlimited=t->defending&&has_tag(*t,"takeroots");
                     if(!t->unlimited_retaliation&&!rooted_unlimited)t->retaliation_available=false;

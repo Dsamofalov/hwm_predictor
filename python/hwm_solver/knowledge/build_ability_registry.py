@@ -22,7 +22,7 @@ EXACT_SEARCH = {
     "impervioustopain", "agilesteed", "blindingcharge", "brittle", "deadflesh",
     "lifeguardmembrane", "spirit", "fireprskin", "fierceretaliation", "attentive",
     "painmirror", "magmashield", "pleasureinpain", "raptureinagony", "auraofbravery",
-    "takeroots", "fireattack", "battlethirst", "tasteofblood", "bloodfrenzy", "organicarmor", "shieldother", "concentration", "lizardbite",
+    "takeroots", "fireattack", "battlethirst", "tasteofblood", "bloodfrenzy", "organicarmor", "shieldother", "concentration", "lizardbite", "lifedrain",
 }
 PARTIAL_EXACT = {"forcearrow", "ifire", "bloodlust"}
 EXACT_TARGETING = {"undead", "elemental", "mechanical", "immunity", "imind", "iblind",

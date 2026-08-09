@@ -207,7 +207,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 1565158729,layhands,learned_damage,0.7500,offense|casting|summon,26,Возложение рук.
 273197747,leap,learned_damage,0.7500,movement|ranged|offense,16,Прыжок.
 660893535,leap6,learned_damage,0.7500,movement|ranged|offense|retaliation,33,Скачок.
-406688247,lifedrain,learned_damage,0.3000,offense,147,Осушение.
+406688247,lifedrain,exact_search,0.0000,offense,147,Осушение.
 2683136385,lifeguardmembrane,exact_search,0.0000,offense|defense|targeting,26,Защитная оболочка.
 1194501870,lighting_attack,learned_damage,0.7500,offense|casting,91,Удар молнией.
 4135954951,lightningbreath,learned_damage,0.7500,offense|targeting,18,Электрическое дыхание.

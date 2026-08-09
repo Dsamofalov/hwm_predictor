@@ -3132,9 +3132,9 @@
       "code": "lifedrain",
       "name": "Осушение.",
       "description": "Во время нападения на врага это существо может выпить его жизнь и использовать для восстановления своей собственной и даже воскресить нескольких существ из своего отряда. Восстанавливается здоровье в размере половины нанесенного урона.",
-      "support": "learned_damage",
+      "support": "exact_search",
       "learned_damage": true,
-      "risk_weight": 0.3,
+      "risk_weight": 0.0,
       "categories": [
         "offense"
       ],
@@ -6299,10 +6299,10 @@
   ],
   "support_counts": {
     "unresolved": 78,
-    "exact_search": 81,
+    "exact_search": 82,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 181,
+    "learned_damage": 180,
     "identity": 4,
     "modeled_proc": 8,
     "partial_exact": 18,

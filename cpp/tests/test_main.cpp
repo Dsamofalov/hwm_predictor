@@ -1185,6 +1185,55 @@ static bool test_battle_thirst_and_taste_of_blood_exact_state() {
     return true;
 }
 
+static bool test_life_drain_exact_heal_resurrection_and_retaliation() {
+    GenericSimulator sim;
+
+    // Primary attack: 50% of actually inflicted damage heals the attacker and may
+    // resurrect previously lost creatures, but never beyond max_count.
+    BattleState s=fixture(); auto* a=s.entity(1); auto* t=s.entity(2); CHECK(a&&t);
+    a->owner=1; a->is_shooter=false; a->shots=0; a->anchor={1,1}; a->max_count=10;
+    a->count=5; a->max_hp_per_unit=20; a->top_unit_hp=10; a->attack=30;
+    a->min_damage=a->max_damage=8; add_tag(*a,"lifedrain");
+    t->owner=2; t->anchor={2,1}; t->max_count=50; t->count=50;
+    t->max_hp_per_unit=20; t->top_unit_hp=20; t->retaliation_available=false;
+    auto acts=sim.legal_actions(s);
+    auto hit=std::find_if(acts.begin(),acts.end(),[](const Action&x){return x.type==ActionType::MeleeAttack&&x.target_uid&&*x.target_uid==2&&!x.destination;});
+    CHECK(hit!=acts.end());
+    const int attacker_before=entity_total_hp(*a), target_before=entity_total_hp(*t);
+    auto tr=sim.apply(s,*hit,0.5); CHECK(tr.valid);
+    const int dealt=target_before-entity_total_hp(*tr.state.entity(2)); CHECK(dealt>0);
+    CHECK(entity_total_hp(*tr.state.entity(1))==std::min(200,attacker_before+dealt/2));
+    CHECK(tr.state.entity(1)->count>5);
+
+    BattleState full=s; auto* fa=full.entity(1); CHECK(fa); fa->count=10; fa->top_unit_hp=20;
+    auto facts=sim.legal_actions(full);
+    auto fhit=std::find_if(facts.begin(),facts.end(),[](const Action&x){return x.type==ActionType::MeleeAttack&&x.target_uid&&*x.target_uid==2&&!x.destination;});
+    CHECK(fhit!=facts.end());
+    auto capped=sim.apply(full,*fhit,0.5); CHECK(capped.valid);
+    CHECK(entity_total_hp(*capped.state.entity(1))==200);
+
+    // Retaliation uses the same rule. Compare against an otherwise identical branch
+    // where retaliation is disabled to isolate target HP after the primary hit.
+    BattleState r=fixture(); auto* ra=r.entity(1); auto* rt=r.entity(2); CHECK(ra&&rt);
+    ra->is_shooter=false; ra->shots=0; ra->anchor={1,1}; ra->max_count=20; ra->count=20;
+    ra->max_hp_per_unit=30; ra->top_unit_hp=30; ra->min_damage=ra->max_damage=1; ra->attack=1;
+    rt->anchor={2,1}; rt->max_count=10; rt->count=5; rt->max_hp_per_unit=20; rt->top_unit_hp=10;
+    rt->min_damage=rt->max_damage=10; rt->attack=30; rt->retaliation_available=true; add_tag(*rt,"lifedrain");
+    auto racts=sim.legal_actions(r);
+    auto rhit=std::find_if(racts.begin(),racts.end(),[](const Action&x){return x.type==ActionType::MeleeAttack&&x.target_uid&&*x.target_uid==2&&!x.destination;});
+    CHECK(rhit!=racts.end());
+    BattleState no_ret=r; no_ret.entity(2)->retaliation_available=false;
+    auto primary_only=sim.apply(no_ret,*rhit,0.5); CHECK(primary_only.valid);
+    const int target_after_primary=entity_total_hp(*primary_only.state.entity(2));
+    const int retaliation_target_before=entity_total_hp(*r.entity(1));
+    auto with_ret=sim.apply(r,*rhit,0.5); CHECK(with_ret.valid);
+    const int retaliation_dealt=retaliation_target_before-entity_total_hp(*with_ret.state.entity(1));
+    CHECK(retaliation_dealt>0);
+    CHECK(entity_total_hp(*with_ret.state.entity(2))==std::min(200,target_after_primary+retaliation_dealt/2));
+    return true;
+}
+
+
 static bool test_kill_trigger_enraged_gate() {
     const auto path=std::filesystem::temp_directory_path()/"hwm_kill_trigger_test.csv";
     {
@@ -1223,6 +1272,7 @@ int main() {
     if (!test_spell_immunity_targeting_and_dynamic_caster_risk()) return EXIT_FAILURE;
     if (!test_proc_model_stateful_mechanics()) return EXIT_FAILURE;
     if (!test_battle_thirst_and_taste_of_blood_exact_state()) return EXIT_FAILURE;
+    if (!test_life_drain_exact_heal_resurrection_and_retaliation()) return EXIT_FAILURE;
     if (!test_kill_trigger_enraged_gate()) return EXIT_FAILURE;
     if (!test_mana_drain_and_reference_damage_perks()) return EXIT_FAILURE;
     if (!test_entrenchment_lifecycle_and_resistance()) return EXIT_FAILURE;
