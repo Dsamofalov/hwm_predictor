@@ -31,11 +31,15 @@ This file is the development diary for repository changes performed against the 
 ### Life Drain patch tooling
 
 - Commit: `4b4d18fd8727fe9e9c9fec72edd26eff1cc0cf08`
-- First one-shot patch-runner staging commit; workflow did not start any jobs because the embedded multiline YAML was invalid. No functional source changes were produced by that failed run.
-
-- Temporary patch script commit: `73e7cdd743fdf3606b62c5bfddd5aa1316334c31`
-- Corrected runner commit: `e5fc43c25792f5a66c12931f07d9070c30ccf7b1`
-- Moved the patch logic into a temporary Python script so GitHub Actions parses the workflow safely. Both temporary files are removed by the functional commit.
+  - First one-shot workflow staging attempt; GitHub rejected the embedded multiline YAML before creating a job. No functional source change was produced.
+- Commit: `539eba4ebf9ff075a420f2da6e01990351f86e55`
+  - Moved the large patch logic into a temporary Python script to keep the workflow YAML small and parseable.
+- Commit: `66150992861f3641a1cba32ef2c3e089dfb50a0a`
+  - Fixed the temporary workflow and reached a real build/test run. C++ build and CTest passed, but an over-broad `git diff --check` rejected intentional Markdown hard-break spaces and generated CRLF CSV, so no functional commit was produced.
+- Commit: `73e7cdd743fdf3606b62c5bfddd5aa1316334c31`
+  - Narrowed the whitespace gate to C++/Python source files and added cleanup of the first temporary script.
+- Commit: `e5fc43c25792f5a66c12931f07d9070c30ccf7b1`
+  - Re-ran the verified patch pipeline successfully. The functional commit below deletes all temporary patch infrastructure.
 
 ### Exact Life Drain transition
 
