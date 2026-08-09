@@ -1,0 +1,32 @@
+name: Apply Regeneration formula correction
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply_regeneration_formula_fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+
+      - name: Apply, verify, commit and log Regeneration formula correction
+        run: python .github/scripts/apply_regeneration_formula_fix.py
