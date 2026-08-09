@@ -306,7 +306,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 225815241,rebirth,reference_only,0.7500,offense|targeting,0,Возрождение
 599042684,rebirth25,unresolved,0.4500,identity,6,rebirth25
 649522636,rebirth50,learned_damage,0.2500,identity,9,rebirth50
-1816987862,regeneration,learned_damage,0.3000,offense,89,Регенерация.
+1816987862,regeneration,exact_search,0.0000,offense,89,Регенерация.
 693242804,repair,unresolved,0.6200,offense,1,Починка.
 4273381350,resistanttocurses,learned_damage,0.7500,casting,20,Устойчивость к проклятиям.
 1966801462,resurrection,learned_damage,0.7500,offense|summon,23,Воскрешение.

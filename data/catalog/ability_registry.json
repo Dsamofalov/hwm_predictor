@@ -4584,9 +4584,9 @@
       "code": "regeneration",
       "name": "Регенерация.",
       "description": "Каждый ход отряд существ восстанавливает себе 3-50 ед. здоровья, зависит от количества существ в отряде.",
-      "support": "learned_damage",
+      "support": "exact_search",
       "learned_damage": true,
-      "risk_weight": 0.3,
+      "risk_weight": 0.0,
       "categories": [
         "offense"
       ],
@@ -6299,10 +6299,10 @@
   ],
   "support_counts": {
     "unresolved": 78,
-    "exact_search": 82,
+    "exact_search": 83,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 180,
+    "learned_damage": 179,
     "identity": 4,
     "modeled_proc": 8,
     "partial_exact": 18,

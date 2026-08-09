@@ -459,6 +459,19 @@ static void restore_hp(Entity& target,int heal){
     if(hp<=0)return;
     target.count=static_cast<int>((hp+mh-1)/mh);target.top_unit_hp=static_cast<int>(hp-static_cast<int64_t>(target.count-1)*mh);target.alive=true;
 }
+static void heal_top_unit_only(Entity& target,int heal){
+    // HeroesWM Regeneration restores only the currently living top creature.
+    // It must never increase stack count (unlike Raise Dead / Life Drain).
+    if(heal<=0||!target.alive||target.count<=0||target.max_hp_per_unit<=0)return;
+    const int mh=std::max(1,target.max_hp_per_unit);
+    const int current=target.top_unit_hp>0?std::min(mh,target.top_unit_hp):mh;
+    target.top_unit_hp=std::min(mh,current+heal);
+}
+static int regeneration_heal(double roll){
+    // Exact HeroesWM range: a uniformly sampled integer 30..50 HP at turn start.
+    const double r=std::clamp(roll,0.0,1.0);
+    return 30+std::min(20,static_cast<int>(std::floor(r*21.0)));
+}
 
 Transition GenericSimulator::apply(const BattleState&s,const Action&a,double roll) const{
     Transition tr;tr.state=s;auto* actor=tr.state.entity(a.actor_uid);if(!actor||!actor->alive){tr.valid=false;tr.warning="actor_missing";return tr;}
@@ -772,11 +785,25 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
     ++tr.state.decision_seq;++tr.state.halfturn;++tr.state.state_seq;
     // Srn2 is preparatory: in 101/101 paired observations the same UID is immediately active again.
     uint64_t next=rune_activation&&actor?actor->uid:(actor?next_actor_.choose(tr.state,*actor,a.type):0);
-    tr.state.active_entity_uid=next;if(auto*n=tr.state.entity(next)){tr.state.side_to_act=n->side;if(!rune_activation){n->retaliation_available=true;n->defending=false;
-        const auto shield_id=status_effect_id("proc_shieldbash");
-        n->effects.erase(std::remove_if(n->effects.begin(),n->effects.end(),[&](const Effect&fx){return fx.id==shield_id;}),n->effects.end());
-    }}else tr.state.side_to_act=Side::Unknown;
-    bool p=false,e=false;for(auto&x:tr.state.entities)if(x.alive&&!x.is_hero){if(x.side==Side::Player)p=true;if(x.side==Side::Pve)e=true;}tr.terminal=!p||!e;if(tr.terminal)tr.state.phase=Phase::Finished;return tr;
+    tr.state.active_entity_uid=next;
+    auto* next_entity=tr.state.entity(next);
+    if(next_entity){
+        tr.state.side_to_act=next_entity->side;
+        if(!rune_activation){
+            next_entity->retaliation_available=true;next_entity->defending=false;
+            const auto shield_id=status_effect_id("proc_shieldbash");
+            next_entity->effects.erase(std::remove_if(next_entity->effects.begin(),next_entity->effects.end(),[&](const Effect&fx){return fx.id==shield_id;}),next_entity->effects.end());
+        }
+    }else tr.state.side_to_act=Side::Unknown;
+    bool p=false,e=false;for(auto&x:tr.state.entities)if(x.alive&&!x.is_hero){if(x.side==Side::Player)p=true;if(x.side==Side::Pve)e=true;}
+    tr.terminal=!p||!e;
+    // Regeneration is a start-of-turn mechanic. The root state already contains any
+    // server-applied heal, so only apply it when this rollout actually advances to a
+    // new actor. Srn2 is a preparatory immediate reactivation, not a new turn.
+    if(!tr.terminal&&!rune_activation&&next_entity&&has_tag(*next_entity,"regeneration"))
+        heal_top_unit_only(*next_entity,regeneration_heal(roll));
+    if(tr.terminal)tr.state.phase=Phase::Finished;
+    return tr;
 }
 
 double GenericSimulator::heuristic_value(const BattleState&s,Side perspective) const{double us=0,them=0;for(auto&e:s.entities){if(e.is_hero)continue;double hp=total_hp(e);double morale_factor=std::clamp(1.0+0.01*effective_morale(s,e),0.90,1.10);double power=(hp*(1.0+0.03*effective_attack(s,e)+0.02*effective_defense(s,e))+e.count*(effective_min_damage(e)+effective_max_damage(e)))*morale_factor;if(e.side==perspective)us+=power;else if(e.side!=Side::Unknown)them+=power;}if(us+them<=0)return 0;return (us-them)/(us+them);}
