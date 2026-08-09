@@ -51,3 +51,22 @@ This file is the development diary for repository changes performed against the 
 - Promoted `lifedrain` from `learned_damage` to `exact_search`; regenerated Ability Registry to 82 exact-search / 180 learned-damage / 78 unresolved.
 - Updated active Markdown specification, implementation report, and test report status.
 - C++ Debug build and CTest passed before commit.
+
+### Regeneration patch tooling
+
+- Commit: `9ae958b2bc2aed3382bb05af0578d3db3224b27d`
+  - Initial Regeneration staging runner. Production code and registry generation compiled far enough to verify 83/179/78 counts, but the new C++ test did not compile because the project `CHECK` macro returns `false` inside lambdas. No functional commit was produced.
+- Commit: `4a4d9947a63ab4246d0a853c148ae6a6cee1ab70`
+  - Corrected the regression helper lambdas and the scheduler indentation warning; re-ran the self-removing patch pipeline.
+- The temporary workflow and patch scripts were removed by the functional commit below.
+
+### Exact Regeneration turn-start transition
+
+- Commit: `ed108d79169bb21720bc830f846865fcf9c1a9b6`
+- Implemented `regeneration` as a start-of-turn transition when the rollout advances to the next actor.
+- Uses an exact 30–50 HP integer roll and heals only the current top creature; stack `count` never increases.
+- Explicitly excludes Srn2 preparatory same-actor reactivation and terminal states to avoid duplicate/non-turn healing.
+- Added C++ regression coverage for 30/40/50 HP rolls, max-HP cap, next-actor timing, and no-resurrection invariant.
+- Promoted `regeneration` from `learned_damage` to `exact_search`; regenerated Ability Registry to 83 exact-search / 179 learned-damage / 78 unresolved.
+- Updated active Markdown specification, implementation reports, and test report status.
+- C++ Debug build and CTest passed before commit.
