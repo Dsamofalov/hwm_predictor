@@ -106,4 +106,11 @@ This file is the development diary for repository changes performed against the 
   - Re-ran the full 866-battle Mana Feed probe: **42/42 `Smfd` records** satisfy the exact action/target/mana-delta invariant.
   - Added Python and C++ regressions, promoted `manafeed` to exact-search and regenerated the registry to 84 exact-search / 178 learned-damage / 78 unresolved.
   - Updated active Markdown specification, implementation reports, test report and `data/reports/manafeed_probe.json`.
-  - Targeted C++ build/CTest and Python pytest passed before commit.
+  - Targeted C++ build/CTest and Python replay pytest passed before commit.
+
+### Mana Feed full integration verification
+
+- Commit: `255c2c088a206383136de9e69fc8311b98f44bfc`
+- Triggered the standard repository CI against the final Mana Feed functional tree because pushes made by the self-removing workflow do not recursively trigger GitHub Actions.
+- Workflow run `31341290199`: **PASS**.
+- Verified C++ configure/build/CTest, the complete Python pytest suite, extension dependency installation, TypeScript typecheck, and extension build.
