@@ -24,7 +24,7 @@
 - При structural-ready состоянии basic action generator имеет хотя бы один action в **5338/5351 = 99.76%** held-out states.
 - Held-out observed basic-action representability: **5373/5481 = 98.03%**.
 - Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
-- Ability catalog: **421** ability code; registry: **83 exact-search**, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением на 30–50 HP только текущего верхнего существа, без увеличения `count`.
+- Ability catalog: **421** ability code; registry: **83 exact-search**, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`.
 - Ability-risk на held-out sample: mean **0.2389**, p90 **0.3978**.
 - Player action-type prior: held-out top-1 **70.76%**, top-3 **93.46%**. PvE prior: top-1 **62.81%**, top-3 **96.11%**.
 - Value: test battle-level Brier **0.05176** против **0.11891** constant baseline; AUC **0.9889**.

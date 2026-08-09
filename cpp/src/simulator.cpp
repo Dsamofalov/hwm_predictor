@@ -467,10 +467,12 @@ static void heal_top_unit_only(Entity& target,int heal){
     const int current=target.top_unit_hp>0?std::min(mh,target.top_unit_hp):mh;
     target.top_unit_hp=std::min(mh,current+heal);
 }
-static int regeneration_heal(double roll){
-    // Exact HeroesWM range: a uniformly sampled integer 30..50 HP at turn start.
+static int regeneration_heal(int count,double roll){
+    // HeroesWM formula: random integer 3..5 HP per living creature, capped at
+    // the first 10 creatures in the stack. This yields the documented 3..50 range.
     const double r=std::clamp(roll,0.0,1.0);
-    return 30+std::min(20,static_cast<int>(std::floor(r*21.0)));
+    const int per_creature=3+std::min(2,static_cast<int>(std::floor(r*3.0)));
+    return per_creature*std::min(10,std::max(0,count));
 }
 
 Transition GenericSimulator::apply(const BattleState&s,const Action&a,double roll) const{
@@ -801,7 +803,7 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
     // server-applied heal, so only apply it when this rollout actually advances to a
     // new actor. Srn2 is a preparatory immediate reactivation, not a new turn.
     if(!tr.terminal&&!rune_activation&&next_entity&&has_tag(*next_entity,"regeneration"))
-        heal_top_unit_only(*next_entity,regeneration_heal(roll));
+        heal_top_unit_only(*next_entity,regeneration_heal(next_entity->count,roll));
     if(tr.terminal)tr.state.phase=Phase::Finished;
     return tr;
 }

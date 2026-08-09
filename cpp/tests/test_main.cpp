@@ -1188,13 +1188,13 @@ static bool test_battle_thirst_and_taste_of_blood_exact_state() {
 static bool test_regeneration_exact_turn_start_no_resurrection() {
     GenericSimulator sim;
 
-    auto make_state=[](int top_hp)->BattleState{
+    auto make_state=[](int top_hp,int count=3)->BattleState{
         BattleState s=fixture();
         auto* actor=s.entity(1); auto* regen=s.entity(2);
         if(!actor||!regen)return {};
         s.decision_seq=10;
         actor->last_acted_seq=9; actor->initiative=1; actor->atb=0;
-        regen->max_count=10; regen->count=3; regen->max_hp_per_unit=125;
+        regen->max_count=20; regen->count=count; regen->max_hp_per_unit=125;
         regen->top_unit_hp=top_hp; regen->initiative=100; regen->atb=10000;
         regen->last_acted_seq=0; add_tag(*regen,"regeneration");
         return s;
@@ -1208,16 +1208,20 @@ static bool test_regeneration_exact_turn_start_no_resurrection() {
     };
 
     auto low=apply_wait(make_state(20),0.0); CHECK(low.valid); CHECK(!low.terminal); CHECK(low.state.active_entity_uid==2); CHECK(low.state.entity(2));
-    CHECK(low.state.entity(2)->top_unit_hp==50);  // +30
+    CHECK(low.state.entity(2)->top_unit_hp==29);  // 3 HP * 3 creatures = +9
     CHECK(low.state.entity(2)->count==3);
 
     auto mid=apply_wait(make_state(20),0.5); CHECK(mid.valid); CHECK(!mid.terminal); CHECK(mid.state.active_entity_uid==2); CHECK(mid.state.entity(2));
-    CHECK(mid.state.entity(2)->top_unit_hp==60);  // +40
+    CHECK(mid.state.entity(2)->top_unit_hp==32);  // 4 HP * 3 creatures = +12
     CHECK(mid.state.entity(2)->count==3);
 
     auto high=apply_wait(make_state(20),1.0); CHECK(high.valid); CHECK(!high.terminal); CHECK(high.state.active_entity_uid==2); CHECK(high.state.entity(2));
-    CHECK(high.state.entity(2)->top_unit_hp==70); // +50
+    CHECK(high.state.entity(2)->top_unit_hp==35); // 5 HP * 3 creatures = +15
     CHECK(high.state.entity(2)->count==3);
+
+    auto full_stack=apply_wait(make_state(20,10),1.0); CHECK(full_stack.valid); CHECK(full_stack.state.entity(2));
+    CHECK(full_stack.state.entity(2)->top_unit_hp==70); // cap: 5 * min(10,10) = +50
+    CHECK(full_stack.state.entity(2)->count==10);
 
     auto capped=apply_wait(make_state(120),1.0); CHECK(capped.valid); CHECK(!capped.terminal); CHECK(capped.state.active_entity_uid==2); CHECK(capped.state.entity(2));
     CHECK(capped.state.entity(2)->top_unit_hp==125);
