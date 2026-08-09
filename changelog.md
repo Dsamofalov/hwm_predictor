@@ -70,3 +70,14 @@ This file is the development diary for repository changes performed against the 
 - Promoted `regeneration` from `learned_damage` to `exact_search`; regenerated Ability Registry to 83 exact-search / 179 learned-damage / 78 unresolved.
 - Updated active Markdown specification, implementation reports, and test report status.
 - C++ Debug build and CTest passed before commit.
+
+### Regeneration formula correction
+
+- Commit: `c60b3c9af08e5a88973b86809191f89720aee67a`
+  - Staged a self-removing correction after cross-checking the HeroesWM reference formula against the fixed 30–50 implementation.
+- Commit: `00dd1074ad6c83d92f43bb90a1fe1dc5083aaadf`
+  - Corrected Regeneration from a fixed 30–50 HP roll to `random(3,5) * min(current_count, 10)`.
+  - Preserved the already-correct start-of-turn timing, Srn2 exclusion, top-unit-only healing, and no-resurrection invariant from `ed108d79169bb21720bc830f846865fcf9c1a9b6`.
+  - Expanded regression coverage for 3-creature 9/12/15 HP healing and the 10-creature 50 HP cap.
+  - Updated the active Markdown specification formula. Ability Registry counts remain 83 exact-search / 179 learned-damage / 78 unresolved.
+  - C++ Debug build and CTest passed before commit.
