@@ -3,7 +3,7 @@
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
 **Дата:** 09.08.2026  
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 10.08.2026 — Life Drain и Regeneration переведены в exact-search.  
+**Последнее обновление реализации:** 10.08.2026 — Life Drain, Regeneration и Mana Feed переведены в exact-search.  
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
@@ -24,7 +24,7 @@
 - При structural-ready состоянии basic action generator имеет хотя бы один action в **5338/5351 = 99.76%** held-out states.
 - Held-out observed basic-action representability: **5373/5481 = 98.03%**.
 - Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
-- Ability catalog: **421** ability code; registry: **83 exact-search**, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`.
+- Ability catalog: **421** ability code; registry: **84 exact-search**, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
 - Ability-risk на held-out sample: mean **0.2389**, p90 **0.3978**.
 - Player action-type prior: held-out top-1 **70.76%**, top-3 **93.46%**. PvE prior: top-1 **62.81%**, top-3 **96.11%**.
 - Value: test battle-level Brier **0.05176** против **0.11891** constant baseline; AUC **0.9889**.
@@ -35,7 +35,7 @@
 
 ### Текущий незавершённый фронт разработки
 
-1. Закрытие high-impact unresolved creature abilities; `Life Drain` и `Regeneration` закрыты 10.08.2026, текущая точка исследования — remaining assist/counter/stateful abilities.
+1. Закрытие high-impact unresolved creature abilities; `Life Drain`, `Regeneration` и `Mana Feed` закрыты 10.08.2026, текущая точка исследования — remaining assist/counter/summon/control abilities.
 2. Устранение 19 финальных structural-invalid replay (в основном geometry/rare mechanics) без ослабления invariants.
 3. Full learned dynamics ensemble и multi-step validation gate.
 4. Tree reuse/transposition и дальнейшее улучшение opponent branching.

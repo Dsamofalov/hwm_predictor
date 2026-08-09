@@ -3589,9 +3589,9 @@
       "code": "manafeed",
       "name": "Передача маны.",
       "description": "Существо может передавать свой запас маны собственному герою (1 ед. маны за каждое существо в отряде).",
-      "support": "learned_damage",
+      "support": "exact_search",
       "learned_damage": true,
-      "risk_weight": 0.3,
+      "risk_weight": 0.0,
       "categories": [
         "offense"
       ],
@@ -6299,10 +6299,10 @@
   ],
   "support_counts": {
     "unresolved": 78,
-    "exact_search": 83,
+    "exact_search": 84,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 179,
+    "learned_damage": 178,
     "identity": 4,
     "modeled_proc": 8,
     "partial_exact": 18,

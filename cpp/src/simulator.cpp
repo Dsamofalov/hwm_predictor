@@ -351,6 +351,15 @@ std::vector<Action> GenericSimulator::legal_actions(const BattleState&s) const{
         rune.ability_id=rune_speed_id;rune.source="exact:server-run-modifier+Srn2";a.push_back(std::move(rune));
     }
     const uint32_t carrier_wire_id=stable_tag_id("car");
+    const uint32_t mana_feed_wire_id=stable_tag_id("mfd");
+    if(!actor->rune_speed_active&&has_tag(*actor,"manafeed")&&actor->mana>0&&actor->count>0){
+        for(const auto&hero:s.entities){
+            if(!hero.alive||!hero.is_hero||hero.owner!=actor->owner)continue;
+            Action feed;feed.action_id=id++;feed.actor_uid=actor->uid;feed.type=ActionType::Ability;
+            feed.target_uid=hero.uid;feed.ability_id=mana_feed_wire_id;feed.source="exact:Smfd+reference";
+            a.push_back(std::move(feed));
+        }
+    }
     if(!actor->rune_speed_active&&has_tag(*actor,"carrier")){
         const int radius=std::max(0,(int)std::floor(actor->speed));
         for(const auto&target:s.entities){
@@ -482,8 +491,10 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
     auto legal=legal_actions(s);auto eq=[&](const Action&x){return x.type==a.type&&x.actor_uid==a.actor_uid&&x.target_uid==a.target_uid&&x.destination==a.destination&&x.ability_id==a.ability_id;};if(std::none_of(legal.begin(),legal.end(),eq)){tr.valid=false;tr.warning="illegal_action";return tr;}
     const uint32_t rune_speed_id=stable_tag_id("rn2");
     const uint32_t carrier_wire_id=stable_tag_id("car");
+    const uint32_t mana_feed_wire_id=stable_tag_id("mfd");
     const bool rune_activation=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==rune_speed_id;
     const bool carrier_action=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==carrier_wire_id;
+    const bool mana_feed_action=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==mana_feed_wire_id;
     const bool had_rune_speed_active=actor->rune_speed_active;
     // DEFEND lasts until this stack receives its next action. Clear the previous stance
     // before applying the new action; choosing DEFEND below immediately re-enables it.
@@ -498,6 +509,14 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
         if(!actor->rune_speed_available||actor->rune_speed_consumed||actor->rune_speed_active){tr.valid=false;tr.warning="rune_speed_unavailable";return tr;}
         actor->rune_speed_active=true;actor->rune_speed_consumed=true;
         tr.warning="exact_rune_speed_activation";
+    } else if(mana_feed_action){
+        if(!a.target_uid){tr.valid=false;tr.warning="mana_feed_target_missing";return tr;}
+        auto* hero=tr.state.entity(*a.target_uid);
+        const int amount=std::min(std::max(0,actor->count),std::max(0,actor->mana));
+        if(!hero||!hero->alive||!hero->is_hero||hero->owner!=actor->owner||!has_tag(*actor,"manafeed")||amount<=0){
+            tr.valid=false;tr.warning="mana_feed_action_invalid";return tr;
+        }
+        actor->mana-=amount;hero->mana+=amount;tr.warning="exact_mana_feed";
     } else if(carrier_action){
         if(!a.target_uid||!a.destination){tr.valid=false;tr.warning="carrier_target_or_destination_missing";return tr;}
         auto*target=tr.state.entity(*a.target_uid);

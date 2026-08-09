@@ -238,7 +238,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 284465491,manadestroyer,unresolved,0.6200,offense,2,Уничтожитель маны.
 496427704,manadrain,exact_search,0.0000,offense|casting|summon,152,Осушение маны.
 350440535,manaeater,unresolved,0.4500,identity,3,Пожиратель маны.
-3273432050,manafeed,learned_damage,0.3000,offense,168,Передача маны.
+3273432050,manafeed,exact_search,0.0000,offense,168,Передача маны.
 4101454259,manaleech,learned_damage,0.3000,offense,127,Поглощение маны.
 60838358,manastealer,unresolved,0.6200,offense,9,Крадущий ману.
 1869368502,maneuver,learned_damage,0.3000,ranged|offense,154,Маневрирование.

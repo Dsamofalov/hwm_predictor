@@ -633,6 +633,18 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
                         semantic(n); emit(events,seq,"SPECIAL",uid,target_uid,text.substr(i,n));
                     }
                 }
+                else if(code=="mfd" && j==i+19 && digits(text.substr(i+4,15)) && text.substr(i+12,7)=="0000000"){
+                    // Mana Feed corpus invariant (42/42 observed): actor3,own_hero3,
+                    // amount2,0000000. The amount is min(current count,current mana).
+                    const uint64_t target_uid=loose_int(text.substr(i+7,3));
+                    const int amount=loose_int(text.substr(i+10,2));
+                    auto* actor=s.entity(uid); auto* hero=s.entity(target_uid);
+                    const int expected=actor?std::min(std::max(0,actor->count),std::max(0,actor->mana)):0;
+                    const bool exact=actor&&hero&&actor->alive&&has_ability(*actor,"manafeed")&&hero->is_hero&&
+                        actor->owner==hero->owner&&amount>0&&amount==expected;
+                    if(exact){known(n);actor->mana-=amount;hero->mana+=amount;emit(events,seq,"MANA_FEED",uid,target_uid,text.substr(i,n));}
+                    else{semantic(n);emit(events,seq,"SPECIAL",uid,target_uid,text.substr(i,n));}
+                }
                 else if(code=="rgl" && j==i+19 && digits(text.substr(i+4,15)) && text.substr(i+4,3)=="000"){
                     // Mana Drain heal record.  New raw-corpus invariant: when the second UID
                     // belongs to a stack carrying `manadrain`, the final 9 digits equal

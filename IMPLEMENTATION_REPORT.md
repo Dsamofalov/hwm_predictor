@@ -25,7 +25,7 @@
 | Dataset accepted decisions | 52,357 |
 | Creature IDs | 644 |
 | Ability codes | 421 |
-| Ability Registry exact-search | 83 |
+| Ability Registry exact-search | 84 |
 | Ability Registry unresolved | 78 |
 | Held-out ability risk mean / p90 | 0.2389 / 0.3978 |
 | Player prior top-1 / top-3 | 70.76% / 93.46% |
@@ -77,23 +77,23 @@ Latest Ability Registry support counts:
 
 ```json
 {
-  "exact_search": 83,
+  "exact_search": 84,
   "exact_targeting": 11,
   "partial_exact": 18,
   "modeled_proc": 8,
   "modeled_collateral": 5,
   "modeled_kill_trigger": 2,
   "dynamic_spellbook": 1,
-  "learned_damage": 179,
+  "learned_damage": 178,
   "reference_only": 32,
   "identity": 4,
   "unresolved": 78
 }
 ```
 
-Examples already handled in runtime include core movement/shooter/large/flyer/retaliation rules; multi-hit; defense penetration/resistances/immunities; Defend/Take Roots/Entrenchment; Stone/Warding/Crippling observed state; Enraged/Pack Enrage; Battle Thirst/Taste of Blood; Mana Drain; Life Drain; Regeneration; Blood Frenzy; Organic Armor; Shield Other; Swift Attack; Impervious to Pain; Concentration; Lizard Bite; direct hero spells and several status spells.
+Examples already handled in runtime include core movement/shooter/large/flyer/retaliation rules; multi-hit; defense penetration/resistances/immunities; Defend/Take Roots/Entrenchment; Stone/Warding/Crippling observed state; Enraged/Pack Enrage; Battle Thirst/Taste of Blood; Mana Drain; Mana Feed; Life Drain; Regeneration; Blood Frenzy; Organic Armor; Shield Other; Swift Attack; Impervious to Pain; Concentration; Lizard Bite; direct hero spells and several status spells.
 
-**Current research frontier:** remaining assist/counter/summon/control abilities. Life Drain and Regeneration were promoted to `exact_search` on 10.08.2026; Regeneration is modeled only on an actual rollout turn transition and cannot resurrect creatures.
+**Current research frontier:** remaining assist/counter/summon/control abilities. Life Drain, Regeneration and Mana Feed are `exact_search`; Mana Feed is additionally validated on all 42 observed `Smfd` actions in the 866-battle corpus.
 
 ## 5. What is intentionally not claimed
 
@@ -105,7 +105,7 @@ Examples already handled in runtime include core movement/shooter/large/flyer/re
 
 ## 6. Next gates
 
-1. Continue high-impact unresolved abilities after the completed Life Drain and Regeneration transitions.
+1. Continue high-impact unresolved abilities after the completed Life Drain, Regeneration and Mana Feed transitions.
 2. Resolve remaining structural-invalid replay families.
 3. Add full learned dynamics ensemble + multi-step divergence gate.
 4. Improve tree reuse/transposition/opponent branching.

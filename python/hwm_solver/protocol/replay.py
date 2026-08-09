@@ -387,6 +387,26 @@ def _observed_shieldbash_proc(
     return hit, target_uid
 
 
+def _validated_mana_feed(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the corpus-proven Smfd Mana Feed record.
+
+    All 42 observed records use actor3,own_hero3,amount2,0000000. The amount equals
+    min(current stack count, current creature mana), matching the reference mechanic.
+    """
+    if command.opcode != "SPECIAL" or command.code != "mfd":
+        return False
+    if command.actor_uid is None or command.target_uid is None or command.amount is None:
+        return False
+    actor=entities.get(int(command.actor_uid)); hero=entities.get(int(command.target_uid))
+    amount=int(command.amount)
+    return bool(
+        actor and hero and actor.alive and "manafeed" in set(actor.abilities)
+        and hero.is_hero and actor.owner == hero.owner and amount > 0
+        and int(command.duration or 0) == 0
+        and amount == min(max(0,int(actor.count)),max(0,int(actor.mana)))
+    )
+
+
 def _validated_weakeningstrike(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
     """Validate W<actor><target> as Weakening Strike.
 
@@ -451,6 +471,8 @@ def _decision_semantic_unresolved_flags(
             if exact and c.code == "btt":
                 exact = 0 <= int(c.amount) <= 20
             unresolved = not exact
+        elif c.opcode == "SPECIAL" and c.code == "mfd":
+            unresolved = not _validated_mana_feed(c, entities)
         elif c.opcode == "SPECIAL" and c.code == "rgl":
             drain_actor = entities.get(int(c.actor_uid)) if c.actor_uid is not None else None
             unresolved = not bool(
@@ -864,6 +886,13 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                     value=float(int(numeric[6:8])), duration=int(numeric[8:12]) // 100,
                     amount=int(numeric[12:15]), code=code,
                 ))
+            elif code == "mfd" and len(numeric) == 15 and numeric.isdigit() and numeric[8:] == "0000000":
+                # Mana Feed: actor3,own_hero3,amount2,0000000. Exactness is gated
+                # against actor ability/owner/count/mana before the state mutation.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]),
+                    amount=int(numeric[6:8]), duration=0, code=code,
+                ))
             elif code == "rgl" and len(numeric) == 15 and numeric.isdigit() and numeric[:3] == "000":
                 # Mana Drain's heal result uses 000,source_uid3,heal9. Other mechanics can
                 # share the rgl code, so semantic exactness is gated later by `manadrain`.
@@ -1141,6 +1170,7 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     defends = [c for c in cmds if c.opcode == "DEFEND" and c.actor_uid == actor_uid]
     teleports = [c for c in cmds if c.opcode == "TELEPORT" and c.actor_uid == actor_uid]
     specials = [c for c in cmds if c.opcode == "SPECIAL"]
+    mana_feed = next((c for c in specials if c.code == "mfd" and c.actor_uid == actor_uid and c.target_uid is not None), None)
     rune_speed_activations = [c for c in cmds if c.opcode == "RUNE_SPEED_ACTIVATE"]
     carriers = [c for c in cmds if c.opcode == "CARRIER_RELOCATE"]
     special_codes = [c.code for c in specials] + (["car"] if carriers else []) + (["rn2"] if rune_speed_activations else []) + (["tel"] if teleports else [])
@@ -1150,7 +1180,7 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     action_move = attack_move if dealt else final_move
     changed = bool(actor and action_move and (actor.x, actor.y) != (action_move.x, action_move.y))
     phantom = next((c for c in specials if c.code == "phm" and c.target_uid is not None), None)
-    target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (phantom.target_uid if phantom else None)))
+    target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (mana_feed.target_uid if mana_feed else (phantom.target_uid if phantom else None))))
     target = state.entities.get(target_uid) if target_uid is not None else None
     ax = action_move.x if action_move else (actor.x if actor else 0)
     ay = action_move.y if action_move else (actor.y if actor else 0)
@@ -1169,6 +1199,8 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
             typ = "MELEE_ATTACK"
     elif teleports:
         typ = "HERO_ACTION" if actor and actor.is_hero else "ABILITY"
+    elif mana_feed:
+        typ = "ABILITY"
     elif carriers:
         typ = "ABILITY"
     elif any(c.opcode == "PROC" and c.code == "badmorale" for c in cmds):
@@ -1331,6 +1363,9 @@ def _apply_command(
         target = entities[int(c.target_uid)]
         target.apply_heal(int(c.amount or 0))
         actor.mana = max(0, actor.mana - int(c.value or 0))
+    elif c.opcode == "SPECIAL" and c.code == "mfd" and _validated_mana_feed(c, entities):
+        actor=entities[int(c.actor_uid)]; hero=entities[int(c.target_uid)]; amount=int(c.amount or 0)
+        actor.mana=max(0,actor.mana-amount); hero.mana+=amount
     elif c.opcode == "SPECIAL" and c.code == "rgl" and c.actor_uid in entities and c.amount is not None:
         actor=entities[c.actor_uid]
         if "manadrain" in set(actor.abilities) and actor.max_hp > 0 and int(c.amount) % int(actor.max_hp) == 0:
@@ -1572,6 +1607,7 @@ def _action_from_compact(
     defends = [c for c in cmds if c.opcode == "DEFEND" and c.actor_uid == actor_uid]
     teleports = [c for c in cmds if c.opcode == "TELEPORT" and c.actor_uid == actor_uid]
     specials = [c for c in cmds if c.opcode == "SPECIAL"]
+    mana_feed = next((c for c in specials if c.code == "mfd" and c.actor_uid == actor_uid and c.target_uid is not None), None)
     rune_speed_activations = [c for c in cmds if c.opcode == "RUNE_SPEED_ACTIVATE"]
     carriers = [c for c in cmds if c.opcode == "CARRIER_RELOCATE"]
     special_codes = [c.code for c in specials] + (["car"] if carriers else []) + (["rn2"] if rune_speed_activations else []) + (["tel"] if teleports else [])
@@ -1580,7 +1616,7 @@ def _action_from_compact(
     attack_move = _attack_move(actor_uid, cmds) if dealt else None
     action_move = attack_move if dealt else final_move
     phantom = next((c for c in specials if c.code == "phm" and c.target_uid is not None), None)
-    target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (phantom.target_uid if phantom else None)))
+    target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (mana_feed.target_uid if mana_feed else (phantom.target_uid if phantom else None))))
     target = by_uid.get(int(target_uid)) if target_uid is not None else None
     ax = action_move.x if action_move else (int(actor["x"]) if actor else 0)
     ay = action_move.y if action_move else (int(actor["y"]) if actor else 0)
@@ -1600,6 +1636,8 @@ def _action_from_compact(
             typ = "MELEE_ATTACK"
     elif teleports:
         typ = "HERO_ACTION" if actor and bool(actor.get("is_hero")) else "ABILITY"
+    elif mana_feed:
+        typ = "ABILITY"
     elif carriers:
         typ = "ABILITY"
     elif any(c.opcode == "PROC" and c.code == "badmorale" for c in cmds):

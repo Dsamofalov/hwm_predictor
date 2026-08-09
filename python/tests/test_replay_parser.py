@@ -1,6 +1,6 @@
 from hwm_solver.protocol.replay import (
     parse_entity_record, parse_turn_records, parse_commands, build_decisions, parse_tooltips,
-    _perspective_owner, _apply_command,
+    _perspective_owner, _apply_command, _decision_semantic_unresolved_flags,
 )
 
 
@@ -81,6 +81,39 @@ def test_psc_damage_layout_and_phantom_dissipation():
     entities = {17: e}
     _apply_command(entities, c)
     assert not e.alive and e.count == 0
+
+def test_mana_feed_exact_wire_and_transition():
+    from hwm_solver.protocol.replay import RawEntity
+
+    def entity(uid: int, owner: int, mana: int, count: int, abilities: list[str]) -> RawEntity:
+        return RawEntity(uid=uid, owner=owner, creature_id=120, max_hp=20, top_hp=20,
+            min_damage=1, max_damage=1, mana=mana, max_mana=max(mana, 15), speed=5, atb=0,
+            initiative=10, max_count=max(1,count), count=count, x=1, y=1, attack_range=6,
+            shots=5, attack=5, defense=5, morale_raw=0, luck_raw=0, retaliation_raw=0,
+            real_health=0, experience_level_code=0, abilities=abilities)
+
+    actor=entity(15,1,15,5,["manafeed"])
+    hero=entity(1,1,10,1,["hero"])
+    enemy_hero=entity(2,2,7,1,["hero"])
+    entities={15:actor,1:hero,2:enemy_hero}
+    cmd=parse_commands("Smfd015001050000000")[0]
+    assert cmd.opcode == "SPECIAL" and cmd.code == "mfd"
+    assert (cmd.actor_uid,cmd.target_uid,cmd.amount,cmd.duration) == (15,1,5,0)
+    assert _decision_semantic_unresolved_flags([cmd],entities,15) == [False]
+    _apply_command(entities,cmd)
+    assert actor.mana == 10 and hero.mana == 15 and enemy_hero.mana == 7
+
+    # Transfer is limited by remaining creature mana when count is larger.
+    actor.mana=3; actor.count=20; hero.mana=15
+    cmd=parse_commands("Smfd015001030000000")[0]
+    assert _decision_semantic_unresolved_flags([cmd],entities,15) == [False]
+    _apply_command(entities,cmd)
+    assert actor.mana == 0 and hero.mana == 18
+
+    # Wrong owner/amount must remain semantic-risk and must not mutate state.
+    bad=parse_commands("Smfd015002010000000")[0]
+    assert _decision_semantic_unresolved_flags([bad],entities,15) == [True]
+
 
 def test_tooltips_decode():
     import base64, json

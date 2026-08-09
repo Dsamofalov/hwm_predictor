@@ -8,7 +8,8 @@
   },
   "action_types": {
     "RANGED_ATTACK": 515,
-    "CAST_OR_ABILITY": 152,
+    "CAST_OR_ABILITY": 110,
+    "ABILITY": 42,
     "MOVE": 25,
     "DEFEND": 17,
     "MELEE_ATTACK": 17,
@@ -102,8 +103,11 @@
     "MOVE,DAMAGE,DAMAGE,PROC,STATE": 1
   },
   "mana_delta_pairs": {
-    "actor=0,hero=0": 630,
+    "actor=0,hero=0": 588,
     "actor=-6,hero=0": 93,
+    "actor=-15,hero=15": 21,
+    "actor=-5,hero=5": 15,
+    "actor=-3,hero=3": 6,
     "actor=0,hero=None": 5,
     "actor=-6,hero=None": 1,
     "actor=-3,hero=0": 1
@@ -416,6 +420,55 @@
       "candidate": true
     },
     {
+      "battle_id": "1626528753",
+      "decision_index": 30,
+      "server_turn": 18,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 12,
+      "friendly_hero_mana_after": 12,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150030000000121i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1627116484",
+      "decision_index": 6,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 16,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150210d0150080000000142d0150030000000057i0150100",
+      "candidate": false
+    },
+    {
       "battle_id": "1627116484",
       "decision_index": 21,
       "server_turn": 12,
@@ -523,6 +576,80 @@
       "candidate": true
     },
     {
+      "battle_id": "1628185951",
+      "decision_index": 45,
+      "server_turn": 21,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230106d0230080000000137l023morale^i0230050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1628185951",
+      "decision_index": 50,
+      "server_turn": 23,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 17,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230106d0230170000000102i0230100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1628185951",
+      "decision_index": 58,
+      "server_turn": 28,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 17,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230106l023luck^d0230170000000122i0230100",
+      "candidate": false
+    },
+    {
       "battle_id": "1628379315",
       "decision_index": 7,
       "server_turn": 5,
@@ -573,6 +700,30 @@
       "semantic_unresolved_opcodes": [],
       "raw": "m0220106Sstn022017060500012i0220100",
       "candidate": true
+    },
+    {
+      "battle_id": "1628379315",
+      "decision_index": 45,
+      "server_turn": 19,
+      "actor_uid": 22,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 18,
+      "friendly_hero_mana_after": 18,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0220106d0220090000000079i0220100",
+      "candidate": false
     },
     {
       "battle_id": "1629195501",
@@ -633,6 +784,30 @@
       "candidate": true
     },
     {
+      "battle_id": "1629195501",
+      "decision_index": 32,
+      "server_turn": 7,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 2,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 106,
+      "friendly_hero_mana_after": 106,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 16,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230220d0230160000000048i0230100",
+      "candidate": false
+    },
+    {
       "battle_id": "1629463607",
       "decision_index": 4,
       "server_turn": 6,
@@ -686,6 +861,55 @@
     },
     {
       "battle_id": "1629463607",
+      "decision_index": 32,
+      "server_turn": 20,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 18,
+      "friendly_hero_mana_after": 18,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201l015luck^d0150090000000079i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1629463607",
+      "decision_index": 37,
+      "server_turn": 21,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 14,
+      "friendly_hero_mana_after": 14,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150090000000039i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1629463607",
       "decision_index": 42,
       "server_turn": 22,
       "actor_uid": 15,
@@ -716,6 +940,79 @@
     },
     {
       "battle_id": "1629463607",
+      "decision_index": 47,
+      "server_turn": 23,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150090000000054i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1629463607",
+      "decision_index": 53,
+      "server_turn": 24,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 6,
+      "friendly_hero_mana_after": 6,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150030000000074i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1629463607",
+      "decision_index": 58,
+      "server_turn": 25,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 6,
+      "friendly_hero_mana_after": 6,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201l015luck^d0150090000000097i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1629463607",
       "decision_index": 61,
       "server_turn": 26,
       "actor_uid": 15,
@@ -742,6 +1039,29 @@
       ],
       "raw": "m0150201d0150060000000046i0150100Spss-01010000000007",
       "candidate": true
+    },
+    {
+      "battle_id": "1629463607",
+      "decision_index": 66,
+      "server_turn": 27,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 6,
+      "friendly_hero_mana_after": 6,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150503i0150100",
+      "candidate": false
     },
     {
       "battle_id": "1630747545",
@@ -778,11 +1098,11 @@
       "actor_creature_id": 120,
       "actor_count": 42,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 75,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -791,11 +1111,33 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0120107Smfd012001150000000i0120100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 19,
+      "server_turn": 17,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 57,
+      "friendly_hero_mana_after": 57,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0120305l012morale^i0120050",
+      "candidate": false
     },
     {
       "battle_id": "1631504047",
@@ -805,10 +1147,10 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 42,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 24,
-      "friendly_hero_mana_after": 24,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 39,
       "action_type": "RANGED_ATTACK",
       "target_uid": 4,
       "special_codes": [
@@ -827,6 +1169,231 @@
       ],
       "raw": "m0120305l012luck^l012critical^d0120040000008640Sat3001000000000000i0120100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 32,
+      "server_turn": 29,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 39,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140205l014critical^d0140020000005464i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 37,
+      "server_turn": 34,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 39,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0120206i0120100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 44,
+      "server_turn": 39,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 35,
+      "friendly_hero_mana_after": 35,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140506i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 48,
+      "server_turn": 43,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 35,
+      "friendly_hero_mana_after": 35,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0120505i0120100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631504047",
+      "decision_index": 53,
+      "server_turn": 48,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 17,
+      "friendly_hero_mana_after": 17,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140506l014luck^l014critical^d0140030000008491l014morale^i0140050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631509982",
+      "decision_index": 7,
+      "server_turn": 7,
+      "actor_uid": 10,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 20,
+      "friendly_hero_mana_after": 20,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0100102l010critical^d0100050000003111i0100100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631509982",
+      "decision_index": 19,
+      "server_turn": 16,
+      "actor_uid": 10,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 2,
+      "friendly_hero_mana_after": 2,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0100102l010luck^l010critical^d0100020000005200l010morale^i0100050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631509982",
+      "decision_index": 25,
+      "server_turn": 22,
+      "actor_uid": 10,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 2,
+      "friendly_hero_mana_after": 2,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0100102l010luck^l010critical^d0100040000004511i0100100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631512315",
+      "decision_index": 7,
+      "server_turn": 8,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 45,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014critical^d0140030000005648l014morale^i0140050",
+      "candidate": false
     },
     {
       "battle_id": "1631512315",
@@ -858,6 +1425,55 @@
       ],
       "raw": "m0140102l014luck^l014critical^d0140060000019477Sat3001000000000000i0140100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631512315",
+      "decision_index": 29,
+      "server_turn": 26,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 45,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014critical^d0140040000006705i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631512908",
+      "decision_index": 4,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150102d0150070000001239i0150100",
+      "candidate": false
     },
     {
       "battle_id": "1631512908",
@@ -892,6 +1508,110 @@
       "candidate": true
     },
     {
+      "battle_id": "1631512908",
+      "decision_index": 29,
+      "server_turn": 23,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 6,
+      "friendly_hero_mana_after": 6,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150102l015critical^d0150080000004880l015morale^i0150050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631515222",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150102l015luck^l015critical^d0150060000005968l015morale^i0150050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631515222",
+      "decision_index": 12,
+      "server_turn": 14,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150102l015critical^d0150060000003613l015morale^i0150050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631515222",
+      "decision_index": 24,
+      "server_turn": 21,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150102l015critical^d0150080000006972i0150100",
+      "candidate": false
+    },
+    {
       "battle_id": "1631515222",
       "decision_index": 35,
       "server_turn": 32,
@@ -900,11 +1620,11 @@
       "actor_creature_id": 120,
       "actor_count": 32,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 4,
-      "friendly_hero_mana_after": 4,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 19,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -913,11 +1633,134 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150102Smfd015002150000000i0150100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631515644",
+      "decision_index": 4,
+      "server_turn": 5,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160110l016luck^d0160050000002537l016morale^i0160050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631515644",
+      "decision_index": 14,
+      "server_turn": 12,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 32,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 36,
+      "friendly_hero_mana_after": 36,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160110l016critical^d0160040000002039i0160100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 6,
+      "server_turn": 5,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 60,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130201d0130020000000982i0130100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 24,
+      "server_turn": 16,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130201l013luck^d0130020000004749i0130100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 43,
+      "server_turn": 30,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 34,
+      "friendly_hero_mana_after": 34,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130201d0130050000002851l013morale^i0130050",
+      "candidate": false
     },
     {
       "battle_id": "1631630241",
@@ -928,11 +1771,11 @@
       "actor_creature_id": 120,
       "actor_count": 38,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 49,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -941,11 +1784,83 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0130201Smfd013001150000000i0130100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 71,
+      "server_turn": 53,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 49,
+      "friendly_hero_mana_after": 49,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130301i0130100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 93,
+      "server_turn": 69,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 31,
+      "friendly_hero_mana_after": 31,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130301l013critical^d0130060000004395l013morale^i0130050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631630241",
+      "decision_index": 102,
+      "server_turn": 78,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 31,
+      "friendly_hero_mana_after": 31,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130301l013critical^d0130040000002234i0130100",
+      "candidate": false
     },
     {
       "battle_id": "1631634595",
@@ -956,11 +1871,11 @@
       "actor_creature_id": 120,
       "actor_count": 35,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 75,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -970,9 +1885,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0130210Smfd013001150000000l013morale^i0130050",
       "candidate": true
     },
@@ -985,11 +1898,11 @@
       "actor_creature_id": 120,
       "actor_count": 3,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_after": 12,
+      "friendly_hero_mana_before": 75,
+      "friendly_hero_mana_after": 78,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -998,11 +1911,34 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150101Smfd015001030000000i0150100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631634595",
+      "decision_index": 19,
+      "server_turn": 14,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 35,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 60,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130210l013critical^d0130020000004419i0130100",
+      "candidate": false
     },
     {
       "battle_id": "1631634595",
@@ -1012,12 +1948,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 3,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 42,
-      "friendly_hero_mana_after": 42,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 12,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 63,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1027,11 +1963,35 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150101Smfd015001030000000l015morale^i0150050",
       "candidate": true
+    },
+    {
+      "battle_id": "1631634595",
+      "decision_index": 32,
+      "server_turn": 22,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 35,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 63,
+      "friendly_hero_mana_after": 63,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130210l013luck^l013critical^d0130050000006518i0130100",
+      "candidate": false
     },
     {
       "battle_id": "1631634595",
@@ -1041,12 +2001,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 3,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 42,
-      "friendly_hero_mana_after": 42,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 9,
+      "actor_mana_after": 6,
+      "friendly_hero_mana_before": 63,
+      "friendly_hero_mana_after": 66,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1056,9 +2016,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150101Smfd015001030000000l015morale^i0150050",
       "candidate": true
     },
@@ -1070,12 +2028,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 3,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 24,
-      "friendly_hero_mana_after": 24,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 6,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 48,
+      "friendly_hero_mana_after": 51,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1084,11 +2042,61 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150101Smfd015001030000000i0150100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631634595",
+      "decision_index": 40,
+      "server_turn": 30,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 35,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 51,
+      "friendly_hero_mana_after": 51,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0170209d0170050000002438l017morale^i0170050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631634595",
+      "decision_index": 45,
+      "server_turn": 34,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 35,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 51,
+      "friendly_hero_mana_after": 51,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130210l013luck^l013critical^d0130040000009093l013morale^i0130050",
+      "candidate": false
     },
     {
       "battle_id": "1631635932",
@@ -1099,11 +2107,11 @@
       "actor_creature_id": 120,
       "actor_count": 38,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 75,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1113,11 +2121,336 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0140210Smfd014001150000000l014morale^i0140050",
       "candidate": true
+    },
+    {
+      "battle_id": "1631635932",
+      "decision_index": 16,
+      "server_turn": 10,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 75,
+      "friendly_hero_mana_after": 75,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210d0140060000002755i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631635932",
+      "decision_index": 24,
+      "server_turn": 18,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 67,
+      "friendly_hero_mana_after": 67,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210l014luck^d0140080000002753i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631635932",
+      "decision_index": 37,
+      "server_turn": 26,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 59,
+      "friendly_hero_mana_after": 59,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210l014luck^l014critical^d0140040000008543i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631635932",
+      "decision_index": 46,
+      "server_turn": 32,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 47,
+      "friendly_hero_mana_after": 47,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210l014critical^d0140070000003269l014morale^i0140050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631635932",
+      "decision_index": 51,
+      "server_turn": 37,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 38,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 41,
+      "friendly_hero_mana_after": 41,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210l014critical^d0140020000006539i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631638736",
+      "decision_index": 11,
+      "server_turn": 8,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150040000000934l015morale^i0150050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631638736",
+      "decision_index": 16,
+      "server_turn": 11,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201l015luck^d0150040000002566i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631638736",
+      "decision_index": 28,
+      "server_turn": 17,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150020000001188i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631638736",
+      "decision_index": 37,
+      "server_turn": 22,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201l015luck^l015critical^d0150070000003384i0150100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631657668",
+      "decision_index": 5,
+      "server_turn": 5,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 23,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014critical^d0140080000001520i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631657668",
+      "decision_index": 7,
+      "server_turn": 7,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 24,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160109l016critical^d0160060000001965i0160100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631657668",
+      "decision_index": 17,
+      "server_turn": 13,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 23,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014luck^d0140050000001672i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631657668",
+      "decision_index": 18,
+      "server_turn": 14,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 24,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160109l016luck^l016critical^d0160040000002436i0160100",
+      "candidate": false
     },
     {
       "battle_id": "1631663521",
@@ -1128,11 +2461,11 @@
       "actor_creature_id": 120,
       "actor_count": 17,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 30,
-      "friendly_hero_mana_after": 30,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 45,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1141,11 +2474,136 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0140105Smfd014001150000000i0140100",
       "candidate": true
+    },
+    {
+      "battle_id": "1631663521",
+      "decision_index": 17,
+      "server_turn": 14,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 27,
+      "friendly_hero_mana_after": 27,
+      "action_type": "MOVE",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140505i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631663521",
+      "decision_index": 24,
+      "server_turn": 21,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 9,
+      "friendly_hero_mana_after": 9,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140505l014critical^d0140050000002475l014morale^i0140050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631663521",
+      "decision_index": 27,
+      "server_turn": 23,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 9,
+      "friendly_hero_mana_after": 9,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140505l014luck^d0140030000002961i0140100",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631663521",
+      "decision_index": 31,
+      "server_turn": 27,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 5,
+      "friendly_hero_mana_after": 5,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140505l014luck^l014critical^d0140030000003300l014morale^i0140050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631723609",
+      "decision_index": 12,
+      "server_turn": 8,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 18,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160105l016luck^l016critical^d0160070000000853i0160100",
+      "candidate": false
     },
     {
       "battle_id": "1631726603",
@@ -1156,11 +2614,11 @@
       "actor_creature_id": 120,
       "actor_count": 47,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 40,
-      "friendly_hero_mana_after": 40,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 55,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1170,11 +2628,58 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0140102Smfd014001150000000l014morale^i0140050",
       "candidate": true
+    },
+    {
+      "battle_id": "1631726603",
+      "decision_index": 10,
+      "server_turn": 12,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 37,
+      "friendly_hero_mana_after": 37,
+      "action_type": "WAIT",
+      "target_uid": null,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "WAIT",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102w014i0140050",
+      "candidate": false
+    },
+    {
+      "battle_id": "1631726603",
+      "decision_index": 21,
+      "server_turn": 16,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 37,
+      "friendly_hero_mana_after": 37,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014critical^d0140030000004434i0140100",
+      "candidate": false
     },
     {
       "battle_id": "1631726603",
@@ -1184,10 +2689,10 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 47,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 4,
-      "friendly_hero_mana_after": 4,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 19,
+      "friendly_hero_mana_after": 19,
       "action_type": "RANGED_ATTACK",
       "target_uid": 4,
       "special_codes": [
@@ -1339,11 +2844,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 10,
       "friendly_hero_mana_before": 55,
-      "friendly_hero_mana_after": 55,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 60,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1352,9 +2857,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150209Smfd015001050000000i0150100",
       "candidate": true
     },
@@ -1366,12 +2869,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 29,
-      "friendly_hero_mana_after": 29,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 10,
+      "actor_mana_after": 5,
+      "friendly_hero_mana_before": 34,
+      "friendly_hero_mana_after": 39,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1381,9 +2884,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150209Smfd015001050000000l015morale^i0150050",
       "candidate": true
     },
@@ -1395,12 +2896,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 29,
-      "friendly_hero_mana_after": 29,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 5,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 44,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1409,9 +2910,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150209Smfd015001050000000i0150100",
       "candidate": true
     },
@@ -1424,11 +2923,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 10,
       "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -1438,9 +2937,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160209Smfd016002050000000l016morale^i0160050",
       "candidate": true
     },
@@ -1452,12 +2949,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 52,
-      "friendly_hero_mana_after": 52,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 10,
+      "actor_mana_after": 5,
+      "friendly_hero_mana_before": 57,
+      "friendly_hero_mana_after": 62,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -1466,9 +2963,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160209Smfd016002050000000i0160100",
       "candidate": true
     },
@@ -1482,8 +2977,8 @@
       "actor_count": 36,
       "actor_mana_before": 15,
       "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
+      "friendly_hero_mana_before": 44,
+      "friendly_hero_mana_after": 44,
       "action_type": "RANGED_ATTACK",
       "target_uid": 7,
       "special_codes": [
@@ -1510,12 +3005,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 5,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 44,
+      "friendly_hero_mana_after": 49,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd",
         "paa"
@@ -1527,7 +3022,6 @@
         "SPECIAL"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "raw": "m0160209Smfd016002050000000i0160100Spaa-01010000000004",
@@ -1611,11 +3105,11 @@
       "actor_creature_id": 120,
       "actor_count": 42,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 22,
-      "friendly_hero_mana_after": 22,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 37,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1624,9 +3118,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150102Smfd015001150000000i0150100",
       "candidate": true
     },
@@ -1638,10 +3130,10 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 42,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 4,
-      "friendly_hero_mana_after": 4,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 19,
+      "friendly_hero_mana_after": 19,
       "action_type": "RANGED_ATTACK",
       "target_uid": 9,
       "special_codes": [
@@ -1722,11 +3214,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 3,
-      "actor_mana_after": 3,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
-      "friendly_hero_mana_after": 0,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 3,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1735,9 +3227,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160107Smfd016001030000000i0160100",
       "candidate": true
     },
@@ -1749,10 +3239,10 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 3,
-      "actor_mana_after": 3,
-      "friendly_hero_mana_before": 0,
-      "friendly_hero_mana_after": 0,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 3,
+      "friendly_hero_mana_after": 3,
       "action_type": "RANGED_ATTACK",
       "target_uid": 8,
       "special_codes": [
@@ -1782,11 +3272,11 @@
       "actor_creature_id": 120,
       "actor_count": 25,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 2,
-      "friendly_hero_mana_after": 2,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 17,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -1795,9 +3285,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160210Smfd016001150000000i0160100",
       "candidate": true
     },
@@ -2259,11 +3747,11 @@
       "actor_creature_id": 120,
       "actor_count": 36,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 0,
       "friendly_hero_mana_before": 52,
-      "friendly_hero_mana_after": 52,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 67,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -2272,9 +3760,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0150210Smfd015002150000000i0150100",
       "candidate": true
     },
@@ -2287,11 +3773,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_after": 10,
+      "friendly_hero_mana_before": 49,
+      "friendly_hero_mana_after": 54,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -2300,9 +3786,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160209Smfd016002050000000i0160100",
       "candidate": true
     },
@@ -2314,12 +3798,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 10,
+      "actor_mana_after": 5,
+      "friendly_hero_mana_before": 54,
+      "friendly_hero_mana_after": 59,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -2328,9 +3812,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160209Smfd016002050000000i0160100",
       "candidate": true
     },
@@ -2342,10 +3824,10 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 36,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 59,
+      "friendly_hero_mana_after": 59,
       "action_type": "RANGED_ATTACK",
       "target_uid": 7,
       "special_codes": [
@@ -2373,12 +3855,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 8,
-      "friendly_hero_mana_after": 8,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 5,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 33,
+      "friendly_hero_mana_after": 38,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -2388,9 +3870,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0160106Smfd016002050000000l016morale^i0160050",
       "candidate": true
     },
@@ -2539,11 +4019,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 10,
       "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 39,
+      "action_type": "ABILITY",
+      "target_uid": 2,
       "special_codes": [
         "mfd"
       ],
@@ -2552,9 +4032,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0170209Smfd017002050000000i0170100",
       "candidate": true
     },
@@ -2568,8 +4046,8 @@
       "actor_count": 36,
       "actor_mana_before": 15,
       "actor_mana_after": 15,
-      "friendly_hero_mana_before": 34,
-      "friendly_hero_mana_after": 34,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 39,
       "action_type": "RANGED_ATTACK",
       "target_uid": 8,
       "special_codes": [
@@ -3037,11 +4515,11 @@
       "actor_creature_id": 120,
       "actor_count": 5,
       "actor_mana_before": 15,
-      "actor_mana_after": 15,
+      "actor_mana_after": 10,
       "friendly_hero_mana_before": 60,
-      "friendly_hero_mana_after": 60,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -3050,9 +4528,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0120209Smfd012001050000000i0120100",
       "candidate": true
     },
@@ -3064,12 +4540,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 52,
-      "friendly_hero_mana_after": 52,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 10,
+      "actor_mana_after": 5,
+      "friendly_hero_mana_before": 57,
+      "friendly_hero_mana_after": 62,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -3078,9 +4554,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0120209Smfd012001050000000i0120100",
       "candidate": true
     },
@@ -3094,8 +4568,8 @@
       "actor_count": 36,
       "actor_mana_before": 15,
       "actor_mana_after": 15,
-      "friendly_hero_mana_before": 44,
-      "friendly_hero_mana_after": 44,
+      "friendly_hero_mana_before": 54,
+      "friendly_hero_mana_after": 54,
       "action_type": "RANGED_ATTACK",
       "target_uid": 3,
       "special_codes": [
@@ -3123,12 +4597,12 @@
       "actor_owner": 1,
       "actor_creature_id": 120,
       "actor_count": 5,
-      "actor_mana_before": 15,
-      "actor_mana_after": 15,
-      "friendly_hero_mana_before": 26,
-      "friendly_hero_mana_after": 26,
-      "action_type": "CAST_OR_ABILITY",
-      "target_uid": null,
+      "actor_mana_before": 5,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 36,
+      "friendly_hero_mana_after": 41,
+      "action_type": "ABILITY",
+      "target_uid": 1,
       "special_codes": [
         "mfd"
       ],
@@ -3138,9 +4612,7 @@
         "PROC",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "raw": "m0120209Smfd012001050000000l012morale^i0120050",
       "candidate": true
     },
@@ -3512,6 +4984,3680 @@
       ],
       "semantic_unresolved_opcodes": [],
       "raw": "m0110101l011luck^d0110070000004716Senr002100000000003Senr003100000000003Senr004100000000003l011morale^i0110050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632041791",
+      "decision_index": 21,
+      "server_turn": 18,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 31,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 32,
+      "friendly_hero_mana_after": 32,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0120101d0120020000003439Sat3001000000000000i0120100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632042195",
+      "decision_index": 22,
+      "server_turn": 18,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 14,
+      "friendly_hero_mana_after": 29,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130104Smfd013001150000000i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632051182",
+      "decision_index": 17,
+      "server_turn": 15,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 5,
+      "friendly_hero_mana_after": 20,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150104Smfd015001150000000i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632052122",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 20,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 2,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 30,
+      "friendly_hero_mana_after": 30,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0200202Sstn020014060200012i0200100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632052122",
+      "decision_index": 26,
+      "server_turn": 13,
+      "actor_uid": 19,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 12,
+      "friendly_hero_mana_after": 12,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0190201Sstn019017061500012l019morale^i0190050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632052122",
+      "decision_index": 35,
+      "server_turn": 19,
+      "actor_uid": 19,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 7,
+      "friendly_hero_mana_after": 7,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0190201Sstn019014061500012i0190100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632053524",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 10,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 55,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150207Smfd015001050000000i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632053524",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 42,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 55,
+      "friendly_hero_mana_after": 70,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632053524",
+      "decision_index": 19,
+      "server_turn": 14,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 10,
+      "actor_mana_after": 5,
+      "friendly_hero_mana_before": 52,
+      "friendly_hero_mana_after": 57,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150207Smfd015001050000000l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632110776",
+      "decision_index": 11,
+      "server_turn": 13,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 37,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130110Smfd013001150000000i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632124089",
+      "decision_index": 6,
+      "server_turn": 6,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632124549",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632127245",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632158225",
+      "decision_index": 4,
+      "server_turn": 5,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 23,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0180102Sstn018016062300012i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632158225",
+      "decision_index": 7,
+      "server_turn": 7,
+      "actor_uid": 21,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0210107Sstn021017060500012i0210100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632158225",
+      "decision_index": 28,
+      "server_turn": 14,
+      "actor_uid": 21,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0210107Sstn021015060500012i0210100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632158225",
+      "decision_index": 91,
+      "server_turn": 44,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 23,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0180102l018luck^l018critical^d0180040000004477Sent000004000000000i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632158225",
+      "decision_index": 93,
+      "server_turn": 46,
+      "actor_uid": 21,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 2,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0210704l021critical^d0210070000000182Sent000007000000000i0210100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632183025",
+      "decision_index": 21,
+      "server_turn": 17,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130102l013critical^d0130050000004761Sat3001000000000000l013morale^i0130050l009badmorale^i0090050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632248224",
+      "decision_index": 19,
+      "server_turn": 17,
+      "actor_uid": 11,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0110104d0110030000001321Sent000003000000000l011morale^i0110050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632248224",
+      "decision_index": 25,
+      "server_turn": 23,
+      "actor_uid": 11,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "paa"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0110104l011luck^d0110040000001972i0110100Spaa-01009000000514",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632253549",
+      "decision_index": 25,
+      "server_turn": 22,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0160209d0160050000001656Sat3001000000000000i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632253549",
+      "decision_index": 42,
+      "server_turn": 36,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 28,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 19,
+      "action_type": "ABILITY",
+      "target_uid": 2,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210Smfd014002150000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632329530",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 9,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 45,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 65,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0090102Smfd009001150000000l009morale^i0090050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632336244",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 18,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160110Sstn016014061800012i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632350495",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 18,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150209Sstn015010061800012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632473415",
+      "decision_index": 10,
+      "server_turn": 6,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230106Sstn023021060500012i0230100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632503224",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 50,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [
+        "enr",
+        "enr",
+        "enr",
+        "enr",
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0120109l012luck^d0120080000002125Senr002100000000001Senr003100000000001Senr004100000000001Senr005100000000001Senr006100000000001Senr007100000000001i0120100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632503644",
+      "decision_index": 19,
+      "server_turn": 15,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130102l013luck^d0130070000005415Sat3001000000000000l013morale^i0130050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632512231",
+      "decision_index": 23,
+      "server_turn": 21,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 55,
+      "friendly_hero_mana_after": 55,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130109l013luck^l013critical^d0130060000009236Sat3001000000000000i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632515659",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 60,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "enr",
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150109l015luck^l015critical^d0150040000004623Senr009100000000003Sat3001000000000000i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632515659",
+      "decision_index": 30,
+      "server_turn": 23,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 47,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150109l015critical^d0150100000003672Senr009100000000005i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632521872",
+      "decision_index": 21,
+      "server_turn": 16,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 17,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0140102l014critical^d0140060000003390Sat3001000000000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632614754",
+      "decision_index": 9,
+      "server_turn": 8,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "adp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150201l015critical^d0150100000000210l015morale^i0150050Sadp006000001000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632614754",
+      "decision_index": 18,
+      "server_turn": 12,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "adp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150201l015luck^d0150090000000332l015morale^i0150050Sadp006000002000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 10,
+      "server_turn": 11,
+      "actor_uid": 6,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 364,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "ltn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0061210Sltn006009005000721i0060100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 11,
+      "server_turn": 11,
+      "actor_uid": 7,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn007006060400012i0070100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 33,
+      "server_turn": 26,
+      "actor_uid": 6,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 326,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "sts",
+        "ra2",
+        "ra2",
+        "ral",
+        "enr",
+        "ra2",
+        "raa",
+        "rag"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0061210Ssts006090600500000Sra20110318-1400066d0060110000000268Sra20080133-1200066Sral008000000000000d0060080000000268Senr010100000000004Sra20090000-1000022d0060090000000312i0010000Sraa001001000300000Srag010003800030000i0060100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 34,
+      "server_turn": 26,
+      "actor_uid": 7,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 1,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "ra2",
+        "ltn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0071109Sra20130000-3000001Sltn007013005000016i0070100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 50,
+      "server_turn": 37,
+      "actor_uid": 6,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 86,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "ra2",
+        "ltn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0061210Sra20080281-1500053Sltn006008005000213i0060100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632629367",
+      "decision_index": 63,
+      "server_turn": 45,
+      "actor_uid": 6,
+      "actor_owner": 4,
+      "actor_creature_id": 120,
+      "actor_count": 86,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "ra2"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0061210d0060100000000067Sra20101114-0600016i0060100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632633670",
+      "decision_index": 20,
+      "server_turn": 13,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210Sstn014011061500012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632633670",
+      "decision_index": 33,
+      "server_turn": 23,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210Sstn014012061500012l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632633670",
+      "decision_index": 38,
+      "server_turn": 26,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 15,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "dsp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "SPECIAL",
+        "OPAQUE_EFFECT",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "OPAQUE_EFFECT"
+      ],
+      "raw": "m0140210l014critical^Sdsp-0200300bld0000d0140030000000462i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632655029",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 25,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150101d0150050000000214Sat3001000000000000i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632657092",
+      "decision_index": 14,
+      "server_turn": 13,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 75,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 6,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150202Sstn015010060400012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 23,
+      "server_turn": 13,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160201Sstn016010060400012l016morale^i0160050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 32,
+      "server_turn": 17,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160201Sstn016011060400012i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 36,
+      "server_turn": 20,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 2,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150202Sstn015014060200012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 40,
+      "server_turn": 21,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 3,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 7,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160201Smfd016001030000000i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632704162",
+      "decision_index": 48,
+      "server_turn": 24,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 7,
+      "friendly_hero_mana_after": 7,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "blt",
+        "blt",
+        "ato"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0160201l016luck^d0160060000000035d0060160000000394Sblt006100000000012Sblt007100000000012i0160100Sato001000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201Sstn015012060400012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140202Sstn014009060400012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 61,
+      "server_turn": 49,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 10,
+      "friendly_hero_mana_after": 10,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn015013060400012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 64,
+      "server_turn": 50,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 6,
+      "friendly_hero_mana_after": 6,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn014010060400012l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632726162",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140202Sstn014013060400012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632726162",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201Sstn015012060400012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632726162",
+      "decision_index": 18,
+      "server_turn": 14,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201d0150060000000120Senr003100000000002Senr004100000000002i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632726162",
+      "decision_index": 21,
+      "server_turn": 17,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [
+        "tob"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140202d0140070000000144Stob007007000000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632873730",
+      "decision_index": 8,
+      "server_turn": 7,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 2,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140209Sstn014009060200012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632873730",
+      "decision_index": 9,
+      "server_turn": 8,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150210Sstn015012060400012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632880033",
+      "decision_index": 6,
+      "server_turn": 8,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140209Sstn014013060400012l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632880510",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130209Sstn013008060400012i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632880510",
+      "decision_index": 6,
+      "server_turn": 8,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210Sstn014011060400012l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632880510",
+      "decision_index": 22,
+      "server_turn": 18,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "enr",
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0130209l013luck^l013critical^d0130060000000762Senr002100000000002Senr003100000000002Senr004100000000002i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632880510",
+      "decision_index": 35,
+      "server_turn": 28,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "blt",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210l014luck^d0140030000000174d0030140000000469Sblt007100000000003Senr009100000000003i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632957179",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 15,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 75,
+      "action_type": "ABILITY",
+      "target_uid": 1,
+      "special_codes": [
+        "mfd"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102Smfd014001150000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632957179",
+      "decision_index": 24,
+      "server_turn": 19,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 57,
+      "friendly_hero_mana_after": 57,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0140102l014luck^l014critical^d0140020000004891Sat3001000000000000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632957179",
+      "decision_index": 40,
+      "server_turn": 30,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 39,
+      "friendly_hero_mana_after": 39,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "enr",
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140102l014critical^d0140050000006254Senr003100000000004Senr006100000000004Senr007100000000004i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632957179",
+      "decision_index": 54,
+      "server_turn": 41,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 40,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 35,
+      "friendly_hero_mana_after": 35,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "enr",
+        "enr",
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0170103d0170060000002524Senr003100000000005Senr007100000000005Sent000006000000000l017morale^i0170050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632967347",
+      "decision_index": 4,
+      "server_turn": 5,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 20,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 20,
+      "friendly_hero_mana_after": 20,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "ra2"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0180201l018critical^d0180030000000526Sra20030000-2900063l018morale^i0180050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632967347",
+      "decision_index": 7,
+      "server_turn": 7,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 20,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 20,
+      "friendly_hero_mana_after": 20,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "agl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0160102d0160030000000301i0160100Sagl011000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632967347",
+      "decision_index": 23,
+      "server_turn": 14,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 20,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 12,
+      "friendly_hero_mana_after": 12,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "paa"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0160102l016luck^d0160110000001450l016morale^i0160050Spaa-01013000000115",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632967347",
+      "decision_index": 29,
+      "server_turn": 18,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 20,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "ent",
+        "raa"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0180201l018luck^l018critical^d0180050000001420Sent000005000000000i0010000Sraa002002000300000i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632967347",
+      "decision_index": 39,
+      "server_turn": 23,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 20,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "ra2",
+        "raa"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL",
+        "HIDE_OR_DEATH",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0180201d0180030000000335Sra20030000-1800002i0010000Sraa002002000300000h002i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633057125",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140210Sstn014012060900012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633057125",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150209Sstn015013060900012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633057125",
+      "decision_index": 15,
+      "server_turn": 12,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150209Sstn015009060900012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633057125",
+      "decision_index": 51,
+      "server_turn": 41,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [
+        "fd1"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0140210l014critical^d0140020000000345i0140100Sfd1-01009000000018",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633076555",
+      "decision_index": 10,
+      "server_turn": 9,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150210Sstn015013060500012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633076555",
+      "decision_index": 21,
+      "server_turn": 15,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150210Sstn015010060500012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 5,
+      "server_turn": 7,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn",
+        "spi"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130209Sstn013009060300012i0130100Sspi002000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 10,
+      "server_turn": 8,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn",
+        "spi"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150210Sstn015012060400012i0150100Sspi005000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 22,
+      "server_turn": 17,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 2,
+      "special_codes": [
+        "spi"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130209d0130020000000080l013morale^i0130050Sspi002000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 25,
+      "server_turn": 18,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn",
+        "spi"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150210Sstn015014060400012i0150100Sspi007000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 33,
+      "server_turn": 24,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 9,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "ltn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130209Sltn013007005000043i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 38,
+      "server_turn": 28,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 7,
+      "special_codes": [
+        "spi"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150210d0150070000000103l015morale^i0150050Sspi007000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633082788",
+      "decision_index": 49,
+      "server_turn": 37,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 8,
+      "special_codes": [
+        "ato"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150210l015critical^d0150080000000102i0150100Sato001000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0170211Sstn017012060300012i0170100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 6,
+      "server_turn": 8,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0180212Sstn018016060400012i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 21,
+      "server_turn": 15,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0170211Sstn017015060300012i0170100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 24,
+      "server_turn": 18,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0180212Sstn018013060400012i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 33,
+      "server_turn": 24,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 3,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "fd1"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0170211l017luck^d0170040000000092l017morale^i0170050Sfd1-01012000000017",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633105941",
+      "decision_index": 40,
+      "server_turn": 30,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 3,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "enr",
+        "rgl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "Z_RECORD",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0170211d0170100000000000d0100170000000660Senr013100000000002Srgl000010000000057z010017003i0170100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633120289",
+      "decision_index": 22,
+      "server_turn": 17,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 31,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0130201l013luck^d0130040000006441Sat3001000000000000i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633121131",
+      "decision_index": 12,
+      "server_turn": 10,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 31,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201l015critical^d0150090000002534Senr008100000000003i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633132078",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 7,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "ra2"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150209l015luck^d0150090000000245Sra20090000-3000024i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633132078",
+      "decision_index": 17,
+      "server_turn": 12,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 7,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn",
+        "ato"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "PROC",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "Sstn015010060700012l015morale^i0150050Sato001000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633132078",
+      "decision_index": 23,
+      "server_turn": 12,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 7,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn015015060700012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633140429",
+      "decision_index": 6,
+      "server_turn": 6,
+      "actor_uid": 17,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0170202Sstn017015060400012i0170100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633140429",
+      "decision_index": 7,
+      "server_turn": 7,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "agl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0180201l018critical^d0180090000000200i0180100Sagl006000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633140429",
+      "decision_index": 24,
+      "server_turn": 15,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "enr",
+        "fws",
+        "agl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "PROC",
+        "STATE",
+        "STATE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "m0180201l018luck^d0180090000000175l018morale^i0180050i0160000Senr012100000000002Sfws016100400000172i0160000Sagl007000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633140429",
+      "decision_index": 29,
+      "server_turn": 18,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "DEFEND",
+      "target_uid": null,
+      "special_codes": [
+        "paa"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DEFEND",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0180201Sdef018100000000030i0180100Spaa-01014000000060",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633140429",
+      "decision_index": 37,
+      "server_turn": 24,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn",
+        "ato",
+        "paa"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "raw": "Sstn018014060300012i0180100Sato001000000000000Spaa-01014000000060",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633150462",
+      "decision_index": 3,
+      "server_turn": 5,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140202Sstn014012060400012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633150462",
+      "decision_index": 15,
+      "server_turn": 12,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150201Sstn015013060300012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633150462",
+      "decision_index": 19,
+      "server_turn": 15,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0140202Sstn014011060400012l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633150462",
+      "decision_index": 55,
+      "server_turn": 42,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 3,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn015009060300012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633332948",
+      "decision_index": 4,
+      "server_turn": 6,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150210Sstn015010060800012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633332948",
+      "decision_index": 37,
+      "server_turn": 31,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0140209l014critical^d0140050000000333Sat3001000000000000l014morale^i0140050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633332948",
+      "decision_index": 43,
+      "server_turn": 36,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "dsp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "OPAQUE_EFFECT",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "OPAQUE_EFFECT"
+      ],
+      "raw": "m0140209Sdsp-0200500bld0000d0140050000000189i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633332948",
+      "decision_index": 52,
+      "server_turn": 41,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn014013060900012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633332948",
+      "decision_index": 53,
+      "server_turn": 41,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn015012060800012i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633334992",
+      "decision_index": 51,
+      "server_turn": 41,
+      "actor_uid": 11,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0110201l011luck^l011critical^d0110030000000549Sent000003000000000l011morale^i0110050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633351323",
+      "decision_index": 62,
+      "server_turn": 53,
+      "actor_uid": 12,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn012010060800012i0120100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633387367",
+      "decision_index": 23,
+      "server_turn": 19,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 5,
+      "special_codes": [
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150202l015luck^l015critical^d0150050000000717Senr004100000000002Senr007100000000002i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633387367",
+      "decision_index": 24,
+      "server_turn": 20,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0160201l016critical^d0160090000000543Senr004100000000003Senr007100000000003i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633387367",
+      "decision_index": 40,
+      "server_turn": 31,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 8,
+      "special_codes": [
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150202d0150080000000595Senr004100000000004Senr007100000000004i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633387367",
+      "decision_index": 51,
+      "server_turn": 42,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0150202d0150040000000217Senr007100000000006i0150100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633387367",
+      "decision_index": 58,
+      "server_turn": 46,
+      "actor_uid": 16,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn016014060800012i0160100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633424824",
+      "decision_index": 45,
+      "server_turn": 36,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 15,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "RANGED_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "ent"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "PROC",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "raw": "m0150201l015luck^d0150060000000940Sent000006000000000l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633424824",
+      "decision_index": 69,
+      "server_turn": 56,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 9,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 4,
+      "friendly_hero_mana_after": 4,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn014013060900012i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633424824",
+      "decision_index": 74,
+      "server_turn": 57,
+      "actor_uid": 15,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 8,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "Sstn015012060800012l015morale^i0150050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633429810",
+      "decision_index": 14,
+      "server_turn": 5,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230202Sstn023021060500012l023morale^i0230050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633867935",
+      "decision_index": 13,
+      "server_turn": 7,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230202Sstn023021060500012i0230100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633867935",
+      "decision_index": 35,
+      "server_turn": 14,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230202Sstn023018060500012i0230100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1635944014",
+      "decision_index": 4,
+      "server_turn": 5,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 5,
+      "actor_mana_before": 15,
+      "actor_mana_after": 9,
+      "friendly_hero_mana_before": 40,
+      "friendly_hero_mana_after": 40,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230202Sstn023021060500012i0230100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1635944014",
+      "decision_index": 31,
+      "server_turn": 14,
+      "actor_uid": 23,
+      "actor_owner": 1,
+      "actor_creature_id": 120,
+      "actor_count": 4,
+      "actor_mana_before": 9,
+      "actor_mana_after": 3,
+      "friendly_hero_mana_before": 22,
+      "friendly_hero_mana_after": 22,
+      "action_type": "CAST_OR_ABILITY",
+      "target_uid": null,
+      "special_codes": [
+        "stn"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [],
+      "raw": "m0230202Sstn023018060400012i0230100",
       "candidate": true
     }
   ],

@@ -1120,6 +1120,46 @@ static bool test_entrenchment_lifecycle_and_resistance() {
     return true;
 }
 
+static bool test_mana_feed_exact_action_and_protocol() {
+    GenericSimulator sim;
+    BattleState s=fixture(); auto* actor=s.entity(1); CHECK(actor);
+    actor->owner=1; actor->count=5; actor->max_count=20; actor->mana=15;
+    actor->ability_ids.push_back(stable_ability_id("manafeed"));
+    Entity hero; hero.uid=3; hero.owner=1; hero.side=Side::Player; hero.is_hero=true; hero.alive=true; hero.mana=10;
+    Entity enemy_hero=hero; enemy_hero.uid=4; enemy_hero.owner=2; enemy_hero.side=Side::Pve; enemy_hero.mana=7;
+    s.entities.push_back(hero); s.entities.push_back(enemy_hero);
+
+    auto acts=sim.legal_actions(s);
+    auto feed=std::find_if(acts.begin(),acts.end(),[](const Action&a){
+        return a.type==ActionType::Ability&&a.target_uid&&*a.target_uid==3&&a.ability_id&&*a.ability_id==stable_ability_id("mfd");
+    });
+    CHECK(feed!=acts.end());
+    CHECK(std::none_of(acts.begin(),acts.end(),[](const Action&a){return a.type==ActionType::Ability&&a.target_uid&&*a.target_uid==4&&a.ability_id&&*a.ability_id==stable_ability_id("mfd");}));
+    auto tr=sim.apply(s,*feed,0.5); CHECK(tr.valid); CHECK(tr.warning=="exact_mana_feed");
+    CHECK(tr.state.entity(1)->mana==10); CHECK(tr.state.entity(3)->mana==15); CHECK(tr.state.entity(4)->mana==7);
+
+    BattleState limited=s; limited.entity(1)->count=20; limited.entity(1)->mana=3;
+    auto limited_acts=sim.legal_actions(limited);
+    auto limited_feed=std::find_if(limited_acts.begin(),limited_acts.end(),[](const Action&a){return a.type==ActionType::Ability&&a.target_uid&&*a.target_uid==3&&a.ability_id&&*a.ability_id==stable_ability_id("mfd");});
+    CHECK(limited_feed!=limited_acts.end());
+    auto limited_tr=sim.apply(limited,*limited_feed,0.5); CHECK(limited_tr.valid);
+    CHECK(limited_tr.state.entity(1)->mana==0); CHECK(limited_tr.state.entity(3)->mana==13);
+    BattleState empty=limited; empty.entity(1)->mana=0;
+    const auto empty_acts=sim.legal_actions(empty);
+    CHECK(std::none_of(empty_acts.begin(),empty_acts.end(),[](const Action&a){return a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==stable_ability_id("mfd");}));
+
+    // Live protocol decoder must apply the same exact transition and clear semantic risk.
+    BattleState p=s; p.halfturn=0; p.stream_contiguous=false; p.protocol_ready=false; p.recommendation_safe=false;
+    p.entity(1)->mana=15; p.entity(1)->count=5; p.entity(3)->mana=10; p.active_entity_uid=0;
+    ProtocolDecoder decoder;
+    auto decoded=decoder.decode_update(p,"t=000turns=>1:C001000000Smfd001003050000000i0010100C002000000");
+    CHECK(decoded.state.entity(1)->mana==10); CHECK(decoded.state.entity(3)->mana==15);
+    CHECK(std::any_of(decoded.events.begin(),decoded.events.end(),[](const BattleEvent&e){return e.type=="MANA_FEED"&&e.actor_uid==1&&e.target_uid==3;}));
+    CHECK(decoded.state.semantic_unresolved_records==0); CHECK(decoded.state.recommendation_safe);
+    return true;
+}
+
+
 static bool test_mana_drain_and_reference_damage_perks() {
     BattleState s=fixture();
     auto* a=s.entity(1); auto* t=s.entity(2); CHECK(a&&t);
@@ -1320,6 +1360,7 @@ int main() {
     if (!test_regeneration_exact_turn_start_no_resurrection()) return EXIT_FAILURE;
     if (!test_life_drain_exact_heal_resurrection_and_retaliation()) return EXIT_FAILURE;
     if (!test_kill_trigger_enraged_gate()) return EXIT_FAILURE;
+    if (!test_mana_feed_exact_action_and_protocol()) return EXIT_FAILURE;
     if (!test_mana_drain_and_reference_damage_perks()) return EXIT_FAILURE;
     if (!test_entrenchment_lifecycle_and_resistance()) return EXIT_FAILURE;
     if (!test_observed_stoning_and_crippling_lifecycle()) return EXIT_FAILURE;
