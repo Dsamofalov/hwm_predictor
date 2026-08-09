@@ -91,3 +91,19 @@ This file is the development diary for repository changes performed against the 
   - Matched decisions: **730** across **125** battles; mechanic-like candidates: **243**.
   - The report preserves raw decision records/opcodes and already-decoded mana deltas for evidence-driven wire decoding.
   - Probe parse errors: **0**.
+
+### Exact Mana Feed action
+
+- Commit: `5f01febfbc542f662f99f49acb401201edb18099`
+  - Initial verified patch staging. Registry regeneration and the 42-record corpus probe passed, C++ compiled, but CTest exposed a regression-test bug caused by `begin()`/`end()` from two temporary legal-action vectors. No functional commit was produced.
+- Commit: `aabf7ed4bbab7df68238370e637fc1562e81bf71`
+  - Corrected the regression test to retain one legal-action vector and re-ran the self-removing verified patch.
+- Commit: `80ded68159636f3d3b497e00cc86aa422823eefa`
+  - Decoded `Smfd` as actor3 + own-hero3 + amount2 + zero trailer and marked it exact only when actor ability, ownership and `amount=min(count,mana)` invariants hold.
+  - Added Python and C++ canonical mana transitions: creature mana decreases and own hero mana increases by the same amount.
+  - Added exact C++ legal `Ability` generation and simulator execution targeting only the actor's own hero.
+  - Reclassified observed Mana Feed decisions as target-bound `ABILITY` actions instead of generic targetless `CAST_OR_ABILITY`.
+  - Re-ran the full 866-battle Mana Feed probe: **42/42 `Smfd` records** satisfy the exact action/target/mana-delta invariant.
+  - Added Python and C++ regressions, promoted `manafeed` to exact-search and regenerated the registry to 84 exact-search / 178 learned-damage / 78 unresolved.
+  - Updated active Markdown specification, implementation reports, test report and `data/reports/manafeed_probe.json`.
+  - Targeted C++ build/CTest and Python pytest passed before commit.
