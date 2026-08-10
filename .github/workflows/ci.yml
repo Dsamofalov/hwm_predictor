@@ -15,14 +15,19 @@ defaults:
   run:
     shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
 
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  OMP_NUM_THREADS: '2'
+  MKL_NUM_THREADS: '2'
+  OPENBLAS_NUM_THREADS: '2'
+  NUMEXPR_NUM_THREADS: '2'
+
 jobs:
   core:
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 120
-    env:
-      PYTHONUTF8: '1'
-      PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,9 +39,6 @@ jobs:
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 240
-    env:
-      PYTHONUTF8: '1'
-      PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v4
         with:
