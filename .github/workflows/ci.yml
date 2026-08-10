@@ -30,7 +30,7 @@ env:
 jobs:
   core:
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, windows, x64, hwm-windows]
+    runs-on: windows-2022
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v6
@@ -62,7 +62,7 @@ jobs:
 
   full:
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
-    runs-on: [self-hosted, windows, x64, hwm-windows]
+    runs-on: windows-2022
     timeout-minutes: 240
     steps:
       - uses: actions/checkout@v6

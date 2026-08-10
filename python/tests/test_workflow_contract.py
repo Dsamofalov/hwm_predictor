@@ -28,9 +28,11 @@ def test_main_ci_keeps_windows_bootstrap_out_of_yaml():
 
     assert "ubuntu-latest" not in lowered
     assert "windows-latest" not in lowered
+    assert "self-hosted" not in lowered
+    assert "hwm-windows" not in lowered
     assert "actions/setup-python" not in lowered
     assert "actions/setup-node" not in lowered
-    assert text.count("runs-on: [self-hosted, windows, x64, hwm-windows]") == 2
+    assert text.count("runs-on: windows-2022") == 2
     assert ".\\scripts\\ci_entrypoint_windows.ps1 -Suite Core" in text
     assert ".\\scripts\\ci_entrypoint_windows.ps1 -Suite Full" in text
 
@@ -41,8 +43,8 @@ def test_windows_ci_has_exactly_two_permanent_parallel_suites():
 
     jobs = parsed["jobs"]
     assert set(jobs) == {"core", "full"}
-    assert jobs["core"]["runs-on"] == ["self-hosted", "windows", "x64", "hwm-windows"]
-    assert jobs["full"]["runs-on"] == ["self-hosted", "windows", "x64", "hwm-windows"]
+    assert jobs["core"]["runs-on"] == "windows-2022"
+    assert jobs["full"]["runs-on"] == "windows-2022"
 
 
 def test_windows_ci_entrypoint_preflights_powershell_syntax():
