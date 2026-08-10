@@ -12,22 +12,66 @@ jobs:
     env:
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
-      PSExecutionPolicyPreference: Bypass
     steps:
       - uses: actions/checkout@v4
         with:
           clean: true
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-          cache: pip
+      - name: Resolve preinstalled Python 3.13
+        shell: pwsh
+        run: |
+          $candidates = New-Object System.Collections.Generic.List[string]
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
+          if (Get-Command py -ErrorAction SilentlyContinue) {
+            try {
+              $p = (& py -3.13 -c "import sys; print(sys.executable)" 2>$null | Select-Object -Last 1)
+              if ($LASTEXITCODE -eq 0 -and $p) { $candidates.Add($p.Trim()) }
+            } catch {}
+          }
+
+          if ($env:RUNNER_TOOL_CACHE) {
+            Get-ChildItem -Path (Join-Path $env:RUNNER_TOOL_CACHE 'Python\3.13*\x64\python.exe') -ErrorAction SilentlyContinue |
+              ForEach-Object { $candidates.Add($_.FullName) }
+          }
+
+          Get-ChildItem -Path 'C:\Users\*\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\python.exe' -ErrorAction SilentlyContinue |
+            ForEach-Object { $candidates.Add($_.FullName) }
+
+          $basePython = $null
+          foreach ($candidate in ($candidates | Select-Object -Unique)) {
+            if (-not (Test-Path $candidate)) { continue }
+            & $candidate -c "import sys, venv; raise SystemExit(0 if sys.version_info[:2] == (3, 13) else 1)" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+              $basePython = $candidate
+              break
+            }
+          }
+
+          if (-not $basePython) {
+            throw 'No usable preinstalled Python 3.13 found. Run the HWM Windows prerequisite bootstrap on the runner machine.'
+          }
+
+          Write-Host "Using base Python: $basePython"
+          & $basePython -m venv .venv
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to create workspace virtualenv.' }
+
+          $venvScripts = (Resolve-Path '.venv\Scripts').Path
+          $venvRoot = (Resolve-Path '.venv').Path
+          $venvScripts | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          "VIRTUAL_ENV=$venvRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          & '.venv\Scripts\python.exe' --version
+          & '.venv\Scripts\python.exe' -m pip --version
+
+      - name: Verify preinstalled Node 22+
+        shell: pwsh
+        run: |
+          if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'node.exe not found in runner PATH.' }
+          if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { throw 'npm not found in runner PATH.' }
+          $v = (& node --version).Trim()
+          if ($v -notmatch '^v(\d+)\.') { throw "Cannot parse Node version: $v" }
+          if ([int]$Matches[1] -lt 22) { throw "Node 22+ required; found $v" }
+          Write-Host "Node: $v"
+          Write-Host "npm: $(& npm --version)"
 
       - name: Configure and build C++ Debug with current MSVC
         shell: cmd
