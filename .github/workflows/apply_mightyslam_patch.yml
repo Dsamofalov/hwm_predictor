@@ -29,4 +29,4 @@ jobs:
           python -m pip install pytest numpy
 
       - name: Apply, verify, commit and log Mighty Slam
-        run: PYTHONPATH=python python .github/scripts/apply_mightyslam_patch_v3.py
+        run: PYTHONPATH=python python .github/scripts/apply_mightyslam_patch_v4.py
