@@ -24,4 +24,8 @@ source = source.replace(
     'WORKFLOW.unlink(missing_ok=True)\nSCRIPT.unlink(missing_ok=True)\nold.unlink(missing_ok=True)',
     1,
 )
-exec(compile(source, '<local-pairing-patcher-v2>', 'exec'), {'__name__': '__main__', 'old': old})
+exec(compile(source, '<local-pairing-patcher-v2>', 'exec'), {
+    '__name__': '__main__',
+    '__file__': str(old),
+    'old': old,
+})
