@@ -47,6 +47,8 @@ jobs:
   - Synchronized the main-front status, moved the permanent planner replay gate to the Windows CI contract, and marked prior Linux CI results as historical evidence only.
 - Commits: `4fa95fd07e7dc3faafb0ac19de71a4327c1aa2bd`, `53087329f842dc19a5de3806f458959d6e9c6d6c`, `99423460e859bb22fb01210ae07d165d17e910f0`, `df64b32cee8f7b77e5c48b5f7e1e0dc67d37bb48`
   - Removed the unsupported Linux bootstrap, validation, daemon-launch and demo-launch entry points. Windows scripts are the only supported product tooling path.
+- Commits: `d746c4de9a8d6cb951a697774e1b4bfce3c68469`, `db5f029239ff2b3484b3c826577930d5418a4b20`
+  - Removed the VS Code bash validation fallback and Linux/WSL debugger configuration; VS Code development tasks now target Windows/MSVC only.
 - No CI PASS is claimed for the migration until an actual Windows self-hosted job executes its steps.
 '@
           Add-Content -Path $path -Value $entry -Encoding UTF8
