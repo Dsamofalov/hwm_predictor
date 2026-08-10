@@ -1,10 +1,10 @@
 {
   "heldout_battles": 174,
   "sampled_player_states": 1748,
-  "risk_mean": 0.2388631939403795,
-  "risk_p50": 0.22799212621316628,
-  "risk_p90": 0.3977969774619387,
-  "risk_p99": 0.5468762843538734,
+  "risk_mean": 0.2346831150922166,
+  "risk_p50": 0.22425770860858796,
+  "risk_p90": 0.39711866130685103,
+  "risk_p99": 0.5468762843538735,
   "top_contributors": [
     {
       "code": "caster",
@@ -419,17 +419,6 @@
       ]
     },
     {
-      "code": "regeneration",
-      "name": "Регенерация.",
-      "support": "learned_damage",
-      "risk_weight": 0.3,
-      "state_occurrences": 198,
-      "weighted_contribution": 146883.080025,
-      "categories": [
-        "offense"
-      ]
-    },
-    {
       "code": "stonegarden",
       "name": "Каменный сад.",
       "support": "unresolved",
@@ -487,6 +476,19 @@
       "categories": [
         "offense",
         "targeting"
+      ]
+    },
+    {
+      "code": "wardingarrows",
+      "name": "Останавливающий выстрел.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 640,
+      "weighted_contribution": 117072.82881000006,
+      "categories": [
+        "ranged",
+        "offense",
+        "control"
       ]
     }
   ]
