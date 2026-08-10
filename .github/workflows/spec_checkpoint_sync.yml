@@ -1,0 +1,25 @@
+name: One-shot specification checkpoint sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/spec_checkpoint_sync.ps1'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.repository == 'Dsamofalov/hwm_predictor'
+    runs-on: [self-hosted, windows, x64, hwm-windows]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          clean: true
+      - name: Refresh active specification checkpoint
+        shell: powershell
+        run: .\.github\scripts\spec_checkpoint_sync.ps1
