@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/scripts/spec_checkpoint_sync.ps1'
+      - '.github/workflows/spec_checkpoint_sync.yml'
 
 permissions:
   contents: write
@@ -12,7 +13,7 @@ permissions:
 jobs:
   sync:
     if: github.repository == 'Dsamofalov/hwm_predictor'
-    runs-on: [self-hosted, windows, x64, hwm-windows]
+    runs-on: windows-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
