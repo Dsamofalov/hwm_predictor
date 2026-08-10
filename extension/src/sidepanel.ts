@@ -31,15 +31,16 @@ function renderRecommendation(r:any){
   if(Array.isArray(r.alternatives)&&r.alternatives.length){const title=document.createElement("div");title.className="muted";title.textContent="Alternatives:";alts.appendChild(title);for(const x of r.alternatives.slice(0,4)){const d=document.createElement("div");d.textContent=`• ${actionText(x.action)} (${(Number(x.p_win??0)*100).toFixed(1)}%)`;alts.appendChild(d)}}
 }
 async function pairedToken(){const x=await chrome.storage.local.get([TOKEN_KEY]);return x[TOKEN_KEY] as string|undefined}
+async function currentDaemonStatus(){const x=await chrome.storage.local.get(["hwmLastDaemonStatus","hwmLastDaemonStatusAt"]);if(x.hwmLastDaemonStatus&&Date.now()-Number(x.hwmLastDaemonStatusAt??0)<5000)return x.hwmLastDaemonStatus;return daemonJson("/status")}
 async function guardCurrentRecommendation(r:any){
   if(!r||r.status!=="ok"||!r.state_hash)return r;
-  const status=await daemonJson("/status");
+  const status=await currentDaemonStatus();
   if(status?.state_hash&&status.state_hash!==r.state_hash)return {status:"stale",reason:"recommendation state hash no longer matches current daemon state",requested_state_hash:r.state_hash,current_state_hash:status.state_hash};
   return r;
 }
 async function updatePairingUi(){const token=await pairedToken();hwm$("pairStatus").textContent=token?"paired":"not paired";hwm$("pairStatus").className=token?"ok":"warn"}
 async function refresh(){
-  try{const h=await daemonJson("/health",{},false);hwm$("health").textContent=`daemon: ${h.status}`;hwm$("health").className="ok";const token=await pairedToken();if(token){const status=await daemonJson("/status");if(status?.status==="pairing_required"){hwm$("status").textContent="pairing required"}else hwm$("status").textContent=JSON.stringify(status,null,2)}else hwm$("status").textContent="pairing required"}catch(e){hwm$("health").textContent="daemon: offline";hwm$("health").className="bad";hwm$("status").textContent=String(e)}
+  try{const h=await daemonJson("/health",{},false);hwm$("health").textContent=`daemon: ${h.status}`;hwm$("health").className="ok";const token=await pairedToken();if(token){const status=await currentDaemonStatus();if(status?.status==="pairing_required"){hwm$("status").textContent="pairing required"}else hwm$("status").textContent=JSON.stringify(status,null,2)}else hwm$("status").textContent="pairing required"}catch(e){hwm$("health").textContent="daemon: offline";hwm$("health").className="bad";hwm$("status").textContent=String(e)}
   await updatePairingUi();
   try{const x=await chrome.storage.local.get(["hwmLastRecommendation","hwmLastRecommendationAt",TRACE_KEY]);if(x.hwmLastRecommendation){const guarded=await guardCurrentRecommendation(x.hwmLastRecommendation);renderRecommendation(guarded);hwm$("recommendationTime").textContent=x.hwmLastRecommendationAt?new Date(x.hwmLastRecommendationAt).toLocaleTimeString():""}const trace=Array.isArray(x[TRACE_KEY])?x[TRACE_KEY]:[];hwm$("liveTrace").textContent=trace.length?JSON.stringify(trace.slice(-30),null,2):"-";const last=trace.at(-1);hwm$("traceSummary").textContent=last?`${new Date(last.at).toLocaleTimeString()} · ${last.stage}${last.revision?` · rev ${last.revision}`:""}${last.stateHash?` · ${String(last.stateHash).slice(0,12)}`:""}`:"No bridge events yet."}catch{}
 }
@@ -50,5 +51,5 @@ async function pair(){
 async function recommend(){try{const raw=await daemonJson("/recommend",{method:"POST"});const result=await guardCurrentRecommendation(raw);await chrome.storage.local.set({hwmLastRecommendation:result,hwmLastRecommendationAt:Date.now()});renderRecommendation(result)}catch(e){renderRecommendation({status:"offline",error:String(e)})}}
 hwm$("pair").addEventListener("click",()=>void pair());hwm$("recommend").addEventListener("click",()=>void recommend());hwm$("clearTrace").addEventListener("click",()=>void chrome.storage.local.remove(TRACE_KEY).then(()=>refresh()));
 chrome.runtime.onMessage.addListener((msg:any)=>{if(msg?.type==="recommendation"){void guardCurrentRecommendation(msg.recommendation).then(r=>{renderRecommendation(r);hwm$("recommendationTime").textContent=new Date().toLocaleTimeString()})}});
-setInterval(refresh,1000);void refresh();
+setInterval(refresh,2000);void refresh();
 })();

@@ -200,6 +200,8 @@ std::string SessionStore::status_json() const {
         o << ",\"state_seq\":" << state_->state_seq
           << ",\"state_hash\":\"" << state_hash(*state_) << "\""
           << ",\"phase\":" << static_cast<int>(state_->phase)
+          << ",\"side_to_act\":" << static_cast<int>(state_->side_to_act)
+          << ",\"active_entity_uid\":" << state_->active_entity_uid
           << ",\"protocol_ready\":" << (state_->protocol_ready ? "true" : "false")
           << ",\"recommendation_safe\":" << (state_->recommendation_safe ? "true" : "false")
           << ",\"semantic_safety_tier\":\"" << semantic_safety_tier(*state_) << "\""

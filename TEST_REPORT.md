@@ -10,12 +10,13 @@ C++ CTest:                              1/1 PASS (100%)
 Local API pairing/auth integration:     PASS
 Stale-search cancellation integration:  PASS
 Live recommendation binding contract:   PASS
+WebSocket revision streaming:            PASS
 Python pytest:                          42/42 PASS
 TypeScript typecheck:                   PASS
 Extension build:                        PASS
 ```
 
-The snapshot above is enforced by the standard GitHub CI. The current three closed-loop integration gates all passed together in CI commit `676da42b754ee9d1409cc27e8ad1dfec26d17e6c`.
+The snapshot above is enforced by the standard GitHub CI. Pairing/auth, stale cancellation and live binding passed together in `676da42b754ee9d1409cc27e8ad1dfec26d17e6c`; WebSocket streaming is additionally covered by `scripts/test_websocket_stream.py` and is promoted to the standard CI in the follow-up CI wiring commit.
 
 ## Closed-loop safety regressions
 

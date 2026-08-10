@@ -31,7 +31,7 @@
 - Physical damage: median abs-log error **0.3574 -> 0.2812** после learned creature residual; для rare creatures ability transfer **0.2719 -> 0.2484**.
 - Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
 - Planner real-state regression (Release, 20 states): recommendation **20/20**, action-type stability **100%**, exact-action stability **90%** при budget 300 -> 1200.
-- Automated tests: C++ CTest **100%**, Python **42/42**, TypeScript typecheck/build **PASS**; local API pairing/auth integration **PASS**.
+- Automated tests: C++ CTest **100%**, Python **42/42**, TypeScript typecheck/build **PASS**; local API pairing/auth, stale-search cancellation, live binding и WebSocket streaming integration **PASS**.
 
 ### Текущий незавершённый фронт разработки
 
@@ -1149,7 +1149,7 @@ metrics:
 
 # 23. Модуль M16 — Local Service API
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Loopback C++ HTTP daemon, health/status/state/capture/recommend/debug endpoints, origin filtering, capture persistence и concurrency реализованы. Persistent local pairing token с explicit one-time code реализован и обязателен для private API; WebSocket streaming остаётся незакрыт.
+> **Статус checkpoint 0.3.0 — COMPLETE FOR CURRENT LOCAL API.** Loopback C++ HTTP daemon, health/status/state/capture/recommend/debug endpoints, origin filtering, persistent pairing bearer и authenticated WebSocket revision/status streaming реализованы; transport/auth contracts закреплены integration tests.
 
 ## Назначение
 
@@ -1562,7 +1562,7 @@ Exit: один полный replay проходит end-to-end и визуаль
 
 ## Phase 2 — Closed-loop plumbing без AI
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan, cooperative stale-search cancellation и UI state-hash guard реализованы и regression-tested. Нужна live-browser validation.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan, authenticated WebSocket extension connection, cooperative stale-search cancellation и UI state-hash guard реализованы и regression-tested. Нужна live-browser validation.
 
 P2-01. Local C++ daemon.  
 P2-02. WebSocket extension connection.  

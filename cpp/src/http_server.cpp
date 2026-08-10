@@ -1,6 +1,8 @@
 #include "hwm/http_server.hpp"
 #include "hwm/planner.hpp"
 
+#include <array>
+#include <chrono>
 #include <cstdlib>
 #include <filesystem>
 #include <fstream>
@@ -11,6 +13,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <thread>
+#include <vector>
 
 #ifdef _WIN32
 #define NOMINMAX
@@ -165,6 +168,71 @@ bool bearer_authorized(const std::string& headers, const std::string& token) {
     return secure_equal(auth, expected);
 }
 
+bool websocket_protocol_authorized(const std::string& headers,const std::string& token){
+    const std::string offered=header_value(headers,"Sec-WebSocket-Protocol");
+    const std::string expected="hwm-bearer."+token;
+    bool version=false,authorized=false;
+    size_t pos=0;
+    while(pos<=offered.size()){
+        const size_t comma=offered.find(',',pos);const size_t end=comma==std::string::npos?offered.size():comma;
+        size_t a=pos,b=end;while(a<b&&(offered[a]==' '||offered[a]=='\t'))++a;while(b>a&&(offered[b-1]==' '||offered[b-1]=='\t'))--b;
+        const std::string_view item(offered.data()+a,b-a);
+        if(item=="hwm-v1")version=true;
+        if(secure_equal(item,expected))authorized=true;
+        if(comma==std::string::npos) break;
+        pos=comma+1;
+    }
+    return version&&authorized;
+}
+
+uint32_t rol32(uint32_t v,unsigned n){return (v<<n)|(v>>(32-n));}
+std::array<unsigned char,20> sha1(std::string_view input){
+    std::vector<unsigned char> msg(input.begin(),input.end());const uint64_t bits=uint64_t(msg.size())*8u;
+    msg.push_back(0x80);while((msg.size()%64)!=56)msg.push_back(0);
+    for(int i=7;i>=0;--i)msg.push_back(static_cast<unsigned char>((bits>>(i*8))&0xffu));
+    uint32_t h0=0x67452301u,h1=0xefcdab89u,h2=0x98badcfeu,h3=0x10325476u,h4=0xc3d2e1f0u;
+    for(size_t chunk=0;chunk<msg.size();chunk+=64){
+        uint32_t w[80]{};for(int i=0;i<16;++i){const size_t j=chunk+size_t(i)*4;w[i]=(uint32_t(msg[j])<<24)|(uint32_t(msg[j+1])<<16)|(uint32_t(msg[j+2])<<8)|uint32_t(msg[j+3]);}
+        for(int i=16;i<80;++i)w[i]=rol32(w[i-3]^w[i-8]^w[i-14]^w[i-16],1);
+        uint32_t a=h0,b=h1,c=h2,d=h3,e=h4;
+        for(int i=0;i<80;++i){uint32_t f=0,k=0;if(i<20){f=(b&c)|((~b)&d);k=0x5a827999u;}else if(i<40){f=b^c^d;k=0x6ed9eba1u;}else if(i<60){f=(b&c)|(b&d)|(c&d);k=0x8f1bbcdcu;}else{f=b^c^d;k=0xca62c1d6u;}const uint32_t temp=rol32(a,5)+f+e+k+w[i];e=d;d=c;c=rol32(b,30);b=a;a=temp;}
+        h0+=a;h1+=b;h2+=c;h3+=d;h4+=e;
+    }
+    std::array<unsigned char,20> out{};const uint32_t h[5]={h0,h1,h2,h3,h4};for(int i=0;i<5;++i)for(int j=0;j<4;++j)out[size_t(i)*4+j]=static_cast<unsigned char>((h[i]>>(24-j*8))&0xffu);return out;
+}
+
+std::string base64_bytes(const unsigned char* data,size_t n){
+    static constexpr char tab[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";std::string out;out.reserve(((n+2)/3)*4);
+    for(size_t i=0;i<n;i+=3){const uint32_t a=data[i],b=i+1<n?data[i+1]:0,c=i+2<n?data[i+2]:0,v=(a<<16)|(b<<8)|c;out.push_back(tab[(v>>18)&63]);out.push_back(tab[(v>>12)&63]);out.push_back(i+1<n?tab[(v>>6)&63]:'=');out.push_back(i+2<n?tab[v&63]:'=');}return out;
+}
+
+std::string websocket_accept(std::string_view key){const std::string material=std::string(key)+"258EAFA5-E914-47DA-95CA-C5AB0DC85B11";const auto digest=sha1(material);return base64_bytes(digest.data(),digest.size());}
+
+bool send_all(sock_t s,std::string_view data){size_t off=0;while(off<data.size()){
+#ifdef _WIN32
+    const int n=send(s,data.data()+off,static_cast<int>(data.size()-off),0);
+#else
+    const ssize_t n=send(s,data.data()+off,data.size()-off,MSG_NOSIGNAL);
+#endif
+    if(n<=0) return false;
+    off+=static_cast<size_t>(n);
+    }
+    return true;
+}
+
+std::string websocket_frame(std::string_view payload){std::string out;out.reserve(payload.size()+10);out.push_back(static_cast<char>(0x81));const uint64_t n=payload.size();if(n<=125){out.push_back(static_cast<char>(n));}else if(n<=65535){out.push_back(static_cast<char>(126));out.push_back(static_cast<char>((n>>8)&0xff));out.push_back(static_cast<char>(n&0xff));}else{out.push_back(static_cast<char>(127));for(int i=7;i>=0;--i)out.push_back(static_cast<char>((n>>(i*8))&0xff));}out.append(payload);return out;}
+
+bool websocket_send_json(sock_t s,std::string_view payload){const std::string frame=websocket_frame(payload);return send_all(s,frame);}
+
+void websocket_stream(sock_t client,SessionStore& store,std::atomic<bool>& stop){
+    uint64_t last_revision=~uint64_t{0};auto last_send=std::chrono::steady_clock::now()-std::chrono::seconds(30);
+    while(!stop.load(std::memory_order_acquire)){
+        const uint64_t revision=store.revision();const auto now=std::chrono::steady_clock::now();
+        if(revision!=last_revision){const std::string payload="{\"type\":\"state\",\"status\":"+store.status_json()+"}";if(!websocket_send_json(client,payload))return;last_revision=revision;last_send=now;}
+        else if(now-last_send>=std::chrono::seconds(20)){std::ostringstream o;o<<"{\"type\":\"heartbeat\",\"revision\":"<<revision<<'}';if(!websocket_send_json(client,o.str()))return;last_send=now;}
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
 
 std::string json_escape(std::string_view s) {
     std::string out; out.reserve(s.size()+8);
@@ -400,12 +468,24 @@ int HttpServer::run() {
             const std::string headers = header_end == std::string::npos ? std::string{} : req.substr(0, header_end);
             const std::string origin = header_value(headers, "Origin");
             const std::string body = header_end == std::string::npos ? std::string{} : req.substr(header_end + 4);
+            const std::string upgrade=header_value(headers,"Upgrade");
+            const bool ws_upgrade=method=="GET"&&path=="/ws"&&(upgrade=="websocket"||upgrade=="WebSocket");
+            if(ws_upgrade){
+                if(!allowed_origin(origin)){const auto out=response(403,"{\"error\":\"origin_not_allowed\"}");send_all(client,out);close_sock(client);return;}
+                if(!websocket_protocol_authorized(headers,pairing_token_)){const auto out=response(401,"{\"error\":\"pairing_required\"}");send_all(client,out);close_sock(client);return;}
+                const std::string key=header_value(headers,"Sec-WebSocket-Key"),version_ws=header_value(headers,"Sec-WebSocket-Version");
+                if(key.empty()||version_ws!="13"){const auto out=response(400,"{\"error\":\"invalid_websocket_handshake\"}");send_all(client,out);close_sock(client);return;}
+                std::ostringstream hs;hs<<"HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: "<<websocket_accept(key)<<"\r\nSec-WebSocket-Protocol: hwm-v1\r\n\r\n";
+                if(send_all(client,hs.str())) websocket_stream(client,store_,stop_);
+                close_sock(client);
+                return;
+            }
             std::string out;
             if (!allowed_origin(origin)) out = response(403, "{\"error\":\"origin_not_allowed\"}");
             else if (!public_route(method, path) && !bearer_authorized(headers, pairing_token_))
                 out = response(401, "{\"error\":\"pairing_required\"}");
             else out = handle(method, path, body);
-            send(client, out.data(), static_cast<int>(out.size()), 0);
+            send_all(client,out);
             close_sock(client);
         }).detach();
     }

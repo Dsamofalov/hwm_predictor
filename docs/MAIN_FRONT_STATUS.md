@@ -56,6 +56,10 @@ CI commit carrying all three gates: `676da42b754ee9d1409cc27e8ad1dfec26d17e6c` â
 
 ## Current main-lane decision gate
 
+### M16 authenticated WebSocket streaming
+
+The local daemon now exposes an authenticated `ws://127.0.0.1:<port>/ws` state stream. The bearer is carried as `Sec-WebSocket-Protocol: hwm-bearer.<token>` rather than in the URL. The daemon pushes canonical status immediately and whenever SessionStore revision changes, plus a 20-second heartbeat. The MV3 service worker consumes this stream, stores the last daemon status, deduplicates replanning by revision and falls back to HTTP status only when streamed status is stale/unavailable.
+
 The next correctness step is a real authenticated active-battle smoke validation using `docs/LIVE_VALIDATION.md`.
 
 Do **not** claim M01/M14 complete before that run. The current code proves the local pipeline and safety contracts against deterministic integration fixtures, not HeroesWM's live authenticated client.

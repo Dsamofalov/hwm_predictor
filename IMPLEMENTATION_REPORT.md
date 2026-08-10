@@ -66,7 +66,7 @@ Current standard CI additionally enforces three local closed-loop integration co
 | M13 Search | ADVANCED PARTIAL | PUCT, priors/value/risk, real-state regression, cooperative cancellation | transpositions/tree reuse/full chance modeling |
 | M14 Orchestrator | MOSTLY COMPLETE OFFLINE | authenticated capture/session/decode/plan/revision/hash/replan with stale guards | real live active-battle E2E |
 | M15 Inference Runtime | PARTIAL | C++ CSV/JSON model loaders, Python/ONNX export scaffold | ONNX Runtime batching/manifest |
-| M16 Local API | MOSTLY COMPLETE | loopback HTTP, persistent bearer pairing, capture/state/status/plan/debug, origin guard, auth/stale/live binding CI contracts | WebSocket streaming |
+| M16 Local API | COMPLETE CURRENT API | loopback HTTP, persistent bearer pairing, authenticated WebSocket revision/status stream, capture/state/status/plan/debug, origin guard, auth/stale/live/WS CI contracts | — |
 | M17 UI | PARTIAL/USABLE | side panel, pairing, recommendation/alternatives, auto refresh, stale hash guard, live trace | rich overlay/PV/explanation/live UX QA |
 | M18 Training | ADVANCED PARTIAL | real pipelines for policy/value/damage/spell/next-actor/proc/collateral/kill-trigger | unified production NN dynamics/distillation |
 | M19 Evaluation | ADVANCED PARTIAL | full corpus check, shadow, legal coverage, model metrics, planner stability, local closed-loop integration gates | real live shadow + hard-PvE human trial suite |
@@ -154,7 +154,7 @@ Manual real-battle procedure and pass criteria are recorded in `docs/LIVE_VALIDA
 1. Execute `docs/LIVE_VALIDATION.md` against a real authenticated PvE battle and preserve the metadata-only trace/status evidence.
 2. If network capture is incomplete, implement the smallest evidence-driven runtime-object fallback adapter; otherwise keep network payload as primary truth.
 3. Let branch `ability` continue high-impact ability work independently and review/merge it after corpus/CI gates pass.
-4. After stable live acquisition is proven, continue main-only original-TZ work: WebSocket streaming and persistent tree re-root/transpositions/opponent branching.
+4. After stable live acquisition is proven, continue main-only original-TZ work: persistent tree re-root/transpositions/opponent branching.
 5. Continue structural/legal-action correctness toward the acceptance targets without weakening strict invariants.
 6. Add full learned dynamics ensemble + multi-step divergence gate when the acquisition/correctness prerequisites are satisfied.
 7. Run hard-PvE human-in-loop benchmark: win rate, attempts-to-win, invalid action rate and calibration.
