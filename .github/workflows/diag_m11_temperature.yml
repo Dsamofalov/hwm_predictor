@@ -1,0 +1,29 @@
+name: M11 residual temperature gate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install evaluator dependencies
+        run: python -m pip install pytest numpy
+      - name: Targeted temperature tests
+        env:
+          PYTHONPATH: python
+        run: python -m pytest python/tests/test_dynamics_survival_gate.py python/tests/test_dynamics_temperature_gate.py -q
+      - name: Full leakage-safe calibration plus final test
+        env:
+          PYTHONPATH: python
+        run: |
+          python -m hwm_solver.evaluation.dynamics_temperature_gate hwm_battles \
+            --members 5 --scales 0,0.25,0.5,0.75,1 \
+            --horizons 2,4,8,16 --out /tmp/dynamics-temperature.json
+          cat /tmp/dynamics-temperature.json
