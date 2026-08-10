@@ -1,0 +1,60 @@
+name: Evaluate Crippling Wound conditional proc
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/evaluate_crippling_proc.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install model dependencies
+        run: python -m pip install numpy scikit-learn
+
+      - name: Evaluate temporal conditional model
+        env:
+          PYTHONPATH: python
+        run: |
+          python -m hwm_solver.evaluation.proc_context_report \
+            hwm_battles cripplingwound wnd \
+            --types MELEE_ATTACK,RANGED_ATTACK \
+            --out data/reports/cripplingwound_proc_context.json
+
+      - name: Commit report and changelog
+        env:
+          TOOL_SHA: 5f8547c6f29c5b4bc277f2b5e55f9a939da009f8
+        run: |
+          rm .github/workflows/evaluate_crippling_proc.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: evaluate Crippling Wound conditional proc'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/cripplingwound_proc_context.json').read_text(encoding='utf-8'))
+          m=r['model']
+          p=Path('changelog.md')
+          text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Crippling Wound conditional-proc evaluation\n\n- Commit: `{os.environ['TOOL_SHA']}`\n  - Added a reusable chronological proc-context evaluator with state-conditioned logistic validation and creature/action stratification.\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing evaluation of `cripplingwound` / `Swnd` on the 866-battle corpus.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/cripplingwound_proc_context.json`.\n  - Train/held-out: **{r['train_hits']}/{r['train_n']} = {r['train_rate']:.4f}** vs **{r['heldout_hits']}/{r['heldout_n']} = {r['heldout_rate']:.4f}**.\n  - Conditional held-out Brier: **{m.get('heldout_brier', float('nan')):.5f}** vs baseline **{m.get('baseline_brier', float('nan')):.5f}**; AUC **{m.get('heldout_auc', float('nan')):.4f}**; gate: **{m.get('passes_gate', False)}**.\n  - No production proc is enabled by this report alone; it is an evidence gate for the next functional change.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Crippling Wound proc evaluation'
+          git push origin HEAD:main
