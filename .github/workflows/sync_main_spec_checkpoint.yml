@@ -18,4 +18,4 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
       - name: Sync main-front specification and handoff checkpoint
-        run: python .github/scripts/sync_main_spec_checkpoint.py
+        run: python .github/scripts/sync_main_spec_checkpoint_v2.py
