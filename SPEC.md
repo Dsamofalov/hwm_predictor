@@ -39,7 +39,7 @@
 2. Устранение 19 финальных structural-invalid replay (в основном geometry/rare mechanics) без ослабления invariants.
 3. Full learned dynamics ensemble и multi-step validation gate.
 4. Tree reuse/transposition и дальнейшее улучшение opponent branching.
-5. Live validation расширения на **активном** бою и затем hard-PvE human-in-loop benchmark.
+5. Live validation расширения на **активном** бою (closed-loop trace уже подготовлен) и затем hard-PvE human-in-loop benchmark.
 
 ### Правило источников механик
 
@@ -438,7 +438,7 @@ Event sourcing нужен для:
 
 # 8. Модуль M01 — Browser Bridge
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** MV3 MAIN-world fetch/XHR passive capture, content/service-worker bridge, side panel, localhost forwarding и auto-replan реализованы. Не закрыто: проверка на реальном активном авторизованном бою и fallback через runtime objects.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** MV3 MAIN-world fetch/XHR passive capture, content/service-worker bridge, side panel, authenticated localhost forwarding, auto-replan и bounded metadata-only live closed-loop trace реализованы. Не закрыто: проверка на реальном активном авторизованном бою и полноценный fallback через runtime objects.
 
 ## Назначение
 

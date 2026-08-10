@@ -30,13 +30,19 @@ void persist_body_if_enabled(const RawEnvelope& e) {
 CaptureOutcome SessionStore::capture(RawEnvelope e) {
     std::scoped_lock lock(mu_);
     CaptureOutcome out;
+    const auto stamp_outcome = [&] {
+        out.revision = revision_.load(std::memory_order_acquire);
+        out.state_hash = state_ ? state_hash(*state_) : std::string{};
+    };
     if (e.battle_id.empty()) e.battle_id = battle_id_;
     if (e.battle_id.empty()) {
         out.reason = "battle_id_missing";
+        stamp_outcome();
         return out;
     }
     if (e.body.empty()) {
         out.reason = "empty_body";
+        stamp_outcome();
         return out;
     }
 
@@ -58,6 +64,7 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
         out.accepted = true;
         out.duplicate = true;
         out.reason = "duplicate_body";
+        stamp_outcome();
         return out;
     }
 
@@ -67,6 +74,7 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
         ++out_of_order_captures_;
         out.out_of_order = true;
         out.reason = "captured_at_older_than_current_revision";
+        stamp_outcome();
         return out;
     }
 
@@ -119,6 +127,7 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
     ++accepted_captures_;
     out.accepted = true;
     out.reason = out.canonical_state_updated ? (state_ && state_->protocol_ready ? "canonical_state_ready" : "canonical_state_partial") : "raw_accepted_state_partial";
+    stamp_outcome();
     return out;
 }
 

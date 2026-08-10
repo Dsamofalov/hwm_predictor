@@ -275,6 +275,8 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
             << ",\"out_of_order\":" << (outcome.out_of_order?"true":"false")
             << ",\"session_reset\":" << (outcome.session_reset?"true":"false")
             << ",\"canonical_state_updated\":" << (outcome.canonical_state_updated?"true":"false")
+            << ",\"revision\":" << outcome.revision
+            << ",\"state_hash\":\"" << outcome.state_hash << "\""
             << ",\"reason\":\"" << outcome.reason << "\"}";
         return response(outcome.accepted?200:400, reply.str());
     }
@@ -312,7 +314,9 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
         }
         std::ostringstream o;
         o << "{\"status\":\"" << r.status << "\",\"state_hash\":\"" << r.state_hash
-          << "\",\"semantic_safety_tier\":\"" << semantic_safety_tier(s) << "\""
+          << "\",\"state_revision\":" << requested_revision
+          << ",\"battle_id\":\"" << json_escape(s.battle_id) << "\""
+          << ",\"semantic_safety_tier\":\"" << semantic_safety_tier(s) << "\""
           << ",\"semantic_unresolved_ratio\":" << s.semantic_unresolved_ratio
           << ",\"ability_risk\":" << r.ability_risk
           << ",\"simulations\":" << r.simulations << ",\"nodes\":" << r.nodes

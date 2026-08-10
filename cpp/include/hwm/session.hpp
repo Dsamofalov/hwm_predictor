@@ -20,6 +20,8 @@ struct CaptureOutcome {
     bool out_of_order = false;
     bool session_reset = false;
     bool canonical_state_updated = false;
+    uint64_t revision = 0;
+    std::string state_hash;
     std::string reason;
 };
 
