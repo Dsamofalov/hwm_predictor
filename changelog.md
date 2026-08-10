@@ -415,3 +415,10 @@ This file is the development diary for repository changes performed against the 
   - Added `/recommend` diagnostics: `tree_reused`, `reused_root_visits`, and `retained_nodes`.
   - Extended the dedicated main-owned planner regression with exact reuse, pruning, and battle-scope reset checks.
 
+### WebSocket integration harness frame buffering
+
+- Commit: `33aaea0cac7549972e4be93bf495d0a9dca7f301`
+  - Fixed the raw RFC6455 regression client to preserve bytes received after the HTTP handshake delimiter instead of decoding a coalesced first WebSocket frame as UTF-8 headers.
+  - The server protocol was not relaxed; the test now correctly handles normal TCP packet coalescing.
+  - Final M13 verification run `31380236279` confirms the WebSocket streaming gate passes with this fix.
+
