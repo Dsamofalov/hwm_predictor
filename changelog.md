@@ -172,3 +172,12 @@ This file is the development diary for repository changes performed against the 
   - Mighty Slam: **260** decisions / **73** battles; specials `{'enc': 44, 'psf': 33, 'msl': 32, 'enr': 21, 'ra2': 14, 'adp': 7, 'pss': 6, 'spt': 6, 'blt': 5, 'agl': 5, 'paa': 4, 'ral': 3, 'spi': 2, 'raa': 2, 'at3': 2, 'bld': 2, 'plf': 1, 'fdc': 1, 'sld': 1, 'rn7': 1, 'chm': 1, 'rag': 1, 'lzb': 1, 'rgl': 1, 'ent': 1, 'sff': 1}`; position deltas `{'1,-1': 2, '1,0': 1, '0,-1': 1, '-1,1': 1, '0,1': 1, '3,0': 1}`.
   - Power Strike: **659** decisions / **125** battles; specials `{'rag': 393, 'ral': 116, 'ra2': 101, 'prp': 90, 'raa': 90, 'blt': 53, 'rgm': 50, 'enr': 44, 'eod': 33, 'wnd': 31, 'ray': 23, 'at3': 18, 'spi': 13, 'sld': 12, 'pfr': 10, 'pss': 9, 'psc': 7, 'fd1': 6, 'dsp': 3, 'cpt': 3, 'snu': 3, 'ato': 3, 'mrb': 3, 'sff': 3, 'fdc': 2, 'rgl': 2, 'plf': 1, 'br2': 1, 'zat': 1, 'cha': 1, 'agl': 1, 'tob': 1, 'dsh': 1, 'sta': 1, 'fod': 1, 'fo2': 1, 'adp': 1}`; position deltas `{'-1,1': 5, '0,-1': 4, '-1,0': 3, '-1,-1': 2, '1,-1': 2, '1,1': 2, '-9,0': 1, '0,1': 1, '1,0': 1, '-4,0': 1}`.
   - Parse errors: Mighty Slam **0**, Power Strike **0**.
+
+### Mighty Slam wire isolation
+
+- Commit: `885c8b5acb18a3b7aa78d819ed08218fb93ce9a6`
+  - Staged a self-removing extraction of `Smsl` decisions from the full Mighty Slam probe.
+- Commit: `964807052e9ef91095093ca617042bb782c378dc`
+  - Stored `data/reports/mightyslam_msl_evidence.json` with **32** observed `Smsl` decisions.
+  - Action types: `{'MELEE_ATTACK': 32}`; carrier creature IDs: `{'435': 3, '652': 12, '792': 4, '1053': 5, '1081': 1, '1189': 7}`.
+  - Full raw records and actor/target before-after deltas are retained for exact wire/cooldown/knockback reconstruction.
