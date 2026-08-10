@@ -68,11 +68,10 @@ If the real battle trace shows network capture is sufficient, keep network paylo
 
 After stable live acquisition is proven, main may continue with the next original-TZ gates that do not conflict with `ability`, notably WebSocket streaming, persistent tree re-root/transpositions/opponent branching, and later live/hard-PvE evaluation.
 
-
 ## 2026-08-10 final handoff update
 
 - Authenticated WebSocket functional commit: `68345f0afc89ed0e17884042592fb08b6edd83be`.
-- Standard CI now includes WebSocket streaming and a Windows/MSVC job. CI commit `7353e1ddcf17f27e981cac52f2b1e38f5545881e`: **PASS** on both Linux and Windows; Windows executes C++ build/CTest plus pairing, stale cancellation, live binding and WebSocket daemon integrations.
+- Historical CI checkpoint: commit `7353e1ddcf17f27e981cac52f2b1e38f5545881e` passed both Linux and Windows/MSVC. This is retained only as historical verification; Linux is no longer a supported CI/product platform after the Windows-only migration below.
 - Next main-planner correctness issue identified during audit: `planner.cpp` currently gives each action edge one child while `sim_.apply(..., roll)` is stochastic. Before persistent tree reuse, split sampled outcomes by `state_hash`, share equal states via a transposition table, and regression-test that different sampled outcomes do not reuse a node initialized from the first outcome's legal actions.
 - Stop point for this agent: do not begin that M13 patch in this checkpoint; hand off from here.
 
@@ -100,4 +99,16 @@ M11 evidence commits `45581ae7d0f844f67797c590c3ed529390b76f1f`, `ef35d28aca6a04
 
 The stochastic survival gate uses 692 train / 174 chronological held-out battles. Learned vs generic mean force-L1 is **0.01149 vs 0.01697** at 2 steps and **0.05028 vs 0.08178** at 16 steps. Learned vs generic valid-observed-action coverage is **98.789% vs 98.919%** at 2 steps and **96.349% vs 97.493%** at 16 steps. This replaces the earlier deterministic member-count interpretation as the primary survival/validity diagnostic; the next calibrated experiment targets only positive log-residual corrections so negative damage corrections are preserved.
 
-Planner replay gate commit `cde38a5a89684ff2691c80eeb3583195ffa31758` permanently checks 120 safe held-out states across 109 battles in Linux CI and records 0 invalid recommendations. Replay acceptance is closed; the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md` remains mandatory before the live product loop is declared complete.
+Planner replay gate commit `cde38a5a89684ff2691c80eeb3583195ffa31758` permanently checks 120 safe heldout states across 109 battles and records 0 invalid recommendations. It has now been moved from Linux CI into the Windows self-hosted CI job. Replay acceptance is closed; the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md` remains mandatory before the live product loop is declared complete.
+
+## Windows-only product and CI platform
+
+Platform migration commits:
+
+- `31c25740d4f6cbf27d802ad4e478993b7571f54f` — collapsed the previous Linux-full + Windows-partial matrix into one Windows self-hosted job while preserving every standard gate.
+- `6bd81ce9fabc6fa29fb0e3f9694c988ea69e7b8c` — finalized runner labels `self-hosted, windows, x64, hwm-windows`, added manual `workflow_dispatch`, same-branch stale-run cancellation, and blocked external-fork PR execution on the self-hosted machine.
+- `09237be777671fa3697da05b1813b57e5fc19f78` — updated the public development instructions to declare Windows 10/11 x64 as the sole supported product/CI platform and converted active examples to PowerShell/Windows paths.
+
+Current standard CI executes C++/CTest, the 120-state planner replay gate, all four daemon integration gates, Python pytest, TypeScript typecheck and extension build on Windows/MSVC. Historical Linux PASS records above remain evidence for older trees only; they are not a continuing support commitment.
+
+The new workflow is intentionally queued until a repository-level Windows x64 self-hosted runner carrying the custom `hwm-windows` label is registered and online. No PASS claim is made for the migration commits until that runner executes the workflow.
