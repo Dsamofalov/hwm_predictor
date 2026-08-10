@@ -20,10 +20,25 @@ from hwm_solver.protocol.replay import (
 )
 
 
+def _hero_context(by_uid: dict[int, dict], actor: dict) -> tuple[int, tuple[str, ...]]:
+    heroes = [
+        e for e in by_uid.values()
+        if bool(e.get("is_hero")) and int(e.get("owner", -1)) == int(actor.get("owner", -2))
+    ]
+    if not heroes:
+        return 0, ()
+    hero = heroes[0]
+    tags = tuple(sorted(
+        str(x).lower() for x in (hero.get("abilities") or [])
+        if str(x).lower() != "hero"
+    ))
+    return int(hero.get("creature_id", 0)), tags
+
+
 def _collect(dirs: list[Path], ability: str, signal: str, action_types: set[str]):
     x: list[np.ndarray] = []
     y: list[int] = []
-    meta: list[tuple[int, str]] = []
+    meta: list[tuple[int, str, int, tuple[str, ...]]] = []
     for battle in dirs:
         init = (battle / "init.txt").read_text(errors="replace")
         turns = (battle / "turns0.txt").read_text(errors="replace")
@@ -42,113 +57,86 @@ def _collect(dirs: list[Path], ability: str, signal: str, action_types: set[str]
                 continue
             if row["action_type"] not in action_types:
                 continue
+            hero_id, hero_tags = _hero_context(by_uid, actor)
             x.append(_shield_features(actor, target))
             y.append(int(signal in set(row.get("special_codes") or [])))
-            meta.append((int(actor.get("creature_id", 0)), str(row["action_type"])))
+            meta.append((
+                int(actor.get("creature_id", 0)), str(row["action_type"]), hero_id, hero_tags
+            ))
     X = np.stack(x) if x else np.zeros((0, 9), dtype=np.float64)
     return X, np.asarray(y, dtype=np.int64), meta
 
 
-def _rates(meta: list[tuple[int, str]], y: np.ndarray) -> list[dict]:
+def _rates(meta, y: np.ndarray) -> list[dict]:
     buckets: dict[tuple[int, str], list[int]] = defaultdict(lambda: [0, 0])
-    for key, hit in zip(meta, y, strict=True):
+    for (creature_id, action_type, _hero_id, _hero_tags), hit in zip(meta, y, strict=True):
+        key = (creature_id, action_type)
         buckets[key][0] += 1
         buckets[key][1] += int(hit)
     out = []
     for (creature_id, action_type), (n, hits) in buckets.items():
-        out.append({
-            "creature_id": creature_id,
-            "action_type": action_type,
-            "n": n,
-            "hits": hits,
-            "rate": hits / n if n else 0.0,
-        })
+        out.append({"creature_id": creature_id, "action_type": action_type, "n": n,
+                    "hits": hits, "rate": hits / n if n else 0.0})
     return sorted(out, key=lambda r: (-r["n"], r["creature_id"], r["action_type"]))
 
 
-def report(
-    corpus: Path,
-    ability: str,
-    signal: str,
-    action_types: set[str],
-    *,
-    split: float = 0.8,
-) -> dict:
+def _hero_rates(meta, y: np.ndarray) -> list[dict]:
+    buckets: dict[tuple[int, tuple[str, ...]], list[int]] = defaultdict(lambda: [0, 0])
+    for (_creature_id, _action_type, hero_id, hero_tags), hit in zip(meta, y, strict=True):
+        key = (hero_id, hero_tags)
+        buckets[key][0] += 1
+        buckets[key][1] += int(hit)
+    out = []
+    for (hero_id, tags), (n, hits) in buckets.items():
+        out.append({"hero_creature_id": hero_id, "hero_tags": list(tags), "n": n,
+                    "hits": hits, "rate": hits / n if n else 0.0})
+    return sorted(out, key=lambda r: (-r["n"], r["hero_creature_id"], r["hero_tags"]))
+
+
+def report(corpus: Path, ability: str, signal: str, action_types: set[str], *, split: float = 0.8) -> dict:
     root = corpus / "battles" if (corpus / "battles").is_dir() else corpus
-    battles = sorted(
-        (d for d in root.iterdir() if d.is_dir()),
-        key=lambda p: (0, int(p.name)) if p.name.isdigit() else (1, p.name),
-    )
+    battles = sorted((d for d in root.iterdir() if d.is_dir()),
+                     key=lambda p: (0, int(p.name)) if p.name.isdigit() else (1, p.name))
     cut = int(len(battles) * split)
     Xtr, ytr, mtr = _collect(battles[:cut], ability, signal, action_types)
     Xte, yte, mte = _collect(battles[cut:], ability, signal, action_types)
-
     payload: dict = {
-        "ability": ability,
-        "signal": signal,
-        "action_types": sorted(action_types),
-        "split": split,
-        "train_n": int(len(ytr)),
-        "train_hits": int(ytr.sum()) if len(ytr) else 0,
+        "ability": ability, "signal": signal, "action_types": sorted(action_types), "split": split,
+        "train_n": int(len(ytr)), "train_hits": int(ytr.sum()) if len(ytr) else 0,
         "train_rate": float(ytr.mean()) if len(ytr) else 0.0,
-        "heldout_n": int(len(yte)),
-        "heldout_hits": int(yte.sum()) if len(yte) else 0,
+        "heldout_n": int(len(yte)), "heldout_hits": int(yte.sum()) if len(yte) else 0,
         "heldout_rate": float(yte.mean()) if len(yte) else 0.0,
-        "train_buckets": _rates(mtr, ytr),
-        "heldout_buckets": _rates(mte, yte),
+        "train_buckets": _rates(mtr, ytr), "heldout_buckets": _rates(mte, yte),
+        "train_hero_context": _hero_rates(mtr, ytr), "heldout_hero_context": _hero_rates(mte, yte),
         "model": {"eligible": False},
     }
     if len(ytr) < 50 or len(yte) < 30 or len(np.unique(ytr)) != 2 or len(np.unique(yte)) != 2:
         payload["model"]["reason"] = "insufficient_binary_temporal_sample"
         return payload
-
     scaler = StandardScaler().fit(Xtr)
-    model = LogisticRegression(C=0.5, max_iter=2000, solver="lbfgs").fit(
-        scaler.transform(Xtr), ytr
-    )
+    model = LogisticRegression(C=0.5, max_iter=2000, solver="lbfgs").fit(scaler.transform(Xtr), ytr)
     prob = model.predict_proba(scaler.transform(Xte))[:, 1]
     baseline = np.full(len(yte), float(ytr.mean()))
-    brier = float(brier_score_loss(yte, prob))
-    base_brier = float(brier_score_loss(yte, baseline))
-    auc = float(roc_auc_score(yte, prob))
-    ll = float(log_loss(yte, prob))
-    base_ll = float(log_loss(yte, baseline))
+    brier = float(brier_score_loss(yte, prob)); base_brier = float(brier_score_loss(yte, baseline))
+    auc = float(roc_auc_score(yte, prob)); ll = float(log_loss(yte, prob)); base_ll = float(log_loss(yte, baseline))
     payload["model"] = {
-        "eligible": True,
-        "heldout_brier": brier,
-        "baseline_brier": base_brier,
-        "brier_improvement": base_brier - brier,
-        "heldout_auc": auc,
-        "heldout_logloss": ll,
-        "baseline_logloss": base_ll,
+        "eligible": True, "heldout_brier": brier, "baseline_brier": base_brier,
+        "brier_improvement": base_brier - brier, "heldout_auc": auc,
+        "heldout_logloss": ll, "baseline_logloss": base_ll,
         "passes_gate": bool(brier + 0.005 < base_brier and auc >= 0.60),
-        "intercept": float(model.intercept_[0]),
-        "mean": scaler.mean_.tolist(),
-        "scale": scaler.scale_.tolist(),
-        "coef": model.coef_[0].tolist(),
+        "intercept": float(model.intercept_[0]), "mean": scaler.mean_.tolist(),
+        "scale": scaler.scale_.tolist(), "coef": model.coef_[0].tolist(),
     }
     return payload
 
 
 def main() -> int:
-    p = argparse.ArgumentParser()
-    p.add_argument("corpus", type=Path)
-    p.add_argument("ability")
-    p.add_argument("signal")
-    p.add_argument("--types", default="MELEE_ATTACK,RANGED_ATTACK")
-    p.add_argument("--out", type=Path)
-    args = p.parse_args()
-    payload = report(
-        args.corpus,
-        args.ability,
-        args.signal,
-        {x.strip() for x in args.types.split(",") if x.strip()},
-    )
-    text = json.dumps(payload, ensure_ascii=False, indent=2)
-    print(text)
+    p = argparse.ArgumentParser(); p.add_argument("corpus", type=Path); p.add_argument("ability"); p.add_argument("signal")
+    p.add_argument("--types", default="MELEE_ATTACK,RANGED_ATTACK"); p.add_argument("--out", type=Path); args = p.parse_args()
+    payload = report(args.corpus, args.ability, args.signal, {x.strip() for x in args.types.split(",") if x.strip()})
+    text = json.dumps(payload, ensure_ascii=False, indent=2); print(text)
     if args.out:
-        args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(text + "\n", encoding="utf-8")
+        args.out.parent.mkdir(parents=True, exist_ok=True); args.out.write_text(text + "\n", encoding="utf-8")
     return 0
 
 
