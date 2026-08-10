@@ -158,3 +158,8 @@ Manual real-battle procedure and pass criteria are recorded in `docs/LIVE_VALIDA
 5. Continue structural/legal-action correctness toward the acceptance targets without weakening strict invariants.
 6. Add full learned dynamics ensemble + multi-step divergence gate when the acquisition/correctness prerequisites are satisfied.
 7. Run hard-PvE human-in-loop benchmark: win rate, attempts-to-win, invalid action rate and calibration.
+
+## M13 persistent stochastic search update — 2026-08-10
+
+The historical single-child stochastic edge is removed. Action edges retain outcome bindings keyed by canonical state hash, a per-search transposition graph shares equal states, and the daemon now keeps one mutex-protected Planner whose search graph can be re-rooted on an exactly predicted observed state. Reuse is conservative: same non-empty battle id, perspective, canonical root hash and static structure fingerprint are all required; otherwise the graph resets. Unreachable pre-root nodes are pruned. Revision-bound stale cancellation remains authoritative. Functional SHAs: `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`, `135826c05d7f9b3d44e165ef6732bb6ede89a4c4`, `6edec4d8360169060d280cd07a6e63de9c0fda89`. CI run `31380236279`: PASS.
+

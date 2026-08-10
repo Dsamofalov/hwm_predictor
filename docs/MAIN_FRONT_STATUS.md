@@ -75,3 +75,17 @@ After stable live acquisition is proven, main may continue with the next origina
 - Standard CI now includes WebSocket streaming and a Windows/MSVC job. CI commit `7353e1ddcf17f27e981cac52f2b1e38f5545881e`: **PASS** on both Linux and Windows; Windows executes C++ build/CTest plus pairing, stale cancellation, live binding and WebSocket daemon integrations.
 - Next main-planner correctness issue identified during audit: `planner.cpp` currently gives each action edge one child while `sim_.apply(..., roll)` is stochastic. Before persistent tree reuse, split sampled outcomes by `state_hash`, share equal states via a transposition table, and regression-test that different sampled outcomes do not reuse a node initialized from the first outcome's legal actions.
 - Stop point for this agent: do not begin that M13 patch in this checkpoint; hand off from here.
+
+## M13 stochastic search correctness and persistent re-root
+
+Functional commits:
+
+- `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4` — per-action stochastic outcomes keyed by canonical state hash + per-search transpositions.
+- `135826c05d7f9b3d44e165ef6732bb6ede89a4c4` — persistent planner graph and exact observed-state re-root with reachable-subgraph pruning.
+- `6edec4d8360169060d280cd07a6e63de9c0fda89` — conservative static structure fingerprint guard for safe reuse.
+- `33aaea0cac7549972e4be93bf495d0a9dca7f301` — RFC6455 integration harness buffering fix exposed by the new verification run.
+
+Current behavior: a stochastic action may retain multiple canonical outcome children; equal canonical outcome hashes share one node. Across observed revisions, reuse occurs only for an exact predicted hash in the same non-empty battle/perspective and matching board/static-structure fingerprint. Otherwise search starts fresh. Revision change still cancels stale in-flight search.
+
+Verification: standard CI run `31380236279` PASS on Linux and Windows. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 19 structural-invalid finals and legal-action representability improvement toward >=99.9%.
+

@@ -3,7 +3,7 @@
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
 **Дата:** 10.08.2026
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 10.08.2026 — основной front: persistent pairing/bearer auth, revision-bound cooperative stale-search cancellation, live revision/hash trace/binding, authenticated local WebSocket streaming и Linux + Windows/MSVC CI gates реализованы; ability-front ведётся отдельно в ветке `ability`.
+**Последнее обновление реализации:** 10.08.2026 — основной front: local auth/live WebSocket loop закрыт на integration-fixtures; M13 stochastic outcome separation, transpositions и conservative persistent exact re-root реализованы и прошли Linux + Windows/MSVC CI; real authenticated active-battle smoke всё ещё обязателен; ability-front ведётся отдельно в ветке `ability`.
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
@@ -38,7 +38,7 @@
 Основной `main`-front и ability-front теперь разделены. Creature abilities продолжаются независимо в ветке `ability`; нижеприведённый порядок — приоритет **основного** фронта.
 
 1. **Real active-battle smoke gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном активном авторизованном PvE-бою. Network capture остаётся primary truth; полноценный runtime-object fallback добавлять только если live trace докажет конкретно отсутствующее canonical/legal-action поле.
-2. **M13 chance-outcome correctness → transpositions/tree reuse:** текущий planner исторически хранит один `Edge.child`, хотя `sim_.apply(..., roll)` стохастический. Следующий main-planner набор должен индексировать sampled child outcomes по `state_hash`, не смешивать разные stochastic outcomes в одном первом child-node, затем добавить transposition sharing и только после этого persistent re-root между наблюдаемыми состояниями.
+2. **M13 chance-outcome correctness / transpositions / persistent re-root — current correctness gate implemented:** sampled outcomes одного action разделены по canonical `state_hash`; одинаковые hashes используют общий per-search transposition node. Planner сохраняет граф между recommendation calls и переиспользует его только при точном observed hash в том же battle/perspective и при совпадающем conservative structure fingerprint; иначе строит новое дерево. Revision-bound stale cancellation остаётся обязательной и действует поверх reuse. Дальнейшее opponent/chance branching остаётся последующим качественным улучшением, а не prerequisite для безопасного reuse.
 3. **Decoder/legal correctness:** устранить 19 финальных structural-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **98.03%** к acceptance **>=99.9%**.
 4. **Learned dynamics:** full ensemble + multi-step divergence/validation gate; one-step качество само по себе не считать достаточным.
 5. **Evaluation:** после стабильного live acquisition — >=100 live/replay state invalid-recommendation gate, затем hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
