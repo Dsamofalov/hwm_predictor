@@ -27,7 +27,7 @@ function Invoke-NativeGate {
         [Parameter(Mandatory = $true)][string]$Name,
         [Parameter(Mandatory = $true)][string]$Command,
         [Parameter(Mandatory = $true)][object[]]$Arguments,
-        [Parameter(Mandatory = $true)][System.Collections.Generic.List[string]]$Failures
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()][System.Collections.Generic.List[string]]$Failures
     )
 
     Write-Host "==> $Name"
@@ -48,7 +48,7 @@ function Invoke-NativeGate {
 function Assert-GatesPassed {
     param(
         [Parameter(Mandatory = $true)][string]$SuiteName,
-        [Parameter(Mandatory = $true)][System.Collections.Generic.List[string]]$Failures
+        [Parameter(Mandatory = $true)][AllowEmptyCollection()][System.Collections.Generic.List[string]]$Failures
     )
 
     if ($Failures.Count -eq 0) {
