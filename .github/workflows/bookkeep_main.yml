@@ -1,0 +1,23 @@
+name: One-shot main bookkeeping
+
+on:
+  push:
+    branches: [bookkeep-main]
+    paths:
+      - '.github/scripts/bookkeep_main.py'
+
+permissions:
+  contents: write
+
+jobs:
+  bookkeep:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Synchronize docs and changelog
+        shell: powershell
+        run: python .\.github\scripts\bookkeep_main.py
