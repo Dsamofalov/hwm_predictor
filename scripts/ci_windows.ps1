@@ -22,6 +22,46 @@ function Ensure-Path([string]$Directory) {
     }
 }
 
+function Invoke-NativeGate {
+    param(
+        [Parameter(Mandatory = $true)][string]$Name,
+        [Parameter(Mandatory = $true)][string]$Command,
+        [Parameter(Mandatory = $true)][object[]]$Arguments,
+        [Parameter(Mandatory = $true)][System.Collections.Generic.List[string]]$Failures
+    )
+
+    Write-Host "==> $Name"
+    try {
+        & $Command @Arguments
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Name exited with code $LASTEXITCODE."
+        }
+        Write-Host "[PASS] $Name"
+    }
+    catch {
+        $message = $_.Exception.Message
+        [void]$Failures.Add("$Name :: $message")
+        Write-Warning "[FAIL] $Name :: $message"
+    }
+}
+
+function Assert-GatesPassed {
+    param(
+        [Parameter(Mandatory = $true)][string]$SuiteName,
+        [Parameter(Mandatory = $true)][System.Collections.Generic.List[string]]$Failures
+    )
+
+    if ($Failures.Count -eq 0) {
+        return
+    }
+
+    Write-Host "=== $SuiteName FAILURE SUMMARY ==="
+    foreach ($failure in $Failures) {
+        Write-Host " - $failure"
+    }
+    throw "$SuiteName failed $($Failures.Count) independent gate(s)."
+}
+
 function Bootstrap-CIEnvironment {
     Write-Host '==> Bootstrap Windows CI environment'
 
@@ -132,89 +172,97 @@ function Run-CoreSuite {
     $build = 'build/ci-debug'
     Build-Msvc 'Debug' $build
 
-    Write-Host '==> C++ main-front Debug tests'
-    ctest.exe --test-dir $build -C Debug --output-on-failure -E '^hwm-tests$'
-    Assert-NativeSuccess 'C++ main-front Debug tests'
-
+    $failures = New-Object 'System.Collections.Generic.List[string]'
     $plannerEval = Join-Path $build 'Debug\planner-eval.exe'
     $daemon = Join-Path $build 'Debug\solver-daemon.exe'
 
-    Write-Host '==> Held-out 120-state planner validity'
-    & $script:Python scripts/test_planner_replay_gate.py $plannerEval hwm_battles 120 1 120
-    Assert-NativeSuccess 'planner replay gate'
+    Invoke-NativeGate -Name 'C++ main-front Debug tests' -Command 'ctest.exe' -Arguments @(
+        '--test-dir', $build, '-C', 'Debug', '--output-on-failure', '-E', '^hwm-tests$'
+    ) -Failures $failures
 
-    Write-Host '==> Pairing/auth integration'
-    & $script:Python scripts/test_local_api_auth.py $daemon
-    Assert-NativeSuccess 'pairing/auth integration'
+    Invoke-NativeGate -Name 'Held-out 120-state planner validity' -Command $script:Python -Arguments @(
+        'scripts/test_planner_replay_gate.py', $plannerEval, 'hwm_battles', '120', '1', '120'
+    ) -Failures $failures
 
-    Write-Host '==> Stale cancellation integration'
-    & $script:Python scripts/test_stale_cancellation.py $daemon
-    Assert-NativeSuccess 'stale cancellation integration'
+    Invoke-NativeGate -Name 'Pairing/auth integration' -Command $script:Python -Arguments @(
+        'scripts/test_local_api_auth.py', $daemon
+    ) -Failures $failures
 
-    Write-Host '==> Live recommendation binding contract'
-    & $script:Python scripts/test_live_binding.py $daemon
-    Assert-NativeSuccess 'live binding integration'
+    Invoke-NativeGate -Name 'Stale cancellation integration' -Command $script:Python -Arguments @(
+        'scripts/test_stale_cancellation.py', $daemon
+    ) -Failures $failures
 
-    Write-Host '==> WebSocket revision streaming'
-    & $script:Python scripts/test_websocket_stream.py $daemon
-    Assert-NativeSuccess 'WebSocket integration'
+    Invoke-NativeGate -Name 'Live recommendation binding contract' -Command $script:Python -Arguments @(
+        'scripts/test_live_binding.py', $daemon
+    ) -Failures $failures
 
-    Write-Host '==> Python tests'
-    & $script:Python -m pytest python/tests -q
-    Assert-NativeSuccess 'Python tests'
+    Invoke-NativeGate -Name 'WebSocket revision streaming' -Command $script:Python -Arguments @(
+        'scripts/test_websocket_stream.py', $daemon
+    ) -Failures $failures
 
-    Write-Host '==> Extension install/typecheck/build'
+    Invoke-NativeGate -Name 'Python tests' -Command $script:Python -Arguments @(
+        '-m', 'pytest', 'python/tests', '-q'
+    ) -Failures $failures
+
     Push-Location extension
     try {
-        & $script:Npm install --no-audit --no-fund
-        Assert-NativeSuccess 'extension npm install'
-        & $script:Npm run typecheck
-        Assert-NativeSuccess 'extension typecheck'
-        & $script:Npm run build
-        Assert-NativeSuccess 'extension build'
+        Invoke-NativeGate -Name 'Extension dependency install' -Command $script:Npm -Arguments @(
+            'install', '--no-audit', '--no-fund'
+        ) -Failures $failures
+        Invoke-NativeGate -Name 'TypeScript typecheck' -Command $script:Npm -Arguments @(
+            'run', 'typecheck'
+        ) -Failures $failures
+        Invoke-NativeGate -Name 'Extension build' -Command $script:Npm -Arguments @(
+            'run', 'build'
+        ) -Failures $failures
     }
     finally {
         Pop-Location
     }
+
+    Assert-GatesPassed -SuiteName 'Core' -Failures $failures
 }
 
 function Run-FullSuite {
     $build = 'build/ci-release'
     Build-Msvc 'Release' $build
 
-    Write-Host '==> C++ main-front Release tests'
-    ctest.exe --test-dir $build -C Release --output-on-failure -E '^hwm-tests$'
-    Assert-NativeSuccess 'C++ main-front Release tests'
-
-    Write-Host '==> Release planner benchmark'
-    & (Join-Path $build 'Release\planner-demo.exe') 5000
-    Assert-NativeSuccess 'planner-demo 5000'
-
+    $failures = New-Object 'System.Collections.Generic.List[string]'
     New-Item -ItemType Directory -Force 'build/validation' | Out-Null
 
-    Write-Host '==> M11 full-corpus multistep residual gate'
-    & $script:Python -m hwm_solver.evaluation.dynamics_multistep hwm_battles --out build/validation/dynamics-multistep-damage.json
-    Assert-NativeSuccess 'M11 multistep gate'
+    Invoke-NativeGate -Name 'C++ main-front Release tests' -Command 'ctest.exe' -Arguments @(
+        '--test-dir', $build, '-C', 'Release', '--output-on-failure', '-E', '^hwm-tests$'
+    ) -Failures $failures
 
-    Write-Host '==> M11 full-corpus uncertainty calibration'
-    & $script:Python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/validation/dynamics-uncertainty-calibration.json
-    Assert-NativeSuccess 'M11 uncertainty calibration'
+    Invoke-NativeGate -Name 'Release planner benchmark' -Command (Join-Path $build 'Release\planner-demo.exe') -Arguments @(
+        '5000'
+    ) -Failures $failures
 
-    Write-Host '==> M11 full-corpus selector gate'
-    & $script:Python -m hwm_solver.evaluation.dynamics_selector hwm_battles --out build/validation/dynamics-selector-gate.json
-    Assert-NativeSuccess 'M11 selector gate'
+    Invoke-NativeGate -Name 'M11 full-corpus multistep residual gate' -Command $script:Python -Arguments @(
+        '-m', 'hwm_solver.evaluation.dynamics_multistep', 'hwm_battles', '--out', 'build/validation/dynamics-multistep-damage.json'
+    ) -Failures $failures
 
-    Write-Host '==> M11 stochastic survival-distribution gate'
-    & $script:Python -m hwm_solver.evaluation.dynamics_survival_gate hwm_battles --out build/validation/m11_dynamics_survival_gate.json
-    Assert-NativeSuccess 'M11 survival gate'
+    Invoke-NativeGate -Name 'M11 full-corpus uncertainty calibration' -Command $script:Python -Arguments @(
+        '-m', 'hwm_solver.evaluation.dynamics_uncertainty', 'hwm_battles', '--out', 'build/validation/dynamics-uncertainty-calibration.json'
+    ) -Failures $failures
 
-    Write-Host '==> Verify committed M11 evidence'
-    & $script:Python scripts/verify_m11_evidence.py
-    Assert-NativeSuccess 'M11 evidence verification'
+    Invoke-NativeGate -Name 'M11 full-corpus selector gate' -Command $script:Python -Arguments @(
+        '-m', 'hwm_solver.evaluation.dynamics_selector', 'hwm_battles', '--out', 'build/validation/dynamics-selector-gate.json'
+    ) -Failures $failures
 
-    Write-Host '==> M11 positive-residual temperature calibration'
-    & $script:Python -m hwm_solver.evaluation.dynamics_temperature_gate hwm_battles --out build/validation/m11_dynamics_temperature_gate.json
-    Assert-NativeSuccess 'M11 temperature gate'
+    Invoke-NativeGate -Name 'M11 stochastic survival-distribution gate' -Command $script:Python -Arguments @(
+        '-m', 'hwm_solver.evaluation.dynamics_survival_gate', 'hwm_battles', '--out', 'build/validation/m11_dynamics_survival_gate.json'
+    ) -Failures $failures
+
+    Invoke-NativeGate -Name 'Verify committed M11 evidence' -Command $script:Python -Arguments @(
+        'scripts/verify_m11_evidence.py'
+    ) -Failures $failures
+
+    Invoke-NativeGate -Name 'M11 positive-residual temperature calibration' -Command $script:Python -Arguments @(
+        '-m', 'hwm_solver.evaluation.dynamics_temperature_gate', 'hwm_battles', '--out', 'build/validation/m11_dynamics_temperature_gate.json'
+    ) -Failures $failures
+
+    Assert-GatesPassed -SuiteName 'Full' -Failures $failures
 }
 
 Bootstrap-CIEnvironment
