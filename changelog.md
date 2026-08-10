@@ -548,3 +548,36 @@ This file is the development diary for repository changes performed against the 
 - Exhaustive main-front validation run `31417309122` (temporary PR #5 harness): Debug MSVC build and `hwm-planner-tests` PASS; 120/120 held-out planner states valid with 0 invalid recommendations; all four daemon integrations PASS; Python 61/61 PASS; TypeScript/extension PASS; Release MSVC/CTest and `planner-demo 5000` PASS; all four M11 full-corpus evaluator commands PASS.
   - The ability-owned monolithic `hwm-tests` executable is intentionally excluded from the main-front PASS claim after exposing three independent ability-lane defects on MSVC: Mighty Slam test pointer invalidation after `vector::push_back`, a `frightful_aura`/`frightfulaura` test-code typo, and a subsequent `0xc0000409` hard termination. These remain for the ability branch validation pass.
 
+
+### Windows CI normalization and branch cleanup
+
+- Commit: `681b7f52d058773276967bad56c9d2163c89cd8a`
+  - Centralized permanent Windows Core/Full validation in `scripts/ci_windows.ps1` rather than workflow-embedded bootstrap/test logic.
+- Commit: `87b5bf03c2a4ac160ceccadb674416cb9b2d56a6`
+  - Added canonical M11 evidence verification as normal Python code.
+- Commit: `5f4d8311854d92efce8fcf71b9cc014effac4edd`
+  - Added regression coverage that parses GitHub Actions YAML and enforces the Windows-only runner contract.
+- Commit: `34fc8c5d2e295a85da26afaa7e76296c2f348d73`
+  - Split CI into independent `Core` and `Full` Windows jobs so two matching runners can execute them concurrently.
+- Commit: `99cd646bbc5c2a6a2c6d8d0aa90e530e98bc3230`
+  - Aligned local Windows validation with the same Core/Full suites.
+- Commit: `29bfe624852411d464a5c5d48e129d65dd506bed`
+  - Preserved the recommendation-explanation integration contract before deleting the temporary diagnostics branch.
+- Commits: `5bbfa3e5bd9e6a0f37aa0b7d73c4a3f5b77e87bb`, `767b842a6793f8da071637c6a45c1b21d7730936`
+  - Preserved the M11 positive-residual temperature calibration experiment and unit tests; the unstable hard-PvE sampler was intentionally discarded.
+- Commit: `8878d1da44aa74f6ad346afbd9bc81ca5c174665`
+  - Added M11 temperature calibration to the permanent Full suite.
+- Commit: `510b49931c87606522da17f13e3f1cff7b35579b`
+  - Bounded OpenMP/MKL/OpenBLAS/NumExpr to two threads per job for safe two-runner concurrency on one Windows PC.
+- Commit: `6f4c61d99eb7f06cfdb140a74d72a8bf5e978b79`
+  - Locked the permanent Core/Full test inventory with regression coverage.
+- Commit: `2c65ac15534ec3b648b3675f80388ae35d172a27`
+  - Hardened service execution with explicit venv `python.exe`, `npm.cmd`, `cmake.exe`, and `ctest.exe` invocation.
+- Commit: `6fe428fe25f4a3e4103620464f144ec21e7ab7b5`
+  - Updated the CI contract regression for the explicit Windows executable paths.
+- Commit: `151d568ee34a6fbf234d063a6c645d1341cebd9a`
+  - Removed the redundant bootstrap helper after consolidation on `scripts/ci_windows.ps1`.
+- Commit: `550f12f56d22e660c2a928a119e194fc44da65a6`
+  - Updated README to document service-owned Python, Visual Studio generator, canonical Core/Full commands, two-runner parallelism, and the rule that new main-front tests belong in the permanent suites rather than temporary workflows.
+- Repository branch cleanup completed: only `main` and `ability` remain.
+
