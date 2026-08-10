@@ -87,6 +87,18 @@ jobs:
           Write-Host "npm: $(& npm --version)"
           Write-Host ((& cmake --version | Select-Object -First 1))
 
+      - name: Temporary validation guard for Mighty Slam test pointer lifetime
+        run: |
+          $path = 'cpp/tests/test_main.cpp'
+          $text = Get-Content -Raw -Encoding UTF8 $path
+          $needle = '    s.entities.push_back(secondary);s.entities.push_back(friendly);s.entities.push_back(far);s.entities.push_back(big);'
+          $replacement = $needle + "`n    actor=s.entity(1);primary=s.entity(2);CHECK(actor&&primary); // validation-only: vector push_back invalidates saved pointers"
+          if (-not $text.Contains($needle)) { throw 'Mighty Slam test patch anchor not found.' }
+          $patched = $text.Replace($needle, $replacement)
+          if ($patched -eq $text) { throw 'Mighty Slam test validation patch did not apply.' }
+          Set-Content -Path $path -Value $patched -Encoding UTF8
+          Write-Host 'Applied validation-only pointer-lifetime guard. Production/ability source is unchanged.'
+
       - name: Configure and build C++ Debug with Visual Studio 2022
         run: |
           $ErrorActionPreference = 'Stop'
