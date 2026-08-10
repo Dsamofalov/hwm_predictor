@@ -55,6 +55,15 @@ source=source.replace(
     'after 357 melee observations, 150 primary-target probability samples plus 24 secondary-hit exact I-records, and chronological probability validation',
 )
 
+# Preserve the newline after the existing Python test function anchor. The base
+# patcher originally omitted it, which made the following original body an
+# unexpected indentation after replacement.
+source=source.replace(
+    "def test_mighty_slam_exact_wire_cooldown_and_action_type():'''",
+    "def test_mighty_slam_exact_wire_cooldown_and_action_type():\n'''",
+    1,
+)
+
 # CHECK is a single-argument macro; braced Cell initializers contain commas visible
 # to the preprocessor. Use named expected cells in the generated regression test.
 source=source.replace(
