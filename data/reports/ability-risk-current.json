@@ -1,9 +1,9 @@
 {
   "heldout_battles": 174,
   "sampled_player_states": 1748,
-  "risk_mean": 0.22878301961378766,
-  "risk_p50": 0.21759074245421,
-  "risk_p90": 0.3960068635905753,
+  "risk_mean": 0.22430819893858012,
+  "risk_p50": 0.21389329187918385,
+  "risk_p90": 0.3753832658831461,
   "risk_p99": 0.5468762843538735,
   "top_contributors": [
     {
@@ -54,18 +54,6 @@
         "retaliation",
         "immunity",
         "control"
-      ]
-    },
-    {
-      "code": "pawstrike",
-      "name": "Удар лапой.",
-      "support": "learned_damage",
-      "risk_weight": 0.75,
-      "state_occurrences": 218,
-      "weighted_contribution": 376013.8276875002,
-      "categories": [
-        "offense",
-        "targeting"
       ]
     },
     {
@@ -412,6 +400,18 @@
       "risk_weight": 0.75,
       "state_occurrences": 50,
       "weighted_contribution": 141555.05999999997,
+      "categories": [
+        "offense",
+        "targeting"
+      ]
+    },
+    {
+      "code": "pawstrike",
+      "name": "Удар лапой.",
+      "support": "modeled_proc",
+      "risk_weight": 0.28,
+      "state_occurrences": 218,
+      "weighted_contribution": 140378.49566999983,
       "categories": [
         "offense",
         "targeting"

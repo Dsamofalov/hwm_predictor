@@ -4182,9 +4182,9 @@
       "code": "pawstrike",
       "name": "Удар лапой.",
       "description": "Существо при атаке имеет шанс сместить вражеский отряд на одну клетку и дополнительно отбросить его в начало ATB-шкалы. Шанс зависит от числа клеток, которых этому существу пришлось пройти, чтобы атаковать цель.",
-      "support": "learned_damage",
+      "support": "modeled_proc",
       "learned_damage": true,
-      "risk_weight": 0.75,
+      "risk_weight": 0.28,
       "categories": [
         "offense",
         "targeting"
@@ -6302,9 +6302,9 @@
     "exact_search": 85,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 177,
+    "learned_damage": 176,
     "identity": 4,
-    "modeled_proc": 8,
+    "modeled_proc": 9,
     "partial_exact": 18,
     "dynamic_spellbook": 1,
     "exact_targeting": 11,

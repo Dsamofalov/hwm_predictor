@@ -115,6 +115,36 @@ def test_mana_feed_exact_wire_and_transition():
     assert _decision_semantic_unresolved_flags([bad],entities,15) == [True]
 
 
+def test_pawstrike_i_record_exact_observed_atb_reset():
+    from hwm_solver.protocol.replay import RawEntity
+
+    def entity(uid: int, owner: int, abilities: list[str], *, atb: float = 75.0) -> RawEntity:
+        return RawEntity(
+            uid=uid, owner=owner, creature_id=172, max_hp=22, top_hp=22,
+            min_damage=3, max_damage=5, mana=0, max_mana=0, speed=5, atb=atb,
+            initiative=10, max_count=10, count=10, x=1, y=1, attack_range=1,
+            shots=0, attack=8, defense=6, morale_raw=0, luck_raw=0,
+            retaliation_raw=0, real_health=0, experience_level_code=0,
+            abilities=abilities,
+        )
+
+    source=entity(1,1,["pawstrike"])
+    target=entity(2,2,[],atb=88.0)
+    entities={1:source,2:target}
+    cmds=parse_commands("d0010020000000010b0020601I0020001")
+    irec=next(c for c in cmds if c.opcode=="I_RECORD")
+    assert (irec.actor_uid,irec.target_uid) == (2,1)
+    flags=_decision_semantic_unresolved_flags(cmds,entities,1)
+    assert flags[cmds.index(irec)] is False
+    for c in cmds:
+        _apply_command(entities,c)
+    assert target.atb == 0.0
+
+    # Wrong source/decision actor cannot silently become exact.
+    bad=parse_commands("I0020003")[0]
+    assert _decision_semantic_unresolved_flags([bad],entities,1) == [True]
+
+
 def test_mighty_slam_exact_wire_cooldown_and_action_type():
     from hwm_solver.protocol.replay import RawEntity, _apply_command, _decision_semantic_unresolved_flags
 

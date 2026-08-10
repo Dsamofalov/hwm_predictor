@@ -1120,6 +1120,49 @@ static bool test_entrenchment_lifecycle_and_resistance() {
     return true;
 }
 
+static bool test_pawstrike_modeled_proc_exact_consequence() {
+    GenericSimulator sim;
+    BattleState s=fixture();s.width=14;s.height=10;
+    auto* actor=s.entity(1);auto* target=s.entity(2);CHECK(actor&&target);
+    actor->owner=1;actor->side=Side::Player;actor->is_shooter=false;actor->shots=0;
+    actor->anchor={1,1};actor->speed=12;actor->count=10;actor->max_count=10;
+    actor->min_damage=actor->max_damage=2;actor->attack=8;actor->ability_ids.push_back(stable_ability_id("pawstrike"));
+    target->owner=2;target->side=Side::Pve;target->is_shooter=false;target->shots=0;
+    target->anchor={12,1};target->count=20;target->max_count=20;target->max_hp_per_unit=50;target->top_unit_hp=50;
+    target->min_damage=target->max_damage=8;target->attack=10;target->retaliation_available=true;target->atb=5000;
+
+    auto acts=sim.legal_actions(s);
+    auto charge=std::find_if(acts.begin(),acts.end(),[](const Action&a){
+        return a.type==ActionType::MeleeAttack&&a.target_uid&&*a.target_uid==2&&a.destination&&*a.destination==Cell{11,1};
+    });
+    CHECK(charge!=acts.end()); // moved_cells=10 => modeled p=1.0
+    const int actor_hp=entity_total_hp(*actor);
+    auto open=sim.apply(s,*charge,0.37);CHECK(open.valid);
+    CHECK(open.state.entity(2)->atb==0.0f);
+    const Cell expected_open_push{13,1};CHECK(open.state.entity(2)->anchor==expected_open_push);
+    CHECK(entity_total_hp(*open.state.entity(1))==actor_hp); // pushed out of retaliation adjacency
+
+    BattleState blocked=s;Entity wall=*target;wall.uid=3;wall.anchor={13,1};wall.owner=2;wall.side=Side::Pve;
+    blocked.entities.push_back(wall);
+    auto bacts=sim.legal_actions(blocked);
+    auto bcharge=std::find_if(bacts.begin(),bacts.end(),[](const Action&a){return a.type==ActionType::MeleeAttack&&a.target_uid&&*a.target_uid==2&&a.destination&&*a.destination==Cell{11,1};});
+    CHECK(bcharge!=bacts.end());
+    auto stuck=sim.apply(blocked,*bcharge,0.37);CHECK(stuck.valid);
+    CHECK(stuck.state.entity(2)->atb==0.0f);const Cell expected_blocked_anchor{12,1};CHECK(stuck.state.entity(2)->anchor==expected_blocked_anchor);
+    CHECK(entity_total_hp(*stuck.state.entity(1))<actor_hp); // still adjacent: normal retaliation remains possible
+
+    BattleState stationary=s;stationary.entity(1)->anchor={11,1};stationary.entity(1)->speed=1;stationary.entity(2)->anchor={12,1};stationary.entity(2)->atb=4321;
+    auto sacts=sim.legal_actions(stationary);auto hit=std::find_if(sacts.begin(),sacts.end(),[](const Action&a){return a.type==ActionType::MeleeAttack&&a.target_uid&&*a.target_uid==2&&!a.destination;});CHECK(hit!=sacts.end());
+    auto nocharge=sim.apply(stationary,*hit,0.0);CHECK(nocharge.valid);CHECK(nocharge.state.entity(2)->atb==4321);
+
+    BattleState p=fixture();auto*pa=p.entity(1);auto*pt=p.entity(2);CHECK(pa&&pt);pa->owner=1;pt->owner=2;pa->ability_ids.push_back(stable_ability_id("pawstrike"));pt->atb=7777;p.active_entity_uid=1;
+    ProtocolDecoder decoder;auto decoded=decoder.decode_update(p,"t=000turns=>1:I0020001i0010100C002000000");
+    CHECK(decoded.state.entity(2)->atb==0.0f);CHECK(decoded.state.semantic_unresolved_records==0);
+    CHECK(std::any_of(decoded.events.begin(),decoded.events.end(),[](const BattleEvent&e){return e.type=="PAW_STRIKE_ATB_RESET"&&e.actor_uid==1&&e.target_uid==2;}));
+    return true;
+}
+
+
 static bool test_mighty_slam_exact_action_splash_knockback_cooldown() {
     GenericSimulator sim;
     BattleState s=fixture(); auto* actor=s.entity(1); auto* primary=s.entity(2); CHECK(actor&&primary);
@@ -1408,6 +1451,7 @@ int main() {
     if (!test_regeneration_exact_turn_start_no_resurrection()) return EXIT_FAILURE;
     if (!test_life_drain_exact_heal_resurrection_and_retaliation()) return EXIT_FAILURE;
     if (!test_kill_trigger_enraged_gate()) return EXIT_FAILURE;
+    if (!test_pawstrike_modeled_proc_exact_consequence()) return EXIT_FAILURE;
     if (!test_mighty_slam_exact_action_splash_knockback_cooldown()) return EXIT_FAILURE;
     if (!test_mana_feed_exact_action_and_protocol()) return EXIT_FAILURE;
     if (!test_mana_drain_and_reference_damage_perks()) return EXIT_FAILURE;

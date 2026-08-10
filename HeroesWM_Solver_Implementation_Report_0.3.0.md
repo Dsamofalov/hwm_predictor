@@ -80,18 +80,18 @@ Latest Ability Registry support counts:
   "exact_search": 85,
   "exact_targeting": 11,
   "partial_exact": 18,
-  "modeled_proc": 8,
+  "modeled_proc": 9,
   "modeled_collateral": 5,
   "modeled_kill_trigger": 2,
   "dynamic_spellbook": 1,
-  "learned_damage": 177,
+  "learned_damage": 176,
   "reference_only": 32,
   "identity": 4,
   "unresolved": 78
 }
 ```
 
-Examples already handled in runtime include core movement/shooter/large/flyer/retaliation rules; multi-hit; defense penetration/resistances/immunities; Defend/Take Roots/Entrenchment; Stone/Warding/Crippling observed state; Enraged/Pack Enrage; Battle Thirst/Taste of Blood; Mana Drain; Mana Feed; Life Drain; Regeneration; Mighty Slam; Blood Frenzy; Organic Armor; Shield Other; Swift Attack; Impervious to Pain; Concentration; Lizard Bite; direct hero spells and several status spells.
+Examples already handled in runtime include core movement/shooter/large/flyer/retaliation rules; multi-hit; defense penetration/resistances/immunities; Defend/Take Roots/Entrenchment; Stone/Warding/Crippling observed state; Enraged/Pack Enrage; Battle Thirst/Taste of Blood; Mana Drain; Mana Feed; Life Drain; Regeneration; Mighty Slam; modeled Paw Strike ATB/knockback; Blood Frenzy; Organic Armor; Shield Other; Swift Attack; Impervious to Pain; Concentration; Lizard Bite; direct hero spells and several status spells.
 
 **Current research frontier:** remaining assist/counter/summon/control abilities. Life Drain, Regeneration, Mana Feed and Mighty Slam are `exact_search`; Mana Feed is additionally validated on all 42 observed `Smfd` actions in the 866-battle corpus.
 

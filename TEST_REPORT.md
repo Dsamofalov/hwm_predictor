@@ -7,7 +7,7 @@
 ```text
 C++ incremental Debug build: PASS
 C++ CTest:                  1/1 PASS (100%)
-Python pytest:              40/40 PASS
+Python pytest:              42/42 PASS
 TypeScript typecheck:       PASS
 Extension build:            PASS
 ```
@@ -58,7 +58,7 @@ ability codes:          421
 exact_search:           85
 exact_targeting:        11
 partial_exact:          18
-modeled_proc:           8
+modeled_proc:           9
 modeled_collateral:     5
 modeled_kill_trigger:   2
 unresolved:             78
@@ -70,13 +70,15 @@ Current held-out risk was recomputed from the same 866-battle corpus after the M
 
 ```text
 held-out sampled player states: 1748
-risk mean:              0.22878
-risk p50:               0.21759
-risk p90:               0.39601
+risk mean:              0.22431
+risk p50:               0.21389
+risk p90:               0.37538
 risk p99:               0.54688
 ```
 
 `Crippling Wound` remains deliberately non-speculative: its observed `Swnd` debuff transition is decoded, but the current proc-probability models fail the chronological validation gate and therefore are not enabled in search.
+
+`Paw Strike` is now deliberately hybrid rather than exact-search: current-corpus distance model Brier 0.20250 beats the train-frequency baseline 0.23788, while the historical HP-ratio formula fails current holdout. Observed `I<target><source>` transitions are exact 174/174 and reset ATB to zero; speculative physical push is conditional on legal placement.
 
 ## Policy priors
 

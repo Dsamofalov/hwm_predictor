@@ -887,6 +887,16 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             i+=n;continue;
         }
         if(text[i]=='P'&&i+7<=text.size()&&digits(text.substr(i+1,6))){size_t n=7;semantic(n);const uint64_t puid=loose_int(text.substr(i+1,3));ctx.pending_p_uid=puid;emit(events,seq,"P_RECORD",puid,0,text.substr(i,n));i+=n;continue;}
+        if(text[i]=='I'&&i+8<=text.size()&&digits(text.substr(i+1,7))){
+            const size_t n=8;const uint64_t affected_uid=loose_int(text.substr(i+1,3));
+            const uint64_t source_uid=loose_int(text.substr(i+4,4));
+            auto* source=s.entity(source_uid);auto* affected=s.entity(affected_uid);
+            const bool exact=source&&affected&&source->alive&&source_uid==ctx.actor_uid&&
+                has_ability(*source,"pawstrike")&&source->owner!=affected->owner;
+            if(exact){known(n);affected->atb=0.0f;emit(events,seq,"PAW_STRIKE_ATB_RESET",source_uid,affected_uid,text.substr(i,n));}
+            else{semantic(n);emit(events,seq,"I_RECORD",source_uid,affected_uid,text.substr(i,n));}
+            i+=n;continue;
+        }
         if(text[i]=='T'&&i+7<=text.size()&&digits(text.substr(i+1,6))){
             size_t n=7;const uint64_t actor_uid=loose_int(text.substr(i+1,3)),target_uid=loose_int(text.substr(i+4,3));
             auto* actor=s.entity(actor_uid);auto* target=s.entity(target_uid);
@@ -915,7 +925,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             i+=n;continue;
         }
         bool fixed=false;
-        for(auto spec: {std::pair<char,int>{'I',8},{'T',7},{'R',7},{'V',7},{'F',7},{'Y',10},{'x',10}}){
+        for(auto spec: {std::pair<char,int>{'R',7},{'V',7},{'F',7},{'Y',10},{'x',10}}){
             if(text[i]==spec.first&&i+(size_t)spec.second<=text.size()&&digits(text.substr(i+1,3))){size_t n=spec.second;semantic(n);emit(events,seq,"RAW_KNOWN",loose_int(text.substr(i+1,3)),0,text.substr(i,n));i+=n;fixed=true;break;}
         }
         if(fixed)continue;

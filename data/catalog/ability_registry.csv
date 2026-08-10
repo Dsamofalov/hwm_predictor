@@ -279,7 +279,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 3432167282,painmirror,exact_search,0.0000,offense,43,Отражение боли.
 707599606,paralyzing,learned_damage,0.7500,offense|casting,22,Паралич.
 40209030,patience,learned_damage,0.3000,offense,8,Выжидание.
-2887662221,pawstrike,learned_damage,0.7500,offense|targeting,90,Удар лапой.
+2887662221,pawstrike,modeled_proc,0.2800,offense|targeting,90,Удар лапой.
 2369447438,perseverance,unresolved,0.7500,offense|immunity|casting,16,Упорство.
 818299305,piercingbolt,learned_damage,0.3000,ranged|offense,142,Стрельба насквозь.
 3026372832,pirate,identity,0.0000,offense,599,Пират.

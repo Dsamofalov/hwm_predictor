@@ -677,6 +677,22 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
                     deal_damage(*actor,std::max(0,(int)std::llround(actual_damage*(0.10/0.90))));
                 if(!ranged&&actual_damage>0&&actor->alive&&has_tag(*t,"raptureinagony"))
                     deal_damage(*actor,std::max(0,(int)std::llround(actual_damage*(0.20/0.80))));
+                if(hit==0&&!ranged&&moved_cells>0&&actual_damage>0&&actor->alive&&t->alive&&has_tag(*actor,"pawstrike")){
+                    // Paw Strike is hybrid: the observed consequence is exact, while the
+                    // trigger probability is a current-corpus model. Chronological holdout
+                    // Brier is 0.2025 for p=min(1,0.10*travelled_cells) vs 0.2379 for the
+                    // train-frequency baseline; the historical HP-ratio formula fails this gate.
+                    const double paw_probability=std::min(1.0,0.10*double(moved_cells));
+                    if(proc_roll(roll,actor->uid,t->uid,stable_tag_id("pawstrike"))<=paw_probability){
+                        // 174/174 observed proc I-records identify actor->affected target and reset
+                        // target ATB. This reset is independent of whether physical push fits.
+                        t->atb=0.0f;
+                        const double acx=actor->anchor.x+(actor->footprint_w-1)*0.5,acy=actor->anchor.y+(actor->footprint_h-1)*0.5;
+                        const double tcx=t->anchor.x+(t->footprint_w-1)*0.5,tcy=t->anchor.y+(t->footprint_h-1)*0.5;
+                        const int sx=signum(tcx-acx),sy=signum(tcy-acy);
+                        if(sx||sy){const Cell pushed{t->anchor.x+sx,t->anchor.y+sy};if(can_place(tr.state,*t,pushed))t->anchor=pushed;}
+                    }
+                }
                 if(hit==0&&actual_damage>0){
                     // Stochastic proc layer: probabilities are train-only estimates and
                     // every enabled rule passed a temporal held-out stability gate.

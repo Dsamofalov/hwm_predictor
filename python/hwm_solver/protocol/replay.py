@@ -387,6 +387,38 @@ def _observed_shieldbash_proc(
     return hit, target_uid
 
 
+def _validated_pawstrike_i(
+    command: "LowLevelCommand", entities: dict[int, RawEntity],
+    *, decision_actor_uid: int | None = None, commands: list["LowLevelCommand"] | None = None,
+) -> bool:
+    """Validate I<affected3><source4> as the observed Paw Strike ATB reset.
+
+    Current corpus evidence: 150/150 Paw Strike procs contain an I-record whose
+    four-digit source equals the attacking Paw Strike carrier, paired with primary
+    target FORCED_POSITION. The source relationship is retained even when the
+    forced-position coordinate equals the previous canonical anchor.
+    """
+    if command.opcode != "I_RECORD" or command.actor_uid is None or command.target_uid is None:
+        return False
+    affected = entities.get(int(command.actor_uid))
+    source = entities.get(int(command.target_uid))
+    if not (affected and source and source.alive and "pawstrike" in set(source.abilities)):
+        return False
+    if source.owner == affected.owner:
+        return False
+    if decision_actor_uid is not None and int(source.uid) != int(decision_actor_uid):
+        return False
+    if commands is not None:
+        dealt = any(
+            c.opcode == "DAMAGE" and c.actor_uid == source.uid and c.target_uid == affected.uid
+            for c in commands
+        )
+        forced = any(c.opcode == "FORCED_POSITION" and c.actor_uid == affected.uid for c in commands)
+        if not (dealt and forced):
+            return False
+    return True
+
+
 def _validated_mighty_slam(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
     """Validate the corpus-proven Mighty Slam activation marker.
 
@@ -527,6 +559,10 @@ def _decision_semantic_unresolved_flags(
             unresolved = not bool(rune_actor and rune_actor.rune_speed_active)
         elif c.opcode == "W_RECORD":
             unresolved = not _validated_weakeningstrike(c, entities)
+        elif c.opcode == "I_RECORD":
+            unresolved = not _validated_pawstrike_i(
+                c, entities, decision_actor_uid=actor_uid, commands=commands
+            )
         elif c.opcode == "T_RECORD":
             t_actor = entities.get(int(c.actor_uid)) if c.actor_uid is not None else None
             target_uid = int(c.raw[4:7]) if len(c.raw) == 7 and c.raw[4:7].isdigit() else None
@@ -1086,8 +1122,17 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
             out.append(LowLevelCommand("Z_RECORD",raw,actor_uid=int(raw[1:4]),target_uid=int(raw[4:7]),amount=int(raw[7:10])))
             i += 10
             continue
+        if text[i] == "I" and i + 8 <= n and text[i + 1:i + 8].isdigit():
+            raw = text[i:i + 8]
+            # I<affected_uid3><source_uid4>. `target_uid` intentionally stores the
+            # source because LowLevelCommand has no dedicated source_uid field.
+            out.append(LowLevelCommand(
+                "I_RECORD", raw, actor_uid=int(raw[1:4]), target_uid=int(raw[4:8])
+            ))
+            i += 8
+            continue
         for opcode, opname, width in (
-            ("I", "I_RECORD", 8), ("T", "T_RECORD", 7),
+            ("T", "T_RECORD", 7),
             ("R", "R_RECORD", 7), ("V", "V_RECORD", 7), ("F", "F_RECORD", 7),
             ("Y", "Y_RECORD", 10), ("x", "X_RECORD", 10),
         ):
@@ -1401,6 +1446,10 @@ def _apply_command(
         actor=entities[c.actor_uid]
         if "manadrain" in set(actor.abilities) and actor.max_hp > 0 and int(c.amount) % int(actor.max_hp) == 0:
             actor.apply_heal(int(c.amount))
+    elif c.opcode == "I_RECORD" and _validated_pawstrike_i(c, entities):
+        # Exact observed consequence. Physical displacement is authoritative in the
+        # preceding b/B record; ATB reset happens even if that displacement is blocked.
+        entities[int(c.actor_uid)].atb = 0.0
     elif c.opcode == "Z_RECORD" and c.actor_uid in entities and c.target_uid in entities and c.amount is not None:
         actor=entities[c.actor_uid]; target=entities[c.target_uid]
         if (

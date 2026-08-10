@@ -24,7 +24,7 @@
 - При structural-ready состоянии basic action generator имеет хотя бы один action в **5338/5351 = 99.76%** held-out states.
 - Held-out observed basic-action representability: **5373/5481 = 98.03%**.
 - Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
-- Ability catalog: **421** ability code; registry: **85 exact-search**, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Mighty Slam` теперь имеет отдельный exact `ABILITY` path: выбранная цель + соседние вражеские стеки, knockback только small при валидной клетке, без retaliation, cooldown по минимальному наблюдаемому gap=3; `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
+- Ability catalog: **421** ability code; registry: **85 exact-search**, 11 exact-targeting, 18 partial-exact, 9 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Mighty Slam` теперь имеет отдельный exact `ABILITY` path: выбранная цель + соседние вражеские стеки, knockback только small при валидной клетке, без retaliation, cooldown по минимальному наблюдаемому gap=3; `Paw Strike` переведён из `learned_damage` в `modeled_proc`: вероятность `min(1, 0.10 * travelled_cells)` прошла chronological holdout лучше constant baseline, а observed `I<target><source>` даёт exact ATB=0 transition 174/174; physical push применяется только при валидной клетке; `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
 - Ability-risk на held-out sample: mean **0.2389**, p90 **0.3978**.
 - Player action-type prior: held-out top-1 **70.76%**, top-3 **93.46%**. PvE prior: top-1 **62.81%**, top-3 **96.11%**.
 - Value: test battle-level Brier **0.05176** против **0.11891** constant baseline; AUC **0.9889**.
@@ -35,7 +35,7 @@
 
 ### Текущий незавершённый фронт разработки
 
-1. Закрытие high-impact unresolved creature abilities; `Life Drain`, `Regeneration`, `Mana Feed` и `Mighty Slam` закрыты 10.08.2026, текущая точка исследования — remaining assist/counter/summon/control abilities.
+1. Закрытие high-impact unresolved creature abilities; `Life Drain`, `Regeneration`, `Mana Feed` и `Mighty Slam` закрыты 10.08.2026; `Paw Strike` переведён в validated hybrid modeled-proc 10.08.2026, текущая точка исследования — remaining assist/counter/summon/control abilities.
 2. Устранение 19 финальных structural-invalid replay (в основном geometry/rare mechanics) без ослабления invariants.
 3. Full learned dynamics ensemble и multi-step validation gate.
 4. Tree reuse/transposition и дальнейшее улучшение opponent branching.
@@ -604,7 +604,7 @@ std::shared_ptr<const BattleState> current_observed() const;
 
 # 11. Модуль M04 — Game Knowledge / Entity Catalog
 
-> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Из raw-корпуса: 644 creature ID и 421 ability code. Внешний reference catalog извлечён из двух HTML-источников. Ability Registry: 85 exact-search, 11 exact-targeting, 18 partial-exact, 8 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; 78 abilities остаются unresolved.
+> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Из raw-корпуса: 644 creature ID и 421 ability code. Внешний reference catalog извлечён из двух HTML-источников. Ability Registry: 85 exact-search, 11 exact-targeting, 18 partial-exact, 9 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; 78 abilities остаются unresolved.
 
 ## Назначение
 

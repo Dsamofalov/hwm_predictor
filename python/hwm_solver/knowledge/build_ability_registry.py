@@ -28,6 +28,7 @@ PARTIAL_EXACT = {"forcearrow", "ifire", "bloodlust"}
 EXACT_TARGETING = {"undead", "elemental", "mechanical", "immunity", "imind", "iblind",
                    "islow", "ilighting", "icold", "iair", "iearth"}
 IDENTITY_LOW_RISK = {"alive", "demonic", "amphibian", "pirate"}
+RUNTIME_MODELED_PROC = {"pawstrike"}
 
 
 def fnv1a32(text: str) -> int:
@@ -161,7 +162,8 @@ def build(catalog_path: Path, out: Path, ability_damage: Path | None=None, colla
         support=exact_support(code)
         ld=code in learned
         if support is None:
-            if code in collateral_set: support="modeled_collateral"
+            if code in RUNTIME_MODELED_PROC: support="modeled_proc"
+            elif code in collateral_set: support="modeled_collateral"
             elif code in proc_set: support="modeled_proc"
             elif code in kill_trigger_set: support="modeled_kill_trigger"
             else: support="learned_damage" if ld else ("reference_only" if observed==0 else "unresolved")
