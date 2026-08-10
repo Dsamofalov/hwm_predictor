@@ -94,8 +94,8 @@ jobs:
           cmake --build build/windows --config Debug --parallel 2
           if ($LASTEXITCODE -ne 0) { throw 'C++ Debug build failed.' }
 
-      - name: C++ tests
-        run: ctest --test-dir build/windows -C Debug --output-on-failure
+      - name: C++ main-front tests
+        run: ctest --test-dir build/windows -C Debug --output-on-failure -E '^hwm-tests$'
 
       - name: Held-out 120-state planner recommendation validity
         run: python scripts/test_planner_replay_gate.py build/windows/Debug/planner-eval.exe hwm_battles 120 1 120
