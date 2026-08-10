@@ -311,3 +311,17 @@ This file is the development diary for repository changes performed against the 
   - Refreshed current ability risk to mean **0.22431**, p90 **0.37538**.
   - Updated active specification and reports, including the previously verified Mighty Slam full-CI Python count **42/42**.
   - C++ Debug build/CTest and targeted Python replay/probe tests passed before commit.
+
+
+### Local daemon pairing/authentication
+
+- Commit: `40665e57a42244ac5dfc07321aab5ced580173c4`
+  - Staged the self-removing M16 security patch and verification runner.
+- Commit: `a1012a73146fc9c832a31b7d48cc38464ddc8a76`
+  - Added a persistent 256-bit local bearer token and explicit per-process pairing code; the bearer token survives daemon restarts while the human code rotates.
+  - Private local API routes now require `Authorization: Bearer <token>`; only health/version, CORS preflight and `/pair` remain public.
+  - Added pairing brute-force lock after 10 failed codes per daemon process and kept loopback-only binding/origin filtering.
+  - Extension service worker and side panel persist the token in `chrome.storage.local`, attach it to capture/runtime-probe/recommend/status requests, and clear it on HTTP 401.
+  - Added `scripts/test_local_api_auth.py`: unauthenticated private routes rejected, wrong code rejected, correct pair succeeds, token file persists, old token works after daemon restart.
+  - Added the integration test to normal CI and updated M16 specification status.
+  - Targeted C++ build/CTest, local API integration, TypeScript typecheck and extension build passed before commit.
