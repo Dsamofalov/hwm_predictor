@@ -233,3 +233,14 @@ This file is the development diary for repository changes performed against the 
   - Promoted registry to **85 exact-search / 177 learned-damage / 78 unresolved** and refreshed `ability-risk-current.json` (mean 0.2288, p90 0.3960).
   - Synchronized top-level and stale M04/M12/Phase7 ability counts in the active specification/reports.
   - C++ Debug build/CTest and **targeted replay+ability-probe tests** passed before commit; full Python/TypeScript integration is verified by standard CI on the final tree.
+
+### Paw Strike corpus probe
+
+- Commit: `7414ea61070315efd34aa77a74181f2f17517eba`
+  - Staged a self-removing full-corpus probe for `pawstrike` after Mighty Slam became exact.
+- Commit: `da87dfa0c447506155c31caeaf659008be3a1690`
+  - Stored `data/reports/pawstrike_probe.json` and `pawstrike_registry_entry.json`.
+  - Reference: **Удар лапой.** — Существо при атаке имеет шанс сместить вражеский отряд на одну клетку и дополнительно отбросить его в начало ATB-шкалы. Шанс зависит от числа клеток, которых этому существу пришлось пройти, чтобы атаковать цель.
+  - Matched decisions: **523** across **85** battles; candidates **415**; parse errors **0**.
+  - Action types: `{'MELEE_ATTACK': 357, 'ABILITY': 65, 'MOVE': 63, 'WAIT': 35, 'DEFEND': 3}`; special codes: `{'rn9': 72, 'enr': 29, 'eod': 23, 'sld': 17, 'at3': 15, 'rn2': 14, 'spi': 12, 'rn7': 10, 'rag': 9, 'fw3': 9, 'psc': 8, 'pfr': 8, 'ra2': 6, 'rn1': 6, 'raa': 5, 'blt': 4, 'adp': 4, 'ato': 3, 'pss': 2, 'spt': 2, 'ent': 2, 'crs': 2, 'sff': 2, 'tob': 2, 'rgl': 2, 'zat': 2, 'bdd': 1, 'psf': 1, 'paa': 1, 'slw': 1, 'rn6': 1, 'psa': 1, 'mga': 1}`.
+  - Target position deltas: `{'1,0': 28, '0,-1': 20, '0,1': 19, '1,1': 12, '-1,0': 10, '-1,-1': 7, '1,-1': 5, '-1,1': 4, '0,2': 1, '-9,1': 1, '-8,-1': 1, '0,-2': 1}`; effect additions: `{'sld': 9, 'spt': 1, 'ra2': 1, 'rag': 1, 'psa': 1, 'at3': 1, 'pfr': 1}`.
