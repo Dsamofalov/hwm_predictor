@@ -612,3 +612,18 @@ This file is the development diary for repository changes performed against the 
   - Ability-owned `hwm-tests` remains intentionally outside main-front CI and will be validated separately on branch `ability`.
   - Real authenticated active HeroesWM battle smoke remains the outstanding live product gate.
 
+
+## 2026-08-11
+
+### Current CI/report/specification synchronization
+
+- Functional test reference: `7cd17878174529a40087ce5a78231dd93690851b`, Windows run `31431838319`: **Core PASS + Full PASS**, Python **75/75**, planner validity **120/120** with 0 invalid recommendations.
+- Commit: `deb8afbf37fee3543260f728e3e3ac97f044f2c4`.
+  - Synchronized `TEST_REPORT.md` with the validated Windows Core/Full contract and current 75-test Python suite.
+- Documentation sync staging/hardening commits between `a8d24e7b...` and `1dc6da8a7b4be10d35dee6dc8e3673f82be55d61` were infrastructure-only; they did not change solver runtime or ability code. The self-hosted attempts were cancelled while the user removed the old runners; the final patcher moved to GitHub-hosted Windows after the repository became public.
+- Commit: `96a8f3f3ee50150bd0d1ca2d8e73b92a3507ffe8`.
+  - Updated `SPEC.md` and `HeroesWM_Solver_TZ_Status_0.3.0.md` to checkpoint **11.08.2026** and synchronized them byte-for-byte.
+  - Recorded permanent 120-state / 109-battle planner validity, M13 stochastic outcome/transposition/persistent re-root work, M11 2/4/8/16-step evidence and the still-disabled production learned-dynamics path.
+  - Updated M03/M14/M19 and Phases 5/6/8/9 plus MVP DoD without claiming the still-missing authenticated live battle smoke.
+  - Recorded the infrastructure change: repository is public; self-hosted runners are removed; Windows/MSVC remains the supported CI target and permanent workflows should use GitHub-hosted Windows.
+  - Kept `ability` ownership separate from main-owned status claims.
