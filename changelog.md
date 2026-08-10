@@ -581,3 +581,34 @@ This file is the development diary for repository changes performed against the 
   - Updated README to document service-owned Python, Visual Studio generator, canonical Core/Full commands, two-runner parallelism, and the rule that new main-front tests belong in the permanent suites rather than temporary workflows.
 - Repository branch cleanup completed: only `main` and `ability` remain.
 
+
+### Final Windows self-hosted CI hardening and verification
+
+- Commits: `3a7032c31f8b2dc81dd4f2cc420bf0eff5d12a75`, `e965f8f2ee3c021e3aa0ca09311de0019baa1db3`, `6660c994be4be4ee1c83f89945c78bcd46b36051`, `eef4c3da7d1fcd383f442293b2e60bb411577c8a`, `fc3e155c3290acafc7ce94a567b2eb077b0a5352`
+  - Hardened all daemon integration tests for Windows service execution: loopback HTTP bypasses inherited proxy settings, ports are allocated dynamically, startup is bounded, and failures include daemon output.
+- Commits: `514baa6b51a5e3229e3e271af00fa6ac2244144f`, `18e8d27cd047355cbb8338ffb0d85f9b1708d9a1`
+  - Added canonical `HWM / Core` and `HWM / Full` pending/final commit statuses linked to the exact Actions run, making current-main CI observable through the GitHub API.
+- Commit: `75abd0c68ebf8945d3da883bb8e8461ae623813e`
+  - Fixed Windows PowerShell variable interpolation in the centralized CI script after executable run `31425282849` exposed the parser defect.
+- Run `31425405632`: Core + Full PASS on the same main tree; 120/120 planner validity, all daemon integrations, Python 74/74, TypeScript/extension, Release planner/M11/evidence/temperature commands all completed successfully.
+- Commit: `aa2408c159e82f8f8afa204aa7dd89981698047b`
+  - Added a stable Windows PowerShell AST syntax-preflight entrypoint before bootstrap/build.
+- Commit: `18af31955bd100c85a08f4d5f0e9ff647db98e75`
+  - Replaced post-build fail-fast validation with independent gate execution and a final aggregated failure summary, so one failed test no longer hides the remaining gates.
+- Commit: `15a5930a85c86f27238b9aa5064d2a0b406fdeea`
+  - Routed local Windows validation through the same preflight/Core/Full entrypoint used by the self-hosted runners.
+- Commit: `e56cf0f0fe8a767608f9b42dd9529df7ee60a4f0`
+  - Locked workflow YAML parsing, Windows runner labels, syntax preflight, aggregate-gate behavior, and the permanent Core/Full inventory with Python regressions.
+- Commit: `0a70948a3a66a5492a3fa79b7f5ca154f9881c4d`
+  - Moved the permanent workflow to `actions/checkout@v6` and the stable preflight entrypoint.
+- Commit: `da80a0aa853942d0585820022c92046f9e058d5c`
+  - Fixed Windows PowerShell 5.1 empty typed-collection binding in the aggregate failure accumulator after run `31427555018` exposed it.
+- Commit: `8778930993452f94fb4054aaf9f241e9c6abdc67`
+  - Added regression coverage requiring the empty failure accumulator to remain accepted.
+- Final functional-tree run `31427798132`: **Core PASS + Full PASS** on the same main commit.
+  - Core: PowerShell syntax preflight PASS; MSVC Debug build; main-front CTest; 120/120 planner recommendations valid across 109 held-out battles; pairing/auth, stale-cancellation, live-binding and WebSocket integrations PASS; Python **75/75** PASS; npm/typecheck/extension build PASS.
+  - Full: PowerShell syntax preflight PASS; MSVC Release build/CTest; planner benchmark; M11 multistep, uncertainty, selector, stochastic-survival, canonical evidence verification and positive-residual temperature calibration commands all PASS.
+  - The M11 temperature experiment remains diagnostic-only: no production dynamics/selector/uncertainty enablement is implied by command success.
+  - Ability-owned `hwm-tests` remains intentionally outside main-front CI and will be validated separately on branch `ability`.
+  - Real authenticated active HeroesWM battle smoke remains the outstanding live product gate.
+
