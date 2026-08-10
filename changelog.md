@@ -181,3 +181,12 @@ This file is the development diary for repository changes performed against the 
   - Stored `data/reports/mightyslam_msl_evidence.json` with **32** observed `Smsl` decisions.
   - Action types: `{'MELEE_ATTACK': 32}`; carrier creature IDs: `{'435': 3, '652': 12, '792': 4, '1053': 5, '1081': 1, '1189': 7}`.
   - Full raw records and actor/target before-after deltas are retained for exact wire/cooldown/knockback reconstruction.
+
+### Mighty Slam damage/knockback wire enrichment
+
+- Commit: `4ee0b0baa7fa3b2cbbcb4002e035454d56bfc6da`
+  - Staged a self-removing canonical `parse_commands()` pass over all isolated `Smsl` records.
+- Commit: `56989dce764e7d30e2a53a8c56c8726d61af9a2a`
+  - Enriched `data/reports/mightyslam_msl_evidence.json` with every `DAMAGE` and `FORCED_POSITION` record.
+  - Damage-event count distribution: `{'1': 14, '2': 16, '3': 2}`; multi-target damage rows: **18/32**.
+  - Forced-position count distribution: `{'0': 21, '1': 8, '2': 3}`; rows with knockback: **11/32**.
