@@ -334,7 +334,8 @@ This file is the development diary for repository changes performed against the 
   - Planner now polls a cancellation callback between simulations and returns early when a newer observed revision arrives.
   - `/recommend` binds planning to the snapshot revision and returns structured `stale` metadata instead of spending the full search budget on an obsolete state.
   - Revision invalidation is intentionally stronger than hash-only invalidation: the regression republishes the same demo state (equal state hash) and still cancels the old search.
-  - Extension auto-replanning uses an epoch so older in-flight results cannot overwrite newer storage/UI; side panel additionally checks recommendation `state_hash` against current daemon status before rendering.
+  - Extension recommendation epoch prevents an older in-flight result from overwriting a newer one;
+  - side panel additionally checks recommendation `state_hash` against current daemon status before rendering.
   - Added `scripts/test_stale_cancellation.py`; C++/CTest, pairing auth, stale cancellation, TypeScript typecheck and extension build passed before commit.
 
 ### Live closed-loop trace and binding diagnostics
@@ -379,7 +380,7 @@ This file is the development diary for repository changes performed against the 
   - Server pushes canonical `status` immediately and on every SessionStore revision change, plus a 20-second heartbeat for MV3 service-worker liveness.
   - Status now exposes `side_to_act` and `active_entity_uid` so the service worker schedules planning only for confirmed player decision states.
   - MV3 service worker reconnects the authenticated stream, stores the last daemon status, logs WS events in the bounded live trace and deduplicates replanning by canonical revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
-  - Side panel uses fresh streamed status for stale guards/diagnostics and falls back to HTTP `/status` only when stream data is absent or older than five seconds.
+  - Side panel uses fresh streamed status for stale guards/diagnostics and falls back to HTTP `/status` only when streamed status is stale/unavailable.
   - Added `scripts/test_websocket_stream.py`: wrong bearer -> 401, valid RFC6455 accept verified, initial revision frame received, debug state publication produces pushed newer revision/hash.
   - M16 is now COMPLETE FOR CURRENT LOCAL API; Phase 2 remains MOSTLY COMPLETE until a real active authenticated browser battle is exercised.
   - C++/CTest, pairing, stale cancellation, live binding, WebSocket integration, TypeScript typecheck and extension build passed before commit.
@@ -389,7 +390,7 @@ This file is the development diary for repository changes performed against the 
 - Commit: `68345f0afc89ed0e17884042592fb08b6edd83be`
   - Completed authenticated loopback WebSocket revision/status streaming and extension push-driven replanning.
 - Commit: `7353e1ddcf17f27e981cac52f2b1e38f5545881e`
-  - Standard CI now requires WebSocket streaming and current-MSVC Windows runtime gates.
+  - Standard CI now includes WebSocket streaming and current-MSVC Windows runtime gates.
   - Workflow run `31367488977`: **PASS** on Linux and Windows. Linux passed C++/CTest, all four daemon integrations, Python 42/42, TypeScript typecheck and extension build. Windows passed MSVC C++ build/CTest plus pairing/auth, stale cancellation, live binding and WebSocket integrations.
 - Commit: `144d958fd4c8e87c6fd4ec538a4cbacc007098b7`
   - Updated the active general specification (`SPEC.md` and duplicate checkpoint), `TEST_REPORT.md`, and `docs/MAIN_FRONT_STATUS.md` with the current main-front state.
@@ -493,3 +494,12 @@ This file is the development diary for repository changes performed against the 
   - The survival/validity trade-off remains real but is smaller than the earlier deterministic member-count diagnostic: learned valid-observed-action coverage is **98.789% / 98.284% / 97.551% / 96.349%** vs generic **98.919% / 98.655% / 98.324% / 97.493%**.
   - Therefore the residual ensemble remains evidence-only and production enablement stays false; the next calibration experiment targets positive log-residual corrections rather than generic uncertainty fallback.
   - Full distributional workflow run `31389946209`: **PASS**, targeted tests **4/4**. Nearest full standard CI run `31389813735`: **PASS** Linux + Windows/MSVC before the final roll-decorrelation-only patch; exact final Windows standard job and exact Linux distributional evaluator path also passed before subsequent hosted jobs stopped reaching the `Set up job` step.
+
+### M13 scheduler-recency hash completeness
+
+- Commit: `56190d72d133d325cf5a71f369339b82ba2f3aa1`
+  - Added `Entity.last_acted_seq` to canonical `state_hash`. `NextActorModel` uses `decision_seq + 1 - last_acted_seq` as a recency feature, so omitting it allowed transition-semantically different states to collide in the M13 transposition table.
+  - Extended the dedicated planner regression: two otherwise identical states with different activation histories must have different hashes and distinct `SearchGraph` nodes.
+  - Verified statically that both observed `TURN_START` decoding and simulator rollout assign `last_acted_seq` before incrementing `decision_seq`, so the new hash component uses the same counter convention on predicted and observed states.
+  - Follow-up Markov-state audit found policy-prior/value-model dynamic inputs already represented in the hash; static board/entity capability fields remain protected by the existing persistent-search structure fingerprint.
+  - Draft PR #4 standard CI run `31393097068` did **not execute code**: both hosted jobs completed before `Set up job` with no step list. This entry therefore makes no CI-pass claim; the correctness regression is committed and awaits an executable hosted/local CI run.
