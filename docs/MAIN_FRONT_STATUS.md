@@ -84,10 +84,11 @@ Functional commits:
 - `135826c05d7f9b3d44e165ef6732bb6ede89a4c4` — persistent planner graph and exact observed-state re-root with reachable-subgraph pruning.
 - `6edec4d8360169060d280cd07a6e63de9c0fda89` — conservative static structure fingerprint guard for safe reuse.
 - `33aaea0cac7549972e4be93bf495d0a9dca7f301` — RFC6455 integration harness buffering fix exposed by the new verification run.
+- `56190d72d133d325cf5a71f369339b82ba2f3aa1` — canonical hash now includes scheduler recency (`last_acted_seq`) so transition-semantically different next-actor histories cannot collide in the transposition table.
 
-Current behavior: a stochastic action may retain multiple canonical outcome children; equal canonical outcome hashes share one node. Across observed revisions, reuse occurs only for an exact predicted hash in the same non-empty battle/perspective and matching board/static-structure fingerprint. Otherwise search starts fresh. Revision change still cancels stale in-flight search.
+Current behavior: a stochastic action may retain multiple canonical outcome children; equal canonical outcome hashes share one node. Across observed revisions, reuse occurs only for an exact predicted hash in the same non-empty battle/perspective and matching board/static-structure fingerprint. Otherwise search starts fresh. Revision change still cancels stale in-flight search. `NextActorModel` recency is now part of canonical transposition identity; decoder and simulator both stamp the completed actor before incrementing `decision_seq`, so observed and predicted scheduler histories use the same counter convention.
 
-Verification: standard CI run `31380236279` PASS on Linux and Windows. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 19 structural-invalid finals and legal-action representability improvement toward >=99.9%.
+Verification: standard CI run `31380236279` PASS on Linux and Windows for the original M13 outcome/re-root/fingerprint set. The scheduler-recency follow-up has a dedicated regression in `hwm-planner-tests`, but draft PR #4 run `31393097068` did not execute any job steps; it is therefore committed but not claimed CI-verified yet. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 19 structural-invalid finals and legal-action representability improvement toward >=99.9%.
 
 ## M11 multi-step damage-residual gate
 
@@ -100,4 +101,3 @@ M11 evidence commits `45581ae7d0f844f67797c590c3ed529390b76f1f`, `ef35d28aca6a04
 The stochastic survival gate uses 692 train / 174 chronological held-out battles. Learned vs generic mean force-L1 is **0.01149 vs 0.01697** at 2 steps and **0.05028 vs 0.08178** at 16 steps. Learned vs generic valid-observed-action coverage is **98.789% vs 98.919%** at 2 steps and **96.349% vs 97.493%** at 16 steps. This replaces the earlier deterministic member-count interpretation as the primary survival/validity diagnostic; the next calibrated experiment targets only positive log-residual corrections so negative damage corrections are preserved.
 
 Planner replay gate commit `cde38a5a89684ff2691c80eeb3583195ffa31758` permanently checks 120 safe held-out states across 109 battles in Linux CI and records 0 invalid recommendations. Replay acceptance is closed; the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md` remains mandatory before the live product loop is declared complete.
-
