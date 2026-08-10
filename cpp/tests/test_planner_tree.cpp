@@ -49,6 +49,24 @@ int main() {
     auto [history_b,history_b_created]=history_graph.acquire(scheduler_hash_b);
     CHECK(history_a_created); CHECK(history_b_created); CHECK(history_a!=history_b); CHECK(history_graph.size()==2);
 
+    // Effect.raw is wire/model provenance only. Transition semantics consume id,
+    // duration and magnitude, so equivalent observed/modelled effects must share a
+    // canonical hash even if their textual provenance differs. Semantic effect changes
+    // must still split hashes.
+    auto observed_effect=planner_fixture("effect-provenance");
+    Effect fx; fx.id=status_effect_id("sff"); fx.duration=3; fx.magnitude=9.0f; fx.raw="Ssff001002...";
+    observed_effect.entities[0].effects.push_back(fx);
+    auto modeled_effect=observed_effect;
+    modeled_effect.entities[0].effects[0].raw="modeled cursingattack weakness";
+    CHECK(state_hash(observed_effect)==state_hash(modeled_effect));
+    auto changed_effect=modeled_effect;
+    changed_effect.entities[0].effects[0].duration=2;
+    CHECK(state_hash(observed_effect)!=state_hash(changed_effect));
+    SearchGraph effect_graph;
+    auto [observed_node,observed_created]=effect_graph.acquire(state_hash(observed_effect));
+    auto [modeled_node,modeled_created]=effect_graph.acquire(state_hash(modeled_effect));
+    CHECK(observed_created); CHECK(!modeled_created); CHECK(observed_node==modeled_node); CHECK(effect_graph.size()==1);
+
     PlannerConfig cfg; cfg.simulation_budget=40; cfg.max_depth=3; cfg.self_top_k=6; cfg.seed=7; cfg.time_budget_ms=0;
     Planner planner(cfg); const auto state=planner_fixture("reuse-battle");
     const auto first=planner.plan(state); CHECK(first.status=="ok"); CHECK(!first.tree_reused); CHECK(first.simulations==40); CHECK(first.nodes>0);
