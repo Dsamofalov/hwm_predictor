@@ -12,11 +12,11 @@
     "1081": 2
   },
   "action_types": {
-    "MELEE_ATTACK": 108,
+    "MELEE_ATTACK": 76,
+    "ABILITY": 56,
     "MOVE": 53,
     "RANGED_ATTACK": 40,
     "DEFEND": 27,
-    "ABILITY": 24,
     "WAIT": 8
   },
   "special_codes": {
@@ -308,7 +308,7 @@
       "3,0": 1
     },
     "effects_added": {
-      "proc_shieldbash": 6,
+      "proc_shieldbash": 5,
       "ra2": 3,
       "bld": 1
     },
@@ -5143,7 +5143,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
       "friendly_hero_mana_after": 0,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 14,
       "special_codes": [
         "msl"
@@ -5154,9 +5154,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 6,
         "owner": 2,
@@ -6226,7 +6224,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 80,
       "friendly_hero_mana_after": 80,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 8,
       "special_codes": [
         "msl"
@@ -6240,9 +6238,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 14,
         "owner": 1,
@@ -6722,7 +6718,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -6750,7 +6745,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -6900,7 +6894,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -6928,7 +6921,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -7078,7 +7070,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -7106,7 +7097,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -7222,7 +7212,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 80,
       "friendly_hero_mana_after": 80,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 3,
       "special_codes": [
         "msl"
@@ -7238,9 +7228,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 14,
         "owner": 1,
@@ -7258,7 +7246,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -7315,7 +7302,9 @@
           9,
           4
         ],
-        "effects_added": [],
+        "effects_added": [
+          "msl"
+        ],
         "effects_removed": []
       },
       "target_before": {
@@ -7768,7 +7757,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -7796,7 +7784,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -8234,7 +8221,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 42,
       "friendly_hero_mana_after": 42,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 8,
       "special_codes": [
         "msl"
@@ -8247,9 +8234,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 13,
         "owner": 1,
@@ -8786,7 +8771,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -8814,7 +8798,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -8956,7 +8939,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -8984,7 +8966,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -9130,7 +9111,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -9158,7 +9138,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -9635,7 +9614,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 84,
       "friendly_hero_mana_after": 84,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 6,
       "special_codes": [
         "msl"
@@ -9649,9 +9628,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 18,
         "owner": 1,
@@ -10658,7 +10635,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 80,
       "friendly_hero_mana_after": 80,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 6,
       "special_codes": [
         "msl"
@@ -10675,9 +10652,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 19,
         "owner": 1,
@@ -11200,7 +11175,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 42,
       "friendly_hero_mana_after": 42,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 4,
       "special_codes": [
         "msl",
@@ -11218,9 +11193,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 19,
         "owner": 1,
@@ -11238,7 +11211,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -11295,7 +11267,9 @@
           2,
           5
         ],
-        "effects_added": [],
+        "effects_added": [
+          "msl"
+        ],
         "effects_removed": []
       },
       "target_before": {
@@ -11690,7 +11664,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -11718,7 +11691,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -11860,7 +11832,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -11888,7 +11859,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12030,7 +12000,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12058,7 +12027,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12200,7 +12168,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12228,7 +12195,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12370,7 +12336,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -12398,7 +12363,6 @@
         "effects": [
           "dfm",
           "fst",
-          "msl",
           "rgm",
           "stn"
         ],
@@ -13549,7 +13513,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 30,
       "friendly_hero_mana_after": 30,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 15,
       "special_codes": [
         "msl"
@@ -13563,9 +13527,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 5,
         "owner": 2,
@@ -14212,7 +14174,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 21,
       "friendly_hero_mana_after": 21,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 17,
       "special_codes": [
         "msl",
@@ -14240,7 +14202,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL",
         "SPECIAL",
         "SPECIAL",
@@ -16021,7 +15982,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl"
@@ -16033,9 +15994,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 5,
         "owner": 2,
@@ -16368,7 +16327,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl",
@@ -16383,7 +16342,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -17392,7 +17350,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
       "friendly_hero_mana_after": 0,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 9,
       "special_codes": [
         "msl"
@@ -17404,9 +17362,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 3,
         "owner": 2,
@@ -17838,7 +17794,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
       "friendly_hero_mana_after": 0,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl",
@@ -17853,7 +17809,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -18846,7 +18801,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
       "friendly_hero_mana_after": 0,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl",
@@ -18862,7 +18817,6 @@
         "SPECIAL"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -19428,7 +19382,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 9,
       "special_codes": [
         "msl",
@@ -19444,7 +19398,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL",
         "SPECIAL"
       ],
@@ -20109,7 +20062,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 160,
       "friendly_hero_mana_after": 160,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 10,
       "special_codes": [
         "msl",
@@ -20123,7 +20076,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -20605,7 +20557,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl",
@@ -20625,9 +20577,7 @@
         "SPECIAL",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 7,
         "owner": 4,
@@ -23273,7 +23223,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 26,
       "friendly_hero_mana_after": 26,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl"
@@ -23288,7 +23238,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "I_RECORD"
       ],
       "actor_before": {
@@ -23413,7 +23362,6 @@
           "cnf",
           "crs",
           "fst",
-          "proc_shieldbash",
           "slw"
         ],
         "abilities": [
@@ -23441,9 +23389,7 @@
           6,
           6
         ],
-        "effects_added": [
-          "proc_shieldbash"
-        ],
+        "effects_added": [],
         "effects_removed": []
       },
       "raw": "m0040806Smsl004000000000000I0110004o004d0040110000000533W004011i0040100",
@@ -24013,7 +23959,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 9,
       "special_codes": [
         "msl"
@@ -24025,9 +23971,7 @@
         "W_RECORD",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 8,
         "owner": 2,
@@ -24198,7 +24142,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 10,
       "special_codes": [
         "msl",
@@ -24216,9 +24160,7 @@
         "W_RECORD",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 4,
         "owner": 2,
@@ -25288,7 +25230,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 50,
       "friendly_hero_mana_after": 50,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 10,
       "special_codes": [
         "msl"
@@ -25302,9 +25244,7 @@
         "W_RECORD",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 4,
         "owner": 2,
@@ -25475,7 +25415,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl"
@@ -25486,9 +25426,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 2,
         "owner": 2,
@@ -25953,7 +25891,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 60,
       "friendly_hero_mana_after": 60,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 10,
       "special_codes": [
         "msl",
@@ -25967,7 +25905,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -26615,7 +26552,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 9,
       "special_codes": [
         "msl",
@@ -26629,7 +26566,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -26792,7 +26728,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 12,
       "special_codes": [
         "msl",
@@ -26809,7 +26745,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -27330,7 +27265,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl",
@@ -27346,7 +27281,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -28235,7 +28169,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl",
@@ -28250,7 +28184,6 @@
         "STATE"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -28746,7 +28679,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl",
@@ -28765,7 +28698,6 @@
         "SPECIAL"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL",
         "SPECIAL"
       ],
@@ -28918,7 +28850,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 9,
       "special_codes": [
         "msl",
@@ -28932,7 +28864,6 @@
         "SPECIAL"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -29580,7 +29511,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 11,
       "special_codes": [
         "msl",
@@ -29594,9 +29525,7 @@
         "DAMAGE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 5,
         "owner": 2,
@@ -29940,9 +29869,7 @@
         "atb": 97.0,
         "x": 5,
         "y": 5,
-        "effects": [
-          "msl"
-        ],
+        "effects": [],
         "abilities": [
           "alive",
           "big",
@@ -29964,9 +29891,7 @@
         "atb": 97.0,
         "x": 4,
         "y": 3,
-        "effects": [
-          "msl"
-        ],
+        "effects": [],
         "abilities": [
           "alive",
           "big",
@@ -30079,7 +30004,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": null,
       "friendly_hero_mana_after": null,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 10,
       "special_codes": [
         "msl",
@@ -30093,7 +30018,6 @@
         "SPECIAL"
       ],
       "semantic_unresolved_opcodes": [
-        "SPECIAL",
         "SPECIAL"
       ],
       "actor_before": {
@@ -30110,9 +30034,7 @@
         "atb": 97.0,
         "x": 4,
         "y": 3,
-        "effects": [
-          "msl"
-        ],
+        "effects": [],
         "abilities": [
           "alive",
           "big",
@@ -30162,7 +30084,9 @@
           3,
           4
         ],
-        "effects_added": [],
+        "effects_added": [
+          "msl"
+        ],
         "effects_removed": []
       },
       "target_before": {
@@ -31116,7 +31040,7 @@
       "actor_mana_after": 0,
       "friendly_hero_mana_before": 0,
       "friendly_hero_mana_after": 0,
-      "action_type": "MELEE_ATTACK",
+      "action_type": "ABILITY",
       "target_uid": 13,
       "special_codes": [
         "msl"
@@ -31130,9 +31054,7 @@
         "STATE",
         "STATE"
       ],
-      "semantic_unresolved_opcodes": [
-        "SPECIAL"
-      ],
+      "semantic_unresolved_opcodes": [],
       "actor_before": {
         "uid": 7,
         "owner": 2,

@@ -115,6 +115,36 @@ def test_mana_feed_exact_wire_and_transition():
     assert _decision_semantic_unresolved_flags([bad],entities,15) == [True]
 
 
+def test_mighty_slam_exact_wire_cooldown_and_action_type():
+    from hwm_solver.protocol.replay import RawEntity, _apply_command, _decision_semantic_unresolved_flags
+
+    actor = RawEntity(
+        uid=6, owner=1, creature_id=652, max_hp=100, top_hp=100,
+        min_damage=10, max_damage=20, mana=0, max_mana=0, speed=4, atb=90,
+        initiative=12, max_count=6, count=6, x=2, y=4, attack_range=1, shots=0,
+        attack=20, defense=20, morale_raw=0, luck_raw=0, retaliation_raw=0,
+        real_health=0, experience_level_code=0, abilities=["mightyslam", "big"],
+    )
+    target = RawEntity(
+        uid=8, owner=2, creature_id=71, max_hp=26, top_hp=26,
+        min_damage=1, max_damage=2, mana=0, max_mana=0, speed=4, atb=96,
+        initiative=9.6, max_count=320, count=320, x=4, y=7, attack_range=1, shots=0,
+        attack=10, defense=10, morale_raw=0, luck_raw=0, retaliation_raw=0,
+        real_health=0, experience_level_code=0, abilities=[],
+    )
+    entities = {6: actor, 8: target}
+    cmd = parse_commands("Smsl006000000000000")[0]
+    assert cmd.opcode == "SPECIAL" and cmd.code == "msl" and cmd.actor_uid == 6
+    assert _decision_semantic_unresolved_flags([cmd], entities, 6) == [False]
+    _apply_command(entities, cmd)
+    assert actor.effects["msl"].startswith("observed:")
+    assert actor.effect_turns["msl"] == 3
+
+    # Wrong actor ability is preserved as semantic risk.
+    actor.abilities = ["big"]
+    assert _decision_semantic_unresolved_flags([cmd], entities, 6) == [True]
+
+
 def test_tooltips_decode():
     import base64, json
     data = base64.b64encode(json.dumps({"abil_names":{"shooter":"Shooter"}}).encode()).decode().replace("=", "<")

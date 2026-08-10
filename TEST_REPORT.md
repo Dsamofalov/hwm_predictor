@@ -53,7 +53,7 @@ Rebuilt from current code/models and `generated_v4` catalog:
 
 ```text
 ability codes:          421
-exact_search:           84
+exact_search:           85
 exact_targeting:        11
 partial_exact:          18
 modeled_proc:           8
@@ -61,7 +61,7 @@ modeled_collateral:     5
 modeled_kill_trigger:   2
 unresolved:             78
 
-Registry counts regenerated 10.08.2026 after exact Life Drain, Regeneration and Mana Feed transitions; all 42 observed `Smfd` actions pass the exact corpus transition invariant. Held-out risk numbers below remain the 09.08.2026 checkpoint snapshot and are not relabeled.
+Registry counts regenerated 10.08.2026 after exact Life Drain, Regeneration, Mana Feed and Mighty Slam transitions; all 42 observed `Smfd` actions pass the exact corpus transition invariant. Held-out risk numbers below remain the 09.08.2026 checkpoint snapshot and are not relabeled.
 
 held-out sampled player states: 1748
 risk mean:              0.23886

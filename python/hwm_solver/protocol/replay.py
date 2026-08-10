@@ -387,6 +387,22 @@ def _observed_shieldbash_proc(
     return hit, target_uid
 
 
+def _validated_mighty_slam(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the corpus-proven Mighty Slam activation marker.
+
+    All 32 observed records are `Smsl` + actor3 + twelve zeroes, occur on a living
+    carrier of `mightyslam`, and are followed by ordinary DAMAGE / optional
+    FORCED_POSITION records that remain the authoritative observed transition.
+    """
+    if command.opcode != "SPECIAL" or command.code != "msl" or command.actor_uid is None:
+        return False
+    actor = entities.get(int(command.actor_uid))
+    return bool(
+        actor and actor.alive and "mightyslam" in set(actor.abilities)
+        and command.raw == f"Smsl{int(command.actor_uid):03d}000000000000"
+    )
+
+
 def _validated_mana_feed(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
     """Validate the corpus-proven Smfd Mana Feed record.
 
@@ -471,6 +487,8 @@ def _decision_semantic_unresolved_flags(
             if exact and c.code == "btt":
                 exact = 0 <= int(c.amount) <= 20
             unresolved = not exact
+        elif c.opcode == "SPECIAL" and c.code == "msl":
+            unresolved = not _validated_mighty_slam(c, entities)
         elif c.opcode == "SPECIAL" and c.code == "mfd":
             unresolved = not _validated_mana_feed(c, entities)
         elif c.opcode == "SPECIAL" and c.code == "rgl":
@@ -886,6 +904,12 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                     value=float(int(numeric[6:8])), duration=int(numeric[8:12]) // 100,
                     amount=int(numeric[12:15]), code=code,
                 ))
+            elif code == "msl" and len(numeric) == 15 and numeric.isdigit() and numeric[3:] == "000000000000":
+                # Mighty Slam activation marker: actor3 + zero trailer. Damage targets
+                # and knockback are carried by the following d/b records.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]), duration=0, code=code,
+                ))
             elif code == "mfd" and len(numeric) == 15 and numeric.isdigit() and numeric[8:] == "0000000":
                 # Mana Feed: actor3,own_hero3,amount2,0000000. Exactness is gated
                 # against actor ability/owner/count/mana before the state mutation.
@@ -1171,6 +1195,7 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     teleports = [c for c in cmds if c.opcode == "TELEPORT" and c.actor_uid == actor_uid]
     specials = [c for c in cmds if c.opcode == "SPECIAL"]
     mana_feed = next((c for c in specials if c.code == "mfd" and c.actor_uid == actor_uid and c.target_uid is not None), None)
+    mighty_slam = next((c for c in specials if c.code == "msl" and c.actor_uid == actor_uid), None)
     rune_speed_activations = [c for c in cmds if c.opcode == "RUNE_SPEED_ACTIVATE"]
     carriers = [c for c in cmds if c.opcode == "CARRIER_RELOCATE"]
     special_codes = [c.code for c in specials] + (["car"] if carriers else []) + (["rn2"] if rune_speed_activations else []) + (["tel"] if teleports else [])
@@ -1186,7 +1211,9 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     ay = action_move.y if action_move else (actor.y if actor else 0)
     adjacent = bool(actor and target and _entities_adjacent(actor, ax, ay, target))
 
-    if waits:
+    if mighty_slam:
+        typ = "ABILITY"
+    elif waits:
         typ = "WAIT"
     elif defends:
         typ = "DEFEND"
@@ -1363,6 +1390,10 @@ def _apply_command(
         target = entities[int(c.target_uid)]
         target.apply_heal(int(c.amount or 0))
         actor.mana = max(0, actor.mana - int(c.value or 0))
+    elif c.opcode == "SPECIAL" and c.code == "msl" and _validated_mighty_slam(c, entities):
+        actor = entities[int(c.actor_uid)]
+        actor.effects["msl"] = "observed:Smsl cooldown"
+        actor.effect_turns["msl"] = 3
     elif c.opcode == "SPECIAL" and c.code == "mfd" and _validated_mana_feed(c, entities):
         actor=entities[int(c.actor_uid)]; hero=entities[int(c.target_uid)]; amount=int(c.amount or 0)
         actor.mana=max(0,actor.mana-amount); hero.mana+=amount
@@ -1513,7 +1544,7 @@ def _tick_observed_activation_effects(e: RawEntity) -> None:
     We keep base speed/initiative immutable and expose the duration in compact state,
     so downstream feature code can apply the modifier without irreversible drift.
     """
-    for key in ("proc_stone", "proc_cripple"):
+    for key in ("proc_stone", "proc_cripple", "msl"):
         if key not in e.effect_turns:
             continue
         e.effect_turns[key] = max(0, int(e.effect_turns[key]) - 1)
@@ -1608,6 +1639,7 @@ def _action_from_compact(
     teleports = [c for c in cmds if c.opcode == "TELEPORT" and c.actor_uid == actor_uid]
     specials = [c for c in cmds if c.opcode == "SPECIAL"]
     mana_feed = next((c for c in specials if c.code == "mfd" and c.actor_uid == actor_uid and c.target_uid is not None), None)
+    mighty_slam = next((c for c in specials if c.code == "msl" and c.actor_uid == actor_uid), None)
     rune_speed_activations = [c for c in cmds if c.opcode == "RUNE_SPEED_ACTIVATE"]
     carriers = [c for c in cmds if c.opcode == "CARRIER_RELOCATE"]
     special_codes = [c.code for c in specials] + (["car"] if carriers else []) + (["rn2"] if rune_speed_activations else []) + (["tel"] if teleports else [])
@@ -1623,7 +1655,9 @@ def _action_from_compact(
     adjacent = bool(actor and target and _entities_adjacent(actor, ax, ay, target))
     abilities = set(actor.get("abilities", [])) if actor else set()
 
-    if waits:
+    if mighty_slam:
+        typ = "ABILITY"
+    elif waits:
         typ = "WAIT"
     elif defends:
         typ = "DEFEND"

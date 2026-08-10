@@ -251,7 +251,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 1373162725,master_of_storms10,unresolved,0.4500,identity,4,master_of_storms10
 3701607922,mechanical,exact_targeting,0.0000,identity,152,Механизм.
 4078531002,menacinglook,learned_damage,0.7500,offense|targeting,18,Грозный взгляд.
-782454662,mightyslam,learned_damage,0.7500,offense|retaliation|targeting,102,Могучий удар.
+782454662,mightyslam,exact_search,0.0000,offense|retaliation|targeting,102,Могучий удар.
 1035969365,mobileshooter,learned_damage,0.3000,ranged,45,Расторопность.
 1404966839,moraler,learned_damage,0.3000,offense,26,Весельчак.
 2430009902,morecruelty,unresolved,0.6200,offense,3,Чрезмерная жестокость.

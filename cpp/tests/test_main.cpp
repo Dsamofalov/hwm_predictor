@@ -1120,6 +1120,54 @@ static bool test_entrenchment_lifecycle_and_resistance() {
     return true;
 }
 
+static bool test_mighty_slam_exact_action_splash_knockback_cooldown() {
+    GenericSimulator sim;
+    BattleState s=fixture(); auto* actor=s.entity(1); auto* primary=s.entity(2); CHECK(actor&&primary);
+    actor->owner=1;actor->side=Side::Player;actor->anchor={1,1};actor->count=8;actor->max_count=8;
+    actor->max_hp_per_unit=100;actor->top_unit_hp=100;actor->attack=25;actor->min_damage=actor->max_damage=10;
+    actor->ability_ids.push_back(stable_ability_id("mightyslam"));
+    primary->owner=2;primary->side=Side::Pve;primary->anchor={2,1};primary->count=20;primary->max_count=20;
+    primary->max_hp_per_unit=50;primary->top_unit_hp=50;primary->retaliation_available=true;primary->min_damage=primary->max_damage=100;
+    Entity secondary=*primary;secondary.uid=3;secondary.anchor={2,2};secondary.count=20;secondary.max_count=20;secondary.top_unit_hp=50;
+    Entity friendly=secondary;friendly.uid=4;friendly.owner=1;friendly.side=Side::Player;friendly.anchor={1,2};
+    Entity far=secondary;far.uid=5;far.anchor={8,8};
+    Entity big=secondary;big.uid=6;big.anchor={3,2};big.is_big=true;big.footprint_w=2;big.footprint_h=1;
+    s.entities.push_back(secondary);s.entities.push_back(friendly);s.entities.push_back(far);s.entities.push_back(big);
+
+    auto acts=sim.legal_actions(s);
+    auto slam=std::find_if(acts.begin(),acts.end(),[](const Action&a){return a.type==ActionType::Ability&&a.target_uid&&*a.target_uid==2&&a.ability_id&&*a.ability_id==stable_ability_id("msl")&&!a.destination;});
+    CHECK(slam!=acts.end());
+    const int actor_hp=entity_total_hp(*actor), p_hp=entity_total_hp(*primary), sec_hp=entity_total_hp(*s.entity(3));
+    const int friend_hp=entity_total_hp(*s.entity(4)), far_hp=entity_total_hp(*s.entity(5)), big_hp=entity_total_hp(*s.entity(6));
+    const Cell p0=primary->anchor, sec0=s.entity(3)->anchor, big0=s.entity(6)->anchor;
+    auto tr=sim.apply(s,*slam,0.5); CHECK(tr.valid); CHECK(tr.warning=="exact_mighty_slam");
+    CHECK(entity_total_hp(*tr.state.entity(2))<p_hp); CHECK(entity_total_hp(*tr.state.entity(3))<sec_hp);
+    CHECK(entity_total_hp(*tr.state.entity(4))==friend_hp); CHECK(entity_total_hp(*tr.state.entity(5))==far_hp);
+    CHECK(entity_total_hp(*tr.state.entity(6))<big_hp); // adjacent enemy big stack is splashed
+    CHECK(entity_total_hp(*tr.state.entity(1))==actor_hp); // no ordinary retaliation
+    CHECK(tr.state.entity(2)->anchor!=p0); CHECK(tr.state.entity(3)->anchor!=sec0);
+    CHECK(tr.state.entity(6)->anchor==big0); // big creature never knocked back
+    CHECK(effect_magnitude(*tr.state.entity(1),"msl")>0.0f);
+
+    BattleState cd=tr.state;cd.active_entity_uid=1;cd.side_to_act=Side::Player;
+    auto blocked1=sim.legal_actions(cd);CHECK(std::none_of(blocked1.begin(),blocked1.end(),[](const Action&a){return a.ability_id&&*a.ability_id==stable_ability_id("msl");}));
+    auto w1=std::find_if(blocked1.begin(),blocked1.end(),[](const Action&a){return a.type==ActionType::Wait;});CHECK(w1!=blocked1.end());
+    auto t1=sim.apply(cd,*w1,0.5);CHECK(t1.valid);t1.state.active_entity_uid=1;t1.state.side_to_act=Side::Player;
+    auto blocked2=sim.legal_actions(t1.state);CHECK(std::none_of(blocked2.begin(),blocked2.end(),[](const Action&a){return a.ability_id&&*a.ability_id==stable_ability_id("msl");}));
+    auto w2=std::find_if(blocked2.begin(),blocked2.end(),[](const Action&a){return a.type==ActionType::Wait;});CHECK(w2!=blocked2.end());
+    auto t2=sim.apply(t1.state,*w2,0.5);CHECK(t2.valid);t2.state.active_entity_uid=1;t2.state.side_to_act=Side::Player;
+    auto ready=sim.legal_actions(t2.state);CHECK(std::any_of(ready.begin(),ready.end(),[](const Action&a){return a.ability_id&&*a.ability_id==stable_ability_id("msl");}));
+
+    // Observed protocol marker becomes semantic-safe and stores the same cooldown.
+    BattleState p=s;p.stream_contiguous=false;p.protocol_ready=false;p.recommendation_safe=false;p.active_entity_uid=1;
+    ProtocolDecoder decoder;
+    auto decoded=decoder.decode_update(p,"t=000turns=>1:C001000000Smsl001000000000000d0010020000000010i0010100C002000000");
+    CHECK(std::any_of(decoded.events.begin(),decoded.events.end(),[](const BattleEvent&e){return e.type=="MIGHTY_SLAM"&&e.actor_uid==1;}));
+    CHECK(effect_magnitude(*decoded.state.entity(1),"msl")>0.0f);CHECK(decoded.state.semantic_unresolved_records==0);
+    return true;
+}
+
+
 static bool test_mana_feed_exact_action_and_protocol() {
     GenericSimulator sim;
     BattleState s=fixture(); auto* actor=s.entity(1); CHECK(actor);
@@ -1360,6 +1408,7 @@ int main() {
     if (!test_regeneration_exact_turn_start_no_resurrection()) return EXIT_FAILURE;
     if (!test_life_drain_exact_heal_resurrection_and_retaliation()) return EXIT_FAILURE;
     if (!test_kill_trigger_enraged_gate()) return EXIT_FAILURE;
+    if (!test_mighty_slam_exact_action_splash_knockback_cooldown()) return EXIT_FAILURE;
     if (!test_mana_feed_exact_action_and_protocol()) return EXIT_FAILURE;
     if (!test_mana_drain_and_reference_damage_perks()) return EXIT_FAILURE;
     if (!test_entrenchment_lifecycle_and_resistance()) return EXIT_FAILURE;

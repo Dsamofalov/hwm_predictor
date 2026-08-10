@@ -633,6 +633,13 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
                         semantic(n); emit(events,seq,"SPECIAL",uid,target_uid,text.substr(i,n));
                     }
                 }
+                else if(code=="msl" && j==i+19 && digits(text.substr(i+4,15)) && text.substr(i+7,12)=="000000000000"){
+                    const uint64_t slam_uid=loose_int(text.substr(i+4,3));
+                    auto* slam_actor=s.entity(slam_uid);
+                    const bool exact=slam_actor&&slam_actor->alive&&has_ability(*slam_actor,"mightyslam");
+                    if(exact){known(n);upsert_status_effect(*slam_actor,"msl",3,1.0f,text.substr(i,n));emit(events,seq,"MIGHTY_SLAM",slam_uid,0,text.substr(i,n));}
+                    else{semantic(n);emit(events,seq,"SPECIAL",slam_uid,0,text.substr(i,n));}
+                }
                 else if(code=="mfd" && j==i+19 && digits(text.substr(i+4,15)) && text.substr(i+12,7)=="0000000"){
                     // Mana Feed corpus invariant (42/42 observed): actor3,own_hero3,
                     // amount2,0000000. The amount is min(current count,current mana).
@@ -848,10 +855,10 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
                     // their S-record occurred. Tick them only after the affected stack has
                     // actually completed an activation; this keeps Stoning active while
                     // the petrified stack is the current actor and expires it afterwards.
-                    const uint32_t stone=status_effect_id("proc_stone"),cripple=status_effect_id("proc_cripple");
-                    for(auto&fx:prev->effects) if((fx.id==stone||fx.id==cripple)&&fx.duration>0)--fx.duration;
+                    const uint32_t stone=status_effect_id("proc_stone"),cripple=status_effect_id("proc_cripple"),slam=status_effect_id("msl");
+                    for(auto&fx:prev->effects) if((fx.id==stone||fx.id==cripple||fx.id==slam)&&fx.duration>0)--fx.duration;
                     prev->effects.erase(std::remove_if(prev->effects.begin(),prev->effects.end(),[&](const Effect&fx){
-                        return (fx.id==stone||fx.id==cripple)&&fx.duration<=0;
+                        return (fx.id==stone||fx.id==cripple||fx.id==slam)&&fx.duration<=0;
                     }),prev->effects.end());
                 }
             }

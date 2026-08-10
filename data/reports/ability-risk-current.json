@@ -1,9 +1,9 @@
 {
   "heldout_battles": 174,
   "sampled_player_states": 1748,
-  "risk_mean": 0.2346831150922166,
-  "risk_p50": 0.22425770860858796,
-  "risk_p90": 0.39711866130685103,
+  "risk_mean": 0.22878301961378766,
+  "risk_p50": 0.21759074245421,
+  "risk_p90": 0.3960068635905753,
   "risk_p99": 0.5468762843538735,
   "top_contributors": [
     {
@@ -54,19 +54,6 @@
         "retaliation",
         "immunity",
         "control"
-      ]
-    },
-    {
-      "code": "mightyslam",
-      "name": "Могучий удар.",
-      "support": "learned_damage",
-      "risk_weight": 0.75,
-      "state_occurrences": 181,
-      "weighted_contribution": 485605.29206250096,
-      "categories": [
-        "offense",
-        "retaliation",
-        "targeting"
       ]
     },
     {
@@ -489,6 +476,17 @@
         "ranged",
         "offense",
         "control"
+      ]
+    },
+    {
+      "code": "endurance",
+      "name": "Выносливость.",
+      "support": "learned_damage",
+      "risk_weight": 0.75,
+      "state_occurrences": 64,
+      "weighted_contribution": 112833.17381250011,
+      "categories": [
+        "movement"
       ]
     }
   ]

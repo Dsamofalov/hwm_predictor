@@ -352,6 +352,7 @@ std::vector<Action> GenericSimulator::legal_actions(const BattleState&s) const{
     }
     const uint32_t carrier_wire_id=stable_tag_id("car");
     const uint32_t mana_feed_wire_id=stable_tag_id("mfd");
+    const uint32_t mighty_slam_wire_id=stable_tag_id("msl");
     if(!actor->rune_speed_active&&has_tag(*actor,"manafeed")&&actor->mana>0&&actor->count>0){
         for(const auto&hero:s.entities){
             if(!hero.alive||!hero.is_hero||hero.owner!=actor->owner)continue;
@@ -407,6 +408,10 @@ std::vector<Action> GenericSimulator::legal_actions(const BattleState&s) const{
         if(!actor->shoot_only) for(const Cell anchor:attack_anchors){
             if(!footprints_adjacent(*actor,anchor,e,e.anchor))continue;
             Action hit;hit.action_id=id++;hit.actor_uid=actor->uid;hit.type=ActionType::MeleeAttack;hit.target_uid=e.uid;hit.source="generic";if(anchor!=actor->anchor)hit.destination=anchor;a.push_back(std::move(hit));
+            if(!actor->rune_speed_active&&has_tag(*actor,"mightyslam")&&!has_live_effect(*actor,"msl")){
+                Action slam;slam.action_id=id++;slam.actor_uid=actor->uid;slam.type=ActionType::Ability;slam.target_uid=e.uid;
+                slam.ability_id=mighty_slam_wire_id;slam.source="exact:Smsl+reference+corpus";if(anchor!=actor->anchor)slam.destination=anchor;a.push_back(std::move(slam));
+            }
         }
         if(!actor->rune_speed_active&&actor->is_shooter&&actor->shots>0&&!shooter_blocked)a.push_back({id++,actor->uid,ActionType::RangedAttack,e.uid,std::nullopt,std::nullopt,"generic"});
     }
@@ -492,14 +497,16 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
     const uint32_t rune_speed_id=stable_tag_id("rn2");
     const uint32_t carrier_wire_id=stable_tag_id("car");
     const uint32_t mana_feed_wire_id=stable_tag_id("mfd");
+    const uint32_t mighty_slam_wire_id=stable_tag_id("msl");
     const bool rune_activation=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==rune_speed_id;
     const bool carrier_action=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==carrier_wire_id;
     const bool mana_feed_action=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==mana_feed_wire_id;
+    const bool mighty_slam_action=a.type==ActionType::Ability&&a.ability_id&&*a.ability_id==mighty_slam_wire_id;
     const bool had_rune_speed_active=actor->rune_speed_active;
     // DEFEND lasts until this stack receives its next action. Clear the previous stance
     // before applying the new action; choosing DEFEND below immediately re-enables it.
     actor->defending=false;
-    const bool self_moves=(a.type==ActionType::Move&&a.destination&&*a.destination!=actor->anchor)||(a.type==ActionType::MeleeAttack&&a.destination&&*a.destination!=actor->anchor);
+    const bool self_moves=(a.type==ActionType::Move&&a.destination&&*a.destination!=actor->anchor)||(a.type==ActionType::MeleeAttack&&a.destination&&*a.destination!=actor->anchor)||(mighty_slam_action&&a.destination&&*a.destination!=actor->anchor);
     if(self_moves){
         clear_roots_from_source(tr.state,actor->uid);
         const auto entrench_id=status_effect_id("proc_entrenchment");
@@ -509,6 +516,49 @@ Transition GenericSimulator::apply(const BattleState&s,const Action&a,double rol
         if(!actor->rune_speed_available||actor->rune_speed_consumed||actor->rune_speed_active){tr.valid=false;tr.warning="rune_speed_unavailable";return tr;}
         actor->rune_speed_active=true;actor->rune_speed_consumed=true;
         tr.warning="exact_rune_speed_activation";
+    } else if(mighty_slam_action){
+        if(!a.target_uid||!has_tag(*actor,"mightyslam")||has_live_effect(*actor,"msl")){tr.valid=false;tr.warning="mighty_slam_unavailable";return tr;}
+        const Cell origin=actor->anchor;if(a.destination)actor->anchor=*a.destination;
+        const int moved_cells=a.destination?dist(origin,*a.destination):0;
+        auto*primary=tr.state.entity(*a.target_uid);
+        if(!primary||!primary->alive||primary->is_hero||primary->is_hidden||primary->side==actor->side||primary->side==Side::Unknown||
+           !footprints_adjacent(*actor,actor->anchor,*primary,primary->anchor)){tr.valid=false;tr.warning="mighty_slam_target_invalid";return tr;}
+        std::vector<uint64_t> slam_targets{primary->uid};
+        for(uint64_t uid:collateral_candidates(tr.state,*actor,*primary,CollateralZone::TargetAdjacent)){
+            const auto*secondary=tr.state.entity(uid);
+            if(!secondary||!secondary->alive||secondary->side==actor->side||secondary->side==Side::Unknown)continue;
+            slam_targets.push_back(uid);
+        }
+        std::sort(slam_targets.begin()+1,slam_targets.end());
+        slam_targets.erase(std::unique(slam_targets.begin(),slam_targets.end()),slam_targets.end());
+        std::vector<uint64_t> knockback_candidates;
+        for(size_t idx=0;idx<slam_targets.size();++idx){
+            auto*target=tr.state.entity(slam_targets[idx]);if(!target||!target->alive)continue;
+            const double hit_roll=std::clamp(roll+0.04*(double(idx)-double(slam_targets.size()-1)/2.0),0.0,1.0);
+            const int dmg=std::max(1,(int)std::llround(roll_damage(tr.state,*actor,*target,hit_roll,false,false,moved_cells)*damage_.multiplier(actor->creature_id,ActionType::MeleeAttack)*ability_transfer_multiplier(damage_,ability_damage_,*actor,*target,ActionType::MeleeAttack)));
+            const int hp_before=total_hp(*target);const bool phantom=target->is_phantom;deal_damage(*target,dmg);
+            const int actual=std::max(0,hp_before-total_hp(*target));const int drain=(phantom&&actual>0)?std::min(dmg,hp_before):actual;
+            if(drain>0&&has_tag(*actor,"lifedrain"))restore_hp(*actor,drain/2);
+            if(actual>0&&target->alive&&has_tag(*actor,"weakeningstrike")){target->attack=std::max(0.0f,target->attack-4.0f);if(!has_tag(*target,"armoured")&&!has_tag(*target,"organicarmor"))target->defense=std::max(0.0f,target->defense-4.0f);}
+            if(actual>0&&actor->alive&&target->alive&&has_tag(*target,"fireshield")){const int reflected=std::max(0,(int)std::llround(actual*0.20*fire_damage_multiplier(*actor)));if(reflected>0)deal_damage(*actor,reflected);}
+            if(actual>0&&actor->alive&&target->alive&&has_tag(*target,"magmashield")){const int reflected=std::max(0,(int)std::llround(actual*0.40*fire_damage_multiplier(*actor)));if(reflected>0)deal_damage(*actor,reflected);}
+            if(actual>0&&actor->alive&&target->alive&&has_tag(*target,"painmirror"))deal_damage(*actor,std::max(0,(int)std::llround(actual*0.10)));
+            if(target->alive&&!target->is_big)knockback_candidates.push_back(target->uid);
+        }
+        // Corpus: every observed forced-position target is small. Push one cell away
+        // from the Slam actor only when the resulting footprint is legal; otherwise the
+        // server simply emits no forced-position record.
+        for(uint64_t uid:knockback_candidates){
+            auto*target=tr.state.entity(uid);if(!target||!target->alive||target->is_big)continue;
+            const double acx=actor->anchor.x+(actor->footprint_w-1)*0.5,acy=actor->anchor.y+(actor->footprint_h-1)*0.5;
+            const double tcx=target->anchor.x+(target->footprint_w-1)*0.5,tcy=target->anchor.y+(target->footprint_h-1)*0.5;
+            const int sx=signum(tcx-acx),sy=signum(tcy-acy);if(!sx&&!sy)continue;
+            const Cell pushed{target->anchor.x+sx,target->anchor.y+sy};if(can_place(tr.state,*target,pushed))target->anchor=pushed;
+        }
+        // Set 3 before the generic end-of-action tick. It becomes 2 immediately,
+        // blocks the next two own activations, and is available on the third — exactly
+        // the minimum repeat gap measured in the corpus.
+        set_proc_effect(*actor,"msl",3,1.0f,"exact:mightyslam cooldown");tr.warning="exact_mighty_slam";
     } else if(mana_feed_action){
         if(!a.target_uid){tr.valid=false;tr.warning="mana_feed_target_missing";return tr;}
         auto* hero=tr.state.entity(*a.target_uid);
