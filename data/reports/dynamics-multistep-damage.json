@@ -1,0 +1,77 @@
+{
+  "diagnostic_gate": {
+    "beats_generic_mean_l1_at_all_horizons": true,
+    "production_enablement": false,
+    "reason": "This is the first M11 submodel multi-step gate, not a full structured world-model ensemble."
+  },
+  "ensemble": {
+    "construction": "battle-jackknife; each member excludes a distinct 1/members fold of training battles",
+    "members": 5,
+    "shrinkage": 20.0
+  },
+  "heldout_battles": 174,
+  "horizons_halfturns": [2, 4, 8, 16],
+  "metrics": {
+    "2": {
+      "alive_mismatch_rate": 0.013304233840997852,
+      "ensemble_better_than_generic_rate": 0.6221253933672234,
+      "ensemble_mean_disagreement": 0.0006609258196216511,
+      "ensemble_mean_force_bias": 0.00418251874280434,
+      "ensemble_mean_force_l1": 0.011371907988559124,
+      "ensemble_mean_invalid_action_fraction": 0.011909949164851125,
+      "ensemble_median_force_l1": 0.0038592027066913052,
+      "generic_mean_force_l1": 0.01678704527639987,
+      "generic_mean_invalid_action_fraction": 0.010772210118615348,
+      "generic_median_force_l1": 0.005086499650067569,
+      "mean_modeled_primary_attacks": 1.4958847736625513,
+      "windows": 8262
+    },
+    "4": {
+      "alive_mismatch_rate": 0.023046524160229925,
+      "ensemble_better_than_generic_rate": 0.6691753574884421,
+      "ensemble_mean_disagreement": 0.0010542267075500298,
+      "ensemble_mean_force_bias": 0.007290923673036844,
+      "ensemble_mean_force_l1": 0.017913039304598404,
+      "ensemble_mean_invalid_action_fraction": 0.017403146615059314,
+      "ensemble_median_force_l1": 0.008115205140369721,
+      "generic_mean_force_l1": 0.027283072596534334,
+      "generic_mean_invalid_action_fraction": 0.013753001469376051,
+      "generic_median_force_l1": 0.011094987605054719,
+      "mean_modeled_primary_attacks": 2.58531340716052,
+      "windows": 9301
+    },
+    "8": {
+      "alive_mismatch_rate": 0.04442195368800985,
+      "ensemble_better_than_generic_rate": 0.7208305866842453,
+      "ensemble_mean_disagreement": 0.0018059026620452995,
+      "ensemble_mean_force_bias": 0.013695744665059094,
+      "ensemble_mean_force_l1": 0.02985527540051601,
+      "ensemble_mean_invalid_action_fraction": 0.024410333678626356,
+      "ensemble_median_force_l1": 0.016946900558829338,
+      "generic_mean_force_l1": 0.047103674822621566,
+      "generic_mean_invalid_action_fraction": 0.01699377949377949,
+      "generic_median_force_l1": 0.024883455186256623,
+      "mean_modeled_primary_attacks": 4.945506482091848,
+      "windows": 9102
+    },
+    "16": {
+      "alive_mismatch_rate": 0.08832465124803508,
+      "ensemble_better_than_generic_rate": 0.7753270069248526,
+      "ensemble_mean_disagreement": 0.0030730340610378216,
+      "ensemble_mean_force_bias": 0.025917174520927275,
+      "ensemble_mean_force_l1": 0.04946547176743961,
+      "ensemble_mean_invalid_action_fraction": 0.03579944064940218,
+      "ensemble_median_force_l1": 0.03435904102295255,
+      "generic_mean_force_l1": 0.08125154639443335,
+      "generic_mean_invalid_action_fraction": 0.025144115452527867,
+      "generic_median_force_l1": 0.049992433061545966,
+      "mean_modeled_primary_attacks": 9.926391382405745,
+      "windows": 7798
+    }
+  },
+  "schema_version": 1,
+  "scope": "primary physical-damage residual only; all non-primary state deltas are teacher-forced from replay",
+  "source": "raw corpus chronological 80/20 battle split",
+  "train_attack_samples": 23451,
+  "train_battles": 692
+}
