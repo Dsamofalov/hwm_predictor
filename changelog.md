@@ -265,7 +265,7 @@ This file is the development diary for repository changes performed against the 
   - Train: **111/249=0.4458**; held-out: **39/108=0.3611**.
   - Held-out Brier: train-frequency **0.23788**, fixed 10%/cell **0.20250**, train-selected linear **0.20495**.
   - Best train linear slope: **0.11/cell**; gate **False**.
-  - Big-target stats: `{'train': {'n': 85, 'hits': 38, 'rate': 0.4470588235294118}, 'heldout': {'n': 52, 'hits': 15, 'rate': 0.28846153846153844}}`; small-target stats: `{'train': {'n': 164, 'hits': 73, 'rate': 0.4451219512195122}, 'heldout': {'n': 56, 'hits': 24, 'rate': 0.42857142857142855}}`.
+  - Big-target stats: `{'train': {'n': 85, 'hits': 38, 'rate': 0.4470588235294118}, 'heldout': {'n': 52, 'hits': 15, 'rate': 0.28846153846153844}}`; small-target stats: `{'train': {'n': 164, 'hits': 73, 'rate': 0.4451219512195122}, 'heldout': {'train': {'n': 164, 'hits': 73, 'rate': 0.4451219512195122}, 'heldout': {'n': 56, 'hits': 24, 'rate': 0.42857142857142855}}`.
   - Observed proc consequences: `{'proc_rows': 150, 'displacement': {'1': 105, '0': 42, '2': 1, '9': 1, '8': 1}, 'atb_after': {'90.0': 15, '98.0': 12, '95.0': 16, '96.0': 19, '92.0': 10, '99.0': 12, '97.0': 15, '94.0': 12, '100.0': 14, '93.0': 12, '91.0': 11, '50.0': 2}, 'i_tail': {'0023': 3, '0021': 1, '0020': 12, '0012': 28, '0006': 1, '0002': 6, '0010': 28, '0011': 30, '0015': 15, '0014': 7, '0003': 2, '0005': 3, '0013': 3, '0018': 2, '0007': 1, '0009': 8}, 'i_matches_actor': 150}`.
 
 ### Paw Strike HP-distance formula validation
@@ -379,7 +379,7 @@ This file is the development diary for repository changes performed against the 
   - Added RFC6455 `/ws` on the existing loopback daemon with SHA-1/WebSocket handshake and authenticated subprotocol `hwm-bearer.<token>`; the bearer is not placed in the URL.
   - Server pushes canonical `status` immediately and on every SessionStore revision change, plus a 20-second heartbeat for MV3 service-worker liveness.
   - Status now exposes `side_to_act` and `active_entity_uid` so the service worker schedules planning only for confirmed player decision states.
-  - MV3 service worker reconnects the authenticated stream, stores the last daemon status, logs WS events in the bounded live trace and deduplicates replanning by canonical revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
+  - MV3 service worker reconnects the authenticated stream, stores the last daemon status, logs WS events in the bounded live trace and deduplicates replanning by revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
   - Side panel uses fresh streamed status for stale guards/diagnostics and falls back to HTTP `/status` only when streamed status is stale/unavailable.
   - Added `scripts/test_websocket_stream.py`: wrong bearer -> 401, valid RFC6455 accept verified, initial revision frame received, debug state publication produces pushed newer revision/hash.
   - M16 is now COMPLETE FOR CURRENT LOCAL API; Phase 2 remains MOSTLY COMPLETE until a real active authenticated browser battle is exercised.
@@ -503,3 +503,12 @@ This file is the development diary for repository changes performed against the 
   - Verified statically that both observed `TURN_START` decoding and simulator rollout assign `last_acted_seq` before incrementing `decision_seq`, so the new hash component uses the same counter convention on predicted and observed states.
   - Follow-up Markov-state audit found policy-prior/value-model dynamic inputs already represented in the hash; static board/entity capability fields remain protected by the existing persistent-search structure fingerprint.
   - Draft PR #4 standard CI run `31393097068` did **not execute code**: both hosted jobs completed before `Set up job` with no step list. This entry therefore makes no CI-pass claim; the correctness regression is committed and awaits an executable hosted/local CI run.
+
+### M13 effect provenance hash canonicalization
+
+- Commit: `5d31dfbd6cebb04716d76ba62698876a7ddb259f`
+  - Removed `Effect.raw` from canonical `state_hash` while preserving effect id, duration, magnitude and current vector order.
+  - `Effect.raw` is provenance only: observed decoder stores the server wire text, while speculative simulator transitions write descriptive strings such as `modeled ...`; transition logic consumes effect id/duration/magnitude rather than that text.
+  - This prevents false exact-re-root/transposition misses when an observed status and its correctly modeled status have identical semantics but different provenance strings.
+  - Extended the dedicated planner regression: equal semantic effects with different raw provenance must share a hash/SearchGraph node; changing duration must still split the hash.
+  - Hosted CI was still not executing job steps at integration time, so this entry makes no CTest/CI-pass claim. The change is deliberately limited to provenance canonicalization and awaits the next executable standard CI run.
