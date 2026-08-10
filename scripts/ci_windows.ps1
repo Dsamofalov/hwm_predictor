@@ -72,23 +72,29 @@ function Bootstrap-CIEnvironment {
     Ensure-Path 'C:\Program Files\nodejs'
     Ensure-Path 'C:\Program Files\CMake\bin'
 
-    & '.venv\Scripts\python.exe' --version
+    $script:Python = Join-Path $env:VIRTUAL_ENV 'Scripts\python.exe'
+    if (-not (Test-Path $script:Python)) {
+        throw "venv Python not found: $script:Python"
+    }
+    $script:Npm = (Get-Command npm.cmd -ErrorAction SilentlyContinue).Source
+    if (-not $script:Npm) {
+        throw 'npm.cmd not found.'
+    }
+
+    & $script:Python --version
     Assert-NativeSuccess 'Python version check'
 
-    & $uvExe pip install --python '.venv\Scripts\python.exe' -e '.[dev]'
+    & $uvExe pip install --python $script:Python -e '.[dev]'
     Assert-NativeSuccess 'Python dependency install'
 
-    if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
+    if (-not (Get-Command cmake.exe -ErrorAction SilentlyContinue)) {
         throw 'cmake.exe not found. Install CMake system-wide.'
     }
-    if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    if (-not (Get-Command node.exe -ErrorAction SilentlyContinue)) {
         throw 'node.exe not found. Install Node.js 22+ system-wide.'
     }
-    if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
-        throw 'npm not found.'
-    }
 
-    $nodeVersion = (& node --version).Trim()
+    $nodeVersion = (& node.exe --version).Trim()
     if ($nodeVersion -notmatch '^v(\d+)\.') {
         throw "Cannot parse Node version: $nodeVersion"
     }
@@ -105,20 +111,20 @@ function Bootstrap-CIEnvironment {
         throw 'Visual Studio C++ x64 toolchain not found.'
     }
 
-    Write-Host "Python: $(& python --version)"
+    Write-Host "Python: $(& $script:Python --version)"
     Write-Host "Node:   $nodeVersion"
-    Write-Host "npm:    $(& npm --version)"
-    Write-Host "CMake:  $((& cmake --version | Select-Object -First 1))"
+    Write-Host "npm:    $(& $script:Npm --version)"
+    Write-Host "CMake:  $((& cmake.exe --version | Select-Object -First 1))"
     Write-Host "MSVC:   $script:VsInstall"
 }
 
 function Build-Msvc([string]$Config, [string]$BuildDir) {
     Write-Host "==> Configure C++ $Config"
-    cmake -S . -B $BuildDir -G 'Visual Studio 17 2022' -A x64 -DHWM_BUILD_TESTS=ON
+    cmake.exe -S . -B $BuildDir -G 'Visual Studio 17 2022' -A x64 -DHWM_BUILD_TESTS=ON
     Assert-NativeSuccess "CMake $Config configure"
 
     Write-Host "==> Build C++ $Config"
-    cmake --build $BuildDir --config $Config --parallel 2
+    cmake.exe --build $BuildDir --config $Config --parallel 2
     Assert-NativeSuccess "C++ $Config build"
 }
 
@@ -127,44 +133,44 @@ function Run-CoreSuite {
     Build-Msvc 'Debug' $build
 
     Write-Host '==> C++ main-front Debug tests'
-    ctest --test-dir $build -C Debug --output-on-failure -E '^hwm-tests$'
+    ctest.exe --test-dir $build -C Debug --output-on-failure -E '^hwm-tests$'
     Assert-NativeSuccess 'C++ main-front Debug tests'
 
     $plannerEval = Join-Path $build 'Debug\planner-eval.exe'
     $daemon = Join-Path $build 'Debug\solver-daemon.exe'
 
     Write-Host '==> Held-out 120-state planner validity'
-    python scripts/test_planner_replay_gate.py $plannerEval hwm_battles 120 1 120
+    & $script:Python scripts/test_planner_replay_gate.py $plannerEval hwm_battles 120 1 120
     Assert-NativeSuccess 'planner replay gate'
 
     Write-Host '==> Pairing/auth integration'
-    python scripts/test_local_api_auth.py $daemon
+    & $script:Python scripts/test_local_api_auth.py $daemon
     Assert-NativeSuccess 'pairing/auth integration'
 
     Write-Host '==> Stale cancellation integration'
-    python scripts/test_stale_cancellation.py $daemon
+    & $script:Python scripts/test_stale_cancellation.py $daemon
     Assert-NativeSuccess 'stale cancellation integration'
 
     Write-Host '==> Live recommendation binding contract'
-    python scripts/test_live_binding.py $daemon
+    & $script:Python scripts/test_live_binding.py $daemon
     Assert-NativeSuccess 'live binding integration'
 
     Write-Host '==> WebSocket revision streaming'
-    python scripts/test_websocket_stream.py $daemon
+    & $script:Python scripts/test_websocket_stream.py $daemon
     Assert-NativeSuccess 'WebSocket integration'
 
     Write-Host '==> Python tests'
-    python -m pytest python/tests -q
+    & $script:Python -m pytest python/tests -q
     Assert-NativeSuccess 'Python tests'
 
     Write-Host '==> Extension install/typecheck/build'
     Push-Location extension
     try {
-        npm install --no-audit --no-fund
+        & $script:Npm install --no-audit --no-fund
         Assert-NativeSuccess 'extension npm install'
-        npm run typecheck
+        & $script:Npm run typecheck
         Assert-NativeSuccess 'extension typecheck'
-        npm run build
+        & $script:Npm run build
         Assert-NativeSuccess 'extension build'
     }
     finally {
@@ -177,7 +183,7 @@ function Run-FullSuite {
     Build-Msvc 'Release' $build
 
     Write-Host '==> C++ main-front Release tests'
-    ctest --test-dir $build -C Release --output-on-failure -E '^hwm-tests$'
+    ctest.exe --test-dir $build -C Release --output-on-failure -E '^hwm-tests$'
     Assert-NativeSuccess 'C++ main-front Release tests'
 
     Write-Host '==> Release planner benchmark'
@@ -187,27 +193,27 @@ function Run-FullSuite {
     New-Item -ItemType Directory -Force 'build/validation' | Out-Null
 
     Write-Host '==> M11 full-corpus multistep residual gate'
-    python -m hwm_solver.evaluation.dynamics_multistep hwm_battles --out build/validation/dynamics-multistep-damage.json
+    & $script:Python -m hwm_solver.evaluation.dynamics_multistep hwm_battles --out build/validation/dynamics-multistep-damage.json
     Assert-NativeSuccess 'M11 multistep gate'
 
     Write-Host '==> M11 full-corpus uncertainty calibration'
-    python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/validation/dynamics-uncertainty-calibration.json
+    & $script:Python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/validation/dynamics-uncertainty-calibration.json
     Assert-NativeSuccess 'M11 uncertainty calibration'
 
     Write-Host '==> M11 full-corpus selector gate'
-    python -m hwm_solver.evaluation.dynamics_selector hwm_battles --out build/validation/dynamics-selector-gate.json
+    & $script:Python -m hwm_solver.evaluation.dynamics_selector hwm_battles --out build/validation/dynamics-selector-gate.json
     Assert-NativeSuccess 'M11 selector gate'
 
     Write-Host '==> M11 stochastic survival-distribution gate'
-    python -m hwm_solver.evaluation.dynamics_survival_gate hwm_battles --out build/validation/m11_dynamics_survival_gate.json
+    & $script:Python -m hwm_solver.evaluation.dynamics_survival_gate hwm_battles --out build/validation/m11_dynamics_survival_gate.json
     Assert-NativeSuccess 'M11 survival gate'
 
     Write-Host '==> Verify committed M11 evidence'
-    python scripts/verify_m11_evidence.py
+    & $script:Python scripts/verify_m11_evidence.py
     Assert-NativeSuccess 'M11 evidence verification'
 
     Write-Host '==> M11 positive-residual temperature calibration'
-    python -m hwm_solver.evaluation.dynamics_temperature_gate hwm_battles --out build/validation/m11_dynamics_temperature_gate.json
+    & $script:Python -m hwm_solver.evaluation.dynamics_temperature_gate hwm_battles --out build/validation/m11_dynamics_temperature_gate.json
     Assert-NativeSuccess 'M11 temperature gate'
 }
 
