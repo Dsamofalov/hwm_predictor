@@ -35,6 +35,20 @@ int main() {
     auto [same_outcome,rebound]=graph.bind(stochastic_edge,"damage-low",*low_again); CHECK(!rebound); CHECK(same_outcome==low_outcome); CHECK(graph.size()==3);
     CHECK(graph.prune_to(*high)==1); CHECK(graph.find("damage-high")==high); CHECK(graph.find("damage-low")==nullptr); CHECK(graph.find("root")==nullptr);
 
+    // NextActorModel consumes (decision_seq + 1 - last_acted_seq) as a recency feature.
+    // Two otherwise identical canonical states with different activation history therefore
+    // have different future transition semantics and must never share a transposition node.
+    auto scheduler_a=planner_fixture("scheduler-history");
+    scheduler_a.decision_seq=10; scheduler_a.halfturn=10; scheduler_a.entities[0].last_acted_seq=3;
+    auto scheduler_b=scheduler_a; scheduler_b.entities[0].last_acted_seq=4;
+    const auto scheduler_hash_a=state_hash(scheduler_a);
+    const auto scheduler_hash_b=state_hash(scheduler_b);
+    CHECK(scheduler_hash_a!=scheduler_hash_b);
+    SearchGraph history_graph;
+    auto [history_a,history_a_created]=history_graph.acquire(scheduler_hash_a);
+    auto [history_b,history_b_created]=history_graph.acquire(scheduler_hash_b);
+    CHECK(history_a_created); CHECK(history_b_created); CHECK(history_a!=history_b); CHECK(history_graph.size()==2);
+
     PlannerConfig cfg; cfg.simulation_budget=40; cfg.max_depth=3; cfg.self_top_k=6; cfg.seed=7; cfg.time_budget_ms=0;
     Planner planner(cfg); const auto state=planner_fixture("reuse-battle");
     const auto first=planner.plan(state); CHECK(first.status=="ok"); CHECK(!first.tree_reused); CHECK(first.simulations==40); CHECK(first.nodes>0);

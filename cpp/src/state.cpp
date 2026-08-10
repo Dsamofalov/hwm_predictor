@@ -51,7 +51,7 @@ int festering_aura_sources(const BattleState& s,const Entity& e){
 }
 bool frightful_aura_active(const BattleState& s,const Entity& e){
  for(const auto&src:s.entities){
-  if(src.uid==e.uid||!src.alive||src.is_hero||src.is_hidden||src.side==Side::Unknown||src.side==e.side||!has_ability(src,"frightful_aura"))continue;
+  if(src.uid==e.uid||!src.alive||src.is_hero||src.is_hidden||src.side==Side::Unknown||src.side==e.side||!has_ability(src,"frightfulaura"))continue;
   if(aura_adjacent(src,e))return true;
  }
  return false;
@@ -103,7 +103,7 @@ std::string state_hash(const BattleState& s){
  uint64_t h=1469598103934665603ULL;for(char c:s.battle_id)mix(h,(unsigned char)c);mix(h,s.active_entity_uid);mix(h,(uint64_t)s.side_to_act);mix(h,s.halfturn);mix(h,s.round);mix(h,s.decision_seq);mix(h,(uint64_t)s.phase);
  auto mf=[&](float v){uint32_t u=0;static_assert(sizeof(u)==sizeof(v));std::memcpy(&u,&v,sizeof(u));mix(h,u);};
  std::vector<const Entity*> es;es.reserve(s.entities.size());for(const auto&e:s.entities)es.push_back(&e);std::sort(es.begin(),es.end(),[](auto*a,auto*b){return a->uid<b->uid;});
- for(auto*ep:es){const auto&e=*ep;mix(h,e.uid);mix(h,e.creature_id);mix(h,(uint64_t)e.side);mix(h,e.max_count);mix(h,e.count);mix(h,e.top_unit_hp);mix(h,e.max_hp_per_unit);mix(h,(uint64_t)(e.anchor.x+128));mix(h,(uint64_t)(e.anchor.y+128));mix(h,e.alive);mix(h,e.is_hidden);mix(h,e.is_statix);mix(h,e.is_phantom);mix(h,e.shots);mix(h,e.mana);mix(h,e.waited_this_round);mix(h,e.defending);mix(h,e.retaliation_available);mix(h,e.rune_speed_available);mix(h,e.rune_speed_active);mix(h,e.rune_speed_consumed);for(char c:e.run_modifier)mix(h,(unsigned char)c);mf(e.attack);mf(e.defense);mf(e.min_damage);mf(e.max_damage);mf(e.speed);mf(e.atb);mf(e.initiative);mf(e.morale);mf(e.luck);for(auto id:e.ability_ids)mix(h,id);for(const auto&sp:e.spells){mix(h,sp.id);mix(h,(uint64_t)sp.mana_cost);mix(h,sp.direct_damage);mix(h,sp.mass);mix(h,(uint64_t)sp.effect_kind);mix(h,(uint64_t)sp.target);mf(sp.magnitude);for(char c:sp.wire_code)mix(h,(unsigned char)c);}for(const auto&fx:e.effects){mix(h,fx.id);mix(h,(uint64_t)(fx.duration+0x10000));mf(fx.magnitude);for(char c:fx.raw)mix(h,(unsigned char)c);}}
+ for(auto*ep:es){const auto&e=*ep;mix(h,e.uid);mix(h,e.creature_id);mix(h,(uint64_t)e.side);mix(h,e.max_count);mix(h,e.count);mix(h,e.top_unit_hp);mix(h,e.max_hp_per_unit);mix(h,(uint64_t)(e.anchor.x+128));mix(h,(uint64_t)(e.anchor.y+128));mix(h,e.alive);mix(h,e.is_hidden);mix(h,e.is_statix);mix(h,e.is_phantom);mix(h,e.shots);mix(h,e.mana);mix(h,e.last_acted_seq);mix(h,e.waited_this_round);mix(h,e.defending);mix(h,e.retaliation_available);mix(h,e.rune_speed_available);mix(h,e.rune_speed_active);mix(h,e.rune_speed_consumed);for(char c:e.run_modifier)mix(h,(unsigned char)c);mf(e.attack);mf(e.defense);mf(e.min_damage);mf(e.max_damage);mf(e.speed);mf(e.atb);mf(e.initiative);mf(e.morale);mf(e.luck);for(auto id:e.ability_ids)mix(h,id);for(const auto&sp:e.spells){mix(h,sp.id);mix(h,(uint64_t)sp.mana_cost);mix(h,sp.direct_damage);mix(h,sp.mass);mix(h,(uint64_t)sp.effect_kind);mix(h,(uint64_t)sp.target);mf(sp.magnitude);for(char c:sp.wire_code)mix(h,(unsigned char)c);}for(const auto&fx:e.effects){mix(h,fx.id);mix(h,(uint64_t)(fx.duration+0x10000));mf(fx.magnitude);for(char c:fx.raw)mix(h,(unsigned char)c);}}
  std::ostringstream o;o<<std::hex<<std::setw(16)<<std::setfill('0')<<h;return o.str();}
 std::vector<std::string> validate(const BattleState& s){
  std::vector<std::string> w;
