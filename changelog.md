@@ -463,3 +463,13 @@ This file is the development diary for repository changes performed against the 
   - Stored compact evidence at `data/reports/dynamics-uncertainty-calibration.json`; the CLI emits full ten-bin calibration tables.
   - Full-corpus calibration run `31385464567` and standard Linux/Windows CI run `31385464568`: **PASS**; targeted calibration tests **5/5**.
 
+### M11 calibrated fallback-selector gate
+
+- Commit: `7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b`
+  - Added a strict chronological **64% fit / 16% calibration / 20% final-test** fallback-selector experiment for the five-member primary physical-damage residual ensemble.
+  - Selector features are pre-transition only: creature/action train support, relative ensemble disagreement, residual-correction magnitude/sign, generic lethality ratio and ranged/melee indicator.
+  - Calibration chose threshold `0.5365`, using generic on about 16% of modeled attacks. On the untouched one-step final test, selector abs-log error is **0.38571**, slightly better than ensemble **0.38658** and generic **0.47968**; learned-worse AUC is **0.6020**.
+  - The **multi-step gate fails**: selector is slightly worse than pure ensemble mean-force-L1 at every 2/4/8/16 horizon and still exceeds generic invalid-action rate. At 16 steps: selector **0.05205 L1 / 3.24% invalid**, ensemble **0.05172 / 3.40%**, generic **0.08125 / 2.51%**.
+  - Runtime selector remains disabled. The experiment demonstrates that one-step fallback classification does not resolve the long-horizon accuracy/validity trade-off.
+  - Stored `data/reports/dynamics-selector-gate.json`. Diagnostic run `31386006048` and full standard CI run `31386005987`: **PASS**; targeted selector tests **4/4**.
+
