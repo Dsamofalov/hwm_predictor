@@ -35,6 +35,9 @@ jobs:
       - name: C++ tests
         run: ctest --test-dir build/debug --output-on-failure
 
+      - name: Held-out 120-state planner recommendation validity
+        run: python scripts/test_planner_replay_gate.py build/debug/planner-eval hwm_battles 120 1 120
+
       - name: Local API pairing/auth integration
         run: python scripts/test_local_api_auth.py build/debug/solver-daemon
 
