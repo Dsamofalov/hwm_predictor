@@ -11,6 +11,10 @@ concurrency:
   group: ci-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  statuses: write
+
 defaults:
   run:
     shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
@@ -34,6 +38,18 @@ jobs:
           clean: true
       - name: Core Windows validation
         run: .\scripts\ci_windows.ps1 -Suite Core
+      - name: Publish Core commit status
+        if: always()
+        continue-on-error: true
+        env:
+          HWM_JOB_STATUS: ${{ job.status }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $state = if ($env:HWM_JOB_STATUS -eq 'success') { 'success' } else { 'failure' }
+          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          $body = @{ state = $state; context = 'HWM / Core'; description = "Windows Core: $env:HWM_JOB_STATUS"; target_url = $target } | ConvertTo-Json -Compress
+          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
 
   full:
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
@@ -45,3 +61,15 @@ jobs:
           clean: true
       - name: Full Windows validation
         run: .\scripts\ci_windows.ps1 -Suite Full
+      - name: Publish Full commit status
+        if: always()
+        continue-on-error: true
+        env:
+          HWM_JOB_STATUS: ${{ job.status }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $state = if ($env:HWM_JOB_STATUS -eq 'success') { 'success' } else { 'failure' }
+          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          $body = @{ state = $state; context = 'HWM / Full'; description = "Windows Full: $env:HWM_JOB_STATUS"; target_url = $target } | ConvertTo-Json -Compress
+          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
