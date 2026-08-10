@@ -1,0 +1,42 @@
+name: Cleanup obsolete branches
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/cleanup_obsolete_branches.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: [self-hosted, windows, x64, hwm-windows]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Delete obsolete development branches
+        shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $branches = @(
+            'diagnostics',
+            'm11-uncertainty-repro',
+            'm13-effect-hash',
+            'm13-hash-fix',
+            'main-windows-full-validation',
+            'main-windows-validation-final',
+            'verify-m13-reroot'
+          )
+          foreach ($branch in $branches) {
+            git ls-remote --exit-code --heads origin "refs/heads/$branch" *> $null
+            if ($LASTEXITCODE -eq 0) {
+              Write-Host "Deleting $branch"
+              git push origin --delete $branch
+              if ($LASTEXITCODE -ne 0) { throw "Failed to delete branch: $branch" }
+            } else {
+              Write-Host "Already absent: $branch"
+            }
+          }
