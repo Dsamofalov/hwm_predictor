@@ -12,6 +12,8 @@ TypeScript typecheck:       PASS
 Extension build:            PASS
 ```
 
+The automated-count line above is the last completed full-suite snapshot. A standard full CI run is triggered after the Mighty Slam functional tree; the exact Python count is updated only after that run completes.
+
 ## Full 866-battle corpus-check
 
 ```json
@@ -60,15 +62,21 @@ modeled_proc:           8
 modeled_collateral:     5
 modeled_kill_trigger:   2
 unresolved:             78
+```
 
-Registry counts regenerated 10.08.2026 after exact Life Drain, Regeneration, Mana Feed and Mighty Slam transitions; all 42 observed `Smfd` actions pass the exact corpus transition invariant. Held-out risk numbers below remain the 09.08.2026 checkpoint snapshot and are not relabeled.
+Registry counts regenerated 10.08.2026 after exact Life Drain, Regeneration, Mana Feed and Mighty Slam transitions. All **42/42** observed `Smfd` actions pass the exact Mana Feed invariant and all **32/32** observed `Smsl` decisions classify as explicit `ABILITY` after the Mighty Slam wire/classifier update.
 
+Current held-out risk was recomputed from the same 866-battle corpus after the Mighty Slam promotion:
+
+```text
 held-out sampled player states: 1748
-risk mean:              0.23886
-risk p50:               0.22799
-risk p90:               0.39780
+risk mean:              0.22878
+risk p50:               0.21759
+risk p90:               0.39601
 risk p99:               0.54688
 ```
+
+`Crippling Wound` remains deliberately non-speculative: its observed `Swnd` debuff transition is decoded, but the current proc-probability models fail the chronological validation gate and therefore are not enabled in search.
 
 ## Policy priors
 
