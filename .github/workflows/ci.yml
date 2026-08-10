@@ -2,7 +2,9 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -14,8 +16,8 @@ defaults:
     shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
 
 jobs:
-  windows-self-hosted:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+  core:
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 120
     env:
@@ -25,104 +27,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           clean: true
+      - name: Core Windows validation
+        run: .\scripts\ci_windows.ps1 -Suite Core
 
-      - name: Bootstrap service-owned uv and Python 3.13
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $uvVersion = '0.11.32'
-          $uvDir = Join-Path $env:RUNNER_TOOL_CACHE "uv\$uvVersion"
-          $uvExe = Join-Path $uvDir 'uv.exe'
-          $pythonDir = Join-Path $env:RUNNER_TOOL_CACHE 'uv-python'
-          $uvCache = Join-Path $env:RUNNER_TOOL_CACHE 'uv-cache'
-          New-Item -ItemType Directory -Force $uvDir, $pythonDir, $uvCache | Out-Null
-          if (-not (Test-Path $uvExe)) {
-            $env:UV_UNMANAGED_INSTALL = $uvDir
-            $installer = Invoke-RestMethod "https://astral.sh/uv/$uvVersion/install.ps1"
-            Invoke-Expression $installer
-          }
-          if (-not (Test-Path $uvExe)) { throw "uv.exe not found after installation: $uvExe" }
-          $env:UV_PYTHON_INSTALL_DIR = $pythonDir
-          $env:UV_CACHE_DIR = $uvCache
-          $env:UV_MANAGED_PYTHON = '1'
-          & $uvExe --version
-          & $uvExe python install 3.13 --install-dir $pythonDir
-          if ($LASTEXITCODE -ne 0) { throw 'uv python install 3.13 failed.' }
-          if (Test-Path '.venv') { Remove-Item -Recurse -Force '.venv' }
-          & $uvExe venv --python 3.13 --managed-python .venv
-          if ($LASTEXITCODE -ne 0) { throw 'uv venv failed.' }
-          $venvScripts = (Resolve-Path '.venv\Scripts').Path
-          $venvRoot = (Resolve-Path '.venv').Path
-          $uvDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          $venvScripts | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          "VIRTUAL_ENV=$venvRoot" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          "UV_PYTHON_INSTALL_DIR=$pythonDir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          "UV_CACHE_DIR=$uvCache" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          "UV_MANAGED_PYTHON=1" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          & '.venv\Scripts\python.exe' --version
-          & $uvExe pip install --python '.venv\Scripts\python.exe' -e '.[dev]'
-          if ($LASTEXITCODE -ne 0) { throw 'Python dependency installation failed.' }
-
-      - name: Resolve system Node and CMake
-        run: |
-          $ErrorActionPreference = 'Stop'
-          foreach ($dir in @('C:\Program Files\nodejs', 'C:\Program Files\CMake\bin')) {
-            if (Test-Path $dir) {
-              $env:Path = "$dir;$env:Path"
-              $dir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-            }
-          }
-          if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'node.exe not found.' }
-          if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { throw 'npm not found.' }
-          if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) { throw 'cmake.exe not found.' }
-          $nodeVersion = (& node --version).Trim()
-          if ($nodeVersion -notmatch '^v(\d+)\.') { throw "Cannot parse Node version: $nodeVersion" }
-          if ([int]$Matches[1] -lt 22) { throw "Node 22+ required; found $nodeVersion" }
-          Write-Host "Node: $nodeVersion"
-          Write-Host "npm: $(& npm --version)"
-          Write-Host ((& cmake --version | Select-Object -First 1))
-
-      - name: Configure and build C++ Debug with Visual Studio 2022
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
-          if (-not (Test-Path $vswhere)) { throw 'vswhere.exe not found.' }
-          $vs = (& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath | Select-Object -First 1)
-          if (-not $vs) { throw 'Visual Studio C++ x64 toolchain not found.' }
-          Write-Host "Visual Studio: $vs"
-          cmake -S . -B build/windows -G 'Visual Studio 17 2022' -A x64 -DHWM_BUILD_TESTS=ON
-          if ($LASTEXITCODE -ne 0) { throw 'CMake Debug configure failed.' }
-          cmake --build build/windows --config Debug --parallel 2
-          if ($LASTEXITCODE -ne 0) { throw 'C++ Debug build failed.' }
-
-      - name: C++ main-front tests
-        run: ctest --test-dir build/windows -C Debug --output-on-failure -E '^hwm-tests$'
-
-      - name: Held-out 120-state planner recommendation validity
-        run: python scripts/test_planner_replay_gate.py build/windows/Debug/planner-eval.exe hwm_battles 120 1 120
-
-      - name: Local API pairing/auth integration
-        run: python scripts/test_local_api_auth.py build/windows/Debug/solver-daemon.exe
-
-      - name: Stale search cancellation integration
-        run: python scripts/test_stale_cancellation.py build/windows/Debug/solver-daemon.exe
-
-      - name: Live recommendation binding contract
-        run: python scripts/test_live_binding.py build/windows/Debug/solver-daemon.exe
-
-      - name: WebSocket revision streaming
-        run: python scripts/test_websocket_stream.py build/windows/Debug/solver-daemon.exe
-
-      - name: Python tests
-        run: python -m pytest python/tests -q
-
-      - name: Install extension dependencies
-        working-directory: extension
-        run: npm install --no-audit --no-fund
-
-      - name: TypeScript typecheck
-        working-directory: extension
-        run: npm run typecheck
-
-      - name: Build extension
-        working-directory: extension
-        run: npm run build
+  full:
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: [self-hosted, windows, x64, hwm-windows]
+    timeout-minutes: 240
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: true
+      - name: Full Windows validation
+        run: .\scripts\ci_windows.ps1 -Suite Full
