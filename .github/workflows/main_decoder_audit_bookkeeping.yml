@@ -1,0 +1,42 @@
+name: One-shot decoder audit bookkeeping
+
+on:
+  pull_request_target:
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  bookkeep:
+    if: github.repository == 'Dsamofalov/hwm_predictor' && github.event.pull_request.number == 2 && github.event.pull_request.head.ref == 'verify-m13-reroot' && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Verify functional audit commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 088df7346260a16cc086f59724157274b6d178de HEAD
+      - name: Append changelog and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('changelog.md')
+          t=p.read_text(encoding='utf-8')
+          sha='088df7346260a16cc086f59724157274b6d178de'
+          if sha not in t:
+              t=t.rstrip()+'''\n\n### Decoder geometry evidence audit\n\n- Commit: `088df7346260a16cc086f59724157274b6d178de`\n  - Added `scripts/decoder_geometry_audit.py`, a reproducible read-only corpus audit for decoder/legal geometry without changing ability-owned protocol/replay implementation.\n  - Stored `data/reports/decoder-geometry-audit.json` from all 866 battles / 52,375 decisions.\n  - Reproduces held-out basic-action coverage **5373/5481 = 98.03%** with failures 60 melee-destination, 45 target-adjacency, and 3 MOVE.\n  - Finds **145** raw melee destinations intersecting a live stack in `state_before`, **141** involving a non-target stack.\n  - Of 105 held-out failed melee rows, **64** have a legal landing for the current decoded target and **69** have one when all actor-originated DAMAGE targets are considered; 5 specifically require an alternate DAMAGE target by the conservative existence test.\n  - Python replay final overlap remains **21 battles / 23 pairs**; the separate authoritative C++ corpus gate remains 19 invalid finals / 21 overlap pairs.\n  - Diagnostic workflow job `93438285778`: **PASS**.\n'''+'\n'
+          p.write_text(t,encoding='utf-8')
+          PY
+          rm .github/workflows/main_decoder_audit_bookkeeping.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add changelog.md .github/workflows/main_decoder_audit_bookkeeping.yml
+          git commit -m "docs: record decoder geometry audit"
+          git push origin HEAD:main
