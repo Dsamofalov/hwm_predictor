@@ -430,3 +430,14 @@ This file is the development diary for repository changes performed against the 
   - Regression proves a legal-action-relevant `is_flyer` change that currently collides in `state_hash` does not reuse the old tree.
   - Standard pull-request CI run `31380236279`: **PASS**. Linux passed C++ build, CTest 2/2, pairing/auth, stale cancellation, live binding, WebSocket streaming, full Python tests, TypeScript typecheck and extension build. Windows current-MSVC build/test job passed.
 
+### Decoder geometry evidence audit
+
+- Commit: `088df7346260a16cc086f59724157274b6d178de`
+  - Added `scripts/decoder_geometry_audit.py`, a reproducible read-only corpus audit for decoder/legal geometry without changing ability-owned protocol/replay implementation.
+  - Stored `data/reports/decoder-geometry-audit.json` from all 866 battles / 52,375 decisions.
+  - Reproduces held-out basic-action coverage **5373/5481 = 98.03%** with failures 60 melee-destination, 45 target-adjacency, and 3 MOVE.
+  - Finds **145** raw melee destinations intersecting a live stack in `state_before`, **141** involving a non-target stack.
+  - Of 105 held-out failed melee rows, **64** have a legal landing for the current decoded target and **69** have one when all actor-originated DAMAGE targets are considered; 5 specifically require an alternate DAMAGE target by the conservative existence test.
+  - Python replay final overlap remains **21 battles / 23 pairs**; the separate authoritative C++ corpus gate remains 19 invalid finals / 21 overlap pairs.
+  - Diagnostic workflow job `93438285778`: **PASS**.
+
