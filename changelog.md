@@ -190,3 +190,13 @@ This file is the development diary for repository changes performed against the 
   - Enriched `data/reports/mightyslam_msl_evidence.json` with every `DAMAGE` and `FORCED_POSITION` record.
   - Damage-event count distribution: `{'1': 14, '2': 16, '3': 2}`; multi-target damage rows: **18/32**.
   - Forced-position count distribution: `{'0': 21, '1': 8, '2': 3}`; rows with knockback: **11/32**.
+
+### Mighty Slam splash-target geometry analysis
+
+- Commit: `0e46fa88a1d2f5a01e193d8b978eafc48a3718fb`
+  - Staged a self-removing full-corpus ownership/adjacency check for all `Smsl` secondary damage and knockback records.
+- Commit: `ce06bc32be5ae3762c8b6675c21b5fbff23d755e`
+  - Stored `data/reports/mightyslam_target_geometry.json`.
+  - Secondary damage targets: **20**; enemy **20**, friendly **0**.
+  - Secondary adjacency to primary: **8** adjacent, **12** non-adjacent.
+  - Forced-position records: small **14**, big **0**.
