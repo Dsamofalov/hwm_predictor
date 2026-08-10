@@ -7,7 +7,9 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -56,6 +58,11 @@ struct SearchNode {
 
 class SearchGraph {
 public:
+    SearchNode* find(std::string_view hash) const {
+        const auto it = nodes_.find(std::string(hash));
+        return it == nodes_.end() ? nullptr : it->second.get();
+    }
+
     std::pair<SearchNode*, bool> acquire(std::string hash) {
         if (auto it = nodes_.find(hash); it != nodes_.end()) return {it->second.get(), false};
         auto node = std::make_unique<SearchNode>();
@@ -73,6 +80,28 @@ public:
         return {&it->second, inserted};
     }
 
+    size_t prune_to(SearchNode& root) {
+        std::unordered_set<SearchNode*> reachable;
+        std::vector<SearchNode*> pending{&root};
+        while (!pending.empty()) {
+            SearchNode* node = pending.back();
+            pending.pop_back();
+            if (!node || !reachable.insert(node).second) continue;
+            for (auto& edge : node->edges) {
+                for (auto& [hash, outcome] : edge.outcomes) {
+                    (void)hash;
+                    if (outcome.child) pending.push_back(outcome.child);
+                }
+            }
+        }
+        for (auto it = nodes_.begin(); it != nodes_.end();) {
+            if (!reachable.contains(it->second.get())) it = nodes_.erase(it);
+            else ++it;
+        }
+        return nodes_.size();
+    }
+
+    void clear() { nodes_.clear(); }
     size_t size() const { return nodes_.size(); }
 
 private:

@@ -98,6 +98,15 @@ uint64_t env_u64(const char* name, uint64_t fallback) {
     try { return std::stoull(value); } catch (...) { return fallback; }
 }
 
+PlannerConfig daemon_planner_config() {
+    PlannerConfig cfg;
+    cfg.simulation_budget = env_u64("HWM_SEARCH_SIMS", 10000);
+    cfg.time_budget_ms = env_u64("HWM_SEARCH_MS", 5000);
+    cfg.max_depth = static_cast<int>(env_u64("HWM_SEARCH_DEPTH", 12));
+    cfg.cancellation_poll_interval = env_u64("HWM_SEARCH_CANCEL_POLL", 16);
+    return cfg;
+}
+
 std::string random_hex(size_t bytes) {
     std::random_device rd;
     std::ostringstream o;
@@ -262,7 +271,8 @@ std::string candidate_json(const Candidate& c) {
 
 HttpServer::HttpServer(std::string bind_address, uint16_t port, SessionStore& store)
     : bind_(std::move(bind_address)), port_(port), store_(store),
-      pairing_token_(load_or_create_pairing_token()), pairing_code_(pairing_code()) {}
+      pairing_token_(load_or_create_pairing_token()), pairing_code_(pairing_code()),
+      planner_(std::make_unique<Planner>(daemon_planner_config())) {}
 HttpServer::~HttpServer() { stop(); }
 void HttpServer::stop() { stop_ = true; }
 
@@ -357,14 +367,7 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
         if (s.phase == Phase::Finished) return response(200, "{\"status\":\"finished\",\"reason\":\"battle ended\"}");
         if (s.side_to_act != Side::Player || s.active_entity_uid == 0) return response(200, "{\"status\":\"not_ready\",\"reason\":\"not a confirmed player decision state\"}");
         const auto requested_hash = state_hash(s);
-        PlannerConfig cfg;
-        cfg.simulation_budget = env_u64("HWM_SEARCH_SIMS", 10000);
-        cfg.time_budget_ms = env_u64("HWM_SEARCH_MS", 5000);
-        cfg.max_depth = static_cast<int>(env_u64("HWM_SEARCH_DEPTH", 12));
-        cfg.cancellation_poll_interval = env_u64("HWM_SEARCH_CANCEL_POLL", 16);
-        cfg.cancellation_requested = [this, requested_revision] { return store_.revision() != requested_revision; };
-        Planner planner(cfg);
-        auto r = planner.plan(s);
+        auto r = planner_->plan(s, Side::Player, [this, requested_revision] { return store_.revision() != requested_revision; });
         const bool revision_changed = store_.revision() != requested_revision;
         if (r.status == "cancelled" || revision_changed) {
             auto latest = store_.snapshot();
@@ -388,6 +391,9 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
           << ",\"semantic_unresolved_ratio\":" << s.semantic_unresolved_ratio
           << ",\"ability_risk\":" << r.ability_risk
           << ",\"simulations\":" << r.simulations << ",\"nodes\":" << r.nodes
+          << ",\"tree_reused\":" << (r.tree_reused?"true":"false")
+          << ",\"reused_root_visits\":" << r.reused_root_visits
+          << ",\"retained_nodes\":" << r.retained_nodes
           << ",\"elapsed_ms\":" << r.elapsed_ms << ",\"best\":" << candidate_json(r.best)
           << ",\"alternatives\":[";
         for (size_t i = 0; i < r.alternatives.size(); ++i) {

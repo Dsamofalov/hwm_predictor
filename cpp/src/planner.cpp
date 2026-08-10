@@ -1,5 +1,4 @@
 #include "hwm/planner.hpp"
-#include "hwm/detail/planner_tree.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -31,13 +30,16 @@ size_t widening_limit(const Node& n, size_t total, int hard_top_k) {
 }
 }  // namespace
 
-Planner::Planner(PlannerConfig c) : cfg_(c), prior_(), value_() {}
+Planner::Planner(PlannerConfig c) : cfg_(std::move(c)), prior_(), value_() {}
 
-Recommendation Planner::plan(const BattleState& root, Side perspective) const {
+Recommendation Planner::plan(const BattleState& root, Side perspective, std::function<bool()> cancellation_requested) const {
     const auto started = std::chrono::steady_clock::now();
     Recommendation rec;
     rec.state_hash = state_hash(root);
-    const auto cancelled = [&]() { return cfg_.cancellation_requested && cfg_.cancellation_requested(); };
+    const auto cancelled = [&]() {
+        return (cancellation_requested && cancellation_requested()) ||
+               (cfg_.cancellation_requested && cfg_.cancellation_requested());
+    };
     if (cancelled()) {
         rec.status = "cancelled";
         rec.warnings.push_back("planning cancelled before search because observed session revision changed");
@@ -69,9 +71,31 @@ Recommendation Planner::plan(const BattleState& root, Side perspective) const {
         return rec;
     }
 
-    detail::SearchGraph graph;
-    auto [tree, root_created] = graph.acquire(rec.state_hash);
-    (void)root_created;
+    // One Planner instance owns one mutable MCTS graph.  Serializing plan() protects
+    // persistent statistics when the daemon serves overlapping HTTP recommendation requests.
+    std::unique_lock graph_lock(search_mutex_);
+    if (cancelled()) {
+        rec.status = "cancelled";
+        rec.warnings.push_back("planning cancelled while waiting for the persistent search tree");
+        return rec;
+    }
+
+    Node* tree = nullptr;
+    if (graph_battle_id_ == root.battle_id && graph_perspective_ == perspective) {
+        tree = graph_.find(rec.state_hash);
+    }
+    if (tree) {
+        rec.tree_reused = true;
+        rec.reused_root_visits = tree->visits;
+        rec.retained_nodes = graph_.prune_to(*tree);
+    } else {
+        graph_.clear();
+        graph_battle_id_ = root.battle_id;
+        graph_perspective_ = perspective;
+        auto acquired = graph_.acquire(rec.state_hash);
+        tree = acquired.first;
+    }
+
     std::mt19937 rng(cfg_.seed);
     std::uniform_real_distribution<double> roll(0.0, 1.0);
 
@@ -140,9 +164,9 @@ Recommendation Planner::plan(const BattleState& root, Side perspective) const {
             value = value_.loaded() ? value_.utility(tr.state, perspective) : sim_.heuristic_value(tr.state, perspective);
         } else {
             const std::string outcome_hash = state_hash(tr.state);
-            auto [child, child_created] = graph.acquire(outcome_hash);
+            auto [child, child_created] = graph_.acquire(outcome_hash);
             (void)child_created;
-            auto [outcome, outcome_created] = graph.bind(e, outcome_hash, *child);
+            auto [outcome, outcome_created] = graph_.bind(e, outcome_hash, *child);
             (void)outcome_created;
             value = simulate(*child, std::move(tr.state), depth + 1, false);
             ++outcome->visits;
@@ -171,7 +195,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective) const {
     }
     if (rec.status == "cancelled") {
         rec.simulations = sims;
-        rec.nodes = graph.size();
+        rec.nodes = graph_.size();
         rec.elapsed_ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - started).count();
         rec.warnings.push_back("observed session revision changed during search");
         return rec;
@@ -206,9 +230,6 @@ Recommendation Planner::plan(const BattleState& root, Side perspective) const {
     rec.best = cand.front();
     for (size_t i = 1; i < cand.size() && i < 5; ++i) rec.alternatives.push_back(cand[i]);
 
-    // Principal variation follows the most-visited action and then the most-visited
-    // sampled outcome for that action.  It is descriptive only; live execution still
-    // replans from the next observed canonical state.
     Node* n = tree;
     for (int d = 0; d < cfg_.max_depth && n && n->initialized && !n->edges.empty(); ++d) {
         auto it = std::max_element(n->edges.begin(), n->edges.end(), [](const auto& a, const auto& b) { return a.visits < b.visits; });
@@ -218,7 +239,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective) const {
     }
 
     rec.simulations = sims;
-    rec.nodes = graph.size();
+    rec.nodes = graph_.size();
     rec.elapsed_ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - started).count();
     if (!prior_.loaded()) rec.warnings.push_back("learned policy-prior table not loaded; using fallback priors");
     if (!value_.loaded()) rec.warnings.push_back("learned linear value model not loaded; using heuristic leaves");

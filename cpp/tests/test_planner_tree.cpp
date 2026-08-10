@@ -1,4 +1,5 @@
 #include "hwm/detail/planner_tree.hpp"
+#include "hwm/planner.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -8,14 +9,23 @@ using namespace hwm::detail;
 
 #define CHECK(expr) do { if (!(expr)) { std::cerr << "CHECK failed: " #expr << " at " << __FILE__ << ':' << __LINE__ << '\n'; return EXIT_FAILURE; } } while (0)
 
+static BattleState planner_fixture(std::string battle_id) {
+    BattleState s;
+    s.battle_id=std::move(battle_id); s.state_seq=1; s.phase=Phase::Combat; s.width=12; s.height=10;
+    s.protocol_ready=true; s.recommendation_safe=true;
+    Entity a; a.uid=1; a.creature_id=10; a.side=Side::Player; a.anchor={1,1}; a.count=10; a.max_count=10;
+    a.top_unit_hp=20; a.max_hp_per_unit=20; a.attack=10; a.defense=8; a.min_damage=2; a.max_damage=4; a.speed=4; a.shots=3; a.is_shooter=true;
+    Entity b=a; b.uid=2; b.side=Side::Pve; b.anchor={5,1}; b.count=8; b.max_count=8; b.shots=0; b.is_shooter=false;
+    s.entities={a,b}; s.active_entity_uid=1; s.side_to_act=Side::Player;
+    return s;
+}
+
 int main() {
     SearchGraph graph;
     auto [root, root_created] = graph.acquire("root");
     CHECK(root_created);
     CHECK(root != nullptr);
 
-    // One stochastic action can lead to two different canonical states.  The edge must
-    // retain both outcome bindings instead of reusing the first sampled child node.
     SearchEdge stochastic_edge;
     stochastic_edge.action.action_id = 1;
     stochastic_edge.action.actor_uid = 7;
@@ -46,17 +56,12 @@ int main() {
     CHECK(low_outcome->child != high_outcome->child);
     CHECK(low_outcome->child->hash == "damage-low");
     CHECK(high_outcome->child->hash == "damage-high");
-
-    // The second outcome keeps its own legal-action set.  It must never inherit the
-    // node initialized from the first sampled outcome.
     CHECK(low->edges.size() == 1);
     CHECK(high->edges.size() == 1);
     CHECK(low->edges.front().action.type == ActionType::Wait);
     CHECK(high->edges.front().action.type == ActionType::Defend);
     CHECK(stochastic_edge.modal_child() == high);
 
-    // Equal canonical state hashes are true transpositions: acquiring the same hash
-    // returns the exact same node, including when reached through another action edge.
     auto [low_again, duplicate_created] = graph.acquire("damage-low");
     CHECK(!duplicate_created);
     CHECK(low_again == low);
@@ -66,13 +71,37 @@ int main() {
     auto [transposed, transposed_bound] = graph.bind(sibling_edge, "damage-low", *low_again);
     CHECK(transposed_bound);
     CHECK(transposed->child == low);
-
-    // Re-observing the same outcome on the original edge reuses its binding too.
     auto [same_outcome, rebound] = graph.bind(stochastic_edge, "damage-low", *low_again);
     CHECK(!rebound);
     CHECK(same_outcome == low_outcome);
-    CHECK(graph.size() == 3);  // root + two distinct stochastic states
+    CHECK(graph.size() == 3);
 
-    std::cout << "planner stochastic-outcome/transposition tests passed\n";
+    // Re-root pruning is exact: only nodes reachable from the observed canonical root survive.
+    CHECK(graph.prune_to(*high) == 1);
+    CHECK(graph.find("damage-high") == high);
+    CHECK(graph.find("damage-low") == nullptr);
+    CHECK(graph.find("root") == nullptr);
+
+    // Planner-level persistence reuses an exact observed root, but never crosses battle scope.
+    PlannerConfig cfg; cfg.simulation_budget=40; cfg.max_depth=3; cfg.self_top_k=6; cfg.seed=7; cfg.time_budget_ms=0;
+    Planner planner(cfg);
+    const auto state=planner_fixture("reuse-battle");
+    const auto first=planner.plan(state);
+    CHECK(first.status=="ok");
+    CHECK(!first.tree_reused);
+    CHECK(first.simulations==40);
+    CHECK(first.nodes>0);
+    const auto second=planner.plan(state);
+    CHECK(second.status=="ok");
+    CHECK(second.tree_reused);
+    CHECK(second.reused_root_visits>=first.simulations);
+    CHECK(second.retained_nodes>0);
+    auto other=state; other.battle_id="different-battle";
+    const auto reset=planner.plan(other);
+    CHECK(reset.status=="ok");
+    CHECK(!reset.tree_reused);
+    CHECK(reset.reused_root_visits==0);
+
+    std::cout << "planner stochastic-outcome/transposition/re-root tests passed\n";
     return EXIT_SUCCESS;
 }
