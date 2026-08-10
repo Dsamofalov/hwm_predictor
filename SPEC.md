@@ -1,9 +1,9 @@
 # Техническое задание: HeroesWM PvE Battle Solver / Advisor
 
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
-**Дата:** 09.08.2026  
+**Дата:** 10.08.2026
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 10.08.2026 — Life Drain, Regeneration, Mana Feed и Mighty Slam переведены в exact-search.  
+**Последнее обновление реализации:** 10.08.2026 — основной front: persistent pairing/bearer auth, revision-bound cooperative stale-search cancellation, live revision/hash trace/binding, authenticated local WebSocket streaming и Linux + Windows/MSVC CI gates реализованы; ability-front ведётся отдельно в ветке `ability`.
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
@@ -31,15 +31,19 @@
 - Physical damage: median abs-log error **0.3574 -> 0.2812** после learned creature residual; для rare creatures ability transfer **0.2719 -> 0.2484**.
 - Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
 - Planner real-state regression (Release, 20 states): recommendation **20/20**, action-type stability **100%**, exact-action stability **90%** при budget 300 -> 1200.
-- Automated tests: C++ CTest **100%**, Python **42/42**, TypeScript typecheck/build **PASS**; local API pairing/auth, stale-search cancellation, live binding и WebSocket streaming integration **PASS**.
+- Automated tests: Linux C++ CTest **100%**, Python **42/42**, TypeScript typecheck/build **PASS**; pairing/auth, stale-search cancellation, live binding и WebSocket streaming integrations **PASS**. Windows/MSVC job также **PASS**: C++ build/CTest + все четыре daemon integration gates.
 
 ### Текущий незавершённый фронт разработки
 
-1. Закрытие high-impact unresolved creature abilities; `Life Drain`, `Regeneration`, `Mana Feed` и `Mighty Slam` закрыты 10.08.2026; `Paw Strike` переведён в validated hybrid modeled-proc 10.08.2026, текущая точка исследования — remaining assist/counter/summon/control abilities.
-2. Устранение 19 финальных structural-invalid replay (в основном geometry/rare mechanics) без ослабления invariants.
-3. Full learned dynamics ensemble и multi-step validation gate.
-4. Tree reuse/transposition и дальнейшее улучшение opponent branching.
-5. Live validation расширения на **активном** бою (closed-loop trace уже подготовлен) и затем hard-PvE human-in-loop benchmark.
+Основной `main`-front и ability-front теперь разделены. Creature abilities продолжаются независимо в ветке `ability`; нижеприведённый порядок — приоритет **основного** фронта.
+
+1. **Real active-battle smoke gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном активном авторизованном PvE-бою. Network capture остаётся primary truth; полноценный runtime-object fallback добавлять только если live trace докажет конкретно отсутствующее canonical/legal-action поле.
+2. **M13 chance-outcome correctness → transpositions/tree reuse:** текущий planner исторически хранит один `Edge.child`, хотя `sim_.apply(..., roll)` стохастический. Следующий main-planner набор должен индексировать sampled child outcomes по `state_hash`, не смешивать разные stochastic outcomes в одном первом child-node, затем добавить transposition sharing и только после этого persistent re-root между наблюдаемыми состояниями.
+3. **Decoder/legal correctness:** устранить 19 финальных structural-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **98.03%** к acceptance **>=99.9%**.
+4. **Learned dynamics:** full ensemble + multi-step divergence/validation gate; one-step качество само по себе не считать достаточным.
+5. **Evaluation:** после стабильного live acquisition — >=100 live/replay state invalid-recommendation gate, затем hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
+
+Ability-front: high-impact unresolved assist/counter/summon/control mechanics ведутся отдельно в `ability` и должны попадать в `main` только после corpus/CI review.
 
 ### Правило источников механик
 

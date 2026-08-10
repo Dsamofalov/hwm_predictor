@@ -67,3 +67,11 @@ Do **not** claim M01/M14 complete before that run. The current code proves the l
 If the real battle trace shows network capture is sufficient, keep network payload as the primary path. If it proves a missing canonical/legal-action field, use the existing metadata-only runtime structure probe to identify the smallest explicit runtime-object adapter. Do not implement a broad runtime scraper speculatively.
 
 After stable live acquisition is proven, main may continue with the next original-TZ gates that do not conflict with `ability`, notably WebSocket streaming, persistent tree re-root/transpositions/opponent branching, and later live/hard-PvE evaluation.
+
+
+## 2026-08-10 final handoff update
+
+- Authenticated WebSocket functional commit: `68345f0afc89ed0e17884042592fb08b6edd83be`.
+- Standard CI now includes WebSocket streaming and a Windows/MSVC job. CI commit `7353e1ddcf17f27e981cac52f2b1e38f5545881e`: **PASS** on both Linux and Windows; Windows executes C++ build/CTest plus pairing, stale cancellation, live binding and WebSocket daemon integrations.
+- Next main-planner correctness issue identified during audit: `planner.cpp` currently gives each action edge one child while `sim_.apply(..., roll)` is stochastic. Before persistent tree reuse, split sampled outcomes by `state_hash`, share equal states via a transposition table, and regression-test that different sampled outcomes do not reuse a node initialized from the first outcome's legal actions.
+- Stop point for this agent: do not begin that M13 patch in this checkpoint; hand off from here.

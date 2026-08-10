@@ -11,6 +11,7 @@ Local API pairing/auth integration:     PASS
 Stale-search cancellation integration:  PASS
 Live recommendation binding contract:   PASS
 WebSocket revision streaming:            PASS
+Windows/MSVC C++ + daemon integrations:     PASS
 Python pytest:                          42/42 PASS
 TypeScript typecheck:                   PASS
 Extension build:                        PASS
@@ -171,6 +172,5 @@ These numbers are a controlled held-out replay-state regression, not a live win-
 ## Not validated in this environment
 
 1. Active authenticated battle capture/replanning in the user's Chromium session. The metadata-only closed-loop trace and `docs/LIVE_VALIDATION.md` are ready for this gate, but the real live exercise has not yet been claimed as complete.
-2. Windows MSVC execution (source/tasks/scripts supplied; current validation environment is Linux).
-3. Hard-PvE human-in-loop win-rate uplift.
-4. Full learned dynamics ensemble / ONNX Runtime C++ production path.
+2. Hard-PvE human-in-loop win-rate uplift.
+3. Full learned dynamics ensemble / ONNX Runtime C++ production path.
