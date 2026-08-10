@@ -289,3 +289,11 @@ This file is the development diary for repository changes performed against the 
   - Stored `data/reports/pawstrike_i_record_audit.json`.
   - Source-matching I-records: **174**; class distribution: `{'primary=True,damage=True,forced=True': 150, 'primary=False,damage=True,forced=True': 24}`.
   - Non-primary records retained with complete raw decision/damage/forced-position context instead of being silently labeled Paw Strike.
+
+### Paw Strike I-record ownership/order audit
+
+- Commit: `b1c584c292d4eeaaea09f7b531bfa2ec316c023c`
+  - Staged a self-removing owner and raw-order audit for all 174 source-matching Paw Strike I-records.
+- Commit: `5c9aaed1bb0f38363675845ae4d3a11d07e802b2`
+  - Stored `data/reports/pawstrike_i_ownership_audit.json`.
+  - Ownership: `{'opposing': 174}`; event order: `{'d<b<I': 174}`; exceptions: **0**.
