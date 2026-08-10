@@ -244,3 +244,14 @@ This file is the development diary for repository changes performed against the 
   - Matched decisions: **523** across **85** battles; candidates **415**; parse errors **0**.
   - Action types: `{'MELEE_ATTACK': 357, 'ABILITY': 65, 'MOVE': 63, 'WAIT': 35, 'DEFEND': 3}`; special codes: `{'rn9': 72, 'enr': 29, 'eod': 23, 'sld': 17, 'at3': 15, 'rn2': 14, 'spi': 12, 'rn7': 10, 'rag': 9, 'fw3': 9, 'psc': 8, 'pfr': 8, 'ra2': 6, 'rn1': 6, 'raa': 5, 'blt': 4, 'adp': 4, 'ato': 3, 'pss': 2, 'spt': 2, 'ent': 2, 'crs': 2, 'sff': 2, 'tob': 2, 'rgl': 2, 'zat': 2, 'bdd': 1, 'psf': 1, 'paa': 1, 'slw': 1, 'rn6': 1, 'psa': 1, 'mga': 1}`.
   - Target position deltas: `{'1,0': 28, '0,-1': 20, '0,1': 19, '1,1': 12, '-1,0': 10, '-1,-1': 7, '1,-1': 5, '-1,1': 4, '0,2': 1, '-9,1': 1, '-8,-1': 1, '0,-2': 1}`; effect additions: `{'sld': 9, 'spt': 1, 'ra2': 1, 'rag': 1, 'psa': 1, 'at3': 1, 'pfr': 1}`.
+
+### Paw Strike proc/charge-distance analysis
+
+- Commit: `c0c364f6ee78a0f27fbafe925d28fa78ab7d1532`
+  - Staged a self-removing full-corpus derivation of the Paw Strike observable proc signature: primary target `FORCED_POSITION` plus target `I_RECORD`.
+- Commit: `d427cf3f4f9a795f8c23562db6dd181fe97a76ca`
+  - Stored `data/reports/pawstrike_proc_distance.json`.
+  - Eligible melee samples: **357**; proc hits: **150** (0.4202).
+  - Any forced-position / primary forced / primary forced+I: **161 / 150 / 150**.
+  - Carrier overlap with other knockback abilities: `{}`.
+  - Empirical rate by charge distance: `[{'distance': 0, 'n': 21, 'hits': 0, 'rate': 0.0}, {'distance': 1, 'n': 26, 'hits': 4, 'rate': 0.15384615384615385}, {'distance': 2, 'n': 49, 'hits': 15, 'rate': 0.30612244897959184}, {'distance': 3, 'n': 58, 'hits': 17, 'rate': 0.29310344827586204}, {'distance': 4, 'n': 87, 'hits': 47, 'rate': 0.5402298850574713}, {'distance': 5, 'n': 66, 'hits': 38, 'rate': 0.5757575757575758}, {'distance': 6, 'n': 30, 'hits': 19, 'rate': 0.6333333333333333}, {'distance': 7, 'n': 9, 'hits': 3, 'rate': 0.3333333333333333}, {'distance': 8, 'n': 7, 'hits': 4, 'rate': 0.5714285714285714}, {'distance': 9, 'n': 1, 'hits': 0, 'rate': 0.0}, {'distance': 10, 'n': 3, 'hits': 3, 'rate': 1.0}]`.
