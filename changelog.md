@@ -124,3 +124,17 @@ This file is the development diary for repository changes performed against the 
   - Risk mean / p90: **0.2347 / 0.3971** across **1748** sampled player states.
   - Current top contributors: caster(dynamic_spellbook,2425), enraged(modeled_kill_trigger,2070), cripplingwound(learned_damage,312), shieldbash(modeled_proc,538), mightyslam(learned_damage,181), pawstrike(learned_damage,218), powerstrike(learned_damage,163), entroots(modeled_proc,667), bloodlust(partial_exact,481), waterproof50(partial_exact,647).
   - Stored reproducible report at `data/reports/ability-risk-current.json`.
+
+### Ability probe state-delta upgrade
+
+- Commit: `d5716c42ba023e0ab084c1fa0f5ced9afe9047d8`
+  - Extended `scripts/ability_probe.py` with actor/target before-after snapshots and HP/count/speed/initiative/ATB/effect/position deltas while preserving Mana Feed fields.
+- Commit: `2304ef3f2ac33f73e555d49e8f391e0a5e174292`
+  - Added regression coverage for state-delta aggregation.
+- Commit: `ff90c77c483d1e0291ffcdfde73f4d23061aaf5b`
+  - Verified the enhanced probe with targeted pytest and staged a Crippling Wound corpus run.
+- Commit: `72c3502ac61da10b233c563b03e7b3ac72e35052`
+  - Stored `data/reports/cripplingwound_probe.json` from the full repository corpus.
+  - Matched decisions: **808** across **173** battles; mechanic-like candidates: **585**; parse errors: **0**.
+  - Special-code distribution: `{'rag': 206, 'wnd': 129, 'ral': 86, 'ra2': 78, 'rn1': 76, 'raa': 60, 'enr': 60, 'blt': 43, 'eod': 32, 'spi': 24, 'at3': 21, 'pfr': 12, 'pss': 10, 'sld': 10, 'ato': 7, 'fd1': 7, 'fw3': 7, 'agl': 6, 'rn2': 6, 'dsp': 5, 'rn7': 4, 'spt': 4, 'ent': 4, 'rn3': 2, 'psc': 2, 'tob': 2, 'rgl': 2, 'sor': 2, 'fw2': 2, 'br2': 1, 'bdd': 1, 'fdc': 1, 'zat': 1, 'cpt': 1, 'snu': 1, 'frz': 1, 'ab3': 1, 'crs': 1, 'rn0': 1, 'prp': 1, 'dsh': 1, 'sff': 1, 'eye': 1, 'fod': 1, 'fo2': 1, 'paa': 1, 'psa': 1, 'mga': 1, 'adp': 1}`.
+  - Target speed deltas: `{'0.0': 477}`; initiative deltas: `{'0.0': 477}`; effect additions: `{'proc_cripple': 108, 'proc_shieldbash': 7, 'ra2': 6, 'pfr': 5, 'sld': 2, 'ent': 2, 'fdc': 1, 'tob': 1, 'mga': 1}`.
