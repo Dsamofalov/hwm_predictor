@@ -2,9 +2,14 @@
 #include "hwm/planner.hpp"
 
 #include <cstdlib>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <random>
 #include <regex>
 #include <sstream>
+#include <stdexcept>
 #include <thread>
 
 #ifdef _WIN32
@@ -90,8 +95,74 @@ uint64_t env_u64(const char* name, uint64_t fallback) {
     try { return std::stoull(value); } catch (...) { return fallback; }
 }
 
+std::string random_hex(size_t bytes) {
+    std::random_device rd;
+    std::ostringstream o;
+    o << std::hex << std::setfill('0');
+    for (size_t i = 0; i < bytes; ++i) o << std::setw(2) << (rd() & 0xffu);
+    return o.str();
+}
+
+std::string pairing_code() {
+    if (const char* forced = std::getenv("HWM_PAIRING_CODE"); forced && *forced) return forced;
+    std::random_device rd;
+    const unsigned value = static_cast<unsigned>(rd()) % 1000000u;
+    std::ostringstream o; o << std::setfill('0') << std::setw(6) << value; return o.str();
+}
+
+std::filesystem::path token_path() {
+    if (const char* forced = std::getenv("HWM_TOKEN_FILE"); forced && *forced) return forced;
+#ifdef _WIN32
+    const char* base = std::getenv("LOCALAPPDATA");
+    if (!base || !*base) base = std::getenv("USERPROFILE");
+    return std::filesystem::path(base && *base ? base : ".") / "HeroesWMSolver" / "pairing.token";
+#else
+    const char* home = std::getenv("HOME");
+    return std::filesystem::path(home && *home ? home : ".") / ".heroeswm-solver" / "pairing.token";
+#endif
+}
+
+std::string load_or_create_pairing_token() {
+    const auto path = token_path();
+    {
+        std::ifstream in(path, std::ios::binary);
+        std::string token;
+        if (in && std::getline(in, token) && token.size() >= 32) return token;
+    }
+    std::error_code ec;
+    if (!path.parent_path().empty()) std::filesystem::create_directories(path.parent_path(), ec);
+    const std::string token = random_hex(32);
+    {
+        std::ofstream out(path, std::ios::binary | std::ios::trunc);
+        if (!out) throw std::runtime_error("cannot persist local API pairing token");
+        out << token << '\n';
+    }
+    std::filesystem::permissions(
+        path, std::filesystem::perms::owner_read | std::filesystem::perms::owner_write,
+        std::filesystem::perm_options::replace, ec);
+    return token;
+}
+
+bool secure_equal(std::string_view a, std::string_view b) {
+    if (a.size() != b.size()) return false;
+    unsigned char diff = 0;
+    for (size_t i = 0; i < a.size(); ++i) diff |= static_cast<unsigned char>(a[i] ^ b[i]);
+    return diff == 0;
+}
+
 bool allowed_origin(const std::string& origin) {
     return origin.empty() || origin.rfind("chrome-extension://", 0) == 0 || origin.rfind("moz-extension://", 0) == 0;
+}
+
+bool public_route(const std::string& method, const std::string& path) {
+    return method == "OPTIONS" || (method == "GET" && (path == "/health" || path == "/version")) ||
+        (method == "POST" && path == "/pair");
+}
+
+bool bearer_authorized(const std::string& headers, const std::string& token) {
+    const std::string auth = header_value(headers, "Authorization");
+    const std::string expected = "Bearer " + token;
+    return secure_equal(auth, expected);
 }
 
 
@@ -122,7 +193,8 @@ std::string candidate_json(const Candidate& c) {
 }  // namespace
 
 HttpServer::HttpServer(std::string bind_address, uint16_t port, SessionStore& store)
-    : bind_(std::move(bind_address)), port_(port), store_(store) {}
+    : bind_(std::move(bind_address)), port_(port), store_(store),
+      pairing_token_(load_or_create_pairing_token()), pairing_code_(pairing_code()) {}
 HttpServer::~HttpServer() { stop(); }
 void HttpServer::stop() { stop_ = true; }
 
@@ -131,7 +203,7 @@ std::string HttpServer::response(int code, std::string body, std::string type) {
     o << "HTTP/1.1 " << code << (code == 200 ? " OK" : " Error")
       << "\r\nContent-Type: " << type
       << "\r\nAccess-Control-Allow-Origin: *"
-      << "\r\nAccess-Control-Allow-Headers: Content-Type"
+      << "\r\nAccess-Control-Allow-Headers: Content-Type, Authorization"
       << "\r\nAccess-Control-Allow-Methods: GET,POST,OPTIONS"
       << "\r\nCache-Control: no-store"
       << "\r\nContent-Length: " << body.size()
@@ -144,7 +216,17 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
     if (method == "GET" && path == "/health")
         return response(200, "{\"status\":\"ok\",\"service\":\"heroeswm-solver\",\"version\":\"0.3.0\"}");
     if (method == "GET" && path == "/version")
-        return response(200, "{\"version\":\"0.3.0\",\"api\":2,\"protocol_decoder\":\"raw-v2\"}");
+        return response(200, "{\"version\":\"0.3.0\",\"api\":3,\"protocol_decoder\":\"raw-v2\",\"auth\":\"pairing-bearer-v1\"}");
+    if (method == "POST" && path == "/pair") {
+        if (pairing_failures_.load() >= 10) return response(429, "{\"paired\":false,\"error\":\"pairing_locked_until_restart\"}");
+        const std::string code = json_string(body, "code");
+        if (!secure_equal(code, pairing_code_)) {
+            ++pairing_failures_;
+            return response(403, "{\"paired\":false,\"error\":\"invalid_pairing_code\"}");
+        }
+        pairing_failures_ = 0;
+        return response(200, "{\"paired\":true,\"token\":\"" + pairing_token_ + "\"}");
+    }
     if (method == "GET" && path == "/status") return response(200, store_.status_json());
     if (method == "GET" && (path == "/state" || path == "/session/current/state")) {
         auto s = store_.state();
@@ -262,6 +344,7 @@ int HttpServer::run() {
         return 2;
     }
     std::cout << "solver-daemon listening http://" << bind_ << ':' << port_ << std::endl;
+    std::cout << "HeroesWM Solver pairing code: " << pairing_code_ << std::endl;
 
     while (!stop_) {
         sock_t client = accept(srv, nullptr, nullptr);
@@ -300,6 +383,8 @@ int HttpServer::run() {
             const std::string body = header_end == std::string::npos ? std::string{} : req.substr(header_end + 4);
             std::string out;
             if (!allowed_origin(origin)) out = response(403, "{\"error\":\"origin_not_allowed\"}");
+            else if (!public_route(method, path) && !bearer_authorized(headers, pairing_token_))
+                out = response(401, "{\"error\":\"pairing_required\"}");
             else out = handle(method, path, body);
             send(client, out.data(), static_cast<int>(out.size()), 0);
             close_sock(client);

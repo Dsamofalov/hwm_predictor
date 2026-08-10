@@ -25,13 +25,13 @@
 - Held-out observed basic-action representability: **5373/5481 = 98.03%**.
 - Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
 - Ability catalog: **421** ability code; registry: **85 exact-search**, 11 exact-targeting, 18 partial-exact, 9 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Mighty Slam` теперь имеет отдельный exact `ABILITY` path: выбранная цель + соседние вражеские стеки, knockback только small при валидной клетке, без retaliation, cooldown по минимальному наблюдаемому gap=3; `Paw Strike` переведён из `learned_damage` в `modeled_proc`: вероятность `min(1, 0.10 * travelled_cells)` прошла chronological holdout лучше constant baseline, а observed `I<target><source>` даёт exact ATB=0 transition 174/174; physical push применяется только при валидной клетке; `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
-- Ability-risk на held-out sample: mean **0.2389**, p90 **0.3978**.
+- Ability-risk на held-out sample: mean **0.22431**, p90 **0.37538**.
 - Player action-type prior: held-out top-1 **70.76%**, top-3 **93.46%**. PvE prior: top-1 **62.81%**, top-3 **96.11%**.
 - Value: test battle-level Brier **0.05176** против **0.11891** constant baseline; AUC **0.9889**.
 - Physical damage: median abs-log error **0.3574 -> 0.2812** после learned creature residual; для rare creatures ability transfer **0.2719 -> 0.2484**.
 - Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
 - Planner real-state regression (Release, 20 states): recommendation **20/20**, action-type stability **100%**, exact-action stability **90%** при budget 300 -> 1200.
-- Automated tests: C++ CTest **100%**, Python **39/39**, TypeScript typecheck/build **PASS**.
+- Automated tests: C++ CTest **100%**, Python **42/42**, TypeScript typecheck/build **PASS**; local API pairing/auth integration **PASS**.
 
 ### Текущий незавершённый фронт разработки
 
@@ -1149,7 +1149,7 @@ metrics:
 
 # 23. Модуль M16 — Local Service API
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Loopback C++ HTTP daemon, health/status/state/capture/recommend/debug endpoints, origin filtering, capture persistence и concurrency реализованы. Pairing token и WebSocket streaming остаются незакрыты.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Loopback C++ HTTP daemon, health/status/state/capture/recommend/debug endpoints, origin filtering, capture persistence и concurrency реализованы. Persistent local pairing token с explicit one-time code реализован и обязателен для private API; WebSocket streaming остаётся незакрыт.
 
 ## Назначение
 
