@@ -1,0 +1,72 @@
+name: Measure Mighty Slam cooldown
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/analyze_mightyslam_cooldown.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Measure actor-activation gaps
+        env:
+          PYTHONPATH: python
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from collections import defaultdict
+          from hwm_solver.protocol.replay import parse_initial_entities, parse_turns, iter_compact_decisions, _perspective_owner, _player_won
+
+          root=Path('hwm_battles/battles')
+          gaps=[]; repeated=[]
+          for d in sorted((p for p in root.iterdir() if p.is_dir()),key=lambda p:int(p.name)):
+              init=(d/'init.txt').read_text(errors='replace'); turns=(d/'turns0.txt').read_text(errors='replace')
+              es,_=parse_initial_entities(init); owner=_perspective_owner(es); won=_player_won(init,es,owner)
+              seq=list(iter_compact_decisions(d.name,es,parse_turns(turns),owner,player_won=won))
+              actor_ord=defaultdict(int); last={}
+              for row in seq:
+                  uid=int(row['actor_uid']); actor_ord[uid]+=1
+                  if 'msl' in set(row.get('special_codes') or []):
+                      key=uid
+                      if key in last:
+                          gap=actor_ord[uid]-last[key]
+                          gaps.append(gap)
+                          repeated.append({'battle_id':d.name,'actor_uid':uid,'previous_actor_activation':last[key],'current_actor_activation':actor_ord[uid],'activation_gap':gap,'decision_index':row['decision_index'],'server_turn':row['server_turn']})
+                      last[key]=actor_ord[uid]
+          payload={'repeat_pairs':len(gaps),'activation_gaps':gaps,'minimum_gap':min(gaps) if gaps else None,'distribution':{str(g):gaps.count(g) for g in sorted(set(gaps))},'rows':repeated}
+          Path('data/reports/mightyslam_cooldown.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:v for k,v in payload.items() if k!='rows'},indent=2))
+          PY
+      - name: Commit report and changelog
+        run: |
+          rm .github/workflows/analyze_mightyslam_cooldown.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: measure Mighty Slam cooldown'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/mightyslam_cooldown.json').read_text(encoding='utf-8'))
+          p=Path('changelog.md'); text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Mighty Slam cooldown measurement\n\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing same-actor activation-gap measurement for repeated `Smsl` uses.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/mightyslam_cooldown.json`.\n  - Repeat pairs: **{r['repeat_pairs']}**; minimum own-activation gap: **{r['minimum_gap']}**; distribution: `{r['distribution']}`.\n  - This measurement is used to avoid an off-by-one cooldown in speculative search.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Mighty Slam cooldown measurement'
+          git push origin HEAD:main
