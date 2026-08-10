@@ -1,0 +1,21 @@
+name: Sync main specification checkpoint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync_main_spec_checkpoint.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Sync main-front specification and handoff checkpoint
+        run: python .github/scripts/sync_main_spec_checkpoint.py
