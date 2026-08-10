@@ -325,3 +325,16 @@ This file is the development diary for repository changes performed against the 
   - Added `scripts/test_local_api_auth.py`: unauthenticated private routes rejected, wrong code rejected, correct pair succeeds, token file persists, old token works after daemon restart.
   - Added the integration test to normal CI and updated M16 specification status.
   - Targeted C++ build/CTest, local API integration, TypeScript typecheck and extension build passed before commit.
+
+
+### Revision-bound stale-search cancellation
+
+- Commit: `8a7423546eb4df3c6309d81e85f107b90d78cbe2`
+  - Staged the self-removing closed-loop cancellation patch and end-to-end regression.
+- Commit: `ed20ee1f1bdb88200c65f74f13e60dc25a47f1b7`
+  - Added monotonic SessionStore revision and atomic state+revision snapshots.
+  - Planner now polls a cancellation callback between simulations and returns early when a newer observed revision arrives.
+  - `/recommend` binds planning to the snapshot revision and returns structured `stale` metadata instead of spending the full search budget on an obsolete state.
+  - Revision invalidation is intentionally stronger than hash-only invalidation: the regression republishes the same demo state (equal state hash) and still cancels the old search.
+  - Extension auto-replanning uses an epoch so older in-flight results cannot overwrite newer storage/UI; side panel additionally checks recommendation `state_hash` against current daemon status before rendering.
+  - Added `scripts/test_stale_cancellation.py`; C++/CTest, pairing auth, stale cancellation, TypeScript typecheck and extension build passed before commit.
