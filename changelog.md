@@ -150,3 +150,15 @@ This file is the development diary for repository changes performed against the 
   - Train/held-out: **110/391 = 0.2813** vs **14/86 = 0.1628**.
   - Conditional held-out Brier: **0.15168** vs baseline **0.15034**; AUC **0.5833**; gate: **False**.
   - No production proc is enabled by this report alone; it is an evidence gate for the next functional change.
+
+### Crippling Wound hero-context inspection
+
+- Commit: `65538f5a3cb09904107526a7faa8343cefb59315`
+  - Extended the reusable proc-context evaluator with same-owner hero creature/tag buckets from canonical `state_before`.
+- Commit: `6bee9f22d39381f80c7a48a60050f7a077428d29`
+  - Staged a self-removing full-corpus refresh for the new hero-context output.
+- Commit: `89aaee7716f093f19de644fbc972f8b840df8b9c`
+  - Refreshed `data/reports/cripplingwound_proc_context.json`.
+  - Largest train hero-context buckets: `[{'hero_creature_id': 547, 'hero_tags': ['shooter'], 'n': 83, 'hits': 19, 'rate': 0.2289156626506024}, {'hero_creature_id': 170, 'hero_tags': ['shooter'], 'n': 75, 'hits': 25, 'rate': 0.3333333333333333}, {'hero_creature_id': 1215, 'hero_tags': ['shooter'], 'n': 73, 'hits': 24, 'rate': 0.3287671232876712}, {'hero_creature_id': 0, 'hero_tags': [], 'n': 46, 'hits': 21, 'rate': 0.45652173913043476}, {'hero_creature_id': 1029, 'hero_tags': ['shooter'], 'n': 33, 'hits': 6, 'rate': 0.18181818181818182}, {'hero_creature_id': 1174, 'hero_tags': ['shooter'], 'n': 32, 'hits': 7, 'rate': 0.21875}, {'hero_creature_id': 171, 'hero_tags': ['shooter'], 'n': 10, 'hits': 4, 'rate': 0.4}, {'hero_creature_id': 1451, 'hero_tags': ['shooter'], 'n': 9, 'hits': 0, 'rate': 0.0}]`.
+  - Largest held-out hero-context buckets: `[{'hero_creature_id': 170, 'hero_tags': ['shooter'], 'n': 61, 'hits': 9, 'rate': 0.14754098360655737}, {'hero_creature_id': 0, 'hero_tags': [], 'n': 12, 'hits': 4, 'rate': 0.3333333333333333}, {'hero_creature_id': 1029, 'hero_tags': ['shooter'], 'n': 6, 'hits': 0, 'rate': 0.0}, {'hero_creature_id': 1174, 'hero_tags': ['shooter'], 'n': 3, 'hits': 0, 'rate': 0.0}, {'hero_creature_id': 1258, 'hero_tags': ['shooter'], 'n': 2, 'hits': 0, 'rate': 0.0}, {'hero_creature_id': 737, 'hero_tags': ['shooter'], 'n': 1, 'hits': 1, 'rate': 1.0}, {'hero_creature_id': 1144, 'hero_tags': ['shooter'], 'n': 1, 'hits': 0, 'rate': 0.0}]`.
+  - This report is diagnostic only and does not enable a production proc probability.
