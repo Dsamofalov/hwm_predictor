@@ -422,3 +422,11 @@ This file is the development diary for repository changes performed against the 
   - The server protocol was not relaxed; the test now correctly handles normal TCP packet coalescing.
   - Final M13 verification run `31380236279` confirms the WebSocket streaming gate passes with this fix.
 
+### M13 persistent-reuse structural safety guard
+
+- Commit: `6edec4d8360169060d280cd07a6e63de9c0fda89`
+  - Added a conservative search-structure fingerprint for board bounds/blocked cells and static entity geometry/capability fields that are not currently part of the global `state_hash`.
+  - Persistent tree reuse now additionally requires the same non-empty battle id, perspective and structure fingerprint; otherwise the graph resets.
+  - Regression proves a legal-action-relevant `is_flyer` change that currently collides in `state_hash` does not reuse the old tree.
+  - Standard pull-request CI run `31380236279`: **PASS**. Linux passed C++ build, CTest 2/2, pairing/auth, stale cancellation, live binding, WebSocket streaming, full Python tests, TypeScript typecheck and extension build. Windows current-MSVC build/test job passed.
+
