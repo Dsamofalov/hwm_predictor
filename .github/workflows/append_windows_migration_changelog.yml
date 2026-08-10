@@ -43,6 +43,8 @@ jobs:
             '  - Added regressions for identical-member zero disagreement and sub-epsilon learned/generic ties; refreshed the compact uncertainty evidence from the final committed evaluator.'
             '  - Dedicated Windows self-hosted run `31419316512`: 7/7 targeted tests PASS; two independent full-corpus uncertainty processes produced exactly identical JSON.'
             '  - Production uncertainty fallback remains disabled: disagreement tracks absolute error but still does not identify learned-vs-generic underperformance reliably at every horizon.'
+            '- Commit: `bb8404606621966d8c688f22e93c6ce35dd695ea`'
+            '  - Kept permanent main-front CTest focused on `hwm-planner-tests` by excluding the independently owned `hwm-tests` executable; ability validation remains responsible for that executable and its MSVC failures.'
             '- Exhaustive main-front validation run `31417309122` (temporary PR #5 harness): Debug MSVC build and `hwm-planner-tests` PASS; 120/120 held-out planner states valid with 0 invalid recommendations; all four daemon integrations PASS; Python 61/61 PASS; TypeScript/extension PASS; Release MSVC/CTest and `planner-demo 5000` PASS; all four M11 full-corpus evaluator commands PASS.'
             '  - The ability-owned monolithic `hwm-tests` executable is intentionally excluded from the main-front PASS claim after exposing three independent ability-lane defects on MSVC: Mighty Slam test pointer invalidation after `vector::push_back`, a `frightful_aura`/`frightfulaura` test-code typo, and a subsequent `0xc0000409` hard termination. These remain for the ability branch validation pass.'
           )
@@ -67,7 +69,7 @@ jobs:
             'M11 multistep / uncertainty / selector / survival commands: PASS / PASS / PASS / PASS'
             '```'
             ''
-            'The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main.'
+            'The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main. Permanent main CI reflects this ownership split in `bb8404606621966d8c688f22e93c6ce35dd695ea`.'
             ''
             'M11 uncertainty reproducibility was then repaired in `8dc9dc5b81db936089c7764fafb9c22cb79505a3`. Dedicated run `31419316512` passed 7 targeted tests and produced byte-for-meaning identical JSON objects across two independent full-corpus processes. Runtime uncertainty fallback remains disabled.'
           )
@@ -81,7 +83,7 @@ jobs:
             ''
             'M11 uncertainty evidence is now reproducible under commit `8dc9dc5b81db936089c7764fafb9c22cb79505a3`: dedicated run `31419316512` passed 7 targeted tests and exact JSON equality across two independent full-corpus processes. The production uncertainty gate remains disabled by evidence.'
             ''
-            'The ability-owned `hwm-tests` executable is not included in the main-front PASS claim; its Windows failures are handed to branch `ability`. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.'
+            'Permanent main CI commit `bb8404606621966d8c688f22e93c6ce35dd695ea` excludes the independently owned `hwm-tests` executable from the main-front CTest gate while leaving ability validation responsible for its Windows failures. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.'
           )
 
           git config user.name 'github-actions[bot]'
@@ -95,5 +97,9 @@ jobs:
           }
           git commit -m 'docs: record exhaustive Windows main validation'
           if ($LASTEXITCODE -ne 0) { throw 'Failed to commit validation bookkeeping.' }
+          git fetch origin main
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to refresh main before bookkeeping push.' }
+          git rebase origin/main
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to rebase validation bookkeeping onto current main.' }
           git push origin HEAD:main
           if ($LASTEXITCODE -ne 0) { throw 'Failed to push validation bookkeeping.' }
