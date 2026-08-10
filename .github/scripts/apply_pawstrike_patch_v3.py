@@ -8,10 +8,7 @@ source=source.replace(
     1,
 )
 
-# Full-corpus verification is performed directly on the canonical decision dicts.
-# The internal semantic validator accepts RawEntity objects, whereas state_before
-# deliberately exposes JSON-like dicts. Unit tests below exercise that validator;
-# this corpus gate checks the exact raw/state invariants on every observed record.
+# Full-corpus verification is performed directly on canonical decision dicts.
 old='''            cmds=parse_commands(row["raw"])
             for c in cmds:
                 if c.opcode!="I_RECORD":continue
@@ -56,6 +53,19 @@ source=source.replace('150/150 observed proc I-records identify actor->target','
 source=source.replace(
     'after 357 melee observations, 150 isolated proc signatures and chronological probability validation',
     'after 357 melee observations, 150 primary-target probability samples plus 24 secondary-hit exact I-records, and chronological probability validation',
+)
+
+# CHECK is a single-argument macro; braced Cell initializers contain commas visible
+# to the preprocessor. Use named expected cells in the generated regression test.
+source=source.replace(
+    'CHECK(open.state.entity(2)->anchor==Cell{13,1});',
+    'const Cell expected_open_push{13,1};CHECK(open.state.entity(2)->anchor==expected_open_push);',
+    1,
+)
+source=source.replace(
+    'CHECK(stuck.state.entity(2)->atb==0.0f);CHECK(stuck.state.entity(2)->anchor==Cell{12,1});',
+    'CHECK(stuck.state.entity(2)->atb==0.0f);const Cell expected_blocked_anchor{12,1};CHECK(stuck.state.entity(2)->anchor==expected_blocked_anchor);',
+    1,
 )
 
 # Remove all temporary patch runners from the functional tree.
