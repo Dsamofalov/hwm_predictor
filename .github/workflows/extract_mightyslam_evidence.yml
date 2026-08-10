@@ -1,0 +1,56 @@
+name: Extract Mighty Slam wire evidence
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/extract_mightyslam_evidence.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Extract Sm​sl decisions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src=json.loads(Path('data/reports/mightyslam_probe.json').read_text(encoding='utf-8'))
+          rows=[r for r in src['rows'] if 'msl' in r.get('special_codes',[])]
+          payload={
+            'ability':'mightyslam','special_code':'msl','observed':len(rows),
+            'action_types':{},'creature_ids':{},'rows':rows,
+          }
+          for r in rows:
+            payload['action_types'][r['action_type']]=payload['action_types'].get(r['action_type'],0)+1
+            cid=str(r['actor_creature_id']);payload['creature_ids'][cid]=payload['creature_ids'].get(cid,0)+1
+          Path('data/reports/mightyslam_msl_evidence.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:v for k,v in payload.items() if k!='rows'},ensure_ascii=False,indent=2))
+          PY
+      - name: Commit evidence and changelog
+        run: |
+          rm .github/workflows/extract_mightyslam_evidence.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: isolate Mighty Slam wire evidence'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/mightyslam_msl_evidence.json').read_text(encoding='utf-8'))
+          log=Path('changelog.md');text=log.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Mighty Slam wire isolation\n\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing extraction of `Smsl` decisions from the full Mighty Slam probe.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/mightyslam_msl_evidence.json` with **{r['observed']}** observed `Smsl` decisions.\n  - Action types: `{r['action_types']}`; carrier creature IDs: `{r['creature_ids']}`.\n  - Full raw records and actor/target before-after deltas are retained for exact wire/cooldown/knockback reconstruction.\n'''
+          log.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Mighty Slam wire isolation'
+          git push origin HEAD:main
