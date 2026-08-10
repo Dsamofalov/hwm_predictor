@@ -2,7 +2,7 @@
 
 Локальный **read-only** советник для PvE-боёв HeroesWM. Пользователь выполняет ход вручную; система наблюдает battle state, строит recommendation и после нового observed state перепланирует. Полное ТЗ со статусами реализации: [`SPEC.md`](SPEC.md).
 
-**Поддерживаемая платформа проекта: Windows 10/11 x64.** Основной нативный toolchain — MSVC + CMake/Ninja; стандартный CI также выполняется только на Windows self-hosted runner. Linux/WSL не являются поддерживаемой product/CI платформой.
+**Поддерживаемая платформа проекта: Windows 10/11 x64.** Основной нативный toolchain — MSVC + CMake; локальные presets могут использовать Ninja. Стандартный CI выполняется только на Windows self-hosted runner. Linux/WSL не являются поддерживаемой product/CI платформой.
 
 ## Текущий checkpoint
 
@@ -91,6 +91,13 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\scripts\validate_windows.ps1
 ```
 
+`validate_windows.ps1` запускает те же постоянные suites, что и GitHub Actions:
+
+```powershell
+.\scripts\ci_windows.ps1 -Suite Core
+.\scripts\ci_windows.ps1 -Suite Full
+```
+
 Или в VS Code: `Ctrl+Shift+P` → `Tasks: Run Task` → `Validate all`.
 
 ## 4. Demo planner без браузера
@@ -135,17 +142,18 @@ x64
 hwm-windows
 ```
 
-На runner должны быть доступны Visual Studio Build Tools/MSVC x64, CMake, Ninja, Git и PowerShell. Python 3.13 и Node 22 фиксируются workflow через официальные setup actions. Один Windows runner обслуживает `main`, `ability` и другие внутренние ветки последовательно; устаревшие запуски одной ветки отменяются через `concurrency`.
+На runner должны быть системно доступны Visual Studio 2022 Build Tools/MSVC x64, CMake, Git, Windows PowerShell и Node.js 22+. CI не зависит от пользовательского Python, WindowsApps aliases или hosted-runner toolcache: `scripts/ci_windows.ps1` устанавливает pinned portable `uv`, service-owned CPython 3.13 и отдельный `.venv` внутри workspace/tool cache. Для CI Ninja не требуется: C++ собирается через Visual Studio 2022 generator.
 
-Workflow выполняет на Windows:
+Стандартный workflow состоит из двух независимых jobs:
 
-- C++ configure/build/CTest;
-- held-out 120-state planner recommendation validity gate;
-- local API pairing/auth, stale cancellation, live binding и WebSocket integration tests;
-- Python package + pytest;
-- TypeScript typecheck и extension build.
+- `Core` — MSVC Debug/main-front CTest, held-out 120-state planner gate, pairing/auth, stale cancellation, live binding, WebSocket, полный Python pytest, TypeScript typecheck и extension build;
+- `Full` — MSVC Release/main-front CTest, `planner-demo 5000`, M11 multistep/uncertainty/selector/stochastic-survival evidence, canonical evidence verification и positive-residual temperature calibration.
 
-Pull requests из внешних fork не запускаются на self-hosted машине. Для ручного запуска актуального HEAD доступен `workflow_dispatch` в GitHub Actions UI.
+С одним runner `Core` и `Full` выполняются по очереди. С двумя online runner, имеющими те же labels, GitHub может выполнять эти jobs параллельно. Для безопасной работы двух runner на одном ПК C++ build ограничен `--parallel 2`, а OpenMP/MKL/OpenBLAS/NumExpr — двумя потоками на job.
+
+Новые main-front проверки добавляются в `scripts/ci_windows.ps1` в `Core` или `Full`, а не отдельными временными workflow/ветками. `python/tests/test_workflow_contract.py` фиксирует этот контракт и проверяет Windows-only routing/инвентарь suites.
+
+Pull requests из внешних fork не запускаются на self-hosted машине. Draft PR не занимают runner. Для ручного запуска актуального HEAD доступен `workflow_dispatch` в GitHub Actions UI; устаревшие запуски одной ветки отменяются через `concurrency`.
 
 # Raw corpus и dataset
 
