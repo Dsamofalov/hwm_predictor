@@ -1,0 +1,189 @@
+{
+  "ability": "cripplingwound",
+  "signal": "wnd",
+  "action_types": [
+    "MELEE_ATTACK",
+    "RANGED_ATTACK"
+  ],
+  "split": 0.8,
+  "train_n": 391,
+  "train_hits": 110,
+  "train_rate": 0.2813299232736573,
+  "heldout_n": 86,
+  "heldout_hits": 14,
+  "heldout_rate": 0.16279069767441862,
+  "train_buckets": [
+    {
+      "creature_id": 535,
+      "action_type": "MELEE_ATTACK",
+      "n": 146,
+      "hits": 30,
+      "rate": 0.2054794520547945
+    },
+    {
+      "creature_id": 160,
+      "action_type": "RANGED_ATTACK",
+      "n": 123,
+      "hits": 38,
+      "rate": 0.3089430894308943
+    },
+    {
+      "creature_id": 160,
+      "action_type": "MELEE_ATTACK",
+      "n": 42,
+      "hits": 12,
+      "rate": 0.2857142857142857
+    },
+    {
+      "creature_id": 203,
+      "action_type": "MELEE_ATTACK",
+      "n": 40,
+      "hits": 9,
+      "rate": 0.225
+    },
+    {
+      "creature_id": 723,
+      "action_type": "MELEE_ATTACK",
+      "n": 24,
+      "hits": 11,
+      "rate": 0.4583333333333333
+    },
+    {
+      "creature_id": 159,
+      "action_type": "RANGED_ATTACK",
+      "n": 6,
+      "hits": 6,
+      "rate": 1.0
+    },
+    {
+      "creature_id": 1131,
+      "action_type": "MELEE_ATTACK",
+      "n": 3,
+      "hits": 1,
+      "rate": 0.3333333333333333
+    },
+    {
+      "creature_id": 1013,
+      "action_type": "MELEE_ATTACK",
+      "n": 2,
+      "hits": 1,
+      "rate": 0.5
+    },
+    {
+      "creature_id": 1013,
+      "action_type": "RANGED_ATTACK",
+      "n": 2,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "creature_id": 1165,
+      "action_type": "MELEE_ATTACK",
+      "n": 2,
+      "hits": 1,
+      "rate": 0.5
+    },
+    {
+      "creature_id": 159,
+      "action_type": "MELEE_ATTACK",
+      "n": 1,
+      "hits": 1,
+      "rate": 1.0
+    }
+  ],
+  "heldout_buckets": [
+    {
+      "creature_id": 160,
+      "action_type": "RANGED_ATTACK",
+      "n": 38,
+      "hits": 7,
+      "rate": 0.18421052631578946
+    },
+    {
+      "creature_id": 160,
+      "action_type": "MELEE_ATTACK",
+      "n": 23,
+      "hits": 2,
+      "rate": 0.08695652173913043
+    },
+    {
+      "creature_id": 203,
+      "action_type": "MELEE_ATTACK",
+      "n": 8,
+      "hits": 2,
+      "rate": 0.25
+    },
+    {
+      "creature_id": 535,
+      "action_type": "MELEE_ATTACK",
+      "n": 7,
+      "hits": 1,
+      "rate": 0.14285714285714285
+    },
+    {
+      "creature_id": 1131,
+      "action_type": "MELEE_ATTACK",
+      "n": 7,
+      "hits": 2,
+      "rate": 0.2857142857142857
+    },
+    {
+      "creature_id": 723,
+      "action_type": "MELEE_ATTACK",
+      "n": 2,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "creature_id": 1013,
+      "action_type": "RANGED_ATTACK",
+      "n": 1,
+      "hits": 0,
+      "rate": 0.0
+    }
+  ],
+  "model": {
+    "eligible": true,
+    "heldout_brier": 0.15167998563519175,
+    "baseline_brier": 0.15034143443076184,
+    "brier_improvement": -0.0013385512044299108,
+    "heldout_auc": 0.5833333333333334,
+    "heldout_logloss": 0.4839883616591375,
+    "baseline_logloss": 0.48303010285602216,
+    "passes_gate": false,
+    "intercept": -1.020072181840196,
+    "mean": [
+      7.476238523683549,
+      7.342620131574519,
+      4.142192058417991,
+      3.754414637049653,
+      75.29411764705883,
+      40.327365728900254,
+      4.69309462915601,
+      5.601023017902813,
+      0.3554987212276215
+    ],
+    "scale": [
+      1.0126820058884853,
+      1.645999225231707,
+      1.2714064004902375,
+      1.7853782480543283,
+      28.751211537714614,
+      27.318061120677964,
+      0.9147433437348534,
+      1.5585418383457863,
+      0.4786641624700424
+    ],
+    "coef": [
+      -0.23080935280336926,
+      0.2964870568105301,
+      0.49624576434877565,
+      -0.018736374075647523,
+      -0.27753614440131436,
+      0.26385371089258547,
+      0.011216086141544707,
+      0.30100405091787924,
+      -0.08810028145185826
+    ]
+  }
+}
