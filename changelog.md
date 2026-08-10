@@ -373,3 +373,18 @@ This file is the development diary for repository changes performed against the 
   - Synchronized `IMPLEMENTATION_REPORT.md` with pairing, revision cancellation, live trace/binding, current ability risk and branch ownership.
 - Commit: `499c9c8e20113aa5748f075e9a12dd6609c258fc`
   - Synchronized the duplicate implementation checkpoint `HeroesWM_Solver_Implementation_Report_0.3.0.md`.
+
+
+### Authenticated local WebSocket revision stream
+
+- Commit: `d05361f6b4bb80927ea82a0cca858b4d1ad4b403`
+  - Staged the self-removing M16 WebSocket streaming patch and raw RFC6455 integration test.
+- Commit: `68345f0afc89ed0e17884042592fb08b6edd83be`
+  - Added RFC6455 `/ws` on the existing loopback daemon with SHA-1/WebSocket handshake and authenticated subprotocol `hwm-bearer.<token>`; the bearer is not placed in the URL.
+  - Server pushes canonical `status` immediately and on every SessionStore revision change, plus a 20-second heartbeat for MV3 service-worker liveness.
+  - Status now exposes `side_to_act` and `active_entity_uid` so the service worker schedules planning only for confirmed player decision states.
+  - MV3 service worker reconnects the authenticated stream, stores streamed daemon status, logs WS events in the bounded live trace and deduplicates replanning by canonical revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
+  - Side panel uses fresh streamed status for stale guards/diagnostics and falls back to HTTP `/status` only when stream data is absent or older than five seconds.
+  - Added `scripts/test_websocket_stream.py`: wrong bearer -> 401, valid RFC6455 accept verified, initial revision frame received, debug state publication produces pushed newer revision/hash.
+  - M16 is now COMPLETE FOR CURRENT LOCAL API; Phase 2 remains MOSTLY COMPLETE until a real active authenticated browser battle is exercised.
+  - C++/CTest, pairing, stale cancellation, live binding, WebSocket integration, TypeScript typecheck and extension build passed before commit.
