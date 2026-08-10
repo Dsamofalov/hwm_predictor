@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   sync:
-    # The workflow already exists before this triggering push; it removes itself after success.
+    # Hardened autonomous checkpoint sync; the job removes this workflow after success.
     if: github.repository == 'Dsamofalov/hwm_predictor'
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 30
