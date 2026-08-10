@@ -1,0 +1,75 @@
+name: Isolate extra Paw Strike I-records
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/analyze_pawstrike_extra_i.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Classify all I-records sourced by Paw Strike melee actors
+        env:
+          PYTHONPATH: python
+        run: |
+          python - <<'PY'
+          import json,re
+          from collections import Counter
+          from pathlib import Path
+          from hwm_solver.protocol.replay import parse_initial_entities,parse_turns,iter_compact_decisions,parse_commands,_perspective_owner,_player_won
+          root=Path('hwm_battles/battles');rows=[];classes=Counter();abilities=Counter()
+          for d in sorted((p for p in root.iterdir() if p.is_dir()),key=lambda p:int(p.name)):
+              init=(d/'init.txt').read_text(errors='replace');turns=(d/'turns0.txt').read_text(errors='replace')
+              es,_=parse_initial_entities(init);owner=_perspective_owner(es);won=_player_won(init,es,owner)
+              for r in iter_compact_decisions(d.name,es,parse_turns(turns),owner,player_won=won):
+                  before={int(e['uid']):e for e in r['state_before']};actor=before.get(int(r['actor_uid']))
+                  if not actor or 'pawstrike' not in set(actor.get('abilities') or []) or r['action_type']!='MELEE_ATTACK':continue
+                  cmds=parse_commands(r['raw']);damages=[c for c in cmds if c.opcode=='DAMAGE' and c.actor_uid==int(r['actor_uid']) and c.target_uid is not None]
+                  primary=int(damages[0].target_uid) if damages else None
+                  damage_targets=[int(c.target_uid) for c in damages]
+                  forced={int(c.actor_uid) for c in cmds if c.opcode=='FORCED_POSITION' and c.actor_uid is not None}
+                  for m in re.finditer(r'I(\d{3})(\d{4})',r['raw']):
+                      affected,source=map(int,m.groups())
+                      if source!=int(r['actor_uid']):continue
+                      is_primary=affected==primary;is_damage=affected in damage_targets;is_forced=affected in forced
+                      cls=f'primary={is_primary},damage={is_damage},forced={is_forced}'
+                      classes[cls]+=1
+                      for a in actor.get('abilities') or []:abilities[str(a)]+=1
+                      rows.append({'battle_id':d.name,'decision_index':r['decision_index'],'actor_uid':r['actor_uid'],'actor_creature_id':actor.get('creature_id'),'actor_abilities':sorted(set(actor.get('abilities') or [])),'primary_uid':primary,'damage_targets':damage_targets,'affected_uid':affected,'is_primary':is_primary,'is_damage_target':is_damage,'is_forced':is_forced,'forced_uids':sorted(forced),'raw_i':m.group(0),'raw':r['raw']})
+          payload={'records':len(rows),'classes':dict(classes),'ability_occurrences':dict(abilities),'extra_non_primary':[x for x in rows if not x['is_primary']],'rows':rows}
+          Path('data/reports/pawstrike_i_record_audit.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:v for k,v in payload.items() if k not in {'rows','extra_non_primary'}},ensure_ascii=False,indent=2))
+          print('extra_non_primary',len(payload['extra_non_primary']))
+          PY
+      - name: Commit evidence and changelog
+        run: |
+          rm .github/workflows/analyze_pawstrike_extra_i.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: audit Paw Strike I-record scope'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/pawstrike_i_record_audit.json').read_text(encoding='utf-8'))
+          p=Path('changelog.md');text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Paw Strike I-record scope audit\n\n- Commit: `d788f2884fd909e7d8617d6959a1b2388e11f8fe`\n  - First Paw Strike production staging was rejected by its corpus gate: parsing explicit I-record sources exposed 174 source-matching records, not the previously isolated 150 primary-target procs. No functional Paw Strike commit was produced.\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing audit of all I-records whose four-digit source equals the active Paw Strike melee actor.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/pawstrike_i_record_audit.json`.\n  - Source-matching I-records: **{r['records']}**; class distribution: `{r['classes']}`.\n  - Non-primary records retained with complete raw decision/damage/forced-position context instead of being silently labeled Paw Strike.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Paw Strike I-record scope audit'
+          git push origin HEAD:main
