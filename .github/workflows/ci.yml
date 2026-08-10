@@ -4,11 +4,22 @@ on:
   push:
   pull_request:
 
+concurrency:
+  group: ci-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+  windows-self-hosted:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Windows, X64, hwm-windows]
+    timeout-minutes: 120
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,37 +32,36 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install system build tools
+      - name: Configure and build C++ with current MSVC
+        shell: cmd
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ninja-build
-
-      - name: Configure C++
-        run: cmake --preset debug
-
-      - name: Build C++
-        run: cmake --build build/debug --parallel 2
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64
+          where cl
+          where cmake
+          where ninja
+          cmake -S . -B build/windows -G Ninja -DCMAKE_BUILD_TYPE=Debug -DHWM_BUILD_TESTS=ON
+          cmake --build build/windows --parallel 2
 
       - name: C++ tests
-        run: ctest --test-dir build/debug --output-on-failure
+        run: ctest --test-dir build/windows --output-on-failure
 
       - name: Held-out 120-state planner recommendation validity
-        run: python scripts/test_planner_replay_gate.py build/debug/planner-eval hwm_battles 120 1 120
+        run: python scripts/test_planner_replay_gate.py build/windows/planner-eval.exe hwm_battles 120 1 120
 
       - name: Local API pairing/auth integration
-        run: python scripts/test_local_api_auth.py build/debug/solver-daemon
+        run: python scripts/test_local_api_auth.py build/windows/solver-daemon.exe
 
       - name: Stale search cancellation integration
-        run: python scripts/test_stale_cancellation.py build/debug/solver-daemon
+        run: python scripts/test_stale_cancellation.py build/windows/solver-daemon.exe
 
       - name: Live recommendation binding contract
-        run: python scripts/test_live_binding.py build/debug/solver-daemon
+        run: python scripts/test_live_binding.py build/windows/solver-daemon.exe
 
       - name: WebSocket revision streaming
-        run: python scripts/test_websocket_stream.py build/debug/solver-daemon
+        run: python scripts/test_websocket_stream.py build/windows/solver-daemon.exe
 
       - name: Install Python package
-        run: python -m pip install -e '.[dev]'
+        run: python -m pip install -e ".[dev]"
 
       - name: Python tests
         run: python -m pytest python/tests -q
@@ -67,27 +77,3 @@ jobs:
       - name: Build extension
         working-directory: extension
         run: npm run build
-
-  windows-msvc:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Build and test with current MSVC
-        shell: cmd
-        run: |
-          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64
-          where cl
-          where ninja
-          cmake -S . -B build/windows -G Ninja -DCMAKE_BUILD_TYPE=Debug -DHWM_BUILD_TESTS=ON
-          cmake --build build/windows --parallel 2
-          ctest --test-dir build/windows --output-on-failure
-          python scripts/test_local_api_auth.py build/windows/solver-daemon.exe
-          python scripts/test_stale_cancellation.py build/windows/solver-daemon.exe
-          python scripts/test_live_binding.py build/windows/solver-daemon.exe
-          python scripts/test_websocket_stream.py build/windows/solver-daemon.exe
