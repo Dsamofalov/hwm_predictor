@@ -2,6 +2,8 @@
 
 Локальный **read-only** советник для PvE-боёв HeroesWM. Пользователь выполняет ход вручную; система наблюдает battle state, строит recommendation и после нового observed state перепланирует. Полное ТЗ со статусами реализации: [`SPEC.md`](SPEC.md).
 
+**Поддерживаемая платформа проекта: Windows 10/11 x64.** Основной нативный toolchain — MSVC + CMake/Ninja; стандартный CI также выполняется только на Windows self-hosted runner. Linux/WSL не являются поддерживаемой product/CI платформой.
+
 ## Текущий checkpoint
 
 Проект уже использует **реальный raw corpus 866 боёв**, а не synthetic protocol. Independent decoder, C++ simulator/search и несколько train-only baseline-моделей работают совместно.
@@ -14,7 +16,7 @@
 - Held-out action priors: PLAYER 70.76% top-1 / 93.46% top-3; PvE 62.81% / 96.11%.
 - P(win): test Brier 0.05176 vs 0.11891 constant baseline; AUC 0.9889.
 - Planner real-state regression: 20/20 recommendations, 100% action-type stability, 90% exact-action stability at 300→1200 simulations.
-- Tests: C++ 100%, Python 39/39, TypeScript typecheck/build PASS.
+- Tests: C++, Python и TypeScript/extension входят в единый Windows CI gate.
 
 **Не считается готовым production-продуктом:** остаются rare geometry/mechanics, часть сложных abilities, full learned-dynamics gate, tree reuse и главное — end-to-end validation на реальном активном бою в пользовательском Chromium. Подробно: [`IMPLEMENTATION_REPORT.md`](IMPLEMENTATION_REPORT.md).
 
@@ -53,7 +55,7 @@ new observed state -> stale plan invalidation -> replanning
 - `schemas/` — protobuf target contracts.
 - `fixtures/` — deterministic protocol/simulator fixtures.
 - `.vscode/` — tasks/launch/settings.
-- `scripts/` — bootstrap/validate/start/demo.
+- `scripts/` — Windows bootstrap/validate/start/demo и исследовательские/evaluation scripts.
 
 **Не включены в GitHub snapshot:** build outputs, caches и многосотмегабайтные materialized training datasets (`data/real_dataset_v3..v6`). Их можно воспроизвести из raw corpus. Сам raw 866-battle corpus также хранится отдельно.
 
@@ -64,7 +66,7 @@ new observed state -> stale plan invalidation -> replanning
 1. Visual Studio 2022 Build Tools → **Desktop development with C++** + Windows SDK.
 2. CMake 3.25+.
 3. Ninja.
-4. Python 3.12/3.13 x64.
+4. Python 3.13 x64.
 5. Node.js 22 LTS + npm.
 6. VS Code.
 7. Git.
@@ -122,6 +124,29 @@ Invoke-RestMethod http://127.0.0.1:38471/status
 
 Extension read-only: никаких автокликов/боевых команд.
 
+# Windows self-hosted CI
+
+Стандартный workflow `.github/workflows/ci.yml` использует только runner с labels:
+
+```text
+self-hosted
+windows
+x64
+hwm-windows
+```
+
+На runner должны быть доступны Visual Studio Build Tools/MSVC x64, CMake, Ninja, Git и PowerShell. Python 3.13 и Node 22 фиксируются workflow через официальные setup actions. Один Windows runner обслуживает `main`, `ability` и другие внутренние ветки последовательно; устаревшие запуски одной ветки отменяются через `concurrency`.
+
+Workflow выполняет на Windows:
+
+- C++ configure/build/CTest;
+- held-out 120-state planner recommendation validity gate;
+- local API pairing/auth, stale cancellation, live binding и WebSocket integration tests;
+- Python package + pytest;
+- TypeScript typecheck и extension build.
+
+Pull requests из внешних fork не запускаются на self-hosted машине. Для ручного запуска актуального HEAD доступен `workflow_dispatch` в GitHub Actions UI.
+
 # Raw corpus и dataset
 
 Raw corpus ожидается в виде:
@@ -152,24 +177,26 @@ chronological split: 80/10/10 by battle id
 
 Основное правило: **raw server-declared ability tags определяют, что реально есть у конкретного стека**. HTML-reference не является ground truth; он используется для имени/описания/coverage.
 
-Rebuild catalog (Linux example):
+PowerShell — rebuild catalog:
 
-```bash
-PYTHONPATH=python python -m hwm_solver.knowledge.build_catalog /path/to/hwm_battles \
-  --out data/catalog/generated_v4 \
-  --reference-creatures-html data/reference/creatures_daily_help.html \
-  --hwm-daily-html data/reference/creatures_hwm_daily.html
+```powershell
+$env:PYTHONPATH = "$PWD\python"
+python -m hwm_solver.knowledge.build_catalog C:\path\to\hwm_battles `
+  --out data\catalog\generated_v4 `
+  --reference-creatures-html data\reference\creatures_daily_help.html `
+  --hwm-daily-html data\reference\creatures_hwm_daily.html
 ```
 
 Rebuild Ability Registry:
 
-```bash
-PYTHONPATH=python python -m hwm_solver.knowledge.build_ability_registry data/catalog/generated_v4.json \
-  --out data/catalog/ability_registry.json \
-  --ability-damage models/ability_damage_model.csv \
-  --collateral models/collateral_model.csv \
-  --proc models/proc_model.csv \
-  --kill-trigger models/kill_trigger_model.csv
+```powershell
+$env:PYTHONPATH = "$PWD\python"
+python -m hwm_solver.knowledge.build_ability_registry data\catalog\generated_v4.json `
+  --out data\catalog\ability_registry.json `
+  --ability-damage models\ability_damage_model.csv `
+  --collateral models\collateral_model.csv `
+  --proc models\proc_model.csv `
+  --kill-trigger models\kill_trigger_model.csv
 ```
 
 Support statuses distinguish `exact_search`, `partial_exact`, `exact_targeting`, `modeled_proc`, `modeled_collateral`, `modeled_kill_trigger`, `learned_damage`, `dynamic_spellbook`, `reference_only`, `unresolved`. Unknown/high-impact mechanics raise `ability_risk`; they are not silently treated as ordinary stacks.
@@ -178,17 +205,18 @@ Support statuses distinguish `exact_search`, `partial_exact`, `exact_targeting`,
 
 C++ corpus validation:
 
-```bash
-./build/debug/corpus-check /path/to/hwm_battles
-./build/debug/shadow-replay /path/to/hwm_battles
+```powershell
+.\build\debug\corpus-check.exe C:\path\to\hwm_battles
+.\build\debug\shadow-replay.exe C:\path\to\hwm_battles
 ```
 
 Ability risk:
 
-```bash
-PYTHONPATH=python python -m hwm_solver.evaluation.ability_risk_report \
-  /path/to/hwm_battles --registry data/catalog/ability_registry.json \
-  --out data/reports/ability-risk-current.json
+```powershell
+$env:PYTHONPATH = "$PWD\python"
+python -m hwm_solver.evaluation.ability_risk_report C:\path\to\hwm_battles `
+  --registry data\catalog\ability_registry.json `
+  --out data\reports\ability-risk-current.json
 ```
 
 Key reproducible reports are stored under `data/reports/`.
@@ -210,20 +238,11 @@ POST /debug/import-replay   (HWM_ENABLE_DEBUG=1)
 POST /debug/demo-state      (HWM_ENABLE_DEBUG=1)
 ```
 
-Daemon bind: `127.0.0.1`. Browser Origin filtering включён. Pairing-token/WebSocket из полного ТЗ пока не закрыты.
-
-# Linux / WSL
-
-```bash
-sudo apt update
-sudo apt install -y build-essential cmake ninja-build python3 python3-venv nodejs npm
-chmod +x scripts/*.sh
-./scripts/bootstrap_linux.sh
-./scripts/validate_linux.sh
-```
+Daemon bind: `127.0.0.1`. Browser Origin filtering включён. Pairing/authenticated WebSocket реализованы в текущем local API; реальный authenticated active-battle smoke всё ещё обязателен перед заявлением о complete live loop.
 
 # Безопасность и границы продукта
 
+- Windows 10/11 x64 — единственная поддерживаемая product/CI платформа;
 - read-only advisor;
 - user performs moves manually;
 - no auto-click;
@@ -240,6 +259,6 @@ chmod +x scripts/*.sh
 1. Life Drain и другие high-impact assist/counter/stateful abilities.
 2. 19 structural-invalid финальных replay / rare geometry.
 3. Full learned dynamics + multi-step divergence gate.
-4. Search tree reuse/transposition.
-5. Проверка extension/daemon на активном бою в пользовательском Chromium.
+4. Search tree reuse/transposition correctness and diagnostics.
+5. Проверка extension/daemon на активном бою в пользовательском Chromium на Windows.
 6. После этого — hard-PvE human-in-loop benchmark и win-rate uplift.
