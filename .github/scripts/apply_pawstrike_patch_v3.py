@@ -8,12 +8,10 @@ source=source.replace(
     1,
 )
 
-# Per-command semantic verification: one decision can contain multiple I records.
-source=source.replace(
-    'from hwm_solver.protocol.replay import iter_battle_decisions, parse_commands',
-    'from hwm_solver.protocol.replay import iter_battle_decisions, parse_commands, _decision_semantic_unresolved_flags',
-    1,
-)
+# Full-corpus verification is performed directly on the canonical decision dicts.
+# The internal semantic validator accepts RawEntity objects, whereas state_before
+# deliberately exposes JSON-like dicts. Unit tests below exercise that validator;
+# this corpus gate checks the exact raw/state invariants on every observed record.
 old='''            cmds=parse_commands(row["raw"])
             for c in cmds:
                 if c.opcode!="I_RECORD":continue
@@ -26,14 +24,23 @@ old='''            cmds=parse_commands(row["raw"])
                     if after is not None and float(after.get("atb",-1))==0.0:atb_zero+=1
 '''
 new='''            cmds=parse_commands(row["raw"])
-            flags=_decision_semantic_unresolved_flags(cmds,before,int(row["actor_uid"]))
-            for c,unresolved in zip(cmds,flags,strict=True):
+            damage_pairs={(int(c.actor_uid),int(c.target_uid)) for c in cmds if c.opcode=="DAMAGE" and c.actor_uid is not None and c.target_uid is not None}
+            forced_uids={int(c.actor_uid) for c in cmds if c.opcode=="FORCED_POSITION" and c.actor_uid is not None}
+            for c in cmds:
                 if c.opcode!="I_RECORD":continue
                 source=before.get(int(c.target_uid)) if c.target_uid is not None else None
+                affected_entity=before.get(int(c.actor_uid)) if c.actor_uid is not None else None
                 affected=int(c.actor_uid) if c.actor_uid is not None else -1
                 if source and int(source["uid"])==int(row["actor_uid"]):
                     seen+=1
-                    if not unresolved:exact+=1
+                    invariant=(
+                        "pawstrike" in set(source.get("abilities") or [])
+                        and affected_entity is not None
+                        and int(source.get("owner",-1))!=int(affected_entity.get("owner",-1))
+                        and (int(source["uid"]),affected) in damage_pairs
+                        and affected in forced_uids
+                    )
+                    if invariant:exact+=1
                     after=next((e for e in row["state_after"] if int(e["uid"])==affected),None)
                     if after is not None and float(after.get("atb",-1))==0.0:atb_zero+=1
 '''
@@ -51,8 +58,7 @@ source=source.replace(
     'after 357 melee observations, 150 primary-target probability samples plus 24 secondary-hit exact I-records, and chronological probability validation',
 )
 
-# Remove all temporary patch runners from the functional tree. History of failed
-# staging attempts is appended in the post-success bookkeeping commit.
+# Remove all temporary patch runners from the functional tree.
 source=source.replace(
     "WORKFLOW.unlink(missing_ok=True);SCRIPT.unlink(missing_ok=True)",
     "WORKFLOW.unlink(missing_ok=True);SCRIPT.unlink(missing_ok=True);old_script.unlink(missing_ok=True);Path('.github/scripts/apply_pawstrike_patch_v2.py').unlink(missing_ok=True)",
