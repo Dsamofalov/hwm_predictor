@@ -114,3 +114,13 @@ This file is the development diary for repository changes performed against the 
 - Triggered the standard repository CI against the final Mana Feed functional tree because pushes made by the self-removing workflow do not recursively trigger GitHub Actions.
 - Workflow run `31341290199`: **PASS**.
 - Verified C++ configure/build/CTest, the complete Python pytest suite, extension dependency installation, TypeScript typecheck, and extension build.
+
+### Current ability-risk refresh
+
+- Commit: `84407eddc17a82b160bca2c4c3da1422714e3474`
+  - Staged a one-shot self-removing risk refresh against the current Ability Registry.
+- Commit: `7bdc2186ed430d46e629a5eece22db5eb42efee7`
+  - Recomputed held-out ability risk from the 866-battle corpus using current registry support/risk weights after Life Drain, Regeneration and Mana Feed.
+  - Risk mean / p90: **0.2347 / 0.3971** across **1748** sampled player states.
+  - Current top contributors: caster(dynamic_spellbook,2425), enraged(modeled_kill_trigger,2070), cripplingwound(learned_damage,312), shieldbash(modeled_proc,538), mightyslam(learned_damage,181), pawstrike(learned_damage,218), powerstrike(learned_damage,163), entroots(modeled_proc,667), bloodlust(partial_exact,481), waterproof50(partial_exact,647).
+  - Stored reproducible report at `data/reports/ability-risk-current.json`.
