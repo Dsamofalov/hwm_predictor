@@ -4,7 +4,6 @@ on:
   push:
   pull_request:
 
-# Post-Paw-Strike full verification trigger.
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -35,6 +34,9 @@ jobs:
 
       - name: C++ tests
         run: ctest --test-dir build/debug --output-on-failure
+
+      - name: Local API pairing/auth integration
+        run: python scripts/test_local_api_auth.py build/debug/solver-daemon
 
       - name: Install Python package
         run: python -m pip install -e '.[dev]'
