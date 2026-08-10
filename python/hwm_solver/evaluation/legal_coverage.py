@@ -25,10 +25,10 @@ def _adjacent(a:dict,aa:tuple[int,int],b:dict,ba:tuple[int,int]|None=None)->bool
 
 
 def _bounds(state:list[dict]):
-    nonhero=[e for e in state if e.get('alive',True) and not e.get('is_hero')]
-    maxx=max(12,max((int(e['x'])+(1 if 'big' in set(e.get('abilities',[])) else 0) for e in nonhero),default=12))
-    maxy=max(10,max((int(e['y'])+(1 if 'big' in set(e.get('abilities',[])) else 0) for e in nonhero),default=10))
-    return 1,1,maxx,maxy
+    # The canonical raw protocol board is fixed at x=1..12, y=1..20.  Do not shrink
+    # reachability to coordinates currently occupied by live stacks: legal moves into an
+    # otherwise empty lower half of the battlefield would become false negatives.
+    return 1,1,12,20
 
 
 def _can_place(state:list[dict],actor:dict,anchor:tuple[int,int],bounds)->bool:
@@ -41,6 +41,30 @@ def _can_place(state:list[dict],actor:dict,anchor:tuple[int,int],bounds)->bool:
         if not e.get('alive',True) or e.get('is_hero') or e.get('is_hidden',False) or int(e['uid'])==actor_uid: continue
         occupied |= _footprint(e)
     return not bool(cells & occupied)
+
+
+def _canonical_observed_destination(state:list[dict],actor:dict,dest:tuple[int,int])->tuple[int,int]:
+    """Mirror replay's conservative big-stack raw-cell disambiguation.
+
+    Ordinary raw MOVE coordinates are top-left anchors.  For a 2x2 stack the server can
+    instead emit one of the footprint cells.  Only reinterpret the coordinate when direct
+    placement is impossible; then choose the legal interpretation closest to the previous
+    canonical anchor using the same deterministic tie-breakers as the replay decoder.
+    """
+    if 'big' not in set(actor.get('abilities',[])):
+        return dest
+    bounds=_bounds(state)
+    if _can_place(state,actor,dest,bounds):
+        return dest
+    candidates=[dest,(dest[0]-1,dest[1]),(dest[0],dest[1]-1),(dest[0]-1,dest[1]-1)]
+    legal=[p for p in candidates if _can_place(state,actor,p,bounds)]
+    if not legal:
+        return dest
+    start=(int(actor['x']),int(actor['y']))
+    def score(p:tuple[int,int])->tuple[int,int,int]:
+        dx,dy=abs(p[0]-start[0]),abs(p[1]-start[1])
+        return max(dx,dy),dx+dy,candidates.index(p)
+    return min(legal,key=score)
 
 
 def _reachable(state:list[dict],actor:dict)->set[tuple[int,int]]:
@@ -73,15 +97,17 @@ def supports_observed(row:dict)->tuple[bool,str]:
     if typ in {'WAIT','DEFEND'}:return True,'ok'
     if actor.get('is_hero'):return False,'hero_unsupported'
     if typ=='MOVE':
-        dest=(int(row['destination_x']),int(row['destination_y'])) if row['destination_x'] is not None else None
-        if not dest:return False,'destination_missing'
+        raw_dest=(int(row['destination_x']),int(row['destination_y'])) if row['destination_x'] is not None else None
+        if not raw_dest:return False,'destination_missing'
+        dest=_canonical_observed_destination(state,actor,raw_dest)
         reach=_reachable(state,actor)
         return (dest in reach,'ok' if dest in reach else 'move_not_reachable')
     if typ in ('MELEE_ATTACK','ATTACK'):
         if 'shootonly' in set(actor.get('abilities',[])):return False,'shoot_only_no_melee'
         target=by.get(int(row['target_uid'])) if row['target_uid'] is not None else None
         if not target:return False,'target_missing'
-        dest=(int(row['destination_x']),int(row['destination_y'])) if row['destination_x'] is not None else (int(actor['x']),int(actor['y']))
+        raw_dest=(int(row['destination_x']),int(row['destination_y'])) if row['destination_x'] is not None else (int(actor['x']),int(actor['y']))
+        dest=_canonical_observed_destination(state,actor,raw_dest)
         moved=dest!=(int(actor['x']),int(actor['y']))
         if moved:
             reach=_reachable(state,actor)
