@@ -473,3 +473,14 @@ This file is the development diary for repository changes performed against the 
   - Runtime selector remains disabled. The experiment demonstrates that one-step fallback classification does not resolve the long-horizon accuracy/validity trade-off.
   - Stored `data/reports/dynamics-selector-gate.json`. Diagnostic run `31386006048` and full standard CI run `31386005987`: **PASS**; targeted selector tests **4/4**.
 
+### Held-out 120-state planner recommendation validity gate
+
+- Commit: `cde38a5a89684ff2691c80eeb3583195ffa31758`
+  - Strengthened `planner-eval` from the historical first-N/status-only probe to a deterministic stratified sample across all chronological held-out safe states.
+  - Recommendation validity now checks exact canonical `state_hash`, legal best action, legal alternatives, finite score/P(win)/uncertainty, visited candidates, positive simulations and search nodes.
+  - Added permanent `scripts/test_planner_replay_gate.py` and wired a **120-state** held-out gate into standard Linux CI.
+  - Permanent CI budget `1 -> 120` passes **120/120** recommendations sampled from **109** held-out battles with **0** invalid recommendations, hash mismatches, illegal best actions, illegal alternatives or non-finite metrics.
+  - A stronger `80 -> 300` stress reference also passes **120/120**, with action-type stability **98.33%** and exact-action stability **85%**.
+  - Stored `data/reports/planner-replay-validity-gate.json`. Diagnostic runs `31387183686` (permanent budget) and `31386809158` (stress) passed; standard CI run `31387423155` passed on Linux and Windows/MSVC with the permanent gate enabled.
+  - This closes the replay half of the >=100-state invalid-recommendation acceptance gate; real authenticated active-battle smoke remains separately required.
+
