@@ -441,3 +441,14 @@ This file is the development diary for repository changes performed against the 
   - Python replay final overlap remains **21 battles / 23 pairs**; the separate authoritative C++ corpus gate remains 19 invalid finals / 21 overlap pairs.
   - Diagnostic workflow job `93438285778`: **PASS**.
 
+### M11 multi-step damage-residual ensemble gate
+
+- Commit: `45581ae7d0f844f67797c590c3ed529390b76f1f`
+  - Added `python/hwm_solver/evaluation/dynamics_multistep.py` and targeted tests for a five-member train-battle jackknife ensemble over the existing primary physical-damage residual.
+  - Added autoregressive held-out evaluation at 2/4/8/16 halfturn horizons. Non-primary mechanics remain teacher-forced so the gate isolates primary physical-damage residual drift rather than attributing proc/collateral/resurrection errors to this submodel.
+  - Predicted-invalid actions are preserved as divergence instead of silently teacher-forcing the observed primary damage after model drift makes the real action impossible.
+  - Stored `data/reports/dynamics-multistep-damage.json` from 692 train / 174 chronological held-out battles and 23,451 train attack samples.
+  - Ensemble mean force-L1 beats the generic exact-formula baseline at every measured horizon: 2-step **0.01137 vs 0.01679**, 4-step **0.01791 vs 0.02728**, 8-step **0.02986 vs 0.04710**, 16-step **0.04947 vs 0.08125**.
+  - Production enablement remains intentionally **false**: at 16 steps the ensemble predicted-invalid-action fraction is **3.58%** vs **2.51%** generic and alive mismatch is **8.83%**. This closes the first M11 submodel multi-step evidence gate, not the full learned world-model requirement.
+  - M11 diagnostic run `31384739406`: **PASS** with targeted tests **5/5**. Full standard CI run `31384739323`: **PASS** on Linux and Windows/MSVC.
+
