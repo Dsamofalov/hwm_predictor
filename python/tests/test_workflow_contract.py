@@ -65,6 +65,7 @@ def test_windows_ci_script_owns_core_and_full_test_inventory():
     assert "function Invoke-NativeGate" in text
     assert "function Assert-GatesPassed" in text
     assert "FAILURE SUMMARY" in text
+    assert text.count("[AllowEmptyCollection()]") == 2
 
     core_markers = (
         "test_planner_replay_gate.py",
