@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -11,10 +12,37 @@ from hwm_solver.evaluation.dynamics_multistep import (
     _collect,
     _hp_map,
     _rows,
-    _window_error,
     advance_damage_chain,
     fit_battle_jackknife_ensemble,
 )
+
+
+NUMERIC_TIE_EPSILON = 1e-12
+
+
+def _stable_mean(values) -> float:
+    vals = [float(v) for v in values]
+    return math.fsum(vals) / len(vals) if vals else 0.0
+
+
+def _stable_std(values) -> float:
+    vals = [float(v) for v in values]
+    if not vals:
+        return 0.0
+    mean = _stable_mean(vals)
+    variance = math.fsum((v - mean) * (v - mean) for v in vals) / len(vals)
+    return math.sqrt(max(0.0, variance))
+
+
+def _stable_window_l1(
+    predicted: dict[int, float], observed_state: list[dict], initial_total_hp: float
+) -> float:
+    observed = _hp_map(observed_state)
+    uids = sorted(set(predicted) | set(observed))
+    abs_error = math.fsum(
+        abs(predicted.get(uid, 0.0) - observed.get(uid, 0.0)) for uid in uids
+    )
+    return abs_error / max(1.0, initial_total_hp)
 
 
 def _rankdata(values: np.ndarray) -> np.ndarray:
@@ -72,20 +100,20 @@ def calibration_bins(samples: list[dict], bins: int = 10) -> list[dict]:
                 "count": len(rows),
                 "disagreement_min": float(rows[0]["disagreement"]),
                 "disagreement_max": float(rows[-1]["disagreement"]),
-                "mean_disagreement": float(np.mean([r["disagreement"] for r in rows])),
-                "mean_ensemble_force_l1": float(np.mean([r["ensemble_l1"] for r in rows])),
-                "mean_generic_force_l1": float(np.mean([r["generic_l1"] for r in rows])),
-                "mean_excess_force_l1": float(
-                    np.mean([r["ensemble_l1"] - r["generic_l1"] for r in rows])
+                "mean_disagreement": _stable_mean(r["disagreement"] for r in rows),
+                "mean_ensemble_force_l1": _stable_mean(r["ensemble_l1"] for r in rows),
+                "mean_generic_force_l1": _stable_mean(r["generic_l1"] for r in rows),
+                "mean_excess_force_l1": _stable_mean(
+                    r["ensemble_l1"] - r["generic_l1"] for r in rows
                 ),
-                "ensemble_better_than_generic_rate": float(
-                    np.mean([r["ensemble_l1"] < r["generic_l1"] for r in rows])
+                "ensemble_better_than_generic_rate": _stable_mean(
+                    r["ensemble_l1"] < r["generic_l1"] - NUMERIC_TIE_EPSILON for r in rows
                 ),
-                "mean_ensemble_invalid_action_fraction": float(
-                    np.mean([r["ensemble_invalid_fraction"] for r in rows])
+                "mean_ensemble_invalid_action_fraction": _stable_mean(
+                    r["ensemble_invalid_fraction"] for r in rows
                 ),
-                "mean_generic_invalid_action_fraction": float(
-                    np.mean([r["generic_invalid_fraction"] for r in rows])
+                "mean_generic_invalid_action_fraction": _stable_mean(
+                    r["generic_invalid_fraction"] for r in rows
                 ),
             }
         )
@@ -104,7 +132,7 @@ def collect_window_samples(
             if available < min(horizons):
                 continue
             initial_hp = _hp_map(decisions[start]["state_before"])
-            initial_total = sum(initial_hp.values())
+            initial_total = math.fsum(initial_hp.values())
             generic_hp = dict(initial_hp)
             member_hp = [dict(initial_hp) for _ in ensemble]
             modeled = 0
@@ -122,16 +150,14 @@ def collect_window_samples(
                 if horizon not in samples or modeled == 0:
                     continue
                 observed = row["state_after"]
-                generic_l1, _gb, _gm, _gn = _window_error(generic_hp, observed, initial_total)
-                uids = set().union(*(set(hp) for hp in member_hp))
+                generic_l1 = _stable_window_l1(generic_hp, observed, initial_total)
+                uids = sorted(set().union(*(set(hp) for hp in member_hp)))
                 ensemble_mean = {
-                    uid: float(np.mean([hp.get(uid, 0.0) for hp in member_hp])) for uid in uids
+                    uid: _stable_mean(hp.get(uid, 0.0) for hp in member_hp) for uid in uids
                 }
-                ensemble_l1, _eb, _em, _en = _window_error(
-                    ensemble_mean, observed, initial_total
-                )
-                disagreement = sum(
-                    float(np.std([hp.get(uid, 0.0) for hp in member_hp])) for uid in uids
+                ensemble_l1 = _stable_window_l1(ensemble_mean, observed, initial_total)
+                disagreement = math.fsum(
+                    _stable_std(hp.get(uid, 0.0) for hp in member_hp) for uid in uids
                 ) / max(1.0, initial_total)
                 samples[horizon].append(
                     {
@@ -141,7 +167,7 @@ def collect_window_samples(
                         "disagreement": disagreement,
                         "ensemble_l1": ensemble_l1,
                         "generic_l1": generic_l1,
-                        "ensemble_invalid_fraction": float(np.mean(member_invalid)) / max(1, modeled),
+                        "ensemble_invalid_fraction": _stable_mean(member_invalid) / max(1, modeled),
                         "generic_invalid_fraction": generic_invalid / max(1, modeled),
                     }
                 )
@@ -156,7 +182,7 @@ def summarize(samples: list[dict], bins: int) -> dict:
     generic_l1 = np.asarray([x["generic_l1"] for x in samples], dtype=np.float64)
     excess = ensemble_l1 - generic_l1
     invalid = np.asarray([x["ensemble_invalid_fraction"] for x in samples], dtype=np.float64)
-    learned_worse = (excess > 0).astype(np.int8)
+    learned_worse = (excess > NUMERIC_TIE_EPSILON).astype(np.int8)
     binned = calibration_bins(samples, bins=bins)
     low = binned[0] if binned else {}
     high = binned[-1] if binned else {}

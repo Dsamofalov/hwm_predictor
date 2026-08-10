@@ -5,6 +5,8 @@ import pytest
 
 from hwm_solver.evaluation.dynamics_uncertainty import (
     _rankdata,
+    _stable_mean,
+    _stable_std,
     calibration_bins,
     roc_auc,
     spearman,
@@ -64,3 +66,27 @@ def test_summarize_reports_predictive_uncertainty():
     assert out["spearman_disagreement_vs_invalid_action_fraction"] > 0.99
     assert out["low_to_high_bin_error_ratio"] > 1.0
     assert out["low_to_high_bin_invalid_ratio"] > 1.0
+
+
+def test_stable_moments_do_not_invent_disagreement_for_identical_members():
+    value = 0.123456789012345
+    members = [value] * 5
+    assert _stable_mean(members) == value
+    assert _stable_std(members) == 0.0
+
+
+def test_summarize_treats_sub_epsilon_error_as_numerical_tie():
+    rows = [
+        {
+            "disagreement": float(i),
+            "ensemble_l1": 0.25 + 5e-13,
+            "generic_l1": 0.25,
+            "ensemble_invalid_fraction": 0.0,
+            "generic_invalid_fraction": 0.0,
+        }
+        for i in range(20)
+    ]
+    out = summarize(rows, bins=4)
+    assert out["learned_worse_than_generic_rate"] == 0.0
+    assert out["auc_disagreement_flags_learned_worse_than_generic"] == 0.5
+    assert all(x["ensemble_better_than_generic_rate"] == 0.0 for x in out["bins"])
