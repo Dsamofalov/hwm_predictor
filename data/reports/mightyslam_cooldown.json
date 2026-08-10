@@ -1,0 +1,43 @@
+{
+  "repeat_pairs": 3,
+  "activation_gaps": [
+    6,
+    3,
+    4
+  ],
+  "minimum_gap": 3,
+  "distribution": {
+    "3": 1,
+    "4": 1,
+    "6": 1
+  },
+  "rows": [
+    {
+      "battle_id": "1629923656",
+      "actor_uid": 14,
+      "previous_actor_activation": 5,
+      "current_actor_activation": 11,
+      "activation_gap": 6,
+      "decision_index": 136,
+      "server_turn": 70
+    },
+    {
+      "battle_id": "1629950489",
+      "actor_uid": 19,
+      "previous_actor_activation": 6,
+      "current_actor_activation": 9,
+      "activation_gap": 3,
+      "decision_index": 137,
+      "server_turn": 53
+    },
+    {
+      "battle_id": "1633418447",
+      "actor_uid": 5,
+      "previous_actor_activation": 1,
+      "current_actor_activation": 5,
+      "activation_gap": 4,
+      "decision_index": 68,
+      "server_turn": 57
+    }
+  ]
+}
