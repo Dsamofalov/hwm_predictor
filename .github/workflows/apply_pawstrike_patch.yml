@@ -26,4 +26,4 @@ jobs:
           sudo apt-get install -y ninja-build
           python -m pip install pytest numpy
       - name: Apply, verify, commit and log Paw Strike
-        run: PYTHONPATH=python python .github/scripts/apply_pawstrike_patch.py
+        run: PYTHONPATH=python python .github/scripts/apply_pawstrike_patch_v2.py
