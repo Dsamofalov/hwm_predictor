@@ -61,6 +61,8 @@ jobs:
               '  - Updated the CI contract regression for the explicit Windows executable paths.'
               '- Commit: `151d568ee34a6fbf234d063a6c645d1341cebd9a`'
               '  - Removed the redundant bootstrap helper after consolidation on `scripts/ci_windows.ps1`.'
+              '- Commit: `550f12f56d22e660c2a928a119e194fc44da65a6`'
+              '  - Updated README to document service-owned Python, Visual Studio generator, canonical Core/Full commands, two-runner parallelism, and the rule that new main-front tests belong in the permanent suites rather than temporary workflows.'
               '- Repository branch cleanup completed: only `main` and `ability` remain.'
             )
             Add-Content -Path $path -Value (($lines -join [Environment]::NewLine) + [Environment]::NewLine) -Encoding UTF8
