@@ -255,3 +255,15 @@ This file is the development diary for repository changes performed against the 
   - Any forced-position / primary forced / primary forced+I: **161 / 150 / 150**.
   - Carrier overlap with other knockback abilities: `{}`.
   - Empirical rate by charge distance: `[{'distance': 0, 'n': 21, 'hits': 0, 'rate': 0.0}, {'distance': 1, 'n': 26, 'hits': 4, 'rate': 0.15384615384615385}, {'distance': 2, 'n': 49, 'hits': 15, 'rate': 0.30612244897959184}, {'distance': 3, 'n': 58, 'hits': 17, 'rate': 0.29310344827586204}, {'distance': 4, 'n': 87, 'hits': 47, 'rate': 0.5402298850574713}, {'distance': 5, 'n': 66, 'hits': 38, 'rate': 0.5757575757575758}, {'distance': 6, 'n': 30, 'hits': 19, 'rate': 0.6333333333333333}, {'distance': 7, 'n': 9, 'hits': 3, 'rate': 0.3333333333333333}, {'distance': 8, 'n': 7, 'hits': 4, 'rate': 0.5714285714285714}, {'distance': 9, 'n': 1, 'hits': 0, 'rate': 0.0}, {'distance': 10, 'n': 3, 'hits': 3, 'rate': 1.0}]`.
+
+### Paw Strike temporal probability validation
+
+- Commit: `a7de64d5e8f9a03e99ad42208e7c45971911f998`
+  - Staged a self-removing chronological 80/20 validation of distance-conditioned Paw Strike proc probability and observed consequences.
+- Commit: `bbe0f0aacdf53d3dff1b40c6493bda60d5df8e6c`
+  - Stored `data/reports/pawstrike_probability_validation.json`.
+  - Train: **111/249=0.4458**; held-out: **39/108=0.3611**.
+  - Held-out Brier: train-frequency **0.23788**, fixed 10%/cell **0.20250**, train-selected linear **0.20495**.
+  - Best train linear slope: **0.11/cell**; gate **False**.
+  - Big-target stats: `{'train': {'n': 85, 'hits': 38, 'rate': 0.4470588235294118}, 'heldout': {'n': 52, 'hits': 15, 'rate': 0.28846153846153844}}`; small-target stats: `{'train': {'n': 164, 'hits': 73, 'rate': 0.4451219512195122}, 'heldout': {'n': 56, 'hits': 24, 'rate': 0.42857142857142855}}`.
+  - Observed proc consequences: `{'proc_rows': 150, 'displacement': {'1': 105, '0': 42, '2': 1, '9': 1, '8': 1}, 'atb_after': {'90.0': 15, '98.0': 12, '95.0': 16, '96.0': 19, '92.0': 10, '99.0': 12, '97.0': 15, '94.0': 12, '100.0': 14, '93.0': 12, '91.0': 11, '50.0': 2}, 'i_tail': {'0023': 3, '0021': 1, '0020': 12, '0012': 28, '0006': 1, '0002': 6, '0010': 28, '0011': 30, '0015': 15, '0014': 7, '0003': 2, '0005': 3, '0013': 3, '0018': 2, '0007': 1, '0009': 8}, 'i_matches_actor': 150}`.
