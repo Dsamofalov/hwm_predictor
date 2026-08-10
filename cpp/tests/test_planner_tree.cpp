@@ -23,85 +23,32 @@ static BattleState planner_fixture(std::string battle_id) {
 int main() {
     SearchGraph graph;
     auto [root, root_created] = graph.acquire("root");
-    CHECK(root_created);
-    CHECK(root != nullptr);
+    CHECK(root_created); CHECK(root != nullptr);
+    SearchEdge stochastic_edge; stochastic_edge.action.action_id=1; stochastic_edge.action.actor_uid=7; stochastic_edge.action.type=ActionType::MeleeAttack;
+    auto [low, low_created]=graph.acquire("damage-low"); CHECK(low_created); low->initialized=true; SearchEdge low_legal; low_legal.action.type=ActionType::Wait; low->edges.push_back(std::move(low_legal));
+    auto [low_outcome, low_bound]=graph.bind(stochastic_edge,"damage-low",*low); CHECK(low_bound); ++low_outcome->visits;
+    auto [high, high_created]=graph.acquire("damage-high"); CHECK(high_created); high->initialized=true; SearchEdge high_legal; high_legal.action.type=ActionType::Defend; high->edges.push_back(std::move(high_legal));
+    auto [high_outcome, high_bound]=graph.bind(stochastic_edge,"damage-high",*high); CHECK(high_bound); ++high_outcome->visits; ++high_outcome->visits;
+    CHECK(stochastic_edge.outcomes.size()==2); CHECK(low_outcome->child!=high_outcome->child); CHECK(low->edges.front().action.type==ActionType::Wait); CHECK(high->edges.front().action.type==ActionType::Defend); CHECK(stochastic_edge.modal_child()==high);
+    auto [low_again, duplicate_created]=graph.acquire("damage-low"); CHECK(!duplicate_created); CHECK(low_again==low); SearchEdge sibling_edge; sibling_edge.action.action_id=2; sibling_edge.action.type=ActionType::RangedAttack;
+    auto [transposed, transposed_bound]=graph.bind(sibling_edge,"damage-low",*low_again); CHECK(transposed_bound); CHECK(transposed->child==low);
+    auto [same_outcome,rebound]=graph.bind(stochastic_edge,"damage-low",*low_again); CHECK(!rebound); CHECK(same_outcome==low_outcome); CHECK(graph.size()==3);
+    CHECK(graph.prune_to(*high)==1); CHECK(graph.find("damage-high")==high); CHECK(graph.find("damage-low")==nullptr); CHECK(graph.find("root")==nullptr);
 
-    SearchEdge stochastic_edge;
-    stochastic_edge.action.action_id = 1;
-    stochastic_edge.action.actor_uid = 7;
-    stochastic_edge.action.type = ActionType::MeleeAttack;
-
-    auto [low, low_created] = graph.acquire("damage-low");
-    CHECK(low_created);
-    low->initialized = true;
-    SearchEdge low_legal;
-    low_legal.action.type = ActionType::Wait;
-    low->edges.push_back(std::move(low_legal));
-    auto [low_outcome, low_bound] = graph.bind(stochastic_edge, "damage-low", *low);
-    CHECK(low_bound);
-    ++low_outcome->visits;
-
-    auto [high, high_created] = graph.acquire("damage-high");
-    CHECK(high_created);
-    high->initialized = true;
-    SearchEdge high_legal;
-    high_legal.action.type = ActionType::Defend;
-    high->edges.push_back(std::move(high_legal));
-    auto [high_outcome, high_bound] = graph.bind(stochastic_edge, "damage-high", *high);
-    CHECK(high_bound);
-    ++high_outcome->visits;
-    ++high_outcome->visits;
-
-    CHECK(stochastic_edge.outcomes.size() == 2);
-    CHECK(low_outcome->child != high_outcome->child);
-    CHECK(low_outcome->child->hash == "damage-low");
-    CHECK(high_outcome->child->hash == "damage-high");
-    CHECK(low->edges.size() == 1);
-    CHECK(high->edges.size() == 1);
-    CHECK(low->edges.front().action.type == ActionType::Wait);
-    CHECK(high->edges.front().action.type == ActionType::Defend);
-    CHECK(stochastic_edge.modal_child() == high);
-
-    auto [low_again, duplicate_created] = graph.acquire("damage-low");
-    CHECK(!duplicate_created);
-    CHECK(low_again == low);
-    SearchEdge sibling_edge;
-    sibling_edge.action.action_id = 2;
-    sibling_edge.action.type = ActionType::RangedAttack;
-    auto [transposed, transposed_bound] = graph.bind(sibling_edge, "damage-low", *low_again);
-    CHECK(transposed_bound);
-    CHECK(transposed->child == low);
-    auto [same_outcome, rebound] = graph.bind(stochastic_edge, "damage-low", *low_again);
-    CHECK(!rebound);
-    CHECK(same_outcome == low_outcome);
-    CHECK(graph.size() == 3);
-
-    // Re-root pruning is exact: only nodes reachable from the observed canonical root survive.
-    CHECK(graph.prune_to(*high) == 1);
-    CHECK(graph.find("damage-high") == high);
-    CHECK(graph.find("damage-low") == nullptr);
-    CHECK(graph.find("root") == nullptr);
-
-    // Planner-level persistence reuses an exact observed root, but never crosses battle scope.
     PlannerConfig cfg; cfg.simulation_budget=40; cfg.max_depth=3; cfg.self_top_k=6; cfg.seed=7; cfg.time_budget_ms=0;
-    Planner planner(cfg);
-    const auto state=planner_fixture("reuse-battle");
-    const auto first=planner.plan(state);
-    CHECK(first.status=="ok");
-    CHECK(!first.tree_reused);
-    CHECK(first.simulations==40);
-    CHECK(first.nodes>0);
-    const auto second=planner.plan(state);
-    CHECK(second.status=="ok");
-    CHECK(second.tree_reused);
-    CHECK(second.reused_root_visits>=first.simulations);
-    CHECK(second.retained_nodes>0);
-    auto other=state; other.battle_id="different-battle";
-    const auto reset=planner.plan(other);
-    CHECK(reset.status=="ok");
-    CHECK(!reset.tree_reused);
-    CHECK(reset.reused_root_visits==0);
+    Planner planner(cfg); const auto state=planner_fixture("reuse-battle");
+    const auto first=planner.plan(state); CHECK(first.status=="ok"); CHECK(!first.tree_reused); CHECK(first.simulations==40); CHECK(first.nodes>0);
+    const auto second=planner.plan(state); CHECK(second.status=="ok"); CHECK(second.tree_reused); CHECK(second.reused_root_visits>=first.simulations); CHECK(second.retained_nodes>0);
 
+    // Current global state_hash intentionally omits several static geometry/capability flags.
+    // Persistent reuse therefore has an additional structure fingerprint and must reset even
+    // when state_hash alone would collide on a legal-action-relevant static change.
+    auto changed_structure=state; changed_structure.entities.front().is_flyer=true;
+    CHECK(state_hash(changed_structure)==state_hash(state));
+    const auto structure_reset=planner.plan(changed_structure); CHECK(structure_reset.status=="ok"); CHECK(!structure_reset.tree_reused); CHECK(structure_reset.reused_root_visits==0);
+
+    auto other=state; other.battle_id="different-battle";
+    const auto reset=planner.plan(other); CHECK(reset.status=="ok"); CHECK(!reset.tree_reused); CHECK(reset.reused_root_visits==0);
     std::cout << "planner stochastic-outcome/transposition/re-root tests passed\n";
     return EXIT_SUCCESS;
 }

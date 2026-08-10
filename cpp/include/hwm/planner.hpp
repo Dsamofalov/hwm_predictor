@@ -35,5 +35,6 @@ private:
     mutable detail::SearchGraph graph_;
     mutable std::string graph_battle_id_;
     mutable Side graph_perspective_=Side::Unknown;
+    mutable uint64_t graph_structure_fingerprint_=0;
 };
 }

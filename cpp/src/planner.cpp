@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
 #include <functional>
 #include <numeric>
 #include <random>
@@ -27,6 +28,26 @@ size_t widening_limit(const Node& n, size_t total, int hard_top_k) {
     const size_t dynamic = 4 + static_cast<size_t>(2.0 * std::sqrt(static_cast<double>(n.visits + 1)));
     const size_t cap = hard_top_k > 0 ? std::max<size_t>(4, static_cast<size_t>(hard_top_k)) : total;
     return std::min(total, std::min(cap, dynamic));
+}
+
+uint64_t search_structure_fingerprint(const BattleState& s) {
+    uint64_t h=1469598103934665603ULL;
+    const auto mix=[&](uint64_t v){h^=v+0x9e3779b97f4a7c15ULL+(h<<6)+(h>>2);};
+    const auto mf=[&](float v){uint32_t u=0;std::memcpy(&u,&v,sizeof(u));mix(u);};
+    mix(s.protocol_version); mix(s.ruleset_version); mix(static_cast<uint64_t>(s.min_x+0x10000)); mix(static_cast<uint64_t>(s.min_y+0x10000)); mix(s.width); mix(s.height);
+    auto blocked=s.blocked;
+    std::sort(blocked.begin(),blocked.end(),[](const Cell&a,const Cell&b){return a.x==b.x?a.y<b.y:a.x<b.x;});
+    for(const auto&c:blocked){mix(static_cast<uint64_t>(c.x+0x10000));mix(static_cast<uint64_t>(c.y+0x10000));}
+    std::vector<const Entity*> entities; entities.reserve(s.entities.size());
+    for(const auto&e:s.entities)entities.push_back(&e);
+    std::sort(entities.begin(),entities.end(),[](const Entity*a,const Entity*b){return a->uid<b->uid;});
+    for(const auto*ep:entities){
+        const auto&e=*ep;
+        mix(e.uid);mix(e.creature_id);mix(static_cast<uint64_t>(e.owner+0x10000));mix(static_cast<uint64_t>(e.side));
+        mix(e.footprint_w);mix(e.footprint_h);mix(e.is_hero);mix(e.is_big);mix(e.is_flyer);mix(e.is_shooter);mix(e.is_warmachine);mix(e.is_statix);mix(e.shoot_only);mix(e.double_shoot);mix(e.unlimited_retaliation);mix(e.no_retaliation);mix(e.no_range_penalty);mix(e.no_melee_penalty);
+        for(const auto&sp:e.spells){mix(sp.id);mf(sp.secondary);}
+    }
+    return h;
 }
 }  // namespace
 
@@ -71,8 +92,6 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
         return rec;
     }
 
-    // One Planner instance owns one mutable MCTS graph.  Serializing plan() protects
-    // persistent statistics when the daemon serves overlapping HTTP recommendation requests.
     std::unique_lock graph_lock(search_mutex_);
     if (cancelled()) {
         rec.status = "cancelled";
@@ -80,8 +99,9 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
         return rec;
     }
 
+    const uint64_t structure_fingerprint=search_structure_fingerprint(root);
     Node* tree = nullptr;
-    if (graph_battle_id_ == root.battle_id && graph_perspective_ == perspective) {
+    if (!root.battle_id.empty() && graph_battle_id_ == root.battle_id && graph_perspective_ == perspective && graph_structure_fingerprint_ == structure_fingerprint) {
         tree = graph_.find(rec.state_hash);
     }
     if (tree) {
@@ -92,6 +112,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
         graph_.clear();
         graph_battle_id_ = root.battle_id;
         graph_perspective_ = perspective;
+        graph_structure_fingerprint_ = structure_fingerprint;
         auto acquired = graph_.acquire(rec.state_hash);
         tree = acquired.first;
     }
@@ -135,10 +156,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
             double acc = 0.0;
             for (size_t i = 0; i < lim; ++i) {
                 acc += node.edges[i].prior;
-                if (u <= acc) {
-                    pick = i;
-                    break;
-                }
+                if (u <= acc) { pick = i; break; }
             }
         } else {
             double best = -1e100;
@@ -148,21 +166,16 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
                 const double q = e.q();
                 const double u = cfg_.c_puct * e.prior * root_sqrt / (1.0 + static_cast<double>(e.visits));
                 const double score = q + u;
-                if (score > best) {
-                    best = score;
-                    pick = i;
-                }
+                if (score > best) { best = score; pick = i; }
             }
         }
 
         auto& e = node.edges[pick];
         auto tr = sim_.apply(s, e.action, roll(rng));
         double value = 0.0;
-        if (!tr.valid) {
-            value = -1.0;
-        } else if (tr.terminal) {
-            value = value_.loaded() ? value_.utility(tr.state, perspective) : sim_.heuristic_value(tr.state, perspective);
-        } else {
+        if (!tr.valid) value = -1.0;
+        else if (tr.terminal) value = value_.loaded() ? value_.utility(tr.state, perspective) : sim_.heuristic_value(tr.state, perspective);
+        else {
             const std::string outcome_hash = state_hash(tr.state);
             auto [child, child_created] = graph_.acquire(outcome_hash);
             (void)child_created;
@@ -172,10 +185,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
             ++outcome->visits;
         }
 
-        ++e.visits;
-        e.sum += value;
-        e.sum_sq += value * value;
-        ++node.visits;
+        ++e.visits; e.sum += value; e.sum_sq += value * value; ++node.visits;
         if (is_root && e.root_returns.size() < 512) e.root_returns.push_back(value);
         return value;
     };
@@ -183,19 +193,13 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
     uint64_t sims = 0;
     const uint64_t cancel_every = std::max<uint64_t>(1, cfg_.cancellation_poll_interval);
     for (; sims < cfg_.simulation_budget; ++sims) {
-        if ((sims % cancel_every) == 0 && cancelled()) {
-            rec.status = "cancelled";
-            break;
-        }
+        if ((sims % cancel_every) == 0 && cancelled()) { rec.status = "cancelled"; break; }
         if (cfg_.time_budget_ms && sims > 0 &&
-            std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - started).count() >= static_cast<long long>(cfg_.time_budget_ms)) {
-            break;
-        }
+            std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - started).count() >= static_cast<long long>(cfg_.time_budget_ms)) break;
         simulate(*tree, root, 0, true);
     }
     if (rec.status == "cancelled") {
-        rec.simulations = sims;
-        rec.nodes = graph_.size();
+        rec.simulations = sims; rec.nodes = graph_.size();
         rec.elapsed_ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - started).count();
         rec.warnings.push_back("observed session revision changed during search");
         return rec;
@@ -208,9 +212,7 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
     std::vector<Candidate> cand;
     for (auto& e : tree->edges) {
         if (!e.visits) continue;
-        const double q = e.q();
-        const double sd = e.sd();
-        const double tail = cvar10(e.root_returns, q);
+        const double q = e.q(), sd = e.sd(), tail = cvar10(e.root_returns, q);
         const double combined_uncertainty = std::min(1.0, std::sqrt(sd * sd + 0.25 * semantic_risk * semantic_risk + 0.36 * ability_risk * ability_risk));
         const double risk_score = 0.75 * q + 0.25 * tail - cfg_.risk_lambda * combined_uncertainty;
         const double raw_p = std::clamp(0.5 + 0.5 * q, 0.0, 1.0);
@@ -218,15 +220,8 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
         const double calibrated_p = 0.5 + (raw_p - 0.5) * confidence_scale;
         cand.push_back({e.action, risk_score, std::clamp(calibrated_p, 0.0, 1.0), combined_uncertainty, e.visits});
     }
-    if (cand.empty()) {
-        rec.status = "not_ready";
-        rec.warnings.push_back("Search produced no visited action");
-        return rec;
-    }
-    std::sort(cand.begin(), cand.end(), [](const Candidate& a, const Candidate& b) {
-        if (a.visits != b.visits) return a.visits > b.visits;
-        return a.score > b.score;
-    });
+    if (cand.empty()) { rec.status = "not_ready"; rec.warnings.push_back("Search produced no visited action"); return rec; }
+    std::sort(cand.begin(), cand.end(), [](const Candidate& a, const Candidate& b) { return a.visits != b.visits ? a.visits > b.visits : a.score > b.score; });
     rec.best = cand.front();
     for (size_t i = 1; i < cand.size() && i < 5; ++i) rec.alternatives.push_back(cand[i]);
 
@@ -234,12 +229,10 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
     for (int d = 0; d < cfg_.max_depth && n && n->initialized && !n->edges.empty(); ++d) {
         auto it = std::max_element(n->edges.begin(), n->edges.end(), [](const auto& a, const auto& b) { return a.visits < b.visits; });
         if (it == n->edges.end() || !it->visits) break;
-        rec.pv.push_back(it->action);
-        n = it->modal_child();
+        rec.pv.push_back(it->action); n = it->modal_child();
     }
 
-    rec.simulations = sims;
-    rec.nodes = graph_.size();
+    rec.simulations = sims; rec.nodes = graph_.size();
     rec.elapsed_ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - started).count();
     if (!prior_.loaded()) rec.warnings.push_back("learned policy-prior table not loaded; using fallback priors");
     if (!value_.loaded()) rec.warnings.push_back("learned linear value model not loaded; using heuristic leaves");
