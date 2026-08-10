@@ -26,5 +26,5 @@ jobs:
           sudo apt-get install -y ninja-build
           python -m pip install pytest numpy
       - name: Apply, verify, commit and log Paw Strike
-        # v3 now verifies 174 source-matching I records directly from raw/state invariants.
+        # v3: 174 raw/state invariants + named Cell regression expectations.
         run: PYTHONPATH=python python .github/scripts/apply_pawstrike_patch_v3.py
