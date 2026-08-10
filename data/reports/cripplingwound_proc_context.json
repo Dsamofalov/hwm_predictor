@@ -142,6 +142,213 @@
       "rate": 0.0
     }
   ],
+  "train_hero_context": [
+    {
+      "hero_creature_id": 547,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 83,
+      "hits": 19,
+      "rate": 0.2289156626506024
+    },
+    {
+      "hero_creature_id": 170,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 75,
+      "hits": 25,
+      "rate": 0.3333333333333333
+    },
+    {
+      "hero_creature_id": 1215,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 73,
+      "hits": 24,
+      "rate": 0.3287671232876712
+    },
+    {
+      "hero_creature_id": 0,
+      "hero_tags": [],
+      "n": 46,
+      "hits": 21,
+      "rate": 0.45652173913043476
+    },
+    {
+      "hero_creature_id": 1029,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 33,
+      "hits": 6,
+      "rate": 0.18181818181818182
+    },
+    {
+      "hero_creature_id": 1174,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 32,
+      "hits": 7,
+      "rate": 0.21875
+    },
+    {
+      "hero_creature_id": 171,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 10,
+      "hits": 4,
+      "rate": 0.4
+    },
+    {
+      "hero_creature_id": 1451,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 9,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1441,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 7,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 549,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 6,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1209,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 6,
+      "hits": 2,
+      "rate": 0.3333333333333333
+    },
+    {
+      "hero_creature_id": 972,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 3,
+      "hits": 2,
+      "rate": 0.6666666666666666
+    },
+    {
+      "hero_creature_id": 1251,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 3,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1144,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 2,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1258,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 2,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1269,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 1,
+      "hits": 0,
+      "rate": 0.0
+    }
+  ],
+  "heldout_hero_context": [
+    {
+      "hero_creature_id": 170,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 61,
+      "hits": 9,
+      "rate": 0.14754098360655737
+    },
+    {
+      "hero_creature_id": 0,
+      "hero_tags": [],
+      "n": 12,
+      "hits": 4,
+      "rate": 0.3333333333333333
+    },
+    {
+      "hero_creature_id": 1029,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 6,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1174,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 3,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 1258,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 2,
+      "hits": 0,
+      "rate": 0.0
+    },
+    {
+      "hero_creature_id": 737,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 1,
+      "hits": 1,
+      "rate": 1.0
+    },
+    {
+      "hero_creature_id": 1144,
+      "hero_tags": [
+        "shooter"
+      ],
+      "n": 1,
+      "hits": 0,
+      "rate": 0.0
+    }
+  ],
   "model": {
     "eligible": true,
     "heldout_brier": 0.15167998563519175,
@@ -175,15 +382,15 @@
       0.4786641624700424
     ],
     "coef": [
-      -0.23080935280336926,
+      -0.23080935280336912,
       0.2964870568105301,
-      0.49624576434877565,
-      -0.018736374075647523,
-      -0.27753614440131436,
-      0.26385371089258547,
-      0.011216086141544707,
-      0.30100405091787924,
-      -0.08810028145185826
+      0.4962457643487756,
+      -0.018736374075647596,
+      -0.2775361444013143,
+      0.2638537108925853,
+      0.011216086141544786,
+      0.3010040509178793,
+      -0.08810028145185818
     ]
   }
 }
