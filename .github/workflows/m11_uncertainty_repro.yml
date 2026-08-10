@@ -3,6 +3,8 @@ name: M11 Uncertainty Repro
 on:
   push:
     branches: [m11-uncertainty-repro]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 defaults:
