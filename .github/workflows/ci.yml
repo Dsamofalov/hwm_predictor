@@ -13,7 +13,7 @@ jobs:
   windows-self-hosted:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, windows, x64, hwm-windows]
-    timeout-minutes: 120
+    timeout-minutes: 240
     env:
       PYTHONUTF8: '1'
       PYTHONIOENCODING: utf-8
@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Configure and build C++ with current MSVC
+      - name: Configure and build C++ Debug with current MSVC
         shell: cmd
         run: |
           for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64
@@ -43,7 +43,7 @@ jobs:
           cmake -S . -B build/windows -G Ninja -DCMAKE_BUILD_TYPE=Debug -DHWM_BUILD_TESTS=ON
           cmake --build build/windows --parallel 2
 
-      - name: C++ tests
+      - name: C++ Debug tests
         run: ctest --test-dir build/windows --output-on-failure
 
       - name: Held-out 120-state planner recommendation validity
@@ -78,3 +78,47 @@ jobs:
       - name: Build extension
         working-directory: extension
         run: npm run build
+
+      - name: Configure, build and test C++ Release
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64
+          cmake -S . -B build/windows-release -G Ninja -DCMAKE_BUILD_TYPE=Release -DHWM_BUILD_TESTS=ON
+          cmake --build build/windows-release --parallel 2
+          ctest --test-dir build/windows-release --output-on-failure
+          build\windows-release\planner-demo.exe 5000
+
+      - name: M11 full-corpus multistep residual gate
+        run: python -m hwm_solver.evaluation.dynamics_multistep hwm_battles --out build/validation/dynamics-multistep-damage.json
+
+      - name: M11 full-corpus uncertainty calibration
+        run: python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/validation/dynamics-uncertainty-calibration.json
+
+      - name: M11 full-corpus selector gate
+        run: python -m hwm_solver.evaluation.dynamics_selector hwm_battles --out build/validation/dynamics-selector-gate.json
+
+      - name: M11 stochastic survival-distribution gate
+        run: python -m hwm_solver.evaluation.dynamics_survival_gate hwm_battles --out build/validation/m11_dynamics_survival_gate.json
+
+      - name: Verify regenerated M11 evidence matches committed reports
+        shell: pwsh
+        run: |
+          @'
+          import json
+          from pathlib import Path
+
+          pairs = [
+              ("build/validation/dynamics-multistep-damage.json", "data/reports/dynamics-multistep-damage.json"),
+              ("build/validation/dynamics-uncertainty-calibration.json", "data/reports/dynamics-uncertainty-calibration.json"),
+              ("build/validation/dynamics-selector-gate.json", "data/reports/dynamics-selector-gate.json"),
+              ("build/validation/m11_dynamics_survival_gate.json", "data/reports/m11_dynamics_survival_gate.json"),
+          ]
+          for generated_path, committed_path in pairs:
+              generated = json.loads(Path(generated_path).read_text(encoding="utf-8"))
+              committed = json.loads(Path(committed_path).read_text(encoding="utf-8"))
+              generated.pop("validation", None)
+              committed.pop("validation", None)
+              if generated != committed:
+                  raise SystemExit(f"reproducibility mismatch: {committed_path}")
+              print(f"MATCH: {committed_path}")
+          '@ | python -
