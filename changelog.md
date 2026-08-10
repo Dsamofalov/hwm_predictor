@@ -388,3 +388,16 @@ This file is the development diary for repository changes performed against the 
   - Added `scripts/test_websocket_stream.py`: wrong bearer -> 401, valid RFC6455 accept verified, initial revision frame received, debug state publication produces pushed newer revision/hash.
   - M16 is now COMPLETE FOR CURRENT LOCAL API; Phase 2 remains MOSTLY COMPLETE until a real active authenticated browser battle is exercised.
   - C++/CTest, pairing, stale cancellation, live binding, WebSocket integration, TypeScript typecheck and extension build passed before commit.
+
+
+### Main-front checkpoint handoff
+
+- Commit: `68345f0afc89ed0e17884042592fb08b6edd83be`
+  - Completed authenticated loopback WebSocket revision/status streaming and extension push-driven replanning.
+- Commit: `7353e1ddcf17f27e981cac52f2b1e38f5545881e`
+  - Standard CI now requires WebSocket streaming and current-MSVC Windows runtime gates.
+  - Workflow run `31367488977`: **PASS** on Linux and Windows. Linux passed C++/CTest, all four daemon integrations, Python 42/42, TypeScript typecheck and extension build. Windows passed MSVC C++ build/CTest plus pairing/auth, stale cancellation, live binding and WebSocket integrations.
+- Commit: `144d958fd4c8e87c6fd4ec538a4cbacc007098b7`
+  - Updated the active general specification (`SPEC.md` and duplicate checkpoint), `TEST_REPORT.md`, and `docs/MAIN_FRONT_STATUS.md` with the current main-front state.
+  - Explicit next M13 correctness gate: stochastic action outcomes must be separated by `state_hash` before transposition/persistent tree reuse; do not keep different sampled outcomes under a single first-initialized `Edge.child`.
+  - Real authenticated active-battle smoke validation remains the immediate product gate before claiming live Browser Bridge/Orchestrator complete.
