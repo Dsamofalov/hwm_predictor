@@ -1,0 +1,93 @@
+name: M11 Uncertainty Repro
+
+on:
+  push:
+    branches: [m11-uncertainty-repro]
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
+
+jobs:
+  uncertainty-repro:
+    runs-on: [self-hosted, windows, x64, hwm-windows]
+    timeout-minutes: 60
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: true
+
+      - name: Bootstrap service-owned Python
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $uvVersion = '0.11.32'
+          $uvDir = Join-Path $env:RUNNER_TOOL_CACHE "uv\$uvVersion"
+          $uvExe = Join-Path $uvDir 'uv.exe'
+          $pythonDir = Join-Path $env:RUNNER_TOOL_CACHE 'uv-python'
+          $uvCache = Join-Path $env:RUNNER_TOOL_CACHE 'uv-cache'
+          New-Item -ItemType Directory -Force $uvDir, $pythonDir, $uvCache | Out-Null
+          if (-not (Test-Path $uvExe)) {
+            $env:UV_UNMANAGED_INSTALL = $uvDir
+            $installer = Invoke-RestMethod "https://astral.sh/uv/$uvVersion/install.ps1"
+            Invoke-Expression $installer
+          }
+          $env:UV_PYTHON_INSTALL_DIR = $pythonDir
+          $env:UV_CACHE_DIR = $uvCache
+          $env:UV_MANAGED_PYTHON = '1'
+          & $uvExe python install 3.13 --install-dir $pythonDir
+          & $uvExe venv --python 3.13 --managed-python .venv
+          $venvScripts = (Resolve-Path '.venv\Scripts').Path
+          $venvScripts | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          "VIRTUAL_ENV=$((Resolve-Path '.venv').Path)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "UV_PYTHON_INSTALL_DIR=$pythonDir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "UV_CACHE_DIR=$uvCache" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          & $uvExe pip install --python '.venv\Scripts\python.exe' -e '.[dev]'
+
+      - name: Targeted uncertainty tests
+        run: python -m pytest python/tests/test_dynamics_uncertainty.py -q
+
+      - name: Full-corpus uncertainty pass one
+        run: python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/uncertainty-1.json
+
+      - name: Full-corpus uncertainty pass two
+        run: python -m hwm_solver.evaluation.dynamics_uncertainty hwm_battles --out build/uncertainty-2.json
+
+      - name: Require exact repeated evidence and print compact metrics
+        run: |
+          @'
+          import json
+          from pathlib import Path
+
+          p1 = Path('build/uncertainty-1.json')
+          p2 = Path('build/uncertainty-2.json')
+          a = json.loads(p1.read_text(encoding='utf-8'))
+          b = json.loads(p2.read_text(encoding='utf-8'))
+          if a != b:
+              raise SystemExit('M11 uncertainty evidence is not reproducible across repeated processes')
+          compact = {
+              'train_battles': a['train_battles'],
+              'heldout_battles': a['heldout_battles'],
+              'diagnostic_gate': a['diagnostic_gate'],
+              'metrics': {
+                  h: {
+                      k: a['metrics'][h][k]
+                      for k in (
+                          'windows',
+                          'auc_disagreement_flags_learned_worse_than_generic',
+                          'learned_worse_than_generic_rate',
+                          'low_to_high_bin_error_ratio',
+                          'spearman_disagreement_vs_ensemble_l1',
+                          'spearman_disagreement_vs_excess_l1',
+                          'spearman_disagreement_vs_invalid_action_fraction',
+                      )
+                  }
+                  for h in ('2', '4', '8', '16')
+              },
+          }
+          print(json.dumps(compact, indent=2, sort_keys=True))
+          print('M11 uncertainty repeated-process reproducibility: PASS')
+          '@ | python -
