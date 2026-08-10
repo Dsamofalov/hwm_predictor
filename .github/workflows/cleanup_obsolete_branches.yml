@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths: ['.github/workflows/cleanup_obsolete_branches.yml']
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,7 +18,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
-      - name: Delete obsolete development branches
+
+      - name: Delete obsolete development branches and cleanup workflow
         shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           $ErrorActionPreference = 'Stop'
@@ -30,13 +32,27 @@ jobs:
             'main-windows-validation-final',
             'verify-m13-reroot'
           )
+
           foreach ($branch in $branches) {
             git ls-remote --exit-code --heads origin "refs/heads/$branch" *> $null
             if ($LASTEXITCODE -eq 0) {
-              Write-Host "Deleting $branch"
+              Write-Host "Deleting obsolete branch: $branch"
               git push origin --delete $branch
               if ($LASTEXITCODE -ne 0) { throw "Failed to delete branch: $branch" }
             } else {
               Write-Host "Already absent: $branch"
             }
           }
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm '.github/workflows/cleanup_obsolete_branches.yml'
+          git commit -m 'chore: remove completed branch cleanup workflow'
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to commit cleanup workflow removal.' }
+
+          git fetch origin main
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to refresh main.' }
+          git rebase origin/main
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to rebase cleanup commit onto main.' }
+          git push origin HEAD:main
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to remove cleanup workflow from main.' }
