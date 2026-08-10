@@ -26,5 +26,5 @@ jobs:
           sudo apt-get install -y ninja-build
           python -m pip install pytest numpy
       - name: Apply, verify, commit and log Paw Strike
-        # v3: 174 raw/state invariants + named Cell regression expectations.
+        # v3-final: 174 raw/state invariants, C++ Cell fix, Python insertion newline fix.
         run: PYTHONPATH=python python .github/scripts/apply_pawstrike_patch_v3.py
