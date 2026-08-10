@@ -1,0 +1,5339 @@
+{
+  "records": 174,
+  "classes": {
+    "primary=True,damage=True,forced=True": 150,
+    "primary=False,damage=True,forced=True": 24
+  },
+  "ability_occurrences": {
+    "alive": 174,
+    "big": 174,
+    "enraged": 174,
+    "armoured": 162,
+    "pawstrike": 174,
+    "waterproof50": 4,
+    "patience": 4
+  },
+  "extra_non_primary": [
+    {
+      "battle_id": "1626578405",
+      "decision_index": 28,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        13,
+        11,
+        12
+      ],
+      "affected_uid": 13,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130020",
+      "raw": "m0200911l020luck^d0200080000003607Srn9020000000000000i0200000d0200130000001548b0131014I0130020i0200000d0200110000001296i0200000l020luck^d0200120000002704Ssld012020000300000i0200000l020morale^i0200050Spss-01021000000046Spsf-01021000000015"
+    },
+    {
+      "battle_id": "1631563801",
+      "decision_index": 28,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100608l010luck^d0100040000005000b0040905I0040010Srn9010000000000000i0100000d0100030000002112b0030909I0030010i0100100"
+    },
+    {
+      "battle_id": "1631574804",
+      "decision_index": 33,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        7,
+        5,
+        6,
+        8
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100606l010luck^d0100040000005757b0040704I0040010Srn9010000000000000i0100000d0100020000003009i0100000d0100070000002522i0100000d0100050000002558b0050904I0050010i0100000l010luck^d0100060000005024i0100000l010luck^d0100080000005276l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631747828",
+      "decision_index": 22,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        4,
+        7
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100604d0100080000002108Srn9010000000000000i0100000l010luck^d0100040000004053b0040607I0040010i0100000d0100070000002051l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631764434",
+      "decision_index": 13,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        6,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0110505d0110080000001981Srn9011000000000000i0110000l011luck^d0110060000003602i0110000l011luck^d0110040000003326b0040803I0040011Sat3001000000000000i0110100"
+    },
+    {
+      "battle_id": "1631790208",
+      "decision_index": 25,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        7,
+        5,
+        6
+      ],
+      "affected_uid": 7,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0150505d0150020000001089Srn9015000000000000i0150000l015luck^d0150070000003164b0070805I0070015i0150000l015luck^d0150050000002979i0150000d0150060000001476l015morale^i0150050"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 5,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9,
+        1,
+        7
+      ],
+      "affected_uid": 1,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        1,
+        9
+      ],
+      "raw_i": "I0010011",
+      "raw": "m0110603d0110090000002671b0090801I0090011Srn9011000000000000i0110000d0110010000001710b0010705I0010011i0110000l011luck^d0110070000003512Senr001100000000001l011morale^i0110050"
+    },
+    {
+      "battle_id": "1631801111",
+      "decision_index": 6,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0120804l012luck^d0120040000001405Srn9012000000000000i0120000d0120030000000680b0031003I0030012Sat3001000000000000i0120100"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 22,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13,
+        5,
+        7
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        13
+      ],
+      "raw_i": "I0050014",
+      "raw": "m0140610d0140130000001584b0130812I0130014Srn9014000000000000i0140000l014luck^d0140050000002709b0050908I0050014i0140000d0140070000001486i0140100Sspi004000000000000"
+    },
+    {
+      "battle_id": "1631845993",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100805d0100030000000439Srn9010000000000000i0100000l010luck^d0100040000000843b0041005I0040010i0100100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 20,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        3,
+        5
+      ],
+      "affected_uid": 2,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        5
+      ],
+      "raw_i": "I0020015",
+      "raw": "m0150904l015luck^d0150040000004668Srn9015000000000000i0150000d0150020000002228b0021002I0020015i0150000d0150030000002290i0150000d0150050000002092b0051205I0050015Sat3001000000000000i0150100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 20,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        3,
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        5
+      ],
+      "raw_i": "I0050015",
+      "raw": "m0150904l015luck^d0150040000004668Srn9015000000000000i0150000d0150020000002228b0021002I0020015i0150000d0150030000002290i0150000d0150050000002092b0051205I0050015Sat3001000000000000i0150100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 2,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        8,
+        6
+      ],
+      "affected_uid": 8,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        8
+      ],
+      "raw_i": "I0080013",
+      "raw": "m0130603d0130070000002295Srn9013000000000000i0130000l013luck^d0130080000003467b0080801I0080013Scrs008013000600080i0130000d0130060000002034b0060906I0060013i0130100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 2,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        8,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        8
+      ],
+      "raw_i": "I0060013",
+      "raw": "m0130603d0130070000002295Srn9013000000000000i0130000l013luck^d0130080000003467b0080801I0080013Scrs008013000600080i0130000d0130060000002034b0060906I0060013i0130100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 22,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        5,
+        8,
+        2,
+        7
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        7
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110906l011luck^d0110040000004124Srn9011000000000000i0110000d0110050000002214b0050905I0050011i0110000l011luck^d0110080000004566i0110000d0110020000002279i0110000d0110070000002312b0071209I0070011i0110100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 22,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        5,
+        8,
+        2,
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0110906l011luck^d0110040000004124Srn9011000000000000i0110000d0110050000002214b0050905I0050011i0110000l011luck^d0110080000004566i0110000d0110020000002279i0110000d0110070000002312b0071209I0070011i0110100"
+    },
+    {
+      "battle_id": "1632050106",
+      "decision_index": 28,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0110801l011luck^d0110050000003291b0050904I0050011Srn9011000000000000i0110000d0110030000001759b0031104I0030011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632225954",
+      "decision_index": 21,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110905l011luck^d0110030000001018b0031105I0030011Srn9011000000000000i0110000d0110050000000469b0050907I0050011i0110100"
+    },
+    {
+      "battle_id": "1632694720",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100704l010luck^d0100030000001177b0030401I0030010Srn9010000000000000i0100000d0100040000000727b0040707I0040010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1633096129",
+      "decision_index": 6,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        6
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100707l010luck^d0100060000001516b0060706I0060010Srn9010000000000000i0100000d0100040000000525b0041005I0040010Sat3001000000000000i0100100"
+    },
+    {
+      "battle_id": "1633195170",
+      "decision_index": 18,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 18,
+      "damage_targets": [
+        18,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060011",
+      "raw": "m0110904l011luck^d0110180000000451Srn9011000000000000i0110000d0110060000000161b0061104I0060011i0110100"
+    },
+    {
+      "battle_id": "1633312629",
+      "decision_index": 31,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        6
+      ],
+      "raw_i": "I0060009",
+      "raw": "m0090601l009luck^d0090020000002654b0020901I0020009Srn9009000000000000i0090000l009luck^d0090060000003655b0060604I0060009i0090100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        6,
+        8
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        7,
+        8
+      ],
+      "raw_i": "I0060010",
+      "raw": "m0100908d0100070000000400b0071110I0070010Spfr007040119.68000Srn9010000000000000i0100000d0100060000000399b0060810I0060010Spfr006040119.68000i0100000d0100080000000442b0081010I0080010Spfr008040119.68000i0100100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        6,
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        7,
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0100908d0100070000000400b0071110I0070010Spfr007040119.68000Srn9010000000000000i0100000d0100060000000399b0060810I0060010Spfr006040119.68000i0100000d0100080000000442b0081010I0080010Spfr008040119.68000i0100100"
+    }
+  ],
+  "rows": [
+    {
+      "battle_id": "1625165592",
+      "decision_index": 5,
+      "actor_uid": 23,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080023",
+      "raw": "m0230612d0230080000000952b0080913I0080023i0230100"
+    },
+    {
+      "battle_id": "1625165592",
+      "decision_index": 25,
+      "actor_uid": 23,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120023",
+      "raw": "m0230715d0230120000001076b0120813I0120023i0230100Sbdd004012001180000d0040240000000410l004morale^i0040050"
+    },
+    {
+      "battle_id": "1625710142",
+      "decision_index": 52,
+      "actor_uid": 21,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030021",
+      "raw": "m0210902d0210030000000735b0031101I0030021d0030210000000203l021morale^i0210050"
+    },
+    {
+      "battle_id": "1626169655",
+      "decision_index": 44,
+      "actor_uid": 23,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090023",
+      "raw": "m0231111l023luck^d0230090000003952b0091209I0090023i0230100"
+    },
+    {
+      "battle_id": "1626578405",
+      "decision_index": 28,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        13,
+        11,
+        12
+      ],
+      "affected_uid": 13,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130020",
+      "raw": "m0200911l020luck^d0200080000003607Srn9020000000000000i0200000d0200130000001548b0131014I0130020i0200000d0200110000001296i0200000l020luck^d0200120000002704Ssld012020000300000i0200000l020morale^i0200050Spss-01021000000046Spsf-01021000000015"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 21,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200505l020luck^d0200040000002370b0040806I0040020i0200100"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 45,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200906d0200040000000909b0040706I0040020i0200100"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 64,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200504d0200040000000897b0040807I0040020l020morale^i0200050"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 92,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200405l020luck^d0200040000001418b0040503I0040020i0200100Spss-01019000000007"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 106,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200601l020luck^d0200040000001400b0040404I0040020i0200100"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 119,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200305d0200040000000478b0040403I0040020i0200100"
+    },
+    {
+      "battle_id": "1627593546",
+      "decision_index": 130,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200401d0200040000000048b0040404I0040020l020morale^i0200050Sspi013000000000000"
+    },
+    {
+      "battle_id": "1627981142",
+      "decision_index": 5,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040012",
+      "raw": "m0120606l012luck^d0120040000001323b0040703I0040012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1627981142",
+      "decision_index": 15,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0121104d0120030000001089b0031107I0030012i0120100"
+    },
+    {
+      "battle_id": "1627981142",
+      "decision_index": 26,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0120906d0120030000000899b0031107I0030012d0030120000000318i0120100"
+    },
+    {
+      "battle_id": "1627981142",
+      "decision_index": 33,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0121105d0120030000000723b0031107I0030012i0120100"
+    },
+    {
+      "battle_id": "1628093826",
+      "decision_index": 5,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070020",
+      "raw": "m0200408d0200070000001067b0070211I0070020l020morale^i0200050Sspi003000000000000"
+    },
+    {
+      "battle_id": "1628093826",
+      "decision_index": 43,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120020",
+      "raw": "m0200913d0200120000000760b0121115I0120020Spsc012020000039003Ssld012020000021000i0200000d0120200000000053Spsc012020000013003Ssld012020000007000i0200000i0200100"
+    },
+    {
+      "battle_id": "1628851781",
+      "decision_index": 4,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040020",
+      "raw": "m0200306d0200040000001171b0040304I0040020i0200100"
+    },
+    {
+      "battle_id": "1628851781",
+      "decision_index": 29,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050020",
+      "raw": "m0200106d0200050000000657b0050409I0050020l020morale^i0200050"
+    },
+    {
+      "battle_id": "1628851781",
+      "decision_index": 56,
+      "actor_uid": 20,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120020",
+      "raw": "m0200311d0200120000000632b0120309I0120020i0200100"
+    },
+    {
+      "battle_id": "1630075138",
+      "decision_index": 22,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0120905d0120030000001231b0030802I0030012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1630075138",
+      "decision_index": 29,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0121001l012luck^d0120030000001730b0030702I0030012i0120100"
+    },
+    {
+      "battle_id": "1630075138",
+      "decision_index": 43,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040012",
+      "raw": "m0121007d0120040000001012b0041104I0040012i0120100"
+    },
+    {
+      "battle_id": "1630075138",
+      "decision_index": 68,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090012",
+      "raw": "m0121108d0120090000001372b0091210I0090012d0090120000000226i0120100"
+    },
+    {
+      "battle_id": "1630520470",
+      "decision_index": 8,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060012",
+      "raw": "m0120507d0120060000001271b0060807I0060012i0120100"
+    },
+    {
+      "battle_id": "1630814572",
+      "decision_index": 21,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040012",
+      "raw": "m0120706d0120040000001516b0041009I0040012i0120100Sspi005000000000000"
+    },
+    {
+      "battle_id": "1630814572",
+      "decision_index": 46,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090012",
+      "raw": "m0120806l012luck^d0120090000001387b0090909I0090012i0120100"
+    },
+    {
+      "battle_id": "1630814572",
+      "decision_index": 61,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090012",
+      "raw": "m0120707d0120090000000471b0091010I0090012i0120100"
+    },
+    {
+      "battle_id": "1631323259",
+      "decision_index": 36,
+      "actor_uid": 6,
+      "actor_creature_id": 1336,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "patience",
+        "pawstrike",
+        "waterproof50"
+      ],
+      "primary_uid": 15,
+      "damage_targets": [
+        15
+      ],
+      "affected_uid": 15,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        15
+      ],
+      "raw_i": "I0150006",
+      "raw": "m0060105d0060150000000461b0150103I0150006d0150060000000960i0060100"
+    },
+    {
+      "battle_id": "1631504594",
+      "decision_index": 23,
+      "actor_uid": 2,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070002",
+      "raw": "m0020809Srag00700317-020000d0020070000000141Sra20070268-4900034b0070507I0070002i0020100"
+    },
+    {
+      "battle_id": "1631513662",
+      "decision_index": 54,
+      "actor_uid": 2,
+      "actor_creature_id": 1336,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "patience",
+        "pawstrike",
+        "waterproof50"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130002",
+      "raw": "m0020908Srag01300937-020000d0020130000000191Sra20130915-2200056b0131110I0130002l013luck^d0130020000007603Senr003100000000009Senr006100000000009Sraa001001000200000i0020100"
+    },
+    {
+      "battle_id": "1631563801",
+      "decision_index": 22,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100503d0100040000002262b0040806I0040010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631563801",
+      "decision_index": 28,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        3
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100608l010luck^d0100040000005000b0040905I0040010Srn9010000000000000i0100000d0100030000002112b0030909I0030010i0100100"
+    },
+    {
+      "battle_id": "1631563801",
+      "decision_index": 28,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100608l010luck^d0100040000005000b0040905I0040010Srn9010000000000000i0100000d0100030000002112b0030909I0030010i0100100"
+    },
+    {
+      "battle_id": "1631565469",
+      "decision_index": 21,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0111107l011luck^d0110070000003157b0071110I0070011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1631574804",
+      "decision_index": 33,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        7,
+        5,
+        6,
+        8
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        5
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100606l010luck^d0100040000005757b0040704I0040010Srn9010000000000000i0100000d0100020000003009i0100000d0100070000002522i0100000d0100050000002558b0050904I0050010i0100000l010luck^d0100060000005024i0100000l010luck^d0100080000005276l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631574804",
+      "decision_index": 33,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        7,
+        5,
+        6,
+        8
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100606l010luck^d0100040000005757b0040704I0040010Srn9010000000000000i0100000d0100020000003009i0100000d0100070000002522i0100000d0100050000002558b0050904I0050010i0100000l010luck^d0100060000005024i0100000l010luck^d0100080000005276l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631574804",
+      "decision_index": 41,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100205d0100050000003057b0050203I0050010i0100100"
+    },
+    {
+      "battle_id": "1631744981",
+      "decision_index": 24,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        4
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020010",
+      "raw": "m0100806d0100020000001308b0021006I0020010Srn9010000000000000i0100000d0100040000001837Ssld002010000403000i0100000l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631747828",
+      "decision_index": 22,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        4,
+        7
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100604d0100080000002108Srn9010000000000000i0100000l010luck^d0100040000004053b0040607I0040010i0100000d0100070000002051l010morale^i0100050"
+    },
+    {
+      "battle_id": "1631747828",
+      "decision_index": 36,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070010",
+      "raw": "m0100806d0100070000001793b0070605I0070010i0100100"
+    },
+    {
+      "battle_id": "1631764434",
+      "decision_index": 13,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8,
+        6,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0110505d0110080000001981Srn9011000000000000i0110000l011luck^d0110060000003602i0110000l011luck^d0110040000003326b0040803I0040011Sat3001000000000000i0110100"
+    },
+    {
+      "battle_id": "1631764434",
+      "decision_index": 40,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020011",
+      "raw": "m0110603d0110020000001660b0020601I0020011i0110100"
+    },
+    {
+      "battle_id": "1631790208",
+      "decision_index": 25,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        7,
+        5,
+        6
+      ],
+      "affected_uid": 7,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0150505d0150020000001089Srn9015000000000000i0150000l015luck^d0150070000003164b0070805I0070015i0150000l015luck^d0150050000002979i0150000d0150060000001476l015morale^i0150050"
+    },
+    {
+      "battle_id": "1631790208",
+      "decision_index": 30,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0150703d0150070000001465b0070806I0070015i0150100"
+    },
+    {
+      "battle_id": "1631790208",
+      "decision_index": 67,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0150605d0150070000001792b0070906I0070015i0150100"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 5,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9,
+        1,
+        7
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        1,
+        9
+      ],
+      "raw_i": "I0090011",
+      "raw": "m0110603d0110090000002671b0090801I0090011Srn9011000000000000i0110000d0110010000001710b0010705I0010011i0110000l011luck^d0110070000003512Senr001100000000001l011morale^i0110050"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 5,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9,
+        1,
+        7
+      ],
+      "affected_uid": 1,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        1,
+        9
+      ],
+      "raw_i": "I0010011",
+      "raw": "m0110603d0110090000002671b0090801I0090011Srn9011000000000000i0110000d0110010000001710b0010705I0010011i0110000l011luck^d0110070000003512Senr001100000000001l011morale^i0110050"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 33,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0110704d0110040000001839b0040406I0040011Sslw004011000600030i0110100"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 39,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0110206l011luck^d0110040000003713b0040506I0040011Scrs004011000600080i0110100"
+    },
+    {
+      "battle_id": "1631800006",
+      "decision_index": 46,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0110807d0110030000001598b0030809I0030011d0030110000000130i0110100"
+    },
+    {
+      "battle_id": "1631800867",
+      "decision_index": 8,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0101108d0100030000000560b0030908I0030010i0100100Srn2010000000000000"
+    },
+    {
+      "battle_id": "1631800867",
+      "decision_index": 30,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100906l010luck^d0100030000001050b0030909I0030010i0100100"
+    },
+    {
+      "battle_id": "1631801111",
+      "decision_index": 6,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0120804l012luck^d0120040000001405Srn9012000000000000i0120000d0120030000000680b0031003I0030012Sat3001000000000000i0120100"
+    },
+    {
+      "battle_id": "1631801111",
+      "decision_index": 21,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060012",
+      "raw": "m0120909l012luck^d0120060000000154b0061209I0060012i0120100"
+    },
+    {
+      "battle_id": "1631801392",
+      "decision_index": 6,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050014",
+      "raw": "m0140105d0140050000000958b0050303I0050014d0050140000000294i0140100"
+    },
+    {
+      "battle_id": "1631801392",
+      "decision_index": 24,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060014",
+      "raw": "m0140504d0140060000000904b0060804I0060014i0140100"
+    },
+    {
+      "battle_id": "1631801392",
+      "decision_index": 29,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040014",
+      "raw": "m0140409l014luck^d0140040000001688b0040108I0040014l014morale^i0140050"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 22,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13,
+        5,
+        7
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        13
+      ],
+      "raw_i": "I0130014",
+      "raw": "m0140610d0140130000001584b0130812I0130014Srn9014000000000000i0140000l014luck^d0140050000002709b0050908I0050014i0140000d0140070000001486i0140100Sspi004000000000000"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 22,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13,
+        5,
+        7
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        13
+      ],
+      "raw_i": "I0050014",
+      "raw": "m0140610d0140130000001584b0130812I0130014Srn9014000000000000i0140000l014luck^d0140050000002709b0050908I0050014i0140000d0140070000001486i0140100Sspi004000000000000"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 30,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130014",
+      "raw": "m0140911l014luck^d0140130000002677b0130712I0130014i0140100"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 40,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050014",
+      "raw": "m0140409d0140050000001239b0050209I0050014l014morale^i0140050"
+    },
+    {
+      "battle_id": "1631844886",
+      "decision_index": 42,
+      "actor_uid": 14,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080014",
+      "raw": "m0140303d0140080000001331b0080101I0080014i0140100"
+    },
+    {
+      "battle_id": "1631845993",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100805d0100030000000439Srn9010000000000000i0100000l010luck^d0100040000000843b0041005I0040010i0100100"
+    },
+    {
+      "battle_id": "1631845993",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100305l010luck^d0100030000000952b0030605I0030010i0100100"
+    },
+    {
+      "battle_id": "1631845993",
+      "decision_index": 37,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100703d0100030000000461b0030506I0030010i0100100"
+    },
+    {
+      "battle_id": "1631848584",
+      "decision_index": 18,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        4,
+        16
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020012",
+      "raw": "m0121007d0120020000001889b0021206I0020012Srn9012000000000000i0120000l012luck^d0120040000003372i0120000l012luck^d0120160000004139i0120100"
+    },
+    {
+      "battle_id": "1631848584",
+      "decision_index": 23,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050012",
+      "raw": "m0120602d0120050000001644b0050901I0050012i0120100"
+    },
+    {
+      "battle_id": "1631848584",
+      "decision_index": 54,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020012",
+      "raw": "m0120908l012luck^d0120020000002280b0021208I0020012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1631848584",
+      "decision_index": 68,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0120604d0120030000000923b0030904I0030012i0120100"
+    },
+    {
+      "battle_id": "1631849674",
+      "decision_index": 21,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080012",
+      "raw": "m0120703d0120080000002168b0081006I0080012i0120100"
+    },
+    {
+      "battle_id": "1631849674",
+      "decision_index": 38,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020012",
+      "raw": "m0120906d0120020000001998b0021004I0020012i0120100"
+    },
+    {
+      "battle_id": "1631849674",
+      "decision_index": 47,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020012",
+      "raw": "m0120802d0120020000002107b0021004I0020012d0020120000000003l012morale^i0120050"
+    },
+    {
+      "battle_id": "1631849674",
+      "decision_index": 50,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070012",
+      "raw": "m0121006l012luck^d0120070000004006b0071206I0070012d0070120000000018i0120100"
+    },
+    {
+      "battle_id": "1631850967",
+      "decision_index": 10,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090011",
+      "raw": "m0110905l011luck^d0110090000001420b0091205I0090011i0110100Srn2011000000000000"
+    },
+    {
+      "battle_id": "1631855111",
+      "decision_index": 19,
+      "actor_uid": 3,
+      "actor_creature_id": 1336,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "patience",
+        "pawstrike",
+        "waterproof50"
+      ],
+      "primary_uid": 10,
+      "damage_targets": [
+        10
+      ],
+      "affected_uid": 10,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        10
+      ],
+      "raw_i": "I0100003",
+      "raw": "m0030304d0030100000000999b0100102I0100003d0100030000000363i0030100Sadp001000036000000"
+    },
+    {
+      "battle_id": "1631933802",
+      "decision_index": 14,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5,
+        4
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110305d0110050000001665b0050303I0050011Srn9011000000000000i0110000d0110040000001313l011morale^i0110050"
+    },
+    {
+      "battle_id": "1631933802",
+      "decision_index": 37,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0110503d0110070000001394b0070803I0070011Sat3001000000000000i0110100"
+    },
+    {
+      "battle_id": "1631933802",
+      "decision_index": 66,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060011",
+      "raw": "m0110405l011luck^d0110060000002669b0060403I0060011i0110100"
+    },
+    {
+      "battle_id": "1631933802",
+      "decision_index": 71,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060011",
+      "raw": "m0110301d0110060000001335b0060403I0060011d0060110000000091i0110100"
+    },
+    {
+      "battle_id": "1632007191",
+      "decision_index": 3,
+      "actor_uid": 5,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 17,
+      "damage_targets": [
+        17
+      ],
+      "affected_uid": 17,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        17
+      ],
+      "raw_i": "I0170005",
+      "raw": "m0050303Srag01700000-020000d0050170000000543b0170202I0170005l017luck^d0170050000000198i0050100Srn2005000000000000"
+    },
+    {
+      "battle_id": "1632014861",
+      "decision_index": 68,
+      "actor_uid": 3,
+      "actor_creature_id": 1336,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "patience",
+        "pawstrike",
+        "waterproof50"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120003",
+      "raw": "m0030304d0030120000000191b0120203I0120003d0120030000000575i0030100l005badmorale^i0050050"
+    },
+    {
+      "battle_id": "1632023448",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0101108d0100040000002356b0040906I0040010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 20,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        3,
+        5
+      ],
+      "affected_uid": 2,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        5
+      ],
+      "raw_i": "I0020015",
+      "raw": "m0150904l015luck^d0150040000004668Srn9015000000000000i0150000d0150020000002228b0021002I0020015i0150000d0150030000002290i0150000d0150050000002092b0051205I0050015Sat3001000000000000i0150100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 20,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        2,
+        3,
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        5
+      ],
+      "raw_i": "I0050015",
+      "raw": "m0150904l015luck^d0150040000004668Srn9015000000000000i0150000d0150020000002228b0021002I0020015i0150000d0150030000002290i0150000d0150050000002092b0051205I0050015Sat3001000000000000i0150100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 36,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050015",
+      "raw": "m0150906d0150050000002063b0051009I0050015i0150100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 48,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050015",
+      "raw": "m0150409d0150050000002061b0050709I0050015i0150100"
+    },
+    {
+      "battle_id": "1632023595",
+      "decision_index": 57,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060015",
+      "raw": "m0150909d0150060000002439b0060710I0060015l015morale^i0150050"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 18,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040015",
+      "raw": "m0150908d0150040000002081b0041209I0040015i0150100"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 27,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6,
+        2,
+        7
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060015",
+      "raw": "m0150904l015luck^d0150060000004018b0061205I0060015Srn9015000000000000i0150000d0150020000001844i0150000d0150070000001979Sat3001000000000000i0150100"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 36,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0150801l015luck^d0150070000003816b0071101I0070015i0070000Sfw3007110100000556i0070000l015morale^i0150050"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 42,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020015",
+      "raw": "m0151004d0150020000001977b0021002I0020015i0150100"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 54,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060015",
+      "raw": "m0150402l015luck^d0150060000004091b0060705I0060015l015morale^i0150050"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 58,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060015",
+      "raw": "m0150806d0150060000001758b0060604I0060015i0150100"
+    },
+    {
+      "battle_id": "1632024503",
+      "decision_index": 81,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070015",
+      "raw": "m0151102d0150070000001471b0071101I0070015d0070150000000010i0150100"
+    },
+    {
+      "battle_id": "1632025293",
+      "decision_index": 22,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0121002l012luck^d0120030000004268b0031105I0030012Srn9012000000000000i0120000l012luck^d0120040000004647i0120100"
+    },
+    {
+      "battle_id": "1632025293",
+      "decision_index": 27,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 10,
+      "damage_targets": [
+        10
+      ],
+      "affected_uid": 10,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        10
+      ],
+      "raw_i": "I0100012",
+      "raw": "m0120908d0120100000002342b0101208I0100012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1632025293",
+      "decision_index": 30,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030012",
+      "raw": "m0121103d0120030000002363b0031106I0030012i0120100"
+    },
+    {
+      "battle_id": "1632025293",
+      "decision_index": 35,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080012",
+      "raw": "m0120807d0120080000002327b0081108I0080012i0120100"
+    },
+    {
+      "battle_id": "1632025293",
+      "decision_index": 40,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080012",
+      "raw": "m0120907d0120080000002429b0081208I0080012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 2,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        8,
+        6
+      ],
+      "affected_uid": 8,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        8
+      ],
+      "raw_i": "I0080013",
+      "raw": "m0130603d0130070000002295Srn9013000000000000i0130000l013luck^d0130080000003467b0080801I0080013Scrs008013000600080i0130000d0130060000002034b0060906I0060013i0130100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 2,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        8,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        8
+      ],
+      "raw_i": "I0060013",
+      "raw": "m0130603d0130070000002295Srn9013000000000000i0130000l013luck^d0130080000003467b0080801I0080013Scrs008013000600080i0130000d0130060000002034b0060906I0060013i0130100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 20,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070013",
+      "raw": "m0130407l013luck^d0130070000003677b0070704I0070013i0130100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 29,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030013",
+      "raw": "m0130803l013luck^d0130030000003762b0031104I0030013i0130100"
+    },
+    {
+      "battle_id": "1632025663",
+      "decision_index": 44,
+      "actor_uid": 13,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040013",
+      "raw": "m0131005d0130040000001511b0040908I0040013i0130100"
+    },
+    {
+      "battle_id": "1632026147",
+      "decision_index": 24,
+      "actor_uid": 18,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12,
+        6
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120018",
+      "raw": "m0180903d0180120000000653b0120906I0120018Srn9018000000000000i0180000l018luck^d0180060000003173i0180100"
+    },
+    {
+      "battle_id": "1632027005",
+      "decision_index": 5,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030015",
+      "raw": "m0151102l015luck^d0150030000004266b0031105I0030015Sat3001000000000000i0150100Srn2015000000000000"
+    },
+    {
+      "battle_id": "1632027005",
+      "decision_index": 33,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040015",
+      "raw": "m0150604d0150040000001983b0040905I0040015l015morale^i0150050"
+    },
+    {
+      "battle_id": "1632027005",
+      "decision_index": 43,
+      "actor_uid": 15,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020015",
+      "raw": "m0150603d0150020000001897b0020906I0020015i0150100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 22,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        5,
+        8,
+        2,
+        7
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        7
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110906l011luck^d0110040000004124Srn9011000000000000i0110000d0110050000002214b0050905I0050011i0110000l011luck^d0110080000004566i0110000d0110020000002279i0110000d0110070000002312b0071209I0070011i0110100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 22,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4,
+        5,
+        8,
+        2,
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5,
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0110906l011luck^d0110040000004124Srn9011000000000000i0110000d0110050000002214b0050905I0050011i0110000l011luck^d0110080000004566i0110000d0110020000002279i0110000d0110070000002312b0071209I0070011i0110100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 30,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0111106l011luck^d0110040000004618b0041104I0040011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 41,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0111007d0110070000002319b0070805I0070011i0110100"
+    },
+    {
+      "battle_id": "1632027528",
+      "decision_index": 47,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080011",
+      "raw": "m0110604d0110080000002065b0080907I0080011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632027766",
+      "decision_index": 37,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020011",
+      "raw": "m0110406d0110020000001753b0020709I0020011i0110100"
+    },
+    {
+      "battle_id": "1632050106",
+      "decision_index": 28,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5,
+        3
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110801l011luck^d0110050000003291b0050904I0050011Srn9011000000000000i0110000d0110030000001759b0031104I0030011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632050106",
+      "decision_index": 28,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5,
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0110801l011luck^d0110050000003291b0050904I0050011Srn9011000000000000i0110000d0110030000001759b0031104I0030011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632050106",
+      "decision_index": 33,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0111105d0110030000001526b0031103I0030011i0110100"
+    },
+    {
+      "battle_id": "1632050496",
+      "decision_index": 22,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 10,
+      "damage_targets": [
+        10
+      ],
+      "affected_uid": 10,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        10
+      ],
+      "raw_i": "I0100012",
+      "raw": "m0120909d0120100000001693b0100609I0100012l012morale^i0120050"
+    },
+    {
+      "battle_id": "1632050496",
+      "decision_index": 27,
+      "actor_uid": 12,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 10,
+      "damage_targets": [
+        10
+      ],
+      "affected_uid": 10,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        10
+      ],
+      "raw_i": "I0100012",
+      "raw": "m0120410d0120100000001583b0100609I0100012i0120100"
+    },
+    {
+      "battle_id": "1632068931",
+      "decision_index": 18,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100309l010luck^d0100050000004087b0050607I0050010Stob005009000000000i0100100"
+    },
+    {
+      "battle_id": "1632068931",
+      "decision_index": 25,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100303l010luck^d0100030000003980b0030606I0030010Stob003008000000000i0100100"
+    },
+    {
+      "battle_id": "1632113860",
+      "decision_index": 8,
+      "actor_uid": 5,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 14,
+      "damage_targets": [
+        14
+      ],
+      "affected_uid": 14,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        14
+      ],
+      "raw_i": "I0140005",
+      "raw": "m0050707d0050140000000243b0140909I0140005d0140050000000133l005morale^i0050050Sadp002000010000000"
+    },
+    {
+      "battle_id": "1632113860",
+      "decision_index": 57,
+      "actor_uid": 5,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 12,
+      "damage_targets": [
+        12
+      ],
+      "affected_uid": 12,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        12
+      ],
+      "raw_i": "I0120005",
+      "raw": "m0050503d0050120000000194b0120301I0120005i0050100"
+    },
+    {
+      "battle_id": "1632225954",
+      "decision_index": 3,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110507d0110050000000659b0050807I0050011i0110100"
+    },
+    {
+      "battle_id": "1632225954",
+      "decision_index": 21,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        5
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0110905l011luck^d0110030000001018b0031105I0030011Srn9011000000000000i0110000d0110050000000469b0050907I0050011i0110100"
+    },
+    {
+      "battle_id": "1632225954",
+      "decision_index": 21,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110905l011luck^d0110030000001018b0031105I0030011Srn9011000000000000i0110000d0110050000000469b0050907I0050011i0110100"
+    },
+    {
+      "battle_id": "1632225954",
+      "decision_index": 30,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0111103d0110030000000276b0031106I0030011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1632694720",
+      "decision_index": 7,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100509d0100050000000382b0050809I0050010i0100100"
+    },
+    {
+      "battle_id": "1632694720",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100704l010luck^d0100030000001177b0030401I0030010Srn9010000000000000i0100000d0100040000000727b0040707I0040010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1632694720",
+      "decision_index": 20,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3,
+        4
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100704l010luck^d0100030000001177b0030401I0030010Srn9010000000000000i0100000d0100040000000727b0040707I0040010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1632697506",
+      "decision_index": 25,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070011",
+      "raw": "m0110603l011luck^d0110070000000672b0070606I0070011i0110100"
+    },
+    {
+      "battle_id": "1632715976",
+      "decision_index": 5,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0100905d0100080000001296b0081105I0080010d0080100000000701l010morale^i0100050Srn2010000000000000"
+    },
+    {
+      "battle_id": "1632715976",
+      "decision_index": 32,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 18,
+      "damage_targets": [
+        18
+      ],
+      "affected_uid": 18,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        18
+      ],
+      "raw_i": "I0180010",
+      "raw": "m0100805d0100180000000698b0181105I0180010i0100100"
+    },
+    {
+      "battle_id": "1632856632",
+      "decision_index": 34,
+      "actor_uid": 2,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 11,
+      "damage_targets": [
+        11
+      ],
+      "affected_uid": 11,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        11
+      ],
+      "raw_i": "I0110002",
+      "raw": "m0020706d0020110000001048b0110704I0110002i0020100"
+    },
+    {
+      "battle_id": "1632856632",
+      "decision_index": 52,
+      "actor_uid": 2,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090002",
+      "raw": "m0020307d0020090000000784b0090305I0090002d0090020000000818i0020100"
+    },
+    {
+      "battle_id": "1632856632",
+      "decision_index": 69,
+      "actor_uid": 2,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130002",
+      "raw": "m0020608d0020130000000781b0130507I0130002d0130020000000117Srgl000013000000059i0020100"
+    },
+    {
+      "battle_id": "1632856632",
+      "decision_index": 91,
+      "actor_uid": 2,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130002",
+      "raw": "m0020508d0020130000000129b0130710I0130002l013luck^d0130020000000058Srgl000013000000029i0020100"
+    },
+    {
+      "battle_id": "1632870335",
+      "decision_index": 19,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0101002d0100080000001609b0081201I0080010d0080100000000013i0100100"
+    },
+    {
+      "battle_id": "1632870335",
+      "decision_index": 33,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050010",
+      "raw": "m0100709d0100050000000703b0050608I0050010d0050100000000074i0100100"
+    },
+    {
+      "battle_id": "1632870335",
+      "decision_index": 45,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070010",
+      "raw": "m0100904d0100070000000675b0070907I0070010i0100100"
+    },
+    {
+      "battle_id": "1632870335",
+      "decision_index": 49,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070010",
+      "raw": "m0100708l010luck^d0100070000001338b0071006I0070010i0100100"
+    },
+    {
+      "battle_id": "1633069748",
+      "decision_index": 18,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0110608d0110030000000942b0030908I0030011i0110100"
+    },
+    {
+      "battle_id": "1633079975",
+      "decision_index": 12,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020011",
+      "raw": "m0110904d0110020000000921b0021104I0020011l011morale^i0110050"
+    },
+    {
+      "battle_id": "1633096129",
+      "decision_index": 6,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6,
+        4
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        6
+      ],
+      "raw_i": "I0060010",
+      "raw": "m0100707l010luck^d0100060000001516b0060706I0060010Srn9010000000000000i0100000d0100040000000525b0041005I0040010Sat3001000000000000i0100100"
+    },
+    {
+      "battle_id": "1633096129",
+      "decision_index": 6,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6,
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4,
+        6
+      ],
+      "raw_i": "I0040010",
+      "raw": "m0100707l010luck^d0100060000001516b0060706I0060010Srn9010000000000000i0100000d0100040000000525b0041005I0040010Sat3001000000000000i0100100"
+    },
+    {
+      "battle_id": "1633096129",
+      "decision_index": 21,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0100711Srag00800170-020000d0100080000000445Sra20080126-4400097b0080708I0080010l010morale^i0100050"
+    },
+    {
+      "battle_id": "1633096129",
+      "decision_index": 27,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0100510Srag00800093-020000d0100080000000394Sra20080043-5000086b0080807I0080010i0100100"
+    },
+    {
+      "battle_id": "1633153020",
+      "decision_index": 31,
+      "actor_uid": 7,
+      "actor_creature_id": 172,
+      "actor_abilities": [
+        "alive",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 13,
+      "damage_targets": [
+        13
+      ],
+      "affected_uid": 13,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        13
+      ],
+      "raw_i": "I0130007",
+      "raw": "m0070904d0070130000000406b0130705I0130007d0130070000002878i0070100"
+    },
+    {
+      "battle_id": "1633195170",
+      "decision_index": 18,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 18,
+      "damage_targets": [
+        18,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060011",
+      "raw": "m0110904l011luck^d0110180000000451Srn9011000000000000i0110000d0110060000000161b0061104I0060011i0110100"
+    },
+    {
+      "battle_id": "1633195170",
+      "decision_index": 34,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 19,
+      "damage_targets": [
+        19
+      ],
+      "affected_uid": 19,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        19
+      ],
+      "raw_i": "I0190011",
+      "raw": "m0110907d0110190000000169b0190909I0190011i0110100"
+    },
+    {
+      "battle_id": "1633312629",
+      "decision_index": 31,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        6
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        6
+      ],
+      "raw_i": "I0020009",
+      "raw": "m0090601l009luck^d0090020000002654b0020901I0020009Srn9009000000000000i0090000l009luck^d0090060000003655b0060604I0060009i0090100"
+    },
+    {
+      "battle_id": "1633312629",
+      "decision_index": 31,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2,
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2,
+        6
+      ],
+      "raw_i": "I0060009",
+      "raw": "m0090601l009luck^d0090020000002654b0020901I0020009Srn9009000000000000i0090000l009luck^d0090060000003655b0060604I0060009i0090100"
+    },
+    {
+      "battle_id": "1633421405",
+      "decision_index": 47,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050009",
+      "raw": "m0090206d0090050000001678b0050509I0050009i0090100"
+    },
+    {
+      "battle_id": "1633421405",
+      "decision_index": 57,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040009",
+      "raw": "m0090107l009luck^d0090040000003120b0040210I0040009i0090100"
+    },
+    {
+      "battle_id": "1633421405",
+      "decision_index": 60,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050009",
+      "raw": "m0090509d0090050000001612b0050307I0050009l009morale^i0090050"
+    },
+    {
+      "battle_id": "1633428036",
+      "decision_index": 32,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 8,
+      "damage_targets": [
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        8
+      ],
+      "raw_i": "I0080011",
+      "raw": "m0110802d0110080000000513b0080901I0080011d0080110000000343l011morale^i0110050Srn2011000000000000"
+    },
+    {
+      "battle_id": "1633429841",
+      "decision_index": 3,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 2,
+      "damage_targets": [
+        2
+      ],
+      "affected_uid": 2,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        2
+      ],
+      "raw_i": "I0020009",
+      "raw": "m0091103l009luck^d0090020000002380b0021101I0020009i0090100Srn2009000000000000"
+    },
+    {
+      "battle_id": "1633429841",
+      "decision_index": 18,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040009",
+      "raw": "m0090805d0090040000000822b0040908I0040009l009morale^i0090050"
+    },
+    {
+      "battle_id": "1633429841",
+      "decision_index": 23,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050009",
+      "raw": "m0090904m0090904i0090000Sfw3009090400000094i0090000m0091102d0090050000000936b0050902I0050009l009morale^i0090050"
+    },
+    {
+      "battle_id": "1633429841",
+      "decision_index": 27,
+      "actor_uid": 9,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040009",
+      "raw": "m0091006l009luck^d0090040000001815b0040809I0040009i0090100"
+    },
+    {
+      "battle_id": "1633867107",
+      "decision_index": 6,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 4,
+      "damage_targets": [
+        4
+      ],
+      "affected_uid": 4,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        4
+      ],
+      "raw_i": "I0040011",
+      "raw": "m0110602l011luck^d0110040000002402b0040901I0040011Ssld004011000276000i0110000l011morale^i0110050"
+    },
+    {
+      "battle_id": "1633867107",
+      "decision_index": 18,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0111103d0110050000000754b0051106I0050011Ssld005011000086000i0110000i0110100Sspi003000000000000"
+    },
+    {
+      "battle_id": "1633867107",
+      "decision_index": 42,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0110908d0110050000000684b0051106I0050011d0050110000000115Szat005000000000000i0110100Sspi003000000000000"
+    },
+    {
+      "battle_id": "1633867107",
+      "decision_index": 52,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030011",
+      "raw": "m0111103l011luck^d0110030000001294b0031201I0030011Ssld003011000148000i0110000i0110100"
+    },
+    {
+      "battle_id": "1633867107",
+      "decision_index": 65,
+      "actor_uid": 11,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 5,
+      "damage_targets": [
+        5
+      ],
+      "affected_uid": 5,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        5
+      ],
+      "raw_i": "I0050011",
+      "raw": "m0111104d0110050000000286b0051107I0050011i0110100"
+    },
+    {
+      "battle_id": "1635405232",
+      "decision_index": 46,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 9,
+      "damage_targets": [
+        9,
+        9
+      ],
+      "affected_uid": 9,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        9
+      ],
+      "raw_i": "I0090010",
+      "raw": "m0100807d0100090000001370Srn1010000000000000i0100000l010luck^d0100090000002798b0091007I0090010i0100100"
+    },
+    {
+      "battle_id": "1635523549",
+      "decision_index": 26,
+      "actor_uid": 18,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        7
+      ],
+      "raw_i": "I0070018",
+      "raw": "m0180909d0180070000000982b0070710I0070018i0180100Srn2018000000000000"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 23,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 3,
+      "damage_targets": [
+        3
+      ],
+      "affected_uid": 3,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        3
+      ],
+      "raw_i": "I0030010",
+      "raw": "m0100901l010luck^d0100030000001158b0031101I0030010Spfr003010116.88000Spsc003010000065003Ssld003010000036000i0100000d0030100000000059Spsc003010000013003Ssld003010000007000i0100000i0100100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        6,
+        8
+      ],
+      "affected_uid": 7,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        7,
+        8
+      ],
+      "raw_i": "I0070010",
+      "raw": "m0100908d0100070000000400b0071110I0070010Spfr007040119.68000Srn9010000000000000i0100000d0100060000000399b0060810I0060010Spfr006040119.68000i0100000d0100080000000442b0081010I0080010Spfr008040119.68000i0100100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        6,
+        8
+      ],
+      "affected_uid": 6,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        7,
+        8
+      ],
+      "raw_i": "I0060010",
+      "raw": "m0100908d0100070000000400b0071110I0070010Spfr007040119.68000Srn9010000000000000i0100000d0100060000000399b0060810I0060010Spfr006040119.68000i0100000d0100080000000442b0081010I0080010Spfr008040119.68000i0100100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 31,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 7,
+      "damage_targets": [
+        7,
+        6,
+        8
+      ],
+      "affected_uid": 8,
+      "is_primary": false,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6,
+        7,
+        8
+      ],
+      "raw_i": "I0080010",
+      "raw": "m0100908d0100070000000400b0071110I0070010Spfr007040119.68000Srn9010000000000000i0100000d0100060000000399b0060810I0060010Spfr006040119.68000i0100000d0100080000000442b0081010I0080010Spfr008040119.68000i0100100"
+    },
+    {
+      "battle_id": "1635622876",
+      "decision_index": 54,
+      "actor_uid": 10,
+      "actor_creature_id": 162,
+      "actor_abilities": [
+        "alive",
+        "armoured",
+        "big",
+        "enraged",
+        "pawstrike"
+      ],
+      "primary_uid": 6,
+      "damage_targets": [
+        6
+      ],
+      "affected_uid": 6,
+      "is_primary": true,
+      "is_damage_target": true,
+      "is_forced": true,
+      "forced_uids": [
+        6
+      ],
+      "raw_i": "I0060010",
+      "raw": "m0100609d0100060000000237b0060810I0060010Spfr006010000123000d0060100000000196i0100100"
+    }
+  ]
+}
