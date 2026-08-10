@@ -209,3 +209,27 @@ This file is the development diary for repository changes performed against the 
   - Stored `data/reports/mightyslam_cooldown.json`.
   - Repeat pairs: **3**; minimum own-activation gap: **3**; distribution: `{'3': 1, '4': 1, '6': 1}`.
   - This measurement is used to avoid an off-by-one cooldown in speculative search.
+
+### Exact Mighty Slam action
+
+- Commit: `b56315fec926d020a9950b5abb9e61aed0459009`
+  - Initial staging stopped before source/test execution because a legal/apply patch anchor was not unique. No functional commit was produced.
+- Commit: `0b33c7091ffaacdb885918192775856046775ad6`
+  - Second staging reached the corpus gate, which rejected `Smsl` because generic DAMAGE classification still won over the explicit ability marker. No functional commit was produced.
+- Commit: `ac3da0ee1ed039a3148ffcbaea88ddf2986e4f73`
+  - Third staging passed 32/32 corpus classification, registry/risk refresh and C++ build/CTest, but exposed a generated Python-test newline bug. No functional commit was produced.
+- Commit: `665e6e0d5105023c5ad348e1a17bc44a38f4cd0e`
+  - Fourth staging failed before patch execution because its temporary wrapper contained an unterminated string literal. No functional commit was produced.
+- Commit: `9462be7c91600dc5538d1019f4b2612cf038ac17`
+  - Consolidated the already validated fixes into one clean runner and re-ran the self-removing Mighty Slam verification.
+- Commit: `9cdb8d870de04b0ad6bbd8fd1a47c0ab16e2fb0a`
+  - Promoted `mightyslam` to an explicit legal `ABILITY` sharing normal melee reach/move anchors.
+  - Added selected-target + target-adjacent **enemy-only** splash using the simulator's authoritative footprint geometry.
+  - Added one-cell knockback away from the actor only for surviving small targets and only when `can_place()` accepts the destination; observed corpus has 14/14 forced targets small.
+  - Suppressed ordinary retaliation for the Slam branch and retained core physical damage/resistance plus Life Drain, Weakening Strike and reflect interactions.
+  - Added a 3-activation cooldown marker; minimum observed same-actor repeat gap is 3.
+  - Decoded `Smsl<actor>000000000000` as semantic-safe in Python and C++; server DAMAGE/FORCED_POSITION remain authoritative for observed replay.
+  - Re-ran the 866-battle probe: **32/32 `Smsl` decisions classify as `ABILITY`**.
+  - Promoted registry to **85 exact-search / 177 learned-damage / 78 unresolved** and refreshed `ability-risk-current.json` (mean 0.2288, p90 0.3960).
+  - Synchronized top-level and stale M04/M12/Phase7 ability counts in the active specification/reports.
+  - C++ Debug build/CTest and **targeted replay+ability-probe tests** passed before commit; full Python/TypeScript integration is verified by standard CI on the final tree.
