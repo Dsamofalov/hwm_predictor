@@ -205,6 +205,10 @@ function Run-FullSuite {
     Write-Host '==> Verify committed M11 evidence'
     python scripts/verify_m11_evidence.py
     Assert-NativeSuccess 'M11 evidence verification'
+
+    Write-Host '==> M11 positive-residual temperature calibration'
+    python -m hwm_solver.evaluation.dynamics_temperature_gate hwm_battles --out build/validation/m11_dynamics_temperature_gate.json
+    Assert-NativeSuccess 'M11 temperature gate'
 }
 
 Bootstrap-CIEnvironment
