@@ -1,0 +1,40 @@
+{
+  "corpus": {
+    "battles": 866,
+    "chronological_heldout_battles": 174,
+    "chronological_train_battles": 692,
+    "decisions": 52375
+  },
+  "heldout_basic_action_representability": {
+    "coverage": 0.9802955665024631,
+    "evaluated": 5481,
+    "failure_reasons": {
+      "melee_destination_not_reachable": 60,
+      "move_not_reachable": 3,
+      "target_not_adjacent_after_move": 45
+    },
+    "representable": 5373
+  },
+  "heldout_failed_melee_recovery": {
+    "alternate_damage_target_required": {
+      "melee_destination_not_reachable": 1,
+      "target_not_adjacent_after_move": 4
+    },
+    "using_any_actor_damage_target": {
+      "melee_destination_not_reachable": 44,
+      "target_not_adjacent_after_move": 25
+    },
+    "using_original_target": {
+      "melee_destination_not_reachable": 43,
+      "target_not_adjacent_after_move": 21
+    }
+  },
+  "python_replay_final_overlap": {
+    "battles": 21,
+    "pairs": 23
+  },
+  "raw_melee_destination_collision": {
+    "any_live_stack": 145,
+    "includes_non_target_stack": 141
+  }
+}
