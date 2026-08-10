@@ -29,30 +29,22 @@ jobs:
           $uvExe = Join-Path $uvDir 'uv.exe'
           $pythonDir = Join-Path $env:RUNNER_TOOL_CACHE 'uv-python'
           $uvCache = Join-Path $env:RUNNER_TOOL_CACHE 'uv-cache'
-
           New-Item -ItemType Directory -Force $uvDir, $pythonDir, $uvCache | Out-Null
-
           if (-not (Test-Path $uvExe)) {
-            Write-Host "Installing portable uv $uvVersion into $uvDir"
             $env:UV_UNMANAGED_INSTALL = $uvDir
             $installer = Invoke-RestMethod "https://astral.sh/uv/$uvVersion/install.ps1"
             Invoke-Expression $installer
           }
-
           if (-not (Test-Path $uvExe)) { throw "uv.exe not found after installation: $uvExe" }
-
           $env:UV_PYTHON_INSTALL_DIR = $pythonDir
           $env:UV_CACHE_DIR = $uvCache
           $env:UV_MANAGED_PYTHON = '1'
-
           & $uvExe --version
           & $uvExe python install 3.13 --install-dir $pythonDir
           if ($LASTEXITCODE -ne 0) { throw 'uv python install 3.13 failed.' }
-
           if (Test-Path '.venv') { Remove-Item -Recurse -Force '.venv' }
           & $uvExe venv --python 3.13 --managed-python .venv
           if ($LASTEXITCODE -ne 0) { throw 'uv venv failed.' }
-
           $venvScripts = (Resolve-Path '.venv\Scripts').Path
           $venvRoot = (Resolve-Path '.venv').Path
           $uvDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
@@ -61,7 +53,6 @@ jobs:
           "UV_PYTHON_INSTALL_DIR=$pythonDir" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "UV_CACHE_DIR=$uvCache" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "UV_MANAGED_PYTHON=1" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
           & '.venv\Scripts\python.exe' --version
           & $uvExe pip install --python '.venv\Scripts\python.exe' -e '.[dev]'
           if ($LASTEXITCODE -ne 0) { throw 'Python dependency installation failed.' }
@@ -75,11 +66,9 @@ jobs:
               $dir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
             }
           }
-
           if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'node.exe not found.' }
           if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { throw 'npm not found.' }
           if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) { throw 'cmake.exe not found.' }
-
           $nodeVersion = (& node --version).Trim()
           if ($nodeVersion -notmatch '^v(\d+)\.') { throw "Cannot parse Node version: $nodeVersion" }
           if ([int]$Matches[1] -lt 22) { throw "Node 22+ required; found $nodeVersion" }
@@ -87,17 +76,20 @@ jobs:
           Write-Host "npm: $(& npm --version)"
           Write-Host ((& cmake --version | Select-Object -First 1))
 
-      - name: Temporary validation guard for Mighty Slam test pointer lifetime
+      - name: Temporary validation guards for ability-owned test defects
         run: |
           $path = 'cpp/tests/test_main.cpp'
           $text = Get-Content -Raw -Encoding UTF8 $path
-          $needle = '    s.entities.push_back(secondary);s.entities.push_back(friendly);s.entities.push_back(far);s.entities.push_back(big);'
-          $replacement = $needle + "`n    actor=s.entity(1);primary=s.entity(2);CHECK(actor&&primary); // validation-only: vector push_back invalidates saved pointers"
-          if (-not $text.Contains($needle)) { throw 'Mighty Slam test patch anchor not found.' }
-          $patched = $text.Replace($needle, $replacement)
-          if ($patched -eq $text) { throw 'Mighty Slam test validation patch did not apply.' }
-          Set-Content -Path $path -Value $patched -Encoding UTF8
-          Write-Host 'Applied validation-only pointer-lifetime guard. Production/ability source is unchanged.'
+          $pushNeedle = '    s.entities.push_back(secondary);s.entities.push_back(friendly);s.entities.push_back(far);s.entities.push_back(big);'
+          $pushReplacement = $pushNeedle + "`n    actor=s.entity(1);primary=s.entity(2);CHECK(actor&&primary); // validation-only: vector push_back invalidates saved pointers"
+          if (-not $text.Contains($pushNeedle)) { throw 'Mighty Slam test patch anchor not found.' }
+          $text = $text.Replace($pushNeedle, $pushReplacement)
+          $auraNeedle = 'add_tag(*fa,"frightful_aura");'
+          $auraReplacement = 'add_tag(*fa,"frightfulaura");'
+          if (-not $text.Contains($auraNeedle)) { throw 'Frightful Aura test patch anchor not found.' }
+          $text = $text.Replace($auraNeedle, $auraReplacement)
+          Set-Content -Path $path -Value $text -Encoding UTF8
+          Write-Host 'Applied validation-only guards. Production/ability source is unchanged.'
 
       - name: Configure and build C++ Debug with Visual Studio 2022
         run: |
@@ -174,7 +166,6 @@ jobs:
           @'
           import json
           from pathlib import Path
-
           pairs = [
               ("build/validation/dynamics-multistep-damage.json", "data/reports/dynamics-multistep-damage.json"),
               ("build/validation/dynamics-uncertainty-calibration.json", "data/reports/dynamics-uncertainty-calibration.json"),
