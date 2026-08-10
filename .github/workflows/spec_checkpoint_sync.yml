@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   sync:
-    # One-shot hosted job; the sync commit removes this workflow and its script.
+    # Public hosted Windows run; the sync commit removes this workflow and its script.
     if: github.repository == 'Dsamofalov/hwm_predictor'
     runs-on: windows-latest
     timeout-minutes: 30
