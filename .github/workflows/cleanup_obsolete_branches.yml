@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Delete obsolete development branches and cleanup workflow
+      - name: Delete obsolete branches, record cleanup, and remove this workflow
         shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           $ErrorActionPreference = 'Stop'
@@ -44,15 +44,56 @@ jobs:
             }
           }
 
+          $path = 'changelog.md'
+          $marker = '### Windows CI normalization and branch cleanup'
+          $existing = Get-Content -Raw -Encoding UTF8 $path
+          if (-not $existing.Contains($marker)) {
+            $lines = @(
+              ''
+              $marker
+              ''
+              '- Commit: `1fe72e59cb10dfc1a40b0d53dcfa058a21385f75`'
+              '  - Replaced hosted-style Python bootstrap with a self-hosted Windows-compatible service-owned uv/Python 3.13 environment and Visual Studio 2022 generator.'
+              '- Commit: `3dc09576ce09996a1680bec86e3f79d0454a9591`'
+              '  - Repaired invalid YAML in the Windows migration bookkeeping workflow; the corrected workflow executed successfully on the Windows runner.'
+              '- Commit: `8dc9dc5b81db936089c7764fafb9c22cb79505a3`'
+              '  - Made M11 uncertainty evidence deterministic on Windows and added regression coverage for numerical ties and identical-member disagreement.'
+              '- Commit: `bb8404606621966d8c688f22e93c6ce35dd695ea`'
+              '  - Kept main-front CTest separate from the ability-owned monolithic `hwm-tests` executable so ability validation remains isolated on branch `ability`.'
+              '- Commit: `681b7f52d058773276967bad56c9d2163c89cd8a`'
+              '  - Centralized Windows runner setup and all permanent main-front validation commands in `scripts/ci_windows.ps1`.'
+              '- Commit: `87b5bf03c2a4ac160ceccadb674416cb9b2d56a6`'
+              '  - Added canonical M11 evidence verification as normal Python code rather than embedded workflow scripting.'
+              '- Commit: `5f4d8311854d92efce8fcf71b9cc014effac4edd`'
+              '  - Added regression coverage that parses every GitHub Actions YAML file and enforces the Windows-only runner contract.'
+              '- Commit: `34fc8c5d2e295a85da26afaa7e76296c2f348d73`'
+              '  - Reduced standard CI to two independent permanent jobs, `Core` and `Full`, both routed by `[self-hosted, windows, x64, hwm-windows]`; two registered runners can execute them concurrently.'
+              '- Commit: `99cd646bbc5c2a6a2c6d8d0aa90e530e98bc3230`'
+              '  - Aligned local `scripts/validate_windows.ps1` with the same Core/Full runner suites, removing duplicate validation logic.'
+              '- Commit: `29bfe624852411d464a5c5d48e129d65dd506bed`'
+              '  - Preserved the useful recommendation-explanation integration contract from the temporary diagnostics branch before branch cleanup.'
+              '- Commits: `5bbfa3e5bd9e6a0f37aa0b7d73c4a3f5b77e87bb`, `767b842a6793f8da071637c6a45c1b21d7730936`'
+              '  - Preserved the useful M11 positive-temperature diagnostic gate and its unit tests from the temporary diagnostics branch.'
+              '- Commit: `151d568ee34a6fbf234d063a6c645d1341cebd9a`'
+              '  - Removed a redundant bootstrap helper after consolidating on one Windows CI entry point.'
+              '- Repository branch cleanup:'
+              '  - Keep: `main`, `ability`.'
+              '  - Delete as obsolete/fully absorbed: `m11-uncertainty-repro`, `m13-effect-hash`, `m13-hash-fix`, `main-windows-full-validation`, `main-windows-validation-final`, `verify-m13-reroot`.'
+              '  - Delete `diagnostics` after preserving its useful explanation contract and M11 temperature gate; its hard-PvE gate remains intentionally unintegrated because the battle-diversity design is not production-ready.'
+            )
+            Add-Content -Path $path -Value (($lines -join [Environment]::NewLine) + [Environment]::NewLine) -Encoding UTF8
+          }
+
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git rm '.github/workflows/cleanup_obsolete_branches.yml'
-          git commit -m 'chore: remove completed branch cleanup workflow'
-          if ($LASTEXITCODE -ne 0) { throw 'Failed to commit cleanup workflow removal.' }
+          git add changelog.md
+          git commit -m 'docs: record Windows CI normalization and branch cleanup'
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to commit branch cleanup bookkeeping.' }
 
           git fetch origin main
           if ($LASTEXITCODE -ne 0) { throw 'Failed to refresh main.' }
           git rebase origin/main
           if ($LASTEXITCODE -ne 0) { throw 'Failed to rebase cleanup commit onto main.' }
           git push origin HEAD:main
-          if ($LASTEXITCODE -ne 0) { throw 'Failed to remove cleanup workflow from main.' }
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to push completed branch cleanup.' }
