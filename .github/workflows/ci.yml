@@ -6,7 +6,7 @@ on:
 
 defaults:
   run:
-    shell: powershell
+    shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
 
 jobs:
   windows-self-hosted:
@@ -22,7 +22,7 @@ jobs:
           clean: true
 
       - name: Resolve preinstalled Python 3.13
-        shell: powershell
+        shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           $candidates = New-Object System.Collections.Generic.List[string]
 
@@ -67,7 +67,7 @@ jobs:
           & '.venv\Scripts\python.exe' -m pip --version
 
       - name: Verify preinstalled Node 22+
-        shell: powershell
+        shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'node.exe not found in runner PATH.' }
           if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { throw 'npm not found in runner PATH.' }
@@ -145,7 +145,7 @@ jobs:
         run: python -m hwm_solver.evaluation.dynamics_survival_gate hwm_battles --out build/validation/m11_dynamics_survival_gate.json
 
       - name: Verify regenerated M11 evidence matches committed reports
-        shell: powershell
+        shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           @'
           import json
