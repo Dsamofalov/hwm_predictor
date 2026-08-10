@@ -138,3 +138,15 @@ This file is the development diary for repository changes performed against the 
   - Matched decisions: **808** across **173** battles; mechanic-like candidates: **585**; parse errors: **0**.
   - Special-code distribution: `{'rag': 206, 'wnd': 129, 'ral': 86, 'ra2': 78, 'rn1': 76, 'raa': 60, 'enr': 60, 'blt': 43, 'eod': 32, 'spi': 24, 'at3': 21, 'pfr': 12, 'pss': 10, 'sld': 10, 'ato': 7, 'fd1': 7, 'fw3': 7, 'agl': 6, 'rn2': 6, 'dsp': 5, 'rn7': 4, 'spt': 4, 'ent': 4, 'rn3': 2, 'psc': 2, 'tob': 2, 'rgl': 2, 'sor': 2, 'fw2': 2, 'br2': 1, 'bdd': 1, 'fdc': 1, 'zat': 1, 'cpt': 1, 'snu': 1, 'frz': 1, 'ab3': 1, 'crs': 1, 'rn0': 1, 'prp': 1, 'dsh': 1, 'sff': 1, 'eye': 1, 'fod': 1, 'fo2': 1, 'paa': 1, 'psa': 1, 'mga': 1, 'adp': 1}`.
   - Target speed deltas: `{'0.0': 477}`; initiative deltas: `{'0.0': 477}`; effect additions: `{'proc_cripple': 108, 'proc_shieldbash': 7, 'ra2': 6, 'pfr': 5, 'sld': 2, 'ent': 2, 'fdc': 1, 'tob': 1, 'mga': 1}`.
+
+### Crippling Wound conditional-proc evaluation
+
+- Commit: `5f8547c6f29c5b4bc277f2b5e55f9a939da009f8`
+  - Added a reusable chronological proc-context evaluator with state-conditioned logistic validation and creature/action stratification.
+- Commit: `885046ae8beeb4ff4c02217ac8238ecb3237d04b`
+  - Staged a self-removing evaluation of `cripplingwound` / `Swnd` on the 866-battle corpus.
+- Commit: `dcb752be44bca17fbe75ec5dee8f05dac1e88915`
+  - Stored `data/reports/cripplingwound_proc_context.json`.
+  - Train/held-out: **110/391 = 0.2813** vs **14/86 = 0.1628**.
+  - Conditional held-out Brier: **0.15168** vs baseline **0.15034**; AUC **0.5833**; gate: **False**.
+  - No production proc is enabled by this report alone; it is an evidence gate for the next functional change.
