@@ -484,3 +484,12 @@ This file is the development diary for repository changes performed against the 
   - Stored `data/reports/planner-replay-validity-gate.json`. Diagnostic runs `31387183686` (permanent budget) and `31386809158` (stress) passed; standard CI run `31387423155` passed on Linux and Windows/MSVC with the permanent gate enabled.
   - This closes the replay half of the >=100-state invalid-recommendation acceptance gate; real authenticated active-battle smoke remains separately required.
 
+### M11 stochastic survival-distribution gate
+
+- Commit: `70c7b3a61058ca9e3cfc883cb826ac2b1ef15f4b`
+  - Added a distributional held-out survival gate aligned with the C++ simulator's stochastic physical-damage roll instead of treating deterministic expected damage as the only rollout outcome.
+  - Uses three midpoint-stratified quantile starts rotated by a deterministic golden-ratio shift on subsequent actions; five train-battle jackknife residual members yield 15 learned trajectories versus 3 generic trajectories.
+  - On 692 train / 174 chronological held-out battles, learned mean force-L1 still beats generic at 2/4/8/16 steps: **0.01149/0.01842/0.03018/0.05028** vs **0.01697/0.02808/0.04732/0.08178**.
+  - The survival/validity trade-off remains real but is smaller than the earlier deterministic member-count diagnostic: learned valid-observed-action coverage is **98.789% / 98.284% / 97.551% / 96.349%** vs generic **98.919% / 98.655% / 98.324% / 97.493%**.
+  - Therefore the residual ensemble remains evidence-only and production enablement stays false; the next calibration experiment targets positive log-residual corrections rather than generic uncertainty fallback.
+  - Full distributional workflow run `31389946209`: **PASS**, targeted tests **4/4**. Nearest full standard CI run `31389813735`: **PASS** Linux + Windows/MSVC before the final roll-decorrelation-only patch; exact final Windows standard job and exact Linux distributional evaluator path also passed before subsequent hosted jobs stopped reaching the `Set up job` step.
