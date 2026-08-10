@@ -452,3 +452,14 @@ This file is the development diary for repository changes performed against the 
   - Production enablement remains intentionally **false**: at 16 steps the ensemble predicted-invalid-action fraction is **3.58%** vs **2.51%** generic and alive mismatch is **8.83%**. This closes the first M11 submodel multi-step evidence gate, not the full learned world-model requirement.
   - M11 diagnostic run `31384739406`: **PASS** with targeted tests **5/5**. Full standard CI run `31384739323`: **PASS** on Linux and Windows/MSVC.
 
+### M11 dynamics uncertainty calibration
+
+- Commit: `ef35d28aca6a044019896e3ecf6c4d4b52113d6f`
+  - Added held-out calibration of the five-member damage-residual ensemble disagreement against absolute force error, learned-vs-generic excess error and invalid-action drift at 2/4/8/16 halfturn horizons.
+  - Added tie-safe Spearman/AUC utilities, decile calibration tables and five targeted tests.
+  - Disagreement tracks absolute ensemble error at every horizon (Spearman **0.589 / 0.659 / 0.666 / 0.630**), so it is a useful epistemic-drift indicator.
+  - However, disagreement does **not** identify windows where learned dynamics underperform generic: AUC is **0.472 / 0.431 / 0.390 / 0.318**, and disagreement is negatively correlated with learned-minus-generic excess L1.
+  - Therefore a naive high-disagreement fallback to generic is explicitly rejected and production uncertainty gating remains disabled.
+  - Stored compact evidence at `data/reports/dynamics-uncertainty-calibration.json`; the CLI emits full ten-bin calibration tables.
+  - Full-corpus calibration run `31385464567` and standard Linux/Windows CI run `31385464568`: **PASS**; targeted calibration tests **5/5**.
+
