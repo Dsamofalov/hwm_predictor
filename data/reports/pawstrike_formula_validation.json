@@ -1,0 +1,2023 @@
+{
+  "train_n": 249,
+  "train_hits": 111,
+  "heldout_n": 108,
+  "heldout_hits": 39,
+  "brier": {
+    "train_formula": 0.29987329012414493,
+    "heldout_formula": 0.2419120722975202,
+    "heldout_train_frequency": 0.23787922775439105,
+    "heldout_linear_0.10": 0.2025
+  },
+  "heldout_calibration": [
+    {
+      "bucket": 0,
+      "n": 14,
+      "hits": 0,
+      "observed": 0.0,
+      "predicted": 0.03500000000000002
+    },
+    {
+      "bucket": 1,
+      "n": 6,
+      "hits": 1,
+      "observed": 0.16666666666666666,
+      "predicted": 0.14865222366728864
+    },
+    {
+      "bucket": 2,
+      "n": 10,
+      "hits": 1,
+      "observed": 0.1,
+      "predicted": 0.25281117421128635
+    },
+    {
+      "bucket": 3,
+      "n": 11,
+      "hits": 4,
+      "observed": 0.36363636363636365,
+      "predicted": 0.35113163742807935
+    },
+    {
+      "bucket": 4,
+      "n": 6,
+      "hits": 2,
+      "observed": 0.3333333333333333,
+      "predicted": 0.47143464249276795
+    },
+    {
+      "bucket": 5,
+      "n": 9,
+      "hits": 2,
+      "observed": 0.2222222222222222,
+      "predicted": 0.5490961448207208
+    },
+    {
+      "bucket": 6,
+      "n": 13,
+      "hits": 10,
+      "observed": 0.7692307692307693,
+      "predicted": 0.6479382766135722
+    },
+    {
+      "bucket": 7,
+      "n": 11,
+      "hits": 6,
+      "observed": 0.5454545454545454,
+      "predicted": 0.7345540555809703
+    },
+    {
+      "bucket": 8,
+      "n": 16,
+      "hits": 8,
+      "observed": 0.5,
+      "predicted": 0.841891574472387
+    },
+    {
+      "bucket": 9,
+      "n": 12,
+      "hits": 5,
+      "observed": 0.4166666666666667,
+      "predicted": 0.9507556344418995
+    }
+  ],
+  "i_record_source_matches_actor": 150,
+  "proc_n": 150,
+  "actor_owners": {
+    "1": 326,
+    "2": 31
+  },
+  "hero_presence": {
+    "hero": 339,
+    "no_hero": 18
+  },
+  "formula_gate": false,
+  "rows": [
+    {
+      "battle": "1632694720",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.32537499999999997,
+      "p_total": 0.7928667953962693,
+      "actor_hp": 2010,
+      "target_hp": 800,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632694720",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.28111455108359135,
+      "p_total": 0.8080012216613879,
+      "actor_hp": 2010,
+      "target_hp": 1938,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632694720",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.439622641509434,
+      "p_total": 0.8240287418472968,
+      "actor_hp": 2010,
+      "target_hp": 318,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632697506",
+      "tiles": 6,
+      "proc": false,
+      "p_base": 0.18731343283582091,
+      "p_total": 0.7119031642368749,
+      "actor_hp": 2010,
+      "target_hp": 4200,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1632697506",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.305,
+      "p_total": 0.7666868493749999,
+      "actor_hp": 550,
+      "target_hp": 300,
+      "actor_owner": 2,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 5
+    },
+    {
+      "battle": "1632697506",
+      "tiles": 2,
+      "proc": true,
+      "p_base": 0.2889019279128248,
+      "p_total": 0.49433953187390267,
+      "actor_hp": 1547,
+      "target_hp": 1193,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1632697506",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.3335430463576159,
+      "p_total": 0.555835128941713,
+      "actor_hp": 841,
+      "target_hp": 302,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1632697506",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.30936470588235293,
+      "p_total": 0.670582773706226,
+      "actor_hp": 841,
+      "target_hp": 425,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 8,
+      "proc": true,
+      "p_base": 0.18641791044776118,
+      "p_total": 0.8080398703359903,
+      "actor_hp": 2010,
+      "target_hp": 4260,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.21122230710466006,
+      "p_total": 0.5092459865560846,
+      "actor_hp": 1309,
+      "target_hp": 1692,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 6,
+      "proc": false,
+      "p_base": 0.31447457627118647,
+      "p_total": 0.8962133736218119,
+      "actor_hp": 1268,
+      "target_hp": 590,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 3,
+      "proc": true,
+      "p_base": 0.28993819530284304,
+      "p_total": 0.6419955246200355,
+      "actor_hp": 1077,
+      "target_hp": 809,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.21944289693593316,
+      "p_total": 0.628790809015302,
+      "actor_hp": 1077,
+      "target_hp": 1097,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.18549375000000012,
+      "actor_hp": 1077,
+      "target_hp": 13648,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.19328690807799442,
+      "p_total": 0.19328690807799442,
+      "actor_hp": 1077,
+      "target_hp": 2036,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.09750000000000003,
+      "actor_hp": 851,
+      "target_hp": 10424,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.21445783132530122,
+      "p_total": 0.21445783132530116,
+      "actor_hp": 747,
+      "target_hp": 885,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.16180722891566265,
+      "p_total": 0.4111133175588113,
+      "actor_hp": 747,
+      "target_hp": 2196,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.050000000000000044,
+      "actor_hp": 581,
+      "target_hp": 5492,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632715976",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.10325301204819276,
+      "p_total": 0.3533344780010228,
+      "actor_hp": 581,
+      "target_hp": 2842,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632719202",
+      "tiles": 6,
+      "proc": false,
+      "p_base": 0.19,
+      "p_total": 0.7175704635189999,
+      "actor_hp": 2010,
+      "target_hp": 4020,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632719202",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.2022093023255814,
+      "p_total": 0.0,
+      "actor_hp": 1118,
+      "target_hp": 1781,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632856632",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.4652173913043478,
+      "p_total": 0.9182083250846016,
+      "actor_hp": 20130,
+      "target_hp": 2806,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": false,
+      "i_source": 2,
+      "actor_uid": 2
+    },
+    {
+      "battle": "1632856632",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.668213296398892,
+      "p_total": 0.9878818615364621,
+      "actor_hp": 20130,
+      "target_hp": 1444,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": true,
+      "i_source": 2,
+      "actor_uid": 2
+    },
+    {
+      "battle": "1632856632",
+      "tiles": 3,
+      "proc": true,
+      "p_base": 0.6019805589307412,
+      "p_total": 0.9369459689193096,
+      "actor_hp": 19312,
+      "target_hp": 1646,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": false,
+      "i_source": 2,
+      "actor_uid": 2
+    },
+    {
+      "battle": "1632856632",
+      "tiles": 1,
+      "proc": true,
+      "p_base": 0.38773512476007677,
+      "p_total": 0.38773512476007677,
+      "actor_hp": 2392,
+      "target_hp": 521,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": false,
+      "i_source": 2,
+      "actor_uid": 2
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.18126659856996935,
+      "p_total": 0.4511830381583445,
+      "actor_hp": 1958,
+      "target_hp": 4486,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 6,
+      "proc": true,
+      "p_base": 0.28331820760068066,
+      "p_total": 0.8644940931287455,
+      "actor_hp": 1958,
+      "target_hp": 1763,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.09750000000000003,
+      "actor_hp": 1379,
+      "target_hp": 10071,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.1908849557522124,
+      "p_total": 0.6532221246501948,
+      "actor_hp": 1017,
+      "target_hp": 2004,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.09446447507953343,
+      "p_total": 0.39112595190449617,
+      "actor_hp": 943,
+      "target_hp": 4889,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632870335",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.20374337221633085,
+      "p_total": 0.5980127846710037,
+      "actor_hp": 943,
+      "target_hp": 1454,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1632883907",
+      "tiles": 6,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.2649081093750002,
+      "actor_hp": 2010,
+      "target_hp": 17236,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 8
+    },
+    {
+      "battle": "1632883907",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.3104208416833667,
+      "p_total": 0.5244805844153235,
+      "actor_hp": 2010,
+      "target_hp": 998,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 8
+    },
+    {
+      "battle": "1632883907",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.1707910447761194,
+      "p_total": 0.5272234416379663,
+      "actor_hp": 2010,
+      "target_hp": 5307,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 8
+    },
+    {
+      "battle": "1632883907",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.09750000000000003,
+      "actor_hp": 258,
+      "target_hp": 14519,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 8
+    },
+    {
+      "battle": "1632883907",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.09750000000000003,
+      "actor_hp": 258,
+      "target_hp": 13570,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 8
+    },
+    {
+      "battle": "1633069748",
+      "tiles": 3,
+      "proc": true,
+      "p_base": 0.11485074626865671,
+      "p_total": 0.30649511809090557,
+      "actor_hp": 2010,
+      "target_hp": 9055,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633069748",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.13929850746268657,
+      "p_total": 0.13929850746268657,
+      "actor_hp": 2010,
+      "target_hp": 7417,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633069748",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.12844290657439444,
+      "p_total": 0.0,
+      "actor_hp": 867,
+      "target_hp": 3513,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633069748",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.1461937716262976,
+      "p_total": 0.0,
+      "actor_hp": 867,
+      "target_hp": 3000,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633079975",
+      "tiles": 8,
+      "proc": false,
+      "p_base": 0.28865384615384615,
+      "p_total": 0.934438647928411,
+      "actor_hp": 2010,
+      "target_hp": 1560,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633079975",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.18638805970149253,
+      "p_total": 0.643477808337245,
+      "actor_hp": 2010,
+      "target_hp": 4262,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633079975",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.14427215189873419,
+      "p_total": 0.267729849983977,
+      "actor_hp": 948,
+      "target_hp": 3341,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633079975",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.18553797468354433,
+      "p_total": 0.3366516093174172,
+      "actor_hp": 948,
+      "target_hp": 2037,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633079975",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.75,
+      "p_total": 0.0,
+      "actor_hp": 814,
+      "target_hp": 38,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633096129",
+      "tiles": 6,
+      "proc": true,
+      "p_base": 0.20164179104477611,
+      "p_total": 0.7410673767680168,
+      "actor_hp": 2010,
+      "target_hp": 3240,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1633096129",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.19716778523489933,
+      "p_total": 0.5845687490662889,
+      "actor_hp": 1490,
+      "target_hp": 2624,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1633096129",
+      "tiles": 2,
+      "proc": true,
+      "p_base": 0.20834228187919462,
+      "p_total": 0.3732780573397595,
+      "actor_hp": 1490,
+      "target_hp": 2069,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1633111164",
+      "tiles": 7,
+      "proc": false,
+      "p_base": 0.39600502512562813,
+      "p_total": 0.9706753202666007,
+      "actor_hp": 1937,
+      "target_hp": 398,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633111164",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.10528136293236964,
+      "p_total": 0.35916542487497816,
+      "actor_hp": 1937,
+      "target_hp": 9344,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633111164",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.2026405693950178,
+      "p_total": 0.49305317739393417,
+      "actor_hp": 1405,
+      "target_hp": 2218,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633111164",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.3015862944162436,
+      "p_total": 0.6593265724905708,
+      "actor_hp": 1355,
+      "target_hp": 788,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633111164",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.05,
+      "p_total": 0.050000000000000044,
+      "actor_hp": 364,
+      "target_hp": 4393,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633132078",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.7214285714285713,
+      "p_total": 0.9223979591836734,
+      "actor_hp": 1540,
+      "target_hp": 98,
+      "actor_owner": 2,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 19
+    },
+    {
+      "battle": "1633153020",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.3353180212014134,
+      "p_total": 0.8048108753300158,
+      "actor_hp": 4829,
+      "target_hp": 1698,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": true,
+      "i_source": 7,
+      "actor_uid": 7
+    },
+    {
+      "battle": "1633190004",
+      "tiles": 8,
+      "proc": false,
+      "p_base": 0.2128358208955224,
+      "p_total": 0.8525914812867038,
+      "actor_hp": 2010,
+      "target_hp": 2490,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633190004",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.28988095238095235,
+      "p_total": 0.28988095238095235,
+      "actor_hp": 2010,
+      "target_hp": 1512,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633195170",
+      "tiles": 5,
+      "proc": false,
+      "p_base": 0.280578093306288,
+      "p_total": 0.8072837702500297,
+      "actor_hp": 2010,
+      "target_hp": 1972,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633195170",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.5240909090909092,
+      "p_total": 0.8922116056536439,
+      "actor_hp": 2010,
+      "target_hp": 220,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633195170",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.21656403940886698,
+      "p_total": 0.3862280956526487,
+      "actor_hp": 1624,
+      "target_hp": 1810,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633195170",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.2954054054054054,
+      "p_total": 0.2954054054054054,
+      "actor_hp": 1624,
+      "target_hp": 1073,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633195170",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.3876271186440678,
+      "p_total": 0.8593745906345771,
+      "actor_hp": 1624,
+      "target_hp": 354,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633312629",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.20007462686567165,
+      "p_total": 0.6724728073094097,
+      "actor_hp": 2010,
+      "target_hp": 3345,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633312629",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.3298767334360555,
+      "p_total": 0.3298767334360555,
+      "actor_hp": 1728,
+      "target_hp": 649,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633312629",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.34191489361702126,
+      "p_total": 0.8124451719503776,
+      "actor_hp": 1728,
+      "target_hp": 564,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633371507",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.477434554973822,
+      "p_total": 0.0,
+      "actor_hp": 8688,
+      "target_hp": 1146,
+      "actor_owner": 2,
+      "hero_present": false,
+      "hero_abilities": [],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 2
+    },
+    {
+      "battle": "1633411108",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.08134328358208956,
+      "p_total": 0.2247178879217191,
+      "actor_hp": 2010,
+      "target_hp": 11300,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633411108",
+      "tiles": 5,
+      "proc": false,
+      "p_base": 0.2147910447761194,
+      "p_total": 0.7015124507606836,
+      "actor_hp": 2010,
+      "target_hp": 2359,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633411108",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.18143835616438356,
+      "p_total": 0.3299568352411334,
+      "actor_hp": 1752,
+      "target_hp": 4004,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633411108",
+      "tiles": 5,
+      "proc": false,
+      "p_base": 0.12351027397260275,
+      "p_total": 0.4827099214183953,
+      "actor_hp": 1752,
+      "target_hp": 7387,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 12
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.05983582089552239,
+      "p_total": 0.11609131632880376,
+      "actor_hp": 2010,
+      "target_hp": 12741,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.17597014925373133,
+      "p_total": 0.6200602591227264,
+      "actor_hp": 2010,
+      "target_hp": 4960,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.11720895522388061,
+      "p_total": 0.11720895522388064,
+      "actor_hp": 2010,
+      "target_hp": 8897,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 6,
+      "proc": true,
+      "p_base": 0.1851940298507463,
+      "p_total": 0.7073657095821588,
+      "actor_hp": 2010,
+      "target_hp": 4342,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.2111492537313433,
+      "p_total": 0.6127607566283746,
+      "actor_hp": 2010,
+      "target_hp": 2603,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633421405",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.31084762865792126,
+      "p_total": 0.7744405538576579,
+      "actor_hp": 2010,
+      "target_hp": 991,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633428036",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.308600583090379,
+      "p_total": 0.3086005830903791,
+      "actor_hp": 2010,
+      "target_hp": 1029,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633428036",
+      "tiles": 7,
+      "proc": true,
+      "p_base": 0.21429850746268658,
+      "p_total": 0.81515698361629,
+      "actor_hp": 2010,
+      "target_hp": 2392,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633428036",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.45580246913580247,
+      "p_total": 0.8388353828327133,
+      "actor_hp": 1667,
+      "target_hp": 243,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633429841",
+      "tiles": 10,
+      "proc": true,
+      "p_base": 0.20504477611940297,
+      "p_total": 0.8992078578018888,
+      "actor_hp": 2010,
+      "target_hp": 3012,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633429841",
+      "tiles": 3,
+      "proc": true,
+      "p_base": 0.20429850746268657,
+      "p_total": 0.4962088685532198,
+      "actor_hp": 2010,
+      "target_hp": 3062,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633429841",
+      "tiles": 1,
+      "proc": true,
+      "p_base": 0.29285714285714287,
+      "p_total": 0.2928571428571429,
+      "actor_hp": 2010,
+      "target_hp": 1407,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633429841",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.2807182883341824,
+      "p_total": 0.7323322350297046,
+      "actor_hp": 2010,
+      "target_hp": 1963,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 9,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633429841",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.360796812749004,
+      "p_total": 0.5914192854081681,
+      "actor_hp": 1854,
+      "target_hp": 502,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 9
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.19814814814814816,
+      "p_total": 0.6685098084170933,
+      "actor_hp": 2430,
+      "target_hp": 4200,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.1959872611464968,
+      "p_total": 0.6640190536497211,
+      "actor_hp": 2355,
+      "target_hp": 4240,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.2055923566878981,
+      "p_total": 0.2055923566878981,
+      "actor_hp": 2355,
+      "target_hp": 3486,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 4,
+      "proc": true,
+      "p_base": 0.2819964664310954,
+      "p_total": 0.7342297736365164,
+      "actor_hp": 1811,
+      "target_hp": 1698,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.1706813186813187,
+      "p_total": 0.6077099957044236,
+      "actor_hp": 1365,
+      "target_hp": 3609,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 5,
+      "proc": false,
+      "p_base": 0.2811406844106464,
+      "p_total": 0.8080361173606019,
+      "actor_hp": 1365,
+      "target_hp": 1315,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1633867107",
+      "tiles": 3,
+      "proc": true,
+      "p_base": 0.3162015503875969,
+      "p_total": 0.6802693023251156,
+      "actor_hp": 854,
+      "target_hp": 387,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 11,
+      "actor_uid": 11
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 7,
+      "proc": false,
+      "p_base": 0.3074468085106383,
+      "p_total": 0.9235861740605388,
+      "actor_hp": 2700,
+      "target_hp": 1410,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.5587890625,
+      "p_total": 0.9621047235376886,
+      "actor_hp": 2635,
+      "target_hp": 256,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 5,
+      "proc": false,
+      "p_base": 0.05677708495713174,
+      "p_total": 0.25342796918377486,
+      "actor_hp": 2566,
+      "target_hp": 16527,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 1,
+      "proc": true,
+      "p_base": 0.14053390491036633,
+      "p_total": 0.14053390491036633,
+      "actor_hp": 2566,
+      "target_hp": 9363,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.2198012470771629,
+      "p_total": 0.0,
+      "actor_hp": 2566,
+      "target_hp": 2583,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635405232",
+      "tiles": 4,
+      "proc": false,
+      "p_base": 0.7028235294117646,
+      "p_total": 0.9922006630731,
+      "actor_hp": 2566,
+      "target_hp": 170,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635523549",
+      "tiles": 8,
+      "proc": true,
+      "p_base": 0.30659937888198757,
+      "p_total": 0.9465590941865636,
+      "actor_hp": 2430,
+      "target_hp": 1288,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 18,
+      "actor_uid": 18
+    },
+    {
+      "battle": "1635523549",
+      "tiles": 7,
+      "proc": false,
+      "p_base": 0.75,
+      "p_total": 0.99993896484375,
+      "actor_hp": 2430,
+      "target_hp": 25,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": null,
+      "actor_uid": 18
+    },
+    {
+      "battle": "1635523549",
+      "tiles": 1,
+      "proc": false,
+      "p_base": 0.21913423699169218,
+      "p_total": 0.2191342369916922,
+      "actor_hp": 2287,
+      "target_hp": 2353,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 18
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 6,
+      "proc": true,
+      "p_base": 0.29723404255319147,
+      "p_total": 0.879534054246119,
+      "actor_hp": 2220,
+      "target_hp": 1410,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": true,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 7,
+      "proc": true,
+      "p_base": 0.2958070025619129,
+      "p_total": 0.9141299106820965,
+      "actor_hp": 1788,
+      "target_hp": 1171,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 2,
+      "proc": false,
+      "p_base": 0.3191237113402062,
+      "p_total": 0.5364074795408651,
+      "actor_hp": 1788,
+      "target_hp": 776,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.1976510067114094,
+      "p_total": 0.0,
+      "actor_hp": 1788,
+      "target_hp": 3120,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 0,
+      "proc": false,
+      "p_base": 0.20207845836200963,
+      "p_total": 0.0,
+      "actor_hp": 1453,
+      "target_hp": 2321,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 5,
+      "proc": true,
+      "p_base": 0.21405940594059406,
+      "p_total": 0.7001192392287923,
+      "actor_hp": 1010,
+      "target_hp": 1210,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": 10,
+      "actor_uid": 10
+    },
+    {
+      "battle": "1635622876",
+      "tiles": 3,
+      "proc": false,
+      "p_base": 0.21414004914004914,
+      "p_total": 0.5146718631490743,
+      "actor_hp": 814,
+      "target_hp": 973,
+      "actor_owner": 1,
+      "hero_present": true,
+      "hero_abilities": [
+        "hero",
+        "shooter"
+      ],
+      "target_big": false,
+      "i_source": null,
+      "actor_uid": 10
+    }
+  ]
+}
