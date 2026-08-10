@@ -4,6 +4,7 @@ on:
   push:
   pull_request:
 
+# Post-Paw-Strike full verification trigger.
 jobs:
   build-test:
     runs-on: ubuntu-latest
