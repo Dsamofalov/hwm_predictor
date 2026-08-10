@@ -1,0 +1,42 @@
+name: One-shot M11 survival changelog bookkeeping
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneshot_changelog_m11_survival.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bookkeeping:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append functional SHA and self-remove
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! grep -q '70c7b3a61058ca9e3cfc883cb826ac2b1ef15f4b' changelog.md; then
+            cat >> changelog.md <<'EOF'
+
+### M11 stochastic survival-distribution gate
+
+- Commit: `70c7b3a61058ca9e3cfc883cb826ac2b1ef15f4b`
+  - Added a distributional held-out survival gate aligned with the C++ simulator's stochastic physical-damage roll instead of treating deterministic expected damage as the only rollout outcome.
+  - Uses three midpoint-stratified quantile starts rotated by a deterministic golden-ratio shift on subsequent actions; five train-battle jackknife residual members yield 15 learned trajectories versus 3 generic trajectories.
+  - On 692 train / 174 chronological held-out battles, learned mean force-L1 still beats generic at 2/4/8/16 steps: **0.01149/0.01842/0.03018/0.05028** vs **0.01697/0.02808/0.04732/0.08178**.
+  - The survival/validity trade-off remains real but is smaller than the earlier deterministic member-count diagnostic: learned valid-observed-action coverage is **98.789% / 98.284% / 97.551% / 96.349%** vs generic **98.919% / 98.655% / 98.324% / 97.493%**.
+  - Therefore the residual ensemble remains evidence-only and production enablement stays false; the next calibration experiment targets positive log-residual corrections rather than generic uncertainty fallback.
+  - Full distributional workflow run `31389946209`: PASS, targeted tests 4/4. Nearest full standard CI run `31389813735`: PASS Linux + Windows/MSVC before the final roll-decorrelation-only patch; exact final Windows standard job and exact Linux distributional evaluator path also passed before hosted runner provisioning stopped.
+EOF
+          fi
+          rm -f .github/workflows/oneshot_changelog_m11_survival.yml
+          git config user.name 'hwm-main-agent'
+          git config user.email 'actions@users.noreply.github.com'
+          git add changelog.md .github/workflows/oneshot_changelog_m11_survival.yml
+          git commit -m 'docs: record M11 stochastic survival gate'
+          git push origin HEAD:main
