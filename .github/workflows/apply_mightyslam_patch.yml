@@ -1,0 +1,32 @@
+name: Apply verified Mighty Slam patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply_mightyslam_patch.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install verification dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          python -m pip install -e '.[dev]'
+
+      - name: Apply, verify, commit and log Mighty Slam
+        run: python .github/scripts/apply_mightyslam_patch.py
