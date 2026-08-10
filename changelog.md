@@ -200,3 +200,12 @@ This file is the development diary for repository changes performed against the 
   - Secondary damage targets: **20**; enemy **20**, friendly **0**.
   - Secondary adjacency to primary: **8** adjacent, **12** non-adjacent.
   - Forced-position records: small **14**, big **0**.
+
+### Mighty Slam cooldown measurement
+
+- Commit: `28ae9f2f4ba2ea5153b619a76654a38b3ec5b7c7`
+  - Staged a self-removing same-actor activation-gap measurement for repeated `Smsl` uses.
+- Commit: `6418a74f63bd3df7ba51e257db87e5829a42723f`
+  - Stored `data/reports/mightyslam_cooldown.json`.
+  - Repeat pairs: **3**; minimum own-activation gap: **3**; distribution: `{'3': 1, '4': 1, '6': 1}`.
+  - This measurement is used to avoid an off-by-one cooldown in speculative search.
