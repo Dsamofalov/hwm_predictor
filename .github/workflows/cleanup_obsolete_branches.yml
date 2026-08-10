@@ -6,6 +6,10 @@ on:
     paths: ['.github/workflows/cleanup_obsolete_branches.yml']
   workflow_dispatch:
 
+concurrency:
+  group: branch-cleanup
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
