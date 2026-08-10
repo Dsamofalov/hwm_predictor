@@ -1,0 +1,15 @@
+{
+  "ability_id": 2887662221,
+  "code": "pawstrike",
+  "name": "Удар лапой.",
+  "description": "Существо при атаке имеет шанс сместить вражеский отряд на одну клетку и дополнительно отбросить его в начало ATB-шкалы. Шанс зависит от числа клеток, которых этому существу пришлось пройти, чтобы атаковать цель.",
+  "support": "learned_damage",
+  "learned_damage": true,
+  "risk_weight": 0.75,
+  "categories": [
+    "offense",
+    "targeting"
+  ],
+  "observed_entity_tags": 90,
+  "reference_url": "https://daily-help.ru/ability.php?name=pawstrike"
+}
