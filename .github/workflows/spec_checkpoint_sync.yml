@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/scripts/spec_checkpoint_sync.ps1'
+      - '.github/scripts/spec_checkpoint_sync.py'
       - '.github/workflows/spec_checkpoint_sync.yml'
 
 permissions:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   sync:
-    # Public hosted Windows run; the sync commit removes this workflow and its script.
+    # Public hosted Windows run; the sync commit removes this workflow and both temporary patchers.
     if: github.repository == 'Dsamofalov/hwm_predictor'
     runs-on: windows-latest
     timeout-minutes: 30
@@ -34,7 +34,7 @@ jobs:
           Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
       - name: Refresh active specification checkpoint
         shell: powershell
-        run: .\.github\scripts\spec_checkpoint_sync.ps1
+        run: python .\.github\scripts\spec_checkpoint_sync.py
       - name: Publish docs-sync final status
         if: always()
         shell: powershell
