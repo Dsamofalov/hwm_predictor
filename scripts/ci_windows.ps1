@@ -224,4 +224,4 @@ switch ($Suite) {
     'Full' { Run-FullSuite }
 }
 
-Write-Host "HWM WINDOWS CI $Suite: PASS"
+Write-Host "HWM WINDOWS CI ${Suite}: PASS"
