@@ -189,3 +189,27 @@ Commit `45581ae7d0f844f67797c590c3ed529390b76f1f` adds five targeted evaluator t
 - M11 strict selector (`7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b`): diagnostic `31386006048` and standard CI `31386005987` PASS; final 64/16/20 test rejects selector enablement because multi-step L1 is slightly worse than pure ensemble and invalid-action rate remains above generic.
 - Planner replay validity (`cde38a5a89684ff2691c80eeb3583195ffa31758`): diagnostic `31387183686`, stress `31386809158`, and permanent-CI run `31387423155` PASS. Permanent gate covers 120 safe held-out states from 109 battles with 0 invalid recommendations/hash mismatches/illegal root actions/non-finite metrics.
 
+
+## Windows self-hosted exhaustive main-front validation вЂ” 2026-08-10
+
+Temporary validation PR #5 / Actions run `31417309122` executed the accumulated main-front test debt on the Windows self-hosted runner.
+
+```text
+MSVC Debug configure/build:                    PASS
+hwm-planner-tests Debug:                       PASS
+held-out planner validity:                     120/120 PASS, 0 invalid recommendations
+pairing/auth integration:                      PASS
+stale cancellation integration:                PASS
+live binding integration:                      PASS
+WebSocket integration:                         PASS
+Python pytest:                                 61/61 PASS
+TypeScript typecheck / extension build:        PASS / PASS
+MSVC Release build + main-front CTest:          PASS
+planner-demo 5000:                             PASS
+M11 multistep / uncertainty / selector / survival commands: PASS / PASS / PASS / PASS
+```
+
+The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main. Permanent main CI reflects this ownership split in `bb8404606621966d8c688f22e93c6ce35dd695ea`.
+
+M11 uncertainty reproducibility was then repaired in `8dc9dc5b81db936089c7764fafb9c22cb79505a3`. Dedicated run `31419316512` passed 7 targeted tests and produced byte-for-meaning identical JSON objects across two independent full-corpus processes. Runtime uncertainty fallback remains disabled.
+

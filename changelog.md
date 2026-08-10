@@ -535,3 +535,16 @@ This file is the development diary for repository changes performed against the 
   - Fixed invalid YAML in this changelog workflow by removing the unindented PowerShell here-string and using a YAML-safe line array; also removed the unavailable `pwsh` dependency.
 - Real Windows runner execution is required for PASS claims; historical hosted-runner results remain evidence only.
 
+
+### Exhaustive Windows main-front validation and M11 uncertainty reproducibility
+
+- Commit: `8dc9dc5b81db936089c7764fafb9c22cb79505a3`
+  - Stabilized M11 uncertainty calibration with deterministic summation/member moments, sorted UID aggregation, and an explicit `1e-12` numerical-tie threshold so mathematically equal learned/generic windows are not classified by floating-point noise.
+  - Added regressions for identical-member zero disagreement and sub-epsilon learned/generic ties; refreshed the compact uncertainty evidence from the final committed evaluator.
+  - Dedicated Windows self-hosted run `31419316512`: 7/7 targeted tests PASS; two independent full-corpus uncertainty processes produced exactly identical JSON.
+  - Production uncertainty fallback remains disabled: disagreement tracks absolute error but still does not identify learned-vs-generic underperformance reliably at every horizon.
+- Commit: `bb8404606621966d8c688f22e93c6ce35dd695ea`
+  - Kept permanent main-front CTest focused on `hwm-planner-tests` by excluding the independently owned `hwm-tests` executable; ability validation remains responsible for that executable and its MSVC failures.
+- Exhaustive main-front validation run `31417309122` (temporary PR #5 harness): Debug MSVC build and `hwm-planner-tests` PASS; 120/120 held-out planner states valid with 0 invalid recommendations; all four daemon integrations PASS; Python 61/61 PASS; TypeScript/extension PASS; Release MSVC/CTest and `planner-demo 5000` PASS; all four M11 full-corpus evaluator commands PASS.
+  - The ability-owned monolithic `hwm-tests` executable is intentionally excluded from the main-front PASS claim after exposing three independent ability-lane defects on MSVC: Mighty Slam test pointer invalidation after `vector::push_back`, a `frightful_aura`/`frightfulaura` test-code typo, and a subsequent `0xc0000409` hard termination. These remain for the ability branch validation pass.
+

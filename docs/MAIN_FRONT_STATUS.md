@@ -112,3 +112,14 @@ Platform migration commits:
 Current standard CI executes C++/CTest, the 120-state planner replay gate, all four daemon integration gates, Python pytest, TypeScript typecheck and extension build on Windows/MSVC. Historical Linux PASS records above remain evidence for older trees only; they are not a continuing support commitment.
 
 The new workflow is intentionally queued until a repository-level Windows x64 self-hosted runner carrying the custom `hwm-windows` label is registered and online. No PASS claim is made for the migration commits until that runner executes the workflow.
+
+## Executed Windows main-front validation checkpoint
+
+The Windows self-hosted runner is now proven executable rather than merely configured. Temporary exhaustive run `31417309122` passed Debug/Release MSVC main-front C++, the permanent 120-state planner gate (120/120 valid, 0 invalid recommendations), pairing/auth, stale cancellation, live binding, WebSocket, Python 61/61, TypeScript/extension, `planner-demo 5000`, and all four M11 full-corpus evaluator commands.
+
+This run also closes the pending executable verification for the M13 canonical-hash regressions in `hwm-planner-tests`, including scheduler recency and semantic effect-provenance canonicalization.
+
+M11 uncertainty evidence is now reproducible under commit `8dc9dc5b81db936089c7764fafb9c22cb79505a3`: dedicated run `31419316512` passed 7 targeted tests and exact JSON equality across two independent full-corpus processes. The production uncertainty gate remains disabled by evidence.
+
+Permanent main CI commit `bb8404606621966d8c688f22e93c6ce35dd695ea` excludes the independently owned `hwm-tests` executable from the main-front CTest gate while leaving ability validation responsible for its Windows failures. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.
+
