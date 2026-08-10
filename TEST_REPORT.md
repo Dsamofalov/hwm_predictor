@@ -1,23 +1,29 @@
 # Test report — HeroesWM Solver 0.3.0
 
-**Дата:** 10.08.2026
+**Дата:** 11.08.2026
 
 ## Automated build/test snapshot
 
 ```text
-C++ incremental Debug build:            PASS
-C++ CTest:                              1/1 PASS (100%)
-Local API pairing/auth integration:     PASS
-Stale-search cancellation integration:  PASS
-Live recommendation binding contract:   PASS
-WebSocket revision streaming:            PASS
-Windows/MSVC C++ + daemon integrations:     PASS
-Python pytest:                          42/42 PASS
-TypeScript typecheck:                   PASS
-Extension build:                        PASS
+Supported product/CI platform:                  Windows 10/11 x64
+PowerShell syntax preflight:                    PASS
+MSVC Debug main-front CTest:                    1/1 PASS (hwm-planner-tests)
+Held-out planner validity:                      120/120 PASS; 0 invalid recommendations
+Local API pairing/auth integration:             PASS
+Stale-search cancellation integration:          PASS
+Live recommendation binding contract:           PASS
+WebSocket revision streaming:                   PASS
+Python pytest:                                  75/75 PASS
+TypeScript typecheck:                           PASS
+Extension build:                                PASS
+MSVC Release main-front CTest:                  1/1 PASS (hwm-planner-tests)
+Release planner benchmark (5000 simulations):   PASS
+M11 full-corpus diagnostic/evidence suite:      PASS
 ```
 
-The snapshot above is enforced by the standard GitHub CI. Pairing/auth, stale cancellation and live binding passed together in `676da42b754ee9d1409cc27e8ad1dfec26d17e6c`; WebSocket streaming is additionally covered by `scripts/test_websocket_stream.py` and is promoted to the standard CI in the follow-up CI wiring commit.
+Validated functional-tree reference: `7cd17878174529a40087ce5a78231dd93690851b`, Windows self-hosted Actions run `31431838319`: **Core PASS + Full PASS**. Core compiled all C++ targets under MSVC Debug, executed the main-owned `hwm-planner-tests`, validated 120 held-out planner states from 109 battles with zero invalid recommendations, state-hash mismatches, illegal best/alternative actions or non-finite metrics, passed pairing/auth, stale cancellation, live binding and WebSocket integrations, Python **75/75**, TypeScript typecheck and extension build. Full passed MSVC Release main-front CTest, `planner-demo 5000`, all permanent M11 full-corpus evaluators, committed-evidence verification and the positive-residual temperature experiment.
+
+The ability-owned monolithic `hwm-tests` target is still built but deliberately excluded from the `main` CTest gate until branch `ability` completes its independent MSVC validation. This ownership split is temporary integration debt, not a permanent reduction of the final test contract.
 
 ## Closed-loop safety regressions
 
@@ -152,45 +158,49 @@ Round-robin top-1:         12.75%
 Round-robin top-3:         33.49%
 ```
 
-## Planner regression
+## Planner regression / permanent validity gate
 
-Latest Release real-state evaluation (`planner-eval-v6-release.json`):
+The old 20-state Release stability snapshot is retained as historical evidence, but the permanent acceptance gate is now the deterministic chronological 120-state replay suite.
 
 ```text
-held-out states:           20
-low budget:                300 simulations
-high budget:               1200 simulations
-recommendation success:    20/20 low, 20/20 high
-action-type stability:     100%
-exact-action stability:    90%
-avg low time:              79.4 ms
-avg high time:             363.7 ms
+sampled states:                 120
+sampled battles:                109
+low-budget valid:               120/120
+high-budget valid:              120/120
+invalid recommendations:        0
+state-hash mismatches:           0
+illegal best actions:           0
+illegal alternatives:           0
+non-finite metrics:              0
+action-type stability 1 -> 120: 99.17%
+exact-action stability 1 -> 120: 85.83%
 ```
 
-These numbers are a controlled held-out replay-state regression, not a live win-rate benchmark.
+This closes the **replay** half of the >=100-state technical recommendation-validity requirement. It is not a substitute for the real authenticated active-battle smoke or a live win-rate benchmark.
 
 ## Not validated in this environment
 
 1. Active authenticated battle capture/replanning in the user's Chromium session. The metadata-only closed-loop trace and `docs/LIVE_VALIDATION.md` are ready for this gate, but the real live exercise has not yet been claimed as complete.
 2. Hard-PvE human-in-loop win-rate uplift.
-3. Full learned dynamics ensemble / ONNX Runtime C++ production path.
+3. Full structured learned dynamics ensemble / ONNX Runtime C++ production path.
 
 ## M13 stochastic outcome / persistent re-root verification
 
-Functional commits `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`, `135826c05d7f9b3d44e165ef6732bb6ede89a4c4`, and `6edec4d8360169060d280cd07a6e63de9c0fda89` add a dedicated `hwm-planner-tests` target covering distinct stochastic outcome nodes/legal sets, equal-hash transpositions, exact persistent root reuse, reachable-subgraph pruning, battle reset, and static-structure mismatch reset. WebSocket harness commit `33aaea0cac7549972e4be93bf495d0a9dca7f301` handles coalesced handshake/frame bytes without weakening protocol checks. Standard CI run `31380236279`: PASS; Linux CTest 2/2 plus all daemon integrations, Python tests, TypeScript and extension build passed; Windows current-MSVC build/test passed.
+Functional commits `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`, `135826c05d7f9b3d44e165ef6732bb6ede89a4c4`, and `6edec4d8360169060d280cd07a6e63de9c0fda89` add a dedicated `hwm-planner-tests` target covering distinct stochastic outcome nodes/legal sets, equal-hash transpositions, exact persistent root reuse, reachable-subgraph pruning, battle reset, and static-structure mismatch reset. Follow-up hashing work includes scheduler recency (`last_acted_seq`) in canonical identity and excludes provenance-only `Effect.raw` from semantic state identity, preventing unsafe reuse while avoiding false-negative reuse on diagnostic-only raw text.
 
 ## M11 multi-step damage-residual ensemble gate
 
-Commit `45581ae7d0f844f67797c590c3ed529390b76f1f` adds five targeted evaluator tests and `data/reports/dynamics-multistep-damage.json`. On 174 chronological held-out battles, the five-member train-only ensemble beats the generic baseline in mean normalized force-L1 at 2/4/8/16 halfturn horizons, while 16-step predicted-invalid-action fraction remains worse (3.58% vs 2.51%); production enablement therefore stays false. Diagnostic run `31384739406` and full standard CI run `31384739323` passed.
+Commit `45581ae7d0f844f67797c590c3ed529390b76f1f` adds five targeted evaluator tests and `data/reports/dynamics-multistep-damage.json`. On 174 chronological held-out battles, the five-member train-only ensemble beats the generic baseline in mean normalized force-L1 at 2/4/8/16 halfturn horizons, while 16-step predicted-invalid-action fraction remains worse (3.58% vs 2.51%); production enablement therefore stays false.
 
-## Current M11 uncertainty / selector and 120-state planner gate
+## Current M11 uncertainty / selector / survival / temperature evidence
 
-- M11 uncertainty calibration (`ef35d28aca6a044019896e3ecf6c4d4b52113d6f`): full-corpus run `31385464567` and standard CI `31385464568` PASS; disagreement predicts absolute error but not learned-vs-generic underperformance, so runtime uncertainty fallback remains disabled.
-- M11 strict selector (`7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b`): diagnostic `31386006048` and standard CI `31386005987` PASS; final 64/16/20 test rejects selector enablement because multi-step L1 is slightly worse than pure ensemble and invalid-action rate remains above generic.
-- Planner replay validity (`cde38a5a89684ff2691c80eeb3583195ffa31758`): diagnostic `31387183686`, stress `31386809158`, and permanent-CI run `31387423155` PASS. Permanent gate covers 120 safe held-out states from 109 battles with 0 invalid recommendations/hash mismatches/illegal root actions/non-finite metrics.
+- Uncertainty calibration: ensemble disagreement is informative for absolute error but not learned-vs-generic underperformance, so runtime uncertainty fallback remains disabled.
+- Strict 64/16/20 selector experiment: final test rejects selector enablement because multi-step L1 is slightly worse than the pure ensemble and invalid-action rate remains above generic.
+- Stochastic survival-distribution gate: learned force-L1 remains better than generic, but observed-action survival/validity coverage is below generic at longer horizons; production enablement remains false.
+- Leakage-safe positive-residual temperature calibration selects scale **0.0** because no candidate clears the joint accuracy/coverage hard gate.
+- Committed M11 report JSONs are reproduced and verified by the permanent Full suite.
 
-
-## Windows self-hosted exhaustive main-front validation вЂ” 2026-08-10
+## Windows self-hosted exhaustive main-front validation — 2026-08-10
 
 Temporary validation PR #5 / Actions run `31417309122` executed the accumulated main-front test debt on the Windows self-hosted runner.
 
@@ -212,4 +222,3 @@ M11 multistep / uncertainty / selector / survival commands: PASS / PASS / PASS /
 The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main. Permanent main CI reflects this ownership split in `bb8404606621966d8c688f22e93c6ce35dd695ea`.
 
 M11 uncertainty reproducibility was then repaired in `8dc9dc5b81db936089c7764fafb9c22cb79505a3`. Dedicated run `31419316512` passed 7 targeted tests and produced byte-for-meaning identical JSON objects across two independent full-corpus processes. Runtime uncertainty fallback remains disabled.
-
