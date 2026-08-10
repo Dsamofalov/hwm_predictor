@@ -351,3 +351,25 @@ This file is the development diary for repository changes performed against the 
   - Added `scripts/test_live_binding.py`, proving an OK recommendation is bound to the same daemon revision/hash as the observed demo state.
   - M01 status remains MOSTLY COMPLETE: live trace tooling is ready, but a real authenticated active-battle exercise and full runtime-object fallback remain required.
   - C++/CTest, pairing auth, stale cancellation, live binding, TypeScript typecheck and extension build passed before commit.
+
+
+### Main-front live plumbing CI and report synchronization
+
+- Commit: `a9be0434b940ef13220ed8f5628c4cddd47b07bd`
+  - Added the local pairing/auth daemon integration test to the standard repository CI.
+- Commit: `3850f1ccfc1283546e7c8ed0ec8d38f8dc31e3ec`
+  - Added revision-bound stale-search cancellation integration to standard CI.
+- Commit: `676da42b754ee9d1409cc27e8ad1dfec26d17e6c`
+  - Added the live recommendation revision/hash binding contract to standard CI.
+  - Workflow run `31365724181`: **PASS**.
+  - Verified C++ configure/build/CTest, pairing/auth integration, stale-search cancellation integration, live recommendation binding, the full Python pytest suite, TypeScript typecheck and extension build.
+- Commit: `d920ba47bf4e99832c377fe25467dee50f99235c`
+  - Added `docs/LIVE_VALIDATION.md` with the active authenticated battle smoke gate, expected trace sequence, pass criteria, and evidence-driven runtime-fallback decision rule.
+- Commit: `5af650101bedab884dddfbb9ffeeb48abe8f2283`
+  - Added `docs/MAIN_FRONT_STATUS.md` to preserve the main-lane checkpoint while abilities continue independently on branch `ability`.
+- Commit: `d77e25350464bc0d8d57e4793b11bfc21cb7cf8c`
+  - Synchronized `TEST_REPORT.md` with the three mandatory closed-loop integration gates and current ability metrics.
+- Commit: `6807a34dc4c7046db0ee5881a5383c93429eb43a`
+  - Synchronized `IMPLEMENTATION_REPORT.md` with pairing, revision cancellation, live trace/binding, current ability risk and branch ownership.
+- Commit: `499c9c8e20113aa5748f075e9a12dd6609c258fc`
+  - Synchronized the duplicate implementation checkpoint `HeroesWM_Solver_Implementation_Report_0.3.0.md`.
