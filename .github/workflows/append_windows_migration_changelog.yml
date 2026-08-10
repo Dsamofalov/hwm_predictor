@@ -1,0 +1,62 @@
+name: Append Windows migration changelog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/append_windows_migration_changelog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: [self-hosted, windows, x64, hwm-windows]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Append Windows-only migration entry
+        shell: pwsh
+        run: |
+          $marker = '### Windows-only self-hosted CI migration'
+          $path = 'changelog.md'
+          $existing = Get-Content -Raw -Encoding UTF8 $path
+          if ($existing.Contains($marker)) {
+            Write-Host 'Changelog entry already present; nothing to do.'
+            exit 0
+          }
+
+          $entry = @'
+
+### Windows-only self-hosted CI migration
+
+- Commit: `31c25740d4f6cbf27d802ad4e478993b7571f54f`
+  - Replaced the previous Linux-full + Windows-partial CI matrix with one Windows self-hosted job and moved every standard gate onto Windows/MSVC.
+  - Preserved C++/CTest, the 120-state planner replay validity gate, all four daemon integration tests, Python pytest, TypeScript typecheck and extension build.
+  - Added same-branch stale-run cancellation and protection against running external-fork pull requests on the self-hosted machine.
+- Commit: `6bd81ce9fabc6fa29fb0e3f9694c988ea69e7b8c`
+  - Finalized runner routing to `[self-hosted, windows, x64, hwm-windows]` and added `workflow_dispatch` for manual current-HEAD validation after runner downtime.
+- Commit: `09237be777671fa3697da05b1813b57e5fc19f78`
+  - Declared Windows 10/11 x64 the sole supported product/CI platform in README and converted active build/evaluation examples to PowerShell/Windows paths.
+- Commit: `0118f0586765962a987e5d50794319815b509763`
+  - Synchronized the main-front status, moved the permanent planner replay gate to the Windows CI contract, and marked prior Linux CI results as historical evidence only.
+- Commits: `4fa95fd07e7dc3faafb0ac19de71a4327c1aa2bd`, `53087329f842dc19a5de3806f458959d6e9c6d6c`, `99423460e859bb22fb01210ae07d165d17e910f0`, `df64b32cee8f7b77e5c48b5f7e1e0dc67d37bb48`
+  - Removed the unsupported Linux bootstrap, validation, daemon-launch and demo-launch entry points. Windows scripts are the only supported product tooling path.
+- No CI PASS is claimed for the migration until an actual Windows self-hosted job executes its steps.
+'@
+          Add-Content -Path $path -Value $entry -Encoding UTF8
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add changelog.md
+          if (git diff --cached --quiet) {
+            Write-Host 'No changelog diff to commit.'
+            exit 0
+          }
+          git commit -m 'docs: record Windows-only self-hosted CI migration'
+          git push origin HEAD:main
