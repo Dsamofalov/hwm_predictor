@@ -627,3 +627,17 @@ This file is the development diary for repository changes performed against the 
   - Updated M03/M14/M19 and Phases 5/6/8/9 plus MVP DoD without claiming the still-missing authenticated live battle smoke.
   - Recorded the infrastructure change: repository is public; self-hosted runners are removed; Windows/MSVC remains the supported CI target and permanent workflows should use GitHub-hosted Windows.
   - Kept `ability` ownership separate from main-owned status claims.
+
+### Hosted Windows CI migration and legal-geometry correction
+
+- Commit: `2124d80473015761beeb3160749c366b4b3b92e9`.
+  - Migrated permanent `HWM / Core` and `HWM / Full` from removed self-hosted labels to GitHub-hosted `windows-2022`, preserving the VS2022/MSVC contract and read-only repository contents permission.
+  - Updated `python/tests/test_workflow_contract.py` to reject `self-hosted`/`hwm-windows` and require exactly two hosted Windows 2022 suites.
+  - Hosted Actions run `31438342758`: **Core PASS + Full PASS**.
+- Commit: `ffb2a301ba57c040a07de55bdc91c8354e50e4c5`.
+  - Fixed the main-owned legal-coverage evaluator to use the canonical raw battlefield `x=1..12, y=1..20` instead of shrinking the lower Y bound to currently occupied cells.
+  - Mirrored replay's conservative overloaded 2x2 raw-cell canonicalization only when direct big-stack placement is physically impossible.
+  - Added focused geometry regressions and refreshed `data/reports/decoder-geometry-audit.json`.
+  - Held-out basic-action representability improved **5373/5481 = 98.03% -> 5384/5481 = 98.23%** with failure count **108 -> 97** and no newly introduced failure identities in the corpus A/B audit.
+  - Python replay final-overlap debt remains **21 battles / 23 pairs** on the committed evaluator-only tree; the production C++ structural-invalid gate remains open and is being audited separately without weakening invariants.
+  - Hosted Actions run `31439876436`: **Core PASS + Full PASS**.

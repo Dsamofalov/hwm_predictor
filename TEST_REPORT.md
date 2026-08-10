@@ -5,7 +5,7 @@
 ## Automated build/test snapshot
 
 ```text
-Supported product/CI platform:                  Windows 10/11 x64
+Supported product/CI platform:                  Windows 10/11 x64 via GitHub-hosted windows-2022
 PowerShell syntax preflight:                    PASS
 MSVC Debug main-front CTest:                    1/1 PASS (hwm-planner-tests)
 Held-out planner validity:                      120/120 PASS; 0 invalid recommendations
@@ -78,8 +78,8 @@ Latest stored held-out basic-action evaluation (`legal-coverage-v7-endurance.jso
 
 ```text
 observed basic actions evaluated:      5,481
-representable by current generator:    5,373
-coverage:                              98.03%
+representable by current generator:    5,384
+coverage:                              98.23%
 ```
 
 Primary residual failures are `melee_destination_not_reachable`, `target_not_adjacent_after_move` and rare special movement.
