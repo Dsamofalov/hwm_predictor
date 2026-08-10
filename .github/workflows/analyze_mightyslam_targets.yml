@@ -1,0 +1,83 @@
+name: Analyze Mighty Slam splash targets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/analyze_mightyslam_targets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Analyze splash ownership and geometry
+        env:
+          PYTHONPATH: python
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from hwm_solver.protocol.replay import parse_initial_entities, parse_turns, iter_compact_decisions, parse_commands, _perspective_owner, _player_won
+
+          root=Path('hwm_battles/battles')
+          rows=[]; secondary_total=secondary_enemy=secondary_friendly=adjacent=nonadjacent=0; forced_small=forced_big=0
+          def cells(e):
+              x=int(e.get('x',-99));y=int(e.get('y',-99));big='big' in set(e.get('abilities') or [])
+              return {(x,y),(x+1,y),(x,y+1),(x+1,y+1)} if big else {(x,y)}
+          def near(a,b):
+              return any(max(abs(x1-x2),abs(y1-y2))<=1 for x1,y1 in cells(a) for x2,y2 in cells(b))
+          for d in sorted((p for p in root.iterdir() if p.is_dir()),key=lambda p:int(p.name)):
+              init=(d/'init.txt').read_text(errors='replace');turns=(d/'turns0.txt').read_text(errors='replace')
+              es,_=parse_initial_entities(init); owner=_perspective_owner(es); won=_player_won(init,es,owner)
+              for r in iter_compact_decisions(d.name,es,parse_turns(turns),owner,player_won=won):
+                  if 'msl' not in set(r.get('special_codes') or []): continue
+                  before={int(e['uid']):e for e in r['state_before']}; actor=before[int(r['actor_uid'])]
+                  cmds=parse_commands(r['raw']); damages=[c for c in cmds if c.opcode=='DAMAGE']; forced=[c for c in cmds if c.opcode=='FORCED_POSITION']
+                  if not damages: continue
+                  primary_uid=int(damages[0].target_uid); primary=before.get(primary_uid)
+                  details=[]
+                  for c in damages[1:]:
+                      uid=int(c.target_uid); t=before.get(uid); secondary_total+=1
+                      same=bool(t and int(t.get('owner',-1))==int(actor.get('owner',-2)))
+                      secondary_friendly+=int(same); secondary_enemy+=int(not same)
+                      adj=bool(primary and t and near(primary,t)); adjacent+=int(adj); nonadjacent+=int(not adj)
+                      details.append({'uid':uid,'same_owner_as_actor':same,'adjacent_to_primary':adj,'big':bool(t and 'big' in set(t.get('abilities') or [])),'amount':c.amount})
+                  forced_details=[]
+                  for c in forced:
+                      uid=int(c.actor_uid); t=before.get(uid); big=bool(t and 'big' in set(t.get('abilities') or [])); forced_big+=int(big);forced_small+=int(not big)
+                      forced_details.append({'uid':uid,'big':big,'x':c.x,'y':c.y})
+                  rows.append({'battle_id':d.name,'actor_uid':r['actor_uid'],'actor_owner':actor.get('owner'),'primary_uid':primary_uid,'damage_count':len(damages),'secondary':details,'forced':forced_details,'raw':r['raw']})
+          payload={'observed':len(rows),'secondary_total':secondary_total,'secondary_enemy':secondary_enemy,'secondary_friendly':secondary_friendly,'secondary_adjacent_to_primary':adjacent,'secondary_nonadjacent':nonadjacent,'forced_small':forced_small,'forced_big':forced_big,'rows':rows}
+          Path('data/reports/mightyslam_target_geometry.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps({k:v for k,v in payload.items() if k!='rows'},ensure_ascii=False,indent=2))
+          PY
+      - name: Commit evidence and log
+        run: |
+          rm .github/workflows/analyze_mightyslam_targets.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: analyze Mighty Slam splash geometry'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/mightyslam_target_geometry.json').read_text(encoding='utf-8'))
+          p=Path('changelog.md');text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Mighty Slam splash-target geometry analysis\n\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing full-corpus ownership/adjacency check for all `Smsl` secondary damage and knockback records.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/mightyslam_target_geometry.json`.\n  - Secondary damage targets: **{r['secondary_total']}**; enemy **{r['secondary_enemy']}**, friendly **{r['secondary_friendly']}**.\n  - Secondary adjacency to primary: **{r['secondary_adjacent_to_primary']}** adjacent, **{r['secondary_nonadjacent']}** non-adjacent.\n  - Forced-position records: small **{r['forced_small']}**, big **{r['forced_big']}**.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Mighty Slam splash geometry'
+          git push origin HEAD:main
