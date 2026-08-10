@@ -1,4 +1,4 @@
-name: Append Windows migration changelog
+name: Record Windows validation bookkeeping
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  append:
+  record:
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 10
     steps:
@@ -20,54 +20,80 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Append Windows-only migration entry
+      - name: Record exhaustive Windows validation and M11 reproducibility
         shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
         run: |
           $ErrorActionPreference = 'Stop'
-          $marker = '### Windows-only self-hosted CI migration'
-          $path = 'changelog.md'
-          $existing = Get-Content -Raw -Encoding UTF8 $path
-          if ($existing.Contains($marker)) {
-            Write-Host 'Changelog entry already present; nothing to do.'
-            exit 0
+
+          function Append-IfMissing([string]$Path, [string]$Marker, [string[]]$Lines) {
+            $existing = Get-Content -Raw -Encoding UTF8 $Path
+            if ($existing.Contains($Marker)) {
+              Write-Host "$Path already contains $Marker"
+              return
+            }
+            $entry = ([Environment]::NewLine + ($Lines -join [Environment]::NewLine) + [Environment]::NewLine)
+            Add-Content -Path $Path -Value $entry -Encoding UTF8
           }
 
-          $entryLines = @(
+          Append-IfMissing 'changelog.md' '### Exhaustive Windows main-front validation and M11 uncertainty reproducibility' @(
+            '### Exhaustive Windows main-front validation and M11 uncertainty reproducibility'
             ''
-            '### Windows-only self-hosted CI migration'
-            ''
-            '- Commit: `31c25740d4f6cbf27d802ad4e478993b7571f54f`'
-            '  - Replaced the previous Linux-full + Windows-partial CI matrix with one Windows self-hosted job and moved every standard gate onto Windows/MSVC.'
-            '  - Preserved C++/CTest, the 120-state planner replay validity gate, all four daemon integration tests, Python pytest, TypeScript typecheck and extension build.'
-            '  - Added same-branch stale-run cancellation and protection against running external-fork pull requests on the self-hosted machine.'
-            '- Commit: `6bd81ce9fabc6fa29fb0e3f9694c988ea69e7b8c`'
-            '  - Finalized runner routing to `[self-hosted, windows, x64, hwm-windows]` and added `workflow_dispatch` for manual current-HEAD validation after runner downtime.'
-            '- Commit: `09237be777671fa3697da05b1813b57e5fc19f78`'
-            '  - Declared Windows 10/11 x64 the sole supported product/CI platform in README and converted active build/evaluation examples to PowerShell/Windows paths.'
-            '- Commit: `0118f0586765962a987e5d50794319815b509763`'
-            '  - Synchronized the main-front status, moved the permanent planner replay gate to the Windows CI contract, and marked prior Linux CI results as historical evidence only.'
-            '- Commits: `4fa95fd07e7dc3faafb0ac19de71a4327c1aa2bd`, `53087329f842dc19a5de3806f458959d6e9c6d6c`, `99423460e859bb22fb01210ae07d165d17e910f0`, `df64b32cee8f7b77e5c48b5f7e1e0dc67d37bb48`'
-            '  - Removed the unsupported Linux bootstrap, validation, daemon-launch and demo-launch entry points. Windows scripts are the only supported product tooling path.'
-            '- Commits: `d746c4de9a8d6cb951a697774e1b4bfce3c68469`, `db5f029239ff2b3484b3c826577930d5418a4b20`'
-            '  - Removed the VS Code bash validation fallback and Linux/WSL debugger configuration; VS Code development tasks now target Windows/MSVC only.'
-            '- Commit: `1fe72e59cb10dfc1a40b0d53dcfa058a21385f75`'
-            '  - Stabilized the standard self-hosted Windows CI around service-owned uv/Python 3.13, Windows PowerShell with execution-policy bypass, system Node/CMake discovery, and the Visual Studio 2022 generator.'
-            "- Workflow repair commit: ``$env:GITHUB_SHA``"
-            '  - Fixed invalid YAML in this changelog workflow by removing the unindented PowerShell here-string and using a YAML-safe line array; also removed the unavailable `pwsh` dependency.'
-            '- Real Windows runner execution is required for PASS claims; historical hosted-runner results remain evidence only.'
+            '- Commit: `8dc9dc5b81db936089c7764fafb9c22cb79505a3`'
+            '  - Stabilized M11 uncertainty calibration with deterministic summation/member moments, sorted UID aggregation, and an explicit `1e-12` numerical-tie threshold so mathematically equal learned/generic windows are not classified by floating-point noise.'
+            '  - Added regressions for identical-member zero disagreement and sub-epsilon learned/generic ties; refreshed the compact uncertainty evidence from the final committed evaluator.'
+            '  - Dedicated Windows self-hosted run `31419316512`: 7/7 targeted tests PASS; two independent full-corpus uncertainty processes produced exactly identical JSON.'
+            '  - Production uncertainty fallback remains disabled: disagreement tracks absolute error but still does not identify learned-vs-generic underperformance reliably at every horizon.'
+            '- Exhaustive main-front validation run `31417309122` (temporary PR #5 harness): Debug MSVC build and `hwm-planner-tests` PASS; 120/120 held-out planner states valid with 0 invalid recommendations; all four daemon integrations PASS; Python 61/61 PASS; TypeScript/extension PASS; Release MSVC/CTest and `planner-demo 5000` PASS; all four M11 full-corpus evaluator commands PASS.'
+            '  - The ability-owned monolithic `hwm-tests` executable is intentionally excluded from the main-front PASS claim after exposing three independent ability-lane defects on MSVC: Mighty Slam test pointer invalidation after `vector::push_back`, a `frightful_aura`/`frightfulaura` test-code typo, and a subsequent `0xc0000409` hard termination. These remain for the ability branch validation pass.'
           )
-          $entry = ($entryLines -join [Environment]::NewLine) + [Environment]::NewLine
-          Add-Content -Path $path -Value $entry -Encoding UTF8
+
+          Append-IfMissing 'TEST_REPORT.md' '## Windows self-hosted exhaustive main-front validation — 2026-08-10' @(
+            '## Windows self-hosted exhaustive main-front validation — 2026-08-10'
+            ''
+            'Temporary validation PR #5 / Actions run `31417309122` executed the accumulated main-front test debt on the Windows self-hosted runner.'
+            ''
+            '```text'
+            'MSVC Debug configure/build:                    PASS'
+            'hwm-planner-tests Debug:                       PASS'
+            'held-out planner validity:                     120/120 PASS, 0 invalid recommendations'
+            'pairing/auth integration:                      PASS'
+            'stale cancellation integration:                PASS'
+            'live binding integration:                      PASS'
+            'WebSocket integration:                         PASS'
+            'Python pytest:                                 61/61 PASS'
+            'TypeScript typecheck / extension build:        PASS / PASS'
+            'MSVC Release build + main-front CTest:          PASS'
+            'planner-demo 5000:                             PASS'
+            'M11 multistep / uncertainty / selector / survival commands: PASS / PASS / PASS / PASS'
+            '```'
+            ''
+            'The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main.'
+            ''
+            'M11 uncertainty reproducibility was then repaired in `8dc9dc5b81db936089c7764fafb9c22cb79505a3`. Dedicated run `31419316512` passed 7 targeted tests and produced byte-for-meaning identical JSON objects across two independent full-corpus processes. Runtime uncertainty fallback remains disabled.'
+          )
+
+          Append-IfMissing 'docs/MAIN_FRONT_STATUS.md' '## Executed Windows main-front validation checkpoint' @(
+            '## Executed Windows main-front validation checkpoint'
+            ''
+            'The Windows self-hosted runner is now proven executable rather than merely configured. Temporary exhaustive run `31417309122` passed Debug/Release MSVC main-front C++, the permanent 120-state planner gate (120/120 valid, 0 invalid recommendations), pairing/auth, stale cancellation, live binding, WebSocket, Python 61/61, TypeScript/extension, `planner-demo 5000`, and all four M11 full-corpus evaluator commands.'
+            ''
+            'This run also closes the pending executable verification for the M13 canonical-hash regressions in `hwm-planner-tests`, including scheduler recency and semantic effect-provenance canonicalization.'
+            ''
+            'M11 uncertainty evidence is now reproducible under commit `8dc9dc5b81db936089c7764fafb9c22cb79505a3`: dedicated run `31419316512` passed 7 targeted tests and exact JSON equality across two independent full-corpus processes. The production uncertainty gate remains disabled by evidence.'
+            ''
+            'The ability-owned `hwm-tests` executable is not included in the main-front PASS claim; its Windows failures are handed to branch `ability`. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.'
+          )
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add changelog.md
+          git rm '.github/workflows/append_windows_migration_changelog.yml'
+          git add changelog.md TEST_REPORT.md docs/MAIN_FRONT_STATUS.md
           git diff --cached --quiet
           if ($LASTEXITCODE -eq 0) {
-            Write-Host 'No changelog diff to commit.'
+            Write-Host 'No bookkeeping diff to commit.'
             exit 0
           }
-          git commit -m 'docs: record Windows-only self-hosted CI migration'
-          if ($LASTEXITCODE -ne 0) { throw 'Failed to commit changelog entry.' }
+          git commit -m 'docs: record exhaustive Windows main validation'
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to commit validation bookkeeping.' }
           git push origin HEAD:main
-          if ($LASTEXITCODE -ne 0) { throw 'Failed to push changelog entry.' }
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to push validation bookkeeping.' }
