@@ -338,3 +338,16 @@ This file is the development diary for repository changes performed against the 
   - Revision invalidation is intentionally stronger than hash-only invalidation: the regression republishes the same demo state (equal state hash) and still cancels the old search.
   - Extension auto-replanning uses an epoch so older in-flight results cannot overwrite newer storage/UI; side panel additionally checks recommendation `state_hash` against current daemon status before rendering.
   - Added `scripts/test_stale_cancellation.py`; C++/CTest, pairing auth, stale cancellation, TypeScript typecheck and extension build passed before commit.
+
+
+### Live closed-loop trace and binding diagnostics
+
+- Commit: `8605dec8e2f860a2e977b26b45b94411c3371aba`
+  - Staged the self-removing live-validation instrumentation and binding contract regression.
+- Commit: `21927bdc6b528a06018bad95e63540c9ce02d9fd`
+  - Capture responses now carry canonical `revision` and `state_hash`; successful recommendations carry `state_revision`, `state_hash` and `battle_id`.
+  - Extension stores a bounded 80-event metadata-only trace covering capture forwarding/result, planner requests/results, stale epoch discards and runtime-probe acknowledgements. Raw battle payloads, bearer tokens and full URLs are deliberately excluded.
+  - Side panel exposes the latest closed-loop trace and a clear action, allowing active-battle validation to localize failures across bridge -> daemon -> canonical state -> planner.
+  - Added `scripts/test_live_binding.py`, proving an OK recommendation is bound to the same daemon revision/hash as the observed demo state.
+  - M01 status remains MOSTLY COMPLETE: live trace tooling is ready, but a real authenticated active-battle exercise and full runtime-object fallback remain required.
+  - C++/CTest, pairing auth, stale cancellation, live binding, TypeScript typecheck and extension build passed before commit.
