@@ -297,3 +297,17 @@ This file is the development diary for repository changes performed against the 
 - Commit: `5c9aaed1bb0f38363675845ae4d3a11d07e802b2`
   - Stored `data/reports/pawstrike_i_ownership_audit.json`.
   - Ownership: `{'opposing': 174}`; event order: `{'d<b<I': 174}`; exceptions: **0**.
+
+### Paw Strike hybrid modeled proc
+
+- Commit: `c85e7ac1349b67bb5300edc052d8960ecfe94e53`
+  - Staged a self-removing verified patch after 357 melee observations, 150 primary-target probability samples plus 24 secondary-hit exact I-records, and chronological probability validation.
+- Commit: `8805bb78c02d727ffff150a3d3fe9e08c042ab3b`
+  - Parsed `I<affected3><source4>` with explicit source UID and validated the observed Paw Strike transition against the active attacker.
+  - Marked **174/174** observed Paw Strike I-records semantic-safe and applied exact `ATB=0` in Python/C++ replay state.
+  - Added speculative `p=min(1, 0.10*travelled_cells)` proc; held-out Brier **0.20250** vs **0.23788** train-frequency baseline. The older HP-ratio formula remains rejected (held-out Brier **0.24191**).
+  - On speculative proc, ATB reset is unconditional; one-cell physical push is attempted away from the attacker only if `can_place()` accepts the resulting footprint. Retaliation is not hard-suppressed and naturally depends on post-push adjacency.
+  - Promoted `pawstrike` from `learned_damage` to explicit runtime `modeled_proc`; registry is **85 exact-search / 9 modeled-proc / 176 learned-damage / 78 unresolved**.
+  - Refreshed current ability risk to mean **0.22431**, p90 **0.37538**.
+  - Updated active specification and reports, including the previously verified Mighty Slam full-CI Python count **42/42**.
+  - C++ Debug build/CTest and targeted Python replay/probe tests passed before commit.
