@@ -47,6 +47,8 @@ def test_windows_ci_script_owns_core_and_full_test_inventory():
     text = CI_SCRIPT.read_text(encoding="utf-8")
 
     assert "[ValidateSet('Core', 'Full')]" in text
+    assert "Scripts\\python.exe" in text
+    assert "npm.cmd" in text
 
     core_markers = (
         "test_planner_replay_gate.py",
@@ -54,9 +56,9 @@ def test_windows_ci_script_owns_core_and_full_test_inventory():
         "test_stale_cancellation.py",
         "test_live_binding.py",
         "test_websocket_stream.py",
-        "python -m pytest python/tests -q",
-        "npm run typecheck",
-        "npm run build",
+        "& $script:Python -m pytest python/tests -q",
+        "& $script:Npm run typecheck",
+        "& $script:Npm run build",
     )
     for marker in core_markers:
         assert marker in text
