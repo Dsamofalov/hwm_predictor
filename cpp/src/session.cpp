@@ -89,6 +89,11 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
         if (state_->halfturn==0 && !initial_state_) initial_state_ = *state_;
         out.canonical_state_updated = true;
 
+        // Every accepted canonical publication receives a new monotonic revision.
+        // Duplicate/out-of-order payloads return before this point, so they do not
+        // spuriously cancel an in-flight search.
+        revision_.fetch_add(1, std::memory_order_release);
+
         // If the browser delivered the turn stream before the static lastturn=-3 payload,
         // replay the buffered payloads now. This makes capture order robust.
         if (!pending_updates_.empty() && state_ && !state_->protocol_ready) {
@@ -121,11 +126,18 @@ void SessionStore::set_state(BattleState s) {
     std::scoped_lock lock(mu_);
     battle_id_ = s.battle_id;
     state_ = std::move(s);
+    revision_.fetch_add(1, std::memory_order_release);
 }
 
 std::optional<BattleState> SessionStore::state() const {
     std::scoped_lock lock(mu_);
     return state_;
+}
+
+std::optional<SessionSnapshot> SessionStore::snapshot() const {
+    std::scoped_lock lock(mu_);
+    if (!state_) return std::nullopt;
+    return SessionSnapshot{*state_, revision_.load(std::memory_order_acquire)};
 }
 
 std::optional<RawEnvelope> SessionStore::last_envelope() const {
@@ -167,7 +179,8 @@ std::string SessionStore::status_json() const {
       << ",\"duplicate_captures\":" << duplicate_captures_
       << ",\"out_of_order_captures\":" << out_of_order_captures_
       << ",\"runtime_probe_count\":" << runtime_probe_count_
-      << ",\"runtime_probe_bytes\":" << runtime_probe_bytes_;
+      << ",\"runtime_probe_bytes\":" << runtime_probe_bytes_
+      << ",\"revision\":" << revision_.load(std::memory_order_acquire);
     if (envelope_) {
         o << ",\"source\":\"" << envelope_->source << "\""
           << ",\"sequence_hint\":" << envelope_->sequence_hint

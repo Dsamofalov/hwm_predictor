@@ -279,26 +279,41 @@ std::string HttpServer::handle(std::string method, std::string path, std::string
         return response(outcome.accepted?200:400, reply.str());
     }
     if (method == "POST" && (path == "/recommend" || path == "/session/current/plan")) {
-        auto s = store_.state();
-        if (!s) return response(200, "{\"status\":\"not_ready\",\"reason\":\"canonical state unavailable\"}");
-        if (!s->protocol_ready) return response(200, "{\"status\":\"not_ready\",\"reason\":\"waiting for contiguous turn stream / decoder confidence gate\"}");
-        if (s->phase == Phase::Finished) return response(200, "{\"status\":\"finished\",\"reason\":\"battle ended\"}");
-        if (s->side_to_act != Side::Player || s->active_entity_uid == 0) return response(200, "{\"status\":\"not_ready\",\"reason\":\"not a confirmed player decision state\"}");
-        const auto requested_hash = state_hash(*s);
+        auto snapshot = store_.snapshot();
+        if (!snapshot) return response(200, "{\"status\":\"not_ready\",\"reason\":\"canonical state unavailable\"}");
+        const BattleState& s = snapshot->state;
+        const uint64_t requested_revision = snapshot->revision;
+        if (!s.protocol_ready) return response(200, "{\"status\":\"not_ready\",\"reason\":\"waiting for contiguous turn stream / decoder confidence gate\"}");
+        if (s.phase == Phase::Finished) return response(200, "{\"status\":\"finished\",\"reason\":\"battle ended\"}");
+        if (s.side_to_act != Side::Player || s.active_entity_uid == 0) return response(200, "{\"status\":\"not_ready\",\"reason\":\"not a confirmed player decision state\"}");
+        const auto requested_hash = state_hash(s);
         PlannerConfig cfg;
         cfg.simulation_budget = env_u64("HWM_SEARCH_SIMS", 10000);
         cfg.time_budget_ms = env_u64("HWM_SEARCH_MS", 5000);
         cfg.max_depth = static_cast<int>(env_u64("HWM_SEARCH_DEPTH", 12));
+        cfg.cancellation_poll_interval = env_u64("HWM_SEARCH_CANCEL_POLL", 16);
+        cfg.cancellation_requested = [this, requested_revision] { return store_.revision() != requested_revision; };
         Planner planner(cfg);
-        auto r = planner.plan(*s);
-        auto latest = store_.state();
-        if (!latest || state_hash(*latest) != requested_hash) {
-            return response(200, "{\"status\":\"stale\",\"reason\":\"battle state changed while planning\"}");
+        auto r = planner.plan(s);
+        const bool revision_changed = store_.revision() != requested_revision;
+        if (r.status == "cancelled" || revision_changed) {
+            auto latest = store_.snapshot();
+            const std::string current_hash = latest ? state_hash(latest->state) : std::string{};
+            std::ostringstream stale;
+            stale << "{\"status\":\"stale\",\"reason\":\"battle state changed while planning\""
+                  << ",\"requested_state_hash\":\"" << requested_hash << "\""
+                  << ",\"current_state_hash\":\"" << current_hash << "\""
+                  << ",\"requested_revision\":" << requested_revision
+                  << ",\"current_revision\":" << store_.revision()
+                  << ",\"cancelled_search\":" << (r.status == "cancelled" ? "true" : "false")
+                  << ",\"simulations\":" << r.simulations
+                  << ",\"elapsed_ms\":" << r.elapsed_ms << '}';
+            return response(200, stale.str());
         }
         std::ostringstream o;
         o << "{\"status\":\"" << r.status << "\",\"state_hash\":\"" << r.state_hash
-          << "\",\"semantic_safety_tier\":\"" << semantic_safety_tier(*s) << "\""
-          << ",\"semantic_unresolved_ratio\":" << s->semantic_unresolved_ratio
+          << "\",\"semantic_safety_tier\":\"" << semantic_safety_tier(s) << "\""
+          << ",\"semantic_unresolved_ratio\":" << s.semantic_unresolved_ratio
           << ",\"ability_risk\":" << r.ability_risk
           << ",\"simulations\":" << r.simulations << ",\"nodes\":" << r.nodes
           << ",\"elapsed_ms\":" << r.elapsed_ms << ",\"best\":" << candidate_json(r.best)

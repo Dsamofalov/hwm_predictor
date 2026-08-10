@@ -27,6 +27,8 @@ Planner::Planner(PlannerConfig c):cfg_(c),prior_(),value_(){}
 
 Recommendation Planner::plan(const BattleState& root,Side perspective) const{
     auto started=std::chrono::steady_clock::now();Recommendation rec;rec.state_hash=state_hash(root);
+    const auto cancelled=[&](){return cfg_.cancellation_requested && cfg_.cancellation_requested();};
+    if(cancelled()){rec.status="cancelled";rec.warnings.push_back("planning cancelled before search because observed session revision changed");return rec;}
     if(!root.protocol_ready){rec.status="not_ready";rec.warnings.push_back("protocol state is not structurally ready for planning");return rec;}
     const char* degraded_env=std::getenv("HWM_ALLOW_SEMANTIC_DEGRADED");
     const bool allow_degraded=degraded_env && (std::string_view(degraded_env)=="1" || std::string_view(degraded_env)=="true");
@@ -72,7 +74,13 @@ Recommendation Planner::plan(const BattleState& root,Side perspective) const{
         ++e.visits;e.sum+=value;e.sum_sq+=value*value;++node.visits;if(is_root&&e.root_returns.size()<512)e.root_returns.push_back(value);return value;
     };
 
-    uint64_t sims=0;for(;sims<cfg_.simulation_budget;++sims){if(cfg_.time_budget_ms&&sims>0&&std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()-started).count()>=(long long)cfg_.time_budget_ms)break;simulate(tree,root,0,true);}
+    uint64_t sims=0;const uint64_t cancel_every=std::max<uint64_t>(1,cfg_.cancellation_poll_interval);
+    for(;sims<cfg_.simulation_budget;++sims){
+        if((sims%cancel_every)==0&&cancelled()){rec.status="cancelled";break;}
+        if(cfg_.time_budget_ms&&sims>0&&std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now()-started).count()>=(long long)cfg_.time_budget_ms)break;
+        simulate(tree,root,0,true);
+    }
+    if(rec.status=="cancelled"){rec.simulations=sims;rec.nodes=nodes;rec.elapsed_ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-started).count();rec.warnings.push_back("observed session revision changed during search");return rec;}
     init_node(tree,root);
     const double semantic_risk=std::clamp(root.semantic_unresolved_ratio,0.0,1.0);
     const double ability_risk=std::clamp(sim_.ability_risk(root),0.0,1.0);rec.ability_risk=ability_risk;

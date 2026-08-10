@@ -2,6 +2,7 @@
 const HWM_DAEMON="http://127.0.0.1:38471";
 const HWM_TOKEN_KEY="hwmPairingToken";
 let hwmRecommendTimer:number|undefined;
+let hwmRecommendationEpoch=0;
 
 async function hwmDaemonJson(path:string,init:RequestInit={},auth=true):Promise<any>{
   const headers:any={...(init.headers as any||{})};
@@ -17,19 +18,22 @@ async function hwmDaemonJson(path:string,init:RequestInit={},auth=true):Promise<
   return data;
 }
 
-async function hwmRequestRecommendation(){
+async function hwmRequestRecommendation(epoch:number){
   try{
     const recommendation=await hwmDaemonJson("/recommend",{method:"POST"});
+    if(epoch!==hwmRecommendationEpoch)return;
     await chrome.storage.local.set({hwmLastRecommendation:recommendation,hwmLastRecommendationAt:Date.now()});
     chrome.runtime.sendMessage({type:"recommendation",recommendation}).catch(()=>{});
   }catch(e){
+    if(epoch!==hwmRecommendationEpoch)return;
     await chrome.storage.local.set({hwmLastRecommendation:{status:"offline",error:String(e)},hwmLastRecommendationAt:Date.now()});
   }
 }
 
 function hwmScheduleRecommendation(){
+  const epoch=++hwmRecommendationEpoch;
   if(hwmRecommendTimer!==undefined)clearTimeout(hwmRecommendTimer);
-  hwmRecommendTimer=setTimeout(()=>{hwmRecommendTimer=undefined;void hwmRequestRecommendation()},250) as unknown as number;
+  hwmRecommendTimer=setTimeout(()=>{hwmRecommendTimer=undefined;void hwmRequestRecommendation(epoch)},250) as unknown as number;
 }
 
 chrome.runtime.onInstalled.addListener(()=>chrome.sidePanel.setPanelBehavior({openPanelOnActionClick:true}).catch(()=>{}));

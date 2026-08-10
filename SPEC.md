@@ -569,7 +569,7 @@ DecodeResult decode_update(const BattleState& previous,
 
 # 10. Модуль M03 — State Store / Battle Session
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Thread-safe session, battle reset, duplicate/out-of-order handling, immutable observed state, state hash, stale-plan invalidation и incremental decode реализованы. Persistent search-tree re-rooting по predicted child ещё не завершён.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Thread-safe session, battle reset, duplicate/out-of-order handling, immutable observed state, state hash, revision-bound cooperative stale-search cancellation и incremental decode реализованы. Persistent search-tree re-rooting по predicted child ещё не завершён.
 
 ## Назначение
 
@@ -1562,7 +1562,7 @@ Exit: один полный replay проходит end-to-end и визуаль
 
 ## Phase 2 — Closed-loop plumbing без AI
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan/stale invalidation реализованы и replay-tested. Нужна live-browser validation.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan, cooperative stale-search cancellation и UI state-hash guard реализованы и regression-tested. Нужна live-browser validation.
 
 P2-01. Local C++ daemon.  
 P2-02. WebSocket extension connection.  

@@ -2,6 +2,7 @@
 #include "hwm/planner.hpp"
 #include "hwm/protocol.hpp"
 
+#include <atomic>
 #include <mutex>
 #include <optional>
 #include <string>
@@ -22,11 +23,18 @@ struct CaptureOutcome {
     std::string reason;
 };
 
+struct SessionSnapshot {
+    BattleState state;
+    uint64_t revision = 0;
+};
+
 class SessionStore {
 public:
     CaptureOutcome capture(RawEnvelope e);
     void set_state(BattleState s);
     std::optional<BattleState> state() const;
+    std::optional<SessionSnapshot> snapshot() const;
+    uint64_t revision() const noexcept { return revision_.load(std::memory_order_acquire); }
     std::optional<RawEnvelope> last_envelope() const;
     std::string status_json() const;
     bool capture_runtime_probe(std::string body);
@@ -48,5 +56,6 @@ private:
     uint64_t runtime_probe_count_ = 0;
     uint64_t runtime_probe_bytes_ = 0;
     std::string last_runtime_probe_;
+    std::atomic<uint64_t> revision_{0};
 };
 }  // namespace hwm
