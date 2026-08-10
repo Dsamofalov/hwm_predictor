@@ -512,3 +512,26 @@ This file is the development diary for repository changes performed against the 
   - This prevents false exact-re-root/transposition misses when an observed status and its correctly modeled status have identical semantics but different provenance strings.
   - Extended the dedicated planner regression: equal semantic effects with different raw provenance must share a hash/SearchGraph node; changing duration must still split the hash.
   - Hosted CI was still not executing job steps at integration time, so this entry makes no CTest/CI-pass claim. The change is deliberately limited to provenance canonicalization and awaits the next executable standard CI run.
+
+### Windows-only self-hosted CI migration
+
+- Commit: `31c25740d4f6cbf27d802ad4e478993b7571f54f`
+  - Replaced the previous Linux-full + Windows-partial CI matrix with one Windows self-hosted job and moved every standard gate onto Windows/MSVC.
+  - Preserved C++/CTest, the 120-state planner replay validity gate, all four daemon integration tests, Python pytest, TypeScript typecheck and extension build.
+  - Added same-branch stale-run cancellation and protection against running external-fork pull requests on the self-hosted machine.
+- Commit: `6bd81ce9fabc6fa29fb0e3f9694c988ea69e7b8c`
+  - Finalized runner routing to `[self-hosted, windows, x64, hwm-windows]` and added `workflow_dispatch` for manual current-HEAD validation after runner downtime.
+- Commit: `09237be777671fa3697da05b1813b57e5fc19f78`
+  - Declared Windows 10/11 x64 the sole supported product/CI platform in README and converted active build/evaluation examples to PowerShell/Windows paths.
+- Commit: `0118f0586765962a987e5d50794319815b509763`
+  - Synchronized the main-front status, moved the permanent planner replay gate to the Windows CI contract, and marked prior Linux CI results as historical evidence only.
+- Commits: `4fa95fd07e7dc3faafb0ac19de71a4327c1aa2bd`, `53087329f842dc19a5de3806f458959d6e9c6d6c`, `99423460e859bb22fb01210ae07d165d17e910f0`, `df64b32cee8f7b77e5c48b5f7e1e0dc67d37bb48`
+  - Removed the unsupported Linux bootstrap, validation, daemon-launch and demo-launch entry points. Windows scripts are the only supported product tooling path.
+- Commits: `d746c4de9a8d6cb951a697774e1b4bfce3c68469`, `db5f029239ff2b3484b3c826577930d5418a4b20`
+  - Removed the VS Code bash validation fallback and Linux/WSL debugger configuration; VS Code development tasks now target Windows/MSVC only.
+- Commit: `1fe72e59cb10dfc1a40b0d53dcfa058a21385f75`
+  - Stabilized the standard self-hosted Windows CI around service-owned uv/Python 3.13, Windows PowerShell with execution-policy bypass, system Node/CMake discovery, and the Visual Studio 2022 generator.
+- Workflow repair commit: `3dc09576ce09996a1680bec86e3f79d0454a9591`
+  - Fixed invalid YAML in this changelog workflow by removing the unindented PowerShell here-string and using a YAML-safe line array; also removed the unavailable `pwsh` dependency.
+- Real Windows runner execution is required for PASS claims; historical hosted-runner results remain evidence only.
+
