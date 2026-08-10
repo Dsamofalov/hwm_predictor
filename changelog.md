@@ -136,7 +136,7 @@ This file is the development diary for repository changes performed against the 
 - Commit: `72c3502ac61da10b233c563b03e7b3ac72e35052`
   - Stored `data/reports/cripplingwound_probe.json` from the full repository corpus.
   - Matched decisions: **808** across **173** battles; mechanic-like candidates: **585**; parse errors: **0**.
-  - Special-code distribution: `{'rag': 206, 'wnd': 129, 'ral': 86, 'ra2': 78, 'rn1': 76, 'raa': 60, 'enr': 60, 'blt': 43, 'eod': 32, 'spi': 24, 'at3': 21, 'pfr': 12, 'pss': 10, 'sld': 10, 'ato': 7, 'fd1': 7, 'fw3': 7, 'agl': 6, 'rn2': 6, 'dsp': 5, 'rn7': 4, 'spt': 4, 'ent': 4, 'rn3': 2, 'psc': 2, 'tob': 2, 'rgl': 2, 'sor': 2, 'fw2': 2, 'br2': 1, 'bdd': 1, 'fdc': 1, 'zat': 1, 'cpt': 1, 'snu': 1, 'frz': 1, 'ab3': 1, 'crs': 1, 'rn0': 1, 'prp': 1, 'dsh': 1, 'sff': 1, 'eye': 1, 'fod': 1, 'fo2': 1, 'paa': 1, 'psa': 1, 'mga': 1, 'adp': 1}`.
+  - Special-code distribution: `{'rag': 206, 'wnd': 129, 'ral': 86, 'ra2': 78, 'rn1': 76, 'raa': 60, 'enr': 60, 'blt': 43, 'eod': 32, 'spi': 24, 'at3': 21, 'pfr': 12, 'pss': 10, 'sld': 10, 'ato': 7, 'fd1': 7, 'fw3': 7, 'agl': 6, 'rn2': 6, 'dsp': 5, 'spt': 4, 'ent': 4, 'rn3': 2, 'psc': 2, 'tob': 2, 'rgl': 2, 'sor': 2, 'fw2': 2, 'br2': 1, 'bdd': 1, 'fdc': 1, 'zat': 1, 'cpt': 1, 'snu': 1, 'frz': 1, 'ab3': 1, 'crs': 1, 'rn0': 1, 'prp': 1, 'dsh': 1, 'sff': 1, 'eye': 1, 'fod': 1, 'fo2': 1, 'paa': 1, 'psa': 1, 'mga': 1, 'adp': 1}`.
   - Target speed deltas: `{'0.0': 477}`; initiative deltas: `{'0.0': 477}`; effect additions: `{'proc_cripple': 108, 'proc_shieldbash': 7, 'ra2': 6, 'pfr': 5, 'sld': 2, 'ent': 2, 'fdc': 1, 'tob': 1, 'mga': 1}`.
 
 ### Crippling Wound conditional-proc evaluation
@@ -312,7 +312,6 @@ This file is the development diary for repository changes performed against the 
   - Updated active specification and reports, including the previously verified Mighty Slam full-CI Python count **42/42**.
   - C++ Debug build/CTest and targeted Python replay/probe tests passed before commit.
 
-
 ### Local daemon pairing/authentication
 
 - Commit: `40665e57a42244ac5dfc07321aab5ced580173c4`
@@ -326,7 +325,6 @@ This file is the development diary for repository changes performed against the 
   - Added the integration test to normal CI and updated M16 specification status.
   - Targeted C++ build/CTest, local API integration, TypeScript typecheck and extension build passed before commit.
 
-
 ### Revision-bound stale-search cancellation
 
 - Commit: `8a7423546eb4df3c6309d81e85f107b90d78cbe2`
@@ -339,7 +337,6 @@ This file is the development diary for repository changes performed against the 
   - Extension auto-replanning uses an epoch so older in-flight results cannot overwrite newer storage/UI; side panel additionally checks recommendation `state_hash` against current daemon status before rendering.
   - Added `scripts/test_stale_cancellation.py`; C++/CTest, pairing auth, stale cancellation, TypeScript typecheck and extension build passed before commit.
 
-
 ### Live closed-loop trace and binding diagnostics
 
 - Commit: `8605dec8e2f860a2e977b26b45b94411c3371aba`
@@ -347,11 +344,10 @@ This file is the development diary for repository changes performed against the 
 - Commit: `21927bdc6b528a06018bad95e63540c9ce02d9fd`
   - Capture responses now carry canonical `revision` and `state_hash`; successful recommendations carry `state_revision`, `state_hash` and `battle_id`.
   - Extension stores a bounded 80-event metadata-only trace covering capture forwarding/result, planner requests/results, stale epoch discards and runtime-probe acknowledgements. Raw battle payloads, bearer tokens and full URLs are deliberately excluded.
-  - Side panel exposes the latest closed-loop trace and a clear action, allowing active-battle validation to localize failures across bridge -> daemon -> canonical state -> planner.
+  - Side panel exposes the latest trace for active-battle debugging;
   - Added `scripts/test_live_binding.py`, proving an OK recommendation is bound to the same daemon revision/hash as the observed demo state.
   - M01 status remains MOSTLY COMPLETE: live trace tooling is ready, but a real authenticated active-battle exercise and full runtime-object fallback remain required.
   - C++/CTest, pairing auth, stale cancellation, live binding, TypeScript typecheck and extension build passed before commit.
-
 
 ### Main-front live plumbing CI and report synchronization
 
@@ -365,7 +361,7 @@ This file is the development diary for repository changes performed against the 
   - Verified C++ configure/build/CTest, pairing/auth integration, stale-search cancellation integration, live recommendation binding, the full Python pytest suite, TypeScript typecheck and extension build.
 - Commit: `d920ba47bf4e99832c377fe25467dee50f99235c`
   - Added `docs/LIVE_VALIDATION.md` with the active authenticated battle smoke gate, expected trace sequence, pass criteria, and evidence-driven runtime-fallback decision rule.
-- Commit: `5af650101bedab884dddfbb9ffeeb48abe8f2283`
+- Commit: `5af650101bedab884dddfbb9ffeeb48abe8f075e9a12dd6609c258fc`
   - Added `docs/MAIN_FRONT_STATUS.md` to preserve the main-lane checkpoint while abilities continue independently on branch `ability`.
 - Commit: `d77e25350464bc0d8d57e4793b11bfc21cb7cf8c`
   - Synchronized `TEST_REPORT.md` with the three mandatory closed-loop integration gates and current ability metrics.
@@ -373,7 +369,6 @@ This file is the development diary for repository changes performed against the 
   - Synchronized `IMPLEMENTATION_REPORT.md` with pairing, revision cancellation, live trace/binding, current ability risk and branch ownership.
 - Commit: `499c9c8e20113aa5748f075e9a12dd6609c258fc`
   - Synchronized the duplicate implementation checkpoint `HeroesWM_Solver_Implementation_Report_0.3.0.md`.
-
 
 ### Authenticated local WebSocket revision stream
 
@@ -383,12 +378,11 @@ This file is the development diary for repository changes performed against the 
   - Added RFC6455 `/ws` on the existing loopback daemon with SHA-1/WebSocket handshake and authenticated subprotocol `hwm-bearer.<token>`; the bearer is not placed in the URL.
   - Server pushes canonical `status` immediately and on every SessionStore revision change, plus a 20-second heartbeat for MV3 service-worker liveness.
   - Status now exposes `side_to_act` and `active_entity_uid` so the service worker schedules planning only for confirmed player decision states.
-  - MV3 service worker reconnects the authenticated stream, stores streamed daemon status, logs WS events in the bounded live trace and deduplicates replanning by canonical revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
+  - MV3 service worker reconnects the authenticated stream, stores the last daemon status, logs WS events in the bounded live trace and deduplicates replanning by canonical revision; capture remains passive HTTP and no extra HeroesWM traffic is introduced.
   - Side panel uses fresh streamed status for stale guards/diagnostics and falls back to HTTP `/status` only when stream data is absent or older than five seconds.
   - Added `scripts/test_websocket_stream.py`: wrong bearer -> 401, valid RFC6455 accept verified, initial revision frame received, debug state publication produces pushed newer revision/hash.
   - M16 is now COMPLETE FOR CURRENT LOCAL API; Phase 2 remains MOSTLY COMPLETE until a real active authenticated browser battle is exercised.
   - C++/CTest, pairing, stale cancellation, live binding, WebSocket integration, TypeScript typecheck and extension build passed before commit.
-
 
 ### Main-front checkpoint handoff
 
@@ -401,3 +395,13 @@ This file is the development diary for repository changes performed against the 
   - Updated the active general specification (`SPEC.md` and duplicate checkpoint), `TEST_REPORT.md`, and `docs/MAIN_FRONT_STATUS.md` with the current main-front state.
   - Explicit next M13 correctness gate: stochastic action outcomes must be separated by `state_hash` before transposition/persistent tree reuse; do not keep different sampled outcomes under a single first-initialized `Edge.child`.
   - Real authenticated active-battle smoke validation remains the immediate product gate before claiming live Browser Bridge/Orchestrator complete.
+
+### M13 stochastic chance-outcome correctness and transpositions
+
+- Commit: `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`
+  - Replaced the historical single `Edge.child` with per-action outcome bindings keyed by canonical `state_hash`, so different sampled damage/proc outcomes no longer share the first outcome's legal-action node.
+  - Added a per-search transposition graph: equal canonical hashes reuse the same search node across actions/outcomes.
+  - Principal variation now follows the most-visited sampled outcome for each action instead of an arbitrary first child.
+  - Added a separate main-owned `hwm-planner-tests` CTest target proving two different outcome hashes keep different nodes/legal-action sets and the same hash reuses one node.
+  - `cpp/tests/test_main.cpp` was deliberately left untouched because it is owned by the parallel `ability` lane.
+  - Standard CI result for this functional tree has not yet been recorded; do not treat this entry as a CI-pass claim.
