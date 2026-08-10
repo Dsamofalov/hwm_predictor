@@ -93,3 +93,9 @@ Verification: standard CI run `31380236279` PASS on Linux and Windows. The immed
 
 Functional evidence commit: `45581ae7d0f844f67797c590c3ed529390b76f1f`. The existing damage residual now has a reproducible five-member ensemble evaluation at 2/4/8/16 held-out halfturn horizons. Mean force-L1 beats the generic baseline at all horizons, but long-horizon invalid-action drift is worse, so runtime learned-world enablement remains disabled. M11 stays PARTIAL / EXPERIMENTAL.
 
+## Current M11 / evaluation checkpoint
+
+M11 evidence commits `45581ae7d0f844f67797c590c3ed529390b76f1f`, `ef35d28aca6a044019896e3ecf6c4d4b52113d6f` and `7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b` establish 2/4/8/16-step damage-residual ensemble evaluation, uncertainty calibration, and a strict 64/16/20 fallback-selector test. Mean HP/force drift improves, but long-horizon invalid-action drift remains above generic and both naive disagreement fallback and the calibrated selector are rejected for production. M11 stays PARTIAL / EXPERIMENTAL.
+
+Planner replay gate commit `cde38a5a89684ff2691c80eeb3583195ffa31758` permanently checks 120 safe held-out states across 109 battles in Linux CI and records 0 invalid recommendations. Replay acceptance is closed; the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md` remains mandatory before the live product loop is declared complete.
+

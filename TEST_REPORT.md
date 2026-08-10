@@ -183,3 +183,9 @@ Functional commits `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`, `135826c05d7f9b3d
 
 Commit `45581ae7d0f844f67797c590c3ed529390b76f1f` adds five targeted evaluator tests and `data/reports/dynamics-multistep-damage.json`. On 174 chronological held-out battles, the five-member train-only ensemble beats the generic baseline in mean normalized force-L1 at 2/4/8/16 halfturn horizons, while 16-step predicted-invalid-action fraction remains worse (3.58% vs 2.51%); production enablement therefore stays false. Diagnostic run `31384739406` and full standard CI run `31384739323` passed.
 
+## Current M11 uncertainty / selector and 120-state planner gate
+
+- M11 uncertainty calibration (`ef35d28aca6a044019896e3ecf6c4d4b52113d6f`): full-corpus run `31385464567` and standard CI `31385464568` PASS; disagreement predicts absolute error but not learned-vs-generic underperformance, so runtime uncertainty fallback remains disabled.
+- M11 strict selector (`7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b`): diagnostic `31386006048` and standard CI `31386005987` PASS; final 64/16/20 test rejects selector enablement because multi-step L1 is slightly worse than pure ensemble and invalid-action rate remains above generic.
+- Planner replay validity (`cde38a5a89684ff2691c80eeb3583195ffa31758`): diagnostic `31387183686`, stress `31386809158`, and permanent-CI run `31387423155` PASS. Permanent gate covers 120 safe held-out states from 109 battles with 0 invalid recommendations/hash mismatches/illegal root actions/non-finite metrics.
+

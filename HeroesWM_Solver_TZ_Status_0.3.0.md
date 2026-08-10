@@ -2088,3 +2088,16 @@ https://cmake.org/cmake/help/latest/
 - This does **not** complete M11 or enable a learned world model in production: at 16 steps ensemble predicted-invalid-action fraction is **3.58%** vs **2.51%** generic and alive mismatch reaches **8.83%**. The next M11 gate is uncertainty/disagreement calibration and then broader structured-transition coverage.
 - Reproducible report: `data/reports/dynamics-multistep-damage.json`; diagnostic run `31384739406` and standard Linux/Windows CI run `31384739323` passed.
 
+### 2026-08-10 M11 uncertainty and fallback-selector follow-up
+
+- Uncertainty calibration commit `ef35d28aca6a044019896e3ecf6c4d4b52113d6f` shows ensemble disagreement is informative for **absolute** multi-step drift (Spearman 0.589/0.659/0.666/0.630 at 2/4/8/16 halfturns), but it does **not** identify windows where learned dynamics are worse than generic (AUC 0.472/0.431/0.390/0.318). A naive high-disagreement fallback is therefore rejected.
+- Calibrated selector commit `7c5a4634da26b99ee5b74f824f98fe5dcce4dc5b` uses a strict 64% fit / 16% calibration / 20% final-test split. It slightly improves one-step abs-log error, but is worse than the pure ensemble on multi-step mean force-L1 and still above the generic invalid-action rate. Runtime selector remains disabled.
+- M11 remains **PARTIAL / EXPERIMENTAL**. The next useful learned-dynamics work is to reduce the concrete invalid-action/survival divergence itself, not add another one-step fallback classifier.
+
+### 2026-08-10 held-out planner recommendation-validity acceptance
+
+- Functional commit `cde38a5a89684ff2691c80eeb3583195ffa31758` makes a deterministic **120-state** chronological held-out planner validity gate part of standard Linux CI.
+- The sample spans **109 distinct held-out battles**. At the permanent 120-simulation gate: **120/120** recommendations are valid, with **0** canonical-hash mismatches, illegal best actions, illegal alternatives, non-finite metrics or other invalid recommendations.
+- A stronger 80 -> 300 simulation stress reference also passes 120/120; action-type stability is 98.33% and exact-action stability 85%.
+- This satisfies the **replay** half of the >=100-state invalid-recommendation acceptance requirement. It does **not** replace the required real authenticated active-battle smoke / live-state gate; M14 cannot be declared fully complete from replay alone.
+
