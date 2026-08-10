@@ -267,3 +267,14 @@ This file is the development diary for repository changes performed against the 
   - Best train linear slope: **0.11/cell**; gate **False**.
   - Big-target stats: `{'train': {'n': 85, 'hits': 38, 'rate': 0.4470588235294118}, 'heldout': {'n': 52, 'hits': 15, 'rate': 0.28846153846153844}}`; small-target stats: `{'train': {'n': 164, 'hits': 73, 'rate': 0.4451219512195122}, 'heldout': {'n': 56, 'hits': 24, 'rate': 0.42857142857142855}}`.
   - Observed proc consequences: `{'proc_rows': 150, 'displacement': {'1': 105, '0': 42, '2': 1, '9': 1, '8': 1}, 'atb_after': {'90.0': 15, '98.0': 12, '95.0': 16, '96.0': 19, '92.0': 10, '99.0': 12, '97.0': 15, '94.0': 12, '100.0': 14, '93.0': 12, '91.0': 11, '50.0': 2}, 'i_tail': {'0023': 3, '0021': 1, '0020': 12, '0012': 28, '0006': 1, '0002': 6, '0010': 28, '0011': 30, '0015': 15, '0014': 7, '0003': 2, '0005': 3, '0013': 3, '0018': 2, '0007': 1, '0009': 8}, 'i_matches_actor': 150}`.
+
+### Paw Strike HP-distance formula validation
+
+- Commit: `0931bc137d4e969bc9794e5e75e8bd811c39d1af`
+  - Staged a self-removing chronological validation of the historical HeroesWM base-HP formula combined with per-travelled-cell repeated proc attempts.
+- Commit: `73242abd49819efa27768de89bbc2be962862ea7`
+  - Stored `data/reports/pawstrike_formula_validation.json`.
+  - Held-out Brier: HP-distance formula **0.24191**, train-frequency baseline **0.23788**, linear 10%/cell **0.20250**.
+  - `I_RECORD` source matches Paw Strike actor in **150/150** observed procs.
+  - Actor owners `{'1': 326, '2': 31}`; same-owner hero presence `{'hero': 339, 'no_hero': 18}`.
+  - Formula gate: **False**.
