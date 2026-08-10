@@ -1,0 +1,5764 @@
+{
+  "ability": "mightyslam",
+  "special_code": "msl",
+  "observed": 32,
+  "action_types": {
+    "MELEE_ATTACK": 32
+  },
+  "creature_ids": {
+    "435": 3,
+    "652": 12,
+    "792": 4,
+    "1053": 5,
+    "1081": 1,
+    "1189": 7
+  },
+  "rows": [
+    {
+      "battle_id": "1628426732",
+      "decision_index": 8,
+      "server_turn": 3,
+      "actor_uid": 6,
+      "actor_owner": 2,
+      "actor_creature_id": 435,
+      "actor_count": 3,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 14,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 3,
+        "top_hp": 362,
+        "total_hp": 1086,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 96.0,
+        "x": 11,
+        "y": 8,
+        "effects": [
+          "fws"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_after": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 3,
+        "top_hp": 362,
+        "total_hp": 1086,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 96.0,
+        "x": 11,
+        "y": 8,
+        "effects": [
+          "fws",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          8
+        ],
+        "position_after": [
+          11,
+          8
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 290,
+        "alive": true,
+        "count": 23,
+        "top_hp": 47,
+        "total_hp": 1499,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 23.1,
+        "atb": 93.0,
+        "x": 9,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "demonic",
+          "fearattack",
+          "searingaura"
+        ]
+      },
+      "target_after": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 290,
+        "alive": true,
+        "count": 22,
+        "top_hp": 26,
+        "total_hp": 1412,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 23.1,
+        "atb": 93.0,
+        "x": 9,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "demonic",
+          "fearattack",
+          "searingaura"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -21,
+        "total_hp": -87,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          9,
+          9
+        ],
+        "position_after": [
+          9,
+          9
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0061108Smsl006000000000000d0060140000000087i0060100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629923656",
+      "decision_index": 69,
+      "server_turn": 33,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 6,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 80,
+      "friendly_hero_mana_after": 80,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 8,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 6,
+        "top_hp": 13,
+        "total_hp": 613,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 91.0,
+        "x": 1,
+        "y": 4,
+        "effects": [
+          "dfm",
+          "fst",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 6,
+        "top_hp": 13,
+        "total_hp": 613,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 91.0,
+        "x": 2,
+        "y": 6,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          1,
+          4
+        ],
+        "position_after": [
+          2,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 71,
+        "alive": true,
+        "count": 320,
+        "top_hp": 26,
+        "total_hp": 8320,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.6,
+        "atb": 96.0,
+        "x": 4,
+        "y": 7,
+        "effects": [
+          "crs",
+          "enr",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "burstofenergy",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "shieldother"
+        ]
+      },
+      "target_after": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 71,
+        "alive": true,
+        "count": 309,
+        "top_hp": 13,
+        "total_hp": 8021,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.6,
+        "atb": 96.0,
+        "x": 5,
+        "y": 7,
+        "effects": [
+          "crs",
+          "enr",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "burstofenergy",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "shieldother"
+        ]
+      },
+      "target_delta": {
+        "count": -11,
+        "top_hp": -13,
+        "total_hp": -299,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          4,
+          7
+        ],
+        "position_after": [
+          5,
+          7
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0140206Smsl014000000000000d0140080000000299b0080507d0140070000000231i0080000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629923656",
+      "decision_index": 136,
+      "server_turn": 70,
+      "actor_uid": 14,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 4,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 80,
+      "friendly_hero_mana_after": 80,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 3,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "STATE",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 4,
+        "top_hp": 45,
+        "total_hp": 405,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 91.0,
+        "x": 7,
+        "y": 3,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 14,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 4,
+        "top_hp": 45,
+        "total_hp": 405,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 91.0,
+        "x": 9,
+        "y": 4,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          7,
+          3
+        ],
+        "position_after": [
+          9,
+          4
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 607,
+        "alive": true,
+        "count": 1,
+        "top_hp": 248,
+        "total_hp": 248,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 11.8,
+        "atb": 98.0,
+        "x": 8,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "giantkiller",
+          "ignoredefence20",
+          "mechanical",
+          "noselfret",
+          "shooter",
+          "shootonly"
+        ]
+      },
+      "target_after": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 607,
+        "alive": true,
+        "count": 1,
+        "top_hp": 82,
+        "total_hp": 82,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 11.8,
+        "atb": 98.0,
+        "x": 8,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "giantkiller",
+          "ignoredefence20",
+          "mechanical",
+          "noselfret",
+          "shooter",
+          "shootonly"
+        ]
+      },
+      "target_delta": {
+        "count": 0,
+        "top_hp": -166,
+        "total_hp": -166,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          8,
+          5
+        ],
+        "position_after": [
+          8,
+          5
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0140904Smsl014000000000000d0140030000000166b0030805d0140100000000229b0100907i0030000i0100000i0140100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629929945",
+      "decision_index": 69,
+      "server_turn": 36,
+      "actor_uid": 13,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 7,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 8,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 7,
+        "top_hp": 96,
+        "total_hp": 816,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 92.0,
+        "x": 6,
+        "y": 8,
+        "effects": [
+          "dfm",
+          "fst",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 7,
+        "top_hp": 96,
+        "total_hp": 816,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 92.0,
+        "x": 9,
+        "y": 10,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          6,
+          8
+        ],
+        "position_after": [
+          9,
+          10
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 37,
+        "alive": true,
+        "count": 48,
+        "top_hp": 28,
+        "total_hp": 2566,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.2,
+        "atb": 94.0,
+        "x": 11,
+        "y": 9,
+        "effects": [
+          "crs"
+        ],
+        "abilities": [
+          "alive",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "target_after": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 37,
+        "alive": true,
+        "count": 35,
+        "top_hp": 44,
+        "total_hp": 1880,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.2,
+        "atb": 94.0,
+        "x": 12,
+        "y": 8,
+        "effects": [
+          "crs"
+        ],
+        "abilities": [
+          "alive",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "target_delta": {
+        "count": -13,
+        "top_hp": 16,
+        "total_hp": -686,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          9
+        ],
+        "position_after": [
+          12,
+          8
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0130910Smsl013000000000000d0130080000000686b0081208i0080000i0130100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629936376",
+      "decision_index": 67,
+      "server_turn": 40,
+      "actor_uid": 18,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 9,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 84,
+      "friendly_hero_mana_after": 84,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 18,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 9,
+        "top_hp": 59,
+        "total_hp": 1019,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 96.0,
+        "x": 3,
+        "y": 9,
+        "effects": [
+          "dfm",
+          "fst",
+          "rgm",
+          "sff"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 18,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 9,
+        "top_hp": 59,
+        "total_hp": 1019,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 96.0,
+        "x": 3,
+        "y": 9,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "sff"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          3,
+          9
+        ],
+        "position_after": [
+          3,
+          9
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 118,
+        "alive": true,
+        "count": 14,
+        "top_hp": 21,
+        "total_hp": 502,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.7,
+        "atb": 98.0,
+        "x": 5,
+        "y": 10,
+        "effects": [
+          "crs",
+          "slw"
+        ],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "noretalation",
+          "teleport",
+          "undead"
+        ]
+      },
+      "target_after": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 118,
+        "alive": true,
+        "count": 10,
+        "top_hp": 25,
+        "total_hp": 358,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.7,
+        "atb": 98.0,
+        "x": 5,
+        "y": 10,
+        "effects": [
+          "crs",
+          "slw"
+        ],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "noretalation",
+          "teleport",
+          "undead"
+        ]
+      },
+      "target_delta": {
+        "count": -4,
+        "top_hp": 4,
+        "total_hp": -144,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          5,
+          10
+        ],
+        "position_after": [
+          5,
+          10
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0180309Smsl018000000000000d0180060000000144b0060510d0180050000000088i0060000i0180100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629950489",
+      "decision_index": 98,
+      "server_turn": 37,
+      "actor_uid": 19,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 7,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 80,
+      "friendly_hero_mana_after": 80,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 6,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "STATE",
+        "STATE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 19,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 7,
+        "top_hp": 50,
+        "total_hp": 770,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 93.0,
+        "x": 1,
+        "y": 5,
+        "effects": [
+          "dfm",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 19,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 7,
+        "top_hp": 50,
+        "total_hp": 770,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 93.0,
+        "x": 1,
+        "y": 5,
+        "effects": [
+          "dfm",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          1,
+          5
+        ],
+        "position_after": [
+          1,
+          5
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 21,
+        "alive": true,
+        "count": 40,
+        "top_hp": 13,
+        "total_hp": 949,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 12.0,
+        "atb": 92.0,
+        "x": 2,
+        "y": 4,
+        "effects": [
+          "sff",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "uretalation"
+        ]
+      },
+      "target_after": {
+        "uid": 6,
+        "owner": 2,
+        "creature_id": 21,
+        "alive": true,
+        "count": 28,
+        "top_hp": 12,
+        "total_hp": 660,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 12.0,
+        "atb": 92.0,
+        "x": 2,
+        "y": 4,
+        "effects": [
+          "sff",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "uretalation"
+        ]
+      },
+      "target_delta": {
+        "count": -12,
+        "top_hp": -1,
+        "total_hp": -289,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          2,
+          4
+        ],
+        "position_after": [
+          2,
+          4
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0190105Smsl019000000000000d0190060000000289b0060204d0190090000000217b0090405i0060000i0090000d0190080000000200i0190100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629950489",
+      "decision_index": 137,
+      "server_turn": 53,
+      "actor_uid": 19,
+      "actor_owner": 1,
+      "actor_creature_id": 652,
+      "actor_count": 5,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 42,
+      "friendly_hero_mana_after": 42,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 4,
+      "special_codes": [
+        "msl",
+        "enr",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 19,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 5,
+        "top_hp": 89,
+        "total_hp": 569,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 93.0,
+        "x": 2,
+        "y": 5,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 19,
+        "owner": 1,
+        "creature_id": 652,
+        "alive": true,
+        "count": 5,
+        "top_hp": 89,
+        "total_hp": 569,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.3,
+        "atb": 93.0,
+        "x": 2,
+        "y": 5,
+        "effects": [
+          "dfm",
+          "fst",
+          "msl",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          2,
+          5
+        ],
+        "position_after": [
+          2,
+          5
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 21,
+        "alive": true,
+        "count": 14,
+        "top_hp": 9,
+        "total_hp": 321,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 12.0,
+        "atb": 100.0,
+        "x": 4,
+        "y": 4,
+        "effects": [
+          "cnf",
+          "crs",
+          "enr",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "uretalation"
+        ]
+      },
+      "target_after": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 21,
+        "alive": true,
+        "count": 6,
+        "top_hp": 4,
+        "total_hp": 124,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 12.0,
+        "atb": 100.0,
+        "x": 5,
+        "y": 3,
+        "effects": [
+          "cnf",
+          "crs",
+          "enr",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "enraged",
+          "lshield",
+          "shieldbash",
+          "uretalation"
+        ]
+      },
+      "target_delta": {
+        "count": -8,
+        "top_hp": -5,
+        "total_hp": -197,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          4,
+          4
+        ],
+        "position_after": [
+          5,
+          3
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0190205Smsl019000000000000d0190040000000197b0040503d0190080000000188Senr004100000000006Senr007100000000006i0040000i0190100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629974411",
+      "decision_index": 140,
+      "server_turn": 68,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 792,
+      "actor_count": 33,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 30,
+      "friendly_hero_mana_after": 30,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 15,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 33,
+        "top_hp": 102,
+        "total_hp": 3366,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 14.6,
+        "atb": 95.0,
+        "x": 5,
+        "y": 8,
+        "effects": [
+          "blt",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 33,
+        "top_hp": 102,
+        "total_hp": 3366,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 14.6,
+        "atb": 95.0,
+        "x": 4,
+        "y": 9,
+        "effects": [
+          "blt",
+          "msl",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          5,
+          8
+        ],
+        "position_after": [
+          4,
+          9
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 15,
+        "owner": 1,
+        "creature_id": 645,
+        "alive": true,
+        "count": 2,
+        "top_hp": 192,
+        "total_hp": 392,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 15.1,
+        "atb": 90.0,
+        "x": 3,
+        "y": 11,
+        "effects": [
+          "dfm",
+          "fst",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "fearattack",
+          "flyer",
+          "magicproof50",
+          "organicarmor",
+          "pirate",
+          "teleport"
+        ]
+      },
+      "target_after": {
+        "uid": 15,
+        "owner": 1,
+        "creature_id": 645,
+        "alive": true,
+        "count": 2,
+        "top_hp": 38,
+        "total_hp": 238,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 15.1,
+        "atb": 90.0,
+        "x": 3,
+        "y": 11,
+        "effects": [
+          "dfm",
+          "fst",
+          "rgm",
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "fearattack",
+          "flyer",
+          "magicproof50",
+          "organicarmor",
+          "pirate",
+          "teleport"
+        ]
+      },
+      "target_delta": {
+        "count": 0,
+        "top_hp": -154,
+        "total_hp": -154,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          3,
+          11
+        ],
+        "position_after": [
+          3,
+          11
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0050409Smsl005000000000000d0050150000000154d0050190000000177b0190310i0190000i0050100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1629977598",
+      "decision_index": 32,
+      "server_turn": 25,
+      "actor_uid": 9,
+      "actor_owner": 2,
+      "actor_creature_id": 1053,
+      "actor_count": 1,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 21,
+      "friendly_hero_mana_after": 21,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 17,
+      "special_codes": [
+        "msl",
+        "spt",
+        "spt",
+        "spt",
+        "spt"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "W_RECORD",
+        "FORCED_POSITION",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "W_RECORD",
+        "FORCED_POSITION",
+        "STATE",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 9,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 1,
+        "top_hp": 79,
+        "total_hp": 79,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 11.5,
+        "atb": 92.0,
+        "x": 9,
+        "y": 8,
+        "effects": [],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_after": {
+        "uid": 9,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 1,
+        "top_hp": 79,
+        "total_hp": 79,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 11.5,
+        "atb": 92.0,
+        "x": 8,
+        "y": 7,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          9,
+          8
+        ],
+        "position_after": [
+          8,
+          7
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 17,
+        "owner": 1,
+        "creature_id": 847,
+        "alive": true,
+        "count": 38,
+        "top_hp": 30,
+        "total_hp": 1140,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 16.1,
+        "atb": 94.0,
+        "x": 8,
+        "y": 6,
+        "effects": [
+          "blt",
+          "crs",
+          "frz",
+          "spt"
+        ],
+        "abilities": [
+          "alive",
+          "bloodlust",
+          "flyer",
+          "icedbreath",
+          "magicproof50",
+          "swiftattack"
+        ]
+      },
+      "target_after": {
+        "uid": 17,
+        "owner": 1,
+        "creature_id": 847,
+        "alive": true,
+        "count": 33,
+        "top_hp": 21,
+        "total_hp": 981,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 16.1,
+        "atb": 94.0,
+        "x": 8,
+        "y": 5,
+        "effects": [
+          "blt",
+          "crs",
+          "frz",
+          "spt"
+        ],
+        "abilities": [
+          "alive",
+          "bloodlust",
+          "flyer",
+          "icedbreath",
+          "magicproof50",
+          "swiftattack"
+        ]
+      },
+      "target_delta": {
+        "count": -5,
+        "top_hp": -9,
+        "total_hp": -159,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          8,
+          6
+        ],
+        "position_after": [
+          8,
+          5
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0090807Smsl009000000000000l009luck^Sspt017000000000000Sspt017000000000000d0090170000000159W009017b0170805Sspt018000000000000Sspt018000000000000d0090180000000163W009018b0180905i0170000i0180000i0090100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1631324262",
+      "decision_index": 25,
+      "server_turn": 19,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 792,
+      "actor_count": 35,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 35,
+        "top_hp": 49,
+        "total_hp": 3449,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 11.0,
+        "atb": 97.0,
+        "x": 5,
+        "y": 4,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 35,
+        "top_hp": 49,
+        "total_hp": 3449,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 11.0,
+        "atb": 97.0,
+        "x": 5,
+        "y": 6,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          5,
+          4
+        ],
+        "position_after": [
+          5,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 90,
+        "alive": true,
+        "count": 5,
+        "top_hp": 45,
+        "total_hp": 413,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.3,
+        "atb": 96.0,
+        "x": 3,
+        "y": 8,
+        "effects": [
+          "bls",
+          "fst",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "jousting"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 90,
+        "alive": true,
+        "count": 3,
+        "top_hp": 60,
+        "total_hp": 244,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.3,
+        "atb": 96.0,
+        "x": 3,
+        "y": 8,
+        "effects": [
+          "bls",
+          "fst",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "jousting"
+        ]
+      },
+      "target_delta": {
+        "count": -2,
+        "top_hp": 15,
+        "total_hp": -169,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          3,
+          8
+        ],
+        "position_after": [
+          3,
+          8
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0050506Smsl005000000000000d0050130000000169d0050100000000204i0050100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1631563801",
+      "decision_index": 18,
+      "server_turn": 15,
+      "actor_uid": 4,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 94,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl",
+        "sld"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 94,
+        "top_hp": 106,
+        "total_hp": 11266,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 96.0,
+        "x": 11,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 94,
+        "top_hp": 106,
+        "total_hp": 11266,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 96.0,
+        "x": 7,
+        "y": 5,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          5
+        ],
+        "position_after": [
+          7,
+          5
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 169,
+        "alive": true,
+        "count": 5,
+        "top_hp": 275,
+        "total_hp": 1395,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 13.1,
+        "atb": 92.0,
+        "x": 9,
+        "y": 3,
+        "effects": [
+          "sld"
+        ],
+        "abilities": [
+          "big",
+          "elemental",
+          "fire_breath",
+          "ifire",
+          "magmashield"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 169,
+        "alive": true,
+        "count": 4,
+        "top_hp": 255,
+        "total_hp": 1095,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 13.1,
+        "atb": 92.0,
+        "x": 9,
+        "y": 3,
+        "effects": [
+          "sld"
+        ],
+        "abilities": [
+          "big",
+          "elemental",
+          "fire_breath",
+          "ifire",
+          "magmashield"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -20,
+        "total_hp": -300,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          9,
+          3
+        ],
+        "position_after": [
+          9,
+          3
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0040705Smsl004000000000000d0040110000000300Ssld011004000120000i0040000i0040100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632004401",
+      "decision_index": 25,
+      "server_turn": 19,
+      "actor_uid": 3,
+      "actor_owner": 2,
+      "actor_creature_id": 1081,
+      "actor_count": 1,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1081,
+        "alive": true,
+        "count": 1,
+        "top_hp": 110,
+        "total_hp": 110,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 10.6,
+        "atb": 90.0,
+        "x": 6,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "armoured",
+          "big",
+          "heavystep",
+          "mechanical",
+          "mightyslam",
+          "nonshiftable",
+          "shieldbash"
+        ]
+      },
+      "actor_after": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1081,
+        "alive": true,
+        "count": 1,
+        "top_hp": 110,
+        "total_hp": 110,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 10.6,
+        "atb": 90.0,
+        "x": 6,
+        "y": 5,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "armoured",
+          "big",
+          "heavystep",
+          "mechanical",
+          "mightyslam",
+          "nonshiftable",
+          "shieldbash"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          6,
+          5
+        ],
+        "position_after": [
+          6,
+          5
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 147,
+        "alive": true,
+        "count": 19,
+        "top_hp": 39,
+        "total_hp": 1425,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 16.1,
+        "atb": 98.0,
+        "x": 8,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "auraofres",
+          "big",
+          "blinding_attack"
+        ]
+      },
+      "target_after": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 147,
+        "alive": true,
+        "count": 18,
+        "top_hp": 17,
+        "total_hp": 1326,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 16.1,
+        "atb": 98.0,
+        "x": 8,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "auraofres",
+          "big",
+          "blinding_attack"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -22,
+        "total_hp": -99,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          8,
+          5
+        ],
+        "position_after": [
+          8,
+          5
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0030605Smsl003000000000000d0030090000000099d0030100000000071i0030100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632007191",
+      "decision_index": 23,
+      "server_turn": 11,
+      "actor_uid": 10,
+      "actor_owner": 2,
+      "actor_creature_id": 792,
+      "actor_count": 1,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl",
+        "ra2"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "PROC",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 10,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 1,
+        "top_hp": 11,
+        "total_hp": 11,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 14.9,
+        "atb": 90.0,
+        "x": 11,
+        "y": 6,
+        "effects": [
+          "blt",
+          "rn7"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam",
+          "siegewalls"
+        ]
+      },
+      "actor_after": {
+        "uid": 10,
+        "owner": 2,
+        "creature_id": 792,
+        "alive": true,
+        "count": 1,
+        "top_hp": 11,
+        "total_hp": 11,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 14.9,
+        "atb": 90.0,
+        "x": 11,
+        "y": 4,
+        "effects": [
+          "blt",
+          "msl",
+          "rn7"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam",
+          "siegewalls"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          6
+        ],
+        "position_after": [
+          11,
+          4
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 318,
+        "alive": true,
+        "count": 57,
+        "top_hp": 14,
+        "total_hp": 798,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.4,
+        "atb": 96.0,
+        "x": 11,
+        "y": 2,
+        "effects": [
+          "rag",
+          "ral"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "ignoredefence20"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 318,
+        "alive": true,
+        "count": 42,
+        "top_hp": 8,
+        "total_hp": 582,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.4,
+        "atb": 96.0,
+        "x": 11,
+        "y": 2,
+        "effects": [
+          "ra2",
+          "rag",
+          "ral"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "ignoredefence20"
+        ]
+      },
+      "target_delta": {
+        "count": -15,
+        "top_hp": -6,
+        "total_hp": -216,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          2
+        ],
+        "position_after": [
+          11,
+          2
+        ],
+        "effects_added": [
+          "ra2"
+        ],
+        "effects_removed": []
+      },
+      "raw": "m0101104Smsl010000000000000d0100130000000216Sra20130284-9600064l010morale^i0100050",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632012507",
+      "decision_index": 25,
+      "server_turn": 17,
+      "actor_uid": 7,
+      "actor_owner": 2,
+      "actor_creature_id": 435,
+      "actor_count": 7,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl",
+        "at3"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "PROC",
+        "DAMAGE",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 7,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 7,
+        "top_hp": 362,
+        "total_hp": 2534,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 92.0,
+        "x": 11,
+        "y": 9,
+        "effects": [
+          "psf"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_after": {
+        "uid": 7,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 7,
+        "top_hp": 362,
+        "total_hp": 2534,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 92.0,
+        "x": 2,
+        "y": 9,
+        "effects": [
+          "msl",
+          "psf"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          9
+        ],
+        "position_after": [
+          2,
+          9
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 922,
+        "alive": true,
+        "count": 105,
+        "top_hp": 6,
+        "total_hp": 1254,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 15.2,
+        "atb": 94.0,
+        "x": 1,
+        "y": 8,
+        "effects": [
+          "chm",
+          "dfm",
+          "rgm"
+        ],
+        "abilities": [
+          "alive",
+          "armordamage20",
+          "chameleon",
+          "fireproof25",
+          "noretalation",
+          "shooter"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 922,
+        "alive": false,
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 15.2,
+        "atb": 94.0,
+        "x": 1,
+        "y": 8,
+        "effects": [
+          "chm",
+          "dfm",
+          "rgm"
+        ],
+        "abilities": [
+          "alive",
+          "armordamage20",
+          "chameleon",
+          "fireproof25",
+          "noretalation",
+          "shooter"
+        ]
+      },
+      "target_delta": {
+        "count": -105,
+        "top_hp": -6,
+        "total_hp": -1254,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": true,
+        "position_changed": false,
+        "position_before": [
+          1,
+          8
+        ],
+        "position_after": [
+          1,
+          8
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0070209Smsl007000000000000l007luck^d0070130000003122d0070140000002020i0070100Sat3001000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632014291",
+      "decision_index": 31,
+      "server_turn": 22,
+      "actor_uid": 3,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 9,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "msl",
+        "ra2",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 9,
+        "top_hp": 90,
+        "total_hp": 810,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 94.0,
+        "x": 8,
+        "y": 3,
+        "effects": [
+          "enc"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 9,
+        "top_hp": 90,
+        "total_hp": 810,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 94.0,
+        "x": 5,
+        "y": 4,
+        "effects": [
+          "enc",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          8,
+          3
+        ],
+        "position_after": [
+          5,
+          4
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 859,
+        "alive": true,
+        "count": 80,
+        "top_hp": 13,
+        "total_hp": 1119,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 13.8,
+        "atb": 96.0,
+        "x": 5,
+        "y": 6,
+        "effects": [
+          "ra2",
+          "rag",
+          "ral"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "weakeningstrike"
+        ]
+      },
+      "target_after": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 859,
+        "alive": true,
+        "count": 79,
+        "top_hp": 5,
+        "total_hp": 1097,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 13.8,
+        "atb": 96.0,
+        "x": 5,
+        "y": 6,
+        "effects": [
+          "ra2",
+          "rag",
+          "ral"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "weakeningstrike"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -8,
+        "total_hp": -22,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          5,
+          6
+        ],
+        "position_after": [
+          5,
+          6
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0030504Smsl003000000000000d0030090000000022Sra20090314-0500005Senc003000000000000i0030100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632028844",
+      "decision_index": 28,
+      "server_turn": 19,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 36,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 160,
+      "friendly_hero_mana_after": 160,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 36,
+        "top_hp": 75,
+        "total_hp": 3225,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.8,
+        "atb": 97.0,
+        "x": 7,
+        "y": 6,
+        "effects": [
+          "enc"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 36,
+        "top_hp": 75,
+        "total_hp": 3225,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.8,
+        "atb": 97.0,
+        "x": 7,
+        "y": 7,
+        "effects": [
+          "enc",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          7,
+          6
+        ],
+        "position_after": [
+          7,
+          7
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 43,
+        "alive": true,
+        "count": 157,
+        "top_hp": 12,
+        "total_hp": 1884,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 16.4,
+        "atb": 93.0,
+        "x": 6,
+        "y": 9,
+        "effects": [
+          "prp"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "triplestrike"
+        ]
+      },
+      "target_after": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 43,
+        "alive": true,
+        "count": 21,
+        "top_hp": 2,
+        "total_hp": 242,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 16.4,
+        "atb": 93.0,
+        "x": 6,
+        "y": 9,
+        "effects": [
+          "prp"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "triplestrike"
+        ]
+      },
+      "target_delta": {
+        "count": -136,
+        "top_hp": -10,
+        "total_hp": -1642,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          6,
+          9
+        ],
+        "position_after": [
+          6,
+          9
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0050707Smsl005000000000000d0050100000001642Senc005000000000000i0050100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632051182",
+      "decision_index": 15,
+      "server_turn": 13,
+      "actor_uid": 7,
+      "actor_owner": 4,
+      "actor_creature_id": 792,
+      "actor_count": 293,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl",
+        "blt",
+        "enr",
+        "blt",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 7,
+        "owner": 4,
+        "creature_id": 792,
+        "alive": true,
+        "count": 293,
+        "top_hp": 70,
+        "total_hp": 29270,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 11.0,
+        "atb": 90.0,
+        "x": 10,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam",
+          "siegewalls"
+        ]
+      },
+      "actor_after": {
+        "uid": 7,
+        "owner": 4,
+        "creature_id": 792,
+        "alive": true,
+        "count": 293,
+        "top_hp": 70,
+        "total_hp": 29270,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 11.0,
+        "atb": 90.0,
+        "x": 10,
+        "y": 9,
+        "effects": [
+          "blt",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "bloodlust",
+          "mightyslam",
+          "siegewalls"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          10,
+          9
+        ],
+        "position_after": [
+          10,
+          9
+        ],
+        "effects_added": [
+          "blt",
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 100,
+        "alive": true,
+        "count": 2,
+        "top_hp": 83,
+        "total_hp": 283,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 21.0,
+        "atb": 93.0,
+        "x": 8,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer",
+          "iearth"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 100,
+        "alive": false,
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 21.0,
+        "atb": 93.0,
+        "x": 8,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer",
+          "iearth"
+        ]
+      },
+      "target_delta": {
+        "count": -2,
+        "top_hp": -83,
+        "total_hp": -283,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": true,
+        "position_changed": false,
+        "position_before": [
+          8,
+          9
+        ],
+        "position_after": [
+          8,
+          9
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0071009Smsl007000000000000d0070110000001807Sblt007100000000004Senr012100000000003d0070160000004219Sblt007100000000005Senr012100000000004i0070100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632115076",
+      "decision_index": 36,
+      "server_turn": 27,
+      "actor_uid": 4,
+      "actor_owner": 2,
+      "actor_creature_id": 1053,
+      "actor_count": 21,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 26,
+      "friendly_hero_mana_after": 26,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "I_RECORD",
+        "OPAQUE_SHORT",
+        "DAMAGE",
+        "W_RECORD",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "I_RECORD"
+      ],
+      "actor_before": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 21,
+        "top_hp": 5,
+        "total_hp": 3405,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.1,
+        "atb": 99.0,
+        "x": 8,
+        "y": 6,
+        "effects": [],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_after": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 21,
+        "top_hp": 5,
+        "total_hp": 3405,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 12.1,
+        "atb": 99.0,
+        "x": 8,
+        "y": 6,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          8,
+          6
+        ],
+        "position_after": [
+          8,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 588,
+        "alive": true,
+        "count": 21,
+        "top_hp": 80,
+        "total_hp": 1680,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 17.8,
+        "atb": 93.0,
+        "x": 6,
+        "y": 6,
+        "effects": [
+          "cnf",
+          "crs",
+          "fst",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "blinding_attack",
+          "childofthelight"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 588,
+        "alive": true,
+        "count": 15,
+        "top_hp": 27,
+        "total_hp": 1147,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 17.8,
+        "atb": 93.0,
+        "x": 6,
+        "y": 6,
+        "effects": [
+          "cnf",
+          "crs",
+          "fst",
+          "proc_shieldbash",
+          "slw"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "blinding_attack",
+          "childofthelight"
+        ]
+      },
+      "target_delta": {
+        "count": -6,
+        "top_hp": -53,
+        "total_hp": -533,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          6,
+          6
+        ],
+        "position_after": [
+          6,
+          6
+        ],
+        "effects_added": [
+          "proc_shieldbash"
+        ],
+        "effects_removed": []
+      },
+      "raw": "m0040806Smsl004000000000000I0110004o004d0040110000000533W004011i0040100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632250355",
+      "decision_index": 40,
+      "server_turn": 37,
+      "actor_uid": 8,
+      "actor_owner": 2,
+      "actor_creature_id": 1053,
+      "actor_count": 45,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "W_RECORD",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 45,
+        "top_hp": 4,
+        "total_hp": 7484,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 7,
+        "y": 1,
+        "effects": [
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_after": {
+        "uid": 8,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 45,
+        "top_hp": 4,
+        "total_hp": 7484,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 6,
+        "y": 4,
+        "effects": [
+          "msl",
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          7,
+          1
+        ],
+        "position_after": [
+          6,
+          4
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 149,
+        "alive": true,
+        "count": 21,
+        "top_hp": 125,
+        "total_hp": 2625,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 10.1,
+        "atb": 92.0,
+        "x": 7,
+        "y": 6,
+        "effects": [
+          "enr",
+          "fst"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "noretalation",
+          "regeneration",
+          "six_heads"
+        ]
+      },
+      "target_after": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 149,
+        "alive": true,
+        "count": 20,
+        "top_hp": 49,
+        "total_hp": 2424,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 10.1,
+        "atb": 92.0,
+        "x": 7,
+        "y": 6,
+        "effects": [
+          "enr",
+          "fst"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "noretalation",
+          "regeneration",
+          "six_heads"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -76,
+        "total_hp": -201,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          7,
+          6
+        ],
+        "position_after": [
+          7,
+          6
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0080604Smsl008000000000000d0080090000000201W008009i0080100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632250355",
+      "decision_index": 47,
+      "server_turn": 43,
+      "actor_uid": 4,
+      "actor_owner": 2,
+      "actor_creature_id": 1053,
+      "actor_count": 82,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "msl",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "W_RECORD",
+        "DAMAGE",
+        "SPECIAL",
+        "W_RECORD",
+        "DAMAGE",
+        "W_RECORD",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 82,
+        "top_hp": 119,
+        "total_hp": 13889,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 9,
+        "y": 6,
+        "effects": [
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_after": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 82,
+        "top_hp": 119,
+        "total_hp": 13889,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 9,
+        "y": 6,
+        "effects": [
+          "msl",
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          9,
+          6
+        ],
+        "position_after": [
+          9,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 121,
+        "alive": true,
+        "count": 32,
+        "top_hp": 50,
+        "total_hp": 1600,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 15.8,
+        "atb": 97.0,
+        "x": 11,
+        "y": 8,
+        "effects": [
+          "fst",
+          "lzb",
+          "rgm"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "lizardbite",
+          "ridercharge"
+        ]
+      },
+      "target_after": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 121,
+        "alive": true,
+        "count": 19,
+        "top_hp": 38,
+        "total_hp": 938,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 15.8,
+        "atb": 97.0,
+        "x": 11,
+        "y": 8,
+        "effects": [
+          "fst",
+          "lzb",
+          "rgm"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "lizardbite",
+          "ridercharge"
+        ]
+      },
+      "target_delta": {
+        "count": -13,
+        "top_hp": -12,
+        "total_hp": -662,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          8
+        ],
+        "position_after": [
+          11,
+          8
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0040906Smsl004000000000000d0040100000000662W004010d0040150000000417Senr009100000000006W004015d0040090000000591W004009i0040100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632254034",
+      "decision_index": 113,
+      "server_turn": 69,
+      "actor_uid": 4,
+      "actor_owner": 2,
+      "actor_creature_id": 1053,
+      "actor_count": 1,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 50,
+      "friendly_hero_mana_after": 50,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "W_RECORD",
+        "DAMAGE",
+        "W_RECORD",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 1,
+        "top_hp": 142,
+        "total_hp": 142,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 11.8,
+        "atb": 91.0,
+        "x": 3,
+        "y": 2,
+        "effects": [
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_after": {
+        "uid": 4,
+        "owner": 2,
+        "creature_id": 1053,
+        "alive": true,
+        "count": 1,
+        "top_hp": 142,
+        "total_hp": 142,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 11.8,
+        "atb": 91.0,
+        "x": 3,
+        "y": 1,
+        "effects": [
+          "msl",
+          "slw"
+        ],
+        "abilities": [
+          "big",
+          "festeringaura",
+          "magicproof50",
+          "mightyslam",
+          "pirate",
+          "shieldbash",
+          "undead",
+          "weakeningstrike"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          3,
+          2
+        ],
+        "position_after": [
+          3,
+          1
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 149,
+        "alive": true,
+        "count": 11,
+        "top_hp": 92,
+        "total_hp": 1342,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.5,
+        "atb": 96.0,
+        "x": 1,
+        "y": 1,
+        "effects": [
+          "enr",
+          "proc_shieldbash"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "noretalation",
+          "regeneration",
+          "six_heads"
+        ]
+      },
+      "target_after": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 149,
+        "alive": true,
+        "count": 11,
+        "top_hp": 81,
+        "total_hp": 1331,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.5,
+        "atb": 96.0,
+        "x": 1,
+        "y": 1,
+        "effects": [
+          "enr",
+          "proc_shieldbash"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "noretalation",
+          "regeneration",
+          "six_heads"
+        ]
+      },
+      "target_delta": {
+        "count": 0,
+        "top_hp": -11,
+        "total_hp": -11,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          1,
+          1
+        ],
+        "position_after": [
+          1,
+          1
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0040301Smsl004000000000000d0040100000000011W004010d0040110000000008W004011i0040100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632491254",
+      "decision_index": 18,
+      "server_turn": 15,
+      "actor_uid": 2,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 54,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 54,
+        "top_hp": 81,
+        "total_hp": 6441,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 11,
+        "y": 3,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 54,
+        "top_hp": 81,
+        "total_hp": 6441,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 11,
+        "y": 6,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          3
+        ],
+        "position_after": [
+          11,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 101,
+        "alive": true,
+        "count": 3,
+        "top_hp": 60,
+        "total_hp": 540,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 14.6,
+        "atb": 90.0,
+        "x": 9,
+        "y": 4,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "fire_breath",
+          "flyer",
+          "immunity"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 101,
+        "alive": true,
+        "count": 1,
+        "top_hp": 106,
+        "total_hp": 106,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 14.6,
+        "atb": 90.0,
+        "x": 9,
+        "y": 4,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "fire_breath",
+          "flyer",
+          "immunity"
+        ]
+      },
+      "target_delta": {
+        "count": -2,
+        "top_hp": 46,
+        "total_hp": -434,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          9,
+          4
+        ],
+        "position_after": [
+          9,
+          4
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0021106Smsl002000000000000d0020110000000434i0020100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632692953",
+      "decision_index": 17,
+      "server_turn": 10,
+      "actor_uid": 3,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 15,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 60,
+      "friendly_hero_mana_after": 60,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 15,
+        "top_hp": 90,
+        "total_hp": 1350,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.5,
+        "atb": 90.0,
+        "x": 8,
+        "y": 4,
+        "effects": [
+          "crs",
+          "enc"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 15,
+        "top_hp": 90,
+        "total_hp": 1350,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 11.5,
+        "atb": 90.0,
+        "x": 6,
+        "y": 8,
+        "effects": [
+          "crs",
+          "enc",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          8,
+          4
+        ],
+        "position_after": [
+          6,
+          8
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 121,
+        "alive": true,
+        "count": 28,
+        "top_hp": 50,
+        "total_hp": 1400,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.3,
+        "atb": 100.0,
+        "x": 5,
+        "y": 6,
+        "effects": [
+          "lzb"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "lizardbite",
+          "ridercharge"
+        ]
+      },
+      "target_after": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 121,
+        "alive": true,
+        "count": 14,
+        "top_hp": 49,
+        "total_hp": 699,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 14.3,
+        "atb": 100.0,
+        "x": 5,
+        "y": 6,
+        "effects": [
+          "lzb"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "lizardbite",
+          "ridercharge"
+        ]
+      },
+      "target_delta": {
+        "count": -14,
+        "top_hp": -1,
+        "total_hp": -701,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          5,
+          6
+        ],
+        "position_after": [
+          5,
+          6
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0030608Smsl003000000000000d0030100000000701Senc003000000000000i0030100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 34,
+      "server_turn": 26,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 155,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 155,
+        "top_hp": 90,
+        "total_hp": 13950,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 93.0,
+        "x": 8,
+        "y": 5,
+        "effects": [
+          "enc"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 155,
+        "top_hp": 90,
+        "total_hp": 13950,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 93.0,
+        "x": 9,
+        "y": 3,
+        "effects": [
+          "enc",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          8,
+          5
+        ],
+        "position_after": [
+          9,
+          3
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 147,
+        "alive": true,
+        "count": 18,
+        "top_hp": 54,
+        "total_hp": 1363,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 15.8,
+        "atb": 97.0,
+        "x": 8,
+        "y": 1,
+        "effects": [
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "auraofres",
+          "big",
+          "blinding_attack"
+        ]
+      },
+      "target_after": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 147,
+        "alive": true,
+        "count": 9,
+        "top_hp": 62,
+        "total_hp": 678,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 15.8,
+        "atb": 97.0,
+        "x": 8,
+        "y": 1,
+        "effects": [
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "auraofres",
+          "big",
+          "blinding_attack"
+        ]
+      },
+      "target_delta": {
+        "count": -9,
+        "top_hp": 8,
+        "total_hp": -685,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          8,
+          1
+        ],
+        "position_after": [
+          8,
+          1
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0050903Smsl005000000000000d0050090000000685Senc005000000000000i0050100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632723635",
+      "decision_index": 36,
+      "server_turn": 27,
+      "actor_uid": 2,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 6,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 12,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 6,
+        "top_hp": 68,
+        "total_hp": 518,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 6,
+        "y": 1,
+        "effects": [
+          "enc"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 6,
+        "top_hp": 68,
+        "total_hp": 518,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 6,
+        "y": 1,
+        "effects": [
+          "enc",
+          "msl",
+          "proc_entrenchment"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          6,
+          1
+        ],
+        "position_after": [
+          6,
+          1
+        ],
+        "effects_added": [
+          "msl",
+          "proc_entrenchment"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 12,
+        "owner": 1,
+        "creature_id": 41,
+        "alive": true,
+        "count": 59,
+        "top_hp": 5,
+        "total_hp": 701,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 20.0,
+        "atb": 99.0,
+        "x": 5,
+        "y": 3,
+        "effects": [
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "dancecombo"
+        ]
+      },
+      "target_after": {
+        "uid": 12,
+        "owner": 1,
+        "creature_id": 41,
+        "alive": true,
+        "count": 55,
+        "top_hp": 7,
+        "total_hp": 655,
+        "mana": 0,
+        "speed": 6.0,
+        "initiative": 20.0,
+        "atb": 99.0,
+        "x": 4,
+        "y": 4,
+        "effects": [
+          "stn"
+        ],
+        "abilities": [
+          "alive",
+          "dancecombo"
+        ]
+      },
+      "target_delta": {
+        "count": -4,
+        "top_hp": 2,
+        "total_hp": -46,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          5,
+          3
+        ],
+        "position_after": [
+          4,
+          4
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0020601Smsl002000000000000d0020120000000046b0120404d0020090000000037i0120000Senc002100000000000i0020100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632859583",
+      "decision_index": 14,
+      "server_turn": 11,
+      "actor_uid": 2,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 100,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "STATE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 100,
+        "top_hp": 90,
+        "total_hp": 9000,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 92.0,
+        "x": 11,
+        "y": 1,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 100,
+        "top_hp": 90,
+        "total_hp": 9000,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 92.0,
+        "x": 7,
+        "y": 1,
+        "effects": [
+          "enc",
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          1
+        ],
+        "position_after": [
+          7,
+          1
+        ],
+        "effects_added": [
+          "enc",
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 513,
+        "alive": true,
+        "count": 43,
+        "top_hp": 40,
+        "total_hp": 1720,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 16.5,
+        "atb": 96.0,
+        "x": 6,
+        "y": 1,
+        "effects": [],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "teleport",
+          "torpor",
+          "undead"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 513,
+        "alive": true,
+        "count": 35,
+        "top_hp": 9,
+        "total_hp": 1369,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 16.5,
+        "atb": 96.0,
+        "x": 6,
+        "y": 1,
+        "effects": [],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "teleport",
+          "torpor",
+          "undead"
+        ]
+      },
+      "target_delta": {
+        "count": -8,
+        "top_hp": -31,
+        "total_hp": -351,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          6,
+          1
+        ],
+        "position_after": [
+          6,
+          1
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0020701Smsl002000000000000d0020130000000351b0130601i0130000Senc002000000000000i0020100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1632859583",
+      "decision_index": 64,
+      "server_turn": 50,
+      "actor_uid": 3,
+      "actor_owner": 2,
+      "actor_creature_id": 1189,
+      "actor_count": 310,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl",
+        "enc"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "DAMAGE",
+        "SPECIAL",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 310,
+        "top_hp": 59,
+        "total_hp": 27869,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 94.0,
+        "x": 8,
+        "y": 6,
+        "effects": [
+          "enc",
+          "proc_entrenchment"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_after": {
+        "uid": 3,
+        "owner": 2,
+        "creature_id": 1189,
+        "alive": true,
+        "count": 310,
+        "top_hp": 59,
+        "total_hp": 27869,
+        "mana": 0,
+        "speed": 5.0,
+        "initiative": 9.0,
+        "atb": 94.0,
+        "x": 8,
+        "y": 6,
+        "effects": [
+          "enc",
+          "msl",
+          "proc_entrenchment"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "entrenchment",
+          "impervioustopain",
+          "mightyslam",
+          "safeposition"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          8,
+          6
+        ],
+        "position_after": [
+          8,
+          6
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 513,
+        "alive": true,
+        "count": 43,
+        "top_hp": 40,
+        "total_hp": 1720,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 16.5,
+        "atb": 96.0,
+        "x": 10,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "teleport",
+          "torpor",
+          "undead"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 513,
+        "alive": true,
+        "count": 7,
+        "top_hp": 8,
+        "total_hp": 248,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 16.5,
+        "atb": 96.0,
+        "x": 10,
+        "y": 5,
+        "effects": [],
+        "abilities": [
+          "flyer",
+          "lifedrain",
+          "teleport",
+          "torpor",
+          "undead"
+        ]
+      },
+      "target_delta": {
+        "count": -36,
+        "top_hp": -32,
+        "total_hp": -1472,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          10,
+          5
+        ],
+        "position_after": [
+          10,
+          5
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0030806Smsl003000000000000d0030130000001472d0030140000000000Senc003100000000000i0030100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633416160",
+      "decision_index": 14,
+      "server_turn": 11,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 61,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl",
+        "enr",
+        "at3",
+        "adp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 61,
+        "top_hp": 120,
+        "total_hp": 7320,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 95.0,
+        "x": 11,
+        "y": 7,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 61,
+        "top_hp": 120,
+        "total_hp": 7320,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 95.0,
+        "x": 11,
+        "y": 7,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          7
+        ],
+        "position_after": [
+          11,
+          7
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 103,
+        "alive": true,
+        "count": 2,
+        "top_hp": 200,
+        "total_hp": 400,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 15.5,
+        "atb": 94.0,
+        "x": 10,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 103,
+        "alive": false,
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 15.5,
+        "atb": 94.0,
+        "x": 10,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer"
+        ]
+      },
+      "target_delta": {
+        "count": -2,
+        "top_hp": -200,
+        "total_hp": -400,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": true,
+        "position_changed": false,
+        "position_before": [
+          10,
+          9
+        ],
+        "position_after": [
+          10,
+          9
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0051107Smsl005000000000000d0050110000000521Senr010100000000003d0050090000000594i0050100Sat3001000000000000Sadp001000038000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633416160",
+      "decision_index": 15,
+      "server_turn": 11,
+      "actor_uid": 2,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 24,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 9,
+      "special_codes": [
+        "msl",
+        "adp"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 24,
+        "top_hp": 120,
+        "total_hp": 2880,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 11,
+        "y": 4,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 2,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 24,
+        "top_hp": 120,
+        "total_hp": 2880,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 98.0,
+        "x": 11,
+        "y": 4,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          4
+        ],
+        "position_after": [
+          11,
+          4
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 588,
+        "alive": true,
+        "count": 14,
+        "top_hp": 46,
+        "total_hp": 1086,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 15.5,
+        "atb": 96.0,
+        "x": 9,
+        "y": 6,
+        "effects": [
+          "bld"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "blinding_attack",
+          "childofthelight"
+        ]
+      },
+      "target_after": {
+        "uid": 9,
+        "owner": 1,
+        "creature_id": 588,
+        "alive": true,
+        "count": 10,
+        "top_hp": 62,
+        "total_hp": 782,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 15.5,
+        "atb": 96.0,
+        "x": 9,
+        "y": 6,
+        "effects": [
+          "bld"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "blinding_attack",
+          "childofthelight"
+        ]
+      },
+      "target_delta": {
+        "count": -4,
+        "top_hp": 16,
+        "total_hp": -304,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          9,
+          6
+        ],
+        "position_after": [
+          9,
+          6
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0021104Smsl002000000000000d0020090000000304i0020100Sadp001000040000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633418447",
+      "decision_index": 18,
+      "server_turn": 14,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 61,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 11,
+      "special_codes": [
+        "msl",
+        "enr"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 61,
+        "top_hp": 120,
+        "total_hp": 7320,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 97.0,
+        "x": 11,
+        "y": 7,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 61,
+        "top_hp": 120,
+        "total_hp": 7320,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 97.0,
+        "x": 11,
+        "y": 7,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          11,
+          7
+        ],
+        "position_after": [
+          11,
+          7
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 103,
+        "alive": true,
+        "count": 2,
+        "top_hp": 200,
+        "total_hp": 400,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 15.5,
+        "atb": 94.0,
+        "x": 10,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer"
+        ]
+      },
+      "target_after": {
+        "uid": 11,
+        "owner": 1,
+        "creature_id": 103,
+        "alive": false,
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 9.0,
+        "initiative": 15.5,
+        "atb": 94.0,
+        "x": 10,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "acid_breath",
+          "alive",
+          "big",
+          "flyer"
+        ]
+      },
+      "target_delta": {
+        "count": -2,
+        "top_hp": -200,
+        "total_hp": -400,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": true,
+        "position_changed": false,
+        "position_before": [
+          10,
+          9
+        ],
+        "position_after": [
+          10,
+          9
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0051107Smsl005000000000000d0050110000000477Senr010100000000002d0050090000000657i0050100",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633418447",
+      "decision_index": 68,
+      "server_turn": 57,
+      "actor_uid": 5,
+      "actor_owner": 2,
+      "actor_creature_id": 652,
+      "actor_count": 27,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": null,
+      "friendly_hero_mana_after": null,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 10,
+      "special_codes": [
+        "msl",
+        "agl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "STATE",
+        "SPECIAL"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL",
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 27,
+        "top_hp": 18,
+        "total_hp": 3138,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 97.0,
+        "x": 4,
+        "y": 3,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_after": {
+        "uid": 5,
+        "owner": 2,
+        "creature_id": 652,
+        "alive": true,
+        "count": 27,
+        "top_hp": 18,
+        "total_hp": 3138,
+        "mana": 0,
+        "speed": 4.0,
+        "initiative": 9.0,
+        "atb": 97.0,
+        "x": 3,
+        "y": 4,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "mightyslam",
+          "pirate"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          4,
+          3
+        ],
+        "position_after": [
+          3,
+          4
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 92,
+        "alive": true,
+        "count": 4,
+        "top_hp": 144,
+        "total_hp": 669,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 9.0,
+        "atb": 91.0,
+        "x": 2,
+        "y": 2,
+        "effects": [
+          "enr",
+          "ent"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "entroots"
+        ]
+      },
+      "target_after": {
+        "uid": 10,
+        "owner": 1,
+        "creature_id": 92,
+        "alive": true,
+        "count": 3,
+        "top_hp": 118,
+        "total_hp": 468,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 9.0,
+        "atb": 91.0,
+        "x": 2,
+        "y": 2,
+        "effects": [
+          "enr",
+          "ent"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "enraged",
+          "entroots"
+        ]
+      },
+      "target_delta": {
+        "count": -1,
+        "top_hp": -26,
+        "total_hp": -201,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": false,
+        "position_before": [
+          2,
+          2
+        ],
+        "position_after": [
+          2,
+          2
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0050304Smsl005000000000000d0050100000000201i0050100Sagl013000000000000",
+      "candidate": true
+    },
+    {
+      "battle_id": "1633639637",
+      "decision_index": 16,
+      "server_turn": 4,
+      "actor_uid": 7,
+      "actor_owner": 2,
+      "actor_creature_id": 435,
+      "actor_count": 4,
+      "actor_mana_before": 0,
+      "actor_mana_after": 0,
+      "friendly_hero_mana_before": 0,
+      "friendly_hero_mana_after": 0,
+      "action_type": "MELEE_ATTACK",
+      "target_uid": 13,
+      "special_codes": [
+        "msl"
+      ],
+      "raw_opcodes": [
+        "MOVE",
+        "SPECIAL",
+        "DAMAGE",
+        "FORCED_POSITION",
+        "DAMAGE",
+        "STATE",
+        "STATE"
+      ],
+      "semantic_unresolved_opcodes": [
+        "SPECIAL"
+      ],
+      "actor_before": {
+        "uid": 7,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 4,
+        "top_hp": 362,
+        "total_hp": 1448,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 99.0,
+        "x": 11,
+        "y": 9,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_after": {
+        "uid": 7,
+        "owner": 2,
+        "creature_id": 435,
+        "alive": true,
+        "count": 4,
+        "top_hp": 362,
+        "total_hp": 1448,
+        "mana": 0,
+        "speed": 7.0,
+        "initiative": 13.9,
+        "atb": 99.0,
+        "x": 4,
+        "y": 5,
+        "effects": [
+          "msl"
+        ],
+        "abilities": [
+          "alive",
+          "big",
+          "burningrage",
+          "demoniclineage",
+          "impervioustopain",
+          "mightyslam",
+          "nopenalty",
+          "shooter"
+        ]
+      },
+      "actor_delta": {
+        "count": 0,
+        "top_hp": 0,
+        "total_hp": 0,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          11,
+          9
+        ],
+        "position_after": [
+          4,
+          5
+        ],
+        "effects_added": [
+          "msl"
+        ],
+        "effects_removed": []
+      },
+      "target_before": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 75,
+        "alive": true,
+        "count": 52,
+        "top_hp": 4,
+        "total_hp": 769,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 20.0,
+        "atb": 93.0,
+        "x": 4,
+        "y": 7,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "demonic",
+          "noretalation",
+          "threehead"
+        ]
+      },
+      "target_after": {
+        "uid": 13,
+        "owner": 1,
+        "creature_id": 75,
+        "alive": true,
+        "count": 36,
+        "top_hp": 6,
+        "total_hp": 531,
+        "mana": 0,
+        "speed": 8.0,
+        "initiative": 20.0,
+        "atb": 93.0,
+        "x": 4,
+        "y": 8,
+        "effects": [],
+        "abilities": [
+          "alive",
+          "demonic",
+          "noretalation",
+          "threehead"
+        ]
+      },
+      "target_delta": {
+        "count": -16,
+        "top_hp": 2,
+        "total_hp": -238,
+        "mana": 0,
+        "speed": 0.0,
+        "initiative": 0.0,
+        "atb": 0.0,
+        "alive_changed": false,
+        "position_changed": true,
+        "position_before": [
+          4,
+          7
+        ],
+        "position_after": [
+          4,
+          8
+        ],
+        "effects_added": [],
+        "effects_removed": []
+      },
+      "raw": "m0070405Smsl007000000000000d0070130000000238b0130408d0070100000000137i0130000i0070100",
+      "candidate": true
+    }
+  ]
+}
