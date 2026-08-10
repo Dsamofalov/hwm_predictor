@@ -75,23 +75,16 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Configure C++ with MSVC
-        run: cmake -S . -B build/windows -G "Visual Studio 17 2022" -A x64 -DHWM_BUILD_TESTS=ON
-
-      - name: Build C++ with MSVC
-        run: cmake --build build/windows --config Debug --parallel 2
-
-      - name: C++ tests on Windows
-        run: ctest --test-dir build/windows -C Debug --output-on-failure
-
-      - name: Local API pairing/auth on Windows
-        run: python scripts/test_local_api_auth.py build/windows/Debug/solver-daemon.exe
-
-      - name: Stale cancellation on Windows
-        run: python scripts/test_stale_cancellation.py build/windows/Debug/solver-daemon.exe
-
-      - name: Live binding on Windows
-        run: python scripts/test_live_binding.py build/windows/Debug/solver-daemon.exe
-
-      - name: WebSocket streaming on Windows
-        run: python scripts/test_websocket_stream.py build/windows/Debug/solver-daemon.exe
+      - name: Build and test with current MSVC
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\Common7\Tools\VsDevCmd.bat" -arch=x64
+          where cl
+          where ninja
+          cmake -S . -B build/windows -G Ninja -DCMAKE_BUILD_TYPE=Debug -DHWM_BUILD_TESTS=ON
+          cmake --build build/windows --parallel 2
+          ctest --test-dir build/windows --output-on-failure
+          python scripts/test_local_api_auth.py build/windows/solver-daemon.exe
+          python scripts/test_stale_cancellation.py build/windows/solver-daemon.exe
+          python scripts/test_live_binding.py build/windows/solver-daemon.exe
+          python scripts/test_websocket_stream.py build/windows/solver-daemon.exe
