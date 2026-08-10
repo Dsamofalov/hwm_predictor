@@ -33,7 +33,7 @@ jobs:
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           clean: true
       - name: Publish Core pending status
@@ -46,7 +46,7 @@ jobs:
           $body = @{ state = 'pending'; context = 'HWM / Core'; description = 'Windows Core running'; target_url = $target } | ConvertTo-Json -Compress
           Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
       - name: Core Windows validation
-        run: .\scripts\ci_windows.ps1 -Suite Core
+        run: .\scripts\ci_entrypoint_windows.ps1 -Suite Core
       - name: Publish Core commit status
         if: always()
         continue-on-error: true
@@ -65,7 +65,7 @@ jobs:
     runs-on: [self-hosted, windows, x64, hwm-windows]
     timeout-minutes: 240
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           clean: true
       - name: Publish Full pending status
@@ -78,7 +78,7 @@ jobs:
           $body = @{ state = 'pending'; context = 'HWM / Full'; description = 'Windows Full running'; target_url = $target } | ConvertTo-Json -Compress
           Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
       - name: Full Windows validation
-        run: .\scripts\ci_windows.ps1 -Suite Full
+        run: .\scripts\ci_entrypoint_windows.ps1 -Suite Full
       - name: Publish Full commit status
         if: always()
         continue-on-error: true
