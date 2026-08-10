@@ -41,6 +41,9 @@ jobs:
       - name: Stale search cancellation integration
         run: python scripts/test_stale_cancellation.py build/debug/solver-daemon
 
+      - name: Live recommendation binding contract
+        run: python scripts/test_live_binding.py build/debug/solver-daemon
+
       - name: Install Python package
         run: python -m pip install -e '.[dev]'
 
