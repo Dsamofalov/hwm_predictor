@@ -2079,3 +2079,12 @@ https://cmake.org/cmake/help/latest/
 
 > Работай по фазам и decision gates этого ТЗ. Не начинай ML, пока не доказан стабильный live/replay state acquisition. Не автоматизируй действия игрока. Не делай лишних запросов к HeroesWM в primary path. Все внешние данные переводятся в canonical schema. Любая неопределённость протокола фиксируется в diagnostics и ADR, а не скрывается. Сначала correctness и end-to-end closed loop, затем ML, затем search, затем performance. При обнаружении блокирующей неизвестности сделай минимальный эксперимент, задокументируй результат и выбери предусмотренный fallback; не останавливай всю разработку из-за несущественных неизвестностей.
 
+### 2026-08-10 M11 multi-step learned-dynamics gate
+
+- Functional evidence commit: `45581ae7d0f844f67797c590c3ed529390b76f1f`.
+- The first M11 **multi-step** submodel gate now exists for the existing primary physical-damage residual: five train-battle jackknife ensemble members, chronological held-out battles, and autoregressive evaluation at 2/4/8/16 halfturn horizons.
+- Non-primary transitions are teacher-forced in this gate so proc/collateral/resurrection errors are not misattributed to the damage residual. Predicted-invalid actions are preserved as divergence rather than silently corrected from replay.
+- Ensemble mean normalized force-L1 improves over the generic exact-formula baseline at every measured horizon: **0.01137 vs 0.01679 (2)**, **0.01791 vs 0.02728 (4)**, **0.02986 vs 0.04710 (8)**, **0.04947 vs 0.08125 (16)**.
+- This does **not** complete M11 or enable a learned world model in production: at 16 steps ensemble predicted-invalid-action fraction is **3.58%** vs **2.51%** generic and alive mismatch reaches **8.83%**. The next M11 gate is uncertainty/disagreement calibration and then broader structured-transition coverage.
+- Reproducible report: `data/reports/dynamics-multistep-damage.json`; diagnostic run `31384739406` and standard Linux/Windows CI run `31384739323` passed.
+

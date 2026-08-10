@@ -179,3 +179,7 @@ These numbers are a controlled held-out replay-state regression, not a live win-
 
 Functional commits `d06217fd4aa531aa0e49cf7c8c2495a5ab0ca5e4`, `135826c05d7f9b3d44e165ef6732bb6ede89a4c4`, and `6edec4d8360169060d280cd07a6e63de9c0fda89` add a dedicated `hwm-planner-tests` target covering distinct stochastic outcome nodes/legal sets, equal-hash transpositions, exact persistent root reuse, reachable-subgraph pruning, battle reset, and static-structure mismatch reset. WebSocket harness commit `33aaea0cac7549972e4be93bf495d0a9dca7f301` handles coalesced handshake/frame bytes without weakening protocol checks. Standard CI run `31380236279`: PASS; Linux CTest 2/2 plus all daemon integrations, Python tests, TypeScript and extension build passed; Windows current-MSVC build/test passed.
 
+## M11 multi-step damage-residual ensemble gate
+
+Commit `45581ae7d0f844f67797c590c3ed529390b76f1f` adds five targeted evaluator tests and `data/reports/dynamics-multistep-damage.json`. On 174 chronological held-out battles, the five-member train-only ensemble beats the generic baseline in mean normalized force-L1 at 2/4/8/16 halfturn horizons, while 16-step predicted-invalid-action fraction remains worse (3.58% vs 2.51%); production enablement therefore stays false. Diagnostic run `31384739406` and full standard CI run `31384739323` passed.
+

@@ -89,3 +89,7 @@ Current behavior: a stochastic action may retain multiple canonical outcome chil
 
 Verification: standard CI run `31380236279` PASS on Linux and Windows. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 19 structural-invalid finals and legal-action representability improvement toward >=99.9%.
 
+## M11 multi-step damage-residual gate
+
+Functional evidence commit: `45581ae7d0f844f67797c590c3ed529390b76f1f`. The existing damage residual now has a reproducible five-member ensemble evaluation at 2/4/8/16 held-out halfturn horizons. Mean force-L1 beats the generic baseline at all horizons, but long-horizon invalid-action drift is worse, so runtime learned-world enablement remains disabled. M11 stays PARTIAL / EXPERIMENTAL.
+
