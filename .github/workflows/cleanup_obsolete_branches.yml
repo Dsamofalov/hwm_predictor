@@ -70,6 +70,8 @@ jobs:
               '  - Added the M11 temperature calibration command to the permanent Windows `Full` suite so future heavy diagnostics do not require temporary branches/workflows.'
               '- Commit: `510b49931c87606522da17f13e3f1cff7b35579b`'
               '  - Bounded OpenMP/MKL/OpenBLAS/NumExpr to two threads per CI job so two self-hosted runners on one Windows PC can run Core and Full concurrently without each numerical process consuming every CPU core.'
+              '- Commit: `6f4c61d99eb7f06cfdb140a74d72a8bf5e978b79`'
+              '  - Added regression coverage for the permanent two-job Windows CI inventory, including all Core integration gates and all Full M11 diagnostics, so future tests are added to one canonical script instead of temporary workflow YAML.'
               '- Commit: `151d568ee34a6fbf234d063a6c645d1341cebd9a`'
               '  - Removed a redundant bootstrap helper after consolidation on `scripts/ci_windows.ps1`.'
               '- Repository branch cleanup:'
