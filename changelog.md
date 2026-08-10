@@ -361,7 +361,7 @@ This file is the development diary for repository changes performed against the 
   - Verified C++ configure/build/CTest, pairing/auth integration, stale-search cancellation integration, live recommendation binding, the full Python pytest suite, TypeScript typecheck and extension build.
 - Commit: `d920ba47bf4e99832c377fe25467dee50f99235c`
   - Added `docs/LIVE_VALIDATION.md` with the active authenticated battle smoke gate, expected trace sequence, pass criteria, and evidence-driven runtime-fallback decision rule.
-- Commit: `5af650101bedab884dddfbb9ffeeb48abe8f075e9a12dd6609c258fc`
+- Commit: `5af650101bedab884dddfbb9ffeeb48abe8f2283`
   - Added `docs/MAIN_FRONT_STATUS.md` to preserve the main-lane checkpoint while abilities continue independently on branch `ability`.
 - Commit: `d77e25350464bc0d8d57e4793b11bfc21cb7cf8c`
   - Synchronized `TEST_REPORT.md` with the three mandatory closed-loop integration gates and current ability metrics.
@@ -405,3 +405,13 @@ This file is the development diary for repository changes performed against the 
   - Added a separate main-owned `hwm-planner-tests` CTest target proving two different outcome hashes keep different nodes/legal-action sets and the same hash reuses one node.
   - `cpp/tests/test_main.cpp` was deliberately left untouched because it is owned by the parallel `ability` lane.
   - Standard CI result for this functional tree has not yet been recorded; do not treat this entry as a CI-pass claim.
+
+### M13 persistent exact tree re-root
+
+- Commit: `135826c05d7f9b3d44e165ef6732bb6ede89a4c4`
+  - Made the planner graph persistent across recommendation calls and re-rooted only when the newly observed canonical `state_hash` already exists in the same battle/perspective search graph.
+  - Reused roots retain accumulated visits/statistics and prune unreachable old branches; unmatched observed states start a fresh graph rather than using approximate state matching.
+  - Moved the daemon to one persistent, mutex-protected Planner instance while preserving revision-bound cooperative cancellation through a request-specific callback.
+  - Added `/recommend` diagnostics: `tree_reused`, `reused_root_visits`, and `retained_nodes`.
+  - Extended the dedicated main-owned planner regression with exact reuse, pruning, and battle-scope reset checks.
+
