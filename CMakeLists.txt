@@ -56,4 +56,10 @@ if(HWM_BUILD_TESTS)
   add_executable(hwm-tests cpp/tests/test_main.cpp)
   target_link_libraries(hwm-tests PRIVATE hwm_core)
   add_test(NAME hwm-tests COMMAND hwm-tests)
+
+  # Kept separate from test_main.cpp because creature-ability work owns that file on
+  # the parallel ability branch.  This target is the main-lane M13 planner regression.
+  add_executable(hwm-planner-tests cpp/tests/test_planner_tree.cpp)
+  target_link_libraries(hwm-planner-tests PRIVATE hwm_core)
+  add_test(NAME hwm-planner-tests COMMAND hwm-planner-tests)
 endif()
