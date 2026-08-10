@@ -25,5 +25,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ninja-build
       - name: Apply, verify, commit and log websocket streaming
-        # v2 checks numeric 401 semantics and emits warning-clean C++ helpers.
-        run: python .github/scripts/apply_websocket_stream_patch_v2.py
+        # v3 adds strict TypeScript listener types after the WS protocol gate passed.
+        run: python .github/scripts/apply_websocket_stream_patch_v3.py
