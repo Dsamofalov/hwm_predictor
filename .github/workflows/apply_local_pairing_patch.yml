@@ -25,5 +25,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ninja-build
       - name: Apply, verify, commit and log local pairing
-        # v2 publishes source/spec changes only; permanent CI wiring is added separately.
+        # v2 wrapper now preserves __file__ and publishes source/spec only.
         run: python .github/scripts/apply_local_pairing_patch_v2.py
