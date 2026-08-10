@@ -1,0 +1,53 @@
+{
+  "diagnostic_gate": {
+    "disagreement_flags_learned_underperformance_at_all_horizons": false,
+    "disagreement_tracks_absolute_error_at_all_horizons": true,
+    "production_uncertainty_gate_enabled": false,
+    "reason": "Disagreement correlates with absolute error but does not identify windows where learned dynamics underperform the generic baseline; high-disagreement fallback is therefore not justified."
+  },
+  "ensemble_members": 5,
+  "heldout_battles": 174,
+  "horizons_halfturns": [2, 4, 8, 16],
+  "metrics": {
+    "2": {
+      "auc_disagreement_flags_learned_worse_than_generic": 0.4715322976006416,
+      "learned_worse_than_generic_rate": 0.36770757685790365,
+      "low_to_high_bin_error_ratio": 3.462964860879336,
+      "spearman_disagreement_vs_ensemble_l1": 0.588569634186206,
+      "spearman_disagreement_vs_excess_l1": -0.3029306337763552,
+      "spearman_disagreement_vs_invalid_action_fraction": -0.1770844532133487,
+      "windows": 8262
+    },
+    "4": {
+      "auc_disagreement_flags_learned_worse_than_generic": 0.4314152923381873,
+      "learned_worse_than_generic_rate": 0.3262014837114289,
+      "low_to_high_bin_error_ratio": 5.884514182726489,
+      "spearman_disagreement_vs_ensemble_l1": 0.6585208694668006,
+      "spearman_disagreement_vs_excess_l1": -0.4660777556494988,
+      "spearman_disagreement_vs_invalid_action_fraction": -0.26886723036369564,
+      "windows": 9301
+    },
+    "8": {
+      "auc_disagreement_flags_learned_worse_than_generic": 0.3904205320025593,
+      "learned_worse_than_generic_rate": 0.2767523621182158,
+      "low_to_high_bin_error_ratio": 6.628768656138867,
+      "spearman_disagreement_vs_ensemble_l1": 0.6655217549879888,
+      "spearman_disagreement_vs_excess_l1": -0.5483737371613493,
+      "spearman_disagreement_vs_invalid_action_fraction": -0.2379403490364081,
+      "windows": 9102
+    },
+    "16": {
+      "auc_disagreement_flags_learned_worse_than_generic": 0.3182879332161346,
+      "learned_worse_than_generic_rate": 0.22236470889971788,
+      "low_to_high_bin_error_ratio": 6.228165310082063,
+      "spearman_disagreement_vs_ensemble_l1": 0.6296816790014357,
+      "spearman_disagreement_vs_excess_l1": -0.6405476127483795,
+      "spearman_disagreement_vs_invalid_action_fraction": -0.29252515246826283,
+      "windows": 7798
+    }
+  },
+  "report_kind": "compact committed summary; the evaluator CLI emits the full ten-bin calibration table",
+  "schema_version": 1,
+  "source": "raw corpus chronological 80/20 battle split; ensemble fit on train battles only",
+  "train_battles": 692
+}
