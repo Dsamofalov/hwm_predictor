@@ -56,15 +56,24 @@ def _stop_and_collect(process: subprocess.Popen[str]) -> str:
     return stdout or ""
 
 
-def wait_health(base: str, process: subprocess.Popen[str], timeout: float = 8) -> None:
-    deadline = time.monotonic() + timeout
+def wait_health(base: str, process: subprocess.Popen[str], timeout: float = 20) -> None:
+    """Wait for the loopback daemon without making Windows cold-start timing a test oracle.
+
+    The daemon process can be listening before the first localhost HTTP request is serviced on
+    a freshly started Windows service account (for example while endpoint security inspects the
+    new executable/socket). Keep the wait bounded, but give that one-time path enough headroom.
+    """
+    started = time.monotonic()
+    deadline = started + timeout
     last_error: Exception | None = None
+    attempts = 0
     while time.monotonic() < deadline:
         if process.poll() is not None:
             output = process.stdout.read() if process.stdout is not None else ""
             raise AssertionError(
                 f"daemon exited before health check, code={process.returncode}\n{output}"
             )
+        attempts += 1
         try:
             if request_json(base, "/health", timeout=1)[0] == 200:
                 return
@@ -72,9 +81,10 @@ def wait_health(base: str, process: subprocess.Popen[str], timeout: float = 8) -
             last_error = exc
         time.sleep(0.05)
 
+    elapsed = time.monotonic() - started
     output = _stop_and_collect(process)
     raise AssertionError(
-        "daemon did not become healthy"
+        f"daemon did not become healthy after {elapsed:.1f}s/{attempts} attempts"
         + (f"; last client error: {last_error!r}" if last_error is not None else "")
         + (f"\ndaemon output:\n{output}" if output else "")
     )
