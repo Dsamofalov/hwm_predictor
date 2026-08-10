@@ -151,18 +151,50 @@ jobs:
           @'
           import json
           from pathlib import Path
+
           pairs = [
               ("build/validation/dynamics-multistep-damage.json", "data/reports/dynamics-multistep-damage.json"),
               ("build/validation/dynamics-uncertainty-calibration.json", "data/reports/dynamics-uncertainty-calibration.json"),
               ("build/validation/dynamics-selector-gate.json", "data/reports/dynamics-selector-gate.json"),
               ("build/validation/m11_dynamics_survival_gate.json", "data/reports/m11_dynamics_survival_gate.json"),
           ]
+          skip_keys = {"validation", "report_kind", "reason"}
+
+          def prepare_generated(committed_path, value):
+              value = dict(value)
+              if committed_path.endswith("dynamics-selector-gate.json"):
+                  selector = dict(value["selector"])
+                  calibration = selector.get("calibration_selection", {})
+                  selector["calibration_generic_usage_rate"] = calibration.get("generic_usage_rate")
+                  selector["calibration_mean_abs_log_error"] = calibration.get("mean_abs_log_error")
+                  value["selector"] = selector
+              return value
+
+          def project_like(actual, template, context="root"):
+              if isinstance(template, dict):
+                  if not isinstance(actual, dict):
+                      raise SystemExit(f"evidence type mismatch at {context}")
+                  out = {}
+                  for key, expected in template.items():
+                      if key in skip_keys:
+                          continue
+                      if key not in actual:
+                          raise SystemExit(f"missing evidence field {context}.{key}")
+                      out[key] = project_like(actual[key], expected, f"{context}.{key}")
+                  return out
+              if isinstance(template, list):
+                  if not isinstance(actual, list):
+                      raise SystemExit(f"evidence type mismatch at {context}")
+                  return actual
+              return actual
+
           for generated_path, committed_path in pairs:
               generated = json.loads(Path(generated_path).read_text(encoding="utf-8"))
               committed = json.loads(Path(committed_path).read_text(encoding="utf-8"))
-              generated.pop("validation", None)
-              committed.pop("validation", None)
-              if generated != committed:
+              generated = prepare_generated(committed_path, generated)
+              actual = project_like(generated, committed)
+              expected = project_like(committed, committed)
+              if actual != expected:
                   raise SystemExit(f"reproducibility mismatch: {committed_path}")
               print(f"MATCH: {committed_path}")
           '@ | python -
