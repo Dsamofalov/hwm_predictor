@@ -278,3 +278,14 @@ This file is the development diary for repository changes performed against the 
   - `I_RECORD` source matches Paw Strike actor in **150/150** observed procs.
   - Actor owners `{'1': 326, '2': 31}`; same-owner hero presence `{'hero': 339, 'no_hero': 18}`.
   - Formula gate: **False**.
+
+### Paw Strike I-record scope audit
+
+- Commit: `d788f2884fd909e7d8617d6959a1b2388e11f8fe`
+  - First Paw Strike production staging was rejected by its corpus gate: parsing explicit I-record sources exposed 174 source-matching records, not the previously isolated 150 primary-target procs. No functional Paw Strike commit was produced.
+- Commit: `804e5f62200539e27af2d6f79a38adb23ea645fc`
+  - Staged a self-removing audit of all I-records whose four-digit source equals the active Paw Strike melee actor.
+- Commit: `300f2a7e45b0e5a87a55731b4487b0606b8184d3`
+  - Stored `data/reports/pawstrike_i_record_audit.json`.
+  - Source-matching I-records: **174**; class distribution: `{'primary=True,damage=True,forced=True': 150, 'primary=False,damage=True,forced=True': 24}`.
+  - Non-primary records retained with complete raw decision/damage/forced-position context instead of being silently labeled Paw Strike.
