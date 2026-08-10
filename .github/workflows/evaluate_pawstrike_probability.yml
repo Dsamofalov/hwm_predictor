@@ -1,0 +1,123 @@
+name: Validate Paw Strike probability and consequences
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/evaluate_pawstrike_probability.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Evaluate temporal probability and proc consequences
+        env:
+          PYTHONPATH: python
+        run: |
+          python - <<'PY'
+          import json, math
+          from collections import defaultdict, Counter
+          from pathlib import Path
+          from hwm_solver.protocol.replay import parse_initial_entities, parse_turns, iter_compact_decisions, parse_commands, _perspective_owner, _player_won
+
+          root=Path('hwm_battles/battles')
+          battles=sorted((p for p in root.iterdir() if p.is_dir()),key=lambda p:int(p.name))
+          cut=int(len(battles)*0.8)
+
+          def collect(dirs):
+              rows=[]
+              for d in dirs:
+                  init=(d/'init.txt').read_text(errors='replace'); turns=(d/'turns0.txt').read_text(errors='replace')
+                  es,_=parse_initial_entities(init); owner=_perspective_owner(es); won=_player_won(init,es,owner)
+                  for r in iter_compact_decisions(d.name,es,parse_turns(turns),owner,player_won=won):
+                      before={int(e['uid']):e for e in r['state_before']}; after={int(e['uid']):e for e in r['state_after']}
+                      actor=before.get(int(r['actor_uid'])); target=before.get(int(r['target_uid'])) if r.get('target_uid') is not None else None
+                      if not actor or not target or 'pawstrike' not in set(actor.get('abilities') or []) or r['action_type']!='MELEE_ATTACK': continue
+                      cmds=parse_commands(r['raw']); damages=[c for c in cmds if c.opcode=='DAMAGE' and c.actor_uid==int(r['actor_uid']) and c.target_uid is not None]
+                      if not damages: continue
+                      primary=int(damages[0].target_uid); target=before.get(primary); ta=after.get(primary)
+                      if not target: continue
+                      move=next((c for c in cmds if c.opcode=='MOVE' and c.actor_uid==int(r['actor_uid'])),None)
+                      dx=r.get('first_move_x');dy=r.get('first_move_y')
+                      if dx is None or dy is None:
+                          dx=move.x if move else actor.get('x');dy=move.y if move else actor.get('y')
+                      dist=max(abs(int(dx)-int(actor.get('x',dx))),abs(int(dy)-int(actor.get('y',dy))))
+                      forced=[c for c in cmds if c.opcode=='FORCED_POSITION' and int(c.actor_uid or -1)==primary]
+                      ir=[c for c in cmds if c.opcode=='I_RECORD' and int(c.actor_uid or -1)==primary]
+                      proc=bool(forced and ir)
+                      displacement=None
+                      if forced:
+                          displacement=max(abs(int(forced[0].x)-int(target.get('x',forced[0].x))),abs(int(forced[0].y)-int(target.get('y',forced[0].y))))
+                      rows.append({'battle_id':d.name,'distance':dist,'proc':proc,'target_big':'big' in set(target.get('abilities') or []),
+                                   'displacement':displacement,'target_atb_before':float(target.get('atb',0.0)),'target_atb_after':float(ta.get('atb',0.0)) if ta else None,
+                                   'i_raw':[c.raw for c in ir],'actor_uid':int(r['actor_uid']),'target_uid':primary})
+              return rows
+
+          train=collect(battles[:cut]); test=collect(battles[cut:])
+          def brier(rows,fn):
+              return sum((fn(r)-int(r['proc']))**2 for r in rows)/len(rows) if rows else None
+          base=sum(int(r['proc']) for r in train)/len(train)
+          slopes=[round(x/100,2) for x in range(5,21)]
+          train_scores={str(s):brier(train,lambda r,s=s:min(1.0,s*r['distance'])) for s in slopes}
+          best=min(slopes,key=lambda s:train_scores[str(s)])
+          fixed10=brier(test,lambda r:min(1.0,0.10*r['distance']))
+          best_test=brier(test,lambda r:min(1.0,best*r['distance']))
+          base_test=brier(test,lambda r:base)
+          def table(rows):
+              d=defaultdict(lambda:[0,0])
+              for r in rows:d[r['distance']][0]+=1;d[r['distance']][1]+=int(r['proc'])
+              return [{'distance':k,'n':v[0],'hits':v[1],'rate':v[1]/v[0]} for k,v in sorted(d.items())]
+          def target_kind(rows,big):
+              sub=[r for r in rows if r['target_big']==big]
+              return {'n':len(sub),'hits':sum(int(r['proc']) for r in sub),'rate':sum(int(r['proc']) for r in sub)/len(sub) if sub else None}
+          proc_rows=train+test
+          procs=[r for r in proc_rows if r['proc']]
+          disp=Counter(str(r['displacement']) for r in procs)
+          atb_after=Counter(str(r['target_atb_after']) for r in procs if r['target_atb_after'] is not None)
+          i_tail=Counter(x[-4:] for r in procs for x in r['i_raw'])
+          i_matches_actor=sum(any(x.endswith(f"{r['actor_uid']:04d}") for x in r['i_raw']) for r in procs)
+          payload={
+              'split_battle_count':{'train':cut,'heldout':len(battles)-cut},
+              'train_n':len(train),'train_hits':sum(int(r['proc']) for r in train),'train_rate':base,
+              'heldout_n':len(test),'heldout_hits':sum(int(r['proc']) for r in test),'heldout_rate':sum(int(r['proc']) for r in test)/len(test) if test else 0,
+              'train_by_distance':table(train),'heldout_by_distance':table(test),
+              'linear_slope_train_brier':train_scores,'best_train_slope':best,
+              'heldout_brier':{'train_frequency_baseline':base_test,'fixed_0.10_per_cell':fixed10,'train_selected_linear':best_test},
+              'target_big':{'train':target_kind(train,True),'heldout':target_kind(test,True)},
+              'target_small':{'train':target_kind(train,False),'heldout':target_kind(test,False)},
+              'proc_consequences':{'proc_rows':len(procs),'displacement':dict(disp),'atb_after':dict(atb_after),'i_tail':dict(i_tail),'i_matches_actor':i_matches_actor},
+              'gate': bool(test and fixed10 < base_test and fixed10 <= best_test+0.01 and all((r['displacement']==1) for r in procs if r['displacement'] is not None)),
+          }
+          Path('data/reports/pawstrike_probability_validation.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(payload,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit evidence and changelog
+        run: |
+          rm .github/workflows/evaluate_pawstrike_probability.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: validate Paw Strike probability'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/pawstrike_probability_validation.json').read_text(encoding='utf-8'))
+          p=Path('changelog.md');text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Paw Strike temporal probability validation\n\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Staged a self-removing chronological 80/20 validation of distance-conditioned Paw Strike proc probability and observed consequences.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/pawstrike_probability_validation.json`.\n  - Train: **{r['train_hits']}/{r['train_n']}={r['train_rate']:.4f}**; held-out: **{r['heldout_hits']}/{r['heldout_n']}={r['heldout_rate']:.4f}**.\n  - Held-out Brier: train-frequency **{r['heldout_brier']['train_frequency_baseline']:.5f}**, fixed 10%/cell **{r['heldout_brier']['fixed_0.10_per_cell']:.5f}**, train-selected linear **{r['heldout_brier']['train_selected_linear']:.5f}**.\n  - Best train linear slope: **{r['best_train_slope']:.2f}/cell**; gate **{r['gate']}**.\n  - Big-target stats: `{r['target_big']}`; small-target stats: `{r['target_small']}`.\n  - Observed proc consequences: `{r['proc_consequences']}`.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Paw Strike probability validation'
+          git push origin HEAD:main
