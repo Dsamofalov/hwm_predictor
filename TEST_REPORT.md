@@ -1,18 +1,45 @@
 # Test report — HeroesWM Solver 0.3.0
 
-**Дата:** 09.08.2026
+**Дата:** 10.08.2026
 
 ## Automated build/test snapshot
 
 ```text
-C++ incremental Debug build: PASS
-C++ CTest:                  1/1 PASS (100%)
-Python pytest:              42/42 PASS
-TypeScript typecheck:       PASS
-Extension build:            PASS
+C++ incremental Debug build:            PASS
+C++ CTest:                              1/1 PASS (100%)
+Local API pairing/auth integration:     PASS
+Stale-search cancellation integration:  PASS
+Live recommendation binding contract:   PASS
+Python pytest:                          42/42 PASS
+TypeScript typecheck:                   PASS
+Extension build:                        PASS
 ```
 
-The automated-count line above is the last completed full-suite snapshot. A standard full CI run is triggered after the Mighty Slam functional tree; the exact Python count is updated only after that run completes.
+The snapshot above is enforced by the standard GitHub CI. The current three closed-loop integration gates all passed together in CI commit `676da42b754ee9d1409cc27e8ad1dfec26d17e6c`.
+
+## Closed-loop safety regressions
+
+### Pairing/auth
+
+`scripts/test_local_api_auth.py` starts a real loopback daemon and verifies:
+
+- private API routes reject unauthenticated calls;
+- a wrong pairing code is rejected;
+- a correct explicit code returns the local bearer token;
+- the token is persisted locally;
+- the same bearer token remains valid across a daemon restart when the local token file is retained.
+
+### Revision-bound stale cancellation
+
+`scripts/test_stale_cancellation.py` deliberately republishes the **same** demo BattleState while a long search is in progress. The state hash therefore remains equal, but the SessionStore revision advances. The old planner must cooperatively stop and return `stale` rather than consuming the full search budget or presenting an obsolete result.
+
+This proves stale invalidation is not limited to a post-search hash comparison.
+
+### Live recommendation binding contract
+
+`scripts/test_live_binding.py` verifies that an `ok` recommendation is explicitly bound to the same daemon `state_revision`, `state_hash`, and `battle_id` as the observed planning snapshot.
+
+The extension adds defense-in-depth on top of this contract: a newer accepted capture advances the recommendation epoch, and the side panel refuses to render an `ok` result whose state hash no longer matches current daemon status.
 
 ## Full 866-battle corpus-check
 
@@ -64,9 +91,9 @@ modeled_kill_trigger:   2
 unresolved:             78
 ```
 
-Registry counts regenerated 10.08.2026 after exact Life Drain, Regeneration, Mana Feed and Mighty Slam transitions. All **42/42** observed `Smfd` actions pass the exact Mana Feed invariant and all **32/32** observed `Smsl` decisions classify as explicit `ABILITY` after the Mighty Slam wire/classifier update.
+Current counts include exact Life Drain, Regeneration, Mana Feed and Mighty Slam plus hybrid modeled Paw Strike. All **42/42** observed `Smfd` actions pass the exact Mana Feed invariant, all **32/32** observed `Smsl` decisions classify as explicit `ABILITY`, and the observed Paw Strike ATB-reset relation is validated on **174/174** source-matching I-records.
 
-Current held-out risk was recomputed from the same 866-battle corpus after the Mighty Slam promotion:
+Current held-out risk was recomputed from the same 866-battle corpus after the Paw Strike promotion:
 
 ```text
 held-out sampled player states: 1748
@@ -78,7 +105,7 @@ risk p99:               0.54688
 
 `Crippling Wound` remains deliberately non-speculative: its observed `Swnd` debuff transition is decoded, but the current proc-probability models fail the chronological validation gate and therefore are not enabled in search.
 
-`Paw Strike` is now deliberately hybrid rather than exact-search: current-corpus distance model Brier 0.20250 beats the train-frequency baseline 0.23788, while the historical HP-ratio formula fails current holdout. Observed `I<target><source>` transitions are exact 174/174 and reset ATB to zero; speculative physical push is conditional on legal placement.
+`Paw Strike` is deliberately hybrid rather than exact-search: current-corpus distance model Brier 0.20250 beats the train-frequency baseline 0.23788, while the historical HP-ratio formula fails current holdout. Observed `I<target><source>` transitions reset ATB to zero; speculative physical push is conditional on legal placement.
 
 ## Policy priors
 
@@ -142,7 +169,7 @@ These numbers are a controlled held-out replay-state regression, not a live win-
 
 ## Not validated in this environment
 
-1. Active authenticated battle capture/replanning in the user's Chromium session.
+1. Active authenticated battle capture/replanning in the user's Chromium session. The metadata-only closed-loop trace and `docs/LIVE_VALIDATION.md` are ready for this gate, but the real live exercise has not yet been claimed as complete.
 2. Windows MSVC execution (source/tasks/scripts supplied; current validation environment is Linux).
 3. Hard-PvE human-in-loop win-rate uplift.
 4. Full learned dynamics ensemble / ONNX Runtime C++ production path.
