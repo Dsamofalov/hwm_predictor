@@ -1,0 +1,61 @@
+name: Probe Crippling Wound corpus
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/probe_cripplingwound.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Verify enhanced probe
+        run: |
+          python -m pip install pytest
+          PYTHONPATH=python python -m pytest -q python/tests/test_ability_probe.py
+
+      - name: Inspect Crippling Wound transitions
+        env:
+          PYTHONPATH: python
+        run: |
+          python scripts/ability_probe.py hwm_battles cripplingwound \
+            --rows 1000 \
+            --out data/reports/cripplingwound_probe.json
+
+      - name: Commit evidence and changelog
+        env:
+          TOOL_SHA: d5716c42ba023e0ab084c1fa0f5ced9afe9047d8
+          TEST_SHA: 2304ef3f2ac33f73e555d49e8f391e0a5e174292
+        run: |
+          rm .github/workflows/probe_cripplingwound.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'data: capture Crippling Wound corpus probe'
+          REPORT_SHA=$(git rev-parse HEAD)
+          export REPORT_SHA STAGING_SHA="$GITHUB_SHA"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          r=json.loads(Path('data/reports/cripplingwound_probe.json').read_text(encoding='utf-8'))
+          p=Path('changelog.md')
+          text=p.read_text(encoding='utf-8').rstrip()+'\n\n'
+          text += f'''### Ability probe state-delta upgrade\n\n- Commit: `{os.environ['TOOL_SHA']}`\n  - Extended `scripts/ability_probe.py` with actor/target before-after snapshots and HP/count/speed/initiative/ATB/effect/position deltas while preserving Mana Feed fields.\n- Commit: `{os.environ['TEST_SHA']}`\n  - Added regression coverage for state-delta aggregation.\n- Commit: `{os.environ['STAGING_SHA']}`\n  - Verified the enhanced probe with targeted pytest and staged a Crippling Wound corpus run.\n- Commit: `{os.environ['REPORT_SHA']}`\n  - Stored `data/reports/cripplingwound_probe.json` from the full repository corpus.\n  - Matched decisions: **{r['matched_decisions']}** across **{r['battles']}** battles; mechanic-like candidates: **{r['candidate_decisions']}**; parse errors: **{len(r['errors'])}**.\n  - Special-code distribution: `{r['special_codes']}`.\n  - Target speed deltas: `{r['target_deltas']['speed']}`; initiative deltas: `{r['target_deltas']['initiative']}`; effect additions: `{r['target_deltas']['effects_added']}`.\n'''
+          p.write_text(text,encoding='utf-8')
+          PY
+          git add changelog.md
+          git commit -m 'docs: log Crippling Wound corpus probe'
+          git push origin HEAD:main
