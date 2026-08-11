@@ -129,12 +129,12 @@
       "selector_mean_abs_log_error": 0.4109307616279688
     },
     "test": {
-      "ensemble_mean_abs_log_error": 0.38657592938556495,
-      "generic_mean_abs_log_error": 0.47967855331738785,
+      "ensemble_mean_abs_log_error": 0.3865888582674376,
+      "generic_mean_abs_log_error": 0.47969148219926055,
       "samples": 6191,
       "selector_auc_learned_worse": 0.6020227231120012,
       "selector_generic_usage_rate": 0.1636246163786141,
-      "selector_mean_abs_log_error": 0.3857004686613921
+      "selector_mean_abs_log_error": 0.38571339754326484
     }
   },
   "schema_version": 1,
@@ -163,13 +163,13 @@
     ],
     "threshold": 0.53651533713405,
     "weights": [
-      -0.8003014799670648,
+      -0.8003014799670649,
       -0.4970086141977005,
       -0.06120942705377482,
       -0.42460033393540797,
-      -0.057492932725684946,
-      0.07422106769533468,
-      0.1542915206273823
+      -0.05749293272568499,
+      0.0742210676953347,
+      0.15429152062738233
     ]
   },
   "split": {
