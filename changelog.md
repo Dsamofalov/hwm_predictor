@@ -641,3 +641,18 @@ This file is the development diary for repository changes performed against the 
   - Held-out basic-action representability improved **5373/5481 = 98.03% -> 5384/5481 = 98.23%** with failure count **108 -> 97** and no newly introduced failure identities in the corpus A/B audit.
   - Python replay final-overlap debt remains **21 battles / 23 pairs** on the committed evaluator-only tree; the production C++ structural-invalid gate remains open and is being audited separately without weakening invariants.
   - Hosted Actions run `31439876436`: **Core PASS + Full PASS**.
+
+### Conservative melee raw-position corrections
+
+- Commit: `c22d41678e4054c721f70bd2f1f6abe40830b93c` — `fix: canonicalize unambiguous melee position hints`.
+  - Added the ordinary-melee collision resolver and separate main-owned `hwm-protocol-tests`.
+  - Corpus moved **847 -> 848 structural-ready**, **19 -> 18 invalid**, overlap invariants **21 -> 20**, semantic-safe **790 -> 791**; legal coverage stayed **5384/5481 = 98.23%** with no new failure identities.
+  - The first permanent Full run correctly failed only because committed M11 evidence was stale after replay semantics changed; the verifier was not weakened.
+- Commit: `d00c3c73f5c6f618e07d1123a2789c9c1f089016` — `fix: guard impossible shooter position markers`.
+  - Added a legal-contract guard for impossible special-free shooter `mUUUXXYY` markers: stationary melee when already adjacent, or ranged only when shots remain and the shooter is not melee-blocked.
+  - Corpus improved **18 -> 15 invalid finals**, structural-ready **848 -> 851**, overlap invariants **20 -> 17**, semantic-safe **791 -> 794**.
+  - Held-out observed basic-action representability improved **5384 -> 5385 / 5481 = 98.25%** with zero true->false support regressions.
+  - Permanent Full-CI structural budget tightened to **invalid <= 15**; protocol/Python regressions cover the three newly closed finals.
+- Commit: `2843f4e086852688d3188f19b1973306c40ebe7b` — `data: refresh M11 evidence after decoder corrections`.
+  - Regenerated all four canonical M11 committed evidence reports on the guarded decoder tree and passed exact `verify_m11_evidence.py`; no production M11 selector/residual path was enabled.
+- Final hosted `windows-2022` validation run `31475600960` on `2843f4e086852688d3188f19b1973306c40ebe7b`: **Core PASS + Full PASS**; main-front CTest **2/2**, planner **120/120** with zero invalid recommendations, Python **84/84**, all daemon integrations/extension gates PASS, full-corpus structural budget PASS, and all M11 Full gates including exact evidence verification PASS.

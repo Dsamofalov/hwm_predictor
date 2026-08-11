@@ -1,6 +1,6 @@
 # Main development front checkpoint
 
-Updated: 2026-08-10
+Updated: 2026-08-11
 
 This file tracks the non-ability lane while creature abilities are developed independently on branch `ability` / draft PR #1.
 
@@ -87,7 +87,7 @@ Functional commits:
 
 Current behavior: a stochastic action may retain multiple canonical outcome children; equal canonical outcome hashes share one node. Across observed revisions, reuse occurs only for an exact predicted hash in the same non-empty battle/perspective and matching board/static-structure fingerprint. Otherwise search starts fresh. Revision change still cancels stale in-flight search. `NextActorModel` recency is now part of canonical transposition identity; decoder and simulator both stamp the completed actor before incrementing `decision_seq`, so observed and predicted scheduler histories use the same counter convention.
 
-Verification: standard CI run `31380236279` PASS on Linux and Windows for the original M13 outcome/re-root/fingerprint set. The scheduler-recency follow-up has a dedicated regression in `hwm-planner-tests`, but draft PR #4 run `31393097068` did not execute any job steps; it is therefore committed but not claimed CI-verified yet. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 19 structural-invalid finals and legal-action representability improvement toward >=99.9%.
+Verification: standard CI run `31380236279` PASS on Linux and Windows for the original M13 outcome/re-root/fingerprint set. The scheduler-recency follow-up has a dedicated regression in `hwm-planner-tests`, but draft PR #4 run `31393097068` did not execute any job steps; it is therefore committed but not claimed CI-verified yet. The immediate product gate remains the real authenticated active-battle smoke test; M01/M14 are not promoted to COMPLETE by planner work. The next autonomous main correctness front is attribution of the 15 remaining structural-invalid finals and legal-action representability improvement toward >=99.9%.
 
 ## M11 multi-step damage-residual gate
 
@@ -111,7 +111,7 @@ Platform migration commits:
 
 Current standard CI executes C++/CTest, the 120-state planner replay gate, all four daemon integration gates, Python pytest, TypeScript typecheck and extension build on Windows/MSVC. Historical Linux PASS records above remain evidence for older trees only; they are not a continuing support commitment.
 
-The new workflow is intentionally queued until a repository-level Windows x64 self-hosted runner carrying the custom `hwm-windows` label is registered and online. No PASS claim is made for the migration commits until that runner executes the workflow.
+That self-hosted migration checkpoint is historical. Permanent CI now executes Core and Full on GitHub-hosted `windows-2022`; the custom `hwm-windows` runner label is no longer part of the active contract.
 
 ## Executed Windows main-front validation checkpoint
 
@@ -123,3 +123,14 @@ M11 uncertainty evidence is now reproducible under commit `8dc9dc5b81db936089c77
 
 Permanent main CI commit `bb8404606621966d8c688f22e93c6ce35dd695ea` excludes the independently owned `hwm-tests` executable from the main-front CTest gate while leaving ability validation responsible for its Windows failures. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.
 
+## Decoder/legal checkpoint — guarded raw-position handling
+
+- Functional commits: `c22d41678e4054c721f70bd2f1f6abe40830b93c` and `d00c3c73f5c6f618e07d1123a2789c9c1f089016`; synchronized M11 evidence commit: `2843f4e086852688d3188f19b1973306c40ebe7b`.
+- `mUUUXXYY` ordinary melee hints are conservatively canonicalized only for physically colliding raw anchors with one unique target-adjacent reachable landing within one Chebyshev cell; ability-owned SPECIAL movement stays excluded.
+- Impossible special-free shooter position hints are treated as markers only under guarded stationary-melee or actually-legal ranged conditions (`shots > 0`, no adjacent enemy block).
+- Main-owned `hwm-protocol-tests` is now a permanent CTest target separate from ability-owned `hwm-tests`.
+- Full-corpus result: **851/866 structural-ready**, **15 invalid finals**, **17 overlap invariant hits**, **794/866 semantic-safe**.
+- Held-out observed basic-action representability: **5385/5481 = 98.25%**.
+- Full CI permanently enforces `invalid <= 15`; M11 committed evidence was regenerated after decoder semantics changed and exact verification passes. Production learned dynamics remains disabled.
+- Hosted run `31475600960`: **Core PASS + Full PASS**, CTest **2/2**, planner **120/120**, Python **84/84**.
+- Next main-owned front: continue corpus-proven geometry/protocol discrepancies among the remaining 15 finals; do not absorb Paw Strike/forced-movement/ability semantics owned by `ability`.

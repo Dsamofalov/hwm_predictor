@@ -7,21 +7,22 @@
 ```text
 Supported product/CI platform:                  Windows 10/11 x64 via GitHub-hosted windows-2022
 PowerShell syntax preflight:                    PASS
-MSVC Debug main-front CTest:                    1/1 PASS (hwm-planner-tests)
+MSVC Debug main-front CTest:                    2/2 PASS (planner + protocol)
 Held-out planner validity:                      120/120 PASS; 0 invalid recommendations
 Local API pairing/auth integration:             PASS
 Stale-search cancellation integration:          PASS
 Live recommendation binding contract:           PASS
 WebSocket revision streaming:                   PASS
-Python pytest:                                  75/75 PASS
+Python pytest:                                  84/84 PASS
 TypeScript typecheck:                           PASS
 Extension build:                                PASS
-MSVC Release main-front CTest:                  1/1 PASS (hwm-planner-tests)
+MSVC Release main-front CTest:                  2/2 PASS (planner + protocol)
 Release planner benchmark (5000 simulations):   PASS
 M11 full-corpus diagnostic/evidence suite:      PASS
 ```
 
-Validated functional-tree reference: `7cd17878174529a40087ce5a78231dd93690851b`, Windows self-hosted Actions run `31431838319`: **Core PASS + Full PASS**. Core compiled all C++ targets under MSVC Debug, executed the main-owned `hwm-planner-tests`, validated 120 held-out planner states from 109 battles with zero invalid recommendations, state-hash mismatches, illegal best/alternative actions or non-finite metrics, passed pairing/auth, stale cancellation, live binding and WebSocket integrations, Python **75/75**, TypeScript typecheck and extension build. Full passed MSVC Release main-front CTest, `planner-demo 5000`, all permanent M11 full-corpus evaluators, committed-evidence verification and the positive-residual temperature experiment.
+Validated main-tree reference: `2843f4e086852688d3188f19b1973306c40ebe7b`, GitHub-hosted `windows-2022` Actions run `31475600960`: **Core PASS + Full PASS**. Core compiled all C++ targets under MSVC Debug, executed the main-owned `hwm-planner-tests` + `hwm-protocol-tests`, validated 120 held-out planner states from 110 battles with zero invalid recommendations, state-hash mismatches, illegal best/alternative actions or non-finite metrics, passed pairing/auth, stale cancellation, live binding and WebSocket integrations, Python **84/84**, TypeScript typecheck and extension build. Full passed MSVC Release main-front CTest, full-corpus structural budget `invalid <= 15`, `planner-demo 5000`, all permanent M11 full-corpus evaluators, exact committed-evidence verification and the positive-residual temperature experiment.
+
 
 The ability-owned monolithic `hwm-tests` target is still built but deliberately excluded from the `main` CTest gate until branch `ability` completes its independent MSVC validation. This ownership split is temporary integration debt, not a permanent reduction of the final test contract.
 
@@ -52,10 +53,10 @@ The extension adds defense-in-depth on top of this contract: a newer accepted ca
 ## Full 866-battle corpus-check
 
 ```json
-{"battles":866,"structural_ready":847,"structural_not_ready":19,"semantic_safe":790,"semantic_unsafe":76,"with_unknown":0,"invalid":19,"initial_entities":14819,"coverage_mean":1.0,"coverage_min":1.0,"semantic_unresolved_ratio_mean":0.137432,"semantic_unresolved_ratio_max":0.480769,"semantic_unresolved_records":42576,"protocol_records":291178,"max_turn":297}
+{"battles":866,"structural_ready":851,"structural_not_ready":15,"semantic_safe":794,"semantic_unsafe":72,"with_unknown":0,"invalid":15,"initial_entities":14819,"coverage_mean":1.0,"coverage_min":1.0,"semantic_unresolved_ratio_mean":0.136497,"semantic_unresolved_ratio_max":0.480769,"semantic_unresolved_records":42329,"protocol_records":291178,"max_turn":297}
 ```
 
-`invalid=19` corresponds to 21 strict overlap invariant hits. These are not suppressed.
+`invalid=15` corresponds to 17 strict overlap invariant hits. These are not suppressed. Full CI permanently enforces `invalid <= 15`.
 
 ## Shadow replay
 
@@ -74,12 +75,12 @@ held-out supported hero actions:           684 / 684 = 100%
 
 ## Legal action replay coverage
 
-Latest stored held-out basic-action evaluation (`legal-coverage-v7-endurance.json`):
+Latest canonical decoder geometry audit (`data/reports/decoder-geometry-audit.json`):
 
 ```text
 observed basic actions evaluated:      5,481
-representable by current generator:    5,384
-coverage:                              98.23%
+representable by current generator:    5,385
+coverage:                              98.25%
 ```
 
 Primary residual failures are `melee_destination_not_reachable`, `target_not_adjacent_after_move` and rare special movement.
