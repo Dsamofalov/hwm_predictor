@@ -1217,6 +1217,142 @@ def _entities_adjacent(actor, ax: int, ay: int, target) -> bool:
     return any(max(abs(x1-x2), abs(y1-y2)) <= 1 for x1,y1 in _entity_cells(actor,ax,ay) for x2,y2 in _entity_cells(target))
 
 
+def _observed_value(entity, key: str, default=None):
+    if isinstance(entity, dict):
+        return entity.get(key, default)
+    return getattr(entity, key, default)
+
+
+def _observed_entities(state):
+    return list(state.values()) if isinstance(state, dict) else list(state)
+
+
+def _observed_entity_by_uid(state, uid: int):
+    if isinstance(state, dict):
+        return state.get(uid)
+    return next((e for e in state if int(_observed_value(e, "uid", -1)) == int(uid)), None)
+
+
+def _observed_blocks_board(entity) -> bool:
+    if not bool(_observed_value(entity, "alive", True)):
+        return False
+    abilities = set(_observed_value(entity, "abilities", []) or [])
+    is_hero = bool(_observed_value(entity, "is_hero", False)) or "hero" in abilities
+    is_hidden = bool(_observed_value(entity, "is_hidden", False)) or "hidden" in abilities
+    return not is_hero and not is_hidden
+
+
+def _observed_anchor_blocked(state, actor, anchor: tuple[int, int]) -> bool:
+    actor_uid = int(_observed_value(actor, "uid", -1))
+    actor_cells = _entity_cells(actor, anchor[0], anchor[1])
+    for other in _observed_entities(state):
+        if int(_observed_value(other, "uid", -2)) == actor_uid or not _observed_blocks_board(other):
+            continue
+        if actor_cells & _entity_cells(other):
+            return True
+    return False
+
+
+def _observed_can_place(state, actor, anchor: tuple[int, int]) -> bool:
+    cells = _entity_cells(actor, anchor[0], anchor[1])
+    if any(x < 1 or x > 12 or y < 1 or y > 20 for x, y in cells):
+        return False
+    return not _observed_anchor_blocked(state, actor, anchor)
+
+
+def _observed_big_anchor(state, actor, raw: tuple[int, int]) -> tuple[int, int]:
+    abilities = set(_observed_value(actor, "abilities", []) or [])
+    if "big" not in abilities:
+        return raw
+    if _observed_can_place(state, actor, raw):
+        return raw
+    candidates = [raw, (raw[0]-1, raw[1]), (raw[0], raw[1]-1), (raw[0]-1, raw[1]-1)]
+    legal = [p for p in candidates if _observed_can_place(state, actor, p)]
+    if not legal:
+        return raw
+    start = (int(_observed_value(actor, "x", 0)), int(_observed_value(actor, "y", 0)))
+    def score(p: tuple[int, int]) -> tuple[int, int, int]:
+        dx, dy = abs(p[0]-start[0]), abs(p[1]-start[1])
+        return max(dx,dy), dx+dy, candidates.index(p)
+    return min(legal, key=score)
+
+
+def _observed_reachable(state, actor) -> set[tuple[int, int]]:
+    start = (int(_observed_value(actor, "x", 0)), int(_observed_value(actor, "y", 0)))
+    speed = max(0, int(float(_observed_value(actor, "speed", 0)) * (2.0 if bool(_observed_value(actor, "rune_speed_active", False)) else 1.0)))
+    if speed <= 0:
+        return set()
+    abilities = set(_observed_value(actor, "abilities", []) or [])
+    if "flyer" in abilities:
+        return {
+            (x, y)
+            for y in range(1, 21)
+            for x in range(1, 13)
+            if (x, y) != start
+            and max(abs(x-start[0]), abs(y-start[1])) <= speed
+            and _observed_can_place(state, actor, (x, y))
+        }
+    seen = {start}
+    front = [start]
+    out: set[tuple[int, int]] = set()
+    for _ in range(speed):
+        nxt = []
+        for x, y in front:
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    if dx == 0 and dy == 0:
+                        continue
+                    p = (x+dx, y+dy)
+                    if p in seen or not _observed_can_place(state, actor, p):
+                        continue
+                    seen.add(p)
+                    out.add(p)
+                    nxt.append(p)
+        front = nxt
+        if not front:
+            break
+    return out
+
+
+def _resolve_special_free_unique_melee_anchor(
+    state,
+    actor_uid: int,
+    target_uid: int | None,
+    raw_x: int,
+    raw_y: int,
+    commands: list[LowLevelCommand],
+) -> tuple[int, int]:
+    actor = _observed_entity_by_uid(state, actor_uid)
+    target = _observed_entity_by_uid(state, int(target_uid)) if target_uid is not None else None
+    if actor is None or target is None or not bool(_observed_value(actor, "alive", True)) or not bool(_observed_value(target, "alive", True)):
+        return raw_x, raw_y
+    raw = (raw_x, raw_y)
+    canonical = _observed_big_anchor(state, actor, raw)
+    # Main-decoder correction only. Any SPECIAL record keeps the existing generic/raw path;
+    # those decisions remain owned by exact/ability-specific semantics.
+    if any(c.opcode == "SPECIAL" for c in commands):
+        return canonical
+    # Unique landing inference is allowed only when the raw anchor itself intersects a
+    # visible live stack. Non-colliding but surprising movement remains untouched.
+    if not _observed_anchor_blocked(state, actor, raw):
+        return canonical
+    if _observed_can_place(state, actor, canonical) and _entities_adjacent(actor, canonical[0], canonical[1], target):
+        return canonical
+    landings = []
+    start = (int(_observed_value(actor, "x", 0)), int(_observed_value(actor, "y", 0)))
+    if _observed_can_place(state, actor, start) and _entities_adjacent(actor, start[0], start[1], target):
+        landings.append(start)
+    for p in sorted(_observed_reachable(state, actor)):
+        if _entities_adjacent(actor, p[0], p[1], target):
+            landings.append(p)
+    landings = list(dict.fromkeys(landings))
+    if len(landings) == 1:
+        candidate = landings[0]
+        if max(abs(candidate[0] - raw[0]), abs(candidate[1] - raw[1])) <= 1:
+            return candidate
+    return canonical
+
+
 def _attack_move(actor_uid: int, cmds: list[LowLevelCommand]) -> LowLevelCommand | None:
     """Last actor MOVE before the first actor DAMAGE: actual attack anchor.
 
@@ -1315,10 +1451,17 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
         typ = "UNKNOWN"
 
     destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
+    resolved_melee = None
+    if typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
+        resolved_melee = _resolve_special_free_unique_melee_anchor(
+            state.entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
+        )
+    destination_x = resolved_melee[0] if resolved_melee is not None else (destination_move.x if destination_move else None)
+    destination_y = resolved_melee[1] if resolved_melee is not None else (destination_move.y if destination_move else None)
     return (
         typ, target_uid,
-        teleports[0].x if teleports else (carriers[0].x if carriers else (destination_move.x if destination_move else None)),
-        teleports[0].y if teleports else (carriers[0].y if carriers else (destination_move.y if destination_move else None)),
+        teleports[0].x if teleports else (carriers[0].x if carriers else destination_x),
+        teleports[0].y if teleports else (carriers[0].y if carriers else destination_y),
         first_move.x if first_move else None, first_move.y if first_move else None,
         special_codes,
     )
@@ -1556,8 +1699,19 @@ def _apply_decision_commands(
     suppress = None if _decision_actor_move_is_position(action_type) else actor_uid
     actor_before_pos = (entities[actor_uid].x, entities[actor_uid].y) if actor_uid in entities else None
     shieldbash_proc, shieldbash_target = _observed_shieldbash_proc(commands, entities, actor_uid)
+    attack_move = _attack_move(actor_uid, commands) if action_type == "MELEE_ATTACK" else None
+    first_damage = next((c for c in commands if c.opcode == "DAMAGE" and c.actor_uid == actor_uid), None)
+    corrected_attack_anchor = None
+    if attack_move is not None and attack_move.x is not None and attack_move.y is not None and first_damage is not None:
+        corrected_attack_anchor = _resolve_special_free_unique_melee_anchor(
+            entities, actor_uid, first_damage.target_uid, attack_move.x, attack_move.y, commands
+        )
     for c in commands:
-        _apply_command(entities, c, suppress_actor_move_uid=suppress)
+        applied = c
+        if c is attack_move and corrected_attack_anchor is not None and (c.x, c.y) != corrected_attack_anchor:
+            applied = copy.copy(c)
+            applied.x, applied.y = corrected_attack_anchor
+        _apply_command(entities, applied, suppress_actor_move_uid=suppress)
     if actor_uid in entities and "entrenchment" in set(entities[actor_uid].abilities):
         actor=entities[actor_uid]
         moved = actor_before_pos is not None and (actor.x,actor.y) != actor_before_pos
@@ -1755,10 +1909,17 @@ def _action_from_compact(
         typ = "UNKNOWN"
 
     destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
+    resolved_melee = None
+    if typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
+        resolved_melee = _resolve_special_free_unique_melee_anchor(
+            before_entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
+        )
+    destination_x = resolved_melee[0] if resolved_melee is not None else (destination_move.x if destination_move else None)
+    destination_y = resolved_melee[1] if resolved_melee is not None else (destination_move.y if destination_move else None)
     return (
         typ, target_uid,
-        teleports[0].x if teleports else (carriers[0].x if carriers else (destination_move.x if destination_move else None)),
-        teleports[0].y if teleports else (carriers[0].y if carriers else (destination_move.y if destination_move else None)),
+        teleports[0].x if teleports else (carriers[0].x if carriers else destination_x),
+        teleports[0].y if teleports else (carriers[0].y if carriers else destination_y),
         first_move.x if first_move else None, first_move.y if first_move else None,
         special_codes,
     )

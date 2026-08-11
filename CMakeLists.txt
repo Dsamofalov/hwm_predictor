@@ -62,4 +62,10 @@ if(HWM_BUILD_TESTS)
   add_executable(hwm-planner-tests cpp/tests/test_planner_tree.cpp)
   target_link_libraries(hwm-planner-tests PRIVATE hwm_core)
   add_test(NAME hwm-planner-tests COMMAND hwm-planner-tests)
+
+  # Main-owned protocol/decoder regressions stay separate from ability-owned test_main.cpp.
+  add_executable(hwm-protocol-tests cpp/tests/test_protocol_geometry.cpp)
+  target_link_libraries(hwm-protocol-tests PRIVATE hwm_core)
+  target_compile_definitions(hwm-protocol-tests PRIVATE HWM_PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
+  add_test(NAME hwm-protocol-tests COMMAND hwm-protocol-tests)
 endif()

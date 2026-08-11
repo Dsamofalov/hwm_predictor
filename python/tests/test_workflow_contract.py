@@ -83,6 +83,7 @@ def test_windows_ci_script_owns_core_and_full_test_inventory():
         assert marker in text
 
     full_markers = (
+        "test_corpus_structural_budget.py",
         "planner-demo.exe",
         "dynamics_multistep",
         "dynamics_uncertainty",

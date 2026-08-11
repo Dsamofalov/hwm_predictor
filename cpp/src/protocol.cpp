@@ -433,6 +433,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         bool saw_wait=false;
         bool saw_defend=false;
         bool saw_active_special=false;
+        bool saw_any_special=false;
         bool saw_shieldbash_proc=false;
         std::string exact_status_wire;
         uint64_t pending_p_uid=0;
@@ -447,7 +448,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
     auto resolve_observed_big_anchor=[&](const Entity& e, Cell raw)->Cell {
         if(!e.is_big) return raw;
         auto legal=[&](Cell anchor)->bool {
-            if(anchor.x < 1 || anchor.y < 1) return false;
+            if(anchor.x < 1 || anchor.y < 1 || anchor.x+e.footprint_w-1 > 12 || anchor.y+e.footprint_h-1 > 20) return false;
             for(const auto& other:s.entities){
                 if(other.uid==e.uid || !other.alive || other.is_hero || other.is_hidden) continue;
                 for(int ex=0;ex<e.footprint_w;++ex) for(int ey=0;ey<e.footprint_h;++ey){
@@ -470,6 +471,79 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             }
         }
         return found?best:raw;
+    };
+    auto anchor_collides=[&](const Entity& e,Cell anchor)->bool {
+        for(const auto& other:s.entities){
+            if(other.uid==e.uid || !other.alive || other.is_hero || other.is_hidden) continue;
+            for(int ex=0;ex<e.footprint_w;++ex) for(int ey=0;ey<e.footprint_h;++ey){
+                const Cell ec{anchor.x+ex,anchor.y+ey};
+                for(int ox=0;ox<other.footprint_w;++ox) for(int oy=0;oy<other.footprint_h;++oy)
+                    if(ec==Cell{other.anchor.x+ox,other.anchor.y+oy}) return true;
+            }
+        }
+        return false;
+    };
+    auto anchor_legal=[&](const Entity& e,Cell anchor)->bool {
+        if(anchor.x<1 || anchor.y<1 || anchor.x+e.footprint_w-1>12 || anchor.y+e.footprint_h-1>20) return false;
+        return !anchor_collides(e,anchor);
+    };
+    auto adjacent_at=[&](const Entity& actor,Cell aa,const Entity& target)->bool {
+        for(int ax=0;ax<actor.footprint_w;++ax) for(int ay=0;ay<actor.footprint_h;++ay)
+            for(int bx=0;bx<target.footprint_w;++bx) for(int by=0;by<target.footprint_h;++by)
+                if(std::max(std::abs((aa.x+ax)-(target.anchor.x+bx)),std::abs((aa.y+ay)-(target.anchor.y+by)))<=1) return true;
+        return false;
+    };
+    auto reachable_anchors=[&](const Entity& actor)->std::vector<Cell> {
+        const Cell start=actor.anchor;
+        const int speed=std::max(0,(int)(actor.speed*(actor.rune_speed_active?2.0f:1.0f)));
+        std::vector<Cell> out;
+        if(speed<=0) return out;
+        if(actor.is_flyer){
+            for(int y=1;y<=20;++y) for(int x=1;x<=12;++x){
+                const Cell p{x,y};
+                if(p==start || std::max(std::abs(x-start.x),std::abs(y-start.y))>speed || !anchor_legal(actor,p)) continue;
+                out.push_back(p);
+            }
+            return out;
+        }
+        std::vector<Cell> seen{start},front{start};
+        auto has_seen=[&](Cell p){return std::find(seen.begin(),seen.end(),p)!=seen.end();};
+        for(int step=0;step<speed && !front.empty();++step){
+            std::vector<Cell> next;
+            for(const Cell base:front){
+                for(int dx=-1;dx<=1;++dx) for(int dy=-1;dy<=1;++dy){
+                    if(dx==0&&dy==0) continue;
+                    const Cell p{base.x+dx,base.y+dy};
+                    if(has_seen(p) || !anchor_legal(actor,p)) continue;
+                    seen.push_back(p);out.push_back(p);next.push_back(p);
+                }
+            }
+            front=std::move(next);
+        }
+        return out;
+    };
+    auto resolve_unique_melee_anchor=[&](const Entity& actor,const Entity& target,Cell raw)->Cell {
+        const Cell canonical=resolve_observed_big_anchor(actor,raw);
+        if(!anchor_collides(actor,raw)) return canonical;
+        if(anchor_legal(actor,canonical) && adjacent_at(actor,canonical,target)) return canonical;
+        std::vector<Cell> landings;
+        if(anchor_legal(actor,actor.anchor) && adjacent_at(actor,actor.anchor,target)) landings.push_back(actor.anchor);
+        for(const Cell p:reachable_anchors(actor)) if(adjacent_at(actor,p,target)) landings.push_back(p);
+        std::sort(landings.begin(),landings.end(),[](Cell a,Cell b){return a.x==b.x?a.y<b.y:a.x<b.x;});
+        landings.erase(std::unique(landings.begin(),landings.end()),landings.end());
+        if(landings.size()!=1) return canonical;
+        const Cell candidate=landings.front();
+        return std::max(std::abs(candidate.x-raw.x),std::abs(candidate.y-raw.y))<=1 ? candidate : canonical;
+    };
+    auto has_future_special=[&](size_t from)->bool {
+        for(size_t p=from;p<text.size();++p){
+            if(text[p]=='C' && p+10<=text.size() && digits(text.substr(p+1,3))) return false;
+            if(text[p]!='S' || p+4>text.size()) continue;
+            const auto code=text.substr(p+1,3);
+            const bool code_ok=std::all_of(code.begin(),code.end(),[](unsigned char c){return std::isalnum(c)||c=='_'||c=='-';});
+            if(code_ok && code!="def") return true;
+        }
+        return false;
     };
     auto apply_one_move=[&](uint64_t uid,const PendingMove& pm){
         if(auto*e=s.entity(uid)){
@@ -511,25 +585,21 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             }
         }
     };
-    auto decide_attack_move=[&](uint64_t target_uid){
+    auto decide_attack_move=[&](uint64_t target_uid,bool future_special){
         if(ctx.move_mode_decided) return;
         auto* actor=s.entity(ctx.actor_uid);
         auto* target=s.entity(target_uid);
-        bool adjacent=false;
-        if(actor&&target){
-            Cell aa=ctx.moves.empty()?actor->anchor:ctx.moves.back().cell;
-            for(int ax=0;ax<actor->footprint_w&&!adjacent;++ax)
-                for(int ay=0;ay<actor->footprint_h&&!adjacent;++ay)
-                    for(int bx=0;bx<target->footprint_w&&!adjacent;++bx)
-                        for(int by=0;by<target->footprint_h&&!adjacent;++by)
-                            if(std::max(std::abs((aa.x+ax)-(target->anchor.x+bx)),
-                                        std::abs((aa.y+ay)-(target->anchor.y+by)))<=1) adjacent=true;
-        }
+        Cell attack_anchor=actor?actor->anchor:Cell{};
+        if(actor&&!ctx.moves.empty()) attack_anchor=resolve_observed_big_anchor(*actor,ctx.moves.back().cell);
+        const bool adjacent=actor&&target&&adjacent_at(*actor,attack_anchor,*target);
         // Raw-corpus invariant: almost every ordinary ranged/WAIT/DEFEND action still
         // emits mUUUXXYY.  For a shooter damaging a non-adjacent target it is a position
         // marker, not movement. Heroes are also non-board actors in the supported PvE
         // corpus, so their m-record is never applied as a creature relocation.
         const bool ranged_marker=actor && ((actor->is_shooter && !adjacent) || actor->is_hero);
+        if(actor&&target&&!ranged_marker&&!ctx.moves.empty()&&!ctx.saw_any_special&&!future_special){
+            ctx.moves.back().cell=resolve_unique_melee_anchor(*actor,*target,ctx.moves.back().cell);
+        }
         ctx.move_mode_decided=true;
         ctx.apply_actor_moves=!ranged_marker;
         ctx.active_attack_was_ranged = ranged_marker && actor && actor->is_shooter && !actor->is_hero;
@@ -555,6 +625,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             const bool code_ok=std::all_of(code.begin(),code.end(),[](unsigned char c){return std::isalnum(c)||c=='_'||c=='-';});
             if(code_ok){size_t j=i+4;while(j<text.size()&&(std::isdigit((unsigned char)text[j])||text[j]=='.'||text[j]=='+'||text[j]=='-'))++j;size_t n=j-i;uint64_t uid=0;if(j>=i+7&&digits(text.substr(i+4,3)))uid=loose_int(text.substr(i+4,3));
                 if(uid==ctx.actor_uid) ctx.saw_active_special=true;
+                if(code!="def") ctx.saw_any_special=true;
                 if(code=="def"){
                     known(n);ctx.saw_defend = ctx.saw_defend || uid==ctx.actor_uid;
                     if(auto*e=s.entity(uid)) e->defending=true;
@@ -825,7 +896,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         }
         if(text[i]=='d'&&i+17<=text.size()&&digits(text.substr(i+1,16))){
             size_t n=17;known(n);uint64_t a=loose_int(text.substr(i+1,3)),t=loose_int(text.substr(i+4,3));int amount=loose_int(text.substr(i+7,10));
-            if(a==ctx.actor_uid){ctx.saw_active_damage=true;decide_attack_move(t);}
+            if(a==ctx.actor_uid){ctx.saw_active_damage=true;decide_attack_move(t,has_future_special(i+n));}
             if(auto*e=s.entity(t)){
                 apply_damage(*e,amount);
                 if(a==ctx.actor_uid&&ctx.saw_shieldbash_proc&&e->alive&&!has_ability(*e,"mechanical")){
