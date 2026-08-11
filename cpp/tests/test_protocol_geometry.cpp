@@ -52,6 +52,12 @@ int main() {
         CHECK(!has_overlap(replay_final(battle_id)));
     }
 
+    // The raw mUUUXXYY may have several globally legal target-adjacent landings. If exactly
+    // one lies within one Chebyshev cell of the raw hint, distant alternatives are not a
+    // plausible interpretation of that local position hint. This closes the remaining
+    // false overlap in this ordinary, special-free melee replay.
+    CHECK(!has_overlap(replay_final("1633877663")));
+
     std::cout << "hwm-protocol-tests PASS\n";
     return 0;
 }

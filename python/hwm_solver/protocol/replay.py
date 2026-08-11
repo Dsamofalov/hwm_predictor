@@ -1346,10 +1346,12 @@ def _resolve_special_free_unique_melee_anchor(
         if _entities_adjacent(actor, p[0], p[1], target):
             landings.append(p)
     landings = list(dict.fromkeys(landings))
-    if len(landings) == 1:
-        candidate = landings[0]
-        if max(abs(candidate[0] - raw[0]), abs(candidate[1] - raw[1])) <= 1:
-            return candidate
+    near_raw = [
+        candidate for candidate in landings
+        if max(abs(candidate[0] - raw[0]), abs(candidate[1] - raw[1])) <= 1
+    ]
+    if len(near_raw) == 1:
+        return near_raw[0]
     return canonical
 
 

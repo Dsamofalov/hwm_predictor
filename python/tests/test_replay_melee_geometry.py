@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from hwm_solver.evaluation.legal_coverage import supports_observed
 from hwm_solver.protocol.replay import iter_battle_decisions
 
 
@@ -78,3 +79,23 @@ def test_stationary_shooter_marker_closes_heldout_melee_false_negative():
     by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
     assert (by_uid[13]["x"], by_uid[13]["y"]) == (11, 4)
     assert not (_cells(by_uid[13]) & _cells(by_uid[21]))
+
+
+def test_unique_near_raw_landing_recovers_observed_melee_actions():
+    cases = [
+        ("1632715976", 92, 13, (10, 3)),
+        ("1633140429", 27, 14, (7, 3)),
+        ("1633877663", 55, 11, (11, 10)),
+        ("1633879731", 29, 18, (10, 9)),
+        ("1633884421", 60, 22, (3, 19)),
+        ("1633884421", 71, 22, (1, 20)),
+    ]
+    for battle_id, index, actor_uid, destination in cases:
+        battle = ROOT / "hwm_battles" / "battles" / battle_id
+        row = list(iter_battle_decisions(battle))[index]
+        assert row["actor_uid"] == actor_uid
+        assert row["action_type"] == "MELEE_ATTACK"
+        assert row["special_codes"] == []
+        assert (row["destination_x"], row["destination_y"]) == destination
+        ok, reason = supports_observed(row)
+        assert ok, (battle_id, index, reason)

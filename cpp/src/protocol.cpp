@@ -531,9 +531,10 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         for(const Cell p:reachable_anchors(actor)) if(adjacent_at(actor,p,target)) landings.push_back(p);
         std::sort(landings.begin(),landings.end(),[](Cell a,Cell b){return a.x==b.x?a.y<b.y:a.x<b.x;});
         landings.erase(std::unique(landings.begin(),landings.end()),landings.end());
-        if(landings.size()!=1) return canonical;
-        const Cell candidate=landings.front();
-        return std::max(std::abs(candidate.x-raw.x),std::abs(candidate.y-raw.y))<=1 ? candidate : canonical;
+        std::vector<Cell> near_raw;
+        for(const Cell candidate:landings)
+            if(std::max(std::abs(candidate.x-raw.x),std::abs(candidate.y-raw.y))<=1) near_raw.push_back(candidate);
+        return near_raw.size()==1 ? near_raw.front() : canonical;
     };
     auto has_future_special=[&](size_t from)->bool {
         for(size_t p=from;p<text.size();++p){

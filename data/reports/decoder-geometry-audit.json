@@ -6,34 +6,34 @@
     "decisions": 52375
   },
   "heldout_basic_action_representability": {
-    "coverage": 0.9824849480021893,
+    "coverage": 0.9835796387520526,
     "evaluated": 5481,
     "failure_reasons": {
-      "melee_destination_not_reachable": 40,
+      "melee_destination_not_reachable": 36,
       "move_not_reachable": 3,
-      "target_not_adjacent_after_move": 53
+      "target_not_adjacent_after_move": 51
     },
-    "representable": 5385
+    "representable": 5391
   },
   "heldout_failed_melee_recovery": {
     "alternate_damage_target_required": {
       "target_not_adjacent_after_move": 5
     },
     "using_any_actor_damage_target": {
-      "melee_destination_not_reachable": 27,
-      "target_not_adjacent_after_move": 33
+      "melee_destination_not_reachable": 23,
+      "target_not_adjacent_after_move": 31
     },
     "using_original_target": {
-      "melee_destination_not_reachable": 27,
-      "target_not_adjacent_after_move": 28
+      "melee_destination_not_reachable": 23,
+      "target_not_adjacent_after_move": 26
     }
   },
   "python_replay_final_overlap": {
-    "battles": 18,
-    "pairs": 19
+    "battles": 17,
+    "pairs": 17
   },
   "raw_melee_destination_collision": {
-    "any_live_stack": 97,
-    "includes_non_target_stack": 95
+    "any_live_stack": 88,
+    "includes_non_target_stack": 87
   }
 }
