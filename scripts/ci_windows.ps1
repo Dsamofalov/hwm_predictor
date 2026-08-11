@@ -235,7 +235,7 @@ function Run-FullSuite {
     ) -Failures $failures
 
     Invoke-NativeGate -Name 'Full-corpus structural-invalid budget' -Command $script:Python -Arguments @(
-        'scripts/test_corpus_structural_budget.py', (Join-Path $build 'Release\corpus-check.exe'), 'hwm_battles', '18'
+        'scripts/test_corpus_structural_budget.py', (Join-Path $build 'Release\corpus-check.exe'), 'hwm_battles', '15'
     ) -Failures $failures
 
     Invoke-NativeGate -Name 'Release planner benchmark' -Command (Join-Path $build 'Release\planner-demo.exe') -Arguments @(

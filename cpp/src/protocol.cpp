@@ -591,17 +591,31 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         auto* target=s.entity(target_uid);
         Cell attack_anchor=actor?actor->anchor:Cell{};
         if(actor&&!ctx.moves.empty()) attack_anchor=resolve_observed_big_anchor(*actor,ctx.moves.back().cell);
+        const bool current_adjacent=actor&&target&&adjacent_at(*actor,actor->anchor,*target);
+        bool shooter_blocked=false;
+        if(actor&&actor->is_shooter&&!actor->is_warmachine){
+            for(const auto& other:s.entities){
+                if(other.uid==actor->uid||!other.alive||other.is_hero||other.is_hidden||other.owner==actor->owner) continue;
+                if(adjacent_at(*actor,actor->anchor,other)){shooter_blocked=true;break;}
+            }
+        }
+        const bool ranged_marker_legal=actor&&actor->is_shooter&&actor->shots>0&&!shooter_blocked;
+        const bool shooter_collision_marker=actor&&target&&actor->is_shooter&&!ctx.moves.empty()&&
+            !ctx.saw_any_special&&!future_special&&anchor_collides(*actor,attack_anchor)&&
+            (current_adjacent||ranged_marker_legal);
+        if(shooter_collision_marker) attack_anchor=actor->anchor;
         const bool adjacent=actor&&target&&adjacent_at(*actor,attack_anchor,*target);
         // Raw-corpus invariant: almost every ordinary ranged/WAIT/DEFEND action still
         // emits mUUUXXYY.  For a shooter damaging a non-adjacent target it is a position
-        // marker, not movement. Heroes are also non-board actors in the supported PvE
-        // corpus, so their m-record is never applied as a creature relocation.
+        // marker, not movement. An impossible special-free shooter landing is also a
+        // marker: retain the current anchor and classify ranged-vs-melee from that state.
+        // Heroes are non-board actors in the supported PvE corpus.
         const bool ranged_marker=actor && ((actor->is_shooter && !adjacent) || actor->is_hero);
-        if(actor&&target&&!ranged_marker&&!ctx.moves.empty()&&!ctx.saw_any_special&&!future_special){
+        if(actor&&target&&!ranged_marker&&!shooter_collision_marker&&!ctx.moves.empty()&&!ctx.saw_any_special&&!future_special){
             ctx.moves.back().cell=resolve_unique_melee_anchor(*actor,*target,ctx.moves.back().cell);
         }
         ctx.move_mode_decided=true;
-        ctx.apply_actor_moves=!ranged_marker;
+        ctx.apply_actor_moves=!ranged_marker&&!shooter_collision_marker;
         ctx.active_attack_was_ranged = ranged_marker && actor && actor->is_shooter && !actor->is_hero;
         flush_moves(ctx.apply_actor_moves);
     };

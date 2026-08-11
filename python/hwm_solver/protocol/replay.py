@@ -1390,7 +1390,22 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     target = state.entities.get(target_uid) if target_uid is not None else None
     ax = action_move.x if action_move else (actor.x if actor else 0)
     ay = action_move.y if action_move else (actor.y if actor else 0)
-    adjacent = bool(actor and target and _entities_adjacent(actor, ax, ay, target))
+    ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in cmds)
+    shooter = bool(actor and (actor.shots > 0 or "shooter" in set(actor.abilities)))
+    current_adjacent_target = bool(actor and target and _entities_adjacent(actor, actor.x, actor.y, target))
+    shooter_blocked = bool(actor and any(
+        other.alive and not other.is_hero and "hidden" not in set(other.abilities)
+        and other.owner != actor.owner and _entities_adjacent(actor, actor.x, actor.y, other)
+        for other in state.entities.values()
+    ))
+    ranged_marker_legal = bool(actor and actor.shots > 0 and not shooter_blocked)
+    shooter_collision_marker = bool(
+        shooter and ordinary and action_move is not None
+        and _observed_anchor_blocked(state.entities, actor, (ax, ay))
+        and (current_adjacent_target or ranged_marker_legal)
+    )
+    adjacency_x, adjacency_y = (actor.x, actor.y) if shooter_collision_marker and actor else (ax, ay)
+    adjacent = bool(actor and target and _entities_adjacent(actor, adjacency_x, adjacency_y, target))
 
     if mighty_slam:
         typ = "ABILITY"
@@ -1452,7 +1467,9 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
 
     destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
     resolved_melee = None
-    if typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
+    if typ == "MELEE_ATTACK" and shooter_collision_marker and actor is not None:
+        resolved_melee = (actor.x, actor.y)
+    elif typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
         resolved_melee = _resolve_special_free_unique_melee_anchor(
             state.entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
         )
@@ -1696,13 +1713,23 @@ def _apply_decision_commands(
     action_type: str,
     commands: list[LowLevelCommand],
 ) -> None:
-    suppress = None if _decision_actor_move_is_position(action_type) else actor_uid
+    attack_move = _attack_move(actor_uid, commands) if action_type == "MELEE_ATTACK" else None
+    actor_for_move = entities.get(actor_uid)
+    first_damage = next((c for c in commands if c.opcode == "DAMAGE" and c.actor_uid == actor_uid), None)
+    target_for_move = entities.get(int(first_damage.target_uid)) if first_damage is not None and first_damage.target_uid is not None else None
+    ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in commands)
+    shooter_collision_marker = bool(
+        actor_for_move is not None and target_for_move is not None and ordinary and attack_move is not None
+        and (actor_for_move.shots > 0 or "shooter" in set(actor_for_move.abilities))
+        and attack_move.x is not None and attack_move.y is not None
+        and _observed_anchor_blocked(entities, actor_for_move, (attack_move.x, attack_move.y))
+        and _entities_adjacent(actor_for_move, actor_for_move.x, actor_for_move.y, target_for_move)
+    )
+    suppress = actor_uid if shooter_collision_marker or not _decision_actor_move_is_position(action_type) else None
     actor_before_pos = (entities[actor_uid].x, entities[actor_uid].y) if actor_uid in entities else None
     shieldbash_proc, shieldbash_target = _observed_shieldbash_proc(commands, entities, actor_uid)
-    attack_move = _attack_move(actor_uid, commands) if action_type == "MELEE_ATTACK" else None
-    first_damage = next((c for c in commands if c.opcode == "DAMAGE" and c.actor_uid == actor_uid), None)
     corrected_attack_anchor = None
-    if attack_move is not None and attack_move.x is not None and attack_move.y is not None and first_damage is not None:
+    if not shooter_collision_marker and attack_move is not None and attack_move.x is not None and attack_move.y is not None and first_damage is not None:
         corrected_attack_anchor = _resolve_special_free_unique_melee_anchor(
             entities, actor_uid, first_damage.target_uid, attack_move.x, attack_move.y, commands
         )
@@ -1855,8 +1882,26 @@ def _action_from_compact(
     target = by_uid.get(int(target_uid)) if target_uid is not None else None
     ax = action_move.x if action_move else (int(actor["x"]) if actor else 0)
     ay = action_move.y if action_move else (int(actor["y"]) if actor else 0)
-    adjacent = bool(actor and target and _entities_adjacent(actor, ax, ay, target))
     abilities = set(actor.get("abilities", [])) if actor else set()
+    ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in cmds)
+    shooter = bool(actor and (int(actor.get("shots", 0)) > 0 or "shooter" in abilities))
+    current_adjacent_target = bool(
+        actor and target and _entities_adjacent(actor, int(actor["x"]), int(actor["y"]), target)
+    )
+    shooter_blocked = bool(actor and any(
+        other.get("alive", True) and not other.get("is_hero") and not other.get("is_hidden", False)
+        and int(other.get("owner", 0)) != int(actor.get("owner", 0))
+        and _entities_adjacent(actor, int(actor["x"]), int(actor["y"]), other)
+        for other in before_entities if int(other.get("uid", -1)) != int(actor.get("uid", -2))
+    ))
+    ranged_marker_legal = bool(actor and int(actor.get("shots", 0)) > 0 and not shooter_blocked)
+    shooter_collision_marker = bool(
+        shooter and ordinary and action_move is not None
+        and _observed_anchor_blocked(before_entities, actor, (ax, ay))
+        and (current_adjacent_target or ranged_marker_legal)
+    )
+    adjacency_x, adjacency_y = (int(actor["x"]), int(actor["y"])) if shooter_collision_marker and actor else (ax, ay)
+    adjacent = bool(actor and target and _entities_adjacent(actor, adjacency_x, adjacency_y, target))
 
     if mighty_slam:
         typ = "ABILITY"
@@ -1910,7 +1955,9 @@ def _action_from_compact(
 
     destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
     resolved_melee = None
-    if typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
+    if typ == "MELEE_ATTACK" and shooter_collision_marker and actor is not None:
+        resolved_melee = (int(actor["x"]), int(actor["y"]))
+    elif typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
         resolved_melee = _resolve_special_free_unique_melee_anchor(
             before_entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
         )

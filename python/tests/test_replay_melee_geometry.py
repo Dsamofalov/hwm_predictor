@@ -43,3 +43,38 @@ def test_far_special_free_melee_hint_is_not_reinterpreted_generically():
     # deliberately left untouched because this creature has movement mechanics whose
     # semantics belong outside the generic decoder.
     assert (row["destination_x"], row["destination_y"]) == (11, 5)
+
+
+def test_shooter_collision_marker_keeps_stationary_melee_anchor():
+    battle = ROOT / "hwm_battles" / "battles" / "1626319743"
+    row = list(iter_battle_decisions(battle))[110]
+    assert row["actor_uid"] == 24
+    assert row["action_type"] == "MELEE_ATTACK"
+    assert row["special_codes"] == []
+    assert (row["destination_x"], row["destination_y"]) == (1, 2)
+    by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
+    assert (by_uid[24]["x"], by_uid[24]["y"]) == (1, 2)
+    assert not (_cells(by_uid[24]) & _cells(by_uid[23]))
+
+
+def test_impossible_shooter_move_marker_can_recover_ranged_attack():
+    battle = ROOT / "hwm_battles" / "battles" / "1632012084"
+    row = list(iter_battle_decisions(battle))[77]
+    assert row["actor_uid"] == 16
+    assert row["action_type"] == "RANGED_ATTACK"
+    assert row["special_codes"] == []
+    assert row["destination_x"] is None and row["destination_y"] is None
+    by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
+    assert (by_uid[16]["x"], by_uid[16]["y"]) == (1, 1)
+
+
+def test_stationary_shooter_marker_closes_heldout_melee_false_negative():
+    battle = ROOT / "hwm_battles" / "battles" / "1632715976"
+    row = list(iter_battle_decisions(battle))[102]
+    assert row["actor_uid"] == 13
+    assert row["action_type"] == "MELEE_ATTACK"
+    assert row["special_codes"] == []
+    assert (row["destination_x"], row["destination_y"]) == (11, 4)
+    by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
+    assert (by_uid[13]["x"], by_uid[13]["y"]) == (11, 4)
+    assert not (_cells(by_uid[13]) & _cells(by_uid[21]))

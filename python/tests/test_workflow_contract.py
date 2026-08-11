@@ -97,3 +97,4 @@ def test_windows_ci_script_owns_core_and_full_test_inventory():
 
     # Ability-owned monolithic CTest remains deliberately outside main-front CI.
     assert text.count("'^hwm-tests$'") == 2
+    assert "'hwm_battles', '15'" in text
