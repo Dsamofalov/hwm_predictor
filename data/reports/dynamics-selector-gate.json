@@ -1,67 +1,180 @@
 {
-  "schema_version": 1,
-  "scope": "calibrated fallback selector for the M11 primary physical-damage residual ensemble",
-  "split": {
-    "fit_battles": 554,
-    "calibration_battles": 138,
-    "test_battles": 174
+  "diagnostic_gate": {
+    "production_selector_enabled": false,
+    "reason": "The selector remains evidence-only until the final test split passes all accuracy and invalid-action gates.",
+    "selector_beats_both_models_and_matches_generic_invalid_rate_at_all_horizons": false
   },
   "ensemble_members": 5,
-  "selector": {
-    "threshold": 0.5364983591733259,
-    "calibration_generic_usage_rate": 0.16013745704467353,
-    "calibration_mean_abs_log_error": 0.41094346564871564
+  "feature_names": [
+    "log1p_creature_action_support",
+    "relative_ensemble_disagreement",
+    "absolute_log_residual_correction",
+    "signed_log_residual_correction",
+    "generic_lethality_ratio",
+    "is_ranged_attack"
+  ],
+  "multistep": {
+    "16": {
+      "ensemble_mean": {
+        "mean_force_l1": 0.05171927150909418,
+        "mean_generic_usage_rate": 0.0,
+        "mean_invalid_action_fraction": 0.03402941242451374,
+        "mean_modeled_primary_attacks": 9.926391382405745,
+        "median_force_l1": 0.035450780082750766,
+        "windows": 7798
+      },
+      "generic": {
+        "mean_force_l1": 0.08125154639443335,
+        "mean_generic_usage_rate": 0.9748558845474722,
+        "mean_invalid_action_fraction": 0.025144115452527867,
+        "mean_modeled_primary_attacks": 9.926391382405745,
+        "median_force_l1": 0.049992433061545966,
+        "windows": 7798
+      },
+      "selector": {
+        "mean_force_l1": 0.05204834782343752,
+        "mean_generic_usage_rate": 0.15566529378404217,
+        "mean_invalid_action_fraction": 0.03244339905342727,
+        "mean_modeled_primary_attacks": 9.926391382405745,
+        "median_force_l1": 0.03562663497177939,
+        "windows": 7798
+      }
+    },
+    "2": {
+      "ensemble_mean": {
+        "mean_force_l1": 0.011663183734502189,
+        "mean_generic_usage_rate": 0.0,
+        "mean_invalid_action_fraction": 0.011740498668603244,
+        "mean_modeled_primary_attacks": 1.4958847736625513,
+        "median_force_l1": 0.0038735247066092344,
+        "windows": 8262
+      },
+      "generic": {
+        "mean_force_l1": 0.01678704527639987,
+        "mean_generic_usage_rate": 0.9892277898813846,
+        "mean_invalid_action_fraction": 0.010772210118615348,
+        "mean_modeled_primary_attacks": 1.4958847736625513,
+        "median_force_l1": 0.005086499650067569,
+        "windows": 8262
+      },
+      "selector": {
+        "mean_force_l1": 0.011755457052903812,
+        "mean_generic_usage_rate": 0.16230936819172112,
+        "mean_invalid_action_fraction": 0.011679980634229,
+        "mean_modeled_primary_attacks": 1.4958847736625513,
+        "median_force_l1": 0.0039036273579190206,
+        "windows": 8262
+      }
+    },
+    "4": {
+      "ensemble_mean": {
+        "mean_force_l1": 0.018464222568193963,
+        "mean_generic_usage_rate": 0.0,
+        "mean_invalid_action_fraction": 0.01687990538651758,
+        "mean_modeled_primary_attacks": 2.58531340716052,
+        "median_force_l1": 0.008267046068547352,
+        "windows": 9301
+      },
+      "generic": {
+        "mean_force_l1": 0.027283072596534334,
+        "mean_generic_usage_rate": 0.986246998530624,
+        "mean_invalid_action_fraction": 0.013753001469376051,
+        "mean_modeled_primary_attacks": 2.58531340716052,
+        "median_force_l1": 0.011094987605054719,
+        "windows": 9301
+      },
+      "selector": {
+        "mean_force_l1": 0.018609202807647343,
+        "mean_generic_usage_rate": 0.1616851234634269,
+        "mean_invalid_action_fraction": 0.016584238253951188,
+        "mean_modeled_primary_attacks": 2.58531340716052,
+        "median_force_l1": 0.008313556515651879,
+        "windows": 9301
+      }
+    },
+    "8": {
+      "ensemble_mean": {
+        "mean_force_l1": 0.03098309024875845,
+        "mean_generic_usage_rate": 0.0,
+        "mean_invalid_action_fraction": 0.02318551129526739,
+        "mean_modeled_primary_attacks": 4.945506482091848,
+        "median_force_l1": 0.017210976252755427,
+        "windows": 9102
+      },
+      "generic": {
+        "mean_force_l1": 0.047103674822621566,
+        "mean_generic_usage_rate": 0.9830062205062206,
+        "mean_invalid_action_fraction": 0.01699377949377949,
+        "mean_modeled_primary_attacks": 4.945506482091848,
+        "median_force_l1": 0.024883455186256623,
+        "windows": 9102
+      },
+      "selector": {
+        "mean_force_l1": 0.03120726237067352,
+        "mean_generic_usage_rate": 0.1610924077387492,
+        "mean_invalid_action_fraction": 0.022627287566311955,
+        "mean_modeled_primary_attacks": 4.945506482091848,
+        "median_force_l1": 0.017244893120189446,
+        "windows": 9102
+      }
+    }
   },
   "one_step": {
     "calibration": {
-      "samples": 4365,
+      "ensemble_mean_abs_log_error": 0.4161052870642867,
       "generic_mean_abs_log_error": 0.5768755574654364,
-      "ensemble_mean_abs_log_error": 0.416118089056588,
-      "selector_mean_abs_log_error": 0.41094346564871564,
+      "samples": 4365,
+      "selector_auc_learned_worse": 0.6973672001359011,
       "selector_generic_usage_rate": 0.16013745704467353,
-      "selector_auc_learned_worse": 0.6973807617032758
+      "selector_mean_abs_log_error": 0.4109307616279688
     },
     "test": {
+      "ensemble_mean_abs_log_error": 0.38657592938556495,
+      "generic_mean_abs_log_error": 0.47967855331738785,
       "samples": 6191,
-      "generic_mean_abs_log_error": 0.47968488843500273,
-      "ensemble_mean_abs_log_error": 0.3865849937943818,
-      "selector_mean_abs_log_error": 0.3857070673937231,
+      "selector_auc_learned_worse": 0.6020227231120012,
       "selector_generic_usage_rate": 0.1636246163786141,
-      "selector_auc_learned_worse": 0.6020046378226643
+      "selector_mean_abs_log_error": 0.3857004686613921
     }
   },
-  "multistep": {
-    "2": {
-      "generic": {"mean_force_l1": 0.01678704527639987, "mean_invalid_action_fraction": 0.010772210118615348},
-      "ensemble_mean": {"mean_force_l1": 0.011663472202068056, "mean_invalid_action_fraction": 0.011740498668603244},
-      "selector": {"mean_force_l1": 0.011755790610161911, "mean_invalid_action_fraction": 0.011679980634229, "mean_generic_usage_rate": 0.16230936819172112}
+  "schema_version": 1,
+  "scope": "calibrated fallback selector for the M11 primary physical-damage residual ensemble",
+  "selector": {
+    "calibration_selection": {
+      "generic_usage_rate": 0.16013745704467353,
+      "mean_abs_log_error": 0.4109307616279688,
+      "threshold": 0.53651533713405
     },
-    "4": {
-      "generic": {"mean_force_l1": 0.027283072596534334, "mean_invalid_action_fraction": 0.013753001469376051},
-      "ensemble_mean": {"mean_force_l1": 0.018464831292635066, "mean_invalid_action_fraction": 0.01687990538651758},
-      "selector": {"mean_force_l1": 0.018609899724421543, "mean_invalid_action_fraction": 0.016584238253951188, "mean_generic_usage_rate": 0.1616851234634269}
-    },
-    "8": {
-      "generic": {"mean_force_l1": 0.047103674822621566, "mean_invalid_action_fraction": 0.01699377949377949},
-      "ensemble_mean": {"mean_force_l1": 0.030984874389592548, "mean_invalid_action_fraction": 0.02318551129526739},
-      "selector": {"mean_force_l1": 0.03120927096410669, "mean_invalid_action_fraction": 0.022627287566311955, "mean_generic_usage_rate": 0.1610924077387492}
-    },
-    "16": {
-      "generic": {"mean_force_l1": 0.08125154639443335, "mean_invalid_action_fraction": 0.025144115452527867},
-      "ensemble_mean": {"mean_force_l1": 0.051724246307698674, "mean_invalid_action_fraction": 0.03402941242451374},
-      "selector": {"mean_force_l1": 0.052054281627296785, "mean_invalid_action_fraction": 0.03244339905342727, "mean_generic_usage_rate": 0.15569347796200836}
-    }
+    "feature_mean": [
+      4.337293913432872,
+      0.026960180527577135,
+      0.3233562747909545,
+      0.28659246164556607,
+      1.6002652127193429,
+      0.3211912943871707
+    ],
+    "feature_scale": [
+      1.4008175525254638,
+      0.023262816644393208,
+      0.218698607281876,
+      0.2650530554467344,
+      14.616584007414966,
+      0.46693409256237856
+    ],
+    "threshold": 0.53651533713405,
+    "weights": [
+      -0.8003014799670648,
+      -0.4970086141977005,
+      -0.06120942705377482,
+      -0.42460033393540797,
+      -0.057492932725684946,
+      0.07422106769533468,
+      0.1542915206273823
+    ]
   },
-  "diagnostic_gate": {
-    "selector_beats_both_models_and_matches_generic_invalid_rate_at_all_horizons": false,
-    "production_selector_enabled": false,
-    "reason": "Selector slightly improves one-step ensemble error but is worse than the pure ensemble on multi-step mean force-L1 and remains above the generic invalid-action rate."
-  },
-  "validation": {
-    "diagnostic_run": 31386006048,
-    "standard_ci_run": 31386005987,
-    "targeted_tests": "4/4 PASS",
-    "linux_ci": "PASS",
-    "windows_msvc_ci": "PASS"
+  "split": {
+    "calibration_battles": 138,
+    "fit_battles": 554,
+    "test_battles": 174
   }
 }

@@ -1,69 +1,65 @@
 {
+  "damage_roll_quantile_starts": [
+    0.16666666666666666,
+    0.5,
+    0.8333333333333334
+  ],
+  "damage_roll_sequence": "midpoint-stratified starts rotated by golden-ratio fractional shift per subsequent action",
+  "diagnostic_gate": {
+    "learned_action_coverage_not_below_generic_at_all_horizons": false,
+    "learned_beats_generic_mean_l1_at_all_horizons": true,
+    "production_enablement": false,
+    "reason": "Evidence-only distributional gate for one transition submodel; full M11 structured dynamics remains incomplete."
+  },
+  "ensemble_members": 5,
+  "heldout_battles": 174,
+  "metrics": {
+    "16": {
+      "generic_mean_force_l1": 0.08178084999321954,
+      "generic_mean_full_window_survival_probability": 0.8098230315465504,
+      "generic_mean_valid_observed_action_coverage": 0.9749253929460393,
+      "learned_mean_force_l1": 0.050283150728287,
+      "learned_mean_full_window_survival_probability": 0.7241087458322647,
+      "learned_mean_valid_observed_action_coverage": 0.9634932147374441,
+      "mean_modeled_primary_attacks": 9.926391382405745,
+      "windows": 7798
+    },
+    "2": {
+      "generic_mean_force_l1": 0.016966499726857556,
+      "generic_mean_full_window_survival_probability": 0.982732187525216,
+      "generic_mean_valid_observed_action_coverage": 0.9891874445251351,
+      "learned_mean_force_l1": 0.011489115648559837,
+      "learned_mean_full_window_survival_probability": 0.9801339465827483,
+      "learned_mean_valid_observed_action_coverage": 0.9878883240539014,
+      "mean_modeled_primary_attacks": 1.4958847736625513,
+      "windows": 8262
+    },
+    "4": {
+      "generic_mean_force_l1": 0.028080239780113692,
+      "generic_mean_full_window_survival_probability": 0.9653800666594989,
+      "generic_mean_valid_observed_action_coverage": 0.986551625273268,
+      "learned_mean_force_l1": 0.018422078359941755,
+      "learned_mean_full_window_survival_probability": 0.9545353546213668,
+      "learned_mean_valid_observed_action_coverage": 0.9828381655497019,
+      "mean_modeled_primary_attacks": 2.58531340716052,
+      "windows": 9301
+    },
+    "8": {
+      "generic_mean_force_l1": 0.047324642173119755,
+      "generic_mean_full_window_survival_probability": 0.9206035303596278,
+      "generic_mean_valid_observed_action_coverage": 0.9832443070247948,
+      "learned_mean_force_l1": 0.03018224570907024,
+      "learned_mean_full_window_survival_probability": 0.8846773602871164,
+      "learned_mean_valid_observed_action_coverage": 0.9755086358135139,
+      "mean_modeled_primary_attacks": 4.945506482091848,
+      "windows": 9102
+    }
+  },
+  "sampling_approximation": "one sampled quantile per action shared across that action's multi-hit components; C++ runtime adds +/-0.08 per-hit spread",
   "schema_version": 1,
   "scope": "distributional survival gate for the primary physical-damage residual ensemble; non-primary deltas are replay teacher-forced",
   "source": "raw corpus chronological 80/20 battle split",
   "train_battles": 692,
-  "heldout_battles": 174,
-  "ensemble_members": 5,
-  "damage_roll_quantile_starts": [0.16666666666666666, 0.5, 0.8333333333333334],
-  "damage_roll_sequence": "midpoint-stratified starts rotated by golden-ratio fractional shift per subsequent action",
   "trajectory_count_generic": 3,
-  "trajectory_count_learned": 15,
-  "sampling_approximation": "one sampled quantile per action shared across that action's multi-hit components; C++ runtime adds +/-0.08 per-hit spread",
-  "metrics": {
-    "2": {
-      "windows": 8262,
-      "mean_modeled_primary_attacks": 1.4958847736625513,
-      "generic_mean_force_l1": 0.01696646474274205,
-      "learned_mean_force_l1": 0.011489177565173935,
-      "generic_mean_valid_observed_action_coverage": 0.9891874445251351,
-      "learned_mean_valid_observed_action_coverage": 0.9878883240539014,
-      "generic_mean_full_window_survival_probability": 0.982732187525216,
-      "learned_mean_full_window_survival_probability": 0.9801339465827483
-    },
-    "4": {
-      "windows": 9301,
-      "mean_modeled_primary_attacks": 2.58531340716052,
-      "generic_mean_force_l1": 0.02808017908603744,
-      "learned_mean_force_l1": 0.01842227917808464,
-      "generic_mean_valid_observed_action_coverage": 0.986551625273268,
-      "learned_mean_valid_observed_action_coverage": 0.9828381655497019,
-      "generic_mean_full_window_survival_probability": 0.9653800666594989,
-      "learned_mean_full_window_survival_probability": 0.9545353546213668
-    },
-    "8": {
-      "windows": 9102,
-      "mean_modeled_primary_attacks": 4.945506482091848,
-      "generic_mean_force_l1": 0.047324542172943414,
-      "learned_mean_force_l1": 0.03018269167730089,
-      "generic_mean_valid_observed_action_coverage": 0.9832443070247948,
-      "learned_mean_valid_observed_action_coverage": 0.9755086358135139,
-      "generic_mean_full_window_survival_probability": 0.9206035303596278,
-      "learned_mean_full_window_survival_probability": 0.8846773602871164
-    },
-    "16": {
-      "windows": 7798,
-      "mean_modeled_primary_attacks": 9.926391382405745,
-      "generic_mean_force_l1": 0.08178062005220688,
-      "learned_mean_force_l1": 0.05028381492418415,
-      "generic_mean_valid_observed_action_coverage": 0.9749253929460393,
-      "learned_mean_valid_observed_action_coverage": 0.9634938723682632,
-      "generic_mean_full_window_survival_probability": 0.8098230315465504,
-      "learned_mean_full_window_survival_probability": 0.7241172950329144
-    }
-  },
-  "diagnostic_gate": {
-    "learned_beats_generic_mean_l1_at_all_horizons": true,
-    "learned_action_coverage_not_below_generic_at_all_horizons": false,
-    "production_enablement": false,
-    "reason": "Evidence-only distributional gate for one transition submodel; full M11 structured dynamics remains incomplete."
-  },
-  "validation": {
-    "distributional_workflow_run": 31389946209,
-    "targeted_tests": "4 passed",
-    "full_corpus_gate": "PASS",
-    "nearest_full_standard_ci_run": 31389813735,
-    "nearest_full_standard_ci": "PASS Linux + Windows/MSVC before the final stochastic-roll decorrelation-only patch",
-    "final_patch_windows_standard_ci": "PASS on exact final code before GitHub-hosted Linux runner provisioning stopped; exact Linux evaluator path covered by distributional_workflow_run"
-  }
+  "trajectory_count_learned": 15
 }
