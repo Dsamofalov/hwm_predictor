@@ -48,6 +48,34 @@ def main() -> None:
                     timeout=15,
                 )
                 time.sleep(0.15)
+
+                # Numeric battle.php echo frames are transport heartbeats, not canonical
+                # updates. They must not publish a revision/hash or cancel this search.
+                heartbeat_status, heartbeat = request_json(
+                    base,
+                    "/capture",
+                    method="POST",
+                    payload={
+                        "battleId": "demo",
+                        "source": "xhr",
+                        "urlKind": "battle_update",
+                        "url": "https://example.invalid/battle.php?warid=demo",
+                        "capturedAt": int(time.time() * 1000),
+                        "sequenceHint": 100,
+                        "body": "4416",
+                    },
+                    token=token,
+                )
+                assert heartbeat_status == 200 and heartbeat.get("accepted") is True, heartbeat
+                assert heartbeat.get("canonical_state_updated") is False, heartbeat
+                assert heartbeat.get("reason") == "heartbeat_noop", heartbeat
+                assert heartbeat.get("revision") == before["revision"], heartbeat
+                assert heartbeat.get("state_hash") == before["state_hash"], heartbeat
+                _, after_heartbeat = request_json(base, "/status", token=token)
+                assert after_heartbeat["revision"] == before["revision"], after_heartbeat
+                assert after_heartbeat["state_hash"] == before["state_hash"], after_heartbeat
+
+                # A real canonical publication still invalidates the pre-change search.
                 assert request_json(
                     base, "/debug/demo-state", method="POST", payload={}, token=token
                 )[0] == 200
@@ -56,13 +84,14 @@ def main() -> None:
             _, after = request_json(base, "/status", token=token)
             assert status == 200 and result.get("status") == "stale", result
             assert result.get("cancelled_search") is True, result
-            assert result.get("requested_revision") < result.get("current_revision"), result
+            assert result.get("requested_revision") == before["revision"], result
+            assert result.get("current_revision") == before["revision"] + 1, result
             assert before["state_hash"] == after["state_hash"], (
                 "test must prove revision invalidation even with equal hash"
             )
             assert result.get("elapsed_ms", 99999) < 5000, result
             print(
-                "stale search cooperative cancellation: PASS",
+                "heartbeat-neutral stale search cooperative cancellation: PASS",
                 result.get("simulations"),
                 result.get("elapsed_ms"),
             )

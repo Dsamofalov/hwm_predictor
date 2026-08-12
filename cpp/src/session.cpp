@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <chrono>
+#include <string_view>
 
 namespace hwm {
 namespace {
@@ -12,6 +13,20 @@ std::string compact_hash(std::string_view s) {
     uint64_t h = 1469598103934665603ULL;
     for (unsigned char c : s) { h ^= c; h *= 1099511628211ULL; }
     std::ostringstream o; o << std::hex << h; return o.str();
+}
+
+bool is_noop_battle_heartbeat(const RawEnvelope& e) {
+    if (e.url_kind != "battle_update") return false;
+    const std::string_view body = e.body;
+    size_t first = 0;
+    while (first < body.size() && (body[first] == ' ' || body[first] == '\t' || body[first] == '\r' || body[first] == '\n')) ++first;
+    size_t last = body.size();
+    while (last > first && (body[last - 1] == ' ' || body[last - 1] == '\t' || body[last - 1] == '\r' || body[last - 1] == '\n')) --last;
+    if (first == last) return false;
+    for (size_t i = first; i < last; ++i) {
+        if (body[i] < '0' || body[i] > '9') return false;
+    }
+    return true;
 }
 
 void persist_body_if_enabled(const RawEnvelope& e) {
@@ -42,6 +57,18 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
     }
     if (e.body.empty()) {
         out.reason = "empty_body";
+        stamp_outcome();
+        return out;
+    }
+
+    // Official battle.php emits frequent numeric echo frames (for example "4416") that
+    // carry no canonical battle semantics. Ignore them before battle reset, raw dedup/hash,
+    // capture ordering and decoder bookkeeping so they cannot publish a revision or cancel
+    // an in-flight search. The MAIN-world hook performs the same classification earlier;
+    // this daemon guard keeps non-extension producers safe as well.
+    if (is_noop_battle_heartbeat(e)) {
+        out.accepted = true;
+        out.reason = "heartbeat_noop";
         stamp_outcome();
         return out;
     }

@@ -74,4 +74,10 @@ if(HWM_BUILD_TESTS)
   target_link_libraries(hwm-protocol-tests PRIVATE hwm_core)
   target_compile_definitions(hwm-protocol-tests PRIVATE HWM_PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
   add_test(NAME hwm-protocol-tests COMMAND hwm-protocol-tests)
+
+  # Production closed-loop ingestion regression: semantic snapshot -> heartbeat -> delta.
+  add_executable(hwm-live-ingestion-tests cpp/tests/test_live_ingestion.cpp)
+  target_link_libraries(hwm-live-ingestion-tests PRIVATE hwm_core)
+  target_compile_definitions(hwm-live-ingestion-tests PRIVATE HWM_PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
+  add_test(NAME hwm-live-ingestion-tests COMMAND hwm-live-ingestion-tests)
 endif()
