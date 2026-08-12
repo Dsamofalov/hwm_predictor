@@ -7,8 +7,8 @@ Integration branch: `integration/ability-snapshot-20260812`
 Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
 Current main integration reference: **`7e646733eded4a491b25ddae1c2efcb9287feeec`**
-Current validated functional ability SHA: **`7f143d9050d42a20300be3a54511cdae16682f0e`**
-Authoritative hosted Windows run: **`31639884205` — PASS / workflow conclusion `success` on exact SHA and branch `ability`**
+Current validated functional ability SHA: **`2596f59a065604dd5a525d19969712cebbd9c3eb`**
+Authoritative hosted Windows run: **`31644823929` — PASS / GitHub Actions check-suite conclusion `success` on exact SHA and branch `ability`**
 
 ## Governance
 
@@ -25,31 +25,34 @@ Authoritative hosted Windows run: **`31639884205` — PASS / workflow conclusion
 - `c24cacf060182494092ef3e460301844639388e6` and `eaca45fc3de060b030ee912c38efea234aa00c1f` synchronized checked registry/report artifacts; run `31631708571` passed.
 - Current supported classification: **`gribbomb = partial_exact`, risk `0.25`**. Exact observed carrier self-removal is represented; predictive Earth/collateral magnitude remains unresolved and disabled.
 
-## Taunt validated evidence package
+## Closed Taunt boundary
 
-Functional commits:
+- `7f143d9050d42a20300be3a54511cdae16682f0e` is the validated Taunt functional SHA; authoritative hosted Windows run `31639884205` passed.
+- Exact corpus evidence pins the server tooltip, neighboring-friendly geometry and opportunity/control counts, but exposes neither a carrier-specific per-attack redirect discriminator nor numeric redirect probability.
+- `ra2`/`ral` occur in both carrier-target and adjacent-ally controls; final DAMAGE destination is not used to reconstruct original intent.
+- Therefore Taunt remains `unresolved` for predictive/search semantics and is closed for this pass as a precise evidence blocker. Do not reopen it from final-target heuristics.
 
-- `e7dffd54b1777766e4916f7b6f5f548e25e2cfab` — replaced the smoke-only Taunt test with exact whole-corpus targeting/tooltip/geometry gates and target-source special-code controls.
-- Hosted run `31639091346` failed only because two handwritten negative-control counts were wrong; the corpus/tooltip/geometry gate passed.
-- `7f143d9050d42a20300be3a54511cdae16682f0e` — corrected only `ra2` adjacent-ally `19 -> 18` and `ral` adjacent-ally `13 -> 9`.
-- Authoritative hosted Windows run `31639884205`: **PASS / conclusion `success` on exact SHA**.
+## Spider / `Sent` wire attribution validated package
 
-Validated whole-corpus Taunt evidence:
+Functional commit:
 
-- 866 corpus battle directories;
-- 24 Taunt carrier battles and 25 carrier entities;
-- 24/24 identical server tooltip descriptions;
-- tooltip semantics: the creature has a **chance** to redirect an enemy attack aimed at a neighboring friendly unit;
-- no numeric Taunt probability is present in the tooltip;
-- 712 attacks observed in Taunt carrier battles;
-- 169 states with a carrier and at least one adjacent friendly unit that can serve as a targeting-opportunity context;
-- 78 attacks ended on a Taunt carrier;
-- 31 carrier-target attacks occurred while an adjacent ally was present;
-- 37 attacks ended on an adjacent ally;
-- target-source `ra2`/`ral` records occur in both carrier-target and adjacent-ally control contexts and therefore are not accepted as Taunt redirect markers;
-- final DAMAGE destination is not treated as evidence of the attacker's original intended target.
+- `2596f59a065604dd5a525d19969712cebbd9c3eb` — added `spider_wire_evidence.py`, an exact atomic test surface in `ABILITY_TESTS.txt`, and corpus-wide source-ability controls. It deliberately changed no replay/runtime/registry semantics.
+- Authoritative hosted Ability Windows run `31644823929`: **PASS / GitHub Actions check-suite `85847738967` completed with conclusion `success`** on exact SHA. Exact Spider wire job `94276046646` passed.
 
-Semantic boundary: **Taunt is closed for this pass as a precise evidence blocker, not as a predictive implementation.** The corpus exactly supports tooltip/geometry/opportunity facts, but it does not expose a carrier-specific per-attack redirect discriminator or numeric proc probability. Therefore Taunt remains `unresolved` for predictive/search semantics, with no runtime or registry promotion and no invented redirect heuristic.
+Validated whole-corpus facts:
+
+- 866 battle directories;
+- 182 battles containing raw `SPECIAL` code `ent` / `Sent...`;
+- 806 `Sent` records, all numeric and all exactly 15 payload digits;
+- every record structurally splits as `source3 + target3 + 000000000`;
+- current parser maps the first UID to `actor_uid` for 806/806 and leaves `target_uid=None` for 806/806;
+- the second UID is nonzero in 806/806 and resolves to a replay entity both before and after in 806/806;
+- all 491 nonzero-source records point to an other-owner target; 315 records have source `000` and retain a target UID;
+- all 89 initial Spider carriers also have `entroots`; there are zero Spider-without-Entroots carriers;
+- source controls among nonzero-source `Sent`: **405 `entroots_without_spider`, 84 `spider_and_entroots`, 2 `neither`**;
+- the two `neither` sources are `alive,netshooter,nopenalty,rangepenalty,shooter`.
+
+Semantic boundary: **raw `Sent` is conclusively not Spider-specific.** The corpus strongly supports a shared immobilization/entangle wire substrate, but the two non-Entroots Netshooter controls mean `ent` is not promoted to an Entroots-exclusive ability label either. No second Spider runtime effect and no Spider registry promotion are justified.
 
 ## Preserved semantic boundaries
 
@@ -61,9 +64,8 @@ Semantic boundary: **Taunt is closed for this pass as a precise evidence blocker
 
 ## Next ownership state
 
-**Taunt evidence work is complete at the strongest currently supportable boundary. Do not spend another cycle trying to infer redirect proc outcomes from final targets or `ra2/ral`.**
-
-1. Advance to the next weighted actionable unfinished ability after recomputing the current risk queue.
-2. Current read-only lead is Spider, but first disambiguate Spider-specific wire semantics from the co-occurring `entroots` mechanic before assigning any `Sent` record to Spider.
-3. Treat any parser target-decoding gap as protocol evidence work first; do not add a second runtime mechanic merely because a carrier has both tags.
-4. For each new functional package, use exact corpus gates, hosted Windows/MSVC Ability CI, then immediately record the functional SHA/run in `ability_changelog.md`, this status file, and root `changelog.md`.
+1. Harden the newly observed Spider/`Sent` wire facts into exact corpus cardinality gates before changing parser semantics.
+2. After that strict wire lock is separately validated on hosted Windows, structural decoding of the second `ent` UID as protocol `target_uid` may be considered independently of ability ownership.
+3. Do **not** create or register a Spider runtime effect from `Sent`; current evidence disproves Spider-specific attribution.
+4. Any later semantic interpretation of the two `netshooter` controls or source-`000` lifecycle records requires its own evidence package; do not guess.
+5. Every next functional package must again receive hosted Windows Ability CI, followed by a separate bookkeeping commit updating `ability_changelog.md`, this status file, and root `changelog.md`.

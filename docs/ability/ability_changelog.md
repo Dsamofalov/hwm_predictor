@@ -137,3 +137,18 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Authoritative hosted Windows run `31639884205` on branch `ability`: **PASS / conclusion `success`** on the exact functional SHA.
   - Validated Taunt ceiling: exact evidence now pins the server tooltip, neighboring-friendly geometry, opportunity counts, and absence of a usable raw redirect-proc label in the observed corpus. A numeric redirect probability and per-attack proc outcome remain unobservable from current evidence.
   - No runtime or registry promotion is made. Taunt remains `unresolved` as predictive/search semantics and is closed for this pass as a precise evidence blocker rather than being modeled from final-target heuristics.
+
+## 2026-08-13
+
+### Spider / `Sent` wire attribution — corpus-wide negative control
+
+- Commit: `2596f59a065604dd5a525d19969712cebbd9c3eb` — `test(ability): audit Spider Sent wire attribution`.
+  - Added a whole-corpus `Sent`/`ent` wire auditor plus an atomic Windows pytest node without changing replay/runtime or registry semantics.
+  - Authoritative hosted Ability Windows CI run `31644823929`: **PASS / check-suite conclusion `success`** on the exact functional SHA. The Spider wire node `94276046646` passed on the hosted Windows runner.
+  - Corpus scope is exactly 866 battle directories, 182 battles containing `ent`, and 806 raw `Sent` records. Every observed payload has the exact structural shape `Sent + 15 decimal digits`; all 806 split as `source3 + target3 + 000000000`, and the target candidate exists in replay state both before and after the record.
+  - Current parser behavior is now pinned: first UID is decoded as actor for 806/806 records, while `target_uid` remains `None` for 806/806 records.
+  - Spider is fully confounded with Entroots at carrier level: all 89 initial Spider carriers also declare `entroots`, and zero Spider carriers without `entroots` exist in this corpus.
+  - Decisive negative control: among 491 nonzero-source `Sent` records, 405 are sourced by entities with `entroots` **without** `spider`, while only 84 are sourced by entities carrying both; therefore raw `Sent` is **not Spider-specific**.
+  - Two additional nonzero sources carry `alive,netshooter,nopenalty,rangepenalty,shooter` with neither `spider` nor `entroots`, so the raw `ent` code is not promoted to an Entroots-exclusive semantic label either. It is treated only as a shared immobilization/entangle wire substrate until further evidence.
+  - Zero-source records total 315 and retain a target UID; they are evidence for lifecycle/clear-style wire behavior, not a second Spider mechanic.
+  - Runtime/registry boundary: **no Spider runtime effect or registry promotion is created.** The next safe step is to lock these exact corpus counts as protocol tests, then separately consider structural `ent` target decoding without assigning ability ownership.

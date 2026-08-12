@@ -121,3 +121,16 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Authoritative hosted Windows run `31639884205` on branch `ability`: **PASS / workflow conclusion `success`** on the exact functional SHA.
   - Taunt is therefore closed for this evidence pass at a precise blocker: server tooltip/geometry/opportunity facts are exact, but current corpus evidence does not expose a carrier-specific per-attack redirect discriminator or numeric probability.
   - No runtime or registry promotion is made; Taunt remains `unresolved` for predictive/search semantics instead of introducing a heuristic from final attack targets.
+
+## 2026-08-13
+
+### Spider / `Sent` wire attribution boundary
+
+- Commit: `2596f59a065604dd5a525d19969712cebbd9c3eb` — `test(ability): audit Spider Sent wire attribution`.
+  - Added corpus-wide raw `Sent`/`ent` protocol evidence and source-ability controls without changing replay/runtime or registry semantics.
+  - Authoritative hosted Ability Windows run `31644823929`: **PASS / GitHub Actions check-suite conclusion `success`** on exact SHA; Spider wire job `94276046646` passed.
+  - Exact observed wire population: 866 battle dirs, 182 `ent` battles, 806 numeric `Sent` records, all with a 15-digit payload structurally splitting as `source3 + target3 + 000000000`.
+  - Current parser decodes the first UID as actor for 806/806 but leaves the second UID undecoded as `target_uid=None` for 806/806; the second UID is nonzero and present in state before/after for every record.
+  - Spider attribution is disproved: all 89 Spider carriers also have `entroots`, while 405 nonzero-source `Sent` records come from `entroots` sources **without** Spider versus 84 from sources carrying both.
+  - Two more nonzero `Sent` sources carry `netshooter` with neither Spider nor Entroots, so raw `ent` is treated as a shared immobilization/entangle wire substrate rather than an Entroots-exclusive ability label.
+  - No Spider runtime effect or registry promotion was added. The next safe layer is strict exact corpus locking, followed only then by a separate structural parser-target decision that remains independent of ability ownership.
