@@ -11,6 +11,15 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-12
 
+### Live active-battle engine evidence / TZ correction
+
+- Commit: `2c042fb8fa9c6f737c5165c945b4ac58720f31d0` — `docs: record live battle transport evidence [skip ci]`.
+  - Updated canonical `SPEC.md`, its active status mirror `HeroesWM_Solver_TZ_Status_0.3.0.md`, and `docs/MAIN_FRONT_STATUS.md` from evidence captured on authenticated active battle `warid=1672746591`.
+  - Phase 0 state-acquisition feasibility is now closed: passive client XHR to `battle.php` produced a semantic `turns=>3` + `s=...` snapshot/update and, after one manual move, a compact `turns=>4:...` incremental update; client `lastturn` advanced `3 -> 4`.
+  - Pure `t=<digits>` responses are specified as transport heartbeat/no-op frames: they are revision-neutral and must not cancel search or trigger replanning.
+  - Network `battle.php` remains primary truth. `stage.pole.obj` / `stage[war_scr].obj` plus `nowturn` are documented only as a targeted read-only cross-check/fallback; grid `x/y` are semantic coordinates, while `scr_x/scr_y` are render-space and must not become canonical board state.
+  - M01/M14 remain open until the same semantic progression passes through the actual MV3 extension -> daemon -> decoder -> planner -> revision-bound replan path. The raw user capture is not committed unsanitized because it contains user-facing battle metadata/chat/tooltips; only a scrubbed minimal regression fixture is acceptable.
+
 ### M11 exact-evidence float canonicalization
 
 - Commit: `342cbac80606969af97ea75cfa99339e48c01dc9` — `fix: canonicalize M11 selector floats`.
