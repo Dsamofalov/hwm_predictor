@@ -40,6 +40,10 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `a654e4a04c9d618a1640706edc92af00f3610618` — `test: fix overlap adjacency evidence`.
   - Corrected the pre-overlap adjacency diagnostic by retaining `alive`, hero, and hidden flags in summarized pre-state entities; the previous diagnostic boolean falsely treated every summarized entity as non-participating.
   - No decoder/simulator semantics or acceptance gates changed. The corrected Geometry Evidence rerun is the evidence source for subsequent invariant-preserving repair decisions.
+- Commit: `2988acfc9ad504b26dad49fe142175cb9e616078` — `test: classify blocked melee marker evidence`.
+  - Added a corpus-wide diagnostic class for SPECIAL-free melee decisions whose raw attack-position marker is blocked while the actor's prior canonical anchor is still legal and adjacent to the first physical damage target.
+  - Each candidate now records raw blockers and ownership, all reachable target-adjacent landings, nearby-to-raw landings, damage-target cardinality, unresolved non-SPECIAL opcodes, resolved destination, overlap introduction/final lineage, and baseline observed-action representability.
+  - This is evidence-only and intentionally follows rejection of a broader blocked-marker fallback that created new held-out failures; decoder and simulator semantics remain unchanged until the candidate classes provide a non-regressing discriminator.
 
 ## 2026-08-12
 
