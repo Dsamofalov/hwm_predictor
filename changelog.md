@@ -31,6 +31,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `9f8597edc99a310226a5e6c272c4a8b8acfacc6b` — `test: publish exact decoder residual taxonomy`.
   - Extended `decoder_geometry_audit.py` without changing decoder behavior: every current held-out failure is now emitted with battle/decision identity, ownership (`special_free`, semantically resolved SPECIAL, or unresolved SPECIAL), special codes, unresolved opcodes, actor metadata, damage targets, and exact target-relative landing cardinality near the observed destination.
   - Added an independent `Geometry Evidence` workflow that runs the full chronological corpus audit on every functional `main` push, publishes the exact JSON artifact, and ignores changelog/docs-only pushes. The workflow is diagnostic/evidence-only and does not weaken or replace Core/Full/Ability gates.
+- Commit: `1b4d8f4c6ae0564c0b19b99c269d028bb40e4c21` — `test: trace overlap introduction lineage`.
+  - Added an exact replay lineage audit that records every newly introduced overlap with battle/decision identity, actor/action, raw decision payload, SPECIAL ownership markers, and the colliding entities after the decision.
+  - Extended the existing Geometry Evidence artifact with `overlap-lineage-audit.json`, including the latest introduction event responsible for every final overlap pair. This changes no decoder or simulator semantics and is intended to drive the next narrow evidence-backed geometry correction.
 
 ## 2026-08-12
 
