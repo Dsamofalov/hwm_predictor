@@ -1,9 +1,24 @@
 # HeroesWM Solver — ТЗ для агента по abilities
 
-Версия контракта: 2026-08-11
+Версия контракта: 2026-08-12
 Рабочая ветка: `ability`
 Draft PR: `#1` (`ability` -> `main`)
 Целевая product/CI платформа: **Windows 10/11 x64 + MSVC**
+
+## 0. КРИТИЧЕСКОЕ ПРАВИЛО: отдельный ability changelog обязателен
+
+Это первое обязательное правило ability-front.
+
+Ability-agent ведёт собственный канонический журнал разработки: [`docs/ability/ability_changelog.md`](ability/ability_changelog.md), по тому же commit-oriented принципу, что и корневой `changelog.md` на `main`.
+
+После **каждого functional ability commit** обязательно:
+
+1. получить требуемую validation для реального functional SHA;
+2. отдельным bookkeeping commit обновить `docs/ability/ability_changelog.md` и `docs/ability/AGENT_STATUS.md`;
+3. записать реальный functional SHA, semantic boundary/result и authoritative hosted Windows/MSVC run, если пакет затрагивает executable behavior/tests/registry/tooling;
+4. не полагаться на историю чата как на журнал разработки и не переписывать/не удалять старые записи changelog — исправления добавлять отдельными correction entries.
+
+Корневой `changelog.md` остаётся журналом main/integration. Ability-работа сначала фиксируется в `ability_changelog.md`; при последующей интеграции main-agent может кратко отразить её в корневом changelog.
 
 ## 1. Роль и границы
 
@@ -301,6 +316,8 @@ Expected details:
 Делать небольшие логические functional commits. Не squash самостоятельно.
 
 После **каждого functional commit** обязательный отдельный bookkeeping commit в `changelog.md`, содержащий реальный SHA функционального коммита.
+
+Дополнительно действует обязательное правило из раздела 0: functional ability commit должен быть отражён в `docs/ability/ability_changelog.md` и `docs/ability/AGENT_STATUS.md` отдельным bookkeeping commit.
 
 Bookkeeping commit не обязан ссылаться на собственный SHA.
 
