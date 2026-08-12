@@ -27,14 +27,17 @@ jobs:
           cache: pip
       - name: Install package
         run: python -m pip install -e .
-      - name: Audit held-out residuals and final overlaps
+      - name: Audit held-out residuals and overlap lineage
         run: |
           mkdir -p build/validation
           python scripts/decoder_geometry_audit.py hwm_battles --output build/validation/decoder-geometry-audit.json
+          python scripts/overlap_lineage_audit.py hwm_battles --output build/validation/overlap-lineage-audit.json
       - name: Publish exact evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: decoder-geometry-audit
-          path: build/validation/decoder-geometry-audit.json
+          path: |
+            build/validation/decoder-geometry-audit.json
+            build/validation/overlap-lineage-audit.json
           if-no-files-found: error
