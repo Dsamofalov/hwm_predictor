@@ -144,3 +144,17 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Authoritative hosted Ability Windows CI run `31645840641`: **PASS / combined status `HWM / Ability = success`** on the exact functional SHA.
   - Semantic ceiling is unchanged and now strict-regression protected: raw `Sent` is not Spider-specific and is not safely Entroots-exclusive because of the Netshooter controls. No Spider runtime effect or registry promotion is created.
   - Any structural target decode must be a separate protocol-level functional package with independent negative controls and hosted Windows validation; it must not be used to manufacture Spider ownership.
+
+### Child of the Light spellbook evidence frontier
+
+- Commit: `58965925cfe09552e9e5a4e22ff3d2cae86cbd69` — `test(ability): audit Child of Light spell wire`.
+  - Hardened the old Child smoke evidence into exact corpus assertions and added a raw server-spellbook/status-wire probe, without changing runtime/registry semantics.
+  - Hosted Ability Windows run `31647277552`: **FAIL** because the probe's tentative literal raw-school assumption `light` was contradicted by the corpus: zero spellbook entries used that token.
+
+- Commit: `87c661aadcbcfd1b9ffd750aef20c6e9418e4c89` — `test(ability): inventory Child of Light spellbook schools`.
+  - Added a school-token inventory and locked the failed `light` token assumption as a negative protocol fact instead of replacing it with a guessed spell list.
+  - Authoritative hosted Ability Windows run `31647544114`: **PASS**; check-suite `85854980801` completed with conclusion `success` on the exact SHA.
+  - Pinned Child baseline: 866 battles, 108 carrier battles, 137 carriers, one exact server tooltip statement across 121 battles, 5634 decisions and 206 carrier-targeted SPECIAL records.
+  - Raw spellbook inventory in carrier battles is 651 actors / 2031 entries with exact tokens `neutral 1405`, `air 275`, `earth 144`, `cold 141`, `other 31`, `fire 18`, `nt 17`; no `light` token exists.
+  - `neutral` mixes candidate Light-like and Dark-like status identities plus Raise Dead, so the field cannot independently classify game Light school. No Child runtime/registry promotion is made.
+  - Next evidence step is independent decoded `bm_tooltips`/server metadata for per-spell school identity; if absent, Child will close for this pass at that precise evidence blocker.

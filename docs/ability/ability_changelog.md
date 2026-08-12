@@ -162,3 +162,19 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Authoritative hosted Ability Windows CI run `31645840641`: **PASS / combined status `HWM / Ability = success`** on the exact functional SHA.
   - Validated ceiling is unchanged but now corpus-locked: `Sent` is not Spider-specific and is not safely Entroots-exclusive because of the two Netshooter controls. No second Spider runtime effect and no Spider registry promotion are justified.
   - Spider is closed for this evidence pass at a precise protocol blocker. Structural decoding of the second UID may be pursued only as a separate protocol-level package with its own negative controls and Windows validation, independently of ability ownership.
+
+### Child of the Light spellbook-school probe
+
+- Commit: `58965925cfe09552e9e5a4e22ff3d2cae86cbd69` — `test(ability): audit Child of Light spell wire`.
+  - Replaced the old Child smoke gate with exact known corpus assertions and added a server-spellbook/status-wire discriminator, without touching replay/runtime/registry semantics.
+  - Hosted Ability Windows run `31647277552`: **FAIL** in the Child atomic node because the exploratory assumption that the raw seven-token spellbook school field was literally `light` was false: the corpus contained zero such spellbook actors/entries.
+  - The failure was treated as protocol evidence rather than worked around by hardcoding a Light spell list or weakening the assertion.
+
+- Commit: `87c661aadcbcfd1b9ffd750aef20c6e9418e4c89` — `test(ability): inventory Child of Light spellbook schools`.
+  - Added a raw school-token inventory and explicitly pinned the previous literal-`light` assumption as false.
+  - Authoritative hosted Ability Windows run `31647544114`: **PASS**; check-suite `85854980801` completed with conclusion `success` on the exact SHA.
+  - Exact Child baseline is now pinned: 866 battle dirs, 108 carrier battles, 137 carriers, one 121-battle tooltip statement, 5634 decisions in carrier battles and 206 carrier-targeted SPECIAL records.
+  - Raw spellbook inventory in carrier battles is exactly 651 actors / 2031 entries with school tokens `neutral 1405`, `air 275`, `earth 144`, `cold 141`, `other 31`, `fire 18`, `nt 17`; there is no `light` token.
+  - The `neutral` bucket mixes `fast/bless/righteous_might/stoneskin` with `slow/curse/confusion/suffering`, plus `raisedead`; `nt` also mixes harmful statuses with `resurrection2`. Therefore the raw school field cannot safely identify game Light-school status spells.
+  - Status-wire controls currently comprise 158 source+code groups hitting Child carriers, 146 with positive effective cost and 12 zero-cost follow-ups; all positive-cost groups have a source spellbook. Direct-damage controls are exactly three records (`ltn 2`, `mfs 1`).
+  - No Child runtime copy rule or registry promotion is made. The next evidence layer is independent decoded `bm_tooltips`/server metadata for per-spell school identity; absent such metadata, Child closes for this pass at that precise blocker rather than from a guessed spell taxonomy.
