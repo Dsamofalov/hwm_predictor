@@ -435,6 +435,23 @@ def _validated_mighty_slam(command: "LowLevelCommand", entities: dict[int, RawEn
     )
 
 
+def _validated_gribbomb_bomb(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the exact observed Gribbomb self-destruction marker.
+
+    Whole-corpus evidence contains exactly one carrier-sourced `Sbom` activation and the
+    server tooltip independently defines it as self-destruction. This validator proves
+    only the carrier removal transition. Neighbor DAMAGE records remain authoritative for
+    their observed HP deltas; no predictive Earth-damage formula is inferred here.
+    """
+    if command.opcode != "SPECIAL" or command.code != "bom" or command.actor_uid is None:
+        return False
+    actor = entities.get(int(command.actor_uid))
+    return bool(
+        actor and actor.alive and "gribbomb" in set(actor.abilities)
+        and command.raw == f"Sbom{int(command.actor_uid):03d}000000000000"
+    )
+
+
 def _validated_mana_feed(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
     """Validate the corpus-proven Smfd Mana Feed record.
 
@@ -521,6 +538,8 @@ def _decision_semantic_unresolved_flags(
             unresolved = not exact
         elif c.opcode == "SPECIAL" and c.code == "msl":
             unresolved = not _validated_mighty_slam(c, entities)
+        elif c.opcode == "SPECIAL" and c.code == "bom":
+            unresolved = not _validated_gribbomb_bomb(c, entities)
         elif c.opcode == "SPECIAL" and c.code == "mfd":
             unresolved = not _validated_mana_feed(c, entities)
         elif c.opcode == "SPECIAL" and c.code == "rgl":
@@ -1601,6 +1620,13 @@ def _apply_command(
         actor = entities[int(c.actor_uid)]
         actor.effects["msl"] = "observed:Smsl cooldown"
         actor.effect_turns["msl"] = 3
+    elif c.opcode == "SPECIAL" and c.code == "bom" and _validated_gribbomb_bomb(c, entities):
+        # Exact observed self-destruction only. Adjacent target HP deltas are still applied
+        # exclusively from the following raw DAMAGE records; no Earth-damage formula lives here.
+        actor = entities[int(c.actor_uid)]
+        actor.count = 0
+        actor.top_hp = 0
+        actor.alive = False
     elif c.opcode == "SPECIAL" and c.code == "mfd" and _validated_mana_feed(c, entities):
         actor=entities[int(c.actor_uid)]; hero=entities[int(c.target_uid)]; amount=int(c.amount or 0)
         actor.mana=max(0,actor.mana-amount); hero.mana+=amount

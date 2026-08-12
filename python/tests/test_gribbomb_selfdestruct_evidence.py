@@ -1,14 +1,26 @@
 from __future__ import annotations
 
+import copy
 import json
 import warnings
 from pathlib import Path
 
 from hwm_solver.ability.gribbomb_selfdestruct_evidence import analyze_corpus
+from hwm_solver.protocol.replay import (
+    _apply_command,
+    _validated_gribbomb_bomb,
+    parse_commands,
+    parse_replay,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / "hwm_battles"
+
+
+def _battle_dir(battle_id: str) -> Path:
+    root = CORPUS / "battles" if (CORPUS / "battles").is_dir() else CORPUS
+    return root / battle_id
 
 
 def test_gribbomb_bom_activation_whole_corpus():
@@ -43,11 +55,11 @@ def test_gribbomb_bom_activation_whole_corpus():
         (13, 26354),
     ]
 
-    # Explicitly preserve the current runtime boundary: generic replay still leaves the
-    # carrier alive because the self-destruction has no ordinary DAMAGE-to-self record.
-    # A later replay-core package must flip this gate instead of silently overclaiming exactness.
-    assert report["replay_actor_alive_after"] == 1
-    assert example["actor_alive_after_generic_replay"] is True
+    # The carrier self-destruction is now an exact observed replay transition. The three
+    # target DAMAGE records above remain authoritative observed deltas; no predictive Earth
+    # damage formula is synthesized from the single activation.
+    assert report["replay_actor_alive_after"] == 0
+    assert example["actor_alive_after_generic_replay"] is False
 
     warnings.warn(
         "GRIBBOMB_BOM_EVIDENCE "
@@ -55,14 +67,43 @@ def test_gribbomb_bom_activation_whole_corpus():
     )
 
 
+def test_gribbomb_bom_replay_kills_only_validated_carrier():
+    replay = parse_replay(_battle_dir("1632859583"))
+    decision = next(
+        d for d in replay.decisions
+        if d.actor_uid == 5 and "bom" in d.special_codes
+    )
+    bomb = next(c for c in parse_commands(decision.raw) if c.opcode == "SPECIAL" and c.code == "bom")
+
+    assert _validated_gribbomb_bomb(bomb, decision.state_before.entities)
+    actor_after = decision.state_after.entities[5]
+    assert actor_after.alive is False
+    assert actor_after.count == 0
+    assert actor_after.top_hp == 0
+
+    wrong_source = copy.deepcopy(decision.state_before.entities)
+    wrong_source[5].abilities = [a for a in wrong_source[5].abilities if a != "gribbomb"]
+    assert not _validated_gribbomb_bomb(bomb, wrong_source)
+    _apply_command(wrong_source, bomb)
+    assert wrong_source[5].alive is True
+
+    malformed = next(c for c in parse_commands("Sbom005000000000001") if c.opcode == "SPECIAL")
+    malformed_state = copy.deepcopy(decision.state_before.entities)
+    assert not _validated_gribbomb_bomb(malformed, malformed_state)
+    _apply_command(malformed_state, malformed)
+    assert malformed_state[5].alive is True
+
+
 def test_gribbomb_non_bom_deaths_are_not_selfdestruct_candidates():
     report = analyze_corpus(CORPUS)
     assert report["parse_errors"] == []
-    # The three active-carrier deaths visible to the current generic replay are ordinary
-    # attack/retaliation deaths with explicit external damage, not Gribbomb activations.
-    assert report["active_actor_deaths"] == 3
-    assert report["active_actor_deaths_no_external_damage"] == 0
-    assert report["active_actor_deaths_with_outgoing_damage"] == 3
+    # Generic replay now contains four Gribbomb-carrier deaths: the one exact Sbom
+    # self-destruction plus three ordinary attack/retaliation deaths with explicit external
+    # damage. Removing the one validated bomb leaves exactly the same three negative controls.
+    assert report["active_actor_deaths"] == 4
+    assert report["active_actor_deaths_no_external_damage"] == 1
+    assert report["active_actor_deaths_with_outgoing_damage"] == 4
+    assert report["active_actor_deaths"] - report["validated_bom_activations"] == 3
     assert report["externally_explained_deaths"] == 3
     assert len(report["external_death_examples"]) == 3
     assert all(row["external_damage"] for row in report["external_death_examples"])
