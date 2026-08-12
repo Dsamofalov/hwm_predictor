@@ -122,3 +122,18 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
 - Recomputed from the synchronized current risk report: Taunt is the highest-priority currently actionable unfinished ability after excluding already documented semantic/substrate blockers.
 - Reuse the existing Taunt evidence auditor. Its current regression is only a smoke gate and must be strengthened to exact corpus counts and raw contexts before any semantic promotion.
 - A final attack landing on a Taunt carrier is not itself a proc discriminator. Do not infer an original intended target from the damage destination; require carrier-specific raw evidence before claiming redirect behavior or probability.
+
+### Taunt strict redirect-evidence boundary
+
+- Commit: `e7dffd54b1777766e4916f7b6f5f548e25e2cfab` — `test(ability): pin Taunt redirect evidence boundary`.
+  - Replaced the old smoke-only Taunt regression with exact whole-corpus gates and explicit target-source special-code contexts.
+  - Pinned 866 battle directories, 24 Taunt carrier battles, 25 carrier entities, 24/24 identical Taunt tooltip descriptions, 712 attacks in carrier battles, 169 carrier-plus-adjacent-ally opportunity states, 78 attacks ending on carriers, 31 carrier-target attacks with an adjacent ally, and 37 attacks ending on an adjacent ally.
+  - The tooltip states only a chance to redirect an attack aimed at a neighboring friendly unit; it provides no numeric probability.
+  - `ra2`/`ral` occur as target-source reactions in both carrier-target and adjacent-ally control contexts, so they are not accepted as a Taunt proc discriminator. Final DAMAGE destination is likewise not used to infer the attacker's original intended target.
+  - Hosted Windows run `31639091346`: **FAIL** only in the new negative-control node because two handwritten expected control counts were wrong (`ra2` adjacent-ally `19` vs observed `18`; `ral` adjacent-ally `13` vs observed `9`). The corpus/tooltip/geometry gate itself passed.
+
+- Commit: `7f143d9050d42a20300be3a54511cdae16682f0e` — `fix(ability): correct Taunt reaction control counts`.
+  - Corrected only those two expected target-source control counts (`ra2 19 -> 18`, `ral 13 -> 9`); no Taunt semantic, corpus, geometry, or negative-discriminator gate was weakened.
+  - Authoritative hosted Windows run `31639884205` on branch `ability`: **PASS / conclusion `success`** on the exact functional SHA.
+  - Validated Taunt ceiling: exact evidence now pins the server tooltip, neighboring-friendly geometry, opportunity counts, and absence of a usable raw redirect-proc label in the observed corpus. A numeric redirect probability and per-attack proc outcome remain unobservable from current evidence.
+  - No runtime or registry promotion is made. Taunt remains `unresolved` as predictive/search semantics and is closed for this pass as a precise evidence blocker rather than being modeled from final-target heuristics.
