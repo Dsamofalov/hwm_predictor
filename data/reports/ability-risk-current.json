@@ -1,10 +1,10 @@
 {
   "heldout_battles": 174,
   "sampled_player_states": 1748,
-  "risk_mean": 0.22430819893858012,
-  "risk_p50": 0.21389329187918385,
-  "risk_p90": 0.3753832658831461,
-  "risk_p99": 0.5468762843538735,
+  "risk_mean": 0.21743995495103047,
+  "risk_p50": 0.2041992806283795,
+  "risk_p90": 0.36754863616918637,
+  "risk_p99": 0.5468762843538734,
   "top_contributors": [
     {
       "code": "caster",
@@ -27,19 +27,6 @@
       "weighted_contribution": 1140574.189500004,
       "categories": [
         "offense"
-      ]
-    },
-    {
-      "code": "cripplingwound",
-      "name": "Калечащее ранение.",
-      "support": "learned_damage",
-      "risk_weight": 0.75,
-      "state_occurrences": 312,
-      "weighted_contribution": 633228.9783750003,
-      "categories": [
-        "movement",
-        "offense",
-        "control"
       ]
     },
     {
@@ -141,17 +128,6 @@
       ]
     },
     {
-      "code": "gribbomb",
-      "name": "Взрыв спор.",
-      "support": "unresolved",
-      "risk_weight": 0.62,
-      "state_occurrences": 38,
-      "weighted_contribution": 254058.62202000007,
-      "categories": [
-        "offense"
-      ]
-    },
-    {
       "code": "taunt",
       "name": "Задира.",
       "support": "learned_damage",
@@ -210,6 +186,19 @@
       "weighted_contribution": 214464.5583749998,
       "categories": [
         "identity"
+      ]
+    },
+    {
+      "code": "cripplingwound",
+      "name": "Калечащее ранение.",
+      "support": "partial_exact",
+      "risk_weight": 0.25,
+      "state_occurrences": 312,
+      "weighted_contribution": 211076.32612499985,
+      "categories": [
+        "movement",
+        "offense",
+        "control"
       ]
     },
     {
@@ -487,6 +476,17 @@
       "weighted_contribution": 112833.17381250011,
       "categories": [
         "movement"
+      ]
+    },
+    {
+      "code": "bravery",
+      "name": "Храбрость.",
+      "support": "learned_damage",
+      "risk_weight": 0.25,
+      "state_occurrences": 241,
+      "weighted_contribution": 112029.27974999991,
+      "categories": [
+        "identity"
       ]
     }
   ]
