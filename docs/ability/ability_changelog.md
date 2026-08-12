@@ -152,3 +152,13 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Two additional nonzero sources carry `alive,netshooter,nopenalty,rangepenalty,shooter` with neither `spider` nor `entroots`, so the raw `ent` code is not promoted to an Entroots-exclusive semantic label either. It is treated only as a shared immobilization/entangle wire substrate until further evidence.
   - Zero-source records total 315 and retain a target UID; they are evidence for lifecycle/clear-style wire behavior, not a second Spider mechanic.
   - Runtime/registry boundary: **no Spider runtime effect or registry promotion is created.** The next safe step is to lock these exact corpus counts as protocol tests, then separately consider structural `ent` target decoding without assigning ability ownership.
+
+### Spider / `Sent` exact corpus contract
+
+- Commit: `1744354e79713569f7598e424f890801db88c8d5` — `test(ability): pin Spider Sent wire corpus`.
+  - Replaced exploratory lower-bound assertions with exact corpus cardinalities and exact source/target controls: 866 battle dirs, 89 initial Spider carriers, 182 `ent` battles, 806 `Sent` records, payload length/trailer invariants, 315 zero-source records, 491 nonzero-source records, and exact `405 / 84 / 2` source-class split.
+  - Pinned exact Spider/source ability sets and required the second UID to remain nonzero and present in replay state before/after for 806/806 records.
+  - The parser gap remains explicit and intentional in this package: first UID maps to actor for 806/806, while `target_uid` remains absent for 806/806. No parser/runtime/registry semantic was changed.
+  - Authoritative hosted Ability Windows CI run `31645840641`: **PASS / combined status `HWM / Ability = success`** on the exact functional SHA.
+  - Validated ceiling is unchanged but now corpus-locked: `Sent` is not Spider-specific and is not safely Entroots-exclusive because of the two Netshooter controls. No second Spider runtime effect and no Spider registry promotion are justified.
+  - Spider is closed for this evidence pass at a precise protocol blocker. Structural decoding of the second UID may be pursued only as a separate protocol-level package with its own negative controls and Windows validation, independently of ability ownership.

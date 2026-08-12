@@ -22,7 +22,7 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 - Commit: `f98ea913be9331ca393c49df82b2025303956f92` — `feat: integrate ability evidence snapshot with atomic CI`.
   - Recreated the final ability-owned state directly on top of current `main` instead of merging the divergent raw `ability` history.
-  - Imported `python/hwm_solver/ability/**`, matching evidence regressions, ability ownership/status documentation, and the evidence-backed `cripplingwound -> partial_exact` registry classification.
+  - Imported `python/hwm_solver/ability/**`, matching evidence regressions, registry state, ability ownership/status documentation, and the evidence-backed `cripplingwound -> partial_exact` registry classification.
   - Preserved current main-owned planner, M11/evaluation, daemon/runtime, extension, general CI, specification, and report files rather than taking their divergent ability-branch versions.
   - Imported the ability-owned C++ test state with the Windows/MSVC test-only fixes: Mighty Slam pointers are reacquired after `vector::push_back`, the canonical `frightfulaura` tag is used, and temporary files use `std::filesystem::temp_directory_path()`.
   - Added a minimal CMake target for an ability case runner and a dedicated hosted-Windows atomic ability workflow.
@@ -134,3 +134,13 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Spider attribution is disproved: all 89 Spider carriers also have `entroots`, while 405 nonzero-source `Sent` records come from `entroots` sources **without** Spider versus 84 from sources carrying both.
   - Two more nonzero `Sent` sources carry `netshooter` with neither Spider nor Entroots, so raw `ent` is treated as a shared immobilization/entangle wire substrate rather than an Entroots-exclusive ability label.
   - No Spider runtime effect or registry promotion was added. The next safe layer is strict exact corpus locking, followed only then by a separate structural parser-target decision that remains independent of ability ownership.
+
+### Spider / `Sent` exact corpus contract
+
+- Commit: `1744354e79713569f7598e424f890801db88c8d5` — `test(ability): pin Spider Sent wire corpus`.
+  - Hardened the exploratory wire evidence into exact corpus cardinality, source-class, source-ability-set, target-presence and parser-gap assertions without changing parser/runtime/registry semantics.
+  - Exact locked population remains 866 battle dirs, 89 initial Spider carriers, 182 `ent` battles and 806 `Sent` records with `source3 + target3 + 000000000` layout; source classes are exactly 405 Entroots-without-Spider, 84 Spider+Entroots and 2 neither.
+  - The second UID is nonzero and state-resolvable for 806/806 records, while current parser behavior remains explicitly `target_uid=None` for 806/806.
+  - Authoritative hosted Ability Windows CI run `31645840641`: **PASS / combined status `HWM / Ability = success`** on the exact functional SHA.
+  - Semantic ceiling is unchanged and now strict-regression protected: raw `Sent` is not Spider-specific and is not safely Entroots-exclusive because of the Netshooter controls. No Spider runtime effect or registry promotion is created.
+  - Any structural target decode must be a separate protocol-level functional package with independent negative controls and hosted Windows validation; it must not be used to manufacture Spider ownership.
