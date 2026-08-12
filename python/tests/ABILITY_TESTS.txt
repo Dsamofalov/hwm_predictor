@@ -28,6 +28,7 @@ python/tests/test_shieldguard_evidence.py
 python/tests/test_shootbash_evidence.py
 python/tests/test_six_heads_evidence.py
 python/tests/test_spider_evidence.py
+python/tests/test_spider_wire_evidence.py
 python/tests/test_stonegarden_evidence.py
 python/tests/test_taunt_evidence.py
 python/tests/test_teleport_evidence.py
