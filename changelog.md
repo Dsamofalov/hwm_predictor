@@ -34,6 +34,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `1b4d8f4c6ae0564c0b19b99c269d028bb40e4c21` — `test: trace overlap introduction lineage`.
   - Added an exact replay lineage audit that records every newly introduced overlap with battle/decision identity, actor/action, raw decision payload, SPECIAL ownership markers, and the colliding entities after the decision.
   - Extended the existing Geometry Evidence artifact with `overlap-lineage-audit.json`, including the latest introduction event responsible for every final overlap pair. This changes no decoder or simulator semantics and is intended to drive the next narrow evidence-backed geometry correction.
+- Commit: `8b384270e1bcda5a4d06e2bb90ee4007e8ebb18a` — `test: expose pre-overlap repair evidence`.
+  - Extended overlap lineage evidence with the colliding pair and actor state before each introduction, the first physical damage target, raw-destination blockers, and whether the actor's prior canonical anchor was already melee-adjacent to that target.
+  - The added fields are diagnostic only: decoder/simulator semantics and acceptance gates are unchanged. They distinguish invariant-preserving marker suppression from cases that require a separately proven landing or SPECIAL-specific mechanic.
 
 ## 2026-08-12
 
