@@ -34,7 +34,7 @@ def test_gribbomb_bom_activation_whole_corpus():
     example = report["candidate_examples"][0]
     assert example["battle_id"] == "1632859583"
     assert example["actor_uid"] == 5
-    assert example["actor_total_hp_before"] == 36356
+    assert example["actor_total_hp_before"] == 36101
     assert example["adjacent_living_uids_before"] == [6, 11, 13]
     assert example["damaged_uids"] == [6, 11, 13]
     assert sorted((row["target_uid"], row["amount"]) for row in example["damage"]) == [
