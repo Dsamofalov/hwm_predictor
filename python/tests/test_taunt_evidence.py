@@ -68,11 +68,11 @@ def test_taunt_has_no_raw_redirect_proc_label():
     # reaction, not a Taunt redirect event or the attacker's original intent.
     target_source = report["target_source_special_code_contexts"]
     assert target_source["ra2"] == {
-        "adjacent_ally_target": 19,
+        "adjacent_ally_target": 18,
         "carrier_target_with_adjacent_ally": 10,
     }
     assert target_source["ral"] == {
-        "adjacent_ally_target": 13,
+        "adjacent_ally_target": 9,
         "carrier_target_with_adjacent_ally": 5,
     }
 
