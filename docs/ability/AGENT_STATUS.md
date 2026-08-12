@@ -6,74 +6,66 @@ Source lane: `ability`
 Integration branch: `integration/ability-snapshot-20260812`
 Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
-Last fully green executable ability run: **`31607886774` — PASS**
-Current functional candidate: **`b6b27633154f12588071a3e94145308aceb57451` — validation failed on one new assertion**
-Current hosted Windows run: **`31621278975` — FAIL expected**
+Current validated functional ability SHA: **`d04999b03a094e637223ec7925b3071e50e36ecf`**
+Authoritative hosted Windows run: **`31621756446` — PASS, 86/86 atomic jobs**
 
 ## Resumed ability-development governance
 
-Current resumed-development documentation commits:
-
-- `7200ec0f24157ae545f1798c76036f9d26dfedc3` — created the dedicated `docs/ability/ability_changelog.md` journal;
-- `a4f359ccfcf9a3a8133986f6e51f441e4c7cdd29` — corrected the canonical contract at `docs/ABILITY_AGENT_TZ.md`, where mandatory maintenance of the dedicated ability changelog is now the first/highest-priority rule.
-
-The mistakenly created `docs/ability/ABILITY_AGENT_TZ.md` is now only a compatibility pointer to `docs/ABILITY_AGENT_TZ.md`; it is not a second contract.
+- `7200ec0f24157ae545f1798c76036f9d26dfedc3` created the dedicated `docs/ability/ability_changelog.md` journal.
+- `a4f359ccfcf9a3a8133986f6e51f441e4c7cdd29` corrected the canonical contract at `docs/ABILITY_AGENT_TZ.md`, where mandatory maintenance of the dedicated ability changelog is now the first/highest-priority rule.
+- The mistakenly created `docs/ability/ABILITY_AGENT_TZ.md` is only a compatibility pointer to `docs/ABILITY_AGENT_TZ.md`; it is not a second contract.
 
 ## Current Gribbomb evidence package
 
-Functional commit `b6b27633154f12588071a3e94145308aceb57451` changed the self-destruct evidence probe from a generic death heuristic to the raw carrier-only `Sbom` marker.
+Functional commits:
 
-Hosted run `31621278975` established before the failing assertion:
+- `b6b27633154f12588071a3e94145308aceb57451` — changed the self-destruct evidence probe from a generic death heuristic to the raw carrier-only `SPECIAL:bom` marker; first hosted run `31621278975` exposed one incorrect handwritten HP expectation.
+- `d04999b03a094e637223ec7925b3071e50e36ecf` — corrected only that expected HP to the replay-derived value `36101`; hosted run `31621756446` completed successfully.
+
+Validated whole-corpus evidence on `d04999b...`:
 
 - 866 corpus battle directories;
 - 7 Gribbomb carrier battles;
-- exactly 1 validated carrier `Sbom` activation;
-- exactly 3 living adjacent targets and 3 outgoing damage records;
+- exactly 1 carrier `Sbom` activation and 1/1 valid raw marker;
+- exactly 3 living adjacent targets and exactly 3 outgoing damage records;
 - exact adjacent target-set match: 1/1 activation;
 - 0 missing adjacent targets and 0 non-adjacent extra targets;
-- the failing handwritten HP expectation was `36356`; replay-derived pre-activation HP is `36101`.
+- pre-activation carrier total HP: `36101`;
+- observed damage: uid 6 = `36101`; uid 11 = `26354`; uid 13 = `26354`;
+- observed damage/HP ratios: `1.000` once and `0.730` twice;
+- 3 other active-carrier deaths are all explicitly externally damaged and therefore are not self-destruct candidates;
+- generic replay still reports the `Sbom` carrier alive after the activation because the self-destruction has no ordinary DAMAGE-to-self record.
 
-The next functional correction changes only that incorrect expected HP. Generic replay still leaves the carrier alive after `Sbom`, so no registry promotion is claimed yet. The predictive Earth-damage formula remains unresolved because the single activation contains target-dependent damage ratios.
+Semantic boundary: the raw activation discriminator and observed adjacent target set are exact replay evidence. Predictive Earth-damage magnitude remains unresolved because the single activation exhibits target-dependent deltas. No registry promotion is claimed until replay can apply the carrier self-destruction exactly without inventing the target-damage formula.
 
 ## Integration state
 
-The divergent `ability` history is **not** merged into `main`. Instead, the final ability-owned state was recreated on top of the current `main` tree and validated there.
+The divergent raw `ability` history is **not** merged into `main`. The canonical lane continues from the integrated ability snapshot while preserving current main-owned planner, M11/evaluation, daemon/runtime, extension, general CI, specification, and report surfaces.
 
-This keeps main-owned planner, M11/evaluation, daemon/runtime, extension, general CI, specification, and report changes from current `main` intact while importing only the ability lane's owned results and minimal integration hooks.
-
-The snapshot includes:
+The ability snapshot includes:
 
 - `python/hwm_solver/ability/**` evidence and analysis modules;
-- the corresponding ability/evidence Python regression tests;
-- the explicit `cripplingwound -> partial_exact` registry classification backed by the existing evidence package;
-- the ability-owned C++ test tree with the Windows/MSVC test-only fixes for Mighty Slam pointer invalidation, canonical `frightfulaura`, and portable temporary paths;
-- a minimal CMake target for an ability case runner;
-- a dedicated hosted-Windows ability workflow.
-
-The snapshot deliberately does **not** import old one-shot integration scripts/workflows, divergent main-owned `ci.yml` changes, planner/M11 tooling, or stale general-spec/report edits from the old lane history.
+- corresponding ability/evidence Python regression tests;
+- the evidence-backed `cripplingwound -> partial_exact` registry classification;
+- ability-owned C++ regressions and Windows/MSVC fixes;
+- the dedicated hosted-Windows atomic ability workflow.
 
 ## Atomic test execution
 
-Ability CI follows `TESTS_CANON.md`:
+Ability CI follows `TESTS_CANON.md`: build once where appropriate, freeze exact inventories, and execute independent C++ test functions / pytest node IDs as separate jobs. Atomicity and exact coverage are correctness requirements; matrix width and worker count are scheduler details.
 
-- C++ is built once as an immutable artifact;
-- the runner freezes the exact C++ test-function inventory and exposes `--case <name>`;
-- each C++ test function is one independently runnable matrix job;
-- Python freezes exact pytest node IDs with `pytest --collect-only` from `python/tests/ABILITY_TESTS.txt`;
-- each collected pytest node is one independently runnable matrix job;
-- workflow-contract regressions verify inventory equality, uniqueness, and dynamic matrix plumbing;
-- no correctness rule depends on a fixed shard count, worker count, matrix width, or `max-parallel` value.
-
-Parallelism is therefore a scheduler optimization only; atomicity and exact coverage are the contract.
+Run `31621756446` on `d04999b...` expanded to **86 jobs** after the additional Gribbomb regression node and completed with workflow conclusion `success`.
 
 ## Preserved semantic boundaries
 
-- `cripplingwound` remains `partial_exact`: observed consequence is supported; speculative probability remains disabled.
+- `cripplingwound` remains `partial_exact`; speculative probability remains disabled.
 - `powerstrike` trigger prediction remains unresolved/learned rather than promoted to an exact speculative proc.
 - Aura of Fire Vulnerability remains evidence-only until a direct Fire-spell execution substrate exists.
-- Gribbomb now has a validated raw `Sbom` activation discriminator and exact observed adjacent target set, but runtime self-destruction and predictive Earth-damage magnitude remain unresolved.
-- Existing closed mechanics such as Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike are not reworked without contrary evidence.
+- Gribbomb now has an exact raw `Sbom` discriminator and exact observed adjacent target-set evidence, but generic replay self-destruction and predictive Earth-damage magnitude remain open.
+- Existing closed Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike mechanics are not reworked without contrary evidence.
 
 ## Next ownership state
 
-Correct the single Gribbomb expected-HP assertion, obtain a fully green hosted Windows run, then decide whether the self-destruction mutation can be integrated safely without speculating about predictive Earth damage. Taunt is the next high-impact evidence target; its raw `A<old_target><carrier>` records are a promising redirect discriminator that must be checked across the full corpus before any promotion.
+1. Audit Taunt `A<old_target><new_target>` collisions across the entire corpus to determine whether it is a carrier-specific redirect discriminator rather than a generic opcode.
+2. If the Taunt collision population is clean, add an evidence-backed exact redirect boundary while leaving unknown trigger probability unresolved.
+3. Revisit Gribbomb executable self-destruction only through a safe minimal replay hook; do not synthesize predictive Earth damage from the single observed activation.

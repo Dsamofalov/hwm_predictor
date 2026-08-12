@@ -56,3 +56,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Promoted raw carrier `SPECIAL:bom` to the primary evidence discriminator and added strict whole-corpus adjacency/target-set regression gates.
   - Hosted Windows run `31621278975` failed only on a handwritten expected pre-activation HP (`36356` vs replay-derived `36101`); the preceding discriminator and 3/3 adjacent-target assertions passed.
   - No runtime/registry promotion is claimed from the failed package; predictive Earth-damage magnitude remains unresolved.
+
+- Commit: `d04999b03a094e637223ec7925b3071e50e36ecf` — `fix(ability): use replay-derived Gribbomb pre-bomb HP`.
+  - Fixed only the incorrect expected pre-activation HP while keeping all strict discriminator, geometry, target-set, and negative-control assertions intact.
+  - Hosted Windows run `31621756446`: **PASS**, 86/86 atomic jobs on the exact functional SHA.
+  - Validated corpus evidence: 866 battle dirs, 7 carrier battles, 1/1 valid `Sbom`, 3/3 adjacent living targets hit, zero missing/extra targets, and 3 non-`Sbom` carrier deaths externally explained.
+  - Runtime self-destruction and predictive Earth-damage magnitude remain intentionally unresolved; no registry promotion is claimed yet.

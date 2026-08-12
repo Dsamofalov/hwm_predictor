@@ -60,3 +60,10 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Hosted Windows run `31621278975`: **FAIL** on the new atomic node because the manually entered expected carrier HP was `36356`, while replay-derived pre-activation HP is `36101`.
   - The failure does not invalidate the discriminator/target-set evidence; it identifies an incorrect handwritten expected value. No rerun is used as a substitute for fixing that value.
   - Runtime boundary remains unresolved: generic replay still leaves the carrier alive after `Sbom`, and predictive Earth-damage magnitude is not inferred from one activation.
+
+- Commit: `d04999b03a094e637223ec7925b3071e50e36ecf` — `fix(ability): use replay-derived Gribbomb pre-bomb HP`.
+  - Corrected only the bad expected pre-activation HP (`36356 -> 36101`); no structural evidence assertion was weakened.
+  - Hosted Windows run `31621756446`: **PASS**, 86/86 atomic jobs successful on this exact SHA.
+  - Whole-corpus gate: 866 battle dirs, 7 carrier battles, exactly 1 validated `Sbom`, exactly 3 adjacent living targets and 3 damage hits, exact target-set match 1/1, zero missing/extra targets, and all 3 non-`Sbom` carrier deaths externally explained.
+  - Observed damage deltas are `36101` to one adjacent same-owner stack and `26354` to each of two other-owner adjacent stacks; ratios `1.000` and `0.730` demonstrate that predictive Earth-damage magnitude cannot be inferred as a universal raw-HP delta from this single activation.
+  - Generic replay still leaves the carrier alive after the raw `Sbom`; therefore Gribbomb is not promoted in the registry yet. The next executable step is exact self-destruction replay handling without synthesizing predictive Earth damage.
