@@ -146,7 +146,7 @@ switch ($Mode) {
         if (-not (Test-Path $caseExe -PathType Leaf)) { throw "Downloaded ability case runner not found: $caseExe" }
         & $caseExe --case $CaseName
         Assert-NativeSuccess "Ability C++ case $CaseName"
-        Write-Host "HWM ABILITY WINDOWS C++ CASE $CaseName: PASS"
+        Write-Host "HWM ABILITY WINDOWS C++ CASE ${CaseName}: PASS"
     }
     'PythonInventory' {
         Bootstrap-PythonEnvironment
@@ -173,6 +173,6 @@ switch ($Mode) {
         Assert-WholeCorpus
         & $script:Python -m pytest -q --durations=5 $TestNode
         Assert-NativeSuccess "Ability Python case $TestNode"
-        Write-Host "HWM ABILITY WINDOWS PYTHON CASE $TestNode: PASS"
+        Write-Host "HWM ABILITY WINDOWS PYTHON CASE ${TestNode}: PASS"
     }
 }
