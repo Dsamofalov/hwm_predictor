@@ -29,6 +29,16 @@ FEATURE_NAMES = (
     "is_ranged_attack",
 )
 
+# Committed M11 evidence is compared exactly. BLAS-backed reductions can differ by
+# one or two final binary64 bits across otherwise equivalent Windows runners, so
+# selector coefficients and probabilities use an explicit, negligible precision
+# boundary before they become evidence or policy decisions.
+SELECTOR_CANONICAL_DECIMALS = 12
+
+
+def _canonical_selector_float(value: float) -> float:
+    return round(float(value), SELECTOR_CANONICAL_DECIMALS)
+
 
 @dataclass(frozen=True)
 class SelectorModel:
@@ -41,7 +51,8 @@ class SelectorModel:
         z = (np.asarray(features, dtype=np.float64) - self.mean) / self.scale
         logit = float(self.weights[0] + np.dot(self.weights[1:], z))
         logit = max(-40.0, min(40.0, logit))
-        return 1.0 / (1.0 + math.exp(-logit))
+        probability = 1.0 / (1.0 + math.exp(-logit))
+        return _canonical_selector_float(probability)
 
     def choose_generic(self, features: np.ndarray) -> bool:
         return self.probability_learned_worse(features) >= self.threshold
@@ -190,6 +201,7 @@ def fit_logistic_selector(
         grad = design.T @ (probs - y) / len(y)
         grad[1:] += l2 * weights[1:] / len(y)
         weights -= learning_rate * grad
+    weights = np.round(weights, decimals=SELECTOR_CANONICAL_DECIMALS)
     return mean, scale, weights
 
 
