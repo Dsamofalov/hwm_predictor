@@ -19,6 +19,12 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Added daemon defense-in-depth before session reset, raw hash/dedup, capture-time ordering, decoder publication, and revision bookkeeping, so a heartbeat cannot reset a battle, replace the last meaningful envelope, publish a canonical revision, or invalidate search.
   - Added a scrubbed `fixtures/live_closed_loop` snapshot/heartbeat/incremental-update regression and an independent `hwm-live-ingestion-tests` CTest asserting monotonic revision/hash behavior.
   - Extended the existing stale-cancellation integration to inject a heartbeat during an in-flight long search, assert unchanged revision/hash, then verify that the following real canonical publication still cancels the stale search.
+- Commit: `6066a4ca1e6051cb0949115737512d5321647857` — `fix: classify observed t= heartbeat frames`.
+  - Corrected the live fixture and stale-cancellation integration to the authenticated observed `t=<digits>` `battle.php` heartbeat shape instead of the earlier numeric-only surrogate.
+- Commit: `a0fc9119b2e257a08c3eeff1bbc446cf66248ce1` — `fix: keep heartbeat classifier evidence-strict`.
+  - Narrowed both MAIN-world and daemon heartbeat classification to exactly trimmed `t=<digits>` on `battle.php`/`battle_update`; bare numeric or otherwise unknown network payloads are no longer guessed away.
+  - Added a negative ingestion regression proving a bare numeric payload reaches normal capture and is retained as the last envelope rather than being classified as a heartbeat.
+  - Preserved the established snapshot -> heartbeat -> incremental regression, monotonic revision/hash assertions, and stale-search cancellation semantics without decoder/protocol changes.
 
 ### Exact decoder residual evidence
 
