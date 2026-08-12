@@ -522,9 +522,9 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         }
         return out;
     };
-    auto resolve_unique_melee_anchor=[&](const Entity& actor,const Entity& target,Cell raw)->Cell {
+    auto resolve_unique_melee_anchor=[&](const Entity& actor,const Entity& target,Cell raw,bool allow_noncolliding)->Cell {
         const Cell canonical=resolve_observed_big_anchor(actor,raw);
-        if(!anchor_collides(actor,raw)) return canonical;
+        if(!anchor_collides(actor,raw) && !allow_noncolliding) return canonical;
         if(anchor_legal(actor,canonical) && adjacent_at(actor,canonical,target)) return canonical;
         std::vector<Cell> landings;
         if(anchor_legal(actor,actor.anchor) && adjacent_at(actor,actor.anchor,target)) landings.push_back(actor.anchor);
@@ -543,6 +543,20 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             const auto code=text.substr(p+1,3);
             const bool code_ok=std::all_of(code.begin(),code.end(),[](unsigned char c){return std::isalnum(c)||c=='_'||c=='-';});
             if(code_ok && code!="def") return true;
+        }
+        return false;
+    };
+    auto has_future_other_active_damage_target=[&](size_t from,uint64_t actor_uid,uint64_t target_uid)->bool {
+        for(size_t p=from;p<text.size();){
+            if(text[p]=='C' && p+10<=text.size() && digits(text.substr(p+1,3))) return false;
+            if(text[p]=='d' && p+17<=text.size() && digits(text.substr(p+1,16))){
+                const uint64_t a=loose_int(text.substr(p+1,3));
+                const uint64_t t=loose_int(text.substr(p+4,3));
+                if(a==actor_uid && t!=target_uid) return true;
+                p+=17;
+                continue;
+            }
+            ++p;
         }
         return false;
     };
@@ -586,7 +600,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
             }
         }
     };
-    auto decide_attack_move=[&](uint64_t target_uid,bool future_special){
+    auto decide_attack_move=[&](uint64_t target_uid,bool future_special,bool future_other_active_damage_target){
         if(ctx.move_mode_decided) return;
         auto* actor=s.entity(ctx.actor_uid);
         auto* target=s.entity(target_uid);
@@ -613,7 +627,8 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         // Heroes are non-board actors in the supported PvE corpus.
         const bool ranged_marker=actor && ((actor->is_shooter && !adjacent) || actor->is_hero);
         if(actor&&target&&!ranged_marker&&!shooter_collision_marker&&!ctx.moves.empty()&&!ctx.saw_any_special&&!future_special){
-            ctx.moves.back().cell=resolve_unique_melee_anchor(*actor,*target,ctx.moves.back().cell);
+            ctx.moves.back().cell=resolve_unique_melee_anchor(
+                *actor,*target,ctx.moves.back().cell,!future_other_active_damage_target);
         }
         ctx.move_mode_decided=true;
         ctx.apply_actor_moves=!ranged_marker&&!shooter_collision_marker;
@@ -911,7 +926,10 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         }
         if(text[i]=='d'&&i+17<=text.size()&&digits(text.substr(i+1,16))){
             size_t n=17;known(n);uint64_t a=loose_int(text.substr(i+1,3)),t=loose_int(text.substr(i+4,3));int amount=loose_int(text.substr(i+7,10));
-            if(a==ctx.actor_uid){ctx.saw_active_damage=true;decide_attack_move(t,has_future_special(i+n));}
+            if(a==ctx.actor_uid){
+                ctx.saw_active_damage=true;
+                decide_attack_move(t,has_future_special(i+n),has_future_other_active_damage_target(i+n,a,t));
+            }
             if(auto*e=s.entity(t)){
                 apply_damage(*e,amount);
                 if(a==ctx.actor_uid&&ctx.saw_shieldbash_proc&&e->alive&&!has_ability(*e,"mechanical")){

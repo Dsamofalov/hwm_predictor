@@ -1332,10 +1332,20 @@ def _resolve_special_free_unique_melee_anchor(
     # those decisions remain owned by exact/ability-specific semantics.
     if any(c.opcode == "SPECIAL" for c in commands):
         return canonical
-    # Unique landing inference is allowed only when the raw anchor itself intersects a
-    # visible live stack. Non-colliding but surprising movement remains untouched.
-    if not _observed_anchor_blocked(state, actor, raw):
-        return canonical
+    raw_blocked = _observed_anchor_blocked(state, actor, raw)
+    if not raw_blocked:
+        # A non-colliding raw m-record is reinterpreted only for a single-target physical
+        # attack. Multi-target attacks can use the position marker for attack-side effects;
+        # moving them from the first DAMAGE record corrupts subsequent replay state.
+        damage_targets = {
+            int(c.target_uid)
+            for c in commands
+            if c.opcode == "DAMAGE"
+            and c.actor_uid == actor_uid
+            and c.target_uid is not None
+        }
+        if target_uid is None or damage_targets != {int(target_uid)}:
+            return canonical
     if _observed_can_place(state, actor, canonical) and _entities_adjacent(actor, canonical[0], canonical[1], target):
         return canonical
     landings = []

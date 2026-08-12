@@ -83,6 +83,11 @@ def test_stationary_shooter_marker_closes_heldout_melee_false_negative():
 
 def test_unique_near_raw_landing_recovers_observed_melee_actions():
     cases = [
+        # Corpus-wide audit found exactly these three additional single-target raw hints
+        # with one nearby legal/reachable target-adjacent landing (two train, one held-out).
+        ("1628210116", 20, 12, (9, 8)),
+        ("1631058267", 78, 19, (3, 2)),
+        ("1632694720", 27, 10, (9, 2)),
         ("1632715976", 92, 13, (10, 3)),
         ("1633140429", 27, 14, (7, 3)),
         ("1633877663", 55, 11, (11, 10)),
