@@ -1,0 +1,46 @@
+name: Ability Registry Regen Once
+
+on:
+  push:
+    branches: [ability]
+    paths:
+      - '.github/workflows/ability_registry_regen_once.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Regenerate canonical registry artifacts
+        run: |
+          python3 python/hwm_solver/knowledge/build_ability_registry.py \
+            data/catalog/generated_v4.json \
+            --out data/catalog/ability_registry.json \
+            --ability-damage models/ability_damage_model.csv \
+            --collateral models/collateral_model.csv \
+            --proc models/proc_model.csv \
+            --kill-trigger models/kill_trigger_model.csv
+          git diff --stat -- data/catalog/ability_registry.json data/catalog/ability_registry.csv
+          git diff --check -- data/catalog/ability_registry.json data/catalog/ability_registry.csv
+          if git diff --quiet -- data/catalog/ability_registry.json data/catalog/ability_registry.csv; then
+            echo 'Canonical regeneration produced no artifact changes.' >&2
+            exit 1
+          fi
+      - name: Commit canonical artifacts and remove one-shot workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/catalog/ability_registry.json data/catalog/ability_registry.csv
+          git rm .github/workflows/ability_registry_regen_once.yml
+          git commit -m 'chore(ability): regenerate ability registry artifacts'
+          git push origin HEAD:ability
+      - name: Validate exact artifact commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ability.yml --ref ability
