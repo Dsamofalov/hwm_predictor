@@ -5,7 +5,17 @@ import argparse
 import json
 from pathlib import Path
 
-from hwm_solver.protocol.replay import iter_battle_decisions, parse_commands
+from hwm_solver.evaluation.legal_coverage import supports_observed
+from hwm_solver.protocol.replay import (
+    _attack_move,
+    _entities_adjacent,
+    _observed_anchor_blocked,
+    _observed_can_place,
+    _observed_entity_by_uid,
+    _observed_reachable,
+    iter_battle_decisions,
+    parse_commands,
+)
 
 
 def cells_at(entity: dict, x: int | None = None, y: int | None = None) -> set[tuple[int, int]]:
@@ -79,22 +89,125 @@ def raw_destination_blockers(state: list[dict], actor_uid: int, destination: tup
     return out
 
 
+def blocked_special_free_melee_candidate(row: dict) -> dict | None:
+    if row.get("action_type") != "MELEE_ATTACK":
+        return None
+    commands = parse_commands(row["raw"])
+    if any(command.opcode == "SPECIAL" for command in commands):
+        return None
+
+    actor_uid = int(row["actor_uid"])
+    move = _attack_move(actor_uid, commands)
+    first_damage = next(
+        (
+            command
+            for command in commands
+            if command.opcode == "DAMAGE"
+            and command.actor_uid == actor_uid
+            and command.target_uid is not None
+        ),
+        None,
+    )
+    if move is None or move.x is None or move.y is None or first_damage is None:
+        return None
+
+    before = row["state_before"]
+    actor = _observed_entity_by_uid(before, actor_uid)
+    target_uid = int(first_damage.target_uid)
+    target = _observed_entity_by_uid(before, target_uid)
+    if actor is None or target is None:
+        return None
+
+    raw = (int(move.x), int(move.y))
+    start = (int(actor.get("x", 0)), int(actor.get("y", 0)))
+    if not _observed_anchor_blocked(before, actor, raw):
+        return None
+    if not _observed_can_place(before, actor, start):
+        return None
+    if not _entities_adjacent(actor, start[0], start[1], target):
+        return None
+
+    landings = [start]
+    for point in sorted(_observed_reachable(before, actor)):
+        if _entities_adjacent(actor, point[0], point[1], target):
+            landings.append(point)
+    landings = list(dict.fromkeys(landings))
+    near_raw = [
+        point
+        for point in landings
+        if max(abs(point[0] - raw[0]), abs(point[1] - raw[1])) <= 1
+    ]
+    damage_targets = sorted(
+        {
+            int(command.target_uid)
+            for command in commands
+            if command.opcode == "DAMAGE"
+            and command.actor_uid == actor_uid
+            and command.target_uid is not None
+        }
+    )
+    observed_ok, observed_reason = supports_observed(row)
+    resolved = (
+        [int(row["destination_x"]), int(row["destination_y"])]
+        if row.get("destination_x") is not None and row.get("destination_y") is not None
+        else [None, None]
+    )
+    blockers = raw_destination_blockers(before, actor_uid, raw)
+    actor_owner = int(actor.get("owner", 0))
+    for blocker in blockers:
+        blocker["same_owner_as_actor"] = int(blocker.get("owner", 0)) == actor_owner
+
+    return {
+        "battle": row["battle_id"],
+        "decision_index": int(row["decision_index"]),
+        "actor": entity_summary(before, actor_uid),
+        "first_damage_target": entity_summary(before, target_uid),
+        "damage_targets": damage_targets,
+        "single_damage_target": damage_targets == [target_uid],
+        "raw_marker": [raw[0], raw[1]],
+        "raw_destination_blockers": blockers,
+        "start_anchor": [start[0], start[1]],
+        "start_legal": True,
+        "start_adjacent_to_first_damage_target": True,
+        "target_adjacent_legal_landings": [[x, y] for x, y in landings],
+        "near_raw_target_adjacent_landings": [[x, y] for x, y in near_raw],
+        "near_raw_landing_count": len(near_raw),
+        "resolved_destination": resolved,
+        "semantic_unresolved_opcodes": list(row.get("semantic_unresolved_opcodes", [])),
+        "special_codes": list(row.get("special_codes", [])),
+        "observed_action_representable": bool(observed_ok),
+        "observed_action_reason": observed_reason,
+        "raw": row["raw"],
+    }
+
+
 def audit(corpus: Path) -> dict:
     root = corpus / "battles" if (corpus / "battles").is_dir() else corpus
     battles = sorted((d for d in root.iterdir() if d.is_dir() and d.name.isdigit()), key=lambda d: int(d.name))
     final_rows: list[dict] = []
     introduced_rows: list[dict] = []
+    blocked_marker_rows: list[dict] = []
 
     for battle in battles:
         previous: set[tuple[int, int]] = set()
         final: set[tuple[int, int]] = set()
         final_state: list[dict] | None = None
         introductions: dict[tuple[int, int], dict] = {}
+        battle_blocked_rows: list[dict] = []
         for row in iter_battle_decisions(battle):
             before = row["state_before"]
             after = row["state_after"]
             current = overlaps(after)
-            for pair in sorted(current - previous):
+            introduced = current - previous
+
+            candidate = blocked_special_free_melee_candidate(row)
+            if candidate is not None:
+                actor_uid = int(row["actor_uid"])
+                candidate["introduced_overlap_pairs"] = [list(pair) for pair in sorted(introduced)]
+                candidate["introduced_actor_overlap"] = any(actor_uid in pair for pair in introduced)
+                battle_blocked_rows.append(candidate)
+
+            for pair in sorted(introduced):
                 commands = parse_commands(row["raw"])
                 actor_uid = int(row["actor_uid"])
                 first_damage = next((
@@ -135,6 +248,14 @@ def audit(corpus: Path) -> dict:
             final = current
             final_state = after
 
+        for candidate in battle_blocked_rows:
+            actor_uid = int(candidate["actor"]["uid"])
+            candidate["actor_in_final_overlap"] = any(actor_uid in pair for pair in final)
+            candidate["final_overlap_pairs_for_actor"] = [
+                list(pair) for pair in sorted(final) if actor_uid in pair
+            ]
+            blocked_marker_rows.append(candidate)
+
         if final and final_state is not None:
             final_rows.append({
                 "battle": battle.name,
@@ -152,6 +273,8 @@ def audit(corpus: Path) -> dict:
         "final_overlap_pairs": sum(len(x["final_pairs"]) for x in final_rows),
         "finals": final_rows,
         "all_overlap_introductions": introduced_rows,
+        "blocked_special_free_melee_marker_candidate_count": len(blocked_marker_rows),
+        "blocked_special_free_melee_marker_candidates": blocked_marker_rows,
     }
 
 
