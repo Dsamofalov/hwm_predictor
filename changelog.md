@@ -37,6 +37,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `8b384270e1bcda5a4d06e2bb90ee4007e8ebb18a` — `test: expose pre-overlap repair evidence`.
   - Extended overlap lineage evidence with the colliding pair and actor state before each introduction, the first physical damage target, raw-destination blockers, and whether the actor's prior canonical anchor was already melee-adjacent to that target.
   - The added fields are diagnostic only: decoder/simulator semantics and acceptance gates are unchanged. They distinguish invariant-preserving marker suppression from cases that require a separately proven landing or SPECIAL-specific mechanic.
+- Commit: `a654e4a04c9d618a1640706edc92af00f3610618` — `test: fix overlap adjacency evidence`.
+  - Corrected the pre-overlap adjacency diagnostic by retaining `alive`, hero, and hidden flags in summarized pre-state entities; the previous diagnostic boolean falsely treated every summarized entity as non-participating.
+  - No decoder/simulator semantics or acceptance gates changed. The corrected Geometry Evidence rerun is the evidence source for subsequent invariant-preserving repair decisions.
 
 ## 2026-08-12
 
