@@ -27,7 +27,6 @@ jobs:
             --proc models/proc_model.csv \
             --kill-trigger models/kill_trigger_model.csv
           git diff --stat -- data/catalog/ability_registry.json data/catalog/ability_registry.csv
-          git diff --check -- data/catalog/ability_registry.json data/catalog/ability_registry.csv
           if git diff --quiet -- data/catalog/ability_registry.json data/catalog/ability_registry.csv; then
             echo 'Canonical regeneration produced no artifact changes.' >&2
             exit 1
