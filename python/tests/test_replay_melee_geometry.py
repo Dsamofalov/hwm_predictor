@@ -104,3 +104,18 @@ def test_unique_near_raw_landing_recovers_observed_melee_actions():
         assert (row["destination_x"], row["destination_y"]) == destination
         ok, reason = supports_observed(row)
         assert ok, (battle_id, index, reason)
+
+def test_blocked_marker_uses_only_local_globally_unique_melee_landing():
+    battle = ROOT / "hwm_battles" / "battles" / "1633884421"
+    row = list(iter_battle_decisions(battle))[76]
+    assert row["actor_uid"] == 13
+    assert row["action_type"] == "MELEE_ATTACK"
+    assert row["special_codes"] == []
+    assert row["semantic_unresolved_opcodes"] == []
+    assert (row["destination_x"], row["destination_y"]) == (2, 20)
+    by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
+    assert (by_uid[13]["x"], by_uid[13]["y"]) == (2, 20)
+    assert not (_cells(by_uid[13]) & _cells(by_uid[18]))
+    ok, reason = supports_observed(row)
+    assert ok, reason
+

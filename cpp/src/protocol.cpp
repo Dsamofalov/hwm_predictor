@@ -534,7 +534,14 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         std::vector<Cell> near_raw;
         for(const Cell candidate:landings)
             if(std::max(std::abs(candidate.x-raw.x),std::abs(candidate.y-raw.y))<=1) near_raw.push_back(candidate);
-        return near_raw.size()==1 ? near_raw.front() : canonical;
+        if(near_raw.size()==1) return near_raw.front();
+        // A blocked raw marker may use the sole legal+reachable target-adjacent landing
+        // only within the next local evidence radius. Far unique landings remain unresolved
+        // because corpus regressions contain independent movement semantics at distance 3+.
+        if(anchor_collides(actor,raw) && landings.size()==1 &&
+           std::max(std::abs(landings.front().x-raw.x),std::abs(landings.front().y-raw.y))<=2)
+            return landings.front();
+        return canonical;
     };
     auto has_future_special=[&](size_t from)->bool {
         for(size_t p=from;p<text.size();++p){

@@ -58,6 +58,10 @@ int main() {
     // false overlap in this ordinary, special-free melee replay.
     CHECK(!has_overlap(replay_final("1633877663")));
 
+    // Corrected corpus evidence: the blocked ordinary marker is two cells from exactly one
+    // legal+reachable target-adjacent landing. Distance-3 movement-semantics controls stay unresolved.
+    CHECK(!has_overlap(replay_final("1633884421")));
+
     std::cout << "hwm-protocol-tests PASS\n";
     return 0;
 }

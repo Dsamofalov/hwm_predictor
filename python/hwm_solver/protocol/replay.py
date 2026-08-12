@@ -1362,6 +1362,10 @@ def _resolve_special_free_unique_melee_anchor(
     ]
     if len(near_raw) == 1:
         return near_raw[0]
+    # Mirror the C++ evidence boundary. The existing radius-1 rule remains stronger;
+    # the radius-2 extension requires a globally unique landing and a blocked raw marker.
+    if raw_blocked and len(landings) == 1 and max(abs(landings[0][0] - raw[0]), abs(landings[0][1] - raw[1])) <= 2:
+        return landings[0]
     return canonical
 
 
