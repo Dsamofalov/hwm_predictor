@@ -54,6 +54,9 @@ def entity_summary(state: list[dict], uid: int) -> dict | None:
         "x": int(e.get("x", 0)),
         "y": int(e.get("y", 0)),
         "count": int(e.get("count", 0)),
+        "alive": bool(e.get("alive", False)),
+        "is_hero": bool(e.get("is_hero", False)),
+        "is_hidden": bool(e.get("is_hidden", False)),
         "abilities": list(e.get("abilities", [])),
     }
 
