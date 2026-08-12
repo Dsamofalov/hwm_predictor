@@ -73,3 +73,13 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
 - User directive after the validated `Sbom` evidence block: **do not advance to the next ability yet**.
 - The next agent must continue Gribbomb from the exact replay self-destruction boundary documented above.
 - Taunt and the rest of the weighted queue remain deferred until Gribbomb is either safely promoted to the strongest evidence-supported classification or explicitly blocked by a precise remaining evidence/substrate gap.
+
+### Gribbomb observed replay self-destruction
+
+- Commit: `2e82c969e0da708f5bbda6973c92d662a638aa3c` — `fix(ability): replay Gribbomb Sbom self-destruction`.
+  - Added a strict replay validator for canonical `Sbom<actor>000000000000`, requiring a living server-declared `gribbomb` carrier.
+  - Exact observed replay now removes that carrier (`alive=false`, `count=0`, `top_hp=0`); wrong-source and malformed-marker negative controls remain alive.
+  - The three adjacent target HP deltas remain sourced exclusively from raw `DAMAGE` records; no predictive Earth-damage formula was added.
+  - Whole-corpus boundary remains 866 battle dirs, 7 carrier battles, exactly 1 validated `Sbom`, exactly 3 adjacent living targets and 3 raw damage hits, exact target-set match 1/1, and zero missing/non-adjacent extra targets.
+  - Hosted Windows run `31625718512`: **PASS, 87/87 atomic jobs** on this exact functional SHA, including the new replay-kill, wrong-source/malformed-marker, and non-`Sbom` death controls.
+  - Carrier self-destruction is now exact observed replay. Predictive Earth-damage magnitude remains unresolved, so no `exact_search`/fully exact promotion is justified.

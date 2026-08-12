@@ -62,3 +62,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Hosted Windows run `31621756446`: **PASS**, 86/86 atomic jobs on the exact functional SHA.
   - Validated corpus evidence: 866 battle dirs, 7 carrier battles, 1/1 valid `Sbom`, 3/3 adjacent living targets hit, zero missing/extra targets, and 3 non-`Sbom` carrier deaths externally explained.
   - Runtime self-destruction and predictive Earth-damage magnitude remain intentionally unresolved; no registry promotion is claimed yet.
+
+- Commit: `2e82c969e0da708f5bbda6973c92d662a638aa3c` — `fix(ability): replay Gribbomb Sbom self-destruction`.
+  - Validated canonical carrier-sourced `Sbom` as an exact observed replay self-removal transition and added wrong-source/malformed-marker negative controls.
+  - The carrier now becomes `alive=false`, `count=0`, `top_hp=0`; adjacent HP changes remain sourced only from raw `DAMAGE` records and no predictive Earth-damage formula was introduced.
+  - Hosted Windows run `31625718512`: **PASS, 87/87 atomic jobs** on the exact functional SHA.
+  - Gribbomb's carrier-removal boundary is exact observed replay; predictive collateral magnitude remains unresolved, so the next ability-owned step is a bounded registry/risk promotion rather than a fully exact claim.
