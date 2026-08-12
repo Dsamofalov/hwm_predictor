@@ -126,6 +126,18 @@ def test_python_matrix_is_derived_from_unique_collected_pytest_nodes():
     assert "GITHUB_OUTPUT" in script
 
 
+def test_registry_risk_manifest_tests_trigger_ability_ci():
+    workflow_text = WORKFLOW.read_text(encoding="utf-8")
+    registry_risk_tests = [
+        relpath for relpath in _manifest_paths() if relpath.endswith("_registry_risk.py")
+    ]
+
+    assert registry_risk_tests
+    # One generic path filter in push and one in pull_request keeps future registry-risk
+    # nodes trigger-covered without hard-coding individual ability names.
+    assert workflow_text.count("'python/tests/test_*_registry_risk.py'") == 2
+
+
 def test_parallelism_is_an_implementation_detail_not_a_numeric_contract():
     workflow_text = WORKFLOW.read_text(encoding="utf-8")
     script = SCRIPT.read_text(encoding="utf-8")
