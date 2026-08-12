@@ -106,3 +106,18 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Recomputed from the synchronized current risk report: Taunt is the highest-priority currently actionable unfinished ability after excluding already documented semantic/substrate blockers.
 - Taunt development resumes from the existing evidence auditor rather than restarting from scratch. Its current smoke regression must be upgraded to exact whole-corpus counts and raw special-code contexts before any semantic promotion.
 - Final-target observations alone are not accepted as Taunt proc evidence; a carrier-specific raw discriminator is required before claiming redirected targeting or proc probability.
+
+### Taunt strict evidence closure
+
+- Commit: `e7dffd54b1777766e4916f7b6f5f548e25e2cfab` — `test(ability): pin Taunt redirect evidence boundary`.
+  - Replaced the smoke-only Taunt regression with exact corpus/tooltip/geometry/opportunity gates and target-source special-code controls.
+  - Pinned 866 battle dirs, 24 carrier battles, 25 carriers, 24/24 identical tooltips, 712 attacks, 169 carrier-plus-adjacent-ally opportunity states, 78 attacks ending on carriers, 31 carrier-target attacks with an adjacent ally, and 37 attacks ending on an adjacent ally.
+  - Tooltip evidence states only a chance to redirect an attack aimed at a neighboring friendly unit and provides no numeric probability.
+  - `ra2`/`ral` target-source records appear in both carrier-target and adjacent-ally control contexts, so they are not accepted as Taunt proc labels; final target is not used to reconstruct original intent.
+  - Hosted Windows run `31639091346`: **FAIL** only because two handwritten expected negative-control counts were wrong (`ra2 19` vs observed `18`; `ral 13` vs observed `9`).
+
+- Commit: `7f143d9050d42a20300be3a54511cdae16682f0e` — `fix(ability): correct Taunt reaction control counts`.
+  - Corrected only the two bad expected counts (`ra2 19 -> 18`, `ral 13 -> 9`) and preserved all semantic/evidence gates.
+  - Authoritative hosted Windows run `31639884205` on branch `ability`: **PASS / workflow conclusion `success`** on the exact functional SHA.
+  - Taunt is therefore closed for this evidence pass at a precise blocker: server tooltip/geometry/opportunity facts are exact, but current corpus evidence does not expose a carrier-specific per-attack redirect discriminator or numeric probability.
+  - No runtime or registry promotion is made; Taunt remains `unresolved` for predictive/search semantics instead of introducing a heuristic from final attack targets.
