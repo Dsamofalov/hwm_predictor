@@ -90,6 +90,50 @@ def _damage_targets(row: dict) -> list[int]:
     return out
 
 
+def _ownership(row: dict) -> str:
+    commands = parse_commands(row["raw"])
+    has_special = any(c.opcode == "SPECIAL" for c in commands)
+    unresolved = bool(row.get("semantic_unresolved_opcodes"))
+    if not has_special:
+        return "special_free"
+    return "special_unresolved" if unresolved else "special_resolved"
+
+
+def _failure_detail(row: dict, reason: str) -> dict:
+    by = {int(e["uid"]): e for e in row["state_before"]}
+    actor = by.get(int(row["actor_uid"]))
+    original = int(row["target_uid"]) if row["target_uid"] is not None else None
+    landings = _landings(row, original) if original is not None else set()
+    raw_dest = None
+    near_raw: list[tuple[int, int]] = []
+    if row["destination_x"] is not None and row["destination_y"] is not None:
+        raw_dest = (int(row["destination_x"]), int(row["destination_y"]))
+        near_raw = sorted(
+            p for p in landings
+            if max(abs(p[0] - raw_dest[0]), abs(p[1] - raw_dest[1])) <= 1
+        )
+    return {
+        "battle": row["battle_id"],
+        "decision_index": int(row["decision_index"]),
+        "reason": reason,
+        "action_type": row["action_type"],
+        "ownership": _ownership(row),
+        "special_codes": list(row.get("special_codes", [])),
+        "semantic_unresolved_opcodes": list(row.get("semantic_unresolved_opcodes", [])),
+        "state_semantically_exact_core": bool(row.get("state_semantically_exact_core", False)),
+        "actor_uid": int(row["actor_uid"]),
+        "target_uid": original,
+        "destination": list(raw_dest) if raw_dest is not None else None,
+        "actor_creature_id": int(actor.get("creature_id", 0)) if actor else None,
+        "actor_abilities": list(actor.get("abilities", [])) if actor else [],
+        "original_target_landings": len(landings),
+        "near_destination_landings": len(near_raw),
+        "near_destination_candidates": [list(p) for p in near_raw],
+        "damage_targets": _damage_targets(row),
+        "raw": row["raw"],
+    }
+
+
 def audit(corpus: Path) -> dict:
     root = corpus / "battles" if (corpus / "battles").is_dir() else corpus
     battles = sorted(
@@ -109,6 +153,11 @@ def audit(corpus: Path) -> dict:
     heldout_recoverable_original: Counter[str] = Counter()
     heldout_recoverable_any_damage: Counter[str] = Counter()
     heldout_alternate_target_needed: Counter[str] = Counter()
+    ownership: Counter[str] = Counter()
+    special_codes: Counter[str] = Counter()
+    unresolved_opcodes: Counter[str] = Counter()
+    landing_cardinality: Counter[str] = Counter()
+    residuals: list[dict] = []
 
     for battle in battles:
         last_after: list[dict] | None = None
@@ -130,6 +179,13 @@ def audit(corpus: Path) -> dict:
                 heldout_matched += 1
                 continue
             heldout_failures[reason] += 1
+            detail = _failure_detail(row, reason)
+            residuals.append(detail)
+            ownership[detail["ownership"]] += 1
+            special_codes.update(detail["special_codes"])
+            unresolved_opcodes.update(detail["semantic_unresolved_opcodes"])
+            landing_cardinality[str(detail["near_destination_landings"])] += 1
+
             if row["action_type"] not in {"MELEE_ATTACK", "ATTACK"} or reason not in MELEE_FAILURES:
                 continue
             original = int(row["target_uid"]) if row["target_uid"] is not None else None
@@ -178,6 +234,13 @@ def audit(corpus: Path) -> dict:
             "using_any_actor_damage_target": dict(heldout_recoverable_any_damage),
             "alternate_damage_target_required": dict(heldout_alternate_target_needed),
         },
+        "heldout_failure_taxonomy": {
+            "ownership": dict(ownership),
+            "special_codes": dict(special_codes),
+            "semantic_unresolved_opcodes": dict(unresolved_opcodes),
+            "near_destination_landing_cardinality": dict(landing_cardinality),
+        },
+        "heldout_residuals": residuals,
     }
 
 

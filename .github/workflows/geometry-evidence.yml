@@ -1,0 +1,40 @@
+name: Geometry Evidence
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - changelog.md
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: geometry-evidence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  heldout-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Audit held-out residuals and final overlaps
+        run: |
+          mkdir -p build/validation
+          python scripts/decoder_geometry_audit.py hwm_battles --output build/validation/decoder-geometry-audit.json
+      - name: Publish exact evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: decoder-geometry-audit
+          path: build/validation/decoder-geometry-audit.json
+          if-no-files-found: error
