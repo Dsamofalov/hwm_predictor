@@ -19,6 +19,17 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Held-out basic-action representability improved from `5391/5481` to `5392/5481` (`98.3762%`), with exact failure inventory `90 -> 89`, no added or changed held-out failures, and unchanged Python final-overlap evidence at `17` battles / `17` pairs.
   - C++ protocol regression and the full-corpus structural-invalid budget (`14`) passed before promotion to `main`; the candidate also improved train representability by two actions without a partition regression.
 
+### Post-decoder evidence and hosted validation
+
+- Commit: `16998598ce3dc282bef76a9b29b27e83fba8bdf9` — `data: refresh M11 selector evidence`.
+  - The first standard Windows run after the decoder change (`31622628256`) passed Core and all functional Full gates but correctly failed committed-evidence verification because `dynamics-selector-gate.json` was stale after the replay-state shift.
+  - Regenerated exactly that selector evidence file on `windows-2022`; no other production or report file changed in the refresh commit.
+  - Follow-up standard hosted run `31624580974` on `16998598ce3dc282bef76a9b29b27e83fba8bdf9`: **Core PASS + Full PASS**, including the `invalid <= 14` full-corpus structural budget and exact M11 committed-evidence verification.
+  - Atomic Ability run `31622630092`: **PASS** on the same functional decoder checkpoint before the selector-only evidence refresh.
+- Commit: `7e646024cda8d4439420462d479e1a3ca007be85` — `docs: sync validated 2026-08-12 checkpoint [skip ci]`.
+  - Synchronized `SPEC.md`, its active status mirror, and `docs/MAIN_FRONT_STATUS.md` to the verified metrics: **852/866 structural-ready**, **795/866 semantic-safe**, **5392/5481 held-out representable**, and **14 final structural-invalid battles**.
+  - Final-only inventory confirms all 14 remaining structural failures are `overlap` only, with 16 C++ overlap pairs total; broader blocked-anchor and non-colliding fallback experiments were rejected because they worsened semantic representability or produced no gain.
+
 ### Atomic test execution canon
 
 - Commit: `d4424f5bc861f8eae58b0c6c723f99b8b3b58341` — `docs: define atomic test execution canon`.
