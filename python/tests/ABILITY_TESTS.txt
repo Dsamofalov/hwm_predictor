@@ -1,0 +1,35 @@
+# Canonical Python test-file surface owned by the ability integration lane.
+# CI collects exact pytest node IDs from these files and executes one node per job.
+python/tests/test_ability_workflow_contract.py
+python/tests/test_auraoffirevul_applicability_evidence.py
+python/tests/test_auraoffirevul_evidence.py
+python/tests/test_auraoffirevul_spellwire_evidence.py
+python/tests/test_childofthelight_evidence.py
+python/tests/test_cripplingwound_control_evidence.py
+python/tests/test_cripplingwound_evidence.py
+python/tests/test_cripplingwound_hit_evidence.py
+python/tests/test_cripplingwound_probability_evidence.py
+python/tests/test_cripplingwound_registry_risk.py
+python/tests/test_cripplingwound_tooltip_evidence.py
+python/tests/test_deathwail_evidence.py
+python/tests/test_gribbomb_evidence.py
+python/tests/test_gribbomb_selfdestruct_evidence.py
+python/tests/test_hexingattack_evidence.py
+python/tests/test_packhunter_evidence.py
+python/tests/test_portal_evidence.py
+python/tests/test_powerstrike_discriminator.py
+python/tests/test_powerstrike_evidence.py
+python/tests/test_powerstrike_geometry_evidence.py
+python/tests/test_powerstrike_retaliation_evidence.py
+python/tests/test_purge_evidence.py
+python/tests/test_ragingblood_evidence.py
+python/tests/test_shieldguard_evidence.py
+python/tests/test_shootbash_evidence.py
+python/tests/test_six_heads_evidence.py
+python/tests/test_spider_evidence.py
+python/tests/test_stonegarden_evidence.py
+python/tests/test_taunt_evidence.py
+python/tests/test_teleport_evidence.py
+python/tests/test_torpor_lifecycle_evidence.py
+python/tests/test_venom_evidence.py
+python/tests/test_vulnerabilitytolight_evidence.py

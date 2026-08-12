@@ -1,0 +1,201 @@
+name: Ability Windows Atomic Validation
+
+on:
+  push:
+    branches: [main, ability, 'integration/**']
+    paths:
+      - '.github/workflows/ability.yml'
+      - 'scripts/ci_ability_windows.ps1'
+      - 'cpp/**'
+      - 'python/hwm_solver/ability/**'
+      - 'python/hwm_solver/knowledge/build_ability_registry.py'
+      - 'python/tests/ABILITY_TESTS.txt'
+      - 'python/tests/test_ability_workflow_contract.py'
+      - 'python/tests/test_*_evidence.py'
+      - 'python/tests/test_powerstrike_discriminator.py'
+      - 'python/tests/test_cripplingwound_registry_risk.py'
+      - 'data/catalog/ability_registry.*'
+      - 'CMakeLists.txt'
+      - 'TESTS_CANON.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/ability.yml'
+      - 'scripts/ci_ability_windows.ps1'
+      - 'cpp/**'
+      - 'python/hwm_solver/ability/**'
+      - 'python/hwm_solver/knowledge/build_ability_registry.py'
+      - 'python/tests/ABILITY_TESTS.txt'
+      - 'python/tests/test_ability_workflow_contract.py'
+      - 'python/tests/test_*_evidence.py'
+      - 'python/tests/test_powerstrike_discriminator.py'
+      - 'python/tests/test_cripplingwound_registry_risk.py'
+      - 'data/catalog/ability_registry.*'
+      - 'CMakeLists.txt'
+      - 'TESTS_CANON.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ability-atomic-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File {0}
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONIOENCODING: utf-8
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  NUMEXPR_NUM_THREADS: '1'
+
+jobs:
+  ability_cpp_build:
+    name: ability-cpp-build-and-inventory
+    runs-on: windows-latest
+    timeout-minutes: 60
+    outputs:
+      cases: ${{ steps.inventory.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+          fetch-depth: 0
+      - name: PowerShell syntax preflight
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path '.\scripts\ci_ability_windows.ps1'),
+            [ref]$tokens,
+            [ref]$parseErrors
+          ) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            foreach ($parseError in $parseErrors) {
+              Write-Host " - $($parseError.Extent.StartLineNumber):$($parseError.Extent.StartColumnNumber) $($parseError.Message)"
+            }
+            throw 'PowerShell syntax preflight failed.'
+          }
+      - name: Build Ability C++ case runner
+        run: .\scripts\ci_ability_windows.ps1 -Mode CppBuild
+      - id: inventory
+        name: Freeze exact C++ case inventory
+        run: .\scripts\ci_ability_windows.ps1 -Mode CppInventory
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ability-cpp-case-runner
+          path: build/ability-artifact/hwm-ability-case-tests.exe
+          if-no-files-found: error
+          retention-days: 1
+
+  ability_cpp_case:
+    name: ability-cpp-${{ matrix.case }}
+    needs: ability_cpp_build
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ${{ fromJSON(needs.ability_cpp_build.outputs.cases) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+          fetch-depth: 1
+      - uses: actions/download-artifact@v4
+        with:
+          name: ability-cpp-case-runner
+          path: build/ability-artifact
+      - name: Run exact C++ case
+        env:
+          ABILITY_CPP_CASE: ${{ matrix.case }}
+        run: .\scripts\ci_ability_windows.ps1 -Mode CppCase -CaseName $env:ABILITY_CPP_CASE
+
+  ability_python_inventory:
+    name: ability-python-inventory
+    runs-on: windows-latest
+    timeout-minutes: 60
+    outputs:
+      cases: ${{ steps.inventory.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+          fetch-depth: 1
+      - name: PowerShell syntax preflight
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path '.\scripts\ci_ability_windows.ps1'),
+            [ref]$tokens,
+            [ref]$parseErrors
+          ) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            foreach ($parseError in $parseErrors) {
+              Write-Host " - $($parseError.Extent.StartLineNumber):$($parseError.Extent.StartColumnNumber) $($parseError.Message)"
+            }
+            throw 'PowerShell syntax preflight failed.'
+          }
+      - id: inventory
+        name: Freeze exact pytest node inventory
+        run: .\scripts\ci_ability_windows.ps1 -Mode PythonInventory
+
+  ability_python_case:
+    name: ability-python-${{ matrix.case }}
+    needs: ability_python_inventory
+    runs-on: windows-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ${{ fromJSON(needs.ability_python_inventory.outputs.cases) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+          fetch-depth: 1
+      - name: Run exact pytest node
+        env:
+          ABILITY_TEST_NODE: ${{ matrix.case }}
+        run: .\scripts\ci_ability_windows.ps1 -Mode PythonCase -TestNode $env:ABILITY_TEST_NODE
+
+  publish_status:
+    if: always() && github.event_name == 'push'
+    needs: [ability_cpp_build, ability_cpp_case, ability_python_inventory, ability_python_case]
+    runs-on: windows-latest
+    permissions:
+      statuses: write
+    steps:
+      - name: Publish ability aggregate status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CPP_BUILD_RESULT: ${{ needs.ability_cpp_build.result }}
+          CPP_RESULT: ${{ needs.ability_cpp_case.result }}
+          PYTHON_INVENTORY_RESULT: ${{ needs.ability_python_inventory.result }}
+          PYTHON_RESULT: ${{ needs.ability_python_case.result }}
+        run: |
+          $ok = ($env:CPP_BUILD_RESULT -eq 'success') -and
+                ($env:CPP_RESULT -eq 'success') -and
+                ($env:PYTHON_INVENTORY_RESULT -eq 'success') -and
+                ($env:PYTHON_RESULT -eq 'success')
+          $state = if ($ok) { 'success' } else { 'failure' }
+          $headers = @{
+            Authorization = "Bearer $env:GH_TOKEN"
+            Accept = 'application/vnd.github+json'
+            'X-GitHub-Api-Version' = '2022-11-28'
+          }
+          $body = @{
+            state = $state
+            context = 'HWM / Ability'
+            description = "Atomic ability validation: C++=$env:CPP_RESULT Python=$env:PYTHON_RESULT"
+            target_url = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          } | ConvertTo-Json -Compress
+          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+          Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -ContentType 'application/json' -Body $body | Out-Null
+          if (-not $ok) { throw 'Ability aggregate validation failed.' }

@@ -57,6 +57,12 @@ if(HWM_BUILD_TESTS)
   target_link_libraries(hwm-tests PRIVATE hwm_core)
   add_test(NAME hwm-tests COMMAND hwm-tests)
 
+  # Ability validation executes the exact hwm-tests function inventory one case per
+  # CI job.  The case runner is intentionally not registered in CTest so main-front
+  # CTest ownership stays unchanged.
+  add_executable(hwm-ability-case-tests cpp/tests/test_ability_cases.cpp)
+  target_link_libraries(hwm-ability-case-tests PRIVATE hwm_core)
+
   # Kept separate from test_main.cpp because creature-ability work owns that file on
   # the parallel ability branch.  This target is the main-lane M13 planner regression.
   add_executable(hwm-planner-tests cpp/tests/test_planner_tree.cpp)

@@ -202,8 +202,8 @@ static bool test_defend_and_ammo_core_mechanics() {
 
     // DEFEND is +30% defence until this stack acts again.
     s=fixture(); actor=s.entity(1); target=s.entity(2); CHECK(actor&&target);
-    auto dit=std::find_if(sim.legal_actions(s).begin(),sim.legal_actions(s).end(),[](const Action&a){return a.type==ActionType::Defend;});
-    auto dacts=sim.legal_actions(s);dit=std::find_if(dacts.begin(),dacts.end(),[](const Action&a){return a.type==ActionType::Defend;});
+    auto dacts=sim.legal_actions(s);
+    auto dit=std::find_if(dacts.begin(),dacts.end(),[](const Action&a){return a.type==ActionType::Defend;});
     CHECK(dit!=dacts.end()); auto defended=sim.apply(s,*dit,0.5); CHECK(defended.valid); CHECK(defended.state.entity(1)->defending);
     BattleState attack_state=defended.state; attack_state.active_entity_uid=2; attack_state.side_to_act=Side::Pve;
     auto before_hp=attack_state.entity(1)->count*attack_state.entity(1)->max_hp_per_unit;
@@ -312,13 +312,13 @@ static bool test_runtime_probe_status() {
 }
 
 static bool test_policy_prior_defend_is_distinct() {
-    const std::string path="/tmp/hwm_policy_prior_test.csv";
+    const auto path=std::filesystem::temp_directory_path()/"hwm_policy_prior_test.csv";
     {
         std::ofstream f(path);
         f << "side,creature_id,count,MOVE,MELEE_ATTACK,RANGED_ATTACK,WAIT,DEFEND,HERO_ACTION,CAST_OR_ABILITY,ABILITY,ATTACK\n";
         f << "PLAYER,10,100,0.01,0.02,0.03,0.04,0.70,0.05,0.06,0.07,0.02\n";
     }
-    PolicyPriorTable p(path); CHECK(p.loaded());
+    PolicyPriorTable p(path.string()); CHECK(p.loaded());
     BattleState s=fixture();
     CHECK(p.type_probability(s,ActionType::Defend)>p.type_probability(s,ActionType::MeleeAttack));
     CHECK(p.type_probability(s,ActionType::Defend)>0.6);
@@ -877,7 +877,7 @@ static bool test_festering_aura_exact_position_effect() {
     // 2x2 footprint adjacency is edge based, not anchor-distance based.
     BattleState big=s; big.entity(1)->anchor={1,1}; big.entity(1)->footprint_w=2;big.entity(1)->footprint_h=2; big.entity(2)->anchor={3,2};
     CHECK(std::abs(effective_attack(big,*big.entity(1))-16.0f)<0.01f);
-    BattleState fear=fixture();auto*fa=fear.entity(1);auto*fv=fear.entity(2);CHECK(fa&&fv);fa->anchor={1,1};fv->anchor={2,1};fa->morale=2;fv->morale=4;add_tag(*fa,"frightful_aura");
+    BattleState fear=fixture();auto*fa=fear.entity(1);auto*fv=fear.entity(2);CHECK(fa&&fv);fa->anchor={1,1};fv->anchor={2,1};fa->morale=2;fv->morale=4;add_tag(*fa,"frightfulaura");
     CHECK(std::abs(effective_morale(fear,*fv)-1.0f)<0.01f);CHECK(std::abs(effective_morale(fear,*fa)-2.0f)<0.01f);fv->anchor={8,8};CHECK(std::abs(effective_morale(fear,*fv)-4.0f)<0.01f);
     BattleState brave=fixture();auto*bs=brave.entity(1);CHECK(bs);bs->anchor={1,1};bs->morale=-2;add_tag(*bs,"auraofbravery");Entity brave_ally=*bs;brave_ally.uid=3;brave_ally.anchor={2,1};brave_ally.morale=-1;brave_ally.ability_ids.clear();brave.entities.push_back(brave_ally);CHECK(effective_morale(brave,*brave.entity(1))>=3.0f);CHECK(effective_morale(brave,*brave.entity(3))>=3.0f);brave.entity(3)->anchor={8,8};CHECK(std::abs(effective_morale(brave,*brave.entity(3))+1.0f)<0.01f);
     return true;
@@ -1176,6 +1176,7 @@ static bool test_mighty_slam_exact_action_splash_knockback_cooldown() {
     Entity far=secondary;far.uid=5;far.anchor={8,8};
     Entity big=secondary;big.uid=6;big.anchor={3,2};big.is_big=true;big.footprint_w=2;big.footprint_h=1;
     s.entities.push_back(secondary);s.entities.push_back(friendly);s.entities.push_back(far);s.entities.push_back(big);
+    actor=s.entity(1);primary=s.entity(2);CHECK(actor&&primary);
 
     auto acts=sim.legal_actions(s);
     auto slam=std::find_if(acts.begin(),acts.end(),[](const Action&a){return a.type==ActionType::Ability&&a.target_uid&&*a.target_uid==2&&a.ability_id&&*a.ability_id==stable_ability_id("msl")&&!a.destination;});
