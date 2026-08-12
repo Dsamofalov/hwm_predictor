@@ -6,7 +6,9 @@ Source lane: `ability`
 Integration branch: `integration/ability-snapshot-20260812`
 Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
-Authoritative hosted Windows run: **`31607886774` — PASS**
+Last fully green executable ability run: **`31607886774` — PASS**
+Current functional candidate: **`b6b27633154f12588071a3e94145308aceb57451` — validation failed on one new assertion**
+Current hosted Windows run: **`31621278975` — FAIL expected**
 
 ## Resumed ability-development governance
 
@@ -17,7 +19,21 @@ Current resumed-development documentation commits:
 
 The mistakenly created `docs/ability/ABILITY_AGENT_TZ.md` is now only a compatibility pointer to `docs/ABILITY_AGENT_TZ.md`; it is not a second contract.
 
-These are documentation/process changes only. The last authoritative executable ability validation remains hosted Windows run `31607886774` until a new functional ability package is committed and validated.
+## Current Gribbomb evidence package
+
+Functional commit `b6b27633154f12588071a3e94145308aceb57451` changed the self-destruct evidence probe from a generic death heuristic to the raw carrier-only `Sbom` marker.
+
+Hosted run `31621278975` established before the failing assertion:
+
+- 866 corpus battle directories;
+- 7 Gribbomb carrier battles;
+- exactly 1 validated carrier `Sbom` activation;
+- exactly 3 living adjacent targets and 3 outgoing damage records;
+- exact adjacent target-set match: 1/1 activation;
+- 0 missing adjacent targets and 0 non-adjacent extra targets;
+- the failing handwritten HP expectation was `36356`; replay-derived pre-activation HP is `36101`.
+
+The next functional correction changes only that incorrect expected HP. Generic replay still leaves the carrier alive after `Sbom`, so no registry promotion is claimed yet. The predictive Earth-damage formula remains unresolved because the single activation contains target-dependent damage ratios.
 
 ## Integration state
 
@@ -50,29 +66,14 @@ Ability CI follows `TESTS_CANON.md`:
 
 Parallelism is therefore a scheduler optimization only; atomicity and exact coverage are the contract.
 
-## Validation evidence
-
-Hosted Windows workflow run `31607886774` on `03d2fbe138e0dad929037315dce46d38256be8f3` completed successfully.
-
-The run expanded to **85 jobs** in total, including:
-
-- C++ build + exact inventory discovery;
-- one job per discovered C++ regression function;
-- Python exact node inventory discovery;
-- one job per discovered ability pytest node;
-- aggregate status publication.
-
-Both inventory jobs passed, all generated C++ and Python case jobs passed, and the aggregate workflow conclusion was `success`.
-
 ## Preserved semantic boundaries
-
-Integration does not promote evidence-only mechanics merely because their probes/tests are now present on `main`.
 
 - `cripplingwound` remains `partial_exact`: observed consequence is supported; speculative probability remains disabled.
 - `powerstrike` trigger prediction remains unresolved/learned rather than promoted to an exact speculative proc.
-- Aura of Fire Vulnerability and the remaining evidence queue keep their documented evidence boundaries until executable runtime semantics are independently proven.
-- Existing closed mechanics such as Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike are not reworked by this integration.
+- Aura of Fire Vulnerability remains evidence-only until a direct Fire-spell execution substrate exists.
+- Gribbomb now has a validated raw `Sbom` activation discriminator and exact observed adjacent target set, but runtime self-destruction and predictive Earth-damage magnitude remain unresolved.
+- Existing closed mechanics such as Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike are not reworked without contrary evidence.
 
 ## Next ownership state
 
-Continue directly on the current `ability` branch from the integrated snapshot. Preserve the semantic boundaries above, use weighted ability-risk contribution to select the next genuinely unclosed mechanic, and validate each functional package with the atomic hosted-Windows ability workflow before claiming PASS.
+Correct the single Gribbomb expected-HP assertion, obtain a fully green hosted Windows run, then decide whether the self-destruction mutation can be integrated safely without speculating about predictive Earth damage. Taunt is the next high-impact evidence target; its raw `A<old_target><carrier>` records are a promising redirect discriminator that must be checked across the full corpus before any promotion.

@@ -51,3 +51,12 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Made mandatory maintenance of this file the first/highest-priority process rule.
   - Converted the mistaken `docs/ability/ABILITY_AGENT_TZ.md` duplicate into a compatibility pointer to the canonical TZ instead of maintaining two competing contracts.
   - No executable ability semantics changed; hosted Windows/MSVC validation is therefore not claimed for this documentation-only correction.
+
+### Gribbomb `Sbom` discriminator — first strict gate
+
+- Commit: `b6b27633154f12588071a3e94145308aceb57451` — `test(ability): pin Gribbomb Sbom activation boundary`.
+  - Replaced the old death-shape heuristic with carrier-sourced `SPECIAL:bom` as the primary Gribbomb activation discriminator.
+  - Whole-corpus evidence reached one validated `Sbom` activation, three adjacent living targets, three damage hits, zero missing adjacent targets, and zero non-adjacent extras before the first failing assertion.
+  - Hosted Windows run `31621278975`: **FAIL** on the new atomic node because the manually entered expected carrier HP was `36356`, while replay-derived pre-activation HP is `36101`.
+  - The failure does not invalidate the discriminator/target-set evidence; it identifies an incorrect handwritten expected value. No rerun is used as a substitute for fixing that value.
+  - Runtime boundary remains unresolved: generic replay still leaves the carrier alive after `Sbom`, and predictive Earth-damage magnitude is not inferred from one activation.

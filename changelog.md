@@ -49,3 +49,10 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - `powerstrike` trigger prediction remains unresolved/learned rather than being promoted to an exact speculative proc.
 - Evidence-only Aura of Fire Vulnerability and the remaining ability queue remain evidence-only until executable semantics satisfy their own gates.
 - Existing closed Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike mechanics were not reworked by this integration.
+
+### Gribbomb evidence resumption
+
+- Commit: `b6b27633154f12588071a3e94145308aceb57451` — `test(ability): pin Gribbomb Sbom activation boundary`.
+  - Promoted raw carrier `SPECIAL:bom` to the primary evidence discriminator and added strict whole-corpus adjacency/target-set regression gates.
+  - Hosted Windows run `31621278975` failed only on a handwritten expected pre-activation HP (`36356` vs replay-derived `36101`); the preceding discriminator and 3/3 adjacent-target assertions passed.
+  - No runtime/registry promotion is claimed from the failed package; predictive Earth-damage magnitude remains unresolved.
