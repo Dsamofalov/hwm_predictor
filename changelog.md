@@ -11,6 +11,14 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-12
 
+### M13 opponent probability-mass expansion
+
+- Commit: `1bdc948f5572cf72bc3bd8749f341d73e4e16de0` — `feat: expand opponent search by policy mass`.
+  - Split opponent expansion policy from player `self_top_k`: opponent nodes now cover configurable cumulative policy mass (`0.98` by default) subject to an independent configurable cap (`32` by default), while progressive widening remains intact.
+  - Opponent detection is perspective-aware instead of being hard-coded to `Side::Pve`; the default player perspective preserves existing product behavior while non-player planner perspectives no longer invert self/opponent treatment.
+  - Preserved existing `PlannerConfig` aggregate-initializer field order by appending the new parameters, so existing positional initializers keep their previous semantics.
+  - Added targeted `hwm-planner-tests` coverage for cumulative-mass thresholds, caps, zero-target handling, and zero-prior fallback. Chance outcomes remain sampled and separated by canonical `state_hash`; transposition, persistent re-root, revision cancellation, and structure guards are unchanged.
+
 ### Single-target melee position-hint recovery
 
 - Commit: `1c5a2b3478e7dacf0ebc714a4fb83246fed3b3f8` — `fix: recover single-target melee position hints`.
