@@ -5,23 +5,106 @@ import warnings
 from pathlib import Path
 
 from hwm_solver.ability.childofthelight_evidence import analyze_corpus
+from hwm_solver.ability.childofthelight_spellwire_evidence import analyze_spellwire_corpus
 
 
 ROOT = Path(__file__).resolve().parents[2]
 CORPUS = ROOT / "hwm_battles"
 
 
+EXPECTED_TOOLTIP = (
+    "Любое брошенное заклинание школы магии Света, кроме наносящих урон и воскрешения, "
+    "накладывается и на это существо, причем на искусном уровне."
+)
+
+
 def test_childofthelight_whole_corpus_evidence():
     report = analyze_corpus(CORPUS)
     assert report["parse_errors"] == []
-    assert report["corpus_battle_dirs"] >= 800
-    assert report["carrier_battles"] > 0
-    assert report["carrier_entities"] > 0
-    assert report["carrier_creatures"]
-    assert report["carrier_ability_sets"]
-    assert 0 <= report["tooltip_battles"] <= report["corpus_battle_dirs"]
-    assert report["decisions_seen_in_carrier_battles"] > 0
+    assert report["corpus_battle_dirs"] == 866
+    assert report["carrier_battles"] == 108
+    assert report["carrier_entities"] == 137
+    assert report["carrier_creatures"] == {"588": 102, "928": 35}
+    assert report["carrier_ability_sets"] == {
+        "alive,big,blinding_attack,childofthelight": 102,
+        "alive,childofthelight,confusionstrike,fireproof25,flyer": 35,
+    }
+    assert report["tooltip_battles"] == 121
+    assert report["tooltip_names"] == {"Дитя Света.": 121}
+    assert report["tooltip_descriptions"] == {EXPECTED_TOOLTIP: 121}
+    assert report["tooltip_claim_shapes"] == [
+        {
+            "count": 121,
+            "claims": {
+                "integers": [],
+                "mentions_also_applied": True,
+                "mentions_damage_exclusion": True,
+                "mentions_expert": True,
+                "mentions_light": True,
+                "mentions_resurrection_exclusion": True,
+                "mentions_spell": True,
+                "percentages": [],
+            },
+        }
+    ]
+    assert report["decisions_seen_in_carrier_battles"] == 5634
+    assert report["carrier_targeted_specials"] == 206
+    assert report["carrier_targeted_codes"] == {
+        "fst": 88,
+        "stn": 47,
+        "rgm": 25,
+        "slw": 13,
+        "crs": 10,
+        "psc": 10,
+        "sff": 7,
+        "ltn": 2,
+        "sta": 2,
+        "cnf": 1,
+        "mfs": 1,
+    }
+    assert report["code_copy_candidates"] == {
+        "fst": 88,
+        "stn": 47,
+        "rgm": 25,
+        "psc": 9,
+        "crs": 5,
+        "slw": 3,
+        "cnf": 1,
+    }
+    assert report["code_solo_carrier_records"] == {
+        "slw": 10,
+        "sff": 7,
+        "crs": 5,
+        "ltn": 2,
+        "sta": 2,
+        "mfs": 1,
+        "psc": 1,
+    }
+
+    wire = analyze_spellwire_corpus(CORPUS)
+    assert wire["parse_errors"] == []
+    assert wire["corpus_battle_dirs"] == 866
+    assert wire["carrier_battles"] == 108
+    assert wire["light_spellbook_actors_in_carrier_battles"] > 0
+    assert wire["light_spell_names"]
+    assert wire["status_groups_with_carrier"] > 0
+    assert (
+        wire["status_groups_positive_cost"]
+        + wire["status_groups_without_positive_cost"]
+        == wire["status_groups_with_carrier"]
+    )
+    assert wire["light_status_groups"] <= wire["status_groups_positive_cost"]
+    assert (
+        wire["light_single_groups"]
+        + wire["light_mass_groups"]
+        + wire["light_ambiguous_groups"]
+        <= wire["light_status_groups"]
+    )
+    assert wire["light_single_copy_groups"] <= wire["light_single_groups"]
+    assert wire["light_single_direct_carrier_groups"] <= wire["light_single_groups"]
+    assert wire["light_mass_control_groups"] == wire["light_mass_groups"]
+
     warnings.warn(
-        "CHILDOFTHELIGHT_EVIDENCE "
-        + json.dumps(report, ensure_ascii=False, sort_keys=True)
+        "CHILDOFTHELIGHT_SPELLWIRE_EVIDENCE "
+        + json.dumps(wire, ensure_ascii=False, sort_keys=True)
     )
