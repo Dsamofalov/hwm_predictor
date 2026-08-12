@@ -81,7 +81,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 2793852128,cowardice,learned_damage,0.7500,offense|retaliation|targeting,23,Трусость.
 2637081570,crashingleap,learned_damage,0.7500,movement|ranged|offense|retaliation|casting,37,Мощный скачок.
 3580932229,cripplingtraps,learned_damage,0.3000,offense,155,Калечащие капканы.
-1292550398,cripplingwound,learned_damage,0.7500,movement|offense|control,245,Калечащее ранение.
+1292550398,cripplingwound,partial_exact,0.2500,movement|offense|control,245,Калечащее ранение.
 160827735,crossfire,learned_damage,0.7500,offense|targeting,75,Перекрестная атака.
 624471117,cruelty,unresolved,0.6200,offense,6,Жестокость.
 422885816,crushblow,learned_damage,0.3000,offense,33,Сокрушающий удар.
@@ -158,7 +158,7 @@ ability_id,code,support,risk_weight,categories,observed_entity_tags,name
 3950043109,giantkiller,exact_search,0.0000,offense,158,Убийца гигантов.
 424724072,giantslayer,unresolved,0.6200,offense|defense,16,Победитель гигантов.
 1852507577,goblinthrower,learned_damage,0.7500,offense|targeting,51,Метание гоблинов.
-2042835215,gribbomb,unresolved,0.6200,offense,13,Взрыв спор.
+2042835215,gribbomb,partial_exact,0.2500,offense,13,Взрыв спор.
 1600631019,hailstormaura,learned_damage,0.7500,offense|retaliation|casting,50,Покров из града.
 1113813550,harmtouch,learned_damage,0.7500,offense|casting,82,Смертельная хватка.
 2214775874,harpoonstrike,learned_damage,0.7500,offense|targeting,24,Удар гарпуном.
