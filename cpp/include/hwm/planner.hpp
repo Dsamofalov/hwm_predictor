@@ -21,7 +21,7 @@ struct Recommendation{
     uint64_t reused_root_visits=0,retained_nodes=0;
     std::vector<std::string>warnings;
 };
-struct PlannerConfig{uint64_t simulation_budget=5000; int max_depth=12; int self_top_k=12; double c_puct=1.4; uint32_t seed=1; uint64_t time_budget_ms=0; double risk_lambda=0.15; uint64_t cancellation_poll_interval=16; std::function<bool()> cancellation_requested;};
+struct PlannerConfig{uint64_t simulation_budget=5000; int max_depth=12; int self_top_k=12; double c_puct=1.4; uint32_t seed=1; uint64_t time_budget_ms=0; double risk_lambda=0.15; uint64_t cancellation_poll_interval=16; std::function<bool()> cancellation_requested; int opponent_top_k=32; double opponent_probability_mass=0.98;};
 class Planner{
 public:
     explicit Planner(PlannerConfig cfg={});

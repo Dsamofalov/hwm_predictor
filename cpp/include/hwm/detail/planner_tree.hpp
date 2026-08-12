@@ -49,6 +49,24 @@ struct SearchEdge {
     }
 };
 
+inline size_t probability_mass_limit(const std::vector<SearchEdge>& edges, double target_mass, size_t hard_cap = 0) {
+    if (edges.empty()) return 0;
+    const size_t cap = hard_cap ? std::min(hard_cap, edges.size()) : edges.size();
+    if (cap == 0) return 0;
+    const double target = std::clamp(target_mass, 0.0, 1.0);
+    if (target <= 0.0) return 1;
+    double total = 0.0;
+    for (const auto& edge : edges) total += std::max(0.0, edge.prior);
+    if (total <= 0.0) return cap;
+    const double threshold = target * total;
+    double cumulative = 0.0;
+    for (size_t i = 0; i < cap; ++i) {
+        cumulative += std::max(0.0, edges[i].prior);
+        if (cumulative + 1e-12 >= threshold) return i + 1;
+    }
+    return cap;
+}
+
 struct SearchNode {
     std::string hash;
     uint64_t visits = 0;

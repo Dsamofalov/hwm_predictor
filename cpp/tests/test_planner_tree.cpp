@@ -35,6 +35,19 @@ int main() {
     auto [same_outcome,rebound]=graph.bind(stochastic_edge,"damage-low",*low_again); CHECK(!rebound); CHECK(same_outcome==low_outcome); CHECK(graph.size()==3);
     CHECK(graph.prune_to(*high)==1); CHECK(graph.find("damage-high")==high); CHECK(graph.find("damage-low")==nullptr); CHECK(graph.find("root")==nullptr);
 
+    // Enemy expansion is defined by cumulative policy mass, independently from the
+    // player's top-K cap. The input is sorted by descending prior, as planner nodes are.
+    std::vector<SearchEdge> opponent_edges(5);
+    opponent_edges[0].prior=0.55; opponent_edges[1].prior=0.30; opponent_edges[2].prior=0.10;
+    opponent_edges[3].prior=0.04; opponent_edges[4].prior=0.01;
+    CHECK(probability_mass_limit(opponent_edges,0.80,32)==2);
+    CHECK(probability_mass_limit(opponent_edges,0.98,32)==4);
+    CHECK(probability_mass_limit(opponent_edges,1.00,32)==5);
+    CHECK(probability_mass_limit(opponent_edges,0.99,3)==3);
+    CHECK(probability_mass_limit(opponent_edges,0.00,32)==1);
+    std::vector<SearchEdge> zero_prior_edges(3);
+    CHECK(probability_mass_limit(zero_prior_edges,0.98,2)==2);
+
     // NextActorModel consumes (decision_seq + 1 - last_acted_seq) as a recency feature.
     // Two otherwise identical canonical states with different activation history therefore
     // have different future transition semantics and must never share a transposition node.
@@ -81,6 +94,6 @@ int main() {
 
     auto other=state; other.battle_id="different-battle";
     const auto reset=planner.plan(other); CHECK(reset.status=="ok"); CHECK(!reset.tree_reused); CHECK(reset.reused_root_visits==0);
-    std::cout << "planner stochastic-outcome/transposition/re-root tests passed\n";
+    std::cout << "planner stochastic-outcome/transposition/re-root/opponent-mass tests passed\n";
     return EXIT_SUCCESS;
 }

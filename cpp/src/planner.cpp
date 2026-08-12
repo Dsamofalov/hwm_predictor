@@ -147,9 +147,18 @@ Recommendation Planner::plan(const BattleState& root, Side perspective, std::fun
         init_node(node, s);
         if (node.edges.empty()) return value_.loaded() ? value_.utility(s, perspective) : sim_.heuristic_value(s, perspective);
 
-        const size_t lim = widening_limit(node, node.edges.size(), cfg_.self_top_k);
+        const bool opponent_turn = s.side_to_act != Side::Unknown &&
+            (perspective == Side::Unknown ? s.side_to_act == Side::Pve : s.side_to_act != perspective);
+        const int hard_top_k = opponent_turn ? cfg_.opponent_top_k : cfg_.self_top_k;
+        const size_t expansion_total = opponent_turn
+            ? detail::probability_mass_limit(
+                node.edges,
+                cfg_.opponent_probability_mass,
+                cfg_.opponent_top_k > 0 ? static_cast<size_t>(cfg_.opponent_top_k) : 0)
+            : node.edges.size();
+        const size_t lim = widening_limit(node, expansion_total, hard_top_k);
         size_t pick = 0;
-        if (s.side_to_act == Side::Pve) {
+        if (opponent_turn) {
             double z = 0.0;
             for (size_t i = 0; i < lim; ++i) z += node.edges[i].prior;
             const double u = std::generate_canonical<double, 32>(rng) * std::max(1e-12, z);
