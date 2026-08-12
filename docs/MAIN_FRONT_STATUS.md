@@ -12,7 +12,9 @@ This file tracks main-owned correctness/search/runtime work. Ability mechanics r
 - Generic follow-up probes rejected broader non-colliding melee recovery (downstream regressions) and unreachable-shooter marker expansion (zero delta). Remaining generic MOVE failures have no unambiguous geometry-only correction.
 - Residual ownership audit: **66/86** remaining melee representability failures contain SPECIAL records; the two special-free multi-target cases are tied to intrinsic multi-target abilities. Do not absorb those into generic decoder heuristics.
 - First standard rerun `31622628256` exposed only stale M11 selector committed evidence after replay-state changed. Evidence-only commit `16998598ce3dc282bef76a9b29b27e83fba8bdf9` refreshed that report on `windows-2022`; follow-up standard run `31624580974` is **Core PASS + Full PASS**. Atomic Ability run `31622630092` is **PASS**.
-- Immediate product blocker remains the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md`; after that, main-owned work continues with evidence-backed decoder closure, M11 production gating and M13 opponent/chance/search calibration.
+- Live transport feasibility is now independently proven on authenticated active PvE battle `warid=1672746591`: a passive XHR hook saw a **12,686-byte** `battle.php` semantic payload with `turns=>3` + `s=...`, then after one manual move a **41-byte** incremental `turns=>4:m0080501i0080100C001000000;`; runtime `lastturn` changed **3 -> 4**. The same short capture saw **28** `t=950` heartbeat/no-op responses.
+- Existing user-side browser automation provides additional read-only engine evidence: live units are read from `stage.pole.obj` / `stage[war_scr].obj` with `owner`, grid `x/y`, `nownumber`, `nowhealth`, `nowturn`, while `scr_x/scr_y` are render/Pixi coordinates. This is a targeted runtime cross-check/fallback surface, not a reason to replace network protocol truth or import auto-action logic.
+- The immediate product blocker is therefore narrower than before: raw live transport is no longer unknown, but the **production** MV3 -> daemon -> canonical revision/hash -> recommendation -> manual move -> next revision -> stale cancellation/re-root -> next recommendation smoke in `docs/LIVE_VALIDATION.md` is still mandatory before M01/M14 can be COMPLETE.
 
 
 ## Completed in the current main-front pass
@@ -55,6 +57,17 @@ Functional commit: `21927bdc6b528a06018bad95e63540c9ce02d9fd`
 - permanent CI regression: `scripts/test_live_binding.py`;
 - active-battle execution procedure and pass criteria: `docs/LIVE_VALIDATION.md`.
 
+### Live engine evidence — 12.08.2026
+
+This evidence was collected outside the project checkout because the project was not installed on the user's battle machine. It therefore closes **protocol feasibility**, not the production extension/daemon gate.
+
+- `war.php?warid=1672746591` issued client XHR `GET /battle.php?warid=1672746591` during the active authenticated fight.
+- Passive interception made no extra HeroesWM request and captured a semantic current-state response containing `turns=>3` and `s=M001...M008...`.
+- One manual user action was followed by a compact incremental `turns=>4:...` response; client global `lastturn` advanced from 3 to 4.
+- Frequent `t=950` responses are transport no-ops/heartbeats. They must be revision-neutral and must not trigger planning/cancellation/replanning.
+- Network remains primary truth. A runtime adapter, if needed, should target `stage.pole.obj` / `stage[war_scr].obj` plus minimal turn markers. Grid `x/y` are semantic positions; `scr_x/scr_y` are render-space coordinates useful only for diagnostics/overlay mapping.
+- Do not commit the raw user capture as-is: it contains battle chat/tooltips/user-facing metadata. A future regression fixture must be scrubbed down to protocol blocks required for the test.
+
 ## CI gate
 
 The standard CI now requires, in addition to C++/Python/TypeScript suites:
@@ -71,13 +84,19 @@ CI commit carrying all three gates: `676da42b754ee9d1409cc27e8ad1dfec26d17e6c` �
 
 The local daemon now exposes an authenticated `ws://127.0.0.1:<port>/ws` state stream. The bearer is carried as `Sec-WebSocket-Protocol: hwm-bearer.<token>` rather than in the URL. The daemon pushes canonical status immediately and whenever SessionStore revision changes, plus a 20-second heartbeat. The MV3 service worker consumes this stream, stores the last daemon status, deduplicates replanning by revision and falls back to HTTP status only when streamed status is stale/unavailable.
 
-The next correctness step is a real authenticated active-battle smoke validation using `docs/LIVE_VALIDATION.md`.
+The next correctness step is a real authenticated **production closed-loop** validation using `docs/LIVE_VALIDATION.md`. The old uncertainty “does active `battle.php` transport exist and is it interceptable?” is closed by the 12.08.2026 live evidence; the remaining gate is whether the shipped extension/daemon pipeline consumes the semantic payload correctly and advances revision/recommendation after a manual move.
 
-Do **not** claim M01/M14 complete before that run. The current code proves the local pipeline and safety contracts against deterministic integration fixtures, not HeroesWM's live authenticated client.
+Do **not** claim M01/M14 complete before that run. The current code proves the local pipeline and safety contracts against deterministic integration fixtures, while the external live capture proves HeroesWM transport/progression. What is still missing is the same evidence through the actual MV3 -> daemon -> decoder -> planner path.
 
-If the real battle trace shows network capture is sufficient, keep network payload as the primary path. If it proves a missing canonical/legal-action field, use the existing metadata-only runtime structure probe to identify the smallest explicit runtime-object adapter. Do not implement a broad runtime scraper speculatively.
+Primary implementation decision is now explicit:
 
-After stable live acquisition is proven, main may continue with the next original-TZ gates that do not conflict with `ability`, notably WebSocket streaming, persistent tree re-root/transpositions/opponent branching, and later live/hard-PvE evaluation.
+- keep `battle.php` network payload as authoritative primary source;
+- classify pure `t=<digits>` heartbeat/no-op frames as revision-neutral;
+- add a minimal scrubbed live-derived `snapshot -> incremental turn delta` regression;
+- if a concrete canonical field is missing or disagrees, use a **targeted** runtime projection from `stage.pole.obj`/`nowturn` and report mismatch diagnostically;
+- never build a broad runtime scraper speculatively and never use `scr_x/scr_y` as canonical board coordinates.
+
+After stable production live acquisition is proven, main continues with evidence-backed decoder closure, M11 production gating and M13 opponent/chance/search calibration, followed by live/hard-PvE evaluation.
 
 ## 2026-08-10 final handoff update
 

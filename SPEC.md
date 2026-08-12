@@ -3,7 +3,7 @@
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
 **Дата:** 12.08.2026
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 12.08.2026 — validated ability snapshot и atomic Ability Windows CI интегрированы в `main`; decoder/legal улучшен до 852/866 structural-ready, 795/866 semantic-safe и 5392/5481 held-out observed basic-action representability без ослабления invariants; M11 selector evidence синхронизирован после decoder-state сдвига; standard Windows run `31624580974` и atomic Ability run `31622630092` являются hosted evidence текущего функционального checkpoint; production learned dynamics остаётся выключенной; real authenticated active-battle smoke и decoder/legal >=99.9% всё ещё обязательны.
+**Последнее обновление реализации:** 12.08.2026 — validated ability snapshot и atomic Ability Windows CI интегрированы в `main`; decoder/legal улучшен до 852/866 structural-ready, 795/866 semantic-safe и 5392/5481 held-out observed basic-action representability без ослабления invariants; M11 selector evidence синхронизирован после decoder-state сдвига; standard Windows run `31624580974` и atomic Ability run `31622630092` остаются hosted evidence проверенного функционального checkpoint; дополнительно на реальном авторизованном активном бою `warid=1672746591` независимо подтверждён пассивный XHR transport `battle.php`: содержательный snapshot/update с `turns=>3` и `s=...`, затем после ручного хода incremental `turns=>4:...`, при этом client runtime `lastturn` изменился `3 -> 4`; frequent `t=950` подтверждены как отдельные no-op/heartbeat responses. Production learned dynamics остаётся выключенной; полный extension -> daemon -> decode -> plan -> revision-bound replan smoke и decoder/legal >=99.9% всё ещё обязательны.
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
@@ -33,16 +33,17 @@
 - Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
 - Permanent held-out planner validity gate: **120/120** sampled states из **110** held-out battles, **0** invalid recommendations, state-hash mismatches, illegal best actions/alternatives или non-finite metrics. На validated hosted Windows run `31475600960` budget `1 -> 120`: action-type stability **99.17%**, exact-action stability **86.67%**.
 - Automated tests / supported platform: Windows 10/11 x64 + MSVC. Проверенный main tree `16998598ce3dc282bef76a9b29b27e83fba8bdf9`: standard hosted `windows-2022` run `31624580974` — **Core PASS + Full PASS**. Atomic Ability run `31622630092` — **PASS** на том же функциональном decoder checkpoint до evidence-only selector refresh. Main-front CTest остаётся отделён от ability-owned atomic inventory; Full CI enforcing full-corpus structural budget **invalid <= 14** и exact M11 committed-evidence verification. Historical Linux/self-hosted Windows results remain evidence only.
+- Live engine/transport evidence: на авторизованном активном PvE-бою `warid=1672746591` passive XHR hook без дополнительных запросов получил `battle.php` response **12,686 bytes** с `turns=>3` + полным `s=M...` state block, а после одного ручного хода — **41-byte** incremental `turns=>4:m0080501i0080100C001000000;`; за тот же короткий capture наблюдались **28** частых `t=950` heartbeat/no-op responses. Runtime snapshot синхронно изменил `lastturn` **3 -> 4**. Предоставленный рабочий browser-automation path дополнительно подтверждает доступность live unit model через `stage.pole.obj`/`stage[war_scr].obj`, где используются `owner`, grid `x/y`, `nownumber`, `nowhealth`, `nowturn`, а `scr_x/scr_y` являются render-space координатами и не должны заменять canonical grid state.
 
 ### Текущий незавершённый фронт разработки
 
 Main-owned correctness/search work и ability-owned mechanics остаются организационно разделены, но validated ability snapshot и отдельный atomic Ability workflow уже интегрированы в `main`. Новые ability semantics по-прежнему принимаются только после corpus/CI evidence; нижеприведённый порядок — приоритет **основного** фронта.
 
-1. **Real active-battle smoke gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном активном авторизованном PvE-бою. Это остаётся главным продуктовым блокером для закрытия Browser Bridge/Orchestrator: network capture primary truth, runtime-object fallback только по доказанному отсутствующему полю.
+1. **Production active-battle closed-loop gate:** transport-level Phase 0 feasibility уже доказана на реальном авторизованном бою: официальный клиент делает пассивно перехватываемые XHR к `battle.php`, отдаёт содержательный state/update и компактный incremental delta после ручного хода. Главный продуктовый блокер теперь уже не «существует ли live transport», а полный production path `MV3 capture -> daemon -> canonical revision/hash -> recommendation -> ручной ход -> новая revision -> stale cancellation/re-root -> новая recommendation`. Network payload остаётся primary truth. Runtime adapter должен быть узким cross-check/fallback по `stage.pole.obj`/`nowturn` только для конкретно доказанного отсутствующего или спорного поля; широкого runtime scraper не делать.
 2. **Decoder/legal correctness:** устранить **14** оставшихся финальных overlap-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **5392/5481 = 98.376%** к acceptance **>=99.9%**. Permanent full-corpus non-regression budget уже ужесточён до `invalid <= 14`. Из 89 held-out representability residuals 66/86 melee failures содержат SPECIAL records; generic main-decoder heuristics не должны подменять ability-owned semantics.
 3. **M11 learned dynamics:** развить уже работающий 2/4/8/16-step evidence harness из primary physical-damage residual до полноценного structured ensemble. Не включать runtime selector/uncertainty/residual production path, пока одновременно не пройдены multi-step accuracy и observed-action survival/validity gates.
 4. **M13 search quality после correctness closure:** safe stochastic outcome separation, transpositions и exact persistent re-root уже реализованы; следующий front — более сильное explicit opponent/chance branching, search calibration и quality/latency trade-offs, не ломая revision cancellation и exact hash/structure guards.
-5. **Evaluation:** replay invalid-recommendation gate >=100 states уже закрыт (**120/120**). После stable live acquisition нужны live-state validation и hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
+5. **Evaluation:** replay invalid-recommendation gate >=100 states уже закрыт (**120/120**). После stable production live acquisition нужны live-state cross-validation и hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
 
 Ability ownership: high-impact unresolved assist/counter/summon/control mechanics остаются отдельным evidence lane. Snapshot уже присутствует в `main`; дальнейшие semantics должны попадать туда только после corpus review и atomic Ability CI, без дублирования generic main-owned decoder/search work.
 
@@ -96,7 +97,7 @@ Ability ownership: high-impact unresolved assist/counter/summon/control mechanic
 3. Полный brute-force по горизонту 10+ полуходов невозможен из-за экспоненциального роста дерева.
 4. PvE-ответы необходимо моделировать вероятностно, а не считать противника идеальным minimax-игроком.
 5. Основная сложность проекта не в размере нейросети, а в качестве состояния, данных, динамики боя и поискового алгоритма.
-6. PixiJS/canvas — это слой отрисовки. Для ML не нужно распознавать поле по картинке, если удаётся получить исходные данные клиента/протокола.
+6. PixiJS/canvas — слой отрисовки, а не источник, требующий CV. На live-клиенте фактическое battle state приходит текстовым `battle.php` payload; при необходимости узкий runtime cross-check может читать клиентскую model surface (`stage.pole.obj`/`stage[war_scr].obj`, `nowturn`) и grid-поля `x/y`, тогда как `scr_x/scr_y` относятся к render-space. Для solver canonical grid/state должен приходить из protocol adapter; runtime объекты не должны протекать дальше adapter boundary.
 7. Для runtime-производительности разумно использовать C++ core, а Python оставить для ML/training/analytics.
 
 ## 1.2. Что уточнено настоящим ТЗ
@@ -151,21 +152,23 @@ Ability ownership: high-impact unresolved assist/counter/summon/control mechanic
 - Страница приведённого боя `warlog.php?warid=1671960831` загружает полноценный интерфейс боя и содержит боевые элементы/характеристики, то есть ссылка является подходящей точкой входа для browser adapter.
 - Официальные правила HeroesWM на дату документа запрещают ПО, эмулирующее присутствие игрока, и отдельно предупреждают об автоматических/полуавтоматических скриптах, выполняющих запросы к игровым механизмам/БД и создающих нагрузку. Это причина сделать продукт строго read-only и пассивным по умолчанию.
 - Старый/текущий доступный endpoint вида `battle.php?lastturn=-3&warid=...` возвращает компактный текстовый боевой payload для завершённых боёв; его использование исторически фигурирует на форуме HeroesWM.
+- **Live active-battle transport подтверждён 12.08.2026.** В авторизованном `war.php?warid=1672746591` официальный клиент выполнял XHR `GET /battle.php?warid=1672746591`. Passive hook, не создающий собственных запросов, получил содержательный response 12,686 bytes с `turns=>3` и `s=M001...M008...`, после одного ручного хода — incremental response `turns=>4:m0080501i0080100C001000000;`. Это снимает прежние гипотезы о доступности `battle.php` и XHR transport во время активного боя.
+- В том же live capture отдельно наблюдались frequent responses вида `t=950` (28 за короткое окно). Они не должны считаться новой canonical revision и не должны запускать replanning сами по себе; это heartbeat/no-op transport traffic, который следует дешёво классифицировать/дедуплицировать.
+- Client runtime одновременно отражает progression: `lastturn` изменился `3 -> 4` после ручного хода; доступны battle-related globals (`warid`, `lastturn`, `hero_army`, `hero_init`, `hero_ap`, spell catalogs и др.). Предоставленный пользователем уже работающий browser-automation код читает live units непосредственно из `stage.pole.obj` либо `stage[war_scr].obj`, используя `owner`, grid `x/y`, `nownumber`, `nowhealth`, `shots/shooter` и `nowturn`; `scr_x/scr_y` используются там только для преобразования render-space в экранные координаты. Для advisor это evidence для узкого read-only cross-check/fallback, а не основание строить runtime scraper или кликер.
 - Chrome Manifest V3 позволяет выполнять расширению скрипт в `MAIN` execution world, то есть технически возможно поставить read-only wrapper вокруг `fetch`/XHR в контексте страницы и через `window.postMessage` передать копию уже полученного ответа в extension.
 - PyTorch имеет официальный C++ frontend; ONNX Runtime имеет официальный C++ API; CMake поддерживает C++23. Это позволяет держать training в Python и inference/search в C++.
 
-## 3.2. НЕ считать проверенным до Phase 0
+## 3.2. НЕ считать проверенным до соответствующего live gate
 
-Следующие пункты являются гипотезами и должны быть подтверждены экспериментом:
+Следующие пункты после transport spike остаются неизвестностями и должны быть подтверждены production-интеграцией или targeted cross-check:
 
-1. Тот же `battle.php` endpoint доступен/полезен во время активного боя.
-2. Официальный клиент действительно обновляет бой через `fetch`, XHR или другой перехватываемый текстовый transport.
-3. Полный текущий `BattleState` может быть реконструирован только из network payload без чтения client-side runtime objects.
-4. Серверный payload содержит достаточно информации для точного восстановления позиций, эффектов, очереди ATB и истории random events.
-5. Из клиента можно получить полный legal-action set текущего активного юнита.
-6. Формат стабильный между PvE-режимами.
+1. Полный текущий canonical `BattleState` во всех поддерживаемых PvE-режимах всегда реконструируется только из network payload без чтения client-side runtime objects.
+2. Server payload во всех режимах содержит достаточно информации для точного восстановления всех позиций/footprints, effects/counters, очереди ATB и history-dependent random mechanics; один live snapshot подтвердил основной state block, но не исчерпывает rare mechanics.
+3. Из клиента можно получить authoritative полный legal-action set текущего active entity. Наличие `stage.pole.obj` и `nowturn` само по себе legal set не доказывает.
+4. Формат, field semantics и runtime-object layout стабильны между PvE-режимами/client asset fingerprints.
+5. `stage.pole.obj`/`stage[war_scr].obj` поля можно устойчиво сопоставлять canonical entity UID/grid state при reload/summon/clone/large-footprint/rare-effect случаях. Пока использовать их только как диагностический cross-check/fallback, а не primary truth.
 
-Если какая-либо гипотеза не подтверждается, используется предусмотренный fallback-адаптер, описанный ниже.
+Если network payload не содержит конкретного критичного canonical поля, используется предусмотренный узкий fallback-адаптер, описанный ниже. Сам факт доступности runtime объектов не является разрешением обходить protocol decoder.
 
 ---
 
@@ -177,7 +180,9 @@ Ability ownership: high-impact unresolved assist/counter/summon/control mechanic
 │                                                                     │
 │  Official game JS/PixiJS                                           │
 │          │                                                          │
-│          ├── existing network responses                            │
+│          ├── existing battle.php XHR/fetch responses (PRIMARY)     │
+│          │                                                          │
+│          └── stage.pole.obj / nowturn (targeted cross-check only)   │
 │          │                                                          │
 │          ▼                                                          │
 │  [Browser Bridge, read-only, MV3]                                  │
@@ -445,7 +450,7 @@ Event sourcing нужен для:
 
 # 8. Модуль M01 — Browser Bridge
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** MV3 MAIN-world fetch/XHR passive capture, content/service-worker bridge, side panel, authenticated localhost forwarding, auto-replan и bounded metadata-only live closed-loop trace реализованы. Не закрыто: проверка на реальном активном авторизованном бою и полноценный fallback через runtime objects.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE / LIVE TRANSPORT OBSERVED.** MV3 MAIN-world fetch/XHR passive capture, content/service-worker bridge, side panel, authenticated localhost forwarding, auto-replan и bounded metadata-only live closed-loop trace реализованы. Отдельный live diagnostic на реальном авторизованном active battle подтвердил, что `battle.php` действительно приходит через XHR, содержит semantic state/update payload и после ручного хода выдаёт incremental `turns=>...`; также выявлен частый `t=950` no-op/heartbeat traffic. Не закрыто: запуск именно production extension -> daemon closed loop на живом бою и узкий runtime-object cross-check/fallback для конкретно доказанных missing/mismatch fields.
 
 ## Назначение
 
@@ -455,7 +460,9 @@ Event sourcing нужен для:
 
 Manifest V3 extension инжектит небольшой script в `MAIN` world. Script ставит безопасные read-only wrappers на `window.fetch` и `XMLHttpRequest`, клонирует ответы, которые соответствуют whitelist боевых endpoint'ов, и отправляет копию через `window.postMessage` в isolated content script. Исходный ответ должен возвращаться игре без изменения.
 
-Если network transport не даёт полного состояния, разрешён fallback `Client Runtime Adapter`: чтение строго необходимых доступных runtime objects/DOM/Pixi model через main-world script. Это fallback, а не первая реализация.
+Для active `war.php` primary source подтверждён: уже существующие запросы клиента к `battle.php?warid=...`. Semantic payload может содержать одновременно `t=...`, `turns=>...`, `s=...`, chat/tooltips и другие blocks; incremental update после хода может быть очень коротким. Ответы, состоящие только из `t=<digits>` (live evidence: `t=950`), классифицируются как heartbeat/no-op: они могут учитываться в transport diagnostics, но **не создают canonical revision, не инвалидируют plan и не запускают replanning**. Фильтрация может происходить в extension или daemon, однако semantics должны быть закреплены тестом.
+
+Если network transport не даёт конкретного обязательного canonical поля либо network/runtime cross-check выявляет mismatch, разрешён fallback `Client Runtime Adapter`. Это отдельный versioned read-only adapter, а не альтернативный широкий scraper.
 
 ## Вход
 
@@ -480,16 +487,27 @@ Manifest V3 extension инжектит небольшой script в `MAIN` world
 
 ## Требования безопасности
 
-- wrapper не меняет URL, headers, body, response status или timing intentional behavior;
+- wrapper не меняет URL, headers, body, response status или intentional timing behavior;
 - capture только exact allowlist endpoints;
 - не передавать cookies/auth tokens локальному сервису;
+- не перехватывать request body ради state acquisition;
 - raw responses хранить только если включён debug/data-capture mode;
 - localhost transport проверяет одноразовый extension token;
-- никаких auto-click/event dispatch.
+- никаких auto-click/event dispatch;
+- runtime adapter не обходит весь `window`, не исполняет getters и не читает cookies/localStorage/sessionStorage/IndexedDB.
 
-## Fallback A
+## Fallback A — targeted Client Runtime Adapter
 
-Если невозможно перехватить payload, extension отправляет snapshot нужных client state objects. Adapter должен быть отдельным versioned модулем.
+Runtime fallback должен начинаться с уже доказанной battle model surface, а не с эвристического обхода глобалов:
+
+1. найти `stage` (`typeof stage !== "undefined" ? stage : window.stage`);
+2. найти battle pole через `stage.pole`, затем guarded fallback `stage[war_scr]` / `stage[window.war_scr]`;
+3. читать только `pole.obj` и минимальные turn markers/controls;
+4. для live entity cross-check разрешены поля identity/side/geometry/state: `obj_index`, `owner`, `side`, grid `x/y`, `alive`, `mvisible`, `nownumber`, `nowhealth`, `shots`, `shooter`; active-turn marker — `nowturn`, если доступен;
+5. `scr_x/scr_y` считать render-space/Pixi coordinates: допустимы для debug overlay/identity cross-check, но **не** являются canonical board coordinates и не должны подменять `x/y`;
+6. runtime snapshot используется только как cross-check или для явно отсутствующего network field; canonical state по-прежнему проходит через protocol adapter и invariants.
+
+Если `stage.pole.obj` отсутствует из-за версии клиента, adapter может использовать versioned alternate locator, но не должен возвращаться к broad window traversal как production contract.
 
 ## Fallback B
 
@@ -501,17 +519,21 @@ Manifest V3 extension инжектит небольшой script в `MAIN` world
 - XHR wrapper не ломает readyState/events;
 - 1000 последовательных responses без leak;
 - отсутствие capture на небоевых страницах;
-- extension работает при отключённом local daemon без ошибок игры.
+- extension работает при отключённом local daemon без ошибок игры;
+- exact no-op fixture `t=<digits>` не повышает canonical revision и не вызывает recommendation;
+- live-derived semantic fixture `turns=>3 + s=... -> turns=>4:...` проходит incremental decode/regression без ручного refresh;
+- targeted runtime adapter не вызывает getters/storage и умеет извлечь минимальную `stage.pole.obj` projection; `scr_x/scr_y` не принимаются за grid `x/y`;
+- при наличии одновременно network и runtime projection mismatch попадает в diagnostics, а не silently заменяет network canonical state.
 
 ## Acceptance
 
-После фактического изменения состояния в клиенте raw envelope должен появляться в daemon обычно менее чем за 250 мс без дополнительных запросов к HeroesWM.
+После фактического semantic изменения состояния в клиенте raw envelope должен появляться в daemon обычно менее чем за 250 мс без дополнительных запросов к HeroesWM. Heartbeat/no-op `t=<digits>` не должен создавать observed revision/replan. Full M01 product acceptance требует реального production trace `capture -> accepted canonical revision/hash -> plan -> manual move -> next revision -> next plan`; отдельный Tampermonkey/devtools capture доказывает transport feasibility, но не заменяет этот gate.
 
 ---
 
 # 9. Модуль M02 — Battle Protocol Adapter / Decoder
 
-> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Независимый C++/Python decoder построен по raw init.txt+turns0.txt. 866/866 incremental replay совпадают с one-shot; low-level coverage 100%; 847/866 финальных состояний structural-ready, held-out player-state structural-ready 97.72%. Остаются 19 боёв с geometry overlap и semantic-unresolved mechanics.
+> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Независимый C++/Python decoder построен по raw init.txt+turns0.txt. 866/866 incremental replay совпадают с one-shot; low-level coverage 100%; **852/866** финальных состояний structural-ready, **795/866** semantic-safe; held-out player-state structural-ready 97.72%. Остаются 14 финальных geometry overlap cases и semantic-unresolved mechanics. Live XHR evidence дополнительно подтвердил тот же `turns=>...`/`s=...` protocol family на активном бою, включая компактный incremental turn delta после ручного действия.
 
 ## Назначение
 
@@ -531,6 +553,8 @@ Manifest V3 extension инжектит небольшой script в `MAIN` world
 6. reconstruction/update `BattleState`;
 7. validation/invariants;
 8. emit canonical delta + snapshot hash.
+
+Transport-only no-op/heartbeat frames вроде `t=<digits>` должны распознаваться до semantic revision: decoder/session может сохранить их как diagnostics/transport metadata, но не должен выдавать изменившийся `BattleState` только из-за heartbeat.
 
 ## API
 
@@ -566,17 +590,21 @@ DecodeResult decode_update(const BattleState& previous,
 
 Изменение decoder, меняющее старый state hash, требует ADR/explicit migration.
 
+Live-derived payload перед commit в fixture должен быть минимально scrubbed от chat/user-facing metadata, сохраняя только protocol blocks, необходимые regression-тесту.
+
 ## Acceptance
 
 - 100% golden fixtures проходят;
 - неизвестные поля не silently drop;
-- decoder restart может восстановить состояние из full snapshot/replay без скрытого mutable singleton state.
+- decoder restart может восстановить состояние из full snapshot/replay без скрытого mutable singleton state;
+- heartbeat/no-op transport frame не создаёт ложную state revision;
+- live-derived initial/current snapshot + следующий incremental turn delta дают монотонную semantic progression.
 
 ---
 
 # 10. Модуль M03 — State Store / Battle Session
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Thread-safe session, battle reset, duplicate/out-of-order handling, immutable observed state, state hash, revision-bound cooperative stale-search cancellation и incremental decode реализованы. Planner сохраняет search graph между recommendation calls и делает conservative exact re-root только при точном observed hash в том же non-empty battle/perspective и совпадающем structure fingerprint; иначе graph сбрасывается. Остаточный gate — real authenticated live-session validation.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Thread-safe session, battle reset, duplicate/out-of-order handling, immutable observed state, state hash, revision-bound cooperative stale-search cancellation и incremental decode реализованы. Planner сохраняет search graph между recommendation calls и делает conservative exact re-root только при точном observed hash в том же non-empty battle/perspective и совпадающем structure fingerprint; иначе graph сбрасывается. Live client transport/progression уже независимо наблюдались, но остаточный gate — production extension/daemon live-session validation: semantic update должен повысить revision, heartbeat `t=<digits>` — нет.
 
 ## Назначение
 
@@ -593,6 +621,8 @@ DecodeResult decode_update(const BattleState& previous,
 
 Никогда не продолжать старое дерево search после прихода наблюдаемого state, если его hash не соответствует ожидаемому child state. При любом отличии выполнять re-root или полный reset.
 
+Transport heartbeat/no-op не считается новым observed state и не должен отменять planning job.
+
 ## API
 
 ```cpp
@@ -604,6 +634,7 @@ std::shared_ptr<const BattleState> current_observed() const;
 
 - out-of-order updates игнорируются/буферизуются;
 - duplicate update idempotent;
+- transport heartbeat/no-op idempotent и revision-neutral;
 - battle reload не создаёт вторую session;
 - завершившийся battle автоматически закрывает planner.
 
@@ -738,7 +769,7 @@ RawPayloadHash
 
 # 14. Модуль M07 — Legal Action Provider
 
-> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** MOVE/MELEE/RANGED/WAIT/DEFEND, move+attack, large/flyer/shooter rules, hero actions и subset spells/abilities реализованы. Held-out observed basic-action representability ~98.03%; remaining failures mostly special movement/ability mechanics.
+> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** MOVE/MELEE/RANGED/WAIT/DEFEND, move+attack, large/flyer/shooter rules, hero actions и subset spells/abilities реализованы. Held-out observed basic-action representability **5392/5481 = 98.376%**; remaining failures mostly special movement/ability mechanics.
 
 ## Назначение
 
@@ -748,7 +779,7 @@ RawPayloadHash
 
 ### Source 1 — Client legal actions (лучший для текущего observed state)
 
-Если Phase 0 показывает, что официальный client уже вычисляет reachable cells/targets, adapter читает их read-only. Это authoritative legal set только для текущего реального состояния.
+Если live gate показывает, что официальный client уже вычисляет reachable cells/targets и это можно читать read-only через узкий adapter, этот набор является authoritative legal set только для текущего реального состояния. **Наличие `stage.pole.obj`, grid coordinates и `nowturn` legal-action set не доказывает**; не подменять этот gate эвристикой по экранным координатам.
 
 ### Source 2 — Exact generic generator
 
@@ -1077,7 +1108,7 @@ Default profiles:
 
 # 21. Модуль M14 — Orchestrator / Replanning Loop
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE OFFLINE / LIVE NOT VALIDATED.** capture -> session -> decode -> plan -> state-hash validation -> auto-replan реализовано; revision-bound cancellation и conservative persistent exact re-root интегрированы. Incremental decoder детерминирован 866/866 replay, а replay recommendation-validity gate закрыт 120/120. Полный active-battle closed loop всё ещё требует проверки в пользовательском Chromium на живом авторизованном бою.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE OFFLINE / LIVE TRANSPORT PROVEN / PRODUCT LOOP NOT VALIDATED.** capture -> session -> decode -> plan -> state-hash validation -> auto-replan реализовано; revision-bound cancellation и conservative persistent exact re-root интегрированы. Incremental decoder детерминирован 866/866 replay, replay recommendation-validity gate закрыт 120/120, а реальный active browser уже подтвердил semantic `battle.php` snapshot -> ручной ход -> incremental turn update. Однако этот live evidence был снят отдельным passive diagnostic hook, не production extension+daemon, поэтому полный active-battle product closed loop всё ещё требует проверки.
 
 ## Назначение
 
@@ -1100,10 +1131,12 @@ IDLE
 ## Правила
 
 - только один active planning job на battle revision;
-- приход нового observed state отменяет старый job;
+- приход нового **semantic** observed state отменяет старый job;
+- heartbeat/no-op transport frame `t=<digits>` не создаёт revision и не отменяет job;
 - UI никогда не показывает recommendation, рассчитанный для старого state hash;
 - cancellation cooperative и быстрый;
-- если decoder сообщает uncertainty/partial state, planner не должен молча выдавать «точный» ход — UI показывает degraded mode.
+- если decoder сообщает uncertainty/partial state, planner не должен молча выдавать «точный» ход — UI показывает degraded mode;
+- при включённом runtime cross-check mismatch network-vs-runtime логируется как diagnostic/degraded evidence; runtime projection не подменяет canonical state silently.
 
 ---
 
@@ -1226,7 +1259,7 @@ Chrome Side Panel.
 
 ## Optional overlay
 
-Можно добавить read-only подсветку рекомендуемой клетки поверх игрового canvas, но **не в MVP**. Если добавляется, overlay не должен генерировать события мыши и должен иметь `pointer-events:none`.
+Можно добавить read-only подсветку рекомендуемой клетки поверх игрового canvas, но **не в MVP**. Если добавляется, overlay не должен генерировать события мыши и должен иметь `pointer-events:none`. Для координат overlay разрешено использовать validated mapping `scr_x/scr_y -> viewport` как чисто визуальный слой; planner/action coordinates остаются canonical grid `x/y`.
 
 ---
 
@@ -1267,7 +1300,7 @@ python -m export.onnx --checkpoint ...
 
 # 26. Модуль M19 — Evaluation Harness
 
-> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Есть C++/Python regression, corpus-check, 866-battle shadow replay, held-out legal coverage, policy/value/damage metrics, permanent 120-state planner validity gate и M11 2/4/8/16-step uncertainty/selector/survival/temperature evidence suite. Replay invalid-recommendation gate >=100 states закрыт 120/120 с нулём invalid recommendations. Нет Level 4 authenticated live shadow и Level 5 human-in-loop hard-PvE win-rate suite.
+> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Есть C++/Python regression, corpus-check, 866-battle shadow replay, held-out legal coverage, policy/value/damage metrics, permanent 120-state planner validity gate и M11 2/4/8/16-step uncertainty/selector/survival/temperature evidence suite. Replay invalid-recommendation gate >=100 states закрыт 120/120 с нулём invalid recommendations. Browser-only live transport/progression evidence теперь существует, но Level 4 authenticated shadow требует production extension/daemon recommendation loop; Level 5 human-in-loop hard-PvE win-rate suite отсутствует.
 
 Это критический модуль. Без него проект легко будет казаться работающим, но советовать плохие ходы.
 
@@ -1311,6 +1344,8 @@ Replay re-decision benchmark:
 ## Level 4 — Shadow Mode online
 
 Система наблюдает реальные бои, но пользователь играет сам. Сравнивать recommendation и фактический outcome. Никакого влияния на игру.
+
+Transport-only capture без daemon recommendation не считается Level 4 PASS, но может использоваться как live protocol fixture/cross-check evidence.
 
 ## Level 5 — Human-in-the-loop trials
 
@@ -1365,7 +1400,8 @@ Replay re-decision benchmark:
 
 ## 27.4. Runtime latency targets
 
-- state ingestion: <250 ms после client update;
+- state ingestion: <250 ms после semantic client update;
+- heartbeat/no-op classification: не должна запускать decoder/planner hot path;
 - decoder: <10 ms common case;
 - recommendation FAST: <2 s на recommended desktop;
 - NORMAL: 2–10 s;
@@ -1471,6 +1507,8 @@ Search: 82k simulations, confidence 0.84.
 client fingerprint -> decoder version -> catalog -> model set
 ```
 
+Runtime adapter locator (`stage.pole`/`stage[war_scr]`) также должен быть versioned по client fingerprint; его поломка не должна автоматически инвалидировать network decoder, если primary payload остаётся валиден.
+
 ---
 
 # 32. Error handling / degraded modes
@@ -1493,8 +1531,13 @@ Fallback CPU/older compatible model или no recommendation; никогда н�
 ## E6. Новое состояние во время search
 Cancel old search, begin new search.
 
+`transport heartbeat/no-op` сюда не относится: он не является новым состоянием.
+
 ## E7. Recommendation invalid по клиенту
 Считать Severity-1 bug. Логировать полный state/action/model/search snapshot для regression fixture.
+
+## E8. Network/runtime cross-check mismatch
+Не заменять canonical state runtime projection'ом silently. Пометить state/protocol degraded, сохранить scrubbed diagnostics и либо продолжить только если mismatch некритичен, либо не выдавать recommendation.
 
 ---
 
@@ -1503,8 +1546,9 @@ Cancel old search, begin new search.
 - bind daemon на loopback;
 - pair extension token;
 - не хранить auth cookie/password;
-- raw HTML/network payload может содержать user identifiers — debug capture должен иметь clear setting и retention policy;
+- raw HTML/network payload может содержать user identifiers/chat/tooltips — debug capture должен иметь clear setting, retention policy и перед commit превращаться в scrubbed minimal fixture;
 - logs не должны содержать session cookies/authorization headers;
+- runtime cross-check не читает browser storage/cookies;
 - модели и datasets локальны по умолчанию;
 - никаких remote telemetry без explicit opt-in.
 
@@ -1518,6 +1562,8 @@ Cancel old search, begin new search.
 
 **Не реализовывать:** auto-click, auto-cast, автоматический выбор клетки, отправка команд боя, анти-AFK, имитация user input, высокочастотный массовый scraper по умолчанию.
 
+Предоставленный пользователем automation script используется только как evidence того, какие read-only runtime fields существуют и как они соотносятся с grid/render coordinates. Его auto-action часть **не является** частью solver scope и не переносится в проект.
+
 Если позднее пользователь захочет автоматическое управление, это отдельный продуктовый/правовой decision и не входит в данное ТЗ.
 
 ---
@@ -1526,7 +1572,7 @@ Cancel old search, begin new search.
 
 ## Phase 0 — Protocol feasibility spike
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Historical raw transport подтверждён и собран на 866 боях; grammar reverse engineering и client resource analysis выполнены. Не закрыта только проверка live active-battle transport в пользовательском браузере.
+> **Статус checkpoint 0.3.0 — COMPLETE FOR FEASIBILITY.** Historical raw transport собран на 866 боях, grammar reverse engineering и client resource analysis выполнены. 12.08.2026 на реальном авторизованном active battle дополнительно доказан пассивный live XHR transport: `battle.php` semantic snapshot/update был пойман без дополнительных HeroesWM requests, после ручного хода пришёл отдельный incremental `turns=>...`, а runtime `lastturn` синхронно увеличился. Это закрывает protocol-feasibility неизвестность. Production M01/M14 extension/daemon closed-loop acceptance остаётся отдельным незакрытым gate.
 
 **Цель:** снять самые большие неизвестности до ML.
 
@@ -1548,13 +1594,13 @@ P0-08. Документировать protocol-notes и unknowns.
 - нет дополнительных запросов к серверу в primary path;
 - определён формат `RawBattleEnvelope`.
 
-**Если Phase 0 не выполнена — не начинать обучение.**
+**Phase 0 feasibility exit выполнен.** Не путать это с MVP live product acceptance: следующий обязательный gate — production extension/daemon closed loop.
 
 ---
 
 ## Phase 1 — Canonical State + Decoder MVP
 
-> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Canonical state и independent decoder работают; 100% record coverage, 847/866 final structural-ready, held-out player-state ready 97.72%. Остаток — редкая geometry/semantic mechanics.
+> **Статус checkpoint 0.3.0 — ADVANCED PARTIAL.** Canonical state и independent decoder работают; 100% record coverage, **852/866** final structural-ready, **795/866** semantic-safe, held-out player-state ready 97.72%. Остаток — редкая geometry/semantic mechanics.
 
 P1-01. Protobuf schemas.  
 P1-02. Parser/tokenizer.  
@@ -1569,7 +1615,7 @@ Exit: один полный replay проходит end-to-end и визуаль
 
 ## Phase 2 — Closed-loop plumbing без AI
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan, authenticated WebSocket extension connection, cooperative stale-search cancellation и UI state-hash guard реализованы и regression-tested. Нужна live-browser validation.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE.** Local capture/session/API/auto-replan, authenticated WebSocket extension connection, cooperative stale-search cancellation и UI state-hash guard реализованы и regression-tested. Live network transport и manual-move incremental update уже доказаны отдельным passive browser capture; ещё нужна production validation, что именно MV3 -> daemon повышает semantic revision, heartbeat остаётся revision-neutral и UI автоматически обновляет recommendation без refresh/ручной команды.
 
 P2-01. Local C++ daemon.  
 P2-02. WebSocket extension connection.  
@@ -1658,7 +1704,7 @@ Exit: multi-step divergence заметно снижена на реальных 
 
 ## Phase 8 — Online advisor MVP
 
-> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE FOR PLUMBING / LIVE NOT VALIDATED.** Daemon+extension+sidepanel, pairing/auth, revision-bound cancellation, authenticated WebSocket push replanning и state-hash guards готовы и permanent integration-tested. Replay recommendation validity закрыта 120/120 states; всё ещё отсутствует обязательный authenticated active-battle end-to-end smoke и последующий hard-PvE human-in-loop benchmark.
+> **Статус checkpoint 0.3.0 — MOSTLY COMPLETE FOR PLUMBING / LIVE TRANSPORT OBSERVED / PRODUCT LOOP NOT VALIDATED.** Daemon+extension+sidepanel, pairing/auth, revision-bound cancellation, authenticated WebSocket push replanning и state-hash guards готовы и permanent integration-tested. Replay recommendation validity закрыта 120/120 states; отдельный live diagnostic подтвердил real `battle.php` snapshot -> manual move -> incremental update, но обязательный production extension -> daemon -> recommendation -> next revision -> recommendation smoke ещё не выполнен. После него нужен hard-PvE human-in-loop benchmark.
 
 P8-01. Подключить planner к live session.  
 P8-02. FAST/NORMAL/DEEP profiles.  
@@ -1685,7 +1731,7 @@ P9-05. Не допускать self-training collapse: mix original data and hol
 
 ## Phase 10 — Hard PvE quality program
 
-> **Статус checkpoint 0.3.0 — NOT COMPLETE.** Нет live hard-PvE benchmark с attempts-to-win/win-rate uplift. Это следующий продуктовый этап после live validation и дальнейшего ability coverage.
+> **Статус checkpoint 0.3.0 — NOT COMPLETE.** Нет live hard-PvE benchmark с attempts-to-win/win-rate uplift. Это следующий продуктовый этап после production live validation и дальнейшего ability coverage.
 
 P10-01. Собрать curated набор самых трудных боёв.  
 P10-02. Для каждого хранить initial state, human outcomes, attempts, known winning trajectories.  
@@ -1698,7 +1744,7 @@ P10-06. Добавлять data/rules/model capacity только по evidence.
 
 # 36. Definition of Done для MVP
 
-> **Checkpoint 11.08.2026:** replay-часть пункта 10 закрыта permanent gate **120/120** с 0 invalid recommendations. Общий MVP всё ещё **не COMPLETE**, потому что live acquisition/closed-loop должны быть подтверждены реальным authenticated active-battle smoke; hard-PvE quality относится к следующему milestone.
+> **Checkpoint 12.08.2026:** replay-часть пункта 10 закрыта permanent gate **120/120** с 0 invalid recommendations. Live state-acquisition feasibility также доказана отдельным passive capture на реальном active battle. Общий MVP всё ещё **не COMPLETE**, потому что production MV3/daemon recommendation/replanning loop должен быть подтверждён end-to-end; hard-PvE quality относится к следующему milestone.
 
 MVP считается готовым, если одновременно выполнено:
 
@@ -1759,6 +1805,9 @@ MVP считается готовым, если одновременно вып�
 
 - raw payload -> decoder -> state;
 - extension capture -> daemon;
+- heartbeat/no-op capture -> revision unchanged/no replan;
+- live-derived semantic snapshot -> incremental turn update -> revision advances;
+- optional runtime projection -> canonical cross-check diagnostics;
 - daemon -> ONNX -> recommendation;
 - observed update cancels search.
 
@@ -1801,6 +1850,8 @@ uncertainty
 warnings
 ```
 
+Transport diagnostics отдельно агрегируют heartbeat/no-op count, не создавая recommendation trace event на каждый `t=<digits>`.
+
 Debug bundle одной кнопкой:
 
 ```text
@@ -1812,7 +1863,7 @@ model manifests
 logs tail
 ```
 
-Не включать cookies.
+Не включать cookies. При runtime cross-check сохранять только минимальную scrubbed projection, а не произвольный dump `window`/DOM.
 
 ---
 
@@ -1885,6 +1936,8 @@ ui:
 12. Не выдавать рекомендацию для stale state hash.
 13. Не увеличивать neural model, пока bottleneck не доказан ablation/metrics.
 14. Не считать one-step dynamics accuracy достаточной.
+15. Не превращать доступность `stage.pole.obj` в broad runtime scraping contract: primary truth — protocol payload, runtime — targeted cross-check/fallback.
+16. Не использовать `scr_x/scr_y` как canonical grid position: это render-space coordinates.
 
 ---
 
@@ -1926,6 +1979,8 @@ ui:
 
 **Pass:** live state автоматически подхватывается без лишнего polling.  
 **Fail:** исследовать runtime adapter; не строить ML на неполных snapshots.
+
+**Current evidence 12.08.2026:** transport-feasibility **PASS** — passive browser hook получил real active `battle.php` state/update и следующий incremental delta после manual move без дополнительных запросов. Product M01/M14 gate остаётся open до production extension -> daemon -> canonical revision/hash -> recommendation -> next semantic revision/recommendation. Heartbeat `t=<digits>` должен быть revision-neutral.
 
 ## DG-2: Replay reconstruction
 
@@ -2035,10 +2090,10 @@ Planner exploitation of model error — ожидаемая проблема. Exa
 # 49. Итоговая продуктовая формулировка
 
 **Вход:** активный battle URL/warid или автоматически обнаруженный открытый HeroesWM бой.  
-**Наблюдение:** passive read-only state capture.  
+**Наблюдение:** passive read-only capture уже получаемых client `battle.php` responses как primary truth; targeted `stage.pole.obj`/`nowturn` projection — только cross-check/fallback.  
 **Решение:** risk-sensitive stochastic planner, использующий learned PvE policy, value, dynamics и exact rule plugins.  
 **Выход:** лучший следующий ручной ход + вероятность победы + альтернативы + условная principal variation.  
-**Обновление:** автоматически после каждого фактического изменения battle state.  
+**Обновление:** автоматически после каждого фактического **semantic** изменения battle state; transport heartbeat не является состоянием.  
 **Конечная цель:** максимальный стабильный win rate на сложных PvE боях, а не имитация исторических человеческих ходов.
 
 ---
@@ -2078,11 +2133,15 @@ https://onnxruntime.ai/docs/get-started/with-cpp.html
 **S11. CMake current documentation / C++23 support:**  
 https://cmake.org/cmake/help/latest/
 
+**S12. Project-owner live evidence, 12.08.2026:** авторизованный active battle `warid=1672746591`, passive browser capture `battle.php` snapshot/update + manual-move incremental delta и synchronized runtime `lastturn`; raw capture содержит user-facing battle metadata/chat и поэтому не коммитится как есть. В repository допускается только scrubbed minimal regression fixture.
+
+**S13. Project-owner browser runtime evidence, 12.08.2026:** предоставленный рабочий Playwright automation path читает unit state через `stage.pole.obj`/`stage[war_scr].obj`, grid `x/y`, `owner`, `nownumber`, `nowhealth`, `nowturn`, а `scr_x/scr_y` использует как Pixi/render coordinates. Использовать только как read-side engine evidence; action/click automation из этого кода не входит в solver scope.
+
 ---
 
 # 51. Короткая инструкция coding agent
 
-> Работай по фазам и decision gates этого ТЗ. Не начинай ML, пока не доказан стабильный live/replay state acquisition. Не автоматизируй действия игрока. Не делай лишних запросов к HeroesWM в primary path. Все внешние данные переводятся в canonical schema. Любая неопределённость протокола фиксируется в diagnostics и ADR, а не скрывается. Сначала correctness и end-to-end closed loop, затем ML, затем search, затем performance. При обнаружении блокирующей неизвестности сделай минимальный эксперимент, задокументируй результат и выбери предусмотренный fallback; не останавливай всю разработку из-за несущественных неизвестностей.
+> Работай по фазам и decision gates этого ТЗ. State-acquisition feasibility уже доказана live capture, но не объявляй M01/M14 COMPLETE до production extension/daemon closed-loop smoke. Не автоматизируй действия игрока. Не делай лишних запросов к HeroesWM в primary path. Primary live truth — passive `battle.php` payload; `stage.pole.obj`/`nowturn` — targeted cross-check/fallback. `t=<digits>` heartbeat не должен создавать revision/replan. Все внешние данные переводятся в canonical schema. Любая неопределённость протокола фиксируется в diagnostics и ADR, а не скрывается. Сначала correctness и end-to-end closed loop, затем ML/search quality и performance. При обнаружении блокирующей неизвестности сделай минимальный эксперимент, задокументируй результат и выбери предусмотренный fallback; не останавливай всю разработку из-за несущественных неизвестностей.
 
 ### 2026-08-10 M11 multi-step learned-dynamics gate
 
@@ -2105,4 +2164,3 @@ https://cmake.org/cmake/help/latest/
 - The sample spans **109 distinct held-out battles**. At the permanent 120-simulation gate: **120/120** recommendations are valid, with **0** canonical-hash mismatches, illegal best actions, illegal alternatives, non-finite metrics or other invalid recommendations.
 - A stronger 80 -> 300 simulation stress reference also passes 120/120; action-type stability is 98.33% and exact-action stability 85%.
 - This satisfies the **replay** half of the >=100-state invalid-recommendation acceptance requirement. It does **not** replace the required real authenticated active-battle smoke / live-state gate; M14 cannot be declared fully complete from replay alone.
-
