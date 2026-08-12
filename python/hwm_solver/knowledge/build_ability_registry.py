@@ -24,7 +24,7 @@ EXACT_SEARCH = {
     "painmirror", "magmashield", "pleasureinpain", "raptureinagony", "auraofbravery",
     "takeroots", "fireattack", "battlethirst", "tasteofblood", "bloodfrenzy", "organicarmor", "shieldother", "concentration", "lizardbite", "lifedrain", "regeneration", "manafeed", "mightyslam",
 }
-PARTIAL_EXACT = {"forcearrow", "ifire", "bloodlust", "cripplingwound"}
+PARTIAL_EXACT = {"forcearrow", "ifire", "bloodlust", "cripplingwound", "gribbomb"}
 EXACT_TARGETING = {"undead", "elemental", "mechanical", "immunity", "imind", "iblind",
                    "islow", "ilighting", "icold", "iair", "iearth"}
 IDENTITY_LOW_RISK = {"alive", "demonic", "amphibian", "pirate"}

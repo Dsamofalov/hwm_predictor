@@ -13,6 +13,7 @@ python/tests/test_cripplingwound_registry_risk.py
 python/tests/test_cripplingwound_tooltip_evidence.py
 python/tests/test_deathwail_evidence.py
 python/tests/test_gribbomb_evidence.py
+python/tests/test_gribbomb_registry_risk.py
 python/tests/test_gribbomb_selfdestruct_evidence.py
 python/tests/test_hexingattack_evidence.py
 python/tests/test_packhunter_evidence.py
