@@ -67,3 +67,9 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Whole-corpus gate: 866 battle dirs, 7 carrier battles, exactly 1 validated `Sbom`, exactly 3 adjacent living targets and 3 damage hits, exact target-set match 1/1, zero missing/extra targets, and all 3 non-`Sbom` carrier deaths externally explained.
   - Observed damage deltas are `36101` to one adjacent same-owner stack and `26354` to each of two other-owner adjacent stacks; ratios `1.000` and `0.730` demonstrate that predictive Earth-damage magnitude cannot be inferred as a universal raw-HP delta from this single activation.
   - Generic replay still leaves the carrier alive after the raw `Sbom`; therefore Gribbomb is not promoted in the registry yet. The next executable step is exact self-destruction replay handling without synthesizing predictive Earth damage.
+
+### Gribbomb handoff lock
+
+- User directive after the validated `Sbom` evidence block: **do not advance to the next ability yet**.
+- The next agent must continue Gribbomb from the exact replay self-destruction boundary documented above.
+- Taunt and the rest of the weighted queue remain deferred until Gribbomb is either safely promoted to the strongest evidence-supported classification or explicitly blocked by a precise remaining evidence/substrate gap.

@@ -66,6 +66,10 @@ Run `31621756446` on `d04999b...` expanded to **86 jobs** after the additional G
 
 ## Next ownership state
 
-1. Audit Taunt `A<old_target><new_target>` collisions across the entire corpus to determine whether it is a carrier-specific redirect discriminator rather than a generic opcode.
-2. If the Taunt collision population is clean, add an evidence-backed exact redirect boundary while leaving unknown trigger probability unresolved.
-3. Revisit Gribbomb executable self-destruction only through a safe minimal replay hook; do not synthesize predictive Earth damage from the single observed activation.
+**Stay on Gribbomb. Do not start Taunt or another ability yet.**
+
+1. Implement or prove the minimal exact replay hook for carrier self-destruction on the validated carrier-sourced `SPECIAL:bom` discriminator.
+2. Add regressions proving that `Sbom` kills/removes the carrier in replay without inventing any target-damage formula.
+3. Keep the three observed target damage records replay-observed only until the Earth-damage modifier rule is independently proven; do not synthesize universal predictive damage from the single activation.
+4. Re-run authoritative hosted Windows/MSVC Ability CI and record the functional SHA/run in `ability_changelog.md` and this status file.
+5. Only after Gribbomb is either safely promoted to the strongest evidence-supported classification or explicitly blocked by a precise remaining substrate/evidence gap may the agent recompute weighted risk and select the next ability.
