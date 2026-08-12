@@ -7,6 +7,7 @@ from pathlib import Path
 from hwm_solver.ability.childofthelight_evidence import analyze_corpus
 from hwm_solver.ability.childofthelight_school_evidence import analyze_school_tokens
 from hwm_solver.ability.childofthelight_spellwire_evidence import analyze_spellwire_corpus
+from hwm_solver.ability.childofthelight_tooltipmeta_evidence import analyze_tooltip_metadata
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -86,31 +87,57 @@ def test_childofthelight_whole_corpus_evidence():
     assert school["parse_errors"] == []
     assert school["corpus_battle_dirs"] == 866
     assert school["carrier_battles"] == 108
-    assert school["spellbook_actors"] > 0
-    assert school["spellbook_entries"] > 0
-    assert school["schools"]
+    assert school["spellbook_actors"] == 651
+    assert school["spellbook_entries"] == 2031
+    assert school["schools"] == {
+        "neutral": 1405,
+        "air": 275,
+        "earth": 144,
+        "cold": 141,
+        "other": 31,
+        "fire": 18,
+        "nt": 17,
+    }
     assert sum(school["schools"].values()) == school["spellbook_entries"]
 
     wire = analyze_spellwire_corpus(CORPUS)
     assert wire["parse_errors"] == []
     assert wire["corpus_battle_dirs"] == 866
     assert wire["carrier_battles"] == 108
-    # The first hosted probe disproved the guessed literal token "light".  Keep this
-    # explicit until the raw school-token inventory above identifies the server token.
+    # The first hosted probe disproved the guessed literal token "light". Keep this
+    # explicit until independent server metadata identifies a game-school discriminator.
     assert wire["light_spellbook_actors_in_carrier_battles"] == 0
     assert wire["light_spell_names"] == {}
-    assert wire["status_groups_with_carrier"] > 0
-    assert (
-        wire["status_groups_positive_cost"]
-        + wire["status_groups_without_positive_cost"]
-        == wire["status_groups_with_carrier"]
-    )
+    assert wire["status_groups_with_carrier"] == 158
+    assert wire["status_groups_positive_cost"] == 146
+    assert wire["status_groups_without_positive_cost"] == 12
+    assert wire["status_groups_without_source_spellbook"] == 0
+    assert wire["status_codes"] == {
+        "fst": 70,
+        "stn": 47,
+        "slw": 13,
+        "crs": 10,
+        "rgm": 10,
+        "sff": 7,
+        "cnf": 1,
+    }
     assert wire["light_status_groups"] == 0
     assert wire["light_single_groups"] == 0
     assert wire["light_mass_groups"] == 0
     assert wire["light_ambiguous_groups"] == 0
     assert wire["light_single_copy_groups"] == 0
     assert wire["light_mass_control_groups"] == 0
+    assert wire["direct_damage_carrier_records"] == 3
+    assert wire["direct_damage_codes"] == {"ltn": 2, "mfs": 1}
+    assert wire["raise_dead_carrier_records"] == 0
+
+    tooltipmeta = analyze_tooltip_metadata(CORPUS)
+    assert tooltipmeta["parse_errors"] == []
+    assert tooltipmeta["corpus_battle_dirs"] == 866
+    assert tooltipmeta["carrier_battles"] == 108
+    assert tooltipmeta["carrier_battles_with_tooltips"] > 0
+    assert tooltipmeta["top_sections"]
+    assert tooltipmeta["section_types"]
 
     warnings.warn(
         "CHILDOFTHELIGHT_SCHOOL_EVIDENCE "
@@ -119,4 +146,8 @@ def test_childofthelight_whole_corpus_evidence():
     warnings.warn(
         "CHILDOFTHELIGHT_SPELLWIRE_EVIDENCE "
         + json.dumps(wire, ensure_ascii=False, sort_keys=True)
+    )
+    warnings.warn(
+        "CHILDOFTHELIGHT_TOOLTIPMETA_EVIDENCE "
+        + json.dumps(tooltipmeta, ensure_ascii=False, sort_keys=True)
     )
