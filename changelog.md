@@ -11,6 +11,14 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-12
 
+### CI parallel-work canon
+
+- Commit: `4beff4847cfd0c17fccc27809131854628e6ea30` — `docs: add non-blocking CI work rule [skip ci]`.
+  - Extended `TESTS_CANON.md` with the explicit rule that hosted CI is a verification source, not a global development barrier.
+  - While a candidate SHA is still running in CI, useful independent work must continue in parallel when its correctness does not depend on the pending verdict.
+  - Waiting is reserved for genuinely dependent decisions such as declaring a checkpoint validated, diagnosing a failure on the same surface, or avoiding ambiguous attribution between dependent changes.
+  - Parallel work must still preserve atomic commits, identifiable candidate SHAs, and the prohibition on claiming a pending CI result as passed.
+
 ### M13 opponent probability-mass expansion
 
 - Commit: `1bdc948f5572cf72bc3bd8749f341d73e4e16de0` — `feat: expand opponent search by policy mass`.
