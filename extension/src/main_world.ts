@@ -9,9 +9,9 @@ const hwmIsNoopHeartbeat=(u:string,body:string)=>{
   try{
     if(new URL(u,location.href).pathname!=="/battle.php")return false;
   }catch{return false}
-  const trimmed=body.trim();
-  // Live evidence uses `t=950`; retain numeric-only echo compatibility as defense-in-depth.
-  return /^(?:t=)?\d+$/.test(trimmed);
+  // Classify only the exact authenticated-live transport shape. Unknown network
+  // payloads must remain primary truth and continue through normal ingestion.
+  return /^t=\d+$/.test(body.trim());
 };
 
 function hwmEmit(source:"fetch"|"xhr",url:string,body:string){

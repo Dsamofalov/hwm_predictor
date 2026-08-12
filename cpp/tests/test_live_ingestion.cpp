@@ -21,6 +21,24 @@ static std::string read_all(const fs::path& path) {
 int main() {
     const fs::path fixture = fs::path(HWM_PROJECT_ROOT) / "fixtures" / "live_closed_loop";
 
+    // Do not broaden the evidence-backed classifier: an unknown bare numeric network
+    // payload is not the observed `t=<digits>` heartbeat shape and must reach ingestion.
+    hwm::SessionStore unknown_store;
+    hwm::RawEnvelope unknown;
+    unknown.battle_id = "sanitized-live";
+    unknown.source = "xhr";
+    unknown.url_kind = "battle_update";
+    unknown.url = "https://example.invalid/battle.php?warid=sanitized-live";
+    unknown.captured_at_ms = 9000;
+    unknown.sequence_hint = 1;
+    unknown.body = "950";
+    const auto unknown_result = unknown_store.capture(unknown);
+    CHECK(unknown_result.accepted);
+    CHECK(unknown_result.reason != "heartbeat_noop");
+    CHECK(!unknown_result.canonical_state_updated);
+    CHECK(unknown_store.last_envelope().has_value());
+    CHECK(unknown_store.last_envelope()->body == "950");
+
     hwm::SessionStore store;
     hwm::RawEnvelope snapshot;
     snapshot.battle_id = "sanitized-live";
