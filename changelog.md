@@ -19,6 +19,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - The M11 selector remains production-disabled; this change only makes its evidence representation reproducible across equivalent hosted Windows runners.
 - Commit: `a71a249343dce0e2ebc34ecb4107695c49e896e2` — `test: lock selector evidence precision`.
   - Added focused Python regressions that require fitted selector weights and probabilities to stay on the canonical precision boundary and verify that adjacent binary64 tail values collapse to the same exact evidence value.
+- Commit: `96499e4d242d1c4d1af1d6579cc21af5a0155679` — `data: canonicalize M11 selector evidence`.
+  - Refreshed only `data/reports/dynamics-selector-gate.json` to the new canonical selector representation: fitted weights and the selected threshold are stored at the same 12-decimal evidence boundary used by the evaluator.
+  - Accuracy, invalid-action, split, and production-enable gates are unchanged; exact committed-evidence verification remains strict equality rather than a tolerance-based comparison.
 
 ### CI parallel-work canon
 
