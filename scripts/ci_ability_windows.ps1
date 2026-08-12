@@ -98,6 +98,22 @@ function Write-GitHubJsonOutput([string]$Name, [object[]]$Values) {
     [System.IO.File]::AppendAllText($env:GITHUB_OUTPUT, "$Name=$json`n", $utf8NoBom)
 }
 
+function Write-GitHubRawJsonOutput([string]$Name, [string]$Json) {
+    try {
+        $parsed = ConvertFrom-Json -InputObject $Json
+    } catch {
+        throw "Invalid $Name inventory JSON: $Json"
+    }
+    if ($null -eq $parsed) { throw "$Name inventory JSON is empty." }
+    Write-Host "$Name inventory JSON: $Json"
+    if (-not $env:GITHUB_OUTPUT) {
+        Write-Host $Json
+        return
+    }
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::AppendAllText($env:GITHUB_OUTPUT, "$Name=$Json`n", $utf8NoBom)
+}
+
 function Get-AbilityPythonTestFiles {
     $manifest = 'python/tests/ABILITY_TESTS.txt'
     if (-not (Test-Path $manifest -PathType Leaf)) { throw "Ability test manifest not found: $manifest" }
@@ -138,8 +154,7 @@ switch ($Mode) {
         if (-not (Test-Path $caseExe -PathType Leaf)) { throw "Ability case runner not found: $caseExe" }
         $json = (& $caseExe --list-json | Out-String).Trim()
         Assert-NativeSuccess 'Ability C++ inventory'
-        try { $cases = @($json | ConvertFrom-Json) } catch { throw "Invalid C++ case inventory JSON: $json" }
-        Write-GitHubJsonOutput -Name 'cases' -Values $cases
+        Write-GitHubRawJsonOutput -Name 'cases' -Json $json
     }
     'CppCase' {
         if (-not $CaseName) { throw 'CaseName is required for CppCase.' }
