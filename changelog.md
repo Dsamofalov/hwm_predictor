@@ -17,6 +17,8 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Diagnosed standard Windows run `31627888832`: Core, planner/protocol regressions, the `invalid <= 14` corpus gate, M11 multistep/calibration/selector/survival gates, and the Release planner benchmark all passed; Full failed only because exact committed selector evidence differed by final binary64 bits in fitted coefficients.
   - Added an explicit 12-decimal canonical precision boundary for fitted selector coefficients and selector probabilities before they become exact evidence or policy decisions, removing irrelevant BLAS/reduction last-bit variation without loosening `verify_m11_evidence.py` or any acceptance threshold.
   - The M11 selector remains production-disabled; this change only makes its evidence representation reproducible across equivalent hosted Windows runners.
+- Commit: `a71a249343dce0e2ebc34ecb4107695c49e896e2` — `test: lock selector evidence precision`.
+  - Added focused Python regressions that require fitted selector weights and probabilities to stay on the canonical precision boundary and verify that adjacent binary64 tail values collapse to the same exact evidence value.
 
 ### CI parallel-work canon
 
