@@ -206,6 +206,23 @@ A test job must not mutate and republish a shared binary under the same artifact
 
 Tests should wait only for prerequisites they actually require. An unrelated build, corpus job, or evaluator is not a valid dependency merely because an old workflow placed it earlier.
 
+### 7.1 CI completion is not a global work barrier
+
+Hosted CI is a required verification source, not a reason to idle independent development work.
+
+When CI for a candidate SHA is still running, continue any useful task whose correctness does not depend on that pending verdict. In particular, independent code/documentation work, read-only audits, evidence attribution, test design, benchmark analysis, and preparation of another atomic change should proceed in parallel when safe.
+
+Waiting for CI is justified only when the next action materially depends on its result, for example when:
+
+- the result is required before declaring a checkpoint validated or updating verified status/metrics;
+- a failure must be diagnosed before safely changing the same surface;
+- the next change would depend on behavior that the pending run is specifically validating;
+- stacking another dependent change would make failure attribution ambiguous.
+
+Parallel work must preserve attribution: keep candidate SHAs and logical changes separately identifiable, do not claim a pending job passed, and do not use concurrency as a reason to mix unrelated changes into one commit.
+
+**Default rule: do not wait for CI if another useful independent task can be executed safely in parallel.**
+
 ---
 
 ## 8. C++ / MSVC policy
@@ -418,6 +435,7 @@ Before accepting a test-parallelization change, verify:
 - [ ] Can shard/worker counts change without changing test semantics?
 - [ ] Are concrete parallelism settings treated as tuning rather than canon?
 - [ ] Are builds reused safely as immutable artifacts where practical?
+- [ ] While hosted CI is running, is useful independent work continuing instead of idling on an unrelated pending verdict?
 - [ ] Are crashes and hangs isolated rather than able to hide many unrelated cases?
 - [ ] Are runtime resources isolated per independent job?
 - [ ] Are global evidence metrics reduced exactly rather than approximately?
@@ -431,6 +449,8 @@ Before accepting a test-parallelization change, verify:
 **Tests should be decomposed to the smallest meaningful independent units and made exactly accountable.**
 
 **Independent units should be allowed to run concurrently, but the repository does not prescribe a fixed level of concurrency.**
+
+**Hosted CI is a verification barrier only for decisions that depend on its verdict; independent useful work should continue in parallel while CI runs.**
 
 **Shard count, worker count, matrix width, and `max-parallel` are implementation details that may change without changing test semantics.**
 
