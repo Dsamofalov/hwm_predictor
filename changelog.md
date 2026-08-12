@@ -68,3 +68,22 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - The carrier now becomes `alive=false`, `count=0`, `top_hp=0`; adjacent HP changes remain sourced only from raw `DAMAGE` records and no predictive Earth-damage formula was introduced.
   - Hosted Windows run `31625718512`: **PASS, 87/87 atomic jobs** on the exact functional SHA.
   - Gribbomb's carrier-removal boundary is exact observed replay; predictive collateral magnitude remains unresolved, so the next ability-owned step is a bounded registry/risk promotion rather than a fully exact claim.
+
+### Gribbomb bounded registry/risk promotion
+
+- Commit: `e4616a155fdd1e15def28f74c8c7af43391177ba` — `feat(ability): classify Gribbomb partial exact`.
+  - Promoted `gribbomb` in the source-of-truth registry builder from `unresolved` to `partial_exact`, giving the canonical `partial_exact` risk weight `0.25` instead of the old unresolved `0.62`.
+  - Added a leakage-safe registry/risk regression that synthesizes the old Gribbomb baseline and proves the candidate registry lowers held-out ability risk.
+  - The regression also requires Gribbomb to remain outside the predictive collateral model: the exact claim is carrier self-removal, not an inferred Earth-damage formula.
+  - Hosted Windows run `31626881854`: **FAIL** only because the new regression encoded a brittle global support-count constant; the Gribbomb classification and semantic assertions themselves passed.
+
+- Commit: `19ba4e6caed9977839eaac8ebb0181ca57a32ede` — `fix(ability): compare Gribbomb registry counts relatively`.
+  - Replaced the brittle global registry cardinality assertion with the invariant that the candidate has exactly `+1 partial_exact / -1 unresolved` versus the synthesized pre-promotion baseline.
+  - No semantic or risk threshold was weakened.
+
+- Commit: `da7fd216f6b993f7e6a1770371004253b80d35cc` — `fix(ability): trigger registry risk tests in CI`.
+  - Closed a workflow path-filter gap by matching `python/tests/test_*_registry_risk.py` for Ability push/PR triggers instead of naming only the older Crippling Wound file.
+  - Added an atomic workflow-contract regression so future ability registry-risk tests cannot silently fall outside the hosted validation trigger.
+  - Authoritative hosted Windows run `31627726097`: **PASS, 89/89 jobs**, including the Gribbomb registry/risk node, all Gribbomb self-destruction controls, the new workflow-trigger regression, and final `publish_status`.
+  - Gribbomb's supported classification ceiling is now `partial_exact`: observed carrier self-removal is exact, while predictive Earth/collateral-damage magnitude remains unresolved.
+  - Checked generated registry/report artifacts still require deterministic regeneration from the validated builder before the Gribbomb package is considered repository-consistent and the queue advances to Taunt.

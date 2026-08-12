@@ -7,8 +7,8 @@ Integration branch: `integration/ability-snapshot-20260812`
 Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
 Current main integration reference: **`7e646733eded4a491b25ddae1c2efcb9287feeec`**
-Current validated functional ability SHA: **`2e82c969e0da708f5bbda6973c92d662a638aa3c`**
-Authoritative hosted Windows run: **`31625718512` — PASS, 87/87 atomic jobs**
+Current validated functional ability SHA: **`da7fd216f6b993f7e6a1770371004253b80d35cc`**
+Authoritative hosted Windows run: **`31627726097` — PASS, 89/89 jobs including `publish_status`**
 
 ## Resumed ability-development governance
 
@@ -41,6 +41,16 @@ Validated whole-corpus evidence on `2e82c969...`:
 
 Semantic boundary: the raw activation discriminator, observed adjacent target set, and carrier self-removal are exact replay semantics. The three target HP deltas remain raw-observed consequences only. Predictive Earth-damage magnitude remains unresolved because the single activation exhibits target-dependent deltas, so Gribbomb cannot be promoted to a fully exact runtime classification.
 
+## Gribbomb registry/risk package
+
+- `e4616a155fdd1e15def28f74c8c7af43391177ba` — source-of-truth registry builder promotes `gribbomb` to `partial_exact`, canonical risk `0.25`, with a held-out risk regression and an explicit guard that Gribbomb is not enabled in the predictive collateral model.
+- Hosted run `31626881854` failed on a brittle global support-count constant in that new regression; the Gribbomb semantic/classification assertions passed.
+- `19ba4e6caed9977839eaac8ebb0181ca57a32ede` — replaced the magic global cardinalities with the relative invariant `+1 partial_exact / -1 unresolved` against a synthetic pre-promotion baseline; no semantic gate was weakened.
+- `da7fd216f6b993f7e6a1770371004253b80d35cc` — generalized Ability CI path filtering to `test_*_registry_risk.py` and added a workflow-contract regression proving registry-risk tests trigger hosted Ability validation.
+- Authoritative run `31627726097` completed successfully with **89/89 jobs**, including the Gribbomb registry/risk node, Gribbomb replay/self-destruction controls, workflow-trigger regression, C++ matrix, and final `publish_status`.
+
+Registry semantic status: **`gribbomb = partial_exact`, risk weight `0.25`** in the validated source-of-truth builder. This promotion covers exact observed carrier self-removal only. Predictive Earth/collateral damage remains unresolved and Gribbomb remains outside the predictive collateral model.
+
 ## Integration state
 
 The divergent raw `ability` history is **not** merged into `main`. The canonical lane continues from the integrated ability snapshot while preserving current main-owned planner, M11/evaluation, daemon/runtime, extension, general CI, specification, and report surfaces.
@@ -57,22 +67,22 @@ The ability snapshot includes:
 
 Ability CI follows `TESTS_CANON.md`: build once where appropriate, freeze exact inventories, and execute independent C++ test functions / pytest node IDs as separate jobs. Atomicity and exact coverage are correctness requirements; matrix width and worker count are scheduler details.
 
-Run `31625718512` on `2e82c969...` completed with workflow conclusion `success` across **87/87 atomic jobs**. The new `test_gribbomb_bom_replay_kills_only_validated_carrier`, the strict whole-corpus `Sbom` gate, and the non-`Sbom` death controls all completed successfully.
+Run `31627726097` on `da7fd216...` completed with workflow conclusion `success` across **89/89 jobs**, including final `publish_status`. The Gribbomb registry/risk regression, replay-kill boundary, wrong-source/malformed-marker controls, non-`Sbom` death controls, and the new registry-risk CI trigger contract all completed successfully.
 
 ## Preserved semantic boundaries
 
 - `cripplingwound` remains `partial_exact`; speculative probability remains disabled.
 - `powerstrike` trigger prediction remains unresolved/learned rather than promoted to an exact speculative proc.
 - Aura of Fire Vulnerability remains evidence-only until a direct Fire-spell execution substrate exists.
-- Gribbomb has exact raw `Sbom` discrimination, exact observed adjacent target-set evidence, and exact observed carrier self-removal; predictive Earth-damage magnitude remains unresolved.
+- `gribbomb` is `partial_exact` in the validated source-of-truth builder: raw `Sbom` discrimination, observed adjacent target-set evidence, and observed carrier self-removal are exact; predictive Earth/collateral-damage magnitude remains unresolved and is not enabled in the predictive collateral model.
 - Existing closed Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike mechanics are not reworked without contrary evidence.
 
 ## Next ownership state
 
-**Stay on Gribbomb until registry/risk reflects the now-validated boundary. Do not start Taunt yet.**
+**Stay on Gribbomb until checked generated registry/report artifacts match the validated builder. Do not start Taunt yet.**
 
-1. Promote Gribbomb only to the strongest evidence-supported registry classification; `partial_exact` is the current ceiling because carrier self-destruction is exact while predictive collateral Earth-damage magnitude remains unresolved.
-2. Add a registry/risk regression proving the promotion does not imply a predictive target-damage formula.
-3. Regenerate canonical registry artifacts and recompute the held-out ability-risk contribution.
-4. Re-run authoritative hosted Windows/MSVC Ability CI and record the functional SHA/run in `ability_changelog.md` and this status file.
-5. Only then recompute the weighted queue and select the next unfinished ability.
+1. Deterministically regenerate the canonical checked registry/report artifacts from the current source-of-truth builder and inputs; do not hand-edit generated JSON/CSV.
+2. Verify the generated diff reflects only the evidence-backed Gribbomb `unresolved -> partial_exact`, risk `0.62 -> 0.25`, and corresponding aggregate/report changes.
+3. Validate the artifact-sync functional SHA on authoritative hosted Windows/MSVC Ability CI (or the repository's canonical deterministic artifact gate if stricter).
+4. Record that exact artifact-sync SHA/run in `ability_changelog.md` and this status file.
+5. Only then recompute the weighted unfinished-ability queue and select the next ability, expected to begin with the existing Taunt evidence package if it remains highest priority.

@@ -83,3 +83,22 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Whole-corpus boundary remains 866 battle dirs, 7 carrier battles, exactly 1 validated `Sbom`, exactly 3 adjacent living targets and 3 raw damage hits, exact target-set match 1/1, and zero missing/non-adjacent extra targets.
   - Hosted Windows run `31625718512`: **PASS, 87/87 atomic jobs** on this exact functional SHA, including the new replay-kill, wrong-source/malformed-marker, and non-`Sbom` death controls.
   - Carrier self-destruction is now exact observed replay. Predictive Earth-damage magnitude remains unresolved, so no `exact_search`/fully exact promotion is justified.
+
+### Gribbomb `partial_exact` registry/risk promotion
+
+- Commit: `e4616a155fdd1e15def28f74c8c7af43391177ba` — `feat(ability): classify Gribbomb partial exact`.
+  - Promoted `gribbomb` in the source-of-truth registry builder from `unresolved` to `partial_exact`, assigning the canonical `partial_exact` risk `0.25` instead of the old unresolved `0.62`.
+  - Added `test_gribbomb_partial_exact_registry_and_risk`, which builds a candidate registry, synthesizes the old Gribbomb `unresolved/0.62` baseline, and requires candidate held-out ability risk to improve without worsening the p90 gate.
+  - The same regression requires Gribbomb to stay out of the predictive collateral model, so the promotion cannot be mistaken for a solved Earth-damage formula.
+  - Hosted run `31626881854`: **FAIL** only on a brittle magic assertion for the repository-wide `partial_exact`/`unresolved` totals. Gribbomb's semantic classification/risk/collateral-boundary assertions passed before that count check.
+
+- Commit: `19ba4e6caed9977839eaac8ebb0181ca57a32ede` — `fix(ability): compare Gribbomb registry counts relatively`.
+  - Replaced the global magic cardinalities with a leakage-safe relative invariant: the candidate registry must be exactly `+1 partial_exact / -1 unresolved` versus the synthetic pre-promotion baseline.
+  - No semantic assertion, risk threshold, or evidence boundary was weakened.
+
+- Commit: `da7fd216f6b993f7e6a1770371004253b80d35cc` — `fix(ability): trigger registry risk tests in CI`.
+  - Found that Ability CI path filters named only `test_cripplingwound_registry_risk.py`, so a new registry-risk test could fail to trigger the workflow when changed alone.
+  - Generalized push/PR filtering to `python/tests/test_*_registry_risk.py` and added `test_registry_risk_manifest_tests_trigger_ability_ci` to lock that contract.
+  - Authoritative hosted Windows run `31627726097`: **PASS, 89/89 jobs** on the exact SHA, including the Gribbomb registry/risk node, all Gribbomb self-destruction controls, the workflow-trigger contract, all C++ cases, and final `publish_status`.
+  - Validated semantic ceiling: `gribbomb = partial_exact`, risk `0.25`; exact observed carrier self-removal is represented, while predictive Earth/collateral-damage magnitude remains unresolved and disabled.
+  - Remaining Gribbomb repository-consistency task: deterministically regenerate the checked registry/report artifacts from the validated builder before advancing the weighted queue to Taunt.
