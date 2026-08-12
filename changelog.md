@@ -11,6 +11,14 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-12
 
+### Single-target melee position-hint recovery
+
+- Commit: `1c5a2b3478e7dacf0ebc714a4fb83246fed3b3f8` — `fix: recover single-target melee position hints`.
+  - Extended special-free melee recovery to non-colliding raw position hints only when the actor damages exactly one target; multi-target decisions retain the conservative existing path so first-hit inference cannot corrupt later replay state.
+  - Added three exact corpus regressions (two chronological-train, one held-out) where one legal/reachable target-adjacent landing exists within one Chebyshev cell of the raw hint.
+  - Held-out basic-action representability improved from `5391/5481` to `5392/5481` (`98.3762%`), with exact failure inventory `90 -> 89`, no added or changed held-out failures, and unchanged Python final-overlap evidence at `17` battles / `17` pairs.
+  - C++ protocol regression and the full-corpus structural-invalid budget (`14`) passed before promotion to `main`; the candidate also improved train representability by two actions without a partition regression.
+
 ### Atomic test execution canon
 
 - Commit: `d4424f5bc861f8eae58b0c6c723f99b8b3b58341` — `docs: define atomic test execution canon`.
