@@ -87,3 +87,22 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Authoritative hosted Windows run `31627726097`: **PASS, 89/89 jobs**, including the Gribbomb registry/risk node, all Gribbomb self-destruction controls, the new workflow-trigger regression, and final `publish_status`.
   - Gribbomb's supported classification ceiling is now `partial_exact`: observed carrier self-removal is exact, while predictive Earth/collateral-damage magnitude remains unresolved.
   - Checked generated registry/report artifacts still require deterministic regeneration from the validated builder before the Gribbomb package is considered repository-consistent and the queue advances to Taunt.
+
+### Gribbomb generated artifact closure
+
+- Commit: `c24cacf060182494092ef3e460301844639388e6` — `chore(ability): regenerate ability registry artifacts`.
+  - Deterministically regenerated checked `data/catalog/ability_registry.json` and `.csv` from the validated source-of-truth builder and tracked inputs.
+  - The generated output incorporates the Gribbomb `partial_exact` promotion and also corrects the previously stale checked Crippling Wound classification; support totals are `partial_exact = 20`, `unresolved = 77`.
+
+- Commit: `eaca45fc3de060b030ee912c38efea234aa00c1f` — `chore(ability): regenerate current ability reports`.
+  - Regenerated `data/reports/ability-registry-current.json` and `data/reports/ability-risk-current.json` from the synchronized checked registry.
+  - Held-out ability-risk mean changed `0.22431 -> 0.21744`; p90 changed `0.37538 -> 0.36755`.
+  - Stale unresolved Gribbomb risk dropped out of the unfinished top-risk slice, while Crippling Wound is now represented as `partial_exact` with canonical risk `0.25`.
+  - Hosted Windows run `31631708571` on exact SHA `eaca45fc...`: workflow **PASS / conclusion `success`**. All test/build/inventory jobs succeeded; final `publish_status` was skipped by workflow condition.
+  - Builder, checked registry, and current report artifacts are now repository-consistent. Gribbomb is closed at the strongest evidence-supported `partial_exact` boundary; predictive Earth/collateral magnitude remains explicitly unresolved and disabled.
+
+### Ability queue after Gribbomb closure
+
+- Recomputed from the synchronized current risk report: Taunt is the highest-priority currently actionable unfinished ability after excluding already documented semantic/substrate blockers.
+- Taunt development resumes from the existing evidence auditor rather than restarting from scratch. Its current smoke regression must be upgraded to exact whole-corpus counts and raw special-code contexts before any semantic promotion.
+- Final-target observations alone are not accepted as Taunt proc evidence; a carrier-specific raw discriminator is required before claiming redirected targeting or proc probability.
