@@ -20,6 +20,12 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Added a scrubbed `fixtures/live_closed_loop` snapshot/heartbeat/incremental-update regression and an independent `hwm-live-ingestion-tests` CTest asserting monotonic revision/hash behavior.
   - Extended the existing stale-cancellation integration to inject a heartbeat during an in-flight long search, assert unchanged revision/hash, then verify that the following real canonical publication still cancels the stale search.
 
+### Exact decoder residual evidence
+
+- Commit: `9f8597edc99a310226a5e6c272c4a8b8acfacc6b` — `test: publish exact decoder residual taxonomy`.
+  - Extended `decoder_geometry_audit.py` without changing decoder behavior: every current held-out failure is now emitted with battle/decision identity, ownership (`special_free`, semantically resolved SPECIAL, or unresolved SPECIAL), special codes, unresolved opcodes, actor metadata, damage targets, and exact target-relative landing cardinality near the observed destination.
+  - Added an independent `Geometry Evidence` workflow that runs the full chronological corpus audit on every functional `main` push, publishes the exact JSON artifact, and ignores changelog/docs-only pushes. The workflow is diagnostic/evidence-only and does not weaken or replace Core/Full/Ability gates.
+
 ## 2026-08-12
 
 ### Live active-battle engine evidence / TZ correction
