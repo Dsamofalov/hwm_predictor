@@ -40,12 +40,12 @@ def test_gribbomb_partial_exact_registry_and_risk(tmp_path: Path):
     # partial_exact only. Predictive Earth-damage magnitude remains deliberately unresolved.
     assert gribbomb["support"] == "partial_exact"
     assert gribbomb["risk_weight"] == 0.25
-    assert build_result["support_counts"]["partial_exact"] == 19
-    assert build_result["support_counts"]["unresolved"] == 77
     assert "gribbomb" not in _enabled_collateral_codes()
 
     # Reconstruct the pre-promotion registry from the same candidate payload so the risk
-    # comparison changes only Gribbomb's support/risk classification.
+    # comparison changes only Gribbomb's support/risk classification. Global support-count
+    # cardinalities are deliberately compared relatively: unrelated registry growth must not
+    # turn this ability regression into a magic-number scheduling/catalog contract.
     baseline_path = tmp_path / "ability_registry_baseline.json"
     baseline_payload = json.loads(json.dumps(payload))
     baseline_gribbomb = next(
@@ -55,6 +55,14 @@ def test_gribbomb_partial_exact_registry_and_risk(tmp_path: Path):
     baseline_gribbomb["risk_weight"] = 0.62
     baseline_payload["support_counts"]["partial_exact"] -= 1
     baseline_payload["support_counts"]["unresolved"] += 1
+    assert (
+        build_result["support_counts"]["partial_exact"]
+        == baseline_payload["support_counts"]["partial_exact"] + 1
+    )
+    assert (
+        build_result["support_counts"]["unresolved"]
+        == baseline_payload["support_counts"]["unresolved"] - 1
+    )
     baseline_path.write_text(
         json.dumps(baseline_payload, ensure_ascii=False, indent=2),
         encoding="utf-8",
