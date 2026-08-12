@@ -9,6 +9,17 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Specification/status documents are updated when a requirement is verified or its implementation status changes.
 - A bookkeeping commit cannot record its own SHA; entries therefore reference the functional commits they document.
 
+## 2026-08-13
+
+### Production live heartbeat-neutral ingestion
+
+- Commit: `c3d07e81770681c9b0daae8ef1a19874ad98efa1` — `fix: keep live heartbeats revision-neutral`.
+  - Added exact numeric-only `battle.php` heartbeat classification in the MAIN-world network hook before sequence allocation and forwarding; semantic network responses remain the primary capture truth.
+  - Removed the periodic broad runtime-global structure scraper from the MAIN-world hook instead of expanding it into canonical state acquisition. Narrow runtime cross-check/fallback remains a separate, non-primary surface.
+  - Added daemon defense-in-depth before session reset, raw hash/dedup, capture-time ordering, decoder publication, and revision bookkeeping, so a heartbeat cannot reset a battle, replace the last meaningful envelope, publish a canonical revision, or invalidate search.
+  - Added a scrubbed `fixtures/live_closed_loop` snapshot/heartbeat/incremental-update regression and an independent `hwm-live-ingestion-tests` CTest asserting monotonic revision/hash behavior.
+  - Extended the existing stale-cancellation integration to inject a heartbeat during an in-flight long search, assert unchanged revision/hash, then verify that the following real canonical publication still cancels the stale search.
+
 ## 2026-08-12
 
 ### Live active-battle engine evidence / TZ correction
