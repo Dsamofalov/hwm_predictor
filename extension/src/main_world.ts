@@ -10,7 +10,8 @@ const hwmIsNoopHeartbeat=(u:string,body:string)=>{
     if(new URL(u,location.href).pathname!=="/battle.php")return false;
   }catch{return false}
   const trimmed=body.trim();
-  return trimmed.length>0&&/^\d+$/.test(trimmed);
+  // Live evidence uses `t=950`; retain numeric-only echo compatibility as defense-in-depth.
+  return /^(?:t=)?\d+$/.test(trimmed);
 };
 
 function hwmEmit(source:"fetch"|"xhr",url:string,body:string){

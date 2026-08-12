@@ -22,6 +22,7 @@ bool is_noop_battle_heartbeat(const RawEnvelope& e) {
     while (first < body.size() && (body[first] == ' ' || body[first] == '\t' || body[first] == '\r' || body[first] == '\n')) ++first;
     size_t last = body.size();
     while (last > first && (body[last - 1] == ' ' || body[last - 1] == '\t' || body[last - 1] == '\r' || body[last - 1] == '\n')) --last;
+    if (last - first >= 2 && body[first] == 't' && body[first + 1] == '=') first += 2;
     if (first == last) return false;
     for (size_t i = first; i < last; ++i) {
         if (body[i] < '0' || body[i] > '9') return false;
@@ -61,11 +62,11 @@ CaptureOutcome SessionStore::capture(RawEnvelope e) {
         return out;
     }
 
-    // Official battle.php emits frequent numeric echo frames (for example "4416") that
-    // carry no canonical battle semantics. Ignore them before battle reset, raw dedup/hash,
-    // capture ordering and decoder bookkeeping so they cannot publish a revision or cancel
-    // an in-flight search. The MAIN-world hook performs the same classification earlier;
-    // this daemon guard keeps non-extension producers safe as well.
+    // Live battle.php evidence contains frequent `t=950` no-op frames. Numeric-only
+    // echoes are accepted as the same transport class for compatibility. Ignore both
+    // before battle reset, raw dedup/hash, capture ordering and decoder bookkeeping so
+    // they cannot publish a revision or cancel an in-flight search. The MAIN-world hook
+    // performs the same classification earlier; this daemon guard protects other producers.
     if (is_noop_battle_heartbeat(e)) {
         out.accepted = true;
         out.reason = "heartbeat_noop";

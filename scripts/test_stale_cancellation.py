@@ -49,8 +49,9 @@ def main() -> None:
                 )
                 time.sleep(0.15)
 
-                # Numeric battle.php echo frames are transport heartbeats, not canonical
-                # updates. They must not publish a revision/hash or cancel this search.
+                # The authenticated live client emitted `t=950` battle.php frames. They are
+                # transport heartbeats, not canonical updates, and must not publish a
+                # revision/hash or cancel this in-flight search.
                 heartbeat_status, heartbeat = request_json(
                     base,
                     "/capture",
@@ -62,7 +63,7 @@ def main() -> None:
                         "url": "https://example.invalid/battle.php?warid=demo",
                         "capturedAt": int(time.time() * 1000),
                         "sequenceHint": 100,
-                        "body": "4416",
+                        "body": "t=950",
                     },
                     token=token,
                 )
