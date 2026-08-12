@@ -8,6 +8,17 @@ Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
 Authoritative hosted Windows run: **`31607886774` — PASS**
 
+## Resumed ability-development governance
+
+Current resumed-development documentation commits:
+
+- `7200ec0f24157ae545f1798c76036f9d26dfedc3` — created the dedicated `docs/ability/ability_changelog.md` journal;
+- `a4f359ccfcf9a3a8133986f6e51f441e4c7cdd29` — corrected the canonical contract at `docs/ABILITY_AGENT_TZ.md`, where mandatory maintenance of the dedicated ability changelog is now the first/highest-priority rule.
+
+The mistakenly created `docs/ability/ABILITY_AGENT_TZ.md` is now only a compatibility pointer to `docs/ABILITY_AGENT_TZ.md`; it is not a second contract.
+
+These are documentation/process changes only. The last authoritative executable ability validation remains hosted Windows run `31607886774` until a new functional ability package is committed and validated.
+
 ## Integration state
 
 The divergent `ability` history is **not** merged into `main`. Instead, the final ability-owned state was recreated on top of the current `main` tree and validated there.
@@ -64,4 +75,4 @@ Integration does not promote evidence-only mechanics merely because their probes
 
 ## Next ownership state
 
-After this snapshot lands on `main`, future creature-ability development should branch from the current `main` state and use the atomic ability workflow as its validation surface. The old divergent `ability` branch is historical source material, not the branch to merge wholesale.
+Continue directly on the current `ability` branch from the integrated snapshot. Preserve the semantic boundaries above, use weighted ability-risk contribution to select the next genuinely unclosed mechanic, and validate each functional package with the atomic hosted-Windows ability workflow before claiming PASS.

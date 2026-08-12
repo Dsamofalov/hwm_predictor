@@ -39,3 +39,15 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
 - `powerstrike` trigger prediction remains learned/unresolved rather than being promoted to an exact speculative proc.
 - Aura of Fire Vulnerability remains evidence-only until an executable direct-Fire-spell substrate exists.
 - Existing closed Life Drain, Regeneration, Mana Feed, Mighty Slam, and Paw Strike mechanics are preserved unless new evidence falsifies their current model.
+
+### Dedicated ability changelog contract
+
+- Commit: `7200ec0f24157ae545f1798c76036f9d26dfedc3` — `docs(ability): add canonical ability changelog and agent rules`.
+  - Added this dedicated ability development journal.
+  - The same commit mistakenly created a duplicate agent-TZ path under `docs/ability/`; that path is not canonical.
+
+- Commit: `a4f359ccfcf9a3a8133986f6e51f441e4c7cdd29` — `docs(ability): make ability changelog rule canonical`.
+  - Corrected the canonical contract at `docs/ABILITY_AGENT_TZ.md`.
+  - Made mandatory maintenance of this file the first/highest-priority process rule.
+  - Converted the mistaken `docs/ability/ABILITY_AGENT_TZ.md` duplicate into a compatibility pointer to the canonical TZ instead of maintaining two competing contracts.
+  - No executable ability semantics changed; hosted Windows/MSVC validation is therefore not claimed for this documentation-only correction.
