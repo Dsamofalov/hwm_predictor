@@ -1,8 +1,19 @@
 # Main development front checkpoint
 
-Updated: 2026-08-11
+Updated: 2026-08-12
 
-This file tracks the non-ability lane while creature abilities are developed independently on branch `ability` / draft PR #1.
+This file tracks main-owned correctness/search/runtime work. Ability mechanics retain separate evidence ownership, while the validated ability snapshot and atomic Ability Windows workflow are already integrated into `main`.
+
+## 2026-08-12 current checkpoint
+
+- Decoder functional commit `1c5a2b3478e7dacf0ebc714a4fb83246fed3b3f8` conservatively recovers unique nearby **single-target** melee position hints in both Python and C++; multi-target and SPECIAL decisions keep the guarded path.
+- Full corpus: **852/866 structural-ready**, **14 invalid finals**, **795/866 semantic-safe**. All 14 final structural failures are `overlap` only (16 pairs total).
+- Held-out observed basic-action representability: **5392/5481 = 98.376%**, exact residual inventory **89**; the promoted change removed one held-out failure and added/changed none.
+- Generic follow-up probes rejected broader non-colliding melee recovery (downstream regressions) and unreachable-shooter marker expansion (zero delta). Remaining generic MOVE failures have no unambiguous geometry-only correction.
+- Residual ownership audit: **66/86** remaining melee representability failures contain SPECIAL records; the two special-free multi-target cases are tied to intrinsic multi-target abilities. Do not absorb those into generic decoder heuristics.
+- First standard rerun `31622628256` exposed only stale M11 selector committed evidence after replay-state changed. Evidence-only commit `16998598ce3dc282bef76a9b29b27e83fba8bdf9` refreshed that report on `windows-2022`; follow-up standard run `31624580974` is **Core PASS + Full PASS**. Atomic Ability run `31622630092` is **PASS**.
+- Immediate product blocker remains the real authenticated active-battle smoke in `docs/LIVE_VALIDATION.md`; after that, main-owned work continues with evidence-backed decoder closure, M11 production gating and M13 opponent/chance/search calibration.
+
 
 ## Completed in the current main-front pass
 
@@ -129,8 +140,8 @@ Permanent main CI commit `bb8404606621966d8c688f22e93c6ce35dd695ea` excludes the
 - `mUUUXXYY` ordinary melee hints are conservatively canonicalized only for physically colliding raw anchors with one unique target-adjacent reachable landing within one Chebyshev cell; ability-owned SPECIAL movement stays excluded.
 - Impossible special-free shooter position hints are treated as markers only under guarded stationary-melee or actually-legal ranged conditions (`shots > 0`, no adjacent enemy block).
 - Main-owned `hwm-protocol-tests` is now a permanent CTest target separate from ability-owned `hwm-tests`.
-- Full-corpus result: **851/866 structural-ready**, **15 invalid finals**, **17 overlap invariant hits**, **794/866 semantic-safe**.
-- Held-out observed basic-action representability: **5385/5481 = 98.25%**.
-- Full CI permanently enforces `invalid <= 15`; M11 committed evidence was regenerated after decoder semantics changed and exact verification passes. Production learned dynamics remains disabled.
+- Full-corpus result at the 12.08.2026 checkpoint: **852/866 structural-ready**, **14 invalid finals** (all `overlap`, 16 pairs), **795/866 semantic-safe**; Python replay-final overlap audit remains **17 battles / 17 pairs**.
+- Held-out observed basic-action representability: **5392/5481 = 98.376%** (**89** residual failures).
+- Full CI permanently enforces `invalid <= 14`; M11 committed evidence was re-synchronized after decoder semantics changed and exact verification passes on run `31624580974`. Production learned dynamics remains disabled.
 - Hosted run `31475600960`: **Core PASS + Full PASS**, CTest **2/2**, planner **120/120**, Python **84/84**.
-- Next main-owned front: continue corpus-proven geometry/protocol discrepancies among the remaining 15 finals; do not absorb Paw Strike/forced-movement/ability semantics owned by `ability`.
+- Next main-owned decoder front: continue corpus-proven discrepancies among the remaining 14 overlap finals and 89 held-out representability residuals; do not absorb SPECIAL/multi-target/forced-movement semantics owned by the ability evidence lane.

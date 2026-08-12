@@ -1,14 +1,14 @@
 # Техническое задание: HeroesWM PvE Battle Solver / Advisor
 
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
-**Дата:** 11.08.2026
+**Дата:** 12.08.2026
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 11.08.2026 — `main` переведён на Windows-only CI; M13 stochastic outcomes/transpositions/persistent exact re-root дополнены scheduler-recency и semantic-effect hash canonicalization; permanent held-out planner gate расширен до 120 состояний с 0 invalid recommendations; M11 получил reproducible 2/4/8/16-step ensemble, uncertainty/selector/survival/temperature evidence gates, но production learned dynamics остаётся выключенной; real authenticated active-battle smoke и decoder/legal >=99.9% всё ещё обязательны; ability-front ведётся отдельно в ветке `ability`.
+**Последнее обновление реализации:** 12.08.2026 — validated ability snapshot и atomic Ability Windows CI интегрированы в `main`; decoder/legal улучшен до 852/866 structural-ready, 795/866 semantic-safe и 5392/5481 held-out observed basic-action representability без ослабления invariants; M11 selector evidence синхронизирован после decoder-state сдвига; standard Windows run `31624580974` и atomic Ability run `31622630092` являются hosted evidence текущего функционального checkpoint; production learned dynamics остаётся выключенной; real authenticated active-battle smoke и decoder/legal >=99.9% всё ещё обязательны.
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
 
-## 0.3. Статус реализации на checkpoint 0.3.0 (11.08.2026)
+## 0.3. Статус реализации на checkpoint 0.3.0 (12.08.2026)
 
 Этот раздел является частью ТЗ и фиксирует фактическое состояние реализации. Исходные требования ниже **не удалены**: напротив каждого крупного модуля и фазы добавлен статус checkpoint 0.3.0.
 
@@ -18,11 +18,11 @@
 
 - Raw corpus: **866/866** боёв с `init.txt` + `turns0.txt`.
 - Low-level protocol coverage: **100%**, unknown record families в текущем tokenizer: **0**.
-- Final structural-ready: **851/866**; semantic-safe final states: **794/866**.
+- Final structural-ready: **852/866**; semantic-safe final states: **795/866**. Все **14** оставшихся structural-invalid finals нарушают только invariant `overlap` (16 overlap-пар суммарно).
 - Incremental replay == one-shot replay: **866/866**.
 - Held-out player non-hero states: structural-ready **5351/5476 = 97.72%**; strict semantic-safe **4979/5476 = 90.92%**.
 - При structural-ready состоянии basic action generator имеет хотя бы один action в **5338/5351 = 99.76%** held-out states.
-- Held-out observed basic-action representability: **5385/5481 = 98.25%**.
+- Held-out observed basic-action representability: **5392/5481 = 98.376%**; exact residual failure inventory: **89** (36 melee destination unreachable, 50 target-not-adjacent after move, 3 move unreachable).
 - Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
 - Ability catalog: **421** ability code; registry: **85 exact-search**, 11 exact-targeting, 18 partial-exact, 9 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Mighty Slam` теперь имеет отдельный exact `ABILITY` path: выбранная цель + соседние вражеские стеки, knockback только small при валидной клетке, без retaliation, cooldown по минимальному наблюдаемому gap=3; `Paw Strike` переведён из `learned_damage` в `modeled_proc`: вероятность `min(1, 0.10 * travelled_cells)` прошла chronological holdout лучше constant baseline, а observed `I<target><source>` даёт exact ATB=0 transition 174/174; physical push применяется только при валидной клетке; `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
 - Ability-risk на held-out sample: mean **0.22431**, p90 **0.37538**.
@@ -32,19 +32,19 @@
 - M11 multi-step evidence: five-member train-only physical-damage residual ensemble evaluated at **2/4/8/16** halfturn horizons. Deterministic mean force-L1 at 16 steps **0.04947 vs 0.08125** generic, but invalid-action fraction **3.58% vs 2.51%**; stochastic survival gate at 16 steps **0.05028 vs 0.08178** force-L1 while valid-observed-action coverage is **96.349% vs 97.493%**. Uncertainty/selector experiments do not clear production criteria; leakage-safe positive-residual temperature calibration selects scale **0.0** because no candidate passes the hard joint accuracy/coverage gate. Production learned dynamics remains **disabled**.
 - Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
 - Permanent held-out planner validity gate: **120/120** sampled states из **110** held-out battles, **0** invalid recommendations, state-hash mismatches, illegal best actions/alternatives или non-finite metrics. На validated hosted Windows run `31475600960` budget `1 -> 120`: action-type stability **99.17%**, exact-action stability **86.67%**.
-- Automated tests / supported platform: Windows 10/11 x64 + MSVC. Последний полностью проверенный main tree `2843f4e086852688d3188f19b1973306c40ebe7b`, hosted `windows-2022` run `31475600960`: **Core PASS + Full PASS**; MSVC Debug/Release main-front CTest **2/2** (`hwm-planner-tests` + `hwm-protocol-tests`), 120-state planner gate, pairing/auth, stale cancellation, live binding, WebSocket, Python **84/84**, TypeScript/extension, `planner-demo 5000` и все permanent M11 evidence commands PASS. Full CI также enforcing full-corpus structural budget **invalid <= 15**. Historical Linux/self-hosted Windows results remain evidence only. Ability-owned `hwm-tests` остаётся вне main-front CTest до интеграции ветки `ability`.
+- Automated tests / supported platform: Windows 10/11 x64 + MSVC. Проверенный main tree `16998598ce3dc282bef76a9b29b27e83fba8bdf9`: standard hosted `windows-2022` run `31624580974` — **Core PASS + Full PASS**. Atomic Ability run `31622630092` — **PASS** на том же функциональном decoder checkpoint до evidence-only selector refresh. Main-front CTest остаётся отделён от ability-owned atomic inventory; Full CI enforcing full-corpus structural budget **invalid <= 14** и exact M11 committed-evidence verification. Historical Linux/self-hosted Windows results remain evidence only.
 
 ### Текущий незавершённый фронт разработки
 
-Основной `main`-front и ability-front теперь разделены. Creature abilities продолжаются независимо в ветке `ability`; нижеприведённый порядок — приоритет **основного** фронта.
+Main-owned correctness/search work и ability-owned mechanics остаются организационно разделены, но validated ability snapshot и отдельный atomic Ability workflow уже интегрированы в `main`. Новые ability semantics по-прежнему принимаются только после corpus/CI evidence; нижеприведённый порядок — приоритет **основного** фронта.
 
 1. **Real active-battle smoke gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном активном авторизованном PvE-бою. Это остаётся главным продуктовым блокером для закрытия Browser Bridge/Orchestrator: network capture primary truth, runtime-object fallback только по доказанному отсутствующему полю.
-2. **Decoder/legal correctness:** устранить **15** оставшихся финальных structural-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **98.25%** к acceptance **>=99.9%**. Уже добавлен permanent full-corpus non-regression budget `invalid <= 15`.
+2. **Decoder/legal correctness:** устранить **14** оставшихся финальных overlap-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **5392/5481 = 98.376%** к acceptance **>=99.9%**. Permanent full-corpus non-regression budget уже ужесточён до `invalid <= 14`. Из 89 held-out representability residuals 66/86 melee failures содержат SPECIAL records; generic main-decoder heuristics не должны подменять ability-owned semantics.
 3. **M11 learned dynamics:** развить уже работающий 2/4/8/16-step evidence harness из primary physical-damage residual до полноценного structured ensemble. Не включать runtime selector/uncertainty/residual production path, пока одновременно не пройдены multi-step accuracy и observed-action survival/validity gates.
 4. **M13 search quality после correctness closure:** safe stochastic outcome separation, transpositions и exact persistent re-root уже реализованы; следующий front — более сильное explicit opponent/chance branching, search calibration и quality/latency trade-offs, не ломая revision cancellation и exact hash/structure guards.
 5. **Evaluation:** replay invalid-recommendation gate >=100 states уже закрыт (**120/120**). После stable live acquisition нужны live-state validation и hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
 
-Ability-front: high-impact unresolved assist/counter/summon/control mechanics ведутся отдельно в `ability` и должны попадать в `main` только после corpus/CI review.
+Ability ownership: high-impact unresolved assist/counter/summon/control mechanics остаются отдельным evidence lane. Snapshot уже присутствует в `main`; дальнейшие semantics должны попадать туда только после corpus review и atomic Ability CI, без дублирования generic main-owned decoder/search work.
 
 ### Правило источников механик
 
