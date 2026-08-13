@@ -163,7 +163,16 @@ jobs:
       - name: Run exact pytest node
         env:
           ABILITY_TEST_NODE: ${{ matrix.case }}
+          ABILITY_EVIDENCE_DIR: build/ability-evidence
         run: .\scripts\ci_ability_windows.ps1 -Mode PythonCase -TestNode $env:ABILITY_TEST_NODE
+      - name: Upload Hexing Attack wire evidence
+        if: always() && matrix.case == 'python/tests/test_hexingattack_evidence.py::test_hexingattack_wire_collision_audit'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hexingattack-wire-evidence
+          path: build/ability-evidence/hexingattack-wire.json
+          if-no-files-found: error
+          retention-days: 1
 
   publish_status:
     if: always() && github.event_name == 'push'

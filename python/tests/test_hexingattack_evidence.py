@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import warnings
 from pathlib import Path
 
@@ -16,6 +17,20 @@ EXPECTED_TOOLTIP = (
     "«Проклятие», «Замедление», «Слабость» или «Разрушающий луч». Эти заклинания накладываются "
     "на искусном уровне."
 )
+
+
+def _export_wire_evidence(report: dict) -> None:
+    evidence_dir = os.environ.get("ABILITY_EVIDENCE_DIR", "").strip()
+    if not evidence_dir:
+        return
+    out_dir = Path(evidence_dir)
+    if not out_dir.is_absolute():
+        out_dir = ROOT / out_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "hexingattack-wire.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def test_hexingattack_whole_corpus_evidence():
@@ -76,17 +91,40 @@ def test_hexingattack_whole_corpus_evidence():
     # whole-corpus collision auditor establishes whether ray has one stable identity.
     assert report["other_special_codes"].get("ray") == 3
 
+    warnings.warn(
+        "HEXINGATTACK_EVIDENCE "
+        + json.dumps(report, ensure_ascii=False, sort_keys=True)
+    )
+
+
+def test_hexingattack_wire_collision_audit():
     wire = analyze_wire_collisions(CORPUS)
+    _export_wire_evidence(wire)
+
     assert wire["parse_errors"] == []
     assert wire["corpus_battle_dirs"] == 866
     assert wire["candidate_codes"] == ["crs", "slw", "sff", "ray"]
     assert all(wire["records"].get(code, 0) > 0 for code in wire["candidate_codes"])
     assert wire["records"].get("ray", 0) >= 3
 
-    warnings.warn(
-        "HEXINGATTACK_EVIDENCE "
-        + json.dumps(report, ensure_ascii=False, sort_keys=True)
-    )
+    # Structural conservation checks make the exploratory auditor fail loudly if one
+    # aggregate silently drops candidate records before the exact corpus snapshot is pinned.
+    for code in wire["candidate_codes"]:
+        count = wire["records"][code]
+        assert sum(wire["field2_shapes"][code].values()) == count
+        assert sum(wire["field4_shapes"][code].values()) == count
+        assert sum(wire["field3_shapes"][code].values()) == count
+        assert sum(wire["action_types"][code].values()) == count
+        assert wire["zero_field2"].get(code, 0) + wire["positive_field2"].get(code, 0) == count
+        assert wire["source_present"].get(code, 0) <= count
+        assert wire["target_present"].get(code, 0) <= count
+        assert wire["attack_bound"].get(code, 0) <= count
+        assert (
+            wire["hexing_attack_bound"].get(code, 0)
+            + wire["nonhexing_attack_bound"].get(code, 0)
+            == wire["attack_bound"].get(code, 0)
+        )
+
     warnings.warn(
         "HEXINGATTACK_WIRE_COLLISION_EVIDENCE "
         + json.dumps(wire, ensure_ascii=False, sort_keys=True)
