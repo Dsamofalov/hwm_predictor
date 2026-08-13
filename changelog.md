@@ -177,3 +177,13 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Corrected text counts are `child_light_text_hits = 216`, `non_child_light_text_hits = 92`, `school_text_hits = 112`, while the independent joint discriminator remains `non_child_school_light_hits = 0`.
   - Thus Light-related ability/perk prose exists, but no metadata identifies a concrete spell and independently classifies it as Light. Child of the Light is closed for this evidence pass as `unresolved` at that precise missing per-spell school discriminator.
   - No runtime copy rule, registry promotion, hardcoded Light spell list, or numeric probability is introduced. The weighted unfinished queue advances to Hexing Attack with source/collision auditing required before any proc attribution.
+
+### Hexing Attack baseline and wire-collision evidence
+
+- Commit: `a2c06ef10048486cc84239b045f3710e9f7db795` — `test(ability): pin Hexing baseline and wire audit`.
+  - Hardened the Hexing smoke test to exact corpus baseline assertions and added a whole-corpus raw candidate-wire collision/layout auditor for `crs`, `slw`, `sff`, and `ray`.
+  - Baseline pins 866 battle dirs, 32 carrier battles, 88 carriers, 115 carrier attacks (all melee), 12 parsed zero-cost same-actor/same-target status records (`sff = 5`, `crs = 4`, `slw = 3`), plus 3 raw `Sray...` occurrences in Hexing attack windows that remain outside generic status grammar.
+  - Tooltip names Curse, Slow, Weakness and Disrupting Ray but supplies no numeric proc probability.
+  - Authoritative hosted Ability Windows run `31680364027`: **PASS / conclusion `success`** on exact SHA; check-suite `85941007397`.
+  - The package is evidence-only. It does not prove `ray == Disrupting Ray`, `sff == Weakness`, Hexing ownership of every candidate record, or any proc percentage; no replay/runtime/registry promotion was made.
+  - Next ability step is strict whole-corpus collision locking and independent normal-cast/server-spellbook identity controls before any semantic decode or probability model.
