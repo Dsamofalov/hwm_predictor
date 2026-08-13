@@ -187,3 +187,13 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Authoritative hosted Ability Windows run `31680364027`: **PASS / conclusion `success`** on exact SHA; check-suite `85941007397`.
   - The package is evidence-only. It does not prove `ray == Disrupting Ray`, `sff == Weakness`, Hexing ownership of every candidate record, or any proc percentage; no replay/runtime/registry promotion was made.
   - Next ability step is strict whole-corpus collision locking and independent normal-cast/server-spellbook identity controls before any semantic decode or probability model.
+
+### Hexing wire evidence artifact and atomic split
+
+- Commit: `46a707c90f7053bf944592c9b1fd8d26aa88a2fa` — `test(ability): export Hexing wire evidence artifact`.
+  - Split the Hexing baseline and raw collision auditor into independent pytest nodes and exported deterministic `hexingattack-wire.json` from the dedicated wire node; the hosted workflow uploads it as a short-lived evidence artifact.
+  - Authoritative hosted Ability Windows run `31685964687`: **PASS / completed with conclusion `success`** on exact functional SHA `46a707...`; check-suite `85956077927`. Dedicated wire node `94402248165` and artifact upload succeeded.
+  - Exact recovered raw population is 3895 records: `crs=480`, `slw=1412`, `sff=824`, `ray=1179`; source and target state are present for every record and all records are other-owner.
+  - Hexing attack-bound subset is exactly `crs=4`, `slw=3`, `sff=5`, `ray=3`; non-Hexing attack-bound controls are `crs=64`, `slw=24`, `sff=502`, `ray=1`.
+  - `ray` and `sff` are therefore shared spell/status wires rather than Hexing-owned proc labels. `ray` has 406 normal `CAST_OR_ABILITY` contexts and strong same-source `dray/mdray` cost controls; `sff` has 77 normal cast contexts and strong `suffering/msuffering` cost controls, with same-cost collisions retained as ambiguity evidence.
+  - No replay/runtime/registry semantic or proc probability was introduced. The next functional step is an exact corpus contract over the exported aggregates before any stronger internal spell-identity or observed-consequence claim.

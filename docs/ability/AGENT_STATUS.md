@@ -5,9 +5,9 @@ Checkpoint: **2026-08-13**
 Source lane: `ability`
 Draft PR: `#1` (`ability` -> `main`)
 Ability TZ refresh commit: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
-Current validated functional ability SHA: **`a2c06ef10048486cc84239b045f3710e9f7db795`**
-Authoritative hosted Windows run: **`31680364027` — PASS / conclusion `success`**
-Check-suite: **`85941007397`**
+Current validated functional ability SHA: **`46a707c90f7053bf944592c9b1fd8d26aa88a2fa`**
+Authoritative hosted Windows run: **`31685964687` — PASS / conclusion `success`**
+Check-suite: **`85956077927`**
 Platform authority: **GitHub-hosted Windows 10/11 x64 + VS2022/MSVC only**
 
 ## Governance
@@ -84,61 +84,41 @@ Semantic ceiling: Child remains `unresolved`, closed at the missing per-spell Li
 
 Weighted unfinished queue currently leads to **`hexingattack`** after actionability/blocker filtering.
 
-### Validated baseline and current functional package
+### Validated baseline and evidence-export package
 
-Functional SHA: **`a2c06ef10048486cc84239b045f3710e9f7db795`** — `test(ability): pin Hexing baseline and wire audit`.
+Baseline functional SHA: **`a2c06ef10048486cc84239b045f3710e9f7db795`** — `test(ability): pin Hexing baseline and wire audit`; hosted Windows run `31680364027` PASS / check-suite `85941007397`.
 
-Hosted Windows validation: **run `31680364027` PASS / conclusion `success`**, check-suite **`85941007397`** on the exact functional SHA.
+Current validated functional SHA: **`46a707c90f7053bf944592c9b1fd8d26aa88a2fa`** — `test(ability): export Hexing wire evidence artifact`; hosted Windows run **`31685964687` PASS**, check-suite **`85956077927`**.
 
-Strict baseline now in `python/tests/test_hexingattack_evidence.py`:
+The current package splits Hexing baseline and wire collision audit into independent pytest nodes and exports deterministic `hexingattack-wire.json` from the exact wire node. No replay/runtime/registry semantics changed.
 
-- 866 battle dirs;
-- 32 Hexing carrier battles;
-- 88 carriers;
-- carrier creatures: `333 = 41`, `269 = 27`, `268 = 20`;
-- exact carrier ability sets: `caster,hexingattack,undead` (47) and `alive,caster,hexingattack,ragingblood,sacrificegoblin,swiftattack` (41);
-- 32/32 identical Hexing tooltip descriptions;
-- 115 carrier attacks, all `MELEE_ATTACK`;
-- attack creatures: `333 = 94`, `269 = 16`, `268 = 5`;
-- 12 parsed zero-cost same-actor/same-target status records: `sff = 5`, `crs = 4`, `slw = 3`;
-- `crs` amount shapes `100 = 3`, `96 = 1`;
-- `sff` amount shape `12 = 5`;
-- `slw` amount shape `40 = 3`;
-- raw Hexing attack windows contain 3 additional `Sray...` records left outside generic status grammar;
-- tooltip lists Curse, Slow, Weakness and Disrupting Ray at expert level but supplies only “some probability”; there is no numeric probability/percentage/integer constant.
+### Exact recovered whole-corpus wire inventory
 
-The same functional SHA added `python/hwm_solver/ability/hexingattack_wire_evidence.py`, a whole-corpus collision/layout auditor for candidate codes `crs/slw/sff/ray`.
+- 866 battle dirs, parse errors = 0;
+- total candidate raw records = **3895**: `crs=480`, `slw=1412`, `sff=824`, `ray=1179`;
+- all records have source and target state present; all are other-owner (`same_owner={}`);
+- Hexing attack-bound subset is exactly `crs=4`, `slw=3`, `sff=5`, `ray=3`, matching the 15 carrier-attack observations;
+- non-Hexing attack-bound controls are `crs=64`, `slw=24`, `sff=502`, `ray=1`;
+- `ray` is heavily shared outside Hexing: 1179 total, 406 `CAST_OR_ABILITY`, 768 `HERO_ACTION`, 5 `MELEE_ATTACK`; only 3 are Hexing attack-bound;
+- `ray` positive field2 is 605 records (`05=374`, `10=227`, plus `01=1`, `07=3`), and same-source spellbooks provide strong independent `dray`/`mdray` cost controls (`dray` exact-cost matches 376, `mdray` 277), alongside other same-cost collisions that must remain explicit;
+- `sff` likewise is not Hexing-specific: 824 total, 77 `CAST_OR_ABILITY`, 658 `MELEE_ATTACK`, only 5 Hexing attack-bound; positive exact-cost spellbook controls are dominated by `suffering`/`msuffering` but collide with other same-cost spells.
 
 ### Current semantic boundary
 
-The package is **evidence-only**. PASS does not imply:
+The artifact proves that `crs/slw/sff/ray` are shared spell/status wire codes rather than Hexing-owned event labels. The 15 Hexing attack-bound records can be isolated structurally by server-declared Hexing source + attack/actor/target agreement, but **no numeric proc probability is inferred**.
 
-- `ray == Disrupting Ray`;
-- `sff == Weakness`;
-- all candidate wires are Hexing-owned;
-- proc probability is `12/115`, `15/115` or any other observed frequency;
-- any runtime/registry promotion.
+The independent spellbook/cast controls are now sufficient to investigate internal spell identities (`ray` with `dray/mdray`, `sff` with `suffering/msuffering`) without relying on mnemonics or tooltip prose. Before runtime changes, the next functional package must strict-pin the full collision contract and keep same-cost ambiguities visible.
 
-`ray` and `sff` remain raw candidate identities until independent normal-cast/server-spellbook/collision evidence proves them.
+No runtime/registry promotion has been made by `46a707...`.
 
 ## Exact next work
 
-1. Inspect/extract the full `HEXINGATTACK_WIRE_COLLISION_EVIDENCE` output from exact SHA `a2c06ef...` / run `31680364027`, or rerun the exact atomic Hexing node on hosted Windows if needed to recover the full report.
-2. Convert exploratory lower bounds in the wire test into exact corpus assertions for every candidate code:
-   - record counts;
-   - payload fixed-width shapes;
-   - source/target state presence;
-   - decision actor/target agreement;
-   - attack-bound counts;
-   - Hexing vs non-Hexing attack-bound populations;
-   - source ability-set collisions;
-   - zero/positive field populations;
-   - owner relationships;
-   - server spellbook names and exact/compatible positive-cost controls.
-3. Require an independent normal-cast/server-spellbook discriminator before assigning semantic spell names to `ray` or `sff`.
-4. Do not infer probability from corpus frequency. Probability work starts only after event attribution is solved.
-5. Do not change replay/runtime/registry until the wire identity and observed consequence reach a proof-supported boundary.
-6. If independent identity remains confounded, close Hexing as a precise blocker and recompute `data/reports/ability-risk-current.json` for the next actionable unfinished ability.
+1. Convert the exported report into strict exact assertions: total/raw widths, field2/field4/field3 shapes, source/target presence, actor/target agreement, action types, attack-bound/Hexing/non-Hexing controls, source ability sets/creatures, zero/positive fields, owner relation, spellbook and exact/compatible cost controls, and representative examples.
+2. Add compact deterministic identity-control aggregates where the current report is unnecessarily verbose, especially unique/ambiguous exact-cost normal-cast controls.
+3. Promote `ray`/`sff` to internal spell identities only if those independent controls remain unambiguous under strict regression; do not use mnemonic resemblance as evidence.
+4. Do not infer probability from `15/115` or any corpus frequency.
+5. Do not change replay/runtime/registry until wire identity and observed consequence are both proof-supported.
+6. If identity or per-event consequence remains confounded, close Hexing at the precise blocker, regenerate `data/reports/ability-risk-current.json`, and advance to the highest actionable unfinished weighted-contribution ability.
 
 ## Current files to inspect first
 

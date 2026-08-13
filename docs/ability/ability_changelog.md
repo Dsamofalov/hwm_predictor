@@ -212,3 +212,15 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Semantic boundary remains evidence-only: `ray == disrupting ray`, `sff == weakness`, per-event Hexing ownership, and proc probability are all still unproven. No replay/runtime/registry promotion was made.
   - Next step is to extract the full `HEXINGATTACK_WIRE_COLLISION_EVIDENCE` report and convert the exploratory lower bounds into exact corpus assertions for payload shapes, source/target agreement, Hexing/non-Hexing collision populations, source ability sets, zero/positive fields, owner relations, and independent normal-cast/server-spellbook controls.
   - Observed frequency `12/115` or a hypothetical `15/115` must **not** be used as a proc probability. Probability work starts only after independent per-event attribution is solved.
+
+### Hexing wire evidence artifact and atomic split
+
+- Commit: `46a707c90f7053bf944592c9b1fd8d26aa88a2fa` — `test(ability): export Hexing wire evidence artifact`.
+  - Split the Hexing baseline and whole-corpus wire collision auditor into independent pytest nodes so the 866-battle scans fan out independently under `TESTS_CANON.md`.
+  - Added deterministic `hexingattack-wire.json` export from the exact wire node and a one-day hosted artifact upload; no replay/runtime/registry semantics changed.
+  - Authoritative hosted Ability Windows run `31685964687`: **PASS / completed with conclusion `success`** on exact functional SHA `46a707...`; check-suite `85956077927`. The dedicated wire node `94402248165` and artifact upload both passed.
+  - Recovered exact whole-corpus population: `crs=480`, `slw=1412`, `sff=824`, `ray=1179` (3895 total), with source/target state present for every record and all records other-owner.
+  - Exact Hexing attack-bound subset is `crs=4`, `slw=3`, `sff=5`, `ray=3`; non-Hexing attack-bound controls are `crs=64`, `slw=24`, `sff=502`, `ray=1`.
+  - `ray` is decisively shared rather than Hexing-specific: 1179 total records include 406 `CAST_OR_ABILITY` and only 3 Hexing attack-bound records. Positive `field2` controls are dominated by costs `05` and `10`, with same-source spellbooks producing `dray`/`mdray` exact-cost matches hundreds of times; other same-cost spells also collide and remain explicit.
+  - `sff` is likewise shared: 824 total, 77 `CAST_OR_ABILITY`, 658 `MELEE_ATTACK`, 5 Hexing attack-bound. Its positive-cost controls are dominated by `suffering`/`msuffering` but are not unique solely by cost.
+  - This commit therefore establishes evidence plumbing and collision evidence, not final spell identity or proc probability. The next functional package must strict-pin all exported aggregates and only then decide the strongest identity/observed-consequence boundary supported by independent controls.
