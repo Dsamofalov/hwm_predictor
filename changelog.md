@@ -1,6 +1,6 @@
 # HeroesWM Solver — Change Log
 
-Historical entries through **2026-08-11** are preserved verbatim in [`docs/changelog_archive_through_2026-08-11.md`](docs/changelog_archive_through_2026-08-11.md). The archive is the exact previous `changelog.md` blob; no historical entry was rewritten or dropped during this rollover.
+Historical entries through **2026-08-11** remain in [`docs/changelog_archive_through_2026-08-11.md`](docs/changelog_archive_through_2026-08-11.md). On 2026-08-13 that archive received only a governance banner clarifying that its old branch/lane instructions are historical; the archived development entries themselves remain unchanged.
 
 ## Working convention
 
@@ -10,6 +10,13 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - A bookkeeping commit cannot record its own SHA; entries therefore reference the functional commits they document.
 
 ## 2026-08-13
+
+### Ability development governance unified on `main`
+
+- Ability is now a logical module/ownership boundary, not a dedicated Git development lane. All future ability implementation, evidence, tests, registry/risk updates and docs are committed directly to `main`.
+- Ability-specific status/evidence and atomic Windows CI remain separate module surfaces; branch isolation is replaced by scope discipline and exact-SHA cross-module validation for shared substrate.
+- `ABILITY_MERGE_CANON.md` is retired as an active procedure. The historical `ability` ref is archive/provenance only and is not source of truth, handoff destination, or normal merge source.
+- Earlier changelog/archive references to an `ability` branch, Draft PR or ability-to-main integration describe historical repository organization and are superseded by this governance checkpoint.
 
 ### Ability integration: validated ability state merged into current main
 
@@ -24,7 +31,7 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Four generated M11 evidence reports were regenerated on the merged replay semantics after the first integration candidate correctly exposed stale numeric snapshots. The final independent strict verifier passed without loosening assertions or tolerances.
 - Final negative-diff audit from `2d6c985...` to `3df0d5ee...` found only ability-owned/integration files, the audited shared replay delta, and the four regenerated M11 reports; there were no unexplained main-owned changes and no deletions. `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `docs/LIVE_VALIDATION.md`, production live/front/search code and main geometry were not replaced by ability versions.
 - Semantic ceilings remain explicit: Child of the Light school discrimination is unresolved; Taunt remains unresolved; Spider/`Sent` is not promoted to a Spider-specific mechanic; Hexing gains no speculative proc probability/rule; Gribbomb remains `partial_exact` with predictive collateral/Earth magnitude unresolved.
-- The `ability` branch is retained after integration as required by the handoff canon.
+- The historical `ability` ref is retained only as archive/provenance. It is no longer an active development branch and no future ability work should target or merge from it.
 
 ### Authoritative main stabilization / production replanning safety
 
@@ -72,7 +79,7 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `5b6e78975f11e9457703e0d73352afffce438b3e` — `docs: add current main-agent handoff TZ [skip ci]`.
   - Added `docs/MAIN_AGENT_TZ.md` as the short-form binding handoff over the long `SPEC.md` for the current main lane.
   - The next agent must first run authoritative Windows validation for the current main functional tree, measure exact post-geometry corpus totals, resolve only evidence-proven stale M11 data if necessary, then delete `agent/stationary-friendly-marker-20260813` after confirming all useful changes are already in `main`.
-  - Other `agent/*` branches must not be deleted merely by name because they may belong to concurrent ability/evidence work.
+  - Historical note for that checkpoint: other `agent/*` branches were not deleted merely by name because they could contain concurrent evidence work. This no longer defines ability governance; current ability development is `main`-only.
 
 ### Production live heartbeat-neutral ingestion
 

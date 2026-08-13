@@ -1,16 +1,17 @@
 # MAIN agent TZ — current handoff
 
 **Updated:** 2026-08-13  
-**Role:** binding short-form handoff for the `main` development lane.  
-**Precedence:** read `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `TESTS_CANON.md`, `docs/LIVE_VALIDATION.md`, and `changelog.md`. Ability mechanics remain independently owned by `ability`.
+**Role:** binding short-form handoff for development on `main`.
+**Precedence:** read `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `TESTS_CANON.md`, `docs/LIVE_VALIDATION.md`, and `changelog.md`. Ability mechanics remain a separate logical module/ownership boundary, but their implementation/evidence/tests are developed directly in `main`; there is no active ability development branch.
 
 ## Authoritative repository checkpoint
 
 - Repository: `Dsamofalov/hwm_predictor`.
 - Branch: `main`.
-- Current validated functional SHA: `49bbe98e00cbee27d437c26cd93b2127a18dc8b8` — `fix: retry live replanning after transport failure`.
-- Hosted atomic Windows CI: run `31693648818` — **Core PASS + Full PASS**.
-- Geometry Evidence: run `31693648857` — **PASS** on the same SHA.
+- Current integrated validated functional SHA: `3df0d5ee4434d3cc401dba1b765a4dca068c15c1`.
+- Hosted Main Windows CI: run `31700599112` — **Core PASS + Full PASS** on that exact SHA.
+- Ability-module Windows validation: run `31700597609` — **PASS** on the same exact SHA.
+- Last pre-integration Geometry Evidence checkpoint remains run `31693648857` on `49bbe98e00cbee27d437c26cd93b2127a18dc8b8`; no newer geometry metric is claimed by this governance update.
 - Supported product/CI platform: Windows 10/11 x64 + MSVC; permanent hosted validation runs on `windows-2022`.
 
 ## Exact current decoder / corpus checkpoint
@@ -44,7 +45,7 @@ Network `battle.php` remains primary truth. Runtime `stage.pole.obj` / `nowturn`
 ## Mandatory next work order
 
 1. Execute and retain metadata-safe evidence for the real authenticated production closed-loop smoke.
-2. Continue decoder/legal closure toward **>=99.9%** from the exact 87-residual inventory, only with evidence-backed generic corrections. Do not duplicate ability-owned mechanics.
+2. Continue decoder/legal closure toward **>=99.9%** from the exact 87-residual inventory. Generic corrections stay generic; SPECIAL/ability semantics are handled through the ability module on the same `main`, with its evidence gates.
 3. Keep M11 learned dynamics production-disabled until joint multi-step accuracy + observed-action survival/validity gates pass.
 4. Continue M13 opponent/chance/search calibration only after correctness closure, preserving stochastic outcomes, transpositions, revision cancellation, exact re-root and hash/structure guards.
 5. After stable live acquisition, run live-state and hard-PvE human-in-loop evaluation/calibration.
@@ -58,4 +59,4 @@ Network `battle.php` remains primary truth. Runtime `stage.pole.obj` / `nowturn`
 - No autoclicking, game-command automation, or extra high-frequency HeroesWM polling.
 - Do not weaken structural invariants or semantic safety gates to improve metrics.
 - Do not enable learned dynamics from mean-error improvement alone.
-- Do not rewrite ability-owned semantics without new raw/server evidence and ability-owned acceptance.
+- Do not rewrite ability-module semantics without new raw/server evidence and module-owned acceptance.

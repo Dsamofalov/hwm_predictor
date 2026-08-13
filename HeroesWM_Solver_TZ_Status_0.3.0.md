@@ -44,12 +44,12 @@ Transport feasibility доказана на реальном authenticated battl
 ### Текущий незавершённый фронт разработки
 
 1. **Production active-battle closed-loop gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном authenticated PvE бою и сохранить только metadata-safe evidence. Не добавлять autoclick/game-command automation и не делать extra high-frequency polling.
-2. **Decoder/legal correctness:** двигаться от exact 87-residual inventory к acceptance **>=99.9%** только через evidence-backed generic classes. Большинство residuals SPECIAL/ability-owned; main не должен подменять ability semantics.
+2. **Decoder/legal correctness:** двигаться от exact 87-residual inventory к acceptance **>=99.9%** только через evidence-backed generic classes. SPECIAL/ability-owned residuals должны закрываться через ability-модуль на том же `main`, а не маскироваться generic heuristics.
 3. **M11 learned dynamics:** оставлять production disabled, пока joint multi-step accuracy + observed-action survival/validity gates не разрешат enablement.
 4. **M13 search quality:** после correctness closure улучшать opponent/chance branching, calibration и quality/latency, сохраняя stochastic outcome separation, transpositions, revision cancellation, exact re-root и hash/structure guards.
 5. **Evaluation:** после stable production live acquisition — live-state cross-validation и hard-PvE human-in-loop benchmark / calibration.
 
-Ability ownership остаётся отдельным lane (`ability` + its own status/evidence/atomic CI). Main не дублирует новые ability semantics.
+Ability остаётся отдельным логическим модулем/ownership boundary со своими status/evidence/atomic-CI surfaces, но вся разработка выполняется непосредственно в `main`. Отдельная development-ветка `ability` и последующий merge-back больше не являются частью workflow.
 
 ### Правило источников механик
 

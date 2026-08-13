@@ -1,5 +1,7 @@
 # HeroesWM Solver — Change Log
 
+> **Historical governance notice (added 2026-08-13):** references below to a dedicated `ability` branch/lane, branch-owned tests, or later ability-to-main merge describe the repository organization at the time of those entries. They are not current instructions. Ability is now a logical module developed directly in `main`; the legacy `ability` ref is archive/provenance only. The historical entries below are otherwise unchanged.
+
 This file is the development diary for repository changes performed against the active specification (`SPEC.md` / `HeroesWM_Solver_TZ_Status_0.3.0.md`).
 
 ## Working convention

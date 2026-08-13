@@ -1,62 +1,54 @@
-# Development lanes
+# Development modules and ownership
 
-Active since: 2026-08-10
+Current governance: **2026-08-13**
+Compatibility note: this filename is retained because older handoffs link to it; the old multi-branch lane model is retired.
 
-## `ability` lane
+## One development branch
 
-Branch: `ability`
-Draft PR: #1
-Detailed contract: `docs/ABILITY_AGENT_TZ.md` on branch `ability`.
+Normal project development, including creature abilities, happens on **`main`**.
 
-While the ability branch is active, main development must avoid modifying the following reserved files unless an integration blocker makes it unavoidable:
+Ability is a separate logical module/ownership boundary, not a Git branch. Do not create or use a dedicated `ability` branch as the normal source of ability work, and do not plan a later ability-to-main merge as part of the development cycle.
 
-- `cpp/src/protocol.cpp`
-- `cpp/src/simulator.cpp`
-- `cpp/src/proc_model.cpp`
-- `cpp/src/ability_registry.cpp`
-- `cpp/src/ability_damage_model.cpp`
-- `cpp/src/collateral_model.cpp`
-- `cpp/src/kill_trigger_model.cpp`
-- matching ability/proc/collateral/kill-trigger headers under `cpp/include/hwm/`
-- `cpp/tests/test_main.cpp`
-- `python/hwm_solver/protocol/replay.py`
-- `python/hwm_solver/knowledge/build_ability_registry.py`
-- ability/proc/collateral research/train scripts under `python/hwm_solver/`
-- `python/tests/test_replay_parser.py`
-- `python/tests/test_ability_probe.py`
-- ability-specific new Python tests
-- `data/catalog/ability_registry.json`
-- `data/catalog/ability_registry.csv`
-- ability reports/evidence/model artifacts
+The historical Git ref named `ability` is archive/provenance only. It is not authoritative project state and must not be used as a handoff destination or merge source for new work.
 
-The ability agent must not modify planner/runtime/UI/CI/shared project reports and must never push to `main`.
+## Ability module
 
-## `main` lane
+Canonical contract: `docs/ABILITY_AGENT_TZ.md`.
 
-Until PR #1 is ready for review, main development focuses on areas that do not overlap the reserved ability files:
+Normal module scope includes:
 
-1. live browser-extension <-> daemon end-to-end path;
-2. pairing/authentication and loopback security;
-3. stale recommendation cancellation/state-hash binding/session correctness;
-4. planner tree reuse/transpositions/opponent branching where changes stay inside planner/runtime ownership;
-5. live diagnostics and reproducible human-in-loop validation tooling;
-6. CI/build/release infrastructure outside ability-owned files.
+- ability protocol/evidence work;
+- ability-specific replay/simulator/proc/collateral mechanics;
+- Ability Registry and risk evidence;
+- `python/hwm_solver/ability/**` and corresponding tests;
+- ability-specific C++/Python regressions;
+- `docs/ability/**` status/history;
+- `.github/workflows/ability.yml` and its contract tests when the validation surface itself needs maintenance.
 
-Primary main-owned files include:
+All such changes are committed directly on `main`.
 
-- `cpp/src/planner.cpp`
-- `cpp/include/hwm/planner.hpp`
-- `cpp/src/session.cpp`
-- `cpp/include/hwm/session.hpp`
-- `cpp/src/http_server.cpp`
-- `cpp/include/hwm/http_server.hpp`
-- `cpp/src/main.cpp`
-- `extension/**`
-- `.github/**`
-- shared project documentation and release files.
+## Other project modules
 
-`cpp/src/state.cpp`, `cpp/include/hwm/state.hpp`, `CMakeLists.txt` and `CMakePresets.json` are integration-sensitive. The ability agent should request changes to them rather than modifying them directly; main may change them only when needed for non-ability work.
+Planner/search, live extension/daemon, session/API, M11/evaluation, UI and release infrastructure remain distinct ownership areas for task decomposition, but they share the same `main` history.
 
-## Merge policy
+An ability-focused agent should not modify unrelated project modules merely because they are available in the same branch. Scope discipline replaces branch isolation.
 
-The ability agent stops at branch/PR delivery. Main reviews `main...ability`, corpus evidence, risk changes and CI, resolves any integration requests, and only then merges.
+## Shared substrate
+
+Files including `python/hwm_solver/protocol/replay.py`, protocol/simulator code, state structures, CMake configuration and shared reports can affect multiple modules.
+
+When an ability change requires shared substrate:
+
+1. make the smallest evidence-backed change directly in `main`;
+2. preserve generic parser/state/runtime invariants;
+3. add positive and negative regressions at the correct ownership boundary;
+4. run Ability validation and every affected main validation surface on the exact functional SHA;
+5. record cross-module impact in `docs/ability/AGENT_STATUS.md` and the changelogs.
+
+There is no integration-request/merge-conflict ceremony merely because the change is ability-related.
+
+## Validation and handoff
+
+`TESTS_CANON.md` remains mandatory. Ability-specific atomic CI is a validation surface inside unified `main` development, not evidence of a separate lane.
+
+A completed ability block ends with a validated `main` functional SHA plus bookkeeping/status updates. It does not end with a dedicated branch, draft PR, or merge-back handoff.

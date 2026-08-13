@@ -11,7 +11,7 @@
 
 Главный оставшийся продуктовый gate — выполнить подготовленный smoke-test на **реальном активном авторизованном бою**. Полноценный runtime-object fallback должен добавляться только если этот live trace докажет, что network payload не покрывает необходимое состояние/legal actions.
 
-Ability-механики параллельно развиваются в отдельной ветке `ability`; main lane не трогает зарезервированные ability/protocol/simulator файлы до review/merge draft PR #1.
+Ability-механики развиваются как отдельный логический модуль внутри `main`: module ownership и Ability CI сохраняются, но отдельная Git-ветка/PR/merge-back workflow больше не используется.
 
 ## 2. Текущие метрики
 
@@ -54,7 +54,7 @@ Current standard CI additionally enforces three local closed-loop integration co
 | M01 Browser Bridge | MOSTLY COMPLETE | MV3 passive fetch/XHR capture, content/service-worker bridge, authenticated localhost forwarding, auto replan, bounded metadata-only live trace | real active-battle validation, full runtime-object fallback if network path proves insufficient |
 | M02 Protocol Decoder | ADVANCED PARTIAL | independent C++/Python decoder, 100% record coverage, 866/866 shadow determinism | 19 rare structural-invalid finals, unresolved semantics |
 | M03 Session | MOSTLY COMPLETE | reset/dedupe/out-of-order, immutable observed state, hash + monotonic revision, atomic snapshots, cooperative stale-search cancellation | persistent search-tree re-rooting by predicted/observed child |
-| M04 Knowledge | ADVANCED PARTIAL | 644 creatures, 421 abilities, reference HTML ingestion, explicit Ability Registry support levels | remaining unresolved/high-impact ability semantics; active work delegated to `ability` branch |
+| M04 Knowledge | ADVANCED PARTIAL | 644 creatures, 421 abilities, reference HTML ingestion, explicit Ability Registry support levels | remaining unresolved/high-impact ability semantics; active work continues in the ability module on `main` |
 | M05 Corpus | COMPLETE CURRENT DATA | 866/866 raw init+turns, metadata/collector/HAR path | corpus itself intentionally external to GitHub |
 | M06 Dataset | MOSTLY COMPLETE | 52,357 accepted decisions, temporal battle split, real features/labels | production learned-dynamics targets/gates |
 | M07 Legal Actions | ADVANCED PARTIAL | basic + hero/spell/ability subset, move+attack, large/flyer/shooter mechanics | rare special action families; observed representability still 98.03% vs higher target |
@@ -80,7 +80,7 @@ Ability handling is not a flat creature-value heuristic. It is split into:
 3. **Ability-conditioned damage residual** — used especially for low-support creature IDs.
 4. **Ability risk** — unresolved mechanics increase search uncertainty weighted by stack strength.
 
-Latest Ability Registry support counts at the main/ability split:
+Latest Ability Registry support counts at this report checkpoint:
 
 ```json
 {
@@ -102,7 +102,7 @@ Examples already handled include core movement/shooter/large/flyer/retaliation r
 
 Life Drain, Regeneration, Mana Feed and Mighty Slam are `exact_search`; Mana Feed is validated on all 42 observed `Smfd` actions, Mighty Slam on all 32 observed `Smsl` decisions, and Paw Strike has 174/174 observed source-matching I-record ATB-reset evidence while remaining hybrid `modeled_proc` for speculative trigger probability.
 
-Further ability work is intentionally isolated in branch `ability` under `docs/ABILITY_AGENT_TZ.md` and draft PR #1, then reviewed/merged by main.
+Further ability work follows `docs/ABILITY_AGENT_TZ.md` as module-scoped work committed directly to `main`; Ability CI validates the module, with no dedicated ability branch or later merge-back step.
 
 ## 5. Current closed-loop safety implementation
 
@@ -153,7 +153,7 @@ Manual real-battle procedure and pass criteria are recorded in `docs/LIVE_VALIDA
 
 1. Execute `docs/LIVE_VALIDATION.md` against a real authenticated PvE battle and preserve the metadata-only trace/status evidence.
 2. If network capture is incomplete, implement the smallest evidence-driven runtime-object fallback adapter; otherwise keep network payload as primary truth.
-3. Let branch `ability` continue high-impact ability work independently and review/merge it after corpus/CI gates pass.
+3. Continue high-impact ability work as a dedicated module directly on `main`, preserving corpus/evidence gates and the Ability atomic-CI surface.
 4. After stable live acquisition is proven, continue main-only original-TZ work: persistent tree re-root/transpositions/opponent branching.
 5. Continue structural/legal-action correctness toward the acceptance targets without weakening strict invariants.
 6. Add full learned dynamics ensemble + multi-step divergence gate when the acquisition/correctness prerequisites are satisfied.

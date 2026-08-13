@@ -1,31 +1,28 @@
-# Ability Integration Status
+# Ability Module Status
 
 Checkpoint: **2026-08-13**
-Status: **INTEGRATED INTO `main`**
-Source lane retained: `ability`
+Status: **ACTIVE MODULE IN `main`**
+Development branch: **`main` only**
+Legacy ref `ability`: historical/archive provenance only; not source of truth, not active lane, not handoff/merge source
 Platform authority: **GitHub-hosted Windows 10/11 x64 + VS2022/MSVC only**
 
-Validated ability source SHA: **`2ae1046c48e99c94da3481a8b3ed81285b9125ab`**
-Ability source Windows run: **`31697180629` — PASS / conclusion `success`**
-Ability source check-suite: **`85986692434`**
-
-Main source before integration: **`2d6c985fbc4a6725e64871f12b127d68f86f1000`**
-Real two-parent integration merge: **`e69592eaa9461825e231cc73656d1e58b9ac4ffd`**
-Promoted/tested functional main SHA: **`3df0d5ee4434d3cc401dba1b765a4dca068c15c1`**
-Integration Ability Windows: **`31700597609` / `85996170989` — PASS**
-Integration Main Windows CI: **`31700599112` / `85996175100` — Core PASS + Full PASS**
+Current validated integrated functional SHA: **`3df0d5ee4434d3cc401dba1b765a4dca068c15c1`**
+Ability Windows: **`31700597609` / `85996170989` — PASS**
+Main Windows CI: **`31700599112` / `85996175100` — Core PASS + Full PASS**
 Strict M11 verifier: **job `94449755943` — PASS**
 Strict Full aggregate: **job `94452449852` — PASS**
 
-The pre-integration failing-first Hexing checkpoints remain historical evidence below; they are not the current validation checkpoint. The `ability` branch is retained and unresolved abilities remain unresolved rather than being promoted speculatively.
+Historical migration provenance: validated pre-unification ability source `2ae1046c48e99c94da3481a8b3ed81285b9125ab`, main source `2d6c985fbc4a6725e64871f12b127d68f86f1000`, two-parent merge `e69592eaa9461825e231cc73656d1e58b9ac4ffd`. These SHAs explain history only and do not define future workflow.
 
 ## Governance
 
-- `docs/ABILITY_AGENT_TZ.md` is the canonical ability-agent contract and was actualized on 2026-08-13 for the current Hexing frontier.
-- `docs/ability/ability_changelog.md` is the canonical ability development journal.
-- `TESTS_CANON.md` governs atomic test execution and exact inventory/coverage requirements.
-- Linux/WSL is diagnostic only and is not PASS/FAIL authority.
-- Ability development does not merge itself into `main`; final integration belongs to main/integration agent.
+- Ability is a logical module/ownership boundary developed directly in `main`.
+- `docs/ABILITY_AGENT_TZ.md` is the canonical module-agent contract.
+- `docs/ability/ability_changelog.md` is the canonical ability development journal; root `changelog.md` records project-wide checkpoints.
+- `TESTS_CANON.md` governs atomic execution and exact inventory/coverage requirements.
+- Linux/WSL is diagnostic only; hosted Windows/MSVC remains Ability PASS/FAIL authority.
+- There is no dedicated ability development branch, Draft PR handoff, or later merge-back phase.
+- Shared substrate changes are allowed when evidence-backed, minimal, and validated by every affected main + Ability surface on the exact SHA.
 
 ## Closed Gribbomb boundary
 
@@ -89,9 +86,9 @@ Strict Child facts:
 
 Semantic ceiling: Child remains `unresolved`, closed at the missing per-spell Light-school discriminator. No runtime copy rule, hardcoded Light taxonomy, registry promotion, or inferred probability is allowed.
 
-## Current lead — Hexing Attack
+## Hexing boundary after integration
 
-Weighted unfinished queue currently leads to **`hexingattack`** after actionability/blocker filtering.
+Hexing was the final active lead of the former branch-isolated phase. Its shared `ray` substrate fix is integrated in `main`; Hexing-specific proc ownership/probability remains unresolved and Hexing is **not** a hardcoded next queue item.
 
 ### Validated sequence
 
@@ -100,6 +97,7 @@ Weighted unfinished queue currently leads to **`hexingattack`** after actionabil
 - `baaeb4436a91962bf9a5f59f8b1b66876dbd8645` — strict whole-corpus collision lock plus compact normal-cast and Hexing-bound discriminators; run `31687089866` PASS / check-suite `85959134496`.
 - `e32346e749364037b2e31406fa07617d4ddbecb4` — strict normal-cast identity and complete 15-row Hexing subset lock; run **`31688840050` PASS / check-suite `85963923436`**. Dedicated wire job `94411530165` and artifact upload passed.
 - `2ea8c352bdf0810ee0f120b4c66d7ab599be5973` — failing-first shared `ray` structural-decode regression; run **`31690057933` FAIL / check-suite `85967292202`** exactly because `Sray001002050600006` retained `target_uid/value/duration/amount = None`.
+- `2ae1046c48e99c94da3481a8b3ed81285b9125ab` — final validated pre-unification ability source after the shared `ray` decode/corpus-lock synchronization; run `31697180629` PASS / suite `85986692434`. The resulting functional state is present in integrated `main` `3df0d5ee...`.
 
 No Hexing-specific proc/runtime/registry semantics have been introduced.
 
@@ -134,12 +132,13 @@ Positive-field2 normal-cast rows produce these **unique exact-cost spellbook ide
 
 The corpus proves that `crs/slw/sff/ray` are shared status/spell wires, not Hexing-owned proc labels. It independently links unique normal-cast subsets to `curse/mcurse`, `slow`, `suffering`, and `dray/mdray`. Hexing attack-bound rows are a distinct zero-cost population structurally isolated by server-declared `hexingattack` source plus attack actor/target agreement.
 
-The failing-first gate now proves the remaining shared substrate gap directly:
+The completed package closes only the shared structural substrate gap:
 
-- `crs/slw/sff` are already in the shared status-wire parser and structurally preserve target/status raw consequence;
-- `ray` is absent from `STATUS_WIRE_TO_BASE`, so generic replay currently parses only `SPECIAL code='ray'` + actor and loses target/value/duration/amount;
-- the exact failing node requires positive `dray/mdray` controls to become decision-scope exact while standalone zero-cost Hexing-like `ray` and same-cost `magicfist` remain semantically unresolved;
-- therefore the next implementation is restricted to the shared evidence-backed `ray -> dray` base mapping and must not add any Hexing-specific runtime rule.
+- `crs/slw/sff/ray` now use evidence-backed shared status-wire structure where independently justified;
+- positive `dray/mdray` controls decode structurally/semantically through the existing spellbook/mana guard;
+- standalone zero-cost Hexing-like `ray` remains semantic-unresolved and does not spend mana;
+- same-cost `magicfist` controls remain unresolved;
+- no Hexing-specific runtime rule was added.
 
 What is **not** promoted:
 
@@ -150,11 +149,11 @@ What is **not** promoted:
 
 ## Exact next work
 
-1. Add only the evidence-backed shared `ray -> dray` status-family mapping in `python/hwm_solver/protocol/replay.py`.
-2. Require the existing failing-first node to pass unchanged: positive `dray/mdray` controls decode structurally and semantically, standalone zero-cost Hexing-like `ray` remains unresolved/no-mana-spend, same-cost `magicfist` remains unresolved/no-mana-spend.
-3. Run/wait the complete hosted Windows Ability workflow on the exact fix SHA; only `completed + success` closes the functional gate.
-4. Close Hexing at the strongest observed consequence boundary that survives those controls; still do not infer proc probability.
-5. Regenerate `data/reports/ability-risk-current.json`, update the canonical TZ/status/changelogs, and prepare a selective ability-to-main merge handoff that preserves main-owned fronts.
+1. On current `main`, regenerate/read `data/reports/ability-risk-current.json` and select the next **actionable unfinished** ability by canonical weighted contribution; do not assume the old Hexing lead is still current.
+2. Implement the next evidence package directly in `main`, preserving all closed ceilings and collision controls.
+3. For shared parser/state/simulator changes, add cross-module regressions and run both Ability and affected Main validation surfaces.
+4. Claim PASS only for the exact functional SHA that reached `completed + success` on hosted Windows.
+5. Update this status, `docs/ability/ability_changelog.md`, root `changelog.md` and the canonical TZ as bookkeeping. No ability-to-main merge handoff exists.
 
 ## Current files to inspect first
 

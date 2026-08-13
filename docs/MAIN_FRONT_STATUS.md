@@ -165,16 +165,16 @@ This run also closes the pending executable verification for the M13 canonical-h
 
 M11 uncertainty evidence is now reproducible under commit `8dc9dc5b81db936089c7764fafb9c22cb79505a3`: dedicated run `31419316512` passed 7 targeted tests and exact JSON equality across two independent full-corpus processes. The production uncertainty gate remains disabled by evidence.
 
-Permanent main CI commit `bb8404606621966d8c688f22e93c6ce35dd695ea` excludes the independently owned `hwm-tests` executable from the main-front CTest gate while leaving ability validation responsible for its Windows failures. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.
+Historical checkpoint: commit `bb8404606621966d8c688f22e93c6ce35dd695ea` temporarily excluded the ability-module `hwm-tests` executable from the main-front CTest gate while Ability validation isolated Windows failures. Current governance no longer maps that ownership split to separate Git branches: all module work is in `main`. The real authenticated active-PvE browser smoke remains the product-level blocker and is not replaced by replay/integration CI.
 
 ## Decoder/legal checkpoint — guarded raw-position handling
 
 - Functional commits: `c22d41678e4054c721f70bd2f1f6abe40830b93c` and `d00c3c73f5c6f618e07d1123a2789c9c1f089016`; synchronized M11 evidence commit: `2843f4e086852688d3188f19b1973306c40ebe7b`.
 - `mUUUXXYY` ordinary melee hints are conservatively canonicalized only for physically colliding raw anchors with one unique target-adjacent reachable landing within one Chebyshev cell; ability-owned SPECIAL movement stays excluded.
 - Impossible special-free shooter position hints are treated as markers only under guarded stationary-melee or actually-legal ranged conditions (`shots > 0`, no adjacent enemy block).
-- Main-owned `hwm-protocol-tests` is now a permanent CTest target separate from ability-owned `hwm-tests`.
+- `hwm-protocol-tests` and ability-module `hwm-tests` remain separate validation surfaces, but both belong to the unified `main` development history.
 - Full-corpus result at the 12.08.2026 checkpoint: **852/866 structural-ready**, **14 invalid finals** (all `overlap`, 16 pairs), **795/866 semantic-safe**; Python replay-final overlap audit remains **17 battles / 17 pairs**.
 - Held-out observed basic-action representability: **5392/5481 = 98.376%** (**89** residual failures).
 - Full CI permanently enforces `invalid <= 14`; M11 committed evidence was re-synchronized after decoder semantics changed and exact verification passes on run `31624580974`. Production learned dynamics remains disabled.
 - Hosted run `31475600960`: **Core PASS + Full PASS**, CTest **2/2**, planner **120/120**, Python **84/84**.
-- Next main-owned decoder front: continue corpus-proven discrepancies among the remaining 14 overlap finals and 89 held-out representability residuals; do not absorb SPECIAL/multi-target/forced-movement semantics owned by the ability evidence lane.
+- Next decoder front: continue corpus-proven discrepancies among the remaining 14 overlap finals and 89 held-out representability residuals; SPECIAL/multi-target/forced-movement semantics stay owned by the ability module, which now works directly in the same `main`.

@@ -1,8 +1,10 @@
 # HeroesWM Solver — Ability Change Log
 
-This is the canonical change log for work performed on the `ability` branch and ability-owned code/data/docs.
+This is the canonical change log for the **ability module** and its code/data/docs. Current ability development is committed directly to `main`.
 
-The root [`changelog.md`](../../changelog.md) remains the main/integration change log. Ability development must be recorded here first; main integration may later summarize the same work in the root change log.
+Historical entries below may mention the former dedicated `ability` branch, draft PRs, or merge-back workflow. Those statements are preserved as provenance of the repository state at that time and are **superseded** by the unified-main governance adopted on 2026-08-13. The historical Git ref `ability` is archive-only, not current project state.
+
+The root [`changelog.md`](../../changelog.md) remains the project-wide change log. Ability functional work is recorded here and in root bookkeeping without a separate integration phase.
 
 ## Working convention
 
@@ -263,6 +265,12 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
 - The shared replay delta is intentionally narrow: independent normal-cast controls justify `ray -> dray` structural/status-family decoding while zero-cost Hexing-like rows remain semantic-unresolved; validated Gribbomb `bom` records may perform the exact carrier self-removal consequence. No Hexing proc probability and no predictive Gribbomb collateral/Earth magnitude were invented.
 - The first merged candidate exposed stale generated M11 numeric evidence in Main Full. All four M11 reports were regenerated from exact candidate artifacts; schemas, sample/window populations and gate booleans remained unchanged, and the final strict `M11Verify` reducer passed.
 - Final promoted functional main SHA: `3df0d5ee4434d3cc401dba1b765a4dca068c15c1`. Ability Windows integration run `31700597609` / suite `85996170989` and Main Windows CI run `31700599112` / suite `85996175100` both completed with **success** on this exact SHA; strict M11 reducer job `94449755943` and strict Full aggregate job `94452449852` both passed.
-- Negative-diff audit found no unexplained main-owned changes or deletions. Main production live/front/search/geometry and shared specification/status files were preserved rather than replaced from the ability branch.
-- Intentional unresolved boundaries after integration: Child of the Light game-school discriminator; Taunt; Spider/`Sent` ownership; Hexing proc probability/rule; predictive Gribbomb collateral/Earth magnitude. The `ability` branch remains retained after integration.
+- Negative-diff audit found no unexplained main-owned changes or deletions. Main production live/front/search/geometry and shared specification/status files were preserved rather than replaced from the **historical** ability source branch.
+- Intentional unresolved boundaries after integration: Child of the Light game-school discriminator; Taunt; Spider/`Sent` ownership; Hexing proc probability/rule; predictive Gribbomb collateral/Earth magnitude. The historical `ability` ref is retained only as archive/provenance; all subsequent ability development is on `main`.
 
+### Unified-main ability governance
+
+- Ability is now a logical module/ownership boundary rather than a Git development lane.
+- All future ability implementation, evidence, tests, registry/risk work and docs are committed directly to `main`.
+- Ability atomic Windows CI remains the module-specific authority; shared-substrate changes must also pass every affected Main validation surface on the same exact SHA.
+- There is no normal Draft PR / ability-to-main merge-back stage. Legacy branch-era entries above remain historical only.

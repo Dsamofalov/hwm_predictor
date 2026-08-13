@@ -1,20 +1,21 @@
 # HeroesWM Solver — ТЗ для агента по abilities
 
-Версия контракта: 2026-08-13
-Рабочая ветка: `ability`
-Draft PR: `#1` (`ability` -> `main`)
+Версия контракта: 2026-08-13 — unified-main governance
+Рабочая ветка: **`main`**
+Модуль: **ability** — отдельный logical ownership boundary, не отдельная Git lane
+Legacy ref `ability`: только historical/archive provenance; не source of truth и не handoff/merge destination
 Целевая product/CI платформа: **Windows 10/11 x64 + Visual Studio 2022 / MSVC**
 
 ## 0. Текущий обязательный checkpoint
 
-На момент актуализации ТЗ текущий validated functional ability SHA:
+Текущий проверенный интегрированный functional checkpoint:
 
-- **`a2c06ef10048486cc84239b045f3710e9f7db795`** — `test(ability): pin Hexing baseline and wire audit`;
-- authoritative hosted Ability Windows CI run **`31680364027` — PASS / conclusion `success`**;
-- check-suite **`85941007397`**;
-- workflow: `.github/workflows/ability.yml`, hosted `windows-latest`.
+- **`3df0d5ee4434d3cc401dba1b765a4dca068c15c1`** — validated functional `main` после последней ability integration;
+- Ability Windows CI **`31700597609` — PASS / conclusion `success`**, check-suite `85996170989`;
+- Main Windows CI **`31700599112` — Core PASS + Full PASS**, check-suite `85996175100`;
+- historical pre-unification ability source `2ae1046c48e99c94da3481a8b3ed81285b9125ab` / run `31697180629` остаётся только provenance.
 
-Этот checkpoint важнее старых handoff-текстов. Перед началом новой functional работы агент обязан сверить фактический HEAD ветки `ability`, этот документ, `docs/ability/AGENT_STATUS.md`, `docs/ability/ability_changelog.md` и `TESTS_CANON.md`.
+Перед новой functional ability-работой агент обязан сверить фактический HEAD `main`, этот документ, `docs/ability/AGENT_STATUS.md`, `docs/ability/ability_changelog.md`, root `changelog.md` и `TESTS_CANON.md`. Никакой синхронизации с legacy веткой `ability` не требуется и не разрешается считать её актуальным состоянием проекта.
 
 ### Закрытые на текущей доказуемой границе mechanics
 
@@ -32,33 +33,19 @@ Draft PR: `#1` (`ability` -> `main`)
 - Spider (`unresolved`, raw `Sent` не Spider-specific и не Entroots-exclusive; отдельный Spider runtime effect запрещён);
 - Child of the Light (`unresolved`, нет независимого per-spell Light-school discriminator; hardcoded Light taxonomy запрещена).
 
-### Текущий active lead: Hexing Attack
+### Последний закрытый evidence-front: Hexing Attack / shared `ray`
 
-Weighted unfinished queue после закрытия Child of the Light ведёт к **`hexingattack`**.
+Pre-unification Hexing work завершил общий parser-substrate package: evidence-backed `ray -> dray` structural/status-family decoding вошёл в integrated `main`, при этом standalone zero-cost Hexing-like rows остаются semantic-unresolved.
 
-Уже validated на Windows baseline:
+Зафиксированная граница:
 
-- 866 battle dirs;
-- 32 Hexing carrier battles;
-- 88 carriers;
-- carrier creature IDs: `333 = 41`, `269 = 27`, `268 = 20`;
-- exact carrier ability sets: `caster,hexingattack,undead` (47) и `alive,caster,hexingattack,ragingblood,sacrificegoblin,swiftattack` (41);
-- 115 carrier attacks, все `MELEE_ATTACK`;
-- generic parser на carrier attack windows видит 12 zero-cost same-actor/same-target status records: `sff = 5`, `crs = 4`, `slw = 3`;
-- raw attack windows дополнительно содержат 3 `Sray...` records, которые generic parser пока не относит к status grammar;
-- tooltip перечисляет четыре возможных expert-level эффекта: Curse, Slow, Weakness, Disrupting Ray, но говорит только «с некоторой вероятностью» и **не содержит numeric probability / percentage / integer constant**.
+- shared `crs/slw/sff/ray` wire families имеют independent normal-cast controls;
+- `ray` структурно декодируется через shared status substrate;
+- Hexing не получает отдельный runtime effect только из tooltip/mnemonic;
+- `15/115` и другие observed frequencies **не** являются proc probability;
+- Child/Taunt/Spider/Gribbomb ceilings ниже остаются в силе.
 
-Functional SHA `a2c06ef...` уже добавил whole-corpus collision/layout auditor `python/hwm_solver/ability/hexingattack_wire_evidence.py` для raw candidate codes `crs/slw/sff/ray` и strict baseline assertions в `python/tests/test_hexingattack_evidence.py`. Сам факт PASS этого пакета **не означает**, что `ray` уже доказан как Disrupting Ray или что proc probability известна.
-
-Следующий агент обязан продолжить именно с этого места:
-
-1. Извлечь и проверить whole-corpus output `HEXINGATTACK_WIRE_COLLISION_EVIDENCE` для exact SHA `a2c06ef...` либо повторно запустить exact Hexing node на hosted Windows при необходимости получения полного отчёта.
-2. Перевести exploratory lower bounds в **exact corpus contract**: exact counts для `crs/slw/sff/ray`, fixed-width payload shapes, source/target presence, actor/target agreement, attack-bound populations, source ability sets, Hexing vs non-Hexing collisions, zero/positive field populations.
-3. Отдельно исследовать normal-cast/server-spellbook controls. Нельзя считать `ray == Disrupting Ray` только из мнемоники `ray` или из соседства с Hexing tooltip. Требуется независимая связь raw wire с server-declared spell identity/cast context.
-4. `sff` также нельзя автоматически называть Weakness без независимого discriminator/collision evidence.
-5. Не моделировать proc probability из наблюдаемой частоты `12/115`, гипотетической `15/115` или любой другой corpus frequency. Tooltip не даёт numeric constant; trigger attribution и probability — отдельные задачи.
-6. Не менять runtime/registry до доказанной semantic boundary. Если wire identity остаётся confounded — закрыть Hexing precise blocker'ом и пересчитать weighted queue.
-7. Если независимая identity доказана, сначала pin protocol/wire semantics и positive/negative controls; только затем рассматривать replay/runtime consequence. Никаких speculative formulas/percentages.
+Следующая ability не hardcode'ится этим governance checkpoint. Перед новым functional package пересчитать текущий `data/reports/ability-risk-current.json` на HEAD `main` и выбрать следующую actionable unfinished ability по canonical weighted queue.
 
 ## 1. КРИТИЧЕСКОЕ ПРАВИЛО: ability changelog обязателен
 
@@ -79,18 +66,18 @@ Bookkeeping/docs-only commit сам по себе не требует новог
 
 ## 2. Роль и границы
 
-Ability-agent отвечает только за creature abilities и связанные evidence/tests:
+Ability-agent — модульный агент внутри единой ветки `main`. Он отвечает за creature abilities и связанные evidence/tests:
 
 - raw/corpus evidence;
 - ability protocol decoding;
 - ability-specific replay/simulator/proc/collateral mechanics;
 - ability registry/risk evidence;
 - C++/Python regressions;
-- merge-ready состояние Draft PR #1.
+- актуальный module status/changelog.
 
-Не переключаться на main-owned planner/M11/live/UI/extension/daemon задачи и не дублировать main-agent.
+Все functional и bookkeeping commits делаются непосредственно в `main`. Dedicated `ability` branch, Draft PR #1 и отдельный ability-to-main merge/handoff больше не являются частью workflow.
 
-Ability-agent **не merge'ит `ability` в `main` самостоятельно**. Финальная интеграция принадлежит main/integration agent.
+Не переключаться на planner/M11/live/UI/extension/daemon задачи без прямой доказанной зависимости ability package. Если ability требует shared substrate, сделать минимальное изменение в `main` и прогнать все затронутые main + Ability validation surfaces.
 
 ## 3. CI/platform contract
 
@@ -248,7 +235,7 @@ Strict locked facts:
 
 ## 8. Ownership
 
-### Ability-owned / разрешено
+### Ability-module scope / normal changes on `main`
 
 C++ ability/protocol/simulator:
 
@@ -259,55 +246,29 @@ C++ ability/protocol/simulator:
 - `cpp/src/ability_damage_model.cpp`;
 - `cpp/src/collateral_model.cpp`;
 - `cpp/src/kill_trigger_model.cpp`;
-- соответствующие ability headers;
-- `cpp/tests/test_main.cpp`.
+- соответствующие ability headers/tests.
 
 Python:
 
-- `python/hwm_solver/protocol/replay.py` только для ability decoding;
+- `python/hwm_solver/protocol/replay.py` для evidence-backed ability/shared-wire decoding;
 - `python/hwm_solver/knowledge/build_ability_registry.py`;
 - `python/hwm_solver/ability/**`;
 - ability/proc/collateral evidence/train code;
-- соответствующие ability-specific tests в `python/tests/**`.
+- соответствующие ability-specific tests.
 
-Evidence/docs:
+Evidence/docs/CI:
 
-- ability registry/risk reports;
-- `data/reports/abilities/**`;
-- `docs/ability/**`;
-- `docs/ABILITY_AGENT_TZ.md`.
+- ability registry/risk reports и `data/reports/abilities/**`;
+- `docs/ability/**`, `docs/ABILITY_AGENT_TZ.md`, bookkeeping в root `changelog.md`;
+- `.github/workflows/ability.yml`, `scripts/ci_ability_windows.ps1`, `python/tests/test_ability_workflow_contract.py` при необходимости поддерживать сам validation surface.
 
-Ability CI exception:
+### Shared substrate
 
-- `.github/workflows/ability.yml`;
-- `scripts/ci_ability_windows.ps1`;
-- `python/tests/test_ability_workflow_contract.py`.
+`cpp/src/state.cpp`, `cpp/include/hwm/state.hpp`, CMake, protocol/replay, simulator и shared reports могут влиять на другие модули. Ability-agent может менять их прямо в `main` только при доказанной необходимости текущего package, минимальным diff и с cross-module regressions/CI. Перед широким shared change записать impact в `docs/ability/AGENT_STATUS.md`.
 
-`changelog.md` менять только bookkeeping commit'ом после functional SHA либо docs correction checkpoint.
+### Outside module scope
 
-### Integration request first
-
-Без доказанной необходимости не менять:
-
-- `cpp/src/state.cpp`;
-- `cpp/include/hwm/state.hpp`;
-- `CMakeLists.txt`;
-- `CMakePresets.json`.
-
-Если ability требует их изменения — сначала записать integration request в `docs/ability/AGENT_STATUS.md`.
-
-### Main-owned / не менять
-
-Кроме минимального разрешения неизбежного merge conflict не менять:
-
-- `cpp/src/planner.cpp`, `cpp/include/hwm/planner.hpp`;
-- M11/evaluation main-front;
-- session/http/main runtime;
-- `extension/**`;
-- `.github/workflows/ci.yml`;
-- main Windows scripts;
-- `schemas/**`;
-- main-owned product/spec/report docs.
+Без прямой ability dependency не менять planner/search, M11/evaluation, session/http/runtime, extension/UI, schemas и unrelated product docs. Это scope rule, а не branch ownership rule; merge conflicts между `main` и ability больше не являются нормальной стадией разработки.
 
 ## 9. Regression gates
 
@@ -342,18 +303,17 @@ Expected platform details:
 
 После законченного functional блока обновить `docs/ability/AGENT_STATUS.md`:
 
-- current ability HEAD;
+- current `main` HEAD;
 - validated functional SHA;
-- main integration reference, если известен;
-- hosted Windows run/check-suite/status;
-- exact remaining failures/blockers;
-- corpus support counts;
-- observed coverage;
-- baseline/candidate metrics, если есть probability model;
+- hosted Windows Ability run/check-suite/status;
+- затронутые Main validation surfaces и их run/status, если менялся shared substrate;
+- exact remaining failures/blockers и corpus support counts;
+- observed coverage / model metrics, если применимо;
 - ability-risk / weighted contribution change;
 - exact/modeled/unresolved boundary;
-- integration requests;
-- следующую механику.
+- следующую actionable ability либо явный blocker.
+
+Handoff всегда указывает на `main`. Legacy `ability` ref не обновляется как часть нормальной разработки.
 
 ## 11. Коммиты
 
@@ -365,16 +325,16 @@ Expected platform details:
 
 Не использовать temporary self-modifying workflows. Не ослаблять assertions ради green CI. Evidence-fail, который опровергает гипотезу, фиксировать как evidence, а не маскировать rerun'ом.
 
-## 12. Review-ready завершение блока
+## 12. Завершение ability-блока на `main`
 
-Перед handoff/integration:
+Перед handoff следующему диалогу:
 
-1. работа остаётся в `ability`;
-2. нет случайных main-owned изменений;
-3. exact functional SHA имеет completed/success hosted Windows Ability CI;
-4. все evidence claims соответствуют strict corpus tests;
-5. `AGENT_STATUS.md` и changelogs актуальны;
-6. Draft PR #1 review-ready;
-7. **не merge `ability` в `main` самостоятельно**.
+1. весь functional код находится в `main`;
+2. нет случайных unrelated-module изменений;
+3. exact functional SHA имеет `completed + success` hosted Windows Ability CI;
+4. shared-substrate change имеет все необходимые Main validation results на том же exact SHA;
+5. evidence claims соответствуют strict corpus tests;
+6. `AGENT_STATUS.md`, ability changelog и root changelog актуальны;
+7. handoff указывает на текущий `main` HEAD и следующий module task — без Draft PR и без ability-to-main merge шага.
 
-Если `main` продвинулся параллельно, не вливать его в ability автоматически после каждой итерации. Синхронизация — только при реальной integration/review необходимости.
+Если `main` изменился до завершения проверки и functional tree изменился, старый PASS не переносится: валидировать новый exact SHA. Legacy ветку `ability` не синхронизировать и не использовать как промежуточную рабочую копию.

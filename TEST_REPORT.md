@@ -24,7 +24,7 @@ M11 full-corpus diagnostic/evidence suite:      PASS
 Validated main-tree reference: `2843f4e086852688d3188f19b1973306c40ebe7b`, GitHub-hosted `windows-2022` Actions run `31475600960`: **Core PASS + Full PASS**. Core compiled all C++ targets under MSVC Debug, executed the main-owned `hwm-planner-tests` + `hwm-protocol-tests`, validated 120 held-out planner states from 110 battles with zero invalid recommendations, state-hash mismatches, illegal best/alternative actions or non-finite metrics, passed pairing/auth, stale cancellation, live binding and WebSocket integrations, Python **84/84**, TypeScript typecheck and extension build. Full passed MSVC Release main-front CTest, full-corpus structural budget `invalid <= 15`, `planner-demo 5000`, all permanent M11 full-corpus evaluators, exact committed-evidence verification and the positive-residual temperature experiment.
 
 
-The ability-owned monolithic `hwm-tests` target is still built but deliberately excluded from the `main` CTest gate until branch `ability` completes its independent MSVC validation. This ownership split is temporary integration debt, not a permanent reduction of the final test contract.
+Historical note: at this 11.08 checkpoint the ability-owned monolithic `hwm-tests` target was temporarily excluded from the main-front CTest gate while its MSVC defects were being isolated. That branch-era split is retired: current ability development is performed on `main`, and Ability CI is a module-specific validation surface rather than a separate development lane.
 
 ## Closed-loop safety regressions
 
@@ -220,6 +220,6 @@ planner-demo 5000:                             PASS
 M11 multistep / uncertainty / selector / survival commands: PASS / PASS / PASS / PASS
 ```
 
-The main-front C++ claim excludes the ability-owned monolithic `hwm-tests` executable. Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and then a later `0xc0000409` termination; those defects are handed to the independent ability branch rather than patched from main. Permanent main CI reflects this ownership split in `bb8404606621966d8c688f22e93c6ce35dd695ea`.
+Historical note for this validation snapshot: the main-front C++ claim excluded the ability-owned monolithic `hwm-tests` executable after Windows/MSVC exposed a dangling-pointer Mighty Slam test, a misspelled Frightful Aura ability code, and a later `0xc0000409` termination. Those defects were handled during the former branch-isolated phase and subsequently integrated; current governance keeps both module development and its validation changes in `main`.
 
 M11 uncertainty reproducibility was then repaired in `8dc9dc5b81db936089c7764fafb9c22cb79505a3`. Dedicated run `31419316512` passed 7 targeted tests and produced byte-for-meaning identical JSON objects across two independent full-corpus processes. Runtime uncertainty fallback remains disabled.
