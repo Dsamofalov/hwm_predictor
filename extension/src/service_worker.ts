@@ -9,7 +9,7 @@ const HWM_TRACE_MAX=80;
 const HWM_WS="ws://127.0.0.1:38471/ws";
 let hwmWs:WebSocket|undefined;
 let hwmWsReconnectTimer:number|undefined;
-let hwmLastScheduledStateKey="";
+const hwmScheduleGuard=hwmCreateScheduleGuard();
 
 type HwmTraceEvent={at:number;stage:string;[key:string]:unknown};
 async function hwmTrace(stage:string,details:Record<string,unknown>={}){
@@ -35,16 +35,23 @@ async function hwmDaemonJson(path:string,init:RequestInit={},auth=true):Promise<
   return data;
 }
 
-async function hwmRequestRecommendation(epoch:number){
+function hwmReleaseRetryableSchedule(stateKey:string,status:unknown){
+  const normalized=String(status??"");
+  if(normalized==="pairing_required"||normalized==="offline"||normalized==="error")hwmScheduleGuard.release(stateKey);
+}
+
+async function hwmRequestRecommendation(epoch:number,stateKey:string){
   await hwmTrace("plan_requested",{epoch});
   try{
     const recommendation=await hwmDaemonJson("/recommend",{method:"POST"});
     if(epoch!==hwmRecommendationEpoch){await hwmTrace("plan_discarded_epoch",{epoch,currentEpoch:hwmRecommendationEpoch,status:recommendation?.status});return}
+    hwmReleaseRetryableSchedule(stateKey,recommendation?.status);
     await hwmTrace("plan_result",{epoch,status:recommendation?.status,stateHash:recommendation?.state_hash??recommendation?.current_state_hash??"",revision:recommendation?.state_revision??recommendation?.current_revision??0,simulations:recommendation?.simulations??0,elapsedMs:recommendation?.elapsed_ms??0});
     await chrome.storage.local.set({hwmLastRecommendation:recommendation,hwmLastRecommendationAt:Date.now()});
     chrome.runtime.sendMessage({type:"recommendation",recommendation}).catch(()=>{});
   }catch(e){
     if(epoch!==hwmRecommendationEpoch){await hwmTrace("plan_error_discarded_epoch",{epoch,currentEpoch:hwmRecommendationEpoch});return}
+    hwmScheduleGuard.release(stateKey);
     await hwmTrace("plan_error",{epoch,error:String(e).slice(0,240)});
     await chrome.storage.local.set({hwmLastRecommendation:{status:"offline",error:String(e)},hwmLastRecommendationAt:Date.now()});
   }
@@ -52,11 +59,16 @@ async function hwmRequestRecommendation(epoch:number){
 
 function hwmScheduleRecommendation(revision=0,stateHash="",battleId=""){
   const stateKey=revision>0?hwmCanonicalScheduleKey(revision,stateHash,battleId):"";
-  if(stateKey&&stateKey===hwmLastScheduledStateKey)return;
-  if(stateKey)hwmLastScheduledStateKey=stateKey;
+  if(stateKey&&!hwmScheduleGuard.claim(stateKey))return;
   const epoch=++hwmRecommendationEpoch;
   if(hwmRecommendTimer!==undefined)clearTimeout(hwmRecommendTimer);
-  hwmRecommendTimer=setTimeout(()=>{hwmRecommendTimer=undefined;void hwmRequestRecommendation(epoch)},250) as unknown as number;
+  hwmRecommendTimer=setTimeout(()=>{hwmRecommendTimer=undefined;void hwmRequestRecommendation(epoch,stateKey)},250) as unknown as number;
+}
+
+function hwmResetRecommendationScheduling(){
+  hwmScheduleGuard.reset();
+  ++hwmRecommendationEpoch;
+  if(hwmRecommendTimer!==undefined){clearTimeout(hwmRecommendTimer);hwmRecommendTimer=undefined}
 }
 
 async function hwmConnectWebSocket(){
@@ -71,7 +83,7 @@ async function hwmConnectWebSocket(){
   }catch(e){await hwmTrace("ws_connect_error",{error:String(e).slice(0,160)})}
 }
 
-chrome.storage.onChanged.addListener((changes:any,area:string)=>{if(area==="local"&&changes[HWM_TOKEN_KEY]){if(hwmWs){hwmWs.close();hwmWs=undefined}void hwmConnectWebSocket()}});
+chrome.storage.onChanged.addListener((changes:any,area:string)=>{if(area==="local"&&changes[HWM_TOKEN_KEY]){hwmResetRecommendationScheduling();if(hwmWs){hwmWs.close();hwmWs=undefined}void hwmConnectWebSocket()}});
 void hwmConnectWebSocket();
 
 chrome.runtime.onInstalled.addListener(()=>chrome.sidePanel.setPanelBehavior({openPanelOnActionClick:true}).catch(()=>{}));
