@@ -59,7 +59,7 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Whole-corpus evidence reached one validated `Sbom` activation, three adjacent living targets, three damage hits, zero missing adjacent targets, and zero non-adjacent extras before the first failing assertion.
   - Hosted Windows run `31621278975`: **FAIL** on the new atomic node because the manually entered expected carrier HP was `36356`, while replay-derived pre-activation HP is `36101`.
   - The failure does not invalidate the discriminator/target-set evidence; it identifies an incorrect handwritten expected value. No rerun is used as a substitute for fixing that value.
-  - Runtime boundary remains unresolved: generic replay still leaves the carrier alive after `Sbom`, and predictive Earth-damage magnitude is not inferred from one activation.
+  - Runtime boundary remains unresolved: generic replay still leaves the carrier alive after `Sbom`, and predictive Earth/collateral magnitude is not inferred from one activation.
 
 - Commit: `d04999b03a094e637223ec7925b3071e50e36ecf` — `fix(ability): use replay-derived Gribbomb pre-bomb HP`.
   - Corrected only the bad expected pre-activation HP (`36356 -> 36101`); no structural evidence assertion was weakened.
@@ -195,8 +195,20 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
 - Commit: `c5a2acaded82d36e5c32b6af9833554a44c60ce2` — `test(ability): lock Child tooltip metadata blocker`.
   - Converted the final decoded-tooltip observations into strict assertions in the existing atomic Child node, without changing replay/runtime/registry semantics.
   - Authoritative hosted Ability Windows run `31679297822`: **PASS / completed with conclusion `success`** on the exact functional SHA; check-suite `85938145984` also belongs to that exact SHA.
-  - Strictly pinned `bm_tooltips` structure: all 108 carrier battles expose only `abil_desc`, `abil_names`, and `perk_hints` dictionaries; exact mapping-key overlap with same-battle server spellbook names is zero (`mapping_spellbook_overlap_counts = {}`, `overlap_spell_names = {}`, `overlap_examples = []`).
+  - Strictly pinned `bm_tooltips` structure: all 108 carrier battles expose only `abil_desc`, `abil_names`, and `perk_hints` dictionaries; exact mapping-key overlap with same-battle spellbook names is zero (`mapping_spellbook_overlap_counts = {}`, `overlap_spell_names = {}`, `overlap_examples = []`).
   - Correction to the previous `7d63aad9...` bookkeeping wording: there are **92 non-Child text hits mentioning Light**, not zero. The decisive zero is narrower and independent: `non_child_school_light_hits = 0`. The strict gate also pins `child_light_text_hits = 216` and `school_text_hits = 112`.
   - Therefore the corpus contains Light-related ability/perk prose, but no server metadata that simultaneously identifies a concrete spell and independently classifies it as Light. The raw spellbook still collapses relevant statuses into `neutral`/`nt`.
   - Child of the Light is closed for this evidence pass as **`unresolved` with a precise missing per-spell school discriminator**. No runtime copy rule, registry promotion, hardcoded Light spell list, or numeric probability is introduced.
   - The weighted unfinished queue now advances to `hexingattack`; any Hexing proc attribution must first pass whole-corpus source/collision controls, and its tooltip's non-numeric “some probability” wording is not a probability constant.
+
+### Hexing Attack baseline and whole-corpus wire audit
+
+- Commit: `a2c06ef10048486cc84239b045f3710e9f7db795` — `test(ability): pin Hexing baseline and wire audit`.
+  - Hardened the existing Hexing smoke test into exact baseline assertions and added `python/hwm_solver/ability/hexingattack_wire_evidence.py`, a whole-corpus collision/layout auditor for raw candidate codes `crs`, `slw`, `sff`, and `ray`.
+  - Exact baseline now pins 866 battle dirs, 32 carrier battles, 88 carriers, creature IDs `333 = 41`, `269 = 27`, `268 = 20`, exact carrier ability sets, 115 carrier attacks (all `MELEE_ATTACK`), and 12 parsed zero-cost same-actor/same-target status records: `sff = 5`, `crs = 4`, `slw = 3`.
+  - Raw Hexing attack windows also contain exactly 3 `Sray...` records that generic parser still leaves outside status grammar; this package intentionally does **not** identify `ray` as Disrupting Ray from its mnemonic.
+  - The tooltip lists Curse, Slow, Weakness, and Disrupting Ray at expert level but provides only “some probability”; it has no numeric percentage/probability constant.
+  - Authoritative hosted Ability Windows run `31680364027`: **PASS / completed with conclusion `success`** on exact functional SHA `a2c06ef...`; check-suite `85941007397`.
+  - Semantic boundary remains evidence-only: `ray == disrupting ray`, `sff == weakness`, per-event Hexing ownership, and proc probability are all still unproven. No replay/runtime/registry promotion was made.
+  - Next step is to extract the full `HEXINGATTACK_WIRE_COLLISION_EVIDENCE` report and convert the exploratory lower bounds into exact corpus assertions for payload shapes, source/target agreement, Hexing/non-Hexing collision populations, source ability sets, zero/positive fields, owner relations, and independent normal-cast/server-spellbook controls.
+  - Observed frequency `12/115` or a hypothetical `15/115` must **not** be used as a proc probability. Probability work starts only after independent per-event attribution is solved.
