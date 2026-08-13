@@ -124,25 +124,28 @@ def test_hexingattack_whole_corpus_evidence():
     assert report["carrier_attacks"] == 115
     assert report["attack_action_types"] == {"MELEE_ATTACK": 115}
     assert report["attack_creatures"] == {"333": 94, "269": 16, "268": 5}
-    assert report["attacks_with_same_target_special"] == 12
-    assert report["same_target_special_records"] == 12
-    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3}
+    assert report["attacks_with_same_target_special"] == 15
+    assert report["same_target_special_records"] == 15
+    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3, "ray": 3}
     assert report["code_added_effects"] == {
         "crs": {"crs": 4},
+        "ray": {"ray": 3},
         "sff": {"sff": 5},
         "slw": {"slw": 3},
     }
     assert report["code_value_shapes"] == {
         "crs": {"0.0": 4},
+        "ray": {"0.0": 3},
         "sff": {"0.0": 5},
         "slw": {"0.0": 3},
     }
     assert report["code_amount_shapes"] == {
         "crs": {"100": 3, "96": 1},
+        "ray": {"6": 3},
         "sff": {"12": 5},
         "slw": {"40": 3},
     }
-    assert report["other_special_codes"].get("ray") == 3
+    assert report["other_special_codes"].get("ray", 0) == 0
 
     warnings.warn(
         "HEXINGATTACK_EVIDENCE "
