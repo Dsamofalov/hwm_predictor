@@ -197,3 +197,12 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Hexing attack-bound subset is exactly `crs=4`, `slw=3`, `sff=5`, `ray=3`; non-Hexing attack-bound controls are `crs=64`, `slw=24`, `sff=502`, `ray=1`.
   - `ray` and `sff` are therefore shared spell/status wires rather than Hexing-owned proc labels. `ray` has 406 normal `CAST_OR_ABILITY` contexts and strong same-source `dray/mdray` cost controls; `sff` has 77 normal cast contexts and strong `suffering/msuffering` cost controls, with same-cost collisions retained as ambiguity evidence.
   - No replay/runtime/registry semantic or proc probability was introduced. The next functional step is an exact corpus contract over the exported aggregates before any stronger internal spell-identity or observed-consequence claim.
+
+### Hexing strict collision contract
+
+- Commit: `baaeb4436a91962bf9a5f59f8b1b66876dbd8645` — `test(ability): lock Hexing wire collision corpus`.
+  - Strictly locked the 3895-record `crs/slw/sff/ray` corpus, including fixed widths, field distributions/digests, source-target agreement, owner relation, attack/Hexing/non-Hexing controls, spellbook collisions and representative rows.
+  - Authoritative hosted Ability Windows run `31687089866`: **PASS / completed with conclusion `success`** on exact SHA; check-suite `85959134496`. Dedicated wire node `94405812591` and artifact upload succeeded.
+  - Normal `CAST_OR_ABILITY` controls are `crs=79`, `slw=430`, `sff=77`, `ray=406`; unique exact-cost same-source spellbook matches independently identify `curse/mcurse`, `slow`, `suffering`, and `dray/mdray` families respectively, while ambiguous same-cost sets remain explicit.
+  - The complete Hexing attack-bound subset is 15 rows (`4/3/5/3`), all zero-field2, and remains distinct from ordinary positive-cost cast validation. No proc probability, blanket zero-cost exactness, runtime mutation or registry promotion is inferred.
+  - Next safe step is to lock the new compact identity/subset aggregates and audit observed replay consequence before any executable Hexing semantic change.
