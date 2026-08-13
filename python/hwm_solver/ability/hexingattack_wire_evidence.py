@@ -39,10 +39,11 @@ def analyze_wire_collisions(corpus: Path) -> dict:
 
     The four three-letter codes are selected only because three are already decoded status
     wires observed after Hexing-carrier attacks and raw ``Sray`` is the unresolved fourth
-    candidate in those same attack windows.  This auditor deliberately does not translate
-    ``ray`` to a spell name.  It reports fixed-width layout, source/target agreement,
-    source ability collisions, zero-vs-positive field populations and raw server spellbook
-    context so semantic attribution can be decided from evidence rather than mnemonics.
+    candidate in those same attack windows. This auditor deliberately does not translate
+    ``ray`` or ``sff`` to spell names. It reports fixed-width layout, source/target agreement,
+    source ability collisions, zero-vs-positive field populations, server spellbook context,
+    CAST_OR_ABILITY exact-cost name sets, and the complete Hexing-bound attack subset so
+    semantic attribution can be decided from independent evidence rather than mnemonics.
     """
     root = corpus / "battles" if (corpus / "battles").is_dir() else corpus
     if not root.is_dir():
@@ -51,7 +52,6 @@ def analyze_wire_collisions(corpus: Path) -> dict:
     battle_dirs.sort(key=lambda p: (0, int(p.name)) if p.name.isdigit() else (1, p.name))
 
     parse_errors: list[str] = []
-    initial: dict[tuple[str, int], object] = {}
     spellbooks: dict[tuple[str, int], list[dict]] = {}
 
     for battle_dir in battle_dirs:
@@ -68,10 +68,11 @@ def analyze_wire_collisions(corpus: Path) -> dict:
         if warnings:
             parse_errors.extend(f"{battle_dir.name}:init_warning:{w}" for w in warnings)
         for uid, entity in entities.items():
-            initial[(battle_dir.name, int(uid))] = entity
             spellbooks[(battle_dir.name, int(uid))] = _spellbook_entries(entity.magic_blob)
 
     records: Counter[str] = Counter()
+    raw_record_width_shapes: dict[str, Counter[str]] = defaultdict(Counter)
+    payload_width_shapes: dict[str, Counter[str]] = defaultdict(Counter)
     field2_shapes: dict[str, Counter[str]] = defaultdict(Counter)
     field4_shapes: dict[str, Counter[str]] = defaultdict(Counter)
     field3_shapes: dict[str, Counter[str]] = defaultdict(Counter)
@@ -82,6 +83,12 @@ def analyze_wire_collisions(corpus: Path) -> dict:
     positive_exact_cost_spellbook_names: dict[str, Counter[str]] = defaultdict(Counter)
     positive_compatible_cost_spellbook_names: dict[str, Counter[str]] = defaultdict(Counter)
     positive_spellbook_entry_shapes: dict[str, Counter[str]] = defaultdict(Counter)
+    cast_or_ability_field2_shapes: dict[str, Counter[str]] = defaultdict(Counter)
+    cast_or_ability_exact_cost_name_sets: dict[str, Counter[str]] = defaultdict(Counter)
+    cast_or_ability_unique_exact_cost_names: dict[str, Counter[str]] = defaultdict(Counter)
+    hexing_attack_field2_shapes: dict[str, Counter[str]] = defaultdict(Counter)
+    hexing_attack_field4_shapes: dict[str, Counter[str]] = defaultdict(Counter)
+    hexing_attack_field3_shapes: dict[str, Counter[str]] = defaultdict(Counter)
 
     source_present: Counter[str] = Counter()
     target_present: Counter[str] = Counter()
@@ -95,8 +102,11 @@ def analyze_wire_collisions(corpus: Path) -> dict:
     positive_field2: Counter[str] = Counter()
     other_owner: Counter[str] = Counter()
     same_owner: Counter[str] = Counter()
+    cast_or_ability_records: Counter[str] = Counter()
+    cast_or_ability_positive_field2: Counter[str] = Counter()
     examples: dict[str, list[dict]] = defaultdict(list)
     positive_examples: dict[str, list[dict]] = defaultdict(list)
+    hexing_attack_records: list[dict] = []
 
     for battle_dir in battle_dirs:
         try:
@@ -119,7 +129,10 @@ def analyze_wire_collisions(corpus: Path) -> dict:
                     field2 = int(payload[6:8])
                     field4 = int(payload[8:12])
                     field3 = int(payload[12:15])
+                    raw_record = match.group(0)
                     records[code] += 1
+                    raw_record_width_shapes[code][str(len(raw_record))] += 1
+                    payload_width_shapes[code][str(len(payload))] += 1
                     field2_shapes[code][f"{field2:02d}"] += 1
                     field4_shapes[code][f"{field4:04d}"] += 1
                     field3_shapes[code][f"{field3:03d}"] += 1
@@ -162,6 +175,9 @@ def analyze_wire_collisions(corpus: Path) -> dict:
                             nonhexing_attack_bound[code] += 1
 
                     entries = spellbooks.get((battle_dir.name, actor_uid), [])
+                    exact_cost_names = sorted(
+                        {str(entry["name"]) for entry in entries if field2 > 0 and int(entry["cost"]) == field2}
+                    )
                     for entry in entries:
                         source_spellbook_names[code][str(entry["name"])] += 1
                         if field2 > 0 and int(entry["cost"]) == field2:
@@ -182,6 +198,16 @@ def analyze_wire_collisions(corpus: Path) -> dict:
                             )
                             positive_spellbook_entry_shapes[code][shape] += 1
 
+                    if action_type == "CAST_OR_ABILITY":
+                        cast_or_ability_records[code] += 1
+                        cast_or_ability_field2_shapes[code][f"{field2:02d}"] += 1
+                        if field2 > 0:
+                            cast_or_ability_positive_field2[code] += 1
+                            name_set = "|".join(exact_cost_names) if exact_cost_names else "<none>"
+                            cast_or_ability_exact_cost_name_sets[code][name_set] += 1
+                            if len(exact_cost_names) == 1:
+                                cast_or_ability_unique_exact_cost_names[code][exact_cost_names[0]] += 1
+
                     row = {
                         "battle_id": str(decision.get("battle_id", battle_dir.name)),
                         "decision_index": int(decision.get("decision_index", -1)),
@@ -198,7 +224,7 @@ def analyze_wire_collisions(corpus: Path) -> dict:
                         "field4": field4,
                         "field3": field3,
                         "attack_bound": is_attack_bound,
-                        "raw_record": match.group(0),
+                        "raw_record": raw_record,
                         "source_spellbook": [
                             {
                                 "name": str(entry["name"]),
@@ -213,6 +239,25 @@ def analyze_wire_collisions(corpus: Path) -> dict:
                         examples[code].append(row)
                     if field2 > 0 and len(positive_examples[code]) < 30:
                         positive_examples[code].append(row)
+                    if is_attack_bound and ABILITY in actor_abilities:
+                        hexing_attack_field2_shapes[code][f"{field2:02d}"] += 1
+                        hexing_attack_field4_shapes[code][f"{field4:04d}"] += 1
+                        hexing_attack_field3_shapes[code][f"{field3:03d}"] += 1
+                        hexing_attack_records.append(
+                            {
+                                "battle_id": row["battle_id"],
+                                "decision_index": row["decision_index"],
+                                "server_turn": row["server_turn"],
+                                "code": code,
+                                "actor_uid": actor_uid,
+                                "target_uid": target_uid,
+                                "actor_creature_id": row["actor_creature_id"],
+                                "field2": field2,
+                                "field4": field4,
+                                "field3": field3,
+                                "raw_record": raw_record,
+                            }
+                        )
         except Exception as exc:
             parse_errors.append(f"{battle_dir.name}:turns:{type(exc).__name__}:{exc}")
 
@@ -221,7 +266,10 @@ def analyze_wire_collisions(corpus: Path) -> dict:
         "evidence_scope": "whole_corpus_raw_candidate_status_wire_collision_inventory",
         "candidate_codes": list(CANDIDATE_CODES),
         "corpus_battle_dirs": len(battle_dirs),
+        "total_raw_count": int(sum(records.values())),
         "records": _counter(records),
+        "raw_record_width_shapes": _nested(raw_record_width_shapes),
+        "payload_width_shapes": _nested(payload_width_shapes),
         "field2_shapes": _nested(field2_shapes),
         "field4_shapes": _nested(field4_shapes),
         "field3_shapes": _nested(field3_shapes),
@@ -234,6 +282,10 @@ def analyze_wire_collisions(corpus: Path) -> dict:
         "attack_bound": _counter(attack_bound),
         "hexing_attack_bound": _counter(hexing_attack_bound),
         "nonhexing_attack_bound": _counter(nonhexing_attack_bound),
+        "hexing_attack_field2_shapes": _nested(hexing_attack_field2_shapes),
+        "hexing_attack_field4_shapes": _nested(hexing_attack_field4_shapes),
+        "hexing_attack_field3_shapes": _nested(hexing_attack_field3_shapes),
+        "hexing_attack_records": hexing_attack_records,
         "zero_field2": _counter(zero_field2),
         "positive_field2": _counter(positive_field2),
         "other_owner": _counter(other_owner),
@@ -244,13 +296,19 @@ def analyze_wire_collisions(corpus: Path) -> dict:
         "positive_exact_cost_spellbook_names": _nested(positive_exact_cost_spellbook_names),
         "positive_compatible_cost_spellbook_names": _nested(positive_compatible_cost_spellbook_names),
         "positive_spellbook_entry_shapes": _nested(positive_spellbook_entry_shapes),
+        "cast_or_ability_records": _counter(cast_or_ability_records),
+        "cast_or_ability_field2_shapes": _nested(cast_or_ability_field2_shapes),
+        "cast_or_ability_positive_field2": _counter(cast_or_ability_positive_field2),
+        "cast_or_ability_exact_cost_name_sets": _nested(cast_or_ability_exact_cost_name_sets),
+        "cast_or_ability_unique_exact_cost_names": _nested(cast_or_ability_unique_exact_cost_names),
         "examples": {code: rows for code, rows in sorted(examples.items())},
         "positive_examples": {code: rows for code, rows in sorted(positive_examples.items())},
         "parse_errors": parse_errors,
         "interpretation_guard": (
             "The fixed-width fields are reported structurally. field2/field4/field3 are not assigned spell semantics "
-            "for raw ray. A ray record is not called Disrupting Ray unless independent normal-cast/spellbook controls "
-            "and collision evidence justify that identity. Zero-cost attack-bound frequency is not a proc probability."
+            "for raw ray or sff. A candidate is not assigned a spell identity from its mnemonic: independent "
+            "CAST_OR_ABILITY/spellbook controls and collision evidence must justify that identity. Zero-cost "
+            "Hexing attack-bound frequency is not a proc probability."
         ),
     }
 

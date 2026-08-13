@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import warnings
@@ -31,6 +32,16 @@ def _export_wire_evidence(report: dict) -> None:
         json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+
+
+def _json_sha256(value: object) -> str:
+    payload = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
 
 
 def test_hexingattack_whole_corpus_evidence():
@@ -86,9 +97,6 @@ def test_hexingattack_whole_corpus_evidence():
         "sff": {"12": 5},
         "slw": {"40": 3},
     }
-    # The current generic parser does not decode the target-shaped fields of raw Sray.
-    # Keep the observed three carrier-attack occurrences visible until the independent
-    # whole-corpus collision auditor establishes whether ray has one stable identity.
     assert report["other_special_codes"].get("ray") == 3
 
     warnings.warn(
@@ -104,11 +112,85 @@ def test_hexingattack_wire_collision_audit():
     assert wire["parse_errors"] == []
     assert wire["corpus_battle_dirs"] == 866
     assert wire["candidate_codes"] == ["crs", "slw", "sff", "ray"]
-    assert all(wire["records"].get(code, 0) > 0 for code in wire["candidate_codes"])
-    assert wire["records"].get("ray", 0) >= 3
+    assert wire["total_raw_count"] == 3895
+    assert wire["records"] == {"slw": 1412, "ray": 1179, "sff": 824, "crs": 480}
+    assert wire["raw_record_width_shapes"] == {
+        "crs": {"19": 480},
+        "ray": {"19": 1179},
+        "sff": {"19": 824},
+        "slw": {"19": 1412},
+    }
+    assert wire["payload_width_shapes"] == {
+        "crs": {"15": 480},
+        "ray": {"15": 1179},
+        "sff": {"15": 824},
+        "slw": {"15": 1412},
+    }
+    assert wire["field2_shapes"] == {
+        "crs": {"00": 305, "04": 92, "08": 81, "06": 2},
+        "ray": {"00": 574, "05": 374, "10": 227, "07": 3, "01": 1},
+        "sff": {"00": 723, "06": 55, "10": 22, "05": 16, "07": 6, "03": 2},
+        "slw": {"00": 585, "04": 554, "08": 257, "03": 10, "06": 6},
+    }
+    assert _json_sha256(wire["field2_shapes"]) == "76a3b76b71c8e2d838bf51b6d651b1ec69c6776607ca806af5565bc436ec0169"
+    assert _json_sha256(wire["field4_shapes"]) == "a75be56a94da873c7769e9f9684100a8545434622e554dacbfe790ea9e70ccef"
+    assert _json_sha256(wire["field3_shapes"]) == "a4cd53da1d782ca34d4b2d4c88447bec2de817bf8ed51703e592360e945678bf"
+    assert wire["source_present"] == wire["records"]
+    assert wire["target_present"] == wire["records"]
+    assert wire["other_owner"] == wire["records"]
+    assert wire["same_owner"] == {}
+    assert wire["source_hexing"] == {"ray": 330, "slw": 52, "sff": 7, "crs": 6}
+    assert wire["decision_actor_match"] == {"slw": 1379, "ray": 1178, "sff": 647, "crs": 422}
+    assert wire["decision_target_match"] == {"sff": 507, "crs": 68, "slw": 27, "ray": 4}
+    assert wire["action_types"] == {
+        "crs": {"HERO_ACTION": 275, "MELEE_ATTACK": 108, "CAST_OR_ABILITY": 79, "RANGED_ATTACK": 18},
+        "ray": {"HERO_ACTION": 768, "CAST_OR_ABILITY": 406, "MELEE_ATTACK": 5},
+        "sff": {"MELEE_ATTACK": 658, "CAST_OR_ABILITY": 77, "HERO_ACTION": 63, "RANGED_ATTACK": 26},
+        "slw": {"HERO_ACTION": 920, "CAST_OR_ABILITY": 430, "MELEE_ATTACK": 37, "RANGED_ATTACK": 23, "ABILITY": 2},
+    }
+    assert _json_sha256(wire["action_types"]) == "4ae946ef015663fc9b4b341c9f8abf6d30a0b92649861c7c8e66b0caab9ee3f7"
+    assert wire["attack_bound"] == {"sff": 507, "crs": 68, "slw": 27, "ray": 4}
+    assert wire["hexing_attack_bound"] == {"sff": 5, "crs": 4, "slw": 3, "ray": 3}
+    assert wire["nonhexing_attack_bound"] == {"sff": 502, "crs": 64, "slw": 24, "ray": 1}
+    assert wire["zero_field2"] == {"sff": 723, "slw": 585, "ray": 574, "crs": 305}
+    assert wire["positive_field2"] == {"slw": 827, "ray": 605, "crs": 175, "sff": 101}
 
-    # Structural conservation checks make the exploratory auditor fail loudly if one
-    # aggregate silently drops candidate records before the exact corpus snapshot is pinned.
+    # Large collision inventories are pinned by canonical JSON digest so every source
+    # ability-set, creature, spellbook entry and representative row remains exact without
+    # turning the test into a duplicated 30kB data snapshot.
+    assert _json_sha256(wire["source_ability_sets"]) == "54a76e80047833293fe5b49106306f6f1e6c2a5c37c5085cacfc696abe0c71fa"
+    assert _json_sha256(wire["source_creatures"]) == "901f26aef691ff72b983d0a3a1ffe3abb4403f65c6cecb381c8b1e278c84528e"
+    assert _json_sha256(wire["source_spellbook_names"]) == "2cf711e32fe88a60e6f55074fc91f13facdcf39101026421f37ed3212e3c3472"
+    assert _json_sha256(wire["positive_exact_cost_spellbook_names"]) == "1ceb000790faad36521d51604fdadba17cedaa6f58b7669c6bbeb7235dcc2a47"
+    assert _json_sha256(wire["positive_compatible_cost_spellbook_names"]) == "368e465f17abe114843c24f331b9e0f4e0ce79a43fef9f9d2ef3e786a829800e"
+    assert _json_sha256(wire["positive_spellbook_entry_shapes"]) == "c8579e7efb46ba96827afb6dfab9a46c4aa05014df33878eb643821002f2db91"
+    assert _json_sha256(wire["examples"]) == "b5433be3e7bcde8d9f65c478406d940daa834775ab57614596416f045936283a"
+    assert _json_sha256(wire["positive_examples"]) == "61882e442d7723e81b94c1d2a8eb618eefea8528e396dafd00bf58ceda84e9fc"
+
+    # Independent server-spellbook controls are visible but cost alone is deliberately
+    # not treated as identity: several spells can share a cost in the same source book.
+    exact = wire["positive_exact_cost_spellbook_names"]
+    assert exact["ray"]["dray"] == 376
+    assert exact["ray"]["mdray"] == 277
+    assert exact["sff"]["suffering"] == 71
+    assert exact["sff"]["msuffering"] == 35
+    assert exact["crs"]["curse"] == 94
+    assert exact["crs"]["mcurse"] == 118
+    assert exact["slw"]["slow"] == 559
+    assert exact["slw"]["mslow"] == 346
+
+    # New CAST_OR_ABILITY and complete Hexing-bound subsets are exported now, but their
+    # exact cardinalities are learned by this hosted run and will be pinned in the next
+    # evidence closure. Conservation checks prevent partial or silently dropped output.
+    assert wire["cast_or_ability_records"] == {
+        code: wire["action_types"][code].get("CAST_OR_ABILITY", 0)
+        for code in wire["candidate_codes"]
+        if wire["action_types"][code].get("CAST_OR_ABILITY", 0)
+    }
+    assert len(wire["hexing_attack_records"]) == sum(wire["hexing_attack_bound"].values()) == 15
+    assert sum(sum(v.values()) for v in wire["hexing_attack_field2_shapes"].values()) == 15
+    assert sum(sum(v.values()) for v in wire["hexing_attack_field4_shapes"].values()) == 15
+    assert sum(sum(v.values()) for v in wire["hexing_attack_field3_shapes"].values()) == 15
     for code in wire["candidate_codes"]:
         count = wire["records"][code]
         assert sum(wire["field2_shapes"][code].values()) == count
@@ -116,14 +198,7 @@ def test_hexingattack_wire_collision_audit():
         assert sum(wire["field3_shapes"][code].values()) == count
         assert sum(wire["action_types"][code].values()) == count
         assert wire["zero_field2"].get(code, 0) + wire["positive_field2"].get(code, 0) == count
-        assert wire["source_present"].get(code, 0) <= count
-        assert wire["target_present"].get(code, 0) <= count
-        assert wire["attack_bound"].get(code, 0) <= count
-        assert (
-            wire["hexing_attack_bound"].get(code, 0)
-            + wire["nonhexing_attack_bound"].get(code, 0)
-            == wire["attack_bound"].get(code, 0)
-        )
+        assert wire["hexing_attack_bound"].get(code, 0) + wire["nonhexing_attack_bound"].get(code, 0) == wire["attack_bound"].get(code, 0)
 
     warnings.warn(
         "HEXINGATTACK_WIRE_COLLISION_EVIDENCE "
