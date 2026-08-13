@@ -15,40 +15,40 @@
   "heldout_battles": 174,
   "metrics": {
     "16": {
-      "generic_mean_force_l1": 0.08178052129907755,
+      "generic_mean_force_l1": 0.08187936862172189,
       "generic_mean_full_window_survival_probability": 0.8098230315465504,
       "generic_mean_valid_observed_action_coverage": 0.9749253929460393,
-      "learned_mean_force_l1": 0.05028283614489631,
+      "learned_mean_force_l1": 0.05047421851473532,
       "learned_mean_full_window_survival_probability": 0.7241087458322647,
       "learned_mean_valid_observed_action_coverage": 0.9634932147374441,
       "mean_modeled_primary_attacks": 9.926391382405745,
       "windows": 7798
     },
     "2": {
-      "generic_mean_force_l1": 0.01696642799797546,
+      "generic_mean_force_l1": 0.017003407954452095,
       "generic_mean_full_window_survival_probability": 0.982732187525216,
       "generic_mean_valid_observed_action_coverage": 0.9891874445251351,
-      "learned_mean_force_l1": 0.011489042807941146,
+      "learned_mean_force_l1": 0.011555664998702593,
       "learned_mean_full_window_survival_probability": 0.9801339465827483,
       "learned_mean_valid_observed_action_coverage": 0.9878883240539014,
       "mean_modeled_primary_attacks": 1.4958847736625513,
       "windows": 8262
     },
     "4": {
-      "generic_mean_force_l1": 0.028080088976979774,
+      "generic_mean_force_l1": 0.028119235719948104,
       "generic_mean_full_window_survival_probability": 0.9653800666594989,
       "generic_mean_valid_observed_action_coverage": 0.986551625273268,
-      "learned_mean_force_l1": 0.018421927126799385,
+      "learned_mean_force_l1": 0.01851439168303545,
       "learned_mean_full_window_survival_probability": 0.9545353546213668,
       "learned_mean_valid_observed_action_coverage": 0.9828381655497019,
       "mean_modeled_primary_attacks": 2.58531340716052,
       "windows": 9301
     },
     "8": {
-      "generic_mean_force_l1": 0.04732444177786955,
+      "generic_mean_force_l1": 0.04739569713543376,
       "generic_mean_full_window_survival_probability": 0.9206035303596278,
       "generic_mean_valid_observed_action_coverage": 0.9832443070247948,
-      "learned_mean_force_l1": 0.030182064399552185,
+      "learned_mean_force_l1": 0.030333211895354727,
       "learned_mean_full_window_survival_probability": 0.8846773602871164,
       "learned_mean_valid_observed_action_coverage": 0.9755086358135139,
       "mean_modeled_primary_attacks": 4.945506482091848,

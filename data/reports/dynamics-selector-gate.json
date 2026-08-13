@@ -16,7 +16,7 @@
   "multistep": {
     "16": {
       "ensemble_mean": {
-        "mean_force_l1": 0.05171927150909418,
+        "mean_force_l1": 0.05190322837695007,
         "mean_generic_usage_rate": 0.0,
         "mean_invalid_action_fraction": 0.03402941242451374,
         "mean_modeled_primary_attacks": 9.926391382405745,
@@ -24,15 +24,15 @@
         "windows": 7798
       },
       "generic": {
-        "mean_force_l1": 0.08125154639443335,
+        "mean_force_l1": 0.08135414417654967,
         "mean_generic_usage_rate": 0.9748558845474722,
         "mean_invalid_action_fraction": 0.025144115452527867,
         "mean_modeled_primary_attacks": 9.926391382405745,
-        "median_force_l1": 0.049992433061545966,
+        "median_force_l1": 0.05040346335802911,
         "windows": 7798
       },
       "selector": {
-        "mean_force_l1": 0.05204834782343752,
+        "mean_force_l1": 0.052232304691293405,
         "mean_generic_usage_rate": 0.15566529378404217,
         "mean_invalid_action_fraction": 0.03244339905342727,
         "mean_modeled_primary_attacks": 9.926391382405745,
@@ -42,59 +42,59 @@
     },
     "2": {
       "ensemble_mean": {
-        "mean_force_l1": 0.011663183734502189,
+        "mean_force_l1": 0.011727339985550055,
         "mean_generic_usage_rate": 0.0,
         "mean_invalid_action_fraction": 0.011740498668603244,
         "mean_modeled_primary_attacks": 1.4958847736625513,
-        "median_force_l1": 0.0038735247066092344,
+        "median_force_l1": 0.0038785209365016678,
         "windows": 8262
       },
       "generic": {
-        "mean_force_l1": 0.01678704527639987,
+        "mean_force_l1": 0.016824905560238298,
         "mean_generic_usage_rate": 0.9892277898813846,
         "mean_invalid_action_fraction": 0.010772210118615348,
         "mean_modeled_primary_attacks": 1.4958847736625513,
-        "median_force_l1": 0.005086499650067569,
+        "median_force_l1": 0.005093596746335797,
         "windows": 8262
       },
       "selector": {
-        "mean_force_l1": 0.011755457052903812,
+        "mean_force_l1": 0.011819613303951676,
         "mean_generic_usage_rate": 0.16230936819172112,
         "mean_invalid_action_fraction": 0.011679980634229,
         "mean_modeled_primary_attacks": 1.4958847736625513,
-        "median_force_l1": 0.0039036273579190206,
+        "median_force_l1": 0.003908280979202771,
         "windows": 8262
       }
     },
     "4": {
       "ensemble_mean": {
-        "mean_force_l1": 0.018464222568193963,
+        "mean_force_l1": 0.01856030424061234,
         "mean_generic_usage_rate": 0.0,
         "mean_invalid_action_fraction": 0.01687990538651758,
         "mean_modeled_primary_attacks": 2.58531340716052,
-        "median_force_l1": 0.008267046068547352,
+        "median_force_l1": 0.00827084203480984,
         "windows": 9301
       },
       "generic": {
-        "mean_force_l1": 0.027283072596534334,
+        "mean_force_l1": 0.02732745740336713,
         "mean_generic_usage_rate": 0.986246998530624,
         "mean_invalid_action_fraction": 0.013753001469376051,
         "mean_modeled_primary_attacks": 2.58531340716052,
-        "median_force_l1": 0.011094987605054719,
+        "median_force_l1": 0.011120213782745242,
         "windows": 9301
       },
       "selector": {
-        "mean_force_l1": 0.018609202807647343,
+        "mean_force_l1": 0.018705284480065726,
         "mean_generic_usage_rate": 0.1616851234634269,
         "mean_invalid_action_fraction": 0.016584238253951188,
         "mean_modeled_primary_attacks": 2.58531340716052,
-        "median_force_l1": 0.008313556515651879,
+        "median_force_l1": 0.008320755000326138,
         "windows": 9301
       }
     },
     "8": {
       "ensemble_mean": {
-        "mean_force_l1": 0.03098309024875845,
+        "mean_force_l1": 0.031127410631963094,
         "mean_generic_usage_rate": 0.0,
         "mean_invalid_action_fraction": 0.02318551129526739,
         "mean_modeled_primary_attacks": 4.945506482091848,
@@ -102,15 +102,15 @@
         "windows": 9102
       },
       "generic": {
-        "mean_force_l1": 0.047103674822621566,
+        "mean_force_l1": 0.04717573236144085,
         "mean_generic_usage_rate": 0.9830062205062206,
         "mean_invalid_action_fraction": 0.01699377949377949,
         "mean_modeled_primary_attacks": 4.945506482091848,
-        "median_force_l1": 0.024883455186256623,
+        "median_force_l1": 0.025030116372529415,
         "windows": 9102
       },
       "selector": {
-        "mean_force_l1": 0.03120726237067352,
+        "mean_force_l1": 0.03135158275387816,
         "mean_generic_usage_rate": 0.1610924077387492,
         "mean_invalid_action_fraction": 0.022627287566311955,
         "mean_modeled_primary_attacks": 4.945506482091848,
