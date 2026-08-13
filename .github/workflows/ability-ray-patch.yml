@@ -42,7 +42,7 @@ jobs:
           if ($numstat -notmatch '^1\s+1\s+python/hwm_solver/protocol/replay\.py$') {
             throw "Unexpected replay diff cardinality: $numstat"
           }
-          $patch = git diff -- $path
+          $patch = (git diff -- $path) -join "`n"
           if ($patch -notmatch '\+\s+"cnf": "confusion", "sff": "suffering", "ray": "dray",') {
             throw 'Expected ray mapping is absent from replay diff'
           }
