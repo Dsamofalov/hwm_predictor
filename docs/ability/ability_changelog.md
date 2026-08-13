@@ -147,7 +147,7 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Authoritative hosted Ability Windows CI run `31644823929`: **PASS / check-suite conclusion `success`** on the exact functional SHA. The Spider wire node `94276046646` passed on the hosted Windows runner.
   - Corpus scope is exactly 866 battle directories, 182 battles containing `ent`, and 806 raw `Sent` records. Every observed payload has the exact structural shape `Sent + 15 decimal digits`; all 806 split as `source3 + target3 + 000000000`, and the target candidate exists in replay state both before and after the record.
   - Current parser behavior is now pinned: first UID is decoded as actor for 806/806 records, while `target_uid` remains `None` for 806/806 records.
-  - Spider is fully confounded with Entroots at carrier level: all 89 initial Spider carriers also declare `entroots`, and zero Spider carriers without `entroots` exist in this corpus.
+  - Spider is fully confounded with Entroots at carrier level: all 89 Spider carriers also declare `entroots`, and zero Spider carriers without `entroots` exist in this corpus.
   - Decisive negative control: among 491 nonzero-source `Sent` records, 405 are sourced by entities with `entroots` **without** `spider`, while only 84 are sourced by entities carrying both; therefore raw `Sent` is **not Spider-specific**.
   - Two additional nonzero sources carry `alive,netshooter,nopenalty,rangepenalty,shooter` with neither `spider` nor `entroots`, so the raw `ent` code is not promoted to an Entroots-exclusive semantic label either. It is treated only as a shared immobilization/entangle wire substrate until further evidence.
   - Zero-source records total 315 and retain a target UID; they are evidence for lifecycle/clear-style wire behavior, not a second Spider mechanic.
@@ -245,3 +245,12 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Authoritative hosted Ability Windows run `31688840050`: **PASS / completed with conclusion `success`** on exact SHA `e32346e...`; check-suite `85963923436`. Dedicated wire node `94411530165` and artifact upload passed.
   - Semantic ceiling is intentionally unchanged: shared wire-family identity is proved, but standalone zero-cost Hexing rows are not promoted to decision-scope exactness and `15/115` is not a proc probability.
   - Replay audit identifies one concrete shared substrate gap: `crs/slw/sff` are already decoded by the status-wire path, while `ray` is not in `STATUS_WIRE_TO_BASE`. The next safe package is a failing-first shared `ray -> dray/mdray` structural-decode regression plus existing zero-cost semantic negative control, not a Hexing-specific runtime effect.
+
+### Hexing shared `ray` decode failing-first evidence
+
+- Commit: `2ea8c352bdf0810ee0f120b4c66d7ab599be5973` — `test(ability): require shared ray status decode`.
+  - Added an atomic regression that requires independently identified positive-cost `dray`/`mdray` controls to decode `Sray` with target/value/duration/amount and to use the existing spellbook/mana semantic guard.
+  - The same regression requires a standalone zero-cost Hexing-like `Sray` to remain semantic-unresolved with no mana spend, and a same-cost `magicfist` control to remain unresolved despite structural `ray` decoding.
+  - Authoritative hosted Ability Windows run `31690057933`: **FAIL / completed with conclusion `failure`** on exact SHA `2ea8c352...`; check-suite `85967292202`. The new atomic node `94415298518` failed exactly at `assert command.target_uid == 2` for `Sray001002050600006`: current replay returned `target_uid=None`, `value=None`, `duration=None`, `amount=None`.
+  - This is the expected substrate evidence-fail, not a bad synthetic payload: the record is parsed as `SPECIAL code='ray'` with actor UID 1, but `ray` is absent from `STATUS_WIRE_TO_BASE` and therefore misses the shared 15-digit status parser.
+  - No assertion is weakened and no Hexing proc semantics are inferred. Next fix is the minimal shared `ray -> dray` status-family mapping, which must preserve the zero-cost and same-cost negative semantic controls.

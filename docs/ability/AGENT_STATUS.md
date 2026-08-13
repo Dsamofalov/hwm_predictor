@@ -8,6 +8,9 @@ Ability TZ refresh commit: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
 Current validated functional ability SHA: **`e32346e749364037b2e31406fa07617d4ddbecb4`**
 Authoritative hosted Windows run: **`31688840050` — PASS / conclusion `success`**
 Check-suite: **`85963923436`**
+Latest failing-first functional evidence SHA: **`2ea8c352bdf0810ee0f120b4c66d7ab599be5973`**
+Failing-first hosted Windows run: **`31690057933` — FAIL / conclusion `failure`**
+Failing-first check-suite: **`85967292202`**
 Platform authority: **GitHub-hosted Windows 10/11 x64 + VS2022/MSVC only**
 
 ## Governance
@@ -90,8 +93,9 @@ Weighted unfinished queue currently leads to **`hexingattack`** after actionabil
 - `46a707c90f7053bf944592c9b1fd8d26aa88a2fa` — independent baseline/wire pytest split and deterministic artifact export; run `31685964687` PASS / check-suite `85956077927`.
 - `baaeb4436a91962bf9a5f59f8b1b66876dbd8645` — strict whole-corpus collision lock plus compact normal-cast and Hexing-bound discriminators; run `31687089866` PASS / check-suite `85959134496`.
 - `e32346e749364037b2e31406fa07617d4ddbecb4` — strict normal-cast identity and complete 15-row Hexing subset lock; run **`31688840050` PASS / check-suite `85963923436`**. Dedicated wire job `94411530165` and artifact upload passed.
+- `2ea8c352bdf0810ee0f120b4c66d7ab599be5973` — failing-first shared `ray` structural-decode regression; run **`31690057933` FAIL / check-suite `85967292202`** exactly because `Sray001002050600006` retained `target_uid/value/duration/amount = None`.
 
-No replay/runtime/registry semantics changed in this sequence.
+No Hexing-specific proc/runtime/registry semantics have been introduced.
 
 ### Strict Hexing wire contract
 
@@ -118,20 +122,20 @@ Positive-field2 normal-cast rows produce these **unique exact-cost spellbook ide
 - `sff`: `suffering=51`;
 - `ray`: `dray=65`, `mdray=63`.
 
-`e32346e...` now regression-locks these exact compact populations and their canonical hashes. Ambiguous same-cost sets remain explicit (`curse|slow`, `fast|slow`, `dray|magicfist`, `poison|suffering`, etc.), so cost alone is not treated as universal identity. The independent normal-cast subset is evidence for the internal wire families; mnemonic resemblance and tooltip wording are not used as the discriminator.
+`e32346e...` regression-locks these exact compact populations and canonical hashes. Ambiguous same-cost sets remain explicit (`curse|slow`, `fast|slow`, `dray|magicfist`, `poison|suffering`, etc.), so cost alone is not treated as universal identity. The independent normal-cast subset is evidence for the internal wire families; mnemonic resemblance and tooltip wording are not used as the discriminator.
 
 ### Current semantic boundary
 
 The corpus proves that `crs/slw/sff/ray` are shared status/spell wires, not Hexing-owned proc labels. It independently links unique normal-cast subsets to `curse/mcurse`, `slow`, `suffering`, and `dray/mdray`. Hexing attack-bound rows are a distinct zero-cost population structurally isolated by server-declared `hexingattack` source plus attack actor/target agreement.
 
-Replay audit after the strict lock shows:
+The failing-first gate now proves the remaining shared substrate gap directly:
 
-- `crs/slw/sff` are already in the shared status-wire parser and therefore structurally preserve target/status raw consequence;
-- `ray` is absent from `STATUS_WIRE_TO_BASE`, so generic replay currently loses the target/status structure for this shared family;
-- existing semantic safety already requires positive cost + matching source spellbook for ordinary exact status casts, and allows zero-cost exactness only as a same-decision follow-up to a positive matching record;
-- therefore adding an evidence-backed shared `ray -> dray` base mapping would naturally cover `dray/mdray` positive casts while **standalone zero-cost Hexing `ray` rows remain semantic-unresolved**.
+- `crs/slw/sff` are already in the shared status-wire parser and structurally preserve target/status raw consequence;
+- `ray` is absent from `STATUS_WIRE_TO_BASE`, so generic replay currently parses only `SPECIAL code='ray'` + actor and loses target/value/duration/amount;
+- the exact failing node requires positive `dray/mdray` controls to become decision-scope exact while standalone zero-cost Hexing-like `ray` and same-cost `magicfist` remain semantically unresolved;
+- therefore the next implementation is restricted to the shared evidence-backed `ray -> dray` base mapping and must not add any Hexing-specific runtime rule.
 
-What is **not** yet promoted:
+What is **not** promoted:
 
 - no numeric Hexing proc probability from `15/115` or any observed frequency;
 - no Hexing-specific runtime effect merely from mnemonic or tooltip prose;
@@ -140,11 +144,11 @@ What is **not** yet promoted:
 
 ## Exact next work
 
-1. Add a failing-first atomic regression for shared `ray` structural decoding using positive `dray/mdray` spellbook controls plus standalone zero-cost negative semantic control.
-2. Validate the failing test on hosted Windows as evidence that current replay lacks `ray` status structure; do not weaken it.
-3. Add only the evidence-backed shared `ray -> dray` status-family mapping, preserving existing decision-scope exactness rules so zero-cost Hexing rows remain unresolved; validate on exact SHA with hosted Windows.
+1. Add only the evidence-backed shared `ray -> dray` status-family mapping in `python/hwm_solver/protocol/replay.py`.
+2. Require the existing failing-first node to pass unchanged: positive `dray/mdray` controls decode structurally and semantically, standalone zero-cost Hexing-like `ray` remains unresolved/no-mana-spend, same-cost `magicfist` remains unresolved/no-mana-spend.
+3. Run/wait the complete hosted Windows Ability workflow on the exact fix SHA; only `completed + success` closes the functional gate.
 4. Close Hexing at the strongest observed consequence boundary that survives those controls; still do not infer proc probability.
-5. Regenerate `data/reports/ability-risk-current.json` after semantic closure and advance to the highest actionable unfinished weighted-contribution ability, excluding precise blockers.
+5. Regenerate `data/reports/ability-risk-current.json`, update the canonical TZ/status/changelogs, and prepare a selective ability-to-main merge handoff that preserves main-owned fronts.
 
 ## Current files to inspect first
 

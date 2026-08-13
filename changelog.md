@@ -216,3 +216,11 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Authoritative hosted Ability Windows run `31688840050`: **PASS / completed with conclusion `success`** on exact SHA; check-suite `85963923436`. Dedicated wire node `94411530165` and artifact upload succeeded.
   - Semantic boundary remains evidence-first: shared wire identity is now exact evidence, but standalone zero-cost Hexing rows remain semantically unresolved, no `15/115` probability is inferred, and no registry promotion is made.
   - Replay audit isolates the next safe substrate gap: shared `ray` lacks the existing status-wire structural decode that `crs/slw/sff` already use. The next package should prove/fix that shared `ray -> dray/mdray` decode while preserving zero-cost semantic negative controls, not create a Hexing-specific runtime effect.
+
+### Hexing shared `ray` decode failing-first evidence
+
+- Commit: `2ea8c352bdf0810ee0f120b4c66d7ab599be5973` — `test(ability): require shared ray status decode`.
+  - Added a failing-first atomic regression for positive `dray/mdray` identity controls, standalone zero-cost Hexing-like `Sray`, and same-cost `magicfist` negative control.
+  - Authoritative hosted Ability Windows run `31690057933`: **FAIL / completed with conclusion `failure`** on exact SHA; check-suite `85967292202`. Atomic node `94415298518` failed exactly because `Sray001002050600006` retained `actor_uid=1` but `target_uid/value/duration/amount` were all unresolved (`None`).
+  - The failure proves the current generic replay gap is structural: `ray` is absent from the shared 15-digit status-wire mapping. It is not evidence for a Hexing-specific runtime effect and does not justify weakening zero-cost or same-cost negative controls.
+  - Next fix is the minimal shared `ray -> dray` base mapping; existing status validation must continue to keep standalone zero-cost and wrong-spellbook positive rows semantic-unresolved.
