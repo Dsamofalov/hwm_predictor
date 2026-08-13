@@ -1,0 +1,64 @@
+name: Ability Ray Corpus Lock Patch
+
+on:
+  push:
+    branches: [ability]
+    paths:
+      - '.github/workflows/ability-ray-corpus-lock-patch.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  patch:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ability
+          fetch-depth: 0
+
+      - name: Synchronize exact corpus locks after shared ray decode
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Replace-Exact([string]$Path, [string]$Old, [string]$New) {
+            $text = [System.IO.File]::ReadAllText($Path)
+            $hits = ([regex]::Matches($text, [regex]::Escape($Old))).Count
+            if ($hits -ne 1) { throw "Expected exactly one replacement in $Path, found $hits for: $Old" }
+            [System.IO.File]::WriteAllText($Path, $text.Replace($Old, $New), [System.Text.UTF8Encoding]::new($false))
+          }
+
+          $child = 'python/tests/test_childofthelight_evidence.py'
+          Replace-Exact $child '    assert report["carrier_targeted_specials"] == 206' '    assert report["carrier_targeted_specials"] == 223'
+          Replace-Exact $child '        "rgm": 25,`n        "slw": 13,' '        "rgm": 25,`n        "ray": 17,`n        "slw": 13,'
+
+          $hex = 'python/tests/test_hexingattack_evidence.py'
+          Replace-Exact $hex '    assert report["attacks_with_same_target_special"] == 12' '    assert report["attacks_with_same_target_special"] == 15'
+          Replace-Exact $hex '    assert report["same_target_special_records"] == 12' '    assert report["same_target_special_records"] == 15'
+          Replace-Exact $hex '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3}' '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3, "ray": 3}'
+          Replace-Exact $hex '        "crs": {"crs": 4},`n        "sff": {"sff": 5},' '        "crs": {"crs": 4},`n        "ray": {"ray": 3},`n        "sff": {"sff": 5},'
+          Replace-Exact $hex '        "crs": {"0.0": 4},`n        "sff": {"0.0": 5},' '        "crs": {"0.0": 4},`n        "ray": {"0.0": 3},`n        "sff": {"0.0": 5},'
+          Replace-Exact $hex '        "crs": {"100": 3, "96": 1},`n        "sff": {"12": 5},' '        "crs": {"100": 3, "96": 1},`n        "ray": {"6": 3},`n        "sff": {"12": 5},'
+          Replace-Exact $hex '    assert report["other_special_codes"].get("ray") == 3' '    assert report["other_special_codes"].get("ray", 0) == 0'
+
+          Remove-Item '.github/workflows/ability-ray-corpus-lock-patch.yml'
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add $child $hex '.github/workflows/ability-ray-corpus-lock-patch.yml'
+          git diff --cached --check
+          git commit -m 'test(ability): sync ray decode corpus locks'
+          git push origin HEAD:ability
+
+          $headers = @{
+            Authorization = "Bearer $env:GH_TOKEN"
+            Accept = 'application/vnd.github+json'
+            'X-GitHub-Api-Version' = '2022-11-28'
+          }
+          $body = @{ ref = 'ability' } | ConvertTo-Json
+          Invoke-RestMethod -Method Post -Uri 'https://api.github.com/repos/Dsamofalov/hwm_predictor/actions/workflows/ability.yml/dispatches' -Headers $headers -ContentType 'application/json' -Body $body
