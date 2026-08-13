@@ -4,7 +4,7 @@ Checkpoint: **2026-08-13**
 
 Source lane: `ability`
 Draft PR: `#1` (`ability` -> `main`)
-Current ability docs HEAD after TZ refresh: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
+Ability TZ refresh commit: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
 Current validated functional ability SHA: **`a2c06ef10048486cc84239b045f3710e9f7db795`**
 Authoritative hosted Windows run: **`31680364027` — PASS / conclusion `success`**
 Check-suite: **`85941007397`**
