@@ -22,13 +22,261 @@ defaults:
 env:
   PYTHONUTF8: '1'
   PYTHONIOENCODING: utf-8
-  OMP_NUM_THREADS: '2'
-  MKL_NUM_THREADS: '2'
-  OPENBLAS_NUM_THREADS: '2'
-  NUMEXPR_NUM_THREADS: '2'
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  NUMEXPR_NUM_THREADS: '1'
 
 jobs:
-  core:
+  core_pending:
+    name: core-status-pending
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    steps:
+      - name: Publish Core pending status
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          $body = @{ state = 'pending'; context = 'HWM / Core'; description = 'Windows Core atomic validation running'; target_url = $target } | ConvertTo-Json -Compress
+          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+
+  full_pending:
+    name: full-status-pending
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    steps:
+      - name: Publish Full pending status
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+          $body = @{ state = 'pending'; context = 'HWM / Full'; description = 'Windows Full atomic validation running'; target_url = $target } | ConvertTo-Json -Compress
+          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+
+  core_cpp_build:
+    name: core-cpp-build-and-inventory
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    outputs:
+      cases: ${{ steps.inventory.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - name: PowerShell syntax preflight
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path '.\scripts\ci_main_windows.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            $parseErrors | ForEach-Object { Write-Host " - $($_.Extent.StartLineNumber):$($_.Extent.StartColumnNumber) $($_.Message)" }
+            throw 'PowerShell syntax preflight failed.'
+          }
+      - id: inventory
+        name: Build Debug once and freeze exact CTest inventory
+        run: .\scripts\ci_main_windows.ps1 -Mode CppBuildInventory -Config Debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main-cpp-debug
+          path: build/main-ci-debug/Debug/*.exe
+          if-no-files-found: error
+          retention-days: 1
+
+  core_cpp_case:
+    name: core-cpp-${{ matrix.case.name }}
+    needs: core_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ${{ fromJSON(needs.core_cpp_build.outputs.cases) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-debug
+          path: build/main-ci-debug/Debug
+      - name: Run exact Debug CTest case
+        env:
+          MAIN_CPP_CASE: ${{ matrix.case.name }}
+          MAIN_CPP_EXE: ${{ matrix.case.exe }}
+        run: .\scripts\ci_main_windows.ps1 -Mode CppCase -Config Debug -CaseName $env:MAIN_CPP_CASE -CaseExe $env:MAIN_CPP_EXE
+
+  core_python_inventory:
+    name: core-python-inventory
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    outputs:
+      cases: ${{ steps.inventory.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - id: inventory
+        name: Freeze exact pytest node inventory
+        run: .\scripts\ci_main_windows.ps1 -Mode PythonInventory
+
+  core_python_case:
+    name: core-python-${{ matrix.case }}
+    needs: core_python_inventory
+    runs-on: windows-2022
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ${{ fromJSON(needs.core_python_inventory.outputs.cases) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - name: Run exact pytest node
+        env:
+          MAIN_PYTHON_CASE: ${{ matrix.case }}
+        run: .\scripts\ci_main_windows.ps1 -Mode PythonCase -TestNode $env:MAIN_PYTHON_CASE
+
+  core_planner:
+    name: core-planner-heldout-120
+    needs: core_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-debug
+          path: build/main-ci-debug/Debug
+      - run: .\scripts\ci_main_windows.ps1 -Mode CorePlanner
+
+  core_runtime:
+    name: core-runtime-${{ matrix.case }}
+    needs: core_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [pairing-auth, stale-cancellation, live-binding, websocket-stream]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-debug
+          path: build/main-ci-debug/Debug
+      - name: Run isolated daemon integration case
+        env:
+          MAIN_RUNTIME_CASE: ${{ matrix.case }}
+        run: .\scripts\ci_main_windows.ps1 -Mode CoreRuntimeCase -CaseName $env:MAIN_RUNTIME_CASE
+
+  core_extension:
+    name: core-extension
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - run: .\scripts\ci_main_windows.ps1 -Mode CoreExtension
+
+  full_cpp_build:
+    name: full-cpp-build-and-inventory
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 60
+    outputs:
+      cases: ${{ steps.inventory.outputs.cases }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - name: PowerShell syntax preflight
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path '.\scripts\ci_main_windows.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count -gt 0) {
+            $parseErrors | ForEach-Object { Write-Host " - $($_.Extent.StartLineNumber):$($_.Extent.StartColumnNumber) $($_.Message)" }
+            throw 'PowerShell syntax preflight failed.'
+          }
+      - id: inventory
+        name: Build Release once and freeze exact CTest inventory
+        run: .\scripts\ci_main_windows.ps1 -Mode CppBuildInventory -Config Release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: main-cpp-release
+          path: build/main-ci-release/Release/*.exe
+          if-no-files-found: error
+          retention-days: 1
+
+  full_cpp_case:
+    name: full-cpp-${{ matrix.case.name }}
+    needs: full_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        case: ${{ fromJSON(needs.full_cpp_build.outputs.cases) }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-release
+          path: build/main-ci-release/Release
+      - name: Run exact Release CTest case
+        env:
+          MAIN_CPP_CASE: ${{ matrix.case.name }}
+          MAIN_CPP_EXE: ${{ matrix.case.exe }}
+        run: .\scripts\ci_main_windows.ps1 -Mode CppCase -Config Release -CaseName $env:MAIN_CPP_CASE -CaseExe $env:MAIN_CPP_EXE
+
+  full_structural_budget:
+    name: full-structural-invalid-budget
+    needs: full_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-release
+          path: build/main-ci-release/Release
+      - run: .\scripts\ci_main_windows.ps1 -Mode FullStructuralBudget
+
+  full_planner_benchmark:
+    name: full-planner-benchmark
+    needs: full_cpp_build
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: main-cpp-release
+          path: build/main-ci-release/Release
+      - run: .\scripts\ci_main_windows.ps1 -Mode FullPlannerBenchmark
+
+  m11_multistep:
+    name: full-m11-multistep
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: windows-2022
     timeout-minutes: 120
@@ -36,58 +284,181 @@ jobs:
       - uses: actions/checkout@v6
         with:
           clean: true
-      - name: Publish Core pending status
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
-          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
-          $body = @{ state = 'pending'; context = 'HWM / Core'; description = 'Windows Core running'; target_url = $target } | ConvertTo-Json -Compress
-          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
-      - name: Core Windows validation
-        run: .\scripts\ci_entrypoint_windows.ps1 -Suite Core
-      - name: Publish Core commit status
-        if: always()
-        continue-on-error: true
-        env:
-          HWM_JOB_STATUS: ${{ job.status }}
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $state = if ($env:HWM_JOB_STATUS -eq 'success') { 'success' } else { 'failure' }
-          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
-          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
-          $body = @{ state = $state; context = 'HWM / Core'; description = "Windows Core: $env:HWM_JOB_STATUS"; target_url = $target } | ConvertTo-Json -Compress
-          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Evaluate -GateName multistep
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m11-multistep
+          path: build/validation/dynamics-multistep-damage.json
+          if-no-files-found: error
+          retention-days: 1
 
-  full:
+  m11_uncertainty:
+    name: full-m11-uncertainty
     if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: windows-2022
-    timeout-minutes: 240
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v6
         with:
           clean: true
-      - name: Publish Full pending status
-        continue-on-error: true
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Evaluate -GateName uncertainty
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m11-uncertainty
+          path: build/validation/dynamics-uncertainty-calibration.json
+          if-no-files-found: error
+          retention-days: 1
+
+  m11_selector:
+    name: full-m11-selector
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Evaluate -GateName selector
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m11-selector
+          path: build/validation/dynamics-selector-gate.json
+          if-no-files-found: error
+          retention-days: 1
+
+  m11_survival:
+    name: full-m11-survival
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Evaluate -GateName survival
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m11-survival
+          path: build/validation/m11_dynamics_survival_gate.json
+          if-no-files-found: error
+          retention-days: 1
+
+  m11_verify:
+    name: full-m11-evidence-reducer
+    needs: [m11_multistep, m11_uncertainty, m11_selector, m11_survival]
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: m11-multistep
+          path: build/validation
+      - uses: actions/download-artifact@v4
+        with:
+          name: m11-uncertainty
+          path: build/validation
+      - uses: actions/download-artifact@v4
+        with:
+          name: m11-selector
+          path: build/validation
+      - uses: actions/download-artifact@v4
+        with:
+          name: m11-survival
+          path: build/validation
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Verify
+
+  m11_temperature:
+    name: full-m11-temperature
+    if: github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          clean: true
+      - run: .\scripts\ci_main_windows.ps1 -Mode M11Temperature
+
+  core:
+    name: core
+    if: always() && (github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository))
+    needs:
+      - core_pending
+      - core_cpp_build
+      - core_cpp_case
+      - core_python_inventory
+      - core_python_case
+      - core_planner
+      - core_runtime
+      - core_extension
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - name: Strict Core aggregate
         env:
+          CORE_PENDING: ${{ needs.core_pending.result }}
+          CPP_BUILD: ${{ needs.core_cpp_build.result }}
+          CPP_CASES: ${{ needs.core_cpp_case.result }}
+          PY_INVENTORY: ${{ needs.core_python_inventory.result }}
+          PY_CASES: ${{ needs.core_python_case.result }}
+          PLANNER: ${{ needs.core_planner.result }}
+          RUNTIME: ${{ needs.core_runtime.result }}
+          EXTENSION: ${{ needs.core_extension.result }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
-          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
-          $body = @{ state = 'pending'; context = 'HWM / Full'; description = 'Windows Full running'; target_url = $target } | ConvertTo-Json -Compress
-          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
-      - name: Full Windows validation
-        run: .\scripts\ci_entrypoint_windows.ps1 -Suite Full
-      - name: Publish Full commit status
-        if: always()
-        continue-on-error: true
+          $results = @($env:CORE_PENDING, $env:CPP_BUILD, $env:CPP_CASES, $env:PY_INVENTORY, $env:PY_CASES, $env:PLANNER, $env:RUNTIME, $env:EXTENSION)
+          $ok = @($results | Where-Object { $_ -ne 'success' }).Count -eq 0
+          if ($env:GITHUB_EVENT_NAME -eq 'push') {
+            $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+            $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+            $state = if ($ok) { 'success' } else { 'failure' }
+            $body = @{ state = $state; context = 'HWM / Core'; description = "Windows Core atomic validation: $state"; target_url = $target } | ConvertTo-Json -Compress
+            Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+          }
+          if (-not $ok) { throw "Core aggregate failed: $($results -join ', ')" }
+
+  full:
+    name: full
+    if: always() && (github.event_name != 'pull_request' || (!github.event.pull_request.draft && github.event.pull_request.head.repo.full_name == github.repository))
+    needs:
+      - full_pending
+      - full_cpp_build
+      - full_cpp_case
+      - full_structural_budget
+      - full_planner_benchmark
+      - m11_multistep
+      - m11_uncertainty
+      - m11_selector
+      - m11_survival
+      - m11_verify
+      - m11_temperature
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - name: Strict Full aggregate
         env:
-          HWM_JOB_STATUS: ${{ job.status }}
+          FULL_PENDING: ${{ needs.full_pending.result }}
+          CPP_BUILD: ${{ needs.full_cpp_build.result }}
+          CPP_CASES: ${{ needs.full_cpp_case.result }}
+          STRUCTURAL: ${{ needs.full_structural_budget.result }}
+          BENCHMARK: ${{ needs.full_planner_benchmark.result }}
+          MULTISTEP: ${{ needs.m11_multistep.result }}
+          UNCERTAINTY: ${{ needs.m11_uncertainty.result }}
+          SELECTOR: ${{ needs.m11_selector.result }}
+          SURVIVAL: ${{ needs.m11_survival.result }}
+          VERIFY: ${{ needs.m11_verify.result }}
+          TEMPERATURE: ${{ needs.m11_temperature.result }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          $state = if ($env:HWM_JOB_STATUS -eq 'success') { 'success' } else { 'failure' }
-          $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
-          $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
-          $body = @{ state = $state; context = 'HWM / Full'; description = "Windows Full: $env:HWM_JOB_STATUS"; target_url = $target } | ConvertTo-Json -Compress
-          Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+          $results = @($env:FULL_PENDING, $env:CPP_BUILD, $env:CPP_CASES, $env:STRUCTURAL, $env:BENCHMARK, $env:MULTISTEP, $env:UNCERTAINTY, $env:SELECTOR, $env:SURVIVAL, $env:VERIFY, $env:TEMPERATURE)
+          $ok = @($results | Where-Object { $_ -ne 'success' }).Count -eq 0
+          if ($env:GITHUB_EVENT_NAME -eq 'push') {
+            $uri = "$env:GITHUB_API_URL/repos/$env:GITHUB_REPOSITORY/statuses/$env:GITHUB_SHA"
+            $target = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+            $state = if ($ok) { 'success' } else { 'failure' }
+            $body = @{ state = $state; context = 'HWM / Full'; description = "Windows Full atomic validation: $state"; target_url = $target } | ConvertTo-Json -Compress
+            Invoke-RestMethod -Method Post -Uri $uri -Headers @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'X-GitHub-Api-Version' = '2022-11-28' } -ContentType 'application/json' -Body $body | Out-Null
+          }
+          if (-not $ok) { throw "Full aggregate failed: $($results -join ', ')" }
