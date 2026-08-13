@@ -178,3 +178,14 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - The `neutral` bucket mixes `fast/bless/righteous_might/stoneskin` with `slow/curse/confusion/suffering`, plus `raisedead`; `nt` also mixes harmful statuses with `resurrection2`. Therefore the raw school field cannot safely identify game Light-school status spells.
   - Status-wire controls currently comprise 158 source+code groups hitting Child carriers, 146 with positive effective cost and 12 zero-cost follow-ups; all positive-cost groups have a source spellbook. Direct-damage controls are exactly three records (`ltn 2`, `mfs 1`).
   - No Child runtime copy rule or registry promotion is made. The next evidence layer is independent decoded `bm_tooltips`/server metadata for per-spell school identity; absent such metadata, Child closes for this pass at that precise blocker rather than from a guessed spell taxonomy.
+
+### Child of the Light decoded tooltip metadata blocker
+
+- Commit: `7d63aad9ae992cd9b949da43a7ec42a82f627a7d` — `test(ability): audit Child tooltip spell metadata`.
+  - Added a generic decoded `bm_tooltips` inventory and strict-pinned the already validated Child school/status-wire counts; no runtime/registry semantics changed.
+  - Authoritative hosted Ability Windows run `31648327688`: **PASS**; check-suite `85857041871` completed with conclusion `success` on the exact SHA, including the Child atomic node `94287152093`.
+  - In all 108 Child carrier battles, decoded `bm_tooltips` exposes exactly three top-level dictionary sections: `abil_names`, `abil_desc`, and `perk_hints`.
+  - Exact key overlap between any of those three tooltip maps and the same battle's raw server spellbook spell names is zero.
+  - The only Light/school wording is the Child ability description itself: `child_light_text_hits = 108`, `non_child_light_text_hits = 0`, `non_child_school_light_hits = 0`.
+  - Thus decoded tooltip metadata provides no independent per-spell Light-school identity to resolve the raw `neutral`/`nt` collapse. No Child runtime copy rule, registry promotion, hardcoded spell taxonomy, or inferred probability is justified.
+  - One final strict regression package should pin these exact zero-overlap/zero-independent-Light cardinalities, after which Child can be closed for this pass at this precise evidence blocker.

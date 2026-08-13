@@ -7,8 +7,8 @@ Integration branch: `integration/ability-snapshot-20260812`
 Functional snapshot commit: `f98ea913be9331ca393c49df82b2025303956f92`
 Validated integration HEAD: `03d2fbe138e0dad929037315dce46d38256be8f3`
 Current main integration reference: **`7e646733eded4a491b25ddae1c2efcb9287feeec`**
-Current validated functional ability SHA: **`87c661aadcbcfd1b9ffd750aef20c6e9418e4c89`**
-Authoritative hosted Windows run: **`31647544114` — PASS / check-suite `85854980801` completed with conclusion `success` on exact SHA and branch `ability`**
+Current validated functional ability SHA: **`7d63aad9ae992cd9b949da43a7ec42a82f627a7d`**
+Authoritative hosted Windows run: **`31648327688` — PASS / check-suite `85857041871` completed with conclusion `success` on exact SHA and branch `ability`**
 
 ## Governance
 
@@ -64,19 +64,23 @@ Functional evidence commits:
 
 - `58965925cfe09552e9e5a4e22ff3d2cae86cbd69` — hardened the old smoke test into exact known corpus facts and added a server-spellbook/status-wire discriminator. Hosted Windows run `31647277552`: **FAIL** in the Child node because the exploratory assumption that the raw spellbook school token was literally `light` was false (`light_spellbook_actors_in_carrier_battles == 0`). This was treated as evidence, not bypassed by weakening the gate.
 - `87c661aadcbcfd1b9ffd750aef20c6e9418e4c89` — added a raw spellbook-school inventory and pinned the failed literal-`light` assumption as an explicit negative fact. Hosted Windows run `31647544114`: **PASS**; check-suite `85854980801` completed with conclusion `success` on the exact SHA.
+- `7d63aad9ae992cd9b949da43a7ec42a82f627a7d` — added a decoded `bm_tooltips` metadata inventory while strict-pinning the validated spellbook/status-wire counts. Hosted Windows run `31648327688`: **PASS**; check-suite `85857041871` completed with conclusion `success` on the exact SHA.
 
-Windows-validated Child corpus facts currently pinned:
+Windows-validated Child corpus facts currently pinned/observed:
 
 - 866 battle directories; 108 carrier battles; 137 carriers (`creature_id 588 = 102`, `928 = 35`);
 - exact carrier ability sets are `alive,big,blinding_attack,childofthelight` (102) and `alive,childofthelight,confusionstrike,fireproof25,flyer` (35);
 - 121 tooltip battles expose one exact tooltip: any Light-school spell except damage and resurrection is also applied to the creature at expert level; it gives no numeric probability or percentage;
 - 5634 decisions in carrier battles and 206 carrier-targeted SPECIAL records; exact codes are `fst 88`, `stn 47`, `rgm 25`, `slw 13`, `crs 10`, `psc 10`, `sff 7`, `ltn 2`, `sta 2`, `cnf 1`, `mfs 1`;
 - server spellbook inventory in those battles contains 651 spellbook actors and 2031 entries with exact raw school-token counts: `neutral 1405`, `air 275`, `earth 144`, `cold 141`, `other 31`, `fire 18`, `nt 17`; there is no raw `light` token;
-- critically, `neutral` mixes status identities conventionally associated with opposite schools and other mechanics in the same raw bucket: e.g. `fast/mfast`, `bless/mbless`, `righteous_might`, `stoneskin` coexist with `slow/mslow`, `curse/mcurse`, `confusion/mconfusion`, `suffering/msuffering`, plus `raisedead`; `nt` similarly mixes harmful status names with `resurrection2`;
+- critically, `neutral` mixes status identities conventionally associated with opposite schools and other mechanics in the same raw bucket: `fast/mfast`, `bless/mbless`, `righteous_might`, `stoneskin` coexist with `slow/mslow`, `curse/mcurse`, `confusion/mconfusion`, `suffering/msuffering`, plus `raisedead`; `nt` similarly mixes harmful status names with `resurrection2`;
 - current status-wire subset hitting Child carriers has 158 source+code groups, 146 with positive effective cost and 12 zero-cost follow-up groups; all 146 positive-cost groups have a source spellbook, but raw school token alone cannot identify Light semantics;
-- direct-damage carrier controls are exactly 3 (`ltn 2`, `mfs 1`); no raise-dead carrier record was observed in this subset.
+- direct-damage carrier controls are exactly 3 (`ltn 2`, `mfs 1`); no raise-dead carrier record was observed in this subset;
+- decoded `bm_tooltips` exists in all 108 carrier battles, but its only top-level sections are `abil_names`, `abil_desc`, and `perk_hints` (108 each; all dictionaries);
+- `bm_tooltips` contains zero exact mapping-key overlaps with the same battle's raw spellbook spell names in all three sections;
+- the only Light/school text is the Child ability description itself (`child_light_text_hits = 108`); `non_child_light_text_hits = 0`, `non_child_school_light_hits = 0`, and there is no independent spell-level school label.
 
-Current semantic boundary: **the raw seven-token spellbook grammar does not expose a trustworthy Light-vs-Dark discriminator for these status spells.** Therefore no Child runtime copy rule, no registry promotion and no hardcoded spell taxonomy are justified yet. The next evidence step is to inspect independent `bm_tooltips`/server metadata for per-spell identity or school labels. If no independent metadata exists, Child must close for this pass at that precise blocker.
+Current semantic boundary: **the observed server payloads do not expose a trustworthy per-spell Light-vs-Dark discriminator for Child of the Light.** The seven-token spellbook collapses relevant statuses into `neutral`/`nt`, while decoded `bm_tooltips` exposes ability/perk text only and no spellbook-key metadata. Therefore no Child runtime copy rule, no registry promotion and no hardcoded spell taxonomy are justified. One final strict regression package should pin the exact `bm_tooltips` zero-overlap/zero-independent-Light facts; after that Child is closed for this pass at a precise evidence blocker.
 
 ## Preserved semantic boundaries
 
@@ -88,8 +92,8 @@ Current semantic boundary: **the raw seven-token spellbook grammar does not expo
 
 ## Next ownership state
 
-1. Continue `childofthelight` only through independent server metadata: audit decoded `bm_tooltips` keys/values and correlate any spell-level school metadata with actual spellbook identities/status wire. Do not infer Light membership from English/Russian spell names alone.
-2. If no independent spell-school discriminator exists, strict-pin the exact blocker and close Child for this pass without runtime/registry promotion.
-3. After Child closure, recompute the weighted unfinished queue; current next candidate from the existing report is `hexingattack` (~229914 weighted contribution), subject to blocker/actionability filtering.
+1. Strict-pin the exact Child `bm_tooltips` blocker (`abil_names/abil_desc/perk_hints` only, zero spellbook-key overlap, zero non-Child school+Light metadata) in the existing atomic Child node; do not add runtime/registry semantics.
+2. After hosted Windows validation and bookkeeping, close Child of the Light for this pass as `unresolved` with the precise missing per-spell school discriminator documented above.
+3. Recompute the weighted unfinished queue; current next actionable candidate is `hexingattack` (~229914 weighted contribution), subject to collision/source controls before any proc probability or runtime promotion.
 4. Spider remains closed: do not create or register a Spider runtime effect from `Sent`; structural `ent` target decoding is a separate protocol opportunity only.
 5. Every next functional package must again receive hosted Windows Ability CI, followed by a separate bookkeeping commit updating `ability_changelog.md`, this status file, and root `changelog.md`.
