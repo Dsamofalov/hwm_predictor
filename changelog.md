@@ -19,6 +19,11 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `3367e802d9448bb008418e78f7a44f42ab99186c` — `test: isolate stationary friendly-marker geometry class`.
   - Refined the corpus evidence for the next blocked-melee correction into an exact residual class: all raw-marker blockers must be same-owner, the attack must have exactly one physical damage target, the actor's current anchor must already be legal and target-adjacent, and neither the existing radius-1 nor radius-2 unique landing resolver may apply.
   - The diagnostic additionally requires the current decoder to resolve away from the stationary anchor and the observed action to remain unrepresentable, preventing already-fixed shooter/unique-landing cases from being reclassified. Decoder/simulator semantics and all acceptance gates remain unchanged.
+- Commit: `3b8131692365d250d96be203836bd36192f1ea4a` — `fix: stop final melee lookahead at battle result`.
+  - Promoted the exact stationary friendly-blocked marker class into both C++ and Python only after the existing radius-1 and radius-2 unique-landing rules: SPECIAL-free, exactly one physical damage target, every raw-marker blocker same-owner, and the actor's current anchor legal + already adjacent to the target.
+  - Added exact regressions for train final-overlap battle `1625534409` decision 82 / actor 22 and held-out representability battle `1632855461` decision 71 / actor 15; existing shooter and unique-landing regressions remain mandatory controls.
+  - Stopped forward SPECIAL/other-damage lookahead at terminal `f<...>` / `f_en<...` result boundaries so result text cannot leak into current-action classification.
+  - Temporary branch `agent/stationary-friendly-marker-20260813` publish run `31684482264` completed successfully after targeted Python geometry tests, C++ protocol tests, a full-corpus structural budget, and Python geometry/overlap non-regression checks. The functional push to `main` came from workflow credentials, so normal standard Windows Core/Full did not auto-trigger on this SHA; authoritative Windows validation and exact post-patch corpus totals remain the next-agent gate before the branch is deleted.
 
 ### M11 selector threshold canonicalization
 
@@ -26,6 +31,14 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Diagnosed Full run `31644212192`: all C++ main-front tests, `invalid <= 14`, planner benchmark, M11 multistep, uncertainty, selector, survival, and temperature gates passed; only exact committed selector evidence failed because quantile interpolation reintroduced a long binary64 threshold tail (`0.5365153371341599`).
   - Canonicalized quantile threshold candidates to the existing 12-decimal selector policy/evidence boundary **before** threshold selection, so calibration metrics and the selected runtime/evidence policy use the same deterministic threshold values.
   - Added a focused regression proving `choose_threshold()` cannot return a longer-than-canonical interpolation tail. Exact evidence verification is not weakened and M11 production learned dynamics remains disabled.
+  - Follow-up hosted standard run `31680022438` on this functional checkpoint is **Core PASS + Full PASS**. This is the last fully authoritative standard Windows checkpoint before `3b813169...`.
+
+### Main-agent handoff TZ
+
+- Commit: `5b6e78975f11e9457703e0d73352afffce438b3e` — `docs: add current main-agent handoff TZ [skip ci]`.
+  - Added `docs/MAIN_AGENT_TZ.md` as the short-form binding handoff over the long `SPEC.md` for the current main lane.
+  - The next agent must first run authoritative Windows validation for the current main functional tree, measure exact post-geometry corpus totals, resolve only evidence-proven stale M11 data if necessary, then delete `agent/stationary-friendly-marker-20260813` after confirming all useful changes are already in `main`.
+  - Other `agent/*` branches must not be deleted merely by name because they may belong to concurrent ability/evidence work.
 
 ### Production live heartbeat-neutral ingestion
 
