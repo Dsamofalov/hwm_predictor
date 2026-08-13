@@ -1,4 +1,4 @@
-name: Ability Ray Corpus Lock Patch
+name: Ability Ray Corpus Diagnostics
 
 on:
   push:
@@ -7,68 +7,39 @@ on:
       - '.github/workflows/ability-ray-corpus-lock-patch.yml'
 
 permissions:
-  contents: write
-  actions: write
+  contents: read
 
 jobs:
-  patch:
+  diagnose:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
         with:
           ref: ability
-          fetch-depth: 0
-
-      - name: Synchronize exact corpus locks after shared ray decode
+          fetch-depth: 1
+      - name: Bootstrap exact ability Python environment
         shell: pwsh
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: .\scripts\ci_ability_windows.ps1 -Mode PythonInventory
+      - name: Print ray-sensitive exact aggregates
+        shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-
-          function Replace-Exact([string]$Path, [string]$Old, [string]$New) {
-            $text = [System.IO.File]::ReadAllText($Path)
-            $hits = ([regex]::Matches($text, [regex]::Escape($Old))).Count
-            if ($hits -ne 1) { throw "Expected exactly one replacement in $Path, found $hits for: $Old" }
-            [System.IO.File]::WriteAllText($Path, $text.Replace($Old, $New), [System.Text.UTF8Encoding]::new($false))
-          }
-
-          function Insert-BeforeExactLine([string]$Path, [string]$Line, [string]$InsertedLine) {
-            $text = [System.IO.File]::ReadAllText($Path)
-            $nl = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
-            $old = $Line + $nl
-            $new = $InsertedLine + $nl + $Line + $nl
-            $hits = ([regex]::Matches($text, [regex]::Escape($old))).Count
-            if ($hits -ne 1) { throw "Expected exactly one line insertion point in $Path, found $hits for: $Line" }
-            [System.IO.File]::WriteAllText($Path, $text.Replace($old, $new), [System.Text.UTF8Encoding]::new($false))
-          }
-
-          $child = 'python/tests/test_childofthelight_evidence.py'
-          Replace-Exact $child '    assert report["carrier_targeted_specials"] == 206' '    assert report["carrier_targeted_specials"] == 223'
-          Insert-BeforeExactLine $child '        "slw": 13,' '        "ray": 17,'
-
-          $hex = 'python/tests/test_hexingattack_evidence.py'
-          Replace-Exact $hex '    assert report["attacks_with_same_target_special"] == 12' '    assert report["attacks_with_same_target_special"] == 15'
-          Replace-Exact $hex '    assert report["same_target_special_records"] == 12' '    assert report["same_target_special_records"] == 15'
-          Replace-Exact $hex '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3}' '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3, "ray": 3}'
-          Insert-BeforeExactLine $hex '        "sff": {"sff": 5},' '        "ray": {"ray": 3},'
-          Insert-BeforeExactLine $hex '        "sff": {"0.0": 5},' '        "ray": {"0.0": 3},'
-          Insert-BeforeExactLine $hex '        "sff": {"12": 5},' '        "ray": {"6": 3},'
-          Replace-Exact $hex '    assert report["other_special_codes"].get("ray") == 3' '    assert report["other_special_codes"].get("ray", 0) == 0'
-
-          Remove-Item '.github/workflows/ability-ray-corpus-lock-patch.yml'
-          git diff --check
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add $child $hex '.github/workflows/ability-ray-corpus-lock-patch.yml'
-          git diff --cached --check
-          git commit -m 'test(ability): sync ray decode corpus locks'
-          git push origin HEAD:ability
-
-          $headers = @{
-            Authorization = "Bearer $env:GH_TOKEN"
-            Accept = 'application/vnd.github+json'
-            'X-GitHub-Api-Version' = '2022-11-28'
-          }
-          $body = @{ ref = 'ability' } | ConvertTo-Json
-          Invoke-RestMethod -Method Post -Uri 'https://api.github.com/repos/Dsamofalov/hwm_predictor/actions/workflows/ability.yml/dispatches' -Headers $headers -ContentType 'application/json' -Body $body
+          $code = @'
+          import json
+          from pathlib import Path
+          from hwm_solver.ability.childofthelight_evidence import analyze_corpus as child
+          from hwm_solver.ability.childofthelight_spellwire_evidence import analyze_spellwire_corpus as child_wire
+          from hwm_solver.ability.hexingattack_evidence import analyze_corpus as hexing
+          root = Path('hwm_battles')
+          c = child(root)
+          w = child_wire(root)
+          h = hexing(root)
+          keep_c = ['carrier_targeted_specials','carrier_targeted_codes','code_copy_candidates','code_solo_carrier_records','copy_target_counts','copy_value_equal','copy_amount_equal','carrier_added_effects']
+          keep_w = ['status_groups_with_carrier','status_groups_positive_cost','status_groups_without_positive_cost','status_groups_without_source_spellbook','status_codes','positive_costs','light_status_groups','light_match_codes','light_single_groups','light_mass_groups','light_ambiguous_groups','light_single_copy_groups','light_single_direct_carrier_groups','light_mass_control_groups','light_single_copy_carrier_records','single_copy_codes','single_direct_codes','mass_control_codes','ambiguous_codes','direct_damage_carrier_records','direct_damage_codes','raise_dead_carrier_records']
+          keep_h = ['attacks_with_same_target_special','same_target_special_records','same_target_codes','code_added_effects','code_value_shapes','code_amount_shapes','other_special_codes']
+          print('CHILD_RAY_EXACT=' + json.dumps({k:c[k] for k in keep_c}, ensure_ascii=False, sort_keys=True))
+          print('CHILD_WIRE_RAY_EXACT=' + json.dumps({k:w[k] for k in keep_w}, ensure_ascii=False, sort_keys=True))
+          print('HEXING_RAY_EXACT=' + json.dumps({k:h[k] for k in keep_h}, ensure_ascii=False, sort_keys=True))
+          '@
+          .\.venv\Scripts\python.exe -c $code
+          if ($LASTEXITCODE -ne 0) { throw "diagnostic failed with exit code $LASTEXITCODE" }
