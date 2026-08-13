@@ -11,6 +11,25 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-13
 
+### Authoritative main stabilization / production replanning safety
+
+- Commit: `58138613956951271c921914c76b6802fdf5f83a` — `fix: bind live replanning dedupe to canonical state`.
+  - Replaced revision-only extension replanning dedupe with canonical `(battle_id, revision, state_hash)` identity so daemon restart/revision reset cannot suppress a genuinely new state.
+  - Extended the live-binding integration through real HTTP `/capture` using the scrubbed production-shape snapshot -> exact `t=<digits>` heartbeat -> incremental sequence; heartbeat remains revision-neutral even when MV3 `sequenceHint` restarts.
+  - Hosted run `31692504639` passed Core + Full; targeted live-binding log proved both HTTP capture progression and recommendation binding.
+- Commit: `49bbe98e00cbee27d437c26cd93b2127a18dc8b8` — `fix: retry live replanning after transport failure`.
+  - Made recommendation scheduling retry-safe after transport/auth failure: only the same claimed canonical key may be released, while a late old-state failure cannot unlock a newer state; auth lifecycle reset clears the guard deliberately.
+  - `not_ready`, `finished`, and `stale` remain semantic non-results rather than automatic retry triggers.
+  - Final hosted atomic Windows CI run `31693648818` is **Core PASS + Full PASS** on `windows-2022`; final Geometry Evidence run `31693648857` is **PASS** on the same SHA.
+  - Exact final corpus checkpoint: **855/866 structural-ready**, **11 invalid**, **798/866 semantic-safe**; held-out observed basic-action representability **5394/5481 = 98.4127%**, residuals **87** (35/49/3); Python final overlaps **15 battles / 15 pairs**.
+  - The remaining M01/M14 blocker is the real authenticated shipped MV3 -> daemon -> recommendation -> manual move -> next recommendation smoke; deterministic CI does not promote that product gate to COMPLETE.
+
+### Main atomic Windows CI checkpoint
+
+- Permanent main CI now follows `TESTS_CANON.md`: exact C++/pytest inventories are frozen before fan-out, Debug/Release C++ are build-once, independent runtime/planner/Full gates run separately, and strict aggregate jobs publish `HWM / Core` and `HWM / Full` only when every mandatory surface succeeds.
+- Final functional run `31693648818` materialized the atomic graph and passed both strict aggregates. Do not return to historical monolithic Core/Full execution.
+
+
 ### Evidence-backed blocked melee recovery
 
 - Commit: `8bd394edb26e6f17fb5fe1dc4cd05736250ef2e9` — `fix: recover local unique blocked melee landing`.

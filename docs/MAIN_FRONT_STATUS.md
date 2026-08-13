@@ -1,10 +1,24 @@
 # Main development front checkpoint
 
-Updated: 2026-08-12
+Updated: 2026-08-13
 
 This file tracks main-owned correctness/search/runtime work. Ability mechanics retain separate evidence ownership, while the validated ability snapshot and atomic Ability Windows workflow are already integrated into `main`.
 
-## 2026-08-12 current checkpoint
+
+## 2026-08-13 authoritative checkpoint
+
+- Current functional `main` SHA: `49bbe98e00cbee27d437c26cd93b2127a18dc8b8` (`fix: retry live replanning after transport failure`).
+- Hosted atomic Windows CI run `31693648818`: **Core PASS + Full PASS** on `windows-2022`; strict aggregate jobs passed after exact C++/pytest inventories, independent runtime cases, planner gates, structural budget and M11 reducer completed.
+- Geometry Evidence run `31693648857`: **PASS** on the same SHA.
+- Exact full-corpus structural checkpoint: **855/866 structural-ready**, **11 invalid finals**, **798/866 semantic-safe**.
+- Exact held-out observed basic-action representability: **5394/5481 = 98.4127%**; residuals **87** = 35 melee-destination-unreachable + 49 target-not-adjacent-after-move + 3 move-unreachable. Python final overlap inventory is **15 battles / 15 pairs**. Only 21 residuals are SPECIAL-free; no safe generic expansion is currently proven for them.
+- Live deterministic boundary is stronger than the previous checkpoint: scrubbed production-shape snapshot/heartbeat/incremental traffic now passes through real HTTP `/capture`; exact `t=<digits>` heartbeat is revision-neutral; recommendation binding is checked against canonical state.
+- Extension replanning dedupe is keyed by `(battle_id, revision, state_hash)`, preventing daemon-restart numeric-revision collisions. Transport/auth failure releases only its own scheduling claim so reconnect can retry the same canonical state without allowing an obsolete failure to unlock a newer state.
+- Numeric revision is monotonic only within one daemon session. It is **not** a global cross-restart identity.
+- M11 production learned dynamics remains disabled despite Full/evidence PASS.
+- Remaining product blocker: real authenticated shipped MV3 -> daemon -> recommendation -> manual move -> next semantic revision -> stale cancellation/exact re-root -> new recommendation smoke per `docs/LIVE_VALIDATION.md`.
+
+## 2026-08-12 historical checkpoint
 
 - Decoder functional commit `1c5a2b3478e7dacf0ebc714a4fb83246fed3b3f8` conservatively recovers unique nearby **single-target** melee position hints in both Python and C++; multi-target and SPECIAL decisions keep the guarded path.
 - Full corpus: **852/866 structural-ready**, **14 invalid finals**, **795/866 semantic-safe**. All 14 final structural failures are `overlap` only (16 pairs total).
@@ -82,7 +96,7 @@ CI commit carrying all three gates: `676da42b754ee9d1409cc27e8ad1dfec26d17e6c` �
 
 ### M16 authenticated WebSocket streaming
 
-The local daemon now exposes an authenticated `ws://127.0.0.1:<port>/ws` state stream. The bearer is carried as `Sec-WebSocket-Protocol: hwm-bearer.<token>` rather than in the URL. The daemon pushes canonical status immediately and whenever SessionStore revision changes, plus a 20-second heartbeat. The MV3 service worker consumes this stream, stores the last daemon status, deduplicates replanning by revision and falls back to HTTP status only when streamed status is stale/unavailable.
+The local daemon now exposes an authenticated `ws://127.0.0.1:<port>/ws` state stream. The bearer is carried as `Sec-WebSocket-Protocol: hwm-bearer.<token>` rather than in the URL. The daemon pushes canonical status immediately and whenever SessionStore revision changes, plus a 20-second heartbeat. The MV3 service worker consumes this stream, stores the last daemon status, deduplicates replanning by canonical `(battle_id, revision, state_hash)` identity, safely releases the same-key claim after transport/auth failure for reconnect retry, and falls back to HTTP status only when streamed status is stale/unavailable. Numeric revision is session-local and is not treated as a global cross-restart identity.
 
 The next correctness step is a real authenticated **production closed-loop** validation using `docs/LIVE_VALIDATION.md`. The old uncertainty “does active `battle.php` transport exist and is it interceptable?” is closed by the 12.08.2026 live evidence; the remaining gate is whether the shipped extension/daemon pipeline consumes the semantic payload correctly and advances revision/recommendation after a manual move.
 
@@ -92,7 +106,7 @@ Primary implementation decision is now explicit:
 
 - keep `battle.php` network payload as authoritative primary source;
 - classify pure `t=<digits>` heartbeat/no-op frames as revision-neutral;
-- add a minimal scrubbed live-derived `snapshot -> incremental turn delta` regression;
+- keep the now-permanent scrubbed live-derived `snapshot -> heartbeat -> incremental turn delta` HTTP regression green;
 - if a concrete canonical field is missing or disagrees, use a **targeted** runtime projection from `stage.pole.obj`/`nowturn` and report mismatch diagnostically;
 - never build a broad runtime scraper speculatively and never use `scr_x/scr_y` as canonical board coordinates.
 

@@ -1,51 +1,55 @@
 # Техническое задание: HeroesWM PvE Battle Solver / Advisor
 
 **Версия:** 1.1 / implementation checkpoint 0.3.0  
-**Дата:** 12.08.2026
+**Дата:** 13.08.2026
 **Статус:** Active implementation specification; checkpoint 0.3.0  
-**Последнее обновление реализации:** 12.08.2026 — validated ability snapshot и atomic Ability Windows CI интегрированы в `main`; decoder/legal улучшен до 852/866 structural-ready, 795/866 semantic-safe и 5392/5481 held-out observed basic-action representability без ослабления invariants; M11 selector evidence синхронизирован после decoder-state сдвига; standard Windows run `31624580974` и atomic Ability run `31622630092` остаются hosted evidence проверенного функционального checkpoint; дополнительно на реальном авторизованном активном бою `warid=1672746591` независимо подтверждён пассивный XHR transport `battle.php`: содержательный snapshot/update с `turns=>3` и `s=...`, затем после ручного хода incremental `turns=>4:...`, при этом client runtime `lastturn` изменился `3 -> 4`; frequent `t=950` подтверждены как отдельные no-op/heartbeat responses. Production learned dynamics остаётся выключенной; полный extension -> daemon -> decode -> plan -> revision-bound replan smoke и decoder/legal >=99.9% всё ещё обязательны.
+**Последнее обновление реализации:** 13.08.2026 — `main` стабилизирован на functional SHA `49bbe98e00cbee27d437c26cd93b2127a18dc8b8`: hosted atomic Windows CI run `31693648818` завершён **Core PASS + Full PASS**, Geometry Evidence run `31693648857` — **PASS**. Exact full-corpus checkpoint: 855/866 structural-ready, 11 structural-invalid, 798/866 semantic-safe. Held-out observed basic-action representability: 5394/5481 = 98.4127%, residual inventory 87 (35 melee destination unreachable, 49 target-not-adjacent after move, 3 move unreachable); Python final overlap inventory 15 battles / 15 pairs. Production live boundary теперь имеет deterministic HTTP snapshot -> heartbeat -> incremental regression, replanning dedupe использует canonical identity `(battle_id, revision, state_hash)`, а transport/auth failure безопасно освобождает только собственный scheduling claim для retry. `t=<digits>` heartbeat остаётся revision-neutral. Production learned dynamics остаётся выключенной. Реальный authenticated MV3 -> daemon -> recommendation -> manual move -> next recommendation smoke и decoder/legal >=99.9% остаются обязательными acceptance gates.
 **Целевая роль документа:** входной документ для coding/agentic-разработчика, который должен начать реализацию без дополнительных продуктовых вопросов.
 
 ---
 
-## 0.3. Статус реализации на checkpoint 0.3.0 (12.08.2026)
+## 0.3. Статус реализации на checkpoint 0.3.0 (13.08.2026)
 
-Этот раздел является частью ТЗ и фиксирует фактическое состояние реализации. Исходные требования ниже **не удалены**: напротив каждого крупного модуля и фазы добавлен статус checkpoint 0.3.0.
+Этот раздел является **authoritative current checkpoint**. Более старые численные checkpoint-описания ниже сохраняют исторический контекст, но при конфликте текущими считаются числа и run IDs из этого раздела и `docs/MAIN_FRONT_STATUS.md`.
 
 **Легенда:** `COMPLETE` — требования текущего этапа закрыты; `MOSTLY COMPLETE` — основной путь реализован, остаётся ограниченная интеграционная проверка; `ADVANCED PARTIAL` — большая часть функциональности работает, но acceptance исходного ТЗ ещё не выполнен полностью; `PARTIAL` — рабочий поднабор; `IN PROGRESS` — активная разработка; `NOT COMPLETE` — этап ещё не закрыт.
 
 ### Проверяемые метрики текущего checkpoint
 
-- Raw corpus: **866/866** боёв с `init.txt` + `turns0.txt`.
-- Low-level protocol coverage: **100%**, unknown record families в текущем tokenizer: **0**.
-- Final structural-ready: **852/866**; semantic-safe final states: **795/866**. Все **14** оставшихся structural-invalid finals нарушают только invariant `overlap` (16 overlap-пар суммарно).
-- Incremental replay == one-shot replay: **866/866**.
-- Held-out player non-hero states: structural-ready **5351/5476 = 97.72%**; strict semantic-safe **4979/5476 = 90.92%**.
-- При structural-ready состоянии basic action generator имеет хотя бы один action в **5338/5351 = 99.76%** held-out states.
-- Held-out observed basic-action representability: **5392/5481 = 98.376%**; exact residual failure inventory: **89** (36 melee destination unreachable, 50 target-not-adjacent after move, 3 move unreachable).
-- Dataset: **52,357** accepted decisions из **52,375** observed; 644 creature ID.
-- Ability catalog: **421** ability code; registry: **85 exact-search**, 11 exact-targeting, 18 partial-exact, 9 modeled-proc, 5 modeled-collateral, 2 modeled-kill-trigger, dynamic spellbook; **78 unresolved**. `Mighty Slam` теперь имеет отдельный exact `ABILITY` path: выбранная цель + соседние вражеские стеки, knockback только small при валидной клетке, без retaliation, cooldown по минимальному наблюдаемому gap=3; `Paw Strike` переведён из `learned_damage` в `modeled_proc`: вероятность `min(1, 0.10 * travelled_cells)` прошла chronological holdout лучше constant baseline, а observed `I<target><source>` даёт exact ATB=0 transition 174/174; physical push применяется только при валидной клетке; `Life Drain` моделируется точным transition-правилом лечения/воскрешения от 50% фактически нанесённого физического урона; `Regeneration` — точным start-of-turn лечением `random(3,5) * min(current_count, 10)` HP только текущего верхнего существа, без увеличения `count`; `Mana Feed` — exact `Smfd` action на собственного героя с передачей `min(current_count, current_mana)` маны.
-- Ability-risk на held-out sample: mean **0.22431**, p90 **0.37538**.
-- Player action-type prior: held-out top-1 **70.76%**, top-3 **93.46%**. PvE prior: top-1 **62.81%**, top-3 **96.11%**.
-- Value: test battle-level Brier **0.05176** против **0.11891** constant baseline; AUC **0.9889**.
-- Physical damage: median abs-log error **0.3574 -> 0.2812** после learned creature residual; для rare creatures ability transfer **0.2719 -> 0.2484**.
-- M11 multi-step evidence: five-member train-only physical-damage residual ensemble evaluated at **2/4/8/16** halfturn horizons. Deterministic mean force-L1 at 16 steps **0.04947 vs 0.08125** generic, but invalid-action fraction **3.58% vs 2.51%**; stochastic survival gate at 16 steps **0.05028 vs 0.08178** force-L1 while valid-observed-action coverage is **96.349% vs 97.493%**. Uncertainty/selector experiments do not clear production criteria; leakage-safe positive-residual temperature calibration selects scale **0.0** because no candidate passes the hard joint accuracy/coverage gate. Production learned dynamics remains **disabled**.
-- Next actor: held-out top-1 **32.16%**, top-3 **65.86%** против round-robin top-1 **12.75%**, top-3 **33.49%**.
-- Permanent held-out planner validity gate: **120/120** sampled states из **110** held-out battles, **0** invalid recommendations, state-hash mismatches, illegal best actions/alternatives или non-finite metrics. На validated hosted Windows run `31475600960` budget `1 -> 120`: action-type stability **99.17%**, exact-action stability **86.67%**.
-- Automated tests / supported platform: Windows 10/11 x64 + MSVC. Проверенный main tree `16998598ce3dc282bef76a9b29b27e83fba8bdf9`: standard hosted `windows-2022` run `31624580974` — **Core PASS + Full PASS**. Atomic Ability run `31622630092` — **PASS** на том же функциональном decoder checkpoint до evidence-only selector refresh. Main-front CTest остаётся отделён от ability-owned atomic inventory; Full CI enforcing full-corpus structural budget **invalid <= 14** и exact M11 committed-evidence verification. Historical Linux/self-hosted Windows results remain evidence only.
-- Live engine/transport evidence: на авторизованном активном PvE-бою `warid=1672746591` passive XHR hook без дополнительных запросов получил `battle.php` response **12,686 bytes** с `turns=>3` + полным `s=M...` state block, а после одного ручного хода — **41-byte** incremental `turns=>4:m0080501i0080100C001000000;`; за тот же короткий capture наблюдались **28** частых `t=950` heartbeat/no-op responses. Runtime snapshot синхронно изменил `lastturn` **3 -> 4**. Предоставленный рабочий browser-automation path дополнительно подтверждает доступность live unit model через `stage.pole.obj`/`stage[war_scr].obj`, где используются `owner`, grid `x/y`, `nownumber`, `nowhealth`, `nowturn`, а `scr_x/scr_y` являются render-space координатами и не должны заменять canonical grid state.
+- Raw corpus: **866/866** боёв; tokenizer low-level coverage **100%**, `with_unknown = 0`.
+- C++ final corpus gate: **855/866 structural-ready**, **11 structural-invalid**, **798/866 semantic-safe**. Hosted Full structural budget на final SHA прошёл без ослабления `invalid <= 14`.
+- Python Geometry Evidence на final SHA: final overlap **15 battles / 15 pairs**; held-out observed basic-action representability **5394/5481 = 98.4127%**.
+- Exact held-out residual inventory: **87** = 35 `melee_destination_not_reachable` + 49 `target_not_adjacent_after_move` + 3 `move_not_reachable`. Ownership audit оставляет только **21 special-free** residual; доказанного безопасного generic expansion для них сейчас нет, поэтому метрика не улучшается эвристикой ценой invariants.
+- Geometry corrections остаются evidence-bounded: radius-1 unique landing -> blocked globally-unique radius-2 landing -> узкий stationary same-owner-blocker fallback; SPECIAL/multi-target/forced movement не поглощаются generic decoder logic. Forward lookahead останавливается на `f<...>` / `f_en<...>` result boundary.
+- Permanent planner replay gate: **120/120** held-out states, 0 invalid recommendations на final hosted atomic pipeline.
+- Main standard validation: functional SHA `49bbe98e00cbee27d437c26cd93b2127a18dc8b8`, GitHub-hosted `windows-2022` atomic CI run `31693648818` — **Core PASS + Full PASS**. Exact inventories замораживаются до fan-out; C++ Debug/Release builds выполняются build-once; pytest nodes, runtime cases и independent Full gates исполняются атомарно; strict reducers публикуют `HWM / Core` и `HWM / Full`.
+- Geometry Evidence run `31693648857` — **PASS** на том же functional SHA; это authoritative source для representability/residual/overlap numbers выше.
+- M11 exact evidence reducer и остальные Full gates прошли, но production learned dynamics остаётся **disabled**: PASS воспроизводимости не заменяет joint accuracy + observed-action survival/validity acceptance.
+
+### Production live closed-loop — текущая граница
+
+Transport feasibility доказана на реальном authenticated battle `warid=1672746591`: passive official `battle.php` XHR дал semantic `turns=>3 + s=...`, после ручного хода — incremental `turns=>4...`; `t=<digits>` наблюдается отдельно как heartbeat/no-op.
+
+На shipped local pipeline теперь детерминированно доказаны следующие safety contracts:
+
+1. scrubbed production-shape `snapshot -> t=<digits> heartbeat -> incremental` проходит через реальный HTTP `/capture`; heartbeat не публикует новую canonical revision;
+2. recommendation привязана к `battle_id`, `state_revision` и `state_hash`;
+3. service-worker scheduling identity — **`(battle_id, revision, state_hash)`**, а не одно число revision; после daemon restart повторившийся numeric revision не может подавить новый canonical state;
+4. transport/auth failure `/recommend` освобождает только claim того же canonical key, поэтому тот же state можно безопасно повторить после reconnect; поздний failure старого state не разблокирует уже заявленный новый state;
+5. `not_ready` / `finished` / `stale` остаются безопасными semantic non-results и не превращаются в retry storm;
+6. network `battle.php` остаётся primary truth; runtime projection разрешена только как targeted cross-check/fallback для конкретно доказанного отсутствующего поля.
+
+**M01/M14 всё ещё не COMPLETE.** Не хватает одного реального authenticated browser smoke через фактически загруженный MV3 extension и daemon: capture -> recommendation -> ручной ход -> новый semantic capture -> stale cancellation/exact re-root -> новая recommendation. Revision monotonicity гарантируется внутри одной daemon session; cross-restart identity определяется composite key, а не глобальной монотонностью числа revision.
 
 ### Текущий незавершённый фронт разработки
 
-Main-owned correctness/search work и ability-owned mechanics остаются организационно разделены, но validated ability snapshot и отдельный atomic Ability workflow уже интегрированы в `main`. Новые ability semantics по-прежнему принимаются только после corpus/CI evidence; нижеприведённый порядок — приоритет **основного** фронта.
+1. **Production active-battle closed-loop gate:** выполнить `docs/LIVE_VALIDATION.md` на реальном authenticated PvE бою и сохранить только metadata-safe evidence. Не добавлять autoclick/game-command automation и не делать extra high-frequency polling.
+2. **Decoder/legal correctness:** двигаться от exact 87-residual inventory к acceptance **>=99.9%** только через evidence-backed generic classes. Большинство residuals SPECIAL/ability-owned; main не должен подменять ability semantics.
+3. **M11 learned dynamics:** оставлять production disabled, пока joint multi-step accuracy + observed-action survival/validity gates не разрешат enablement.
+4. **M13 search quality:** после correctness closure улучшать opponent/chance branching, calibration и quality/latency, сохраняя stochastic outcome separation, transpositions, revision cancellation, exact re-root и hash/structure guards.
+5. **Evaluation:** после stable production live acquisition — live-state cross-validation и hard-PvE human-in-loop benchmark / calibration.
 
-1. **Production active-battle closed-loop gate:** transport-level Phase 0 feasibility уже доказана на реальном авторизованном бою: официальный клиент делает пассивно перехватываемые XHR к `battle.php`, отдаёт содержательный state/update и компактный incremental delta после ручного хода. Главный продуктовый блокер теперь уже не «существует ли live transport», а полный production path `MV3 capture -> daemon -> canonical revision/hash -> recommendation -> ручной ход -> новая revision -> stale cancellation/re-root -> новая recommendation`. Network payload остаётся primary truth. Runtime adapter должен быть узким cross-check/fallback по `stage.pole.obj`/`nowturn` только для конкретно доказанного отсутствующего или спорного поля; широкого runtime scraper не делать.
-2. **Decoder/legal correctness:** устранить **14** оставшихся финальных overlap-invalid replay без ослабления invariants и поднять held-out observed basic-action representability с **5392/5481 = 98.376%** к acceptance **>=99.9%**. Permanent full-corpus non-regression budget уже ужесточён до `invalid <= 14`. Из 89 held-out representability residuals 66/86 melee failures содержат SPECIAL records; generic main-decoder heuristics не должны подменять ability-owned semantics.
-3. **M11 learned dynamics:** развить уже работающий 2/4/8/16-step evidence harness из primary physical-damage residual до полноценного structured ensemble. Не включать runtime selector/uncertainty/residual production path, пока одновременно не пройдены multi-step accuracy и observed-action survival/validity gates.
-4. **M13 search quality после correctness closure:** safe stochastic outcome separation, transpositions и exact persistent re-root уже реализованы; следующий front — более сильное explicit opponent/chance branching, search calibration и quality/latency trade-offs, не ломая revision cancellation и exact hash/structure guards.
-5. **Evaluation:** replay invalid-recommendation gate >=100 states уже закрыт (**120/120**). После stable production live acquisition нужны live-state cross-validation и hard-PvE human-in-loop benchmark / win-rate uplift / calibration.
-
-Ability ownership: high-impact unresolved assist/counter/summon/control mechanics остаются отдельным evidence lane. Snapshot уже присутствует в `main`; дальнейшие semantics должны попадать туда только после corpus review и atomic Ability CI, без дублирования generic main-owned decoder/search work.
+Ability ownership остаётся отдельным lane (`ability` + its own status/evidence/atomic CI). Main не дублирует новые ability semantics.
 
 ### Правило источников механик
 

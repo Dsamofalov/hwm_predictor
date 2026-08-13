@@ -1,91 +1,61 @@
 # MAIN agent TZ — current handoff
 
 **Updated:** 2026-08-13  
-**Role:** authoritative short-form addendum for the `main` development agent.  
-**Precedence:** read `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `TESTS_CANON.md`, `docs/LIVE_VALIDATION.md`, and `changelog.md` first. Where this file contains a newer checkpoint or an explicit next-step instruction, this file is the binding handoff for the main lane until the canonical long-form SPEC/status mirrors are synchronized again.
+**Role:** binding short-form handoff for the `main` development lane.  
+**Precedence:** read `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `TESTS_CANON.md`, `docs/LIVE_VALIDATION.md`, and `changelog.md`. Ability mechanics remain independently owned by `ability`.
 
-## Repository / ownership
+## Authoritative repository checkpoint
 
 - Repository: `Dsamofalov/hwm_predictor`.
-- Main development branch: `main`.
-- Current functional `main` HEAD at handoff: `3b8131692365d250d96be203836bd36192f1ea4a` — `fix: stop final melee lookahead at battle result`.
-- Last fully authoritative hosted standard Windows checkpoint before that geometry patch: functional SHA `3c31ed21eb4f1955c397aef48bc62727a3281b5b`, standard run `31680022438` — **Core PASS + Full PASS**.
-- Ability work remains independently owned by branch `ability`; do not duplicate or casually rewrite ability-owned semantics in `main`. Use the current ability status/docs and atomic Ability CI as the acceptance source for new ability mechanics.
+- Branch: `main`.
+- Current validated functional SHA: `49bbe98e00cbee27d437c26cd93b2127a18dc8b8` — `fix: retry live replanning after transport failure`.
+- Hosted atomic Windows CI: run `31693648818` — **Core PASS + Full PASS**.
+- Geometry Evidence: run `31693648857` — **PASS** on the same SHA.
+- Supported product/CI platform: Windows 10/11 x64 + MSVC; permanent hosted validation runs on `windows-2022`.
 
-## What changed after the last fully hosted standard checkpoint
+## Exact current decoder / corpus checkpoint
 
-### Geometry / decoder
+- C++ full corpus: **855/866 structural-ready**, **11 structural-invalid**, **798/866 semantic-safe**, low-level `with_unknown = 0`.
+- Python final overlaps: **15 battles / 15 pairs**.
+- Held-out observed basic-action representability: **5394/5481 = 98.4127%**.
+- Exact residuals: **87** = 35 `melee_destination_not_reachable` + 49 `target_not_adjacent_after_move` + 3 `move_not_reachable`.
+- Ownership audit: **21 special-free**, 1 semantically resolved SPECIAL, 65 unresolved SPECIAL. The special-free set has no currently proven safe generic expansion; do not trade invariants for the percentage target.
+- Generic melee resolution order remains: radius-1 unique landing -> blocked globally-unique radius-2 landing -> evidence-bounded stationary fallback only for SPECIAL-free, one physical target, same-owner blockers, legal current anchor already adjacent to target. No generic SPECIAL/multi-target/forced-movement fallback.
+- Forward action lookahead stops at `f<...>` / `f_en<...>` battle-result boundaries.
 
-The generic decoder lane received one more evidence-bounded SPECIAL-free melee correction.
+## Live closed-loop state
 
-Functional SHA: `3b8131692365d250d96be203836bd36192f1ea4a`.
+Transport feasibility is proven on authenticated battle `warid=1672746591`: passive official `battle.php` XHR exposed `turns=>3 + s=...`; after one manual move an incremental `turns=>4...` arrived; frequent exact `t=<digits>` frames are heartbeat/no-op.
 
-The patch:
+Current shipped-path contracts are now permanently regression-tested:
 
-1. keeps the existing radius-1 nearby unique landing resolver strongest;
-2. keeps the existing blocked + globally unique radius-2 landing resolver second;
-3. only after those fail, permits a stationary fallback when all of the following are true:
-   - the decision is SPECIAL-free;
-   - the physical attack has exactly one damage target;
-   - the raw actor marker is impossible because it collides only with same-owner live board stacks;
-   - the actor's current canonical anchor is legal;
-   - the actor is already adjacent to the sole damage target;
-4. never turns this into a generic SPECIAL, multi-target, forced-movement, or arbitrary blocked-marker heuristic;
-5. stops forward damage/SPECIAL lookahead at `f<...` / `f_en<...` battle-result boundaries so terminal result text is not misread as part of the current action.
+1. production-shape `snapshot -> heartbeat -> incremental` passes real HTTP `/capture`;
+2. heartbeat does not publish a canonical revision or cancel/replan search;
+3. recommendation is bound to `battle_id`, `state_revision` and `state_hash`;
+4. service-worker replanning identity is `(battle_id, revision, state_hash)`, not revision alone;
+5. daemon restart may reuse a numeric revision without suppressing a different canonical state;
+6. transport/auth `/recommend` failure releases only the same claimed key so reconnect may retry it; an obsolete failure cannot unlock a newer claimed state;
+7. `not_ready`, `finished` and `stale` are safe semantic non-results, not transport retry triggers.
 
-Permanent exact regressions include:
+**Still open:** the real authenticated active-PvE smoke through the actually loaded MV3 extension and daemon. M01/M14 are not COMPLETE until `docs/LIVE_VALIDATION.md` shows capture -> recommendation -> manual move -> newer semantic capture -> stale cancellation/exact re-root -> new recommendation. Revision is monotonic only inside one daemon session; cross-restart identity is composite.
 
-- train final-overlap case `1625534409`, decision `82`, actor `22`;
-- held-out representability case `1632855461`, decision `71`, actor `15`;
-- existing radius-1/radius-2 and shooter-marker regressions remain in place and must continue to pass.
+Network `battle.php` remains primary truth. Runtime `stage.pole.obj` / `nowturn` is targeted cross-check/fallback only for a concretely missing field. No broad runtime scraper and no gameplay automation.
 
-The temporary validation/publish branch `agent/stationary-friendly-marker-20260813` is still present. Its final publish workflow run `31684482264` completed successfully and only pushed the functional files to `main` after targeted Python geometry tests, C++ protocol tests, full-corpus structural budget, and Python geometry/overlap non-regression checks passed. Because the functional `main` push was performed with workflow credentials, the normal standard Windows Core/Full workflows did **not** run automatically on SHA `3b813169...`.
+## Mandatory next work order
 
-### M11 evidence reproducibility
-
-Functional SHA `3c31ed21eb4f1955c397aef48bc62727a3281b5b` canonicalizes selector quantile threshold candidates to the existing 12-decimal evidence boundary before selection. This fixes the exact-evidence long binary64 tail without weakening `verify_m11_evidence.py` or enabling learned dynamics. Standard hosted run `31680022438` is Core/Full PASS. Production learned dynamics remains **disabled**.
-
-## Mandatory first actions for the next main agent
-
-1. **Validate current main on the authoritative Windows pipeline before claiming the new geometry checkpoint.** Run/trigger the standard hosted Windows Core + Full gates on the current main tree containing `3b813169...` (docs-only handoff commits may sit on top; that is fine). Do not treat the successful temporary Ubuntu publish workflow as a substitute for the supported Windows product/CI gate.
-2. If Full fails, diagnose the exact failing gate. In particular, decoder-state changes can make committed M11 evidence stale; do not weaken exact verification and do not blindly refresh evidence unless the evaluator deterministically proves that only the committed evidence representation changed.
-3. Re-run the exact geometry audits and record the post-`3b813169...` numbers instead of inferring them from the two fixed regressions:
-   - C++ final structural-ready / structural-invalid budget;
-   - Python final overlap battles/pairs;
-   - held-out observed basic-action representability and exact residual count;
-   - semantic-safe final count if changed.
-4. Only after the current main functional tree is validated and any required evidence-only refresh is complete, **delete temporary branch `agent/stationary-friendly-marker-20260813`**. Before deletion, confirm that all useful functional/evidence changes are already on `main`. Do not delete other `agent/*` branches merely because they look temporary; other agents may own them.
-5. Update `SPEC.md`, `HeroesWM_Solver_TZ_Status_0.3.0.md`, `docs/MAIN_FRONT_STATUS.md`, and `changelog.md` with the exact validated metrics and authoritative run IDs after the Windows verdict. This short-form TZ is intentionally conservative and does not invent post-patch corpus totals before that audit.
-
-## Main-lane priorities after cleanup
-
-Continue development autonomously in this order unless new evidence changes the dependency graph:
-
-1. **Production active-battle closed-loop gate.** Transport feasibility is already proven. The remaining product acceptance is the real shipped path: `MV3 passive capture -> daemon -> canonical revision/hash -> recommendation -> manual move -> next semantic revision -> stale cancellation/re-root -> next recommendation`. Exact `t=<digits>` heartbeat frames remain revision-neutral. Network `battle.php` is primary truth; runtime projection is targeted cross-check/fallback only.
-2. **Decoder/legal correctness toward >=99.9% held-out observed-action representability.** Use the published exact residual/overlap evidence to select narrow generic geometry classes. Do not absorb SPECIAL/multi-target/forced-movement mechanics into generic fallback logic.
-3. **M11 learned dynamics only behind joint accuracy + survival/validity gates.** Do not enable runtime selector/residual/uncertainty paths while current evidence rejects production enablement.
-4. **M13 search quality after correctness closure:** stronger explicit opponent/chance branching, calibration, and measured quality/latency improvements without breaking stochastic outcome separation, transpositions, revision cancellation, exact re-root, or structure/hash guards.
-5. **Evaluation:** after stable production live acquisition, run live-state cross-validation and hard-PvE human-in-loop quality/win-rate/calibration work.
+1. Execute and retain metadata-safe evidence for the real authenticated production closed-loop smoke.
+2. Continue decoder/legal closure toward **>=99.9%** from the exact 87-residual inventory, only with evidence-backed generic corrections. Do not duplicate ability-owned mechanics.
+3. Keep M11 learned dynamics production-disabled until joint multi-step accuracy + observed-action survival/validity gates pass.
+4. Continue M13 opponent/chance/search calibration only after correctness closure, preserving stochastic outcomes, transpositions, revision cancellation, exact re-root and hash/structure guards.
+5. After stable live acquisition, run live-state and hard-PvE human-in-loop evaluation/calibration.
 
 ## Testing contract
 
-`TESTS_CANON.md` is mandatory. Maximize atomic parallelization without sacrificing correctness:
-
-- freeze exact test inventories;
-- shard independent cases aggressively;
-- preserve exact map/reduce semantics and complete inventory coverage;
-- build once / fan out where possible;
-- CI waiting must not block unrelated evidence work;
-- never claim a pending or unsupported-platform run as authoritative PASS.
-
-Supported product/CI platform remains Windows 10/11 x64 + MSVC; GitHub-hosted `windows-2022` is the permanent standard CI environment.
+`TESTS_CANON.md` is mandatory and already reflected by the permanent main workflow: freeze exact inventories, build once/fan out, run independent meaningful units in parallel, preserve exact map/reduce semantics, and use strict aggregate failure. Do not reintroduce monolithic Core/Full execution merely for historical compatibility. CI waiting does not block independent useful work, but no pending run may be called PASS.
 
 ## Guardrails
 
-- No auto-clicking or game-command automation.
-- No extra high-frequency HeroesWM polling in the primary path.
-- Old historical parser/state dumps are not ground truth.
-- Do not weaken structural invariants to improve a metric.
-- Do not hide unknown/semantic uncertainty.
-- Do not enable learned dynamics because mean error improved if observed-action survival/validity is worse.
-- Do not rewrite closed ability semantics without new raw/server evidence and the ability-owned acceptance path.
+- No autoclicking, game-command automation, or extra high-frequency HeroesWM polling.
+- Do not weaken structural invariants or semantic safety gates to improve metrics.
+- Do not enable learned dynamics from mean-error improvement alone.
+- Do not rewrite ability-owned semantics without new raw/server evidence and ability-owned acceptance.
