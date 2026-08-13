@@ -1246,9 +1246,9 @@
       "code": "cripplingwound",
       "name": "Калечащее ранение.",
       "description": "В случае успешной атаки у существа есть шанс снизить скорость жертвы на 50% и инициативу на 30%. Ранение проходит через 2 хода.",
-      "support": "learned_damage",
+      "support": "partial_exact",
       "learned_damage": true,
-      "risk_weight": 0.75,
+      "risk_weight": 0.25,
       "categories": [
         "movement",
         "offense",
@@ -2407,9 +2407,9 @@
       "code": "gribbomb",
       "name": "Взрыв спор.",
       "description": "Существо может уничтожить себя (активируемая способность). Все существа вокруг получат урон стихией земли равный суммарному здоровью уничтоженного существа.",
-      "support": "unresolved",
+      "support": "partial_exact",
       "learned_damage": false,
-      "risk_weight": 0.62,
+      "risk_weight": 0.25,
       "categories": [
         "offense"
       ],
@@ -6298,14 +6298,14 @@
     }
   ],
   "support_counts": {
-    "unresolved": 78,
+    "unresolved": 77,
     "exact_search": 85,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 176,
+    "learned_damage": 175,
     "identity": 4,
     "modeled_proc": 9,
-    "partial_exact": 18,
+    "partial_exact": 20,
     "dynamic_spellbook": 1,
     "exact_targeting": 11,
     "modeled_kill_trigger": 2

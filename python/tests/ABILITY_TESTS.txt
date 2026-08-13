@@ -1,5 +1,6 @@
 # Canonical Python test-file surface owned by the ability integration lane.
 # CI collects exact pytest node IDs from these files and executes one node per job.
+# Integration freeze: ray decode corpus locks are committed in the ordinary tracked test surface.
 python/tests/test_ability_workflow_contract.py
 python/tests/test_auraoffirevul_applicability_evidence.py
 python/tests/test_auraoffirevul_evidence.py
@@ -13,6 +14,7 @@ python/tests/test_cripplingwound_registry_risk.py
 python/tests/test_cripplingwound_tooltip_evidence.py
 python/tests/test_deathwail_evidence.py
 python/tests/test_gribbomb_evidence.py
+python/tests/test_gribbomb_registry_risk.py
 python/tests/test_gribbomb_selfdestruct_evidence.py
 python/tests/test_hexingattack_evidence.py
 python/tests/test_packhunter_evidence.py
@@ -27,6 +29,7 @@ python/tests/test_shieldguard_evidence.py
 python/tests/test_shootbash_evidence.py
 python/tests/test_six_heads_evidence.py
 python/tests/test_spider_evidence.py
+python/tests/test_spider_wire_evidence.py
 python/tests/test_stonegarden_evidence.py
 python/tests/test_taunt_evidence.py
 python/tests/test_teleport_evidence.py

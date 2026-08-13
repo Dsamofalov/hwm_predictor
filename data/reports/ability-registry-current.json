@@ -1,14 +1,14 @@
 {
   "abilities": 421,
   "support_counts": {
-    "unresolved": 79,
-    "exact_search": 74,
+    "unresolved": 77,
+    "exact_search": 85,
     "modeled_collateral": 5,
     "reference_only": 32,
-    "learned_damage": 187,
+    "learned_damage": 175,
     "identity": 4,
-    "modeled_proc": 8,
-    "partial_exact": 18,
+    "modeled_proc": 9,
+    "partial_exact": 20,
     "dynamic_spellbook": 1,
     "exact_targeting": 11,
     "modeled_kill_trigger": 2

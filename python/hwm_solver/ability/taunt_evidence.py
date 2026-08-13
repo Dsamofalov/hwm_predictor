@@ -162,6 +162,7 @@ def analyze_corpus(corpus: Path) -> dict:
     carrier_involved_special_codes: Counter[str] = Counter()
     opportunity_special_codes: Counter[str] = Counter()
     special_code_contexts: dict[str, Counter[str]] = defaultdict(Counter)
+    target_source_special_code_contexts: dict[str, Counter[str]] = defaultdict(Counter)
     target_geometry: Counter[str] = Counter()
     direct_examples: list[dict] = []
     ally_examples: list[dict] = []
@@ -246,6 +247,8 @@ def analyze_corpus(corpus: Path) -> dict:
                         carrier_involved_special_codes[str(special.code)] += 1
                     opportunity_special_codes[str(special.code)] += 1
                     special_code_contexts[str(special.code)][context] += 1
+                    if source_uid == target_uid:
+                        target_source_special_code_contexts[str(special.code)][context] += 1
 
                 row = {
                     "battle_id": str(decision.get("battle_id", battle_dir.name)),
@@ -296,6 +299,9 @@ def analyze_corpus(corpus: Path) -> dict:
         "special_code_contexts": {
             code: _counter(counter) for code, counter in sorted(special_code_contexts.items())
         },
+        "target_source_special_code_contexts": {
+            code: _counter(counter) for code, counter in sorted(target_source_special_code_contexts.items())
+        },
         "adjacent_ally_count_when_carrier_targeted": _counter(target_geometry),
         "direct_carrier_examples": direct_examples,
         "adjacent_ally_examples": ally_examples,
@@ -304,7 +310,8 @@ def analyze_corpus(corpus: Path) -> dict:
         "interpretation_guard": (
             "An enemy attack ending on a Taunt carrier is not a proc label. The original intended target is not "
             "assumed from final DAMAGE. A Taunt proc requires a carrier-specific raw discriminator that distinguishes "
-            "redirected attacks from ordinary direct attacks; adjacent-ally attacks are kept as separate controls."
+            "redirected attacks from ordinary direct attacks; adjacent-ally attacks are kept as separate controls. "
+            "Target-source ra2/ral records are generic attacked-target reactions and are not treated as Taunt markers."
         ),
     }
 
