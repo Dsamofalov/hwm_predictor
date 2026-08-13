@@ -135,9 +135,36 @@ def test_childofthelight_whole_corpus_evidence():
     assert tooltipmeta["parse_errors"] == []
     assert tooltipmeta["corpus_battle_dirs"] == 866
     assert tooltipmeta["carrier_battles"] == 108
-    assert tooltipmeta["carrier_battles_with_tooltips"] > 0
-    assert tooltipmeta["top_sections"]
-    assert tooltipmeta["section_types"]
+    assert tooltipmeta["carrier_battles_with_tooltips"] == 108
+    assert tooltipmeta["top_sections"] == {
+        "abil_desc": 108,
+        "abil_names": 108,
+        "perk_hints": 108,
+    }
+    assert tooltipmeta["section_types"] == {
+        "abil_desc:dict": 108,
+        "abil_names:dict": 108,
+        "perk_hints:dict": 108,
+    }
+    assert tooltipmeta["mapping_key_counts"] == {
+        "abil_desc": 2711,
+        "abil_names": 2711,
+        "perk_hints": 1279,
+    }
+    # bm_tooltips has no spell-level namespace in carrier battles: none of its keys
+    # overlaps the same battle's server spellbook names, so it cannot independently
+    # classify neutral/nt status entries as Light or Dark.
+    assert tooltipmeta["mapping_spellbook_overlap_counts"] == {}
+    assert tooltipmeta["overlap_spell_names"] == {}
+    assert tooltipmeta["overlap_value_types"] == {}
+    assert tooltipmeta["overlap_examples"] == []
+    assert tooltipmeta["top_level_name_markers"] == {}
+    # There is other ability/perk prose mentioning Light, but no non-Child metadata
+    # that jointly names Light and identifies a spell school. Preserve that distinction.
+    assert tooltipmeta["child_light_text_hits"] == 216
+    assert tooltipmeta["non_child_light_text_hits"] == 92
+    assert tooltipmeta["school_text_hits"] == 112
+    assert tooltipmeta["non_child_school_light_hits"] == 0
 
     warnings.warn(
         "CHILDOFTHELIGHT_SCHOOL_EVIDENCE "
