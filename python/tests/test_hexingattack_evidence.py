@@ -8,6 +8,12 @@ from pathlib import Path
 
 from hwm_solver.ability.hexingattack_evidence import analyze_corpus
 from hwm_solver.ability.hexingattack_wire_evidence import analyze_wire_collisions
+from hwm_solver.protocol.replay import (
+    RawEntity,
+    _apply_command,
+    _decision_semantic_unresolved_flags,
+    parse_commands,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -42,6 +48,45 @@ def _json_sha256(value: object) -> str:
         separators=(",", ":"),
     ).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def _ray_entity(
+    uid: int,
+    owner: int,
+    *,
+    mana: int = 0,
+    magic_blob: str = "",
+    abilities: list[str] | None = None,
+) -> RawEntity:
+    return RawEntity(
+        uid=uid,
+        owner=owner,
+        creature_id=0,
+        max_hp=1,
+        top_hp=1,
+        min_damage=0,
+        max_damage=0,
+        mana=mana,
+        max_mana=mana,
+        speed=1,
+        atb=0,
+        initiative=1,
+        max_count=1,
+        count=1,
+        x=uid,
+        y=1,
+        attack_range=1,
+        shots=0,
+        attack=0,
+        defense=0,
+        morale_raw=0,
+        luck_raw=0,
+        retaliation_raw=0,
+        real_health=1,
+        experience_level_code=0,
+        abilities=list(abilities or []),
+        magic_blob=magic_blob,
+    )
 
 
 def test_hexingattack_whole_corpus_evidence():
@@ -242,3 +287,84 @@ def test_hexingattack_wire_collision_audit():
         "HEXINGATTACK_WIRE_COLLISION_EVIDENCE "
         + json.dumps(wire, ensure_ascii=False, sort_keys=True)
     )
+
+
+def test_shared_ray_status_decode_preserves_zero_cost_uncertainty():
+    # Unique positive-cost normal-cast controls independently identify the shared `ray`
+    # wire as the dray/mdray family. This regression deliberately does not use Hexing
+    # tooltip wording or the 15/115 Hexing attack frequency as a semantic discriminator.
+    for spell_name, cost in (("dray", 5), ("mdray", 10)):
+        actor = _ray_entity(
+            1,
+            1,
+            mana=20,
+            abilities=["hero", "caster"],
+            magic_blob=f"{spell_name}-{cost}-0-1-0-0-0",
+        )
+        target = _ray_entity(2, 2)
+        entities = {1: actor, 2: target}
+        raw = f"Sray001002{cost:02d}0600006"
+        commands = parse_commands(raw)
+
+        assert len(commands) == 1
+        command = commands[0]
+        assert command.opcode == "SPECIAL"
+        assert command.code == "ray"
+        assert command.actor_uid == 1
+        assert command.target_uid == 2
+        assert command.value == float(cost)
+        assert command.duration == 6
+        assert command.amount == 6
+        assert _decision_semantic_unresolved_flags(commands, entities, 1) == [False]
+
+        _apply_command(entities, command)
+        assert target.effects == {"ray": raw}
+        assert actor.effects == {}
+        assert actor.mana == 20 - cost
+
+    # Hexing attack-bound ray rows are standalone zero-cost records. Structural target
+    # decode is useful observed state, but decision semantics must stay unresolved and no
+    # mana can be consumed merely because the wire family is known.
+    actor = _ray_entity(
+        1,
+        1,
+        mana=20,
+        abilities=["caster", "hexingattack"],
+        magic_blob="dray-5-0-1-0-0-0",
+    )
+    target = _ray_entity(2, 2)
+    entities = {1: actor, 2: target}
+    raw = "Sray001002000600006"
+    commands = parse_commands(raw)
+    assert len(commands) == 1
+    command = commands[0]
+    assert command.target_uid == 2
+    assert command.value == 0.0
+    assert command.duration == 6
+    assert command.amount == 6
+    assert _decision_semantic_unresolved_flags(commands, entities, 1) == [True]
+
+    _apply_command(entities, command)
+    assert target.effects == {"ray": raw}
+    assert actor.effects == {}
+    assert actor.mana == 20
+
+    # A same-cost but non-dray source spellbook must not make a positive ray record exact
+    # or spend mana. Structural decoding remains separate from spell identity.
+    actor = _ray_entity(
+        1,
+        1,
+        mana=20,
+        abilities=["hero", "caster"],
+        magic_blob="magicfist-5-0-1-0-0-0",
+    )
+    target = _ray_entity(2, 2)
+    entities = {1: actor, 2: target}
+    raw = "Sray001002050600006"
+    commands = parse_commands(raw)
+    command = commands[0]
+    assert command.target_uid == 2
+    assert _decision_semantic_unresolved_flags(commands, entities, 1) == [True]
+    _apply_command(entities, command)
+    assert target.effects == {"ray": raw}
+    assert actor.mana == 20
