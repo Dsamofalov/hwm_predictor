@@ -29,7 +29,7 @@ SPECIAL_DIRECT_DAMAGE_CODES = frozenset({"mfs", "ltn", "ice", "mar", "swm"})
 STATUS_WIRE_TO_BASE = {
     "fst": "fast", "slw": "slow", "bls": "bless", "crs": "curse",
     "stn": "stoneskin", "dfm": "deflect_missile", "rgm": "righteous_might",
-    "cnf": "confusion", "sff": "suffering",
+    "cnf": "confusion", "sff": "suffering", "ray": "dray",
 }
 
 
