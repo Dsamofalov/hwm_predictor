@@ -179,18 +179,56 @@ def test_hexingattack_wire_collision_audit():
     assert exact["slw"]["slow"] == 559
     assert exact["slw"]["mslow"] == 346
 
-    # New CAST_OR_ABILITY and complete Hexing-bound subsets are exported now, but their
-    # exact cardinalities are learned by this hosted run and will be pinned in the next
-    # evidence closure. Conservation checks prevent partial or silently dropped output.
-    assert wire["cast_or_ability_records"] == {
-        code: wire["action_types"][code].get("CAST_OR_ABILITY", 0)
-        for code in wire["candidate_codes"]
-        if wire["action_types"][code].get("CAST_OR_ABILITY", 0)
+    # Normal selectable casts now provide an independent identity discriminator. Cost is
+    # still not universal identity: the complete ambiguous same-cost sets are digest-pinned
+    # below, while unique same-source exact-cost rows resolve only the expected families.
+    assert wire["cast_or_ability_records"] == {"crs": 79, "slw": 430, "sff": 77, "ray": 406}
+    assert wire["cast_or_ability_field2_shapes"] == {
+        "crs": {"00": 15, "04": 59, "08": 5},
+        "ray": {"00": 263, "01": 1, "05": 76, "07": 3, "10": 63},
+        "sff": {"03": 2, "05": 14, "06": 55, "07": 6},
+        "slw": {"04": 430},
     }
-    assert len(wire["hexing_attack_records"]) == sum(wire["hexing_attack_bound"].values()) == 15
-    assert sum(sum(v.values()) for v in wire["hexing_attack_field2_shapes"].values()) == 15
-    assert sum(sum(v.values()) for v in wire["hexing_attack_field4_shapes"].values()) == 15
-    assert sum(sum(v.values()) for v in wire["hexing_attack_field3_shapes"].values()) == 15
+    assert wire["cast_or_ability_positive_field2"] == {"crs": 64, "slw": 430, "sff": 77, "ray": 143}
+    assert wire["cast_or_ability_unique_exact_cost_names"] == {
+        "crs": {"curse": 52, "mcurse": 5},
+        "slw": {"slow": 261},
+        "sff": {"suffering": 51},
+        "ray": {"dray": 65, "mdray": 63},
+    }
+    assert _json_sha256(wire["cast_or_ability_records"]) == "a74f2d7d722d45ac456cda865b907a9cefb7a2c69bb194839e90c874feb26d19"
+    assert _json_sha256(wire["cast_or_ability_field2_shapes"]) == "45b9500c95015078672ec0cff543aadaa935769a6447d46f70c00f79ad48734e"
+    assert _json_sha256(wire["cast_or_ability_positive_field2"]) == "2e33caa01434dd5c933acf2b104c46fb307673144bcb6712a9b3efa87ed4b68c"
+    assert _json_sha256(wire["cast_or_ability_exact_cost_name_sets"]) == "20d7b988ab42e34161f83c84c356f49a5ec8969666f79c9b2bb84352f52b68f6"
+    assert _json_sha256(wire["cast_or_ability_unique_exact_cost_names"]) == "7ec8b8d3fd5670f9e37ab5143aa729f3582d611f84548870a644aff202061357"
+
+    # The complete Hexing-bound population is a distinct zero-cost attack subset. Lock it
+    # exactly without treating 15/115 as a probability and without declaring zero-cost
+    # records semantically exact in replay merely because the source carries Hexing Attack.
+    assert len(wire["hexing_attack_records"]) == 15
+    assert wire["hexing_attack_field2_shapes"] == {
+        "crs": {"00": 4},
+        "slw": {"00": 3},
+        "sff": {"00": 5},
+        "ray": {"00": 3},
+    }
+    assert wire["hexing_attack_field3_shapes"] == {
+        "crs": {"096": 1, "100": 3},
+        "slw": {"040": 3},
+        "sff": {"012": 5},
+        "ray": {"006": 3},
+    }
+    assert wire["hexing_attack_field4_shapes"] == {
+        "crs": {"1100": 1, "3400": 1, "5000": 2},
+        "slw": {"0500": 1, "2600": 1, "5000": 1},
+        "sff": {"2000": 1, "3600": 1, "4100": 2, "5000": 1},
+        "ray": {"0000": 3},
+    }
+    assert _json_sha256(wire["hexing_attack_field2_shapes"]) == "6be9950008b044f8c4c24100b6c4cc3cf4247aab1f4acb260e711cb0f8d8a4b7"
+    assert _json_sha256(wire["hexing_attack_field4_shapes"]) == "d156f9ae3d34779ed77ad3c81ae47e97a1d0d0ae725a3cd5e1c9e3cbe2432794"
+    assert _json_sha256(wire["hexing_attack_field3_shapes"]) == "7027b9f0253a68114acf6d13c77838103cc42b51567610cc1151c74edcaba85b"
+    assert _json_sha256(wire["hexing_attack_records"]) == "46541623c51538c75939a68e8b19cfeec8e63512194192e55d5a534193812579"
+
     for code in wire["candidate_codes"]:
         count = wire["records"][code]
         assert sum(wire["field2_shapes"][code].values()) == count
