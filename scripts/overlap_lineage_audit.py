@@ -157,21 +157,44 @@ def blocked_special_free_melee_candidate(row: dict) -> dict | None:
     for blocker in blockers:
         blocker["same_owner_as_actor"] = int(blocker.get("owner", 0)) == actor_owner
 
+    single_damage_target = damage_targets == [target_uid]
+    friendly_only_blockers = bool(blockers) and all(
+        bool(blocker.get("same_owner_as_actor")) for blocker in blockers
+    )
+    radius1_unique = len(near_raw) == 1
+    radius2_global_unique = False
+    if len(landings) == 1:
+        point = landings[0]
+        radius2_global_unique = max(abs(point[0] - raw[0]), abs(point[1] - raw[1])) <= 2
+    existing_local_resolver_applies = radius1_unique or radius2_global_unique
+    stationary_friendly_fallback_candidate = (
+        single_damage_target
+        and friendly_only_blockers
+        and not existing_local_resolver_applies
+        and resolved != [start[0], start[1]]
+        and not observed_ok
+    )
+
     return {
         "battle": row["battle_id"],
         "decision_index": int(row["decision_index"]),
         "actor": entity_summary(before, actor_uid),
         "first_damage_target": entity_summary(before, target_uid),
         "damage_targets": damage_targets,
-        "single_damage_target": damage_targets == [target_uid],
+        "single_damage_target": single_damage_target,
         "raw_marker": [raw[0], raw[1]],
         "raw_destination_blockers": blockers,
+        "friendly_only_raw_destination_blockers": friendly_only_blockers,
         "start_anchor": [start[0], start[1]],
         "start_legal": True,
         "start_adjacent_to_first_damage_target": True,
         "target_adjacent_legal_landings": [[x, y] for x, y in landings],
         "near_raw_target_adjacent_landings": [[x, y] for x, y in near_raw],
         "near_raw_landing_count": len(near_raw),
+        "radius1_unique_resolver_applies": radius1_unique,
+        "radius2_global_unique_resolver_applies": radius2_global_unique,
+        "existing_local_resolver_applies": existing_local_resolver_applies,
+        "stationary_friendly_fallback_candidate": stationary_friendly_fallback_candidate,
         "resolved_destination": resolved,
         "semantic_unresolved_opcodes": list(row.get("semantic_unresolved_opcodes", [])),
         "special_codes": list(row.get("special_codes", [])),
@@ -267,6 +290,9 @@ def audit(corpus: Path) -> dict:
                 "latest_introduction_for_final_pair": [introductions.get(p) for p in sorted(final)],
             })
 
+    stationary_candidates = [
+        row for row in blocked_marker_rows if row["stationary_friendly_fallback_candidate"]
+    ]
     return {
         "battles": len(battles),
         "final_overlap_battles": len(final_rows),
@@ -275,6 +301,8 @@ def audit(corpus: Path) -> dict:
         "all_overlap_introductions": introduced_rows,
         "blocked_special_free_melee_marker_candidate_count": len(blocked_marker_rows),
         "blocked_special_free_melee_marker_candidates": blocked_marker_rows,
+        "stationary_friendly_fallback_candidate_count": len(stationary_candidates),
+        "stationary_friendly_fallback_candidates": stationary_candidates,
     }
 
 
