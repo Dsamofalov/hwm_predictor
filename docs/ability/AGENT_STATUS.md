@@ -1,17 +1,23 @@
 # Ability Integration Status
 
 Checkpoint: **2026-08-13**
-
-Source lane: `ability`
-Draft PR: `#1` (`ability` -> `main`)
-Ability TZ refresh commit: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
-Current validated functional ability SHA: **`e32346e749364037b2e31406fa07617d4ddbecb4`**
-Authoritative hosted Windows run: **`31688840050` — PASS / conclusion `success`**
-Check-suite: **`85963923436`**
-Latest failing-first functional evidence SHA: **`2ea8c352bdf0810ee0f120b4c66d7ab599be5973`**
-Failing-first hosted Windows run: **`31690057933` — FAIL / conclusion `failure`**
-Failing-first check-suite: **`85967292202`**
+Status: **INTEGRATED INTO `main`**
+Source lane retained: `ability`
 Platform authority: **GitHub-hosted Windows 10/11 x64 + VS2022/MSVC only**
+
+Validated ability source SHA: **`2ae1046c48e99c94da3481a8b3ed81285b9125ab`**
+Ability source Windows run: **`31697180629` — PASS / conclusion `success`**
+Ability source check-suite: **`85986692434`**
+
+Main source before integration: **`2d6c985fbc4a6725e64871f12b127d68f86f1000`**
+Real two-parent integration merge: **`e69592eaa9461825e231cc73656d1e58b9ac4ffd`**
+Promoted/tested functional main SHA: **`3df0d5ee4434d3cc401dba1b765a4dca068c15c1`**
+Integration Ability Windows: **`31700597609` / `85996170989` — PASS**
+Integration Main Windows CI: **`31700599112` / `85996175100` — Core PASS + Full PASS**
+Strict M11 verifier: **job `94449755943` — PASS**
+Strict Full aggregate: **job `94452449852` — PASS**
+
+The pre-integration failing-first Hexing checkpoints remain historical evidence below; they are not the current validation checkpoint. The `ability` branch is retained and unresolved abilities remain unresolved rather than being promoted speculatively.
 
 ## Governance
 

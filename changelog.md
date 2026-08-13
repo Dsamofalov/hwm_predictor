@@ -11,6 +11,21 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-13
 
+### Ability integration: validated ability state merged into current main
+
+- Ability source: `2ae1046c48e99c94da3481a8b3ed81285b9125ab`; source Ability Windows run `31697180629`, check-suite `85986692434` — **PASS / completed with conclusion `success`**.
+- Main source before integration: `2d6c985fbc4a6725e64871f12b127d68f86f1000`.
+- Real two-parent integration merge: `e69592eaa9461825e231cc73656d1e58b9ac4ffd`, with current-main source as first parent and the validated ability source as second parent. No squash/cherry-pick reconstruction and no force-push were used.
+- Promoted and tested functional main checkpoint: `3df0d5ee4434d3cc401dba1b765a4dca068c15c1`.
+  - Ability Windows integration run `31700597609`, check-suite `85996170989` — **PASS** on that exact SHA.
+  - Main Windows CI run `31700599112`, check-suite `85996175100` — **Core PASS + Full PASS** on that exact SHA.
+  - Strict `full-m11-evidence-reducer` job `94449755943` passed `M11Verify`; strict Full aggregate job `94452449852` passed.
+- Shared `python/hwm_solver/protocol/replay.py` was integrated semantically rather than replaced wholesale. The merged delta is limited to the independently evidenced shared `ray -> dray` status-family decode plus the validated Gribbomb `bom` semantic gate/self-removal path; newer main geometry/runtime changes were preserved.
+- Four generated M11 evidence reports were regenerated on the merged replay semantics after the first integration candidate correctly exposed stale numeric snapshots. The final independent strict verifier passed without loosening assertions or tolerances.
+- Final negative-diff audit from `2d6c985...` to `3df0d5ee...` found only ability-owned/integration files, the audited shared replay delta, and the four regenerated M11 reports; there were no unexplained main-owned changes and no deletions. `SPEC.md`, `docs/MAIN_FRONT_STATUS.md`, `docs/LIVE_VALIDATION.md`, production live/front/search code and main geometry were not replaced by ability versions.
+- Semantic ceilings remain explicit: Child of the Light school discrimination is unresolved; Taunt remains unresolved; Spider/`Sent` is not promoted to a Spider-specific mechanic; Hexing gains no speculative proc probability/rule; Gribbomb remains `partial_exact` with predictive collateral/Earth magnitude unresolved.
+- The `ability` branch is retained after integration as required by the handoff canon.
+
 ### Authoritative main stabilization / production replanning safety
 
 - Commit: `58138613956951271c921914c76b6802fdf5f83a` — `fix: bind live replanning dedupe to canonical state`.
