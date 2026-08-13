@@ -115,7 +115,7 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - Current held-out ability-risk mean improved from `0.22431` to `0.21744`; p90 improved from `0.37538` to `0.36755`.
   - Stale unresolved Gribbomb risk disappeared from the unfinished top-risk slice; Crippling Wound is represented as `partial_exact` with canonical risk `0.25`.
   - Authoritative hosted Windows run `31631708571` on exact SHA `eaca45fc...`: workflow **PASS / conclusion `success`**. All real atomic test/build/inventory jobs succeeded; the final `publish_status` job was skipped by its workflow condition.
-  - Repository-consistency conclusion: builder, checked registry artifacts, and current reports now agree. Gribbomb is closed at `partial_exact`; predictive Earth/collateral magnitude remains explicitly unresolved and disabled rather than guessed.
+  - Repository-consistency conclusion: builder, checked registry, and current report artifacts now agree. Gribbomb is closed at `partial_exact`; predictive Earth/collateral magnitude remains explicitly unresolved and disabled rather than guessed.
 
 ### Next weighted ability after Gribbomb closure
 
@@ -189,3 +189,14 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - The only Light/school wording is the Child ability description itself: `child_light_text_hits = 108`, `non_child_light_text_hits = 0`, `non_child_school_light_hits = 0`.
   - Thus decoded tooltip metadata provides no independent per-spell Light-school identity to resolve the raw `neutral`/`nt` collapse. No Child runtime copy rule, registry promotion, hardcoded spell taxonomy, or inferred probability is justified.
   - One final strict regression package should pin these exact zero-overlap/zero-independent-Light cardinalities, after which Child can be closed for this pass at this precise evidence blocker.
+
+### Child of the Light strict metadata closure and correction
+
+- Commit: `c5a2acaded82d36e5c32b6af9833554a44c60ce2` — `test(ability): lock Child tooltip metadata blocker`.
+  - Converted the final decoded-tooltip observations into strict assertions in the existing atomic Child node, without changing replay/runtime/registry semantics.
+  - Authoritative hosted Ability Windows run `31679297822`: **PASS / completed with conclusion `success`** on the exact functional SHA; check-suite `85938145984` also belongs to that exact SHA.
+  - Strictly pinned `bm_tooltips` structure: all 108 carrier battles expose only `abil_desc`, `abil_names`, and `perk_hints` dictionaries; exact mapping-key overlap with same-battle server spellbook names is zero (`mapping_spellbook_overlap_counts = {}`, `overlap_spell_names = {}`, `overlap_examples = []`).
+  - Correction to the previous `7d63aad9...` bookkeeping wording: there are **92 non-Child text hits mentioning Light**, not zero. The decisive zero is narrower and independent: `non_child_school_light_hits = 0`. The strict gate also pins `child_light_text_hits = 216` and `school_text_hits = 112`.
+  - Therefore the corpus contains Light-related ability/perk prose, but no server metadata that simultaneously identifies a concrete spell and independently classifies it as Light. The raw spellbook still collapses relevant statuses into `neutral`/`nt`.
+  - Child of the Light is closed for this evidence pass as **`unresolved` with a precise missing per-spell school discriminator**. No runtime copy rule, registry promotion, hardcoded Light spell list, or numeric probability is introduced.
+  - The weighted unfinished queue now advances to `hexingattack`; any Hexing proc attribution must first pass whole-corpus source/collision controls, and its tooltip's non-numeric “some probability” wording is not a probability constant.

@@ -165,6 +165,15 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Added decoded `bm_tooltips` structure/key/text evidence and strict-pinned the already validated spellbook/status-wire counts without changing runtime or registry semantics.
   - Authoritative hosted Ability Windows run `31648327688`: **PASS**; check-suite `85857041871` completed with conclusion `success` on the exact SHA.
   - All 108 Child carrier battles have decoded tooltip payloads, but the payload contains only `abil_names`, `abil_desc`, and `perk_hints` dictionaries; none has any exact key overlap with the same battle's raw spellbook spell names.
-  - The only Light/school wording comes from Child's own ability description; there are zero non-Child Light hits and zero non-Child school+Light hits.
+  - The previous bookkeeping wording incorrectly described all non-Child Light prose as absent. The final strict package below corrects that distinction while preserving the actual missing discriminator.
   - Combined with the raw spellbook `neutral`/`nt` collapse, current server evidence lacks an independent per-spell Light-vs-Dark discriminator. No runtime copy rule, registry promotion, hardcoded spell taxonomy or inferred probability is justified.
-  - A final strict Child regression should lock those exact zero-overlap/zero-independent-Light facts before closing the ability for this pass and moving the weighted queue to Hexing Attack.
+
+### Child of the Light strict metadata closure
+
+- Commit: `c5a2acaded82d36e5c32b6af9833554a44c60ce2` — `test(ability): lock Child tooltip metadata blocker`.
+  - Converted the final decoded-tooltip observations into exact regression assertions in the existing atomic Child node; no parser/runtime/registry semantics changed.
+  - Authoritative hosted Ability Windows run `31679297822`: **PASS / completed with conclusion `success`** on the exact SHA; check-suite `85938145984`.
+  - All 108 carrier battles expose only `abil_desc`, `abil_names`, `perk_hints` dictionaries; there are zero exact mapping-key overlaps with same-battle server spellbook spell names.
+  - Corrected text counts are `child_light_text_hits = 216`, `non_child_light_text_hits = 92`, `school_text_hits = 112`, while the independent joint discriminator remains `non_child_school_light_hits = 0`.
+  - Thus Light-related ability/perk prose exists, but no metadata identifies a concrete spell and independently classifies it as Light. Child of the Light is closed for this evidence pass as `unresolved` at that precise missing per-spell school discriminator.
+  - No runtime copy rule, registry promotion, hardcoded Light spell list, or numeric probability is introduced. The weighted unfinished queue advances to Hexing Attack with source/collision auditing required before any proc attribution.
