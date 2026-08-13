@@ -119,3 +119,24 @@ def test_blocked_marker_uses_only_local_globally_unique_melee_landing():
     ok, reason = supports_observed(row)
     assert ok, reason
 
+def test_friendly_blocked_marker_keeps_stationary_adjacent_melee():
+    cases = [
+        # chronological train final-overlap repair
+        ("1625534409", 82, 22, (8, 18), 20),
+        # held-out observed-action residual from the same exact geometry class
+        ("1632855461", 71, 15, (8, 4), 10),
+    ]
+    for battle_id, index, actor_uid, start, friendly_blocker_uid in cases:
+        battle = ROOT / "hwm_battles" / "battles" / battle_id
+        row = list(iter_battle_decisions(battle))[index]
+        assert row["actor_uid"] == actor_uid
+        assert row["action_type"] == "MELEE_ATTACK"
+        assert row["special_codes"] == []
+        assert row["semantic_unresolved_opcodes"] == []
+        assert (row["destination_x"], row["destination_y"]) == start
+        by_uid = {int(entity["uid"]): entity for entity in row["state_after"]}
+        assert (by_uid[actor_uid]["x"], by_uid[actor_uid]["y"]) == start
+        assert not (_cells(by_uid[actor_uid]) & _cells(by_uid[friendly_blocker_uid]))
+        ok, reason = supports_observed(row)
+        assert ok, (battle_id, index, reason)
+

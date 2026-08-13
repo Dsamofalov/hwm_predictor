@@ -1242,15 +1242,20 @@ def _observed_blocks_board(entity) -> bool:
     return not is_hero and not is_hidden
 
 
-def _observed_anchor_blocked(state, actor, anchor: tuple[int, int]) -> bool:
+def _observed_anchor_blockers(state, actor, anchor: tuple[int, int]) -> list:
     actor_uid = int(_observed_value(actor, "uid", -1))
     actor_cells = _entity_cells(actor, anchor[0], anchor[1])
-    for other in _observed_entities(state):
-        if int(_observed_value(other, "uid", -2)) == actor_uid or not _observed_blocks_board(other):
-            continue
-        if actor_cells & _entity_cells(other):
-            return True
-    return False
+    return [
+        other
+        for other in _observed_entities(state)
+        if int(_observed_value(other, "uid", -2)) != actor_uid
+        and _observed_blocks_board(other)
+        and bool(actor_cells & _entity_cells(other))
+    ]
+
+
+def _observed_anchor_blocked(state, actor, anchor: tuple[int, int]) -> bool:
+    return bool(_observed_anchor_blockers(state, actor, anchor))
 
 
 def _observed_can_place(state, actor, anchor: tuple[int, int]) -> bool:
@@ -1333,18 +1338,19 @@ def _resolve_special_free_unique_melee_anchor(
     if any(c.opcode == "SPECIAL" for c in commands):
         return canonical
     raw_blocked = _observed_anchor_blocked(state, actor, raw)
+    damage_targets = {
+        int(c.target_uid)
+        for c in commands
+        if c.opcode == "DAMAGE"
+        and c.actor_uid == actor_uid
+        and c.target_uid is not None
+    }
+    single_target_attack = target_uid is not None and damage_targets == {int(target_uid)}
     if not raw_blocked:
         # A non-colliding raw m-record is reinterpreted only for a single-target physical
         # attack. Multi-target attacks can use the position marker for attack-side effects;
         # moving them from the first DAMAGE record corrupts subsequent replay state.
-        damage_targets = {
-            int(c.target_uid)
-            for c in commands
-            if c.opcode == "DAMAGE"
-            and c.actor_uid == actor_uid
-            and c.target_uid is not None
-        }
-        if target_uid is None or damage_targets != {int(target_uid)}:
+        if not single_target_attack:
             return canonical
     if _observed_can_place(state, actor, canonical) and _entities_adjacent(actor, canonical[0], canonical[1], target):
         return canonical
@@ -1366,6 +1372,22 @@ def _resolve_special_free_unique_melee_anchor(
     # the radius-2 extension requires a globally unique landing and a blocked raw marker.
     if raw_blocked and len(landings) == 1 and max(abs(landings[0][0] - raw[0]), abs(landings[0][1] - raw[1])) <= 2:
         return landings[0]
+    # Exact residual class from the full-corpus lineage audit. Preserve the stationary
+    # legal melee anchor only after the existing local-unique landing rules fail, and only
+    # when the impossible raw marker is occupied exclusively by same-owner board stacks.
+    blockers = _observed_anchor_blockers(state, actor, raw)
+    actor_owner = int(_observed_value(actor, "owner", 0))
+    friendly_only = bool(blockers) and actor_owner > 0 and all(
+        int(_observed_value(other, "owner", 0)) == actor_owner for other in blockers
+    )
+    if (
+        raw_blocked
+        and single_target_attack
+        and friendly_only
+        and _observed_can_place(state, actor, start)
+        and _entities_adjacent(actor, start[0], start[1], target)
+    ):
+        return start
     return canonical
 
 

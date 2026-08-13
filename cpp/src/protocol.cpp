@@ -483,6 +483,23 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         }
         return false;
     };
+    auto anchor_blocked_only_by_owner=[&](const Entity& e,Cell anchor)->bool {
+        if(e.owner<=0) return false;
+        bool blocked=false;
+        for(const auto& other:s.entities){
+            if(other.uid==e.uid || !other.alive || other.is_hero || other.is_hidden) continue;
+            bool collides=false;
+            for(int ex=0;ex<e.footprint_w && !collides;++ex) for(int ey=0;ey<e.footprint_h && !collides;++ey){
+                const Cell ec{anchor.x+ex,anchor.y+ey};
+                for(int ox=0;ox<other.footprint_w && !collides;++ox) for(int oy=0;oy<other.footprint_h;++oy)
+                    if(ec==Cell{other.anchor.x+ox,other.anchor.y+oy}) collides=true;
+            }
+            if(!collides) continue;
+            blocked=true;
+            if(other.owner!=e.owner) return false;
+        }
+        return blocked;
+    };
     auto anchor_legal=[&](const Entity& e,Cell anchor)->bool {
         if(anchor.x<1 || anchor.y<1 || anchor.x+e.footprint_w-1>12 || anchor.y+e.footprint_h-1>20) return false;
         return !anchor_collides(e,anchor);
@@ -522,9 +539,9 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         }
         return out;
     };
-    auto resolve_unique_melee_anchor=[&](const Entity& actor,const Entity& target,Cell raw,bool allow_noncolliding)->Cell {
+    auto resolve_unique_melee_anchor=[&](const Entity& actor,const Entity& target,Cell raw,bool single_target_attack)->Cell {
         const Cell canonical=resolve_observed_big_anchor(actor,raw);
-        if(!anchor_collides(actor,raw) && !allow_noncolliding) return canonical;
+        if(!anchor_collides(actor,raw) && !single_target_attack) return canonical;
         if(anchor_legal(actor,canonical) && adjacent_at(actor,canonical,target)) return canonical;
         std::vector<Cell> landings;
         if(anchor_legal(actor,actor.anchor) && adjacent_at(actor,actor.anchor,target)) landings.push_back(actor.anchor);
@@ -541,10 +558,19 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
         if(anchor_collides(actor,raw) && landings.size()==1 &&
            std::max(std::abs(landings.front().x-raw.x),std::abs(landings.front().y-raw.y))<=2)
             return landings.front();
+        // Exact residual class from the full-corpus lineage audit: when every occupant of
+        // an impossible raw melee marker is friendly, the action damages exactly one target,
+        // and the actor is already legal+adjacent, retaining the current anchor preserves
+        // both board occupancy and the observed melee action. Existing unique landing rules
+        // above remain stronger and are never overridden by this stationary fallback.
+        if(single_target_attack && anchor_blocked_only_by_owner(actor,raw) &&
+           anchor_legal(actor,actor.anchor) && adjacent_at(actor,actor.anchor,target))
+            return actor.anchor;
         return canonical;
     };
     auto has_future_special=[&](size_t from)->bool {
         for(size_t p=from;p<text.size();++p){
+            if(text.compare(p,2,"f<")==0 || text.compare(p,5,"f_en<")==0) return false;
             if(text[p]=='C' && p+10<=text.size() && digits(text.substr(p+1,3))) return false;
             if(text[p]!='S' || p+4>text.size()) continue;
             const auto code=text.substr(p+1,3);
@@ -555,6 +581,7 @@ void apply_commands(BattleState& s, std::string_view text, std::vector<BattleEve
     };
     auto has_future_other_active_damage_target=[&](size_t from,uint64_t actor_uid,uint64_t target_uid)->bool {
         for(size_t p=from;p<text.size();){
+            if(text.compare(p,2,"f<")==0 || text.compare(p,5,"f_en<")==0) return false;
             if(text[p]=='C' && p+10<=text.size() && digits(text.substr(p+1,3))) return false;
             if(text[p]=='d' && p+17<=text.size() && digits(text.substr(p+1,16))){
                 const uint64_t a=loose_int(text.substr(p+1,3));

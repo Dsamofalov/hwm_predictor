@@ -62,6 +62,11 @@ int main() {
     // legal+reachable target-adjacent landing. Distance-3 movement-semantics controls stay unresolved.
     CHECK(!has_overlap(replay_final("1633884421")));
 
+    // The remaining ordinary marker in this battle lands on a friendly 2x2 stack while
+    // the attacker is already legal and adjacent to its sole damage target. The marker is
+    // therefore position telemetry, not a legal relocation into the ally.
+    CHECK(!has_overlap(replay_final("1625534409")));
+
     std::cout << "hwm-protocol-tests PASS\n";
     return 0;
 }
