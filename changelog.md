@@ -11,6 +11,19 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 
 ## 2026-08-13
 
+### Evidence-backed blocked melee recovery
+
+- Commit: `8bd394edb26e6f17fb5fe1dc4cd05736250ef2e9` — `fix: recover local unique blocked melee landing`.
+  - Narrowed SPECIAL-free blocked melee-marker recovery to the evidence-backed local-unique landing class identified by the corpus diagnostics, with matching Python and C++ protocol regressions.
+  - Kept SPECIAL-owned decisions outside the generic repair path and preserved the existing conservative ambiguity handling; hosted full-corpus non-regression remains an external validation gate rather than an assumption.
+
+### M11 selector threshold canonicalization
+
+- Commit: `3c31ed21eb4f1955c397aef48bc62727a3281b5b` — `fix: canonicalize M11 selector threshold`.
+  - Diagnosed Full run `31644212192`: all C++ main-front tests, `invalid <= 14`, planner benchmark, M11 multistep, uncertainty, selector, survival, and temperature gates passed; only exact committed selector evidence failed because quantile interpolation reintroduced a long binary64 threshold tail (`0.5365153371341599`).
+  - Canonicalized quantile threshold candidates to the existing 12-decimal selector policy/evidence boundary **before** threshold selection, so calibration metrics and the selected runtime/evidence policy use the same deterministic threshold values.
+  - Added a focused regression proving `choose_threshold()` cannot return a longer-than-canonical interpolation tail. Exact evidence verification is not weakened and M11 production learned dynamics remains disabled.
+
 ### Production live heartbeat-neutral ingestion
 
 - Commit: `c3d07e81770681c9b0daae8ef1a19874ad98efa1` — `fix: keep live heartbeats revision-neutral`.
