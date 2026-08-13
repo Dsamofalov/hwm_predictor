@@ -50,11 +50,12 @@ def test_childofthelight_whole_corpus_evidence():
         }
     ]
     assert report["decisions_seen_in_carrier_battles"] == 5634
-    assert report["carrier_targeted_specials"] == 206
+    assert report["carrier_targeted_specials"] == 223
     assert report["carrier_targeted_codes"] == {
         "fst": 88,
         "stn": 47,
         "rgm": 25,
+        "ray": 17,
         "slw": 13,
         "crs": 10,
         "psc": 10,
@@ -68,6 +69,7 @@ def test_childofthelight_whole_corpus_evidence():
         "fst": 88,
         "stn": 47,
         "rgm": 25,
+        "ray": 17,
         "psc": 9,
         "crs": 5,
         "slw": 3,
@@ -108,13 +110,14 @@ def test_childofthelight_whole_corpus_evidence():
     # explicit until independent server metadata identifies a game-school discriminator.
     assert wire["light_spellbook_actors_in_carrier_battles"] == 0
     assert wire["light_spell_names"] == {}
-    assert wire["status_groups_with_carrier"] == 158
-    assert wire["status_groups_positive_cost"] == 146
+    assert wire["status_groups_with_carrier"] == 175
+    assert wire["status_groups_positive_cost"] == 163
     assert wire["status_groups_without_positive_cost"] == 12
     assert wire["status_groups_without_source_spellbook"] == 0
     assert wire["status_codes"] == {
         "fst": 70,
         "stn": 47,
+        "ray": 17,
         "slw": 13,
         "crs": 10,
         "rgm": 10,
