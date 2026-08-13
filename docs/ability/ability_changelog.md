@@ -234,3 +234,14 @@ The root [`changelog.md`](../../changelog.md) remains the main/integration chang
   - The complete Hexing attack-bound subset is exactly 15 rows (`crs=4`, `slw=3`, `sff=5`, `ray=3`), all with `field2=00`; exact field3 shapes are `crs:096x1,100x3`, `slw:040x3`, `sff:012x5`, `ray:006x3`.
   - These controls establish shared wire-family identity and isolate the zero-cost Hexing attack-bound population without relying on mnemonic resemblance or tooltip wording. They do **not** justify a proc probability from `15/115`, a blanket zero-cost status exactness rule, runtime mutation, or registry promotion.
   - Next evidence layer is the observed consequence path: strict-pin the newly exported compact normal-cast/15-row aggregates, then audit replay status application (`crs/slw/sff`) and currently unresolved `ray` before any executable semantic change.
+
+### Hexing cast identity controls and 15-row subset lock
+
+- Commit: `e32346e749364037b2e31406fa07617d4ddbecb4` — `test(ability): pin Hexing cast identity controls`.
+  - Strict-pinned the compact `CAST_OR_ABILITY` populations and canonical hashes that independently resolve the shared internal status families without using mnemonic/tooltip guesses.
+  - Exact normal-cast populations are `crs=79`, `slw=430`, `sff=77`, `ray=406`; positive-field2 populations are `crs=64`, `slw=430`, `sff=77`, `ray=143`.
+  - Unique same-source exact-cost identities are now exact regressions: `crs -> curse=52,mcurse=5`; `slw -> slow=261`; `sff -> suffering=51`; `ray -> dray=65,mdray=63`. Ambiguous same-cost sets remain separately hash-locked and are not treated as identity.
+  - Strict-pinned the complete Hexing attack-bound population as exactly 15 rows (`crs=4`, `slw=3`, `sff=5`, `ray=3`), all `field2=00`, with exact field3/field4 shapes and a canonical hash over all 15 raw-derived rows.
+  - Authoritative hosted Ability Windows run `31688840050`: **PASS / completed with conclusion `success`** on exact SHA `e32346e...`; check-suite `85963923436`. Dedicated wire node `94411530165` and artifact upload passed.
+  - Semantic ceiling is intentionally unchanged: shared wire-family identity is proved, but standalone zero-cost Hexing rows are not promoted to decision-scope exactness and `15/115` is not a proc probability.
+  - Replay audit identifies one concrete shared substrate gap: `crs/slw/sff` are already decoded by the status-wire path, while `ray` is not in `STATUS_WIRE_TO_BASE`. The next safe package is a failing-first shared `ray -> dray/mdray` structural-decode regression plus existing zero-cost semantic negative control, not a Hexing-specific runtime effect.

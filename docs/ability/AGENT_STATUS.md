@@ -5,9 +5,9 @@ Checkpoint: **2026-08-13**
 Source lane: `ability`
 Draft PR: `#1` (`ability` -> `main`)
 Ability TZ refresh commit: **`e008eaefad2e03ee7fa7210e8eec06d3360128e9`**
-Current validated functional ability SHA: **`baaeb4436a91962bf9a5f59f8b1b66876dbd8645`**
-Authoritative hosted Windows run: **`31687089866` — PASS / conclusion `success`**
-Check-suite: **`85959134496`**
+Current validated functional ability SHA: **`e32346e749364037b2e31406fa07617d4ddbecb4`**
+Authoritative hosted Windows run: **`31688840050` — PASS / conclusion `success`**
+Check-suite: **`85963923436`**
 Platform authority: **GitHub-hosted Windows 10/11 x64 + VS2022/MSVC only**
 
 ## Governance
@@ -88,7 +88,8 @@ Weighted unfinished queue currently leads to **`hexingattack`** after actionabil
 
 - `a2c06ef10048486cc84239b045f3710e9f7db795` — baseline + first whole-corpus wire auditor; run `31680364027` PASS / check-suite `85941007397`.
 - `46a707c90f7053bf944592c9b1fd8d26aa88a2fa` — independent baseline/wire pytest split and deterministic artifact export; run `31685964687` PASS / check-suite `85956077927`.
-- `baaeb4436a91962bf9a5f59f8b1b66876dbd8645` — strict whole-corpus collision lock plus compact normal-cast and Hexing-bound discriminators; run **`31687089866` PASS / check-suite `85959134496`**. Dedicated wire job `94405812591` and artifact upload passed.
+- `baaeb4436a91962bf9a5f59f8b1b66876dbd8645` — strict whole-corpus collision lock plus compact normal-cast and Hexing-bound discriminators; run `31687089866` PASS / check-suite `85959134496`.
+- `e32346e749364037b2e31406fa07617d4ddbecb4` — strict normal-cast identity and complete 15-row Hexing subset lock; run **`31688840050` PASS / check-suite `85963923436`**. Dedicated wire job `94411530165` and artifact upload passed.
 
 No replay/runtime/registry semantics changed in this sequence.
 
@@ -117,25 +118,33 @@ Positive-field2 normal-cast rows produce these **unique exact-cost spellbook ide
 - `sff`: `suffering=51`;
 - `ray`: `dray=65`, `mdray=63`.
 
-Ambiguous same-cost sets remain explicit (`curse|slow`, `fast|slow`, `dray|magicfist`, `poison|suffering`, etc.), so cost alone is not treated as universal identity. The independent normal-cast subset is evidence for the internal wire families; mnemonic resemblance and tooltip wording are not used as the discriminator.
+`e32346e...` now regression-locks these exact compact populations and their canonical hashes. Ambiguous same-cost sets remain explicit (`curse|slow`, `fast|slow`, `dray|magicfist`, `poison|suffering`, etc.), so cost alone is not treated as universal identity. The independent normal-cast subset is evidence for the internal wire families; mnemonic resemblance and tooltip wording are not used as the discriminator.
 
 ### Current semantic boundary
 
-The corpus now proves that `crs/slw/sff/ray` are shared status/spell wires, not Hexing-owned proc labels. It also independently links unique normal-cast subsets to the internal spell families above. Hexing attack-bound rows are a distinct zero-cost population that can be structurally isolated by server-declared `hexingattack` source plus attack actor/target agreement.
+The corpus proves that `crs/slw/sff/ray` are shared status/spell wires, not Hexing-owned proc labels. It independently links unique normal-cast subsets to `curse/mcurse`, `slow`, `suffering`, and `dray/mdray`. Hexing attack-bound rows are a distinct zero-cost population structurally isolated by server-declared `hexingattack` source plus attack actor/target agreement.
+
+Replay audit after the strict lock shows:
+
+- `crs/slw/sff` are already in the shared status-wire parser and therefore structurally preserve target/status raw consequence;
+- `ray` is absent from `STATUS_WIRE_TO_BASE`, so generic replay currently loses the target/status structure for this shared family;
+- existing semantic safety already requires positive cost + matching source spellbook for ordinary exact status casts, and allows zero-cost exactness only as a same-decision follow-up to a positive matching record;
+- therefore adding an evidence-backed shared `ray -> dray` base mapping would naturally cover `dray/mdray` positive casts while **standalone zero-cost Hexing `ray` rows remain semantic-unresolved**.
 
 What is **not** yet promoted:
 
 - no numeric Hexing proc probability from `15/115` or any observed frequency;
-- no runtime change solely from mnemonic or tooltip prose;
-- no assumption that a zero-cost Hexing row has the same decision-scope exactness rule as an ordinary positive-cost hero cast until the observed consequence path is explicitly validated;
+- no Hexing-specific runtime effect merely from mnemonic or tooltip prose;
+- no standalone zero-cost status exactness rule;
 - no registry promotion.
 
 ## Exact next work
 
-1. Strict-pin the newly exported `CAST_OR_ABILITY` identity aggregates, the full 15-row Hexing-bound subset and their canonical hashes.
-2. Audit the existing replay status mutation path for `crs/slw/sff` versus currently unresolved `ray`; determine whether the zero-cost Hexing-bound rows have an independently observed persistent consequence that can be represented without inventing a probability or duration formula.
-3. If the observed consequence is provable, add only that exact replay/parser substrate with negative controls and hosted Windows validation. If not, close Hexing at the precise remaining blocker.
-4. Regenerate `data/reports/ability-risk-current.json` after semantic closure and advance to the highest actionable unfinished weighted-contribution ability, excluding precise blockers.
+1. Add a failing-first atomic regression for shared `ray` structural decoding using positive `dray/mdray` spellbook controls plus standalone zero-cost negative semantic control.
+2. Validate the failing test on hosted Windows as evidence that current replay lacks `ray` status structure; do not weaken it.
+3. Add only the evidence-backed shared `ray -> dray` status-family mapping, preserving existing decision-scope exactness rules so zero-cost Hexing rows remain unresolved; validate on exact SHA with hosted Windows.
+4. Close Hexing at the strongest observed consequence boundary that survives those controls; still do not infer proc probability.
+5. Regenerate `data/reports/ability-risk-current.json` after semantic closure and advance to the highest actionable unfinished weighted-contribution ability, excluding precise blockers.
 
 ## Current files to inspect first
 

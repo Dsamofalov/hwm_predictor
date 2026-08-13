@@ -206,3 +206,13 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
   - Normal `CAST_OR_ABILITY` controls are `crs=79`, `slw=430`, `sff=77`, `ray=406`; unique exact-cost same-source spellbook matches independently identify `curse/mcurse`, `slow`, `suffering`, and `dray/mdray` families respectively, while ambiguous same-cost sets remain explicit.
   - The complete Hexing attack-bound subset is 15 rows (`4/3/5/3`), all zero-field2, and remains distinct from ordinary positive-cost cast validation. No proc probability, blanket zero-cost exactness, runtime mutation or registry promotion is inferred.
   - Next safe step is to lock the new compact identity/subset aggregates and audit observed replay consequence before any executable Hexing semantic change.
+
+### Hexing cast identity controls
+
+- Commit: `e32346e749364037b2e31406fa07617d4ddbecb4` — `test(ability): pin Hexing cast identity controls`.
+  - Strict-pinned exact normal `CAST_OR_ABILITY` populations, positive-field2 populations, unique same-source exact-cost identities and their canonical hashes for all four shared status families.
+  - Exact unique identities are `crs -> curse=52,mcurse=5`, `slw -> slow=261`, `sff -> suffering=51`, and `ray -> dray=65,mdray=63`; ambiguous same-cost sets remain separately locked and are not used as universal identity.
+  - Strict-pinned all 15 Hexing attack-bound rows (`4/3/5/3`) and exact field2/field3/field4 shapes; every Hexing-bound row has `field2=00`.
+  - Authoritative hosted Ability Windows run `31688840050`: **PASS / completed with conclusion `success`** on exact SHA; check-suite `85963923436`. Dedicated wire node `94411530165` and artifact upload succeeded.
+  - Semantic boundary remains evidence-first: shared wire identity is now exact evidence, but standalone zero-cost Hexing rows remain semantically unresolved, no `15/115` probability is inferred, and no registry promotion is made.
+  - Replay audit isolates the next safe substrate gap: shared `ray` lacks the existing status-wire structural decode that `crs/slw/sff` already use. The next package should prove/fix that shared `ray -> dray/mdray` decode while preserving zero-cost semantic negative controls, not create a Hexing-specific runtime effect.
