@@ -33,17 +33,27 @@ jobs:
             [System.IO.File]::WriteAllText($Path, $text.Replace($Old, $New), [System.Text.UTF8Encoding]::new($false))
           }
 
+          function Insert-BeforeExactLine([string]$Path, [string]$Line, [string]$InsertedLine) {
+            $text = [System.IO.File]::ReadAllText($Path)
+            $nl = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
+            $old = $Line + $nl
+            $new = $InsertedLine + $nl + $Line + $nl
+            $hits = ([regex]::Matches($text, [regex]::Escape($old))).Count
+            if ($hits -ne 1) { throw "Expected exactly one line insertion point in $Path, found $hits for: $Line" }
+            [System.IO.File]::WriteAllText($Path, $text.Replace($old, $new), [System.Text.UTF8Encoding]::new($false))
+          }
+
           $child = 'python/tests/test_childofthelight_evidence.py'
           Replace-Exact $child '    assert report["carrier_targeted_specials"] == 206' '    assert report["carrier_targeted_specials"] == 223'
-          Replace-Exact $child '        "rgm": 25,`n        "slw": 13,' '        "rgm": 25,`n        "ray": 17,`n        "slw": 13,'
+          Insert-BeforeExactLine $child '        "slw": 13,' '        "ray": 17,'
 
           $hex = 'python/tests/test_hexingattack_evidence.py'
           Replace-Exact $hex '    assert report["attacks_with_same_target_special"] == 12' '    assert report["attacks_with_same_target_special"] == 15'
           Replace-Exact $hex '    assert report["same_target_special_records"] == 12' '    assert report["same_target_special_records"] == 15'
           Replace-Exact $hex '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3}' '    assert report["same_target_codes"] == {"sff": 5, "crs": 4, "slw": 3, "ray": 3}'
-          Replace-Exact $hex '        "crs": {"crs": 4},`n        "sff": {"sff": 5},' '        "crs": {"crs": 4},`n        "ray": {"ray": 3},`n        "sff": {"sff": 5},'
-          Replace-Exact $hex '        "crs": {"0.0": 4},`n        "sff": {"0.0": 5},' '        "crs": {"0.0": 4},`n        "ray": {"0.0": 3},`n        "sff": {"0.0": 5},'
-          Replace-Exact $hex '        "crs": {"100": 3, "96": 1},`n        "sff": {"12": 5},' '        "crs": {"100": 3, "96": 1},`n        "ray": {"6": 3},`n        "sff": {"12": 5},'
+          Insert-BeforeExactLine $hex '        "sff": {"sff": 5},' '        "ray": {"ray": 3},'
+          Insert-BeforeExactLine $hex '        "sff": {"0.0": 5},' '        "ray": {"0.0": 3},'
+          Insert-BeforeExactLine $hex '        "sff": {"12": 5},' '        "ray": {"6": 3},'
           Replace-Exact $hex '    assert report["other_special_codes"].get("ray") == 3' '    assert report["other_special_codes"].get("ray", 0) == 0'
 
           Remove-Item '.github/workflows/ability-ray-corpus-lock-patch.yml'
