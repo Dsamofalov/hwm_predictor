@@ -215,8 +215,18 @@ def choose_threshold(
     )
     generic_error = np.asarray([r["generic_error"] for r in examples], dtype=np.float64)
     ensemble_error = np.asarray([r["ensemble_error"] for r in examples], dtype=np.float64)
+    # Probabilities already cross the 12-decimal policy/evidence boundary. Quantile
+    # interpolation can reintroduce a longer binary64 tail, so canonicalize threshold
+    # candidates before selection as well. This keeps the evaluated policy and the
+    # exact committed evidence on the same deterministic boundary.
     candidates = sorted(
-        set([0.0, 1.0] + [float(x) for x in np.quantile(probs, np.linspace(0.0, 1.0, 101))])
+        set(
+            [0.0, 1.0]
+            + [
+                _canonical_selector_float(float(x))
+                for x in np.quantile(probs, np.linspace(0.0, 1.0, 101))
+            ]
+        )
     )
     best: tuple[float, float, float] | None = None
     best_threshold = 1.0

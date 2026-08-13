@@ -50,6 +50,16 @@ def test_choose_threshold_improves_synthetic_selection():
     assert 0.0 < metrics["selector_generic_usage_rate"] < 1.0
 
 
+def test_choose_threshold_uses_canonical_evidence_precision():
+    rows = _examples()
+    mean, scale, weights = ds.fit_logistic_selector(
+        rows, l2=0.0, steps=1200, learning_rate=0.1
+    )
+    threshold, calibration = ds.choose_threshold(rows, mean, scale, weights)
+    assert threshold == ds._canonical_selector_float(threshold)
+    assert calibration["threshold"] == threshold
+
+
 def test_support_counts_group_by_action_and_creature():
     rows = [
         {"action_type": "MELEE_ATTACK", "creature_id": 7},
