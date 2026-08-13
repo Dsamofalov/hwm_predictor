@@ -1,3 +1,4 @@
+(globalThis as any).importScripts("schedule_identity.js");
 (()=>{
 const HWM_DAEMON="http://127.0.0.1:38471";
 const HWM_TOKEN_KEY="hwmPairingToken";
@@ -8,7 +9,7 @@ const HWM_TRACE_MAX=80;
 const HWM_WS="ws://127.0.0.1:38471/ws";
 let hwmWs:WebSocket|undefined;
 let hwmWsReconnectTimer:number|undefined;
-let hwmLastScheduledRevision=0;
+let hwmLastScheduledStateKey="";
 
 type HwmTraceEvent={at:number;stage:string;[key:string]:unknown};
 async function hwmTrace(stage:string,details:Record<string,unknown>={}){
@@ -49,9 +50,10 @@ async function hwmRequestRecommendation(epoch:number){
   }
 }
 
-function hwmScheduleRecommendation(revision=0){
-  if(revision>0&&revision===hwmLastScheduledRevision)return;
-  if(revision>0)hwmLastScheduledRevision=revision;
+function hwmScheduleRecommendation(revision=0,stateHash="",battleId=""){
+  const stateKey=revision>0?hwmCanonicalScheduleKey(revision,stateHash,battleId):"";
+  if(stateKey&&stateKey===hwmLastScheduledStateKey)return;
+  if(stateKey)hwmLastScheduledStateKey=stateKey;
   const epoch=++hwmRecommendationEpoch;
   if(hwmRecommendTimer!==undefined)clearTimeout(hwmRecommendTimer);
   hwmRecommendTimer=setTimeout(()=>{hwmRecommendTimer=undefined;void hwmRequestRecommendation(epoch)},250) as unknown as number;
@@ -63,7 +65,7 @@ async function hwmConnectWebSocket(){
   try{
     const ws=new WebSocket(HWM_WS,["hwm-v1",`hwm-bearer.${token}`]);hwmWs=ws;
     ws.onopen=()=>{void hwmTrace("ws_connected")};
-    ws.onmessage=(event)=>{void (async()=>{try{const msg=JSON.parse(String(event.data));if(msg?.type==="state"&&msg.status){const status=msg.status;await chrome.storage.local.set({hwmLastDaemonStatus:status,hwmLastDaemonStatusAt:Date.now()});await hwmTrace("ws_state",{revision:status.revision??0,stateHash:status.state_hash??"",protocolReady:!!status.protocol_ready,recommendationSafe:!!status.recommendation_safe,sideToAct:status.side_to_act??0});if(status.protocol_ready&&status.recommendation_safe&&status.side_to_act===1&&status.active_entity_uid)hwmScheduleRecommendation(Number(status.revision??0));}else if(msg?.type==="heartbeat"){await chrome.storage.local.set({hwmLastDaemonStreamAt:Date.now()})}}catch(e){await hwmTrace("ws_message_error",{error:String(e).slice(0,160)})}})()};
+    ws.onmessage=(event)=>{void (async()=>{try{const msg=JSON.parse(String(event.data));if(msg?.type==="state"&&msg.status){const status=msg.status;await chrome.storage.local.set({hwmLastDaemonStatus:status,hwmLastDaemonStatusAt:Date.now()});await hwmTrace("ws_state",{revision:status.revision??0,stateHash:status.state_hash??"",protocolReady:!!status.protocol_ready,recommendationSafe:!!status.recommendation_safe,sideToAct:status.side_to_act??0});if(status.protocol_ready&&status.recommendation_safe&&status.side_to_act===1&&status.active_entity_uid)hwmScheduleRecommendation(Number(status.revision??0),String(status.state_hash??""),String(status.battle_id??""));}else if(msg?.type==="heartbeat"){await chrome.storage.local.set({hwmLastDaemonStreamAt:Date.now()})}}catch(e){await hwmTrace("ws_message_error",{error:String(e).slice(0,160)})}})()};
     ws.onerror=()=>{void hwmTrace("ws_error")};
     ws.onclose=()=>{if(hwmWs===ws)hwmWs=undefined;void hwmTrace("ws_closed");if(hwmWsReconnectTimer!==undefined)clearTimeout(hwmWsReconnectTimer);hwmWsReconnectTimer=setTimeout(()=>{hwmWsReconnectTimer=undefined;void hwmConnectWebSocket()},1500) as unknown as number};
   }catch(e){await hwmTrace("ws_connect_error",{error:String(e).slice(0,160)})}
@@ -78,7 +80,7 @@ chrome.runtime.onMessage.addListener((msg:any,_s:any,sendResponse:any)=>{
     const e=msg.envelope??{};
     void hwmTrace("capture_forwarded",{battleId:String(e.battleId??"").slice(0,80),source:e.source??"",urlKind:e.urlKind??"",sequenceHint:e.sequenceHint??0,bodyBytes:typeof e.body==="string"?e.body.length:0});
     hwmDaemonJson("/capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(e)})
-      .then(async r=>{await hwmTrace(r?.accepted?"capture_accepted":"capture_rejected",{battleId:String(e.battleId??"").slice(0,80),sequenceHint:e.sequenceHint??0,reason:r?.reason??r?.error??"",revision:r?.revision??0,stateHash:r?.state_hash??"",duplicate:!!r?.duplicate,outOfOrder:!!r?.out_of_order});sendResponse(r);if(r?.accepted&&r?.canonical_state_updated)hwmScheduleRecommendation(Number(r?.revision??0))})
+      .then(async r=>{await hwmTrace(r?.accepted?"capture_accepted":"capture_rejected",{battleId:String(e.battleId??"").slice(0,80),sequenceHint:e.sequenceHint??0,reason:r?.reason??r?.error??"",revision:r?.revision??0,stateHash:r?.state_hash??"",duplicate:!!r?.duplicate,outOfOrder:!!r?.out_of_order});sendResponse(r);if(r?.accepted&&r?.canonical_state_updated)hwmScheduleRecommendation(Number(r?.revision??0),String(r?.state_hash??""),String(e.battleId??""))})
       .catch(async e=>{await hwmTrace("capture_error",{error:String(e).slice(0,240)});sendResponse({accepted:false,error:String(e)})});
     return true;
   }
