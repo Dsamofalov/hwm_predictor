@@ -1,116 +1,79 @@
 {
   "schema": "hwm-infra-baseline/bootstrap-v0",
   "baseline_id": "I00",
-  "baseline_kind": "immutable_bootstrap_freeze_record",
   "captured_at": "2026-08-13T14:25:43Z",
   "capture_timezone": "Europe/Berlin",
-  "source": {
-    "repository": "Dsamofalov/hwm_predictor",
-    "repository_id": 1329204458,
+  "product_functional_development_frozen": true,
+  "freeze_started_at": "2026-08-13T14:17:00Z",
+  "freeze_note": "I00 does not unfreeze product functional development. This file is immutable bootstrap provenance after merge and is not mutable current-status.",
+  "product": {
+    "repo": "Dsamofalov/hwm_predictor",
+    "repo_id": 1329204458,
     "default_branch": "main",
     "main_head_at_capture": "8967ed5b29cc17d7d7dfdafdf8bb31f5e39fe6f8",
     "main_head_message": "docs: move ability development governance into main [skip ci]",
-    "main_head_classification": "documentation_and_governance_only_since_last_functional_green",
-    "main_head_status_contexts": [],
+    "main_head_combined_status_contexts": [],
     "main_head_actions_runs_count": 0,
-    "last_functional_green_is_not_main_head": true,
-    "comparison_from_last_functional_green": {
-      "base": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
-      "head": "8967ed5b29cc17d7d7dfdafdf8bb31f5e39fe6f8",
-      "ahead_by": 2,
-      "functional_or_workflow_files_changed": false,
-      "changed_paths_are_documentation_or_governance_text": true
-    }
-  },
-  "freeze": {
-    "product_functional_development_frozen": true,
-    "freeze_started_at": "2026-08-13T14:17:00Z",
-    "freeze_reason": "I00 baseline and autonomous-development infrastructure bootstrap",
-    "allowed_product_repo_change_during_i00": "docs/infra-bootstrap/I00_BASELINE.json only",
-    "unfreeze_condition": "explicit infrastructure readiness/acceptance decision; I00 does not unfreeze product work"
-  },
-  "authoritative_checkpoints": {
-    "core": {
+    "main_head_is_functional_green": false,
+    "last_core_green": {
       "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
-      "status_context": "HWM / Core",
+      "context": "HWM / Core",
       "state": "success",
-      "workflow_name": "CI",
-      "workflow_path": ".github/workflows/ci.yml",
-      "workflow_id": 330693306,
       "run_id": 31702086682,
-      "run_number": 655,
-      "event": "push",
-      "head_branch": "main",
       "check_suite_id": 86000491722,
       "aggregate_check_run_id": 94458331137,
-      "conclusion": "success"
-    },
-    "full": {
-      "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
-      "status_context": "HWM / Full",
-      "state": "success",
-      "workflow_name": "CI",
-      "workflow_path": ".github/workflows/ci.yml",
-      "workflow_id": 330693306,
-      "run_id": 31702086682,
-      "run_number": 655,
+      "workflow": ".github/workflows/ci.yml",
       "event": "push",
-      "head_branch": "main",
+      "head_branch": "main"
+    },
+    "last_full_green": {
+      "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
+      "context": "HWM / Full",
+      "state": "success",
+      "run_id": 31702086682,
       "check_suite_id": 86000491722,
       "aggregate_check_run_id": 94458185756,
-      "conclusion": "success"
+      "workflow": ".github/workflows/ci.yml",
+      "event": "push",
+      "head_branch": "main"
     },
-    "ability_integrated": {
+    "last_ability_green_integrated": {
       "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
-      "status_context": "HWM / Ability",
+      "context": "HWM / Ability",
       "state": "success",
-      "workflow_name": "Ability Windows Atomic Validation",
-      "workflow_path": ".github/workflows/ability.yml",
-      "workflow_id": 331457190,
       "run_id": 31702086715,
-      "run_number": 82,
-      "event": "push",
-      "head_branch": "main",
       "check_suite_id": 86000491792,
-      "conclusion": "success"
-    },
-    "geometry_supplemental": {
-      "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
-      "workflow_name": "Geometry Evidence",
-      "workflow_path": ".github/workflows/geometry-evidence.yml",
-      "workflow_id": 333111700,
-      "run_id": 31702086688,
-      "run_number": 20,
+      "workflow": ".github/workflows/ability.yml",
       "event": "push",
-      "head_branch": "main",
+      "head_branch": "main"
+    },
+    "supplemental_geometry_green": {
+      "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
+      "run_id": 31702086688,
       "check_suite_id": 86000491736,
+      "workflow": ".github/workflows/geometry-evidence.yml",
       "conclusion": "success"
     },
     "last_live_evidenced": {
       "sha": "UNKNOWN",
       "status": "UNKNOWN",
-      "reason": "No durable GitHub/evidence record was found that binds the required real authenticated shipped MV3 -> daemon -> recommendation -> manual move -> next semantic revision smoke to an exact product SHA. docs/LIVE_VALIDATION.md explicitly states that this smoke is ready to execute and that deterministic CI does not replace it."
+      "reason": "No durable evidence was found binding the required real authenticated shipped MV3->daemon->recommendation->manual move->next semantic revision smoke to an exact product SHA. docs/LIVE_VALIDATION.md explicitly says this smoke is ready to execute and deterministic CI does not replace it."
     }
   },
   "ability_integration": {
     "state": "COMPLETE",
-    "validated_pre_unification_ability_source": {
+    "pre_unification_ability_source": {
       "sha": "2ae1046c48e99c94da3481a8b3ed81285b9125ab",
-      "workflow_name": "Ability Windows Atomic Validation",
       "run_id": 31697180629,
       "check_suite_id": 85986692434,
-      "head_branch": "ability",
-      "event": "push",
       "conclusion": "success"
     },
     "pre_integration_main_sha": "2d6c985fbc4a6725e64871f12b127d68f86f1000",
-    "two_parent_merge": {
-      "sha": "e69592eaa9461825e231cc73656d1e58b9ac4ffd",
-      "parents": [
-        "2d6c985fbc4a6725e64871f12b127d68f86f1000",
-        "2ae1046c48e99c94da3481a8b3ed81285b9125ab"
-      ]
-    },
+    "merge_commit": "e69592eaa9461825e231cc73656d1e58b9ac4ffd",
+    "merge_parents": [
+      "2d6c985fbc4a6725e64871f12b127d68f86f1000",
+      "2ae1046c48e99c94da3481a8b3ed81285b9125ab"
+    ],
     "post_merge_shared_protocol_commit": {
       "sha": "7a68af2bd92dd85f609f5e8735048f7261fbb36b",
       "parent": "e69592eaa9461825e231cc73656d1e58b9ac4ffd"
@@ -119,14 +82,10 @@
       "sha": "3df0d5ee4434d3cc401dba1b765a4dca068c15c1",
       "parent": "7a68af2bd92dd85f609f5e8735048f7261fbb36b"
     },
-    "legacy_branch_ref": {
-      "name": "ability",
-      "live_branch_present_at_capture": false,
-      "future_development_source": false
-    },
-    "legacy_integration_refs_present_at_capture": []
+    "legacy_ability_branch_present": false,
+    "legacy_integration_branches_present": false
   },
-  "repository_inventory": {
+  "branch_and_pr_inventory": {
     "branches": [
       {
         "name": "main",
@@ -136,19 +95,18 @@
     ],
     "branch_count": 1,
     "open_pull_requests": [],
-    "open_pull_request_count": 0,
-    "legacy_ability_branch_present": false,
-    "legacy_integration_branch_present": false
+    "open_pull_request_count": 0
   },
   "governance": {
     "main_protected": false,
     "active_rulesets": [],
-    "required_checks_enforced_by_branch_governance": [],
+    "required_checks_enforced": [],
     "auto_merge_enabled": false,
     "delete_branch_on_merge_enabled": false,
+    "pull_requests_enabled": false,
     "pull_request_creation_policy": "collaborators_only",
     "direct_push_exposure": true,
-    "observed_authenticated_permissions": {
+    "authenticated_permissions": {
       "admin": true,
       "maintain": true,
       "push": true,
@@ -161,133 +119,87 @@
       "rebase": true
     },
     "posture": "EXPOSED",
-    "posture_reason": "main has no branch protection/ruleset and no required checks; an actor with push permission can bypass PR/CI by direct push. Successful HWM status contexts exist on validated SHAs but are not enforced as merge requirements."
+    "posture_reason": "No branch protection/ruleset/required checks prevent direct push. Successful HWM status contexts are evidence on exact SHAs but are not enforced merge requirements. Repository API also reports has_pull_requests=false."
   },
-  "workflow_inventory": {
-    "default_branch_workflow_files": [
-      {
-        "path": ".github/workflows/ci.yml",
-        "push_branches": [
-          "main"
-        ],
-        "pull_request_branches": [
-          "main"
-        ],
-        "legacy_branch_filter_drift": []
-      },
-      {
-        "path": ".github/workflows/ability.yml",
-        "push_branches": [
-          "main",
-          "ability",
-          "integration/**"
-        ],
-        "pull_request_branches": [
-          "main"
-        ],
-        "legacy_branch_filter_drift": [
-          "ability",
-          "integration/**"
-        ]
-      },
-      {
-        "path": ".github/workflows/geometry-evidence.yml",
-        "push_branches": [
-          "main"
-        ],
-        "pull_request_branches": [],
-        "legacy_branch_filter_drift": []
-      }
-    ],
-    "legacy_branch_filter_drift_detected": true,
-    "workflow_repairs_performed_in_i00": false,
-    "note": "The live branch inventory contains only main, but ability.yml still contains legacy push filters for ability and integration/**. I00 records this drift without modifying workflows."
-  },
-  "detected_drift": [
+  "workflow_branch_filters": [
     {
-      "path": "docs/MAIN_FRONT_STATUS.md",
-      "kind": "stale_current_status",
-      "observed_claim": "Current functional main SHA is 49bbe98e00cbee27d437c26cd93b2127a18dc8b8 with CI run 31693648818.",
-      "verified_state": "Last authoritative integrated Core/Full/Ability green SHA is 3df0d5ee4434d3cc401dba1b765a4dca068c15c1 with later main-push runs 31702086682 and 31702086715."
-    },
-    {
-      "path": "README.md",
-      "kind": "workflow_configuration_drift",
-      "observed_claim": "Standard CI runs only on self-hosted labels self-hosted/windows/x64/hwm-windows and is described as two Core/Full jobs using scripts/ci_windows.ps1.",
-      "verified_state": ".github/workflows/ci.yml currently targets windows-2022, uses atomic fan-out/aggregate jobs, and invokes scripts/ci_main_windows.ps1."
-    },
-    {
-      "path": "docs/MAIN_AGENT_TZ.md",
-      "kind": "stale_evidence_provenance",
-      "observed_claim": "Last Geometry Evidence checkpoint remains run 31693648857 on 49bbe98e... and no newer geometry metric is claimed.",
-      "verified_state": "Geometry Evidence run 31702086688 completed successfully on integrated main SHA 3df0d5ee... after Ability integration."
-    },
-    {
-      "path": "changelog.md",
-      "kind": "legacy_ref_wording_drift",
-      "observed_claim": "The historical ability ref is retained only as archive/provenance.",
-      "verified_state": "Current branch inventory contains only main; no live ability branch ref exists."
+      "path": ".github/workflows/ci.yml",
+      "push": ["main"],
+      "pull_request": ["main"],
+      "legacy_drift": []
     },
     {
       "path": ".github/workflows/ability.yml",
-      "kind": "legacy_branch_filter_drift",
-      "observed_claim": "Push trigger includes ability and integration/**.",
-      "verified_state": "Current branch inventory contains only main; dedicated ability/integration development lanes are retired."
+      "push": ["main", "ability", "integration/**"],
+      "pull_request": ["main"],
+      "legacy_drift": ["ability", "integration/**"]
+    },
+    {
+      "path": ".github/workflows/geometry-evidence.yml",
+      "push": ["main"],
+      "pull_request": [],
+      "legacy_drift": []
     }
   ],
-  "operational_notes": {
-    "old_current_status_docs_are_not_authoritative_after_i00": true,
-    "i00_artifact_becomes_manual_current_status": false,
-    "product_functional_changes_made_in_i00": false,
-    "workflow_changes_made_in_i00": false,
-    "old_docs_deleted_or_archived_in_i00": false
+  "legacy_workflow_filter_drift_detected": true,
+  "workflow_repair_performed": false,
+  "stale_or_conflicting_operational_sources": [
+    {
+      "path": "docs/MAIN_FRONT_STATUS.md",
+      "claim": "Current functional main SHA is 49bbe98e00cbee27d437c26cd93b2127a18dc8b8 / CI 31693648818.",
+      "verified": "Exact latest integrated Core/Full/Ability green SHA is 3df0d5ee4434d3cc401dba1b765a4dca068c15c1 / main-push CI 31702086682 / Ability 31702086715."
+    },
+    {
+      "path": "README.md",
+      "claim": "Standard CI is self-hosted with labels self-hosted/windows/x64/hwm-windows and two Core/Full jobs using scripts/ci_windows.ps1.",
+      "verified": "Current ci.yml uses windows-2022, atomic fan-out/aggregate jobs, and scripts/ci_main_windows.ps1."
+    },
+    {
+      "path": "docs/MAIN_AGENT_TZ.md",
+      "claim": "Last Geometry Evidence remains 31693648857 on 49bbe98e... with no newer geometry metric claimed.",
+      "verified": "Geometry Evidence 31702086688 succeeded on integrated main SHA 3df0d5ee...."
+    },
+    {
+      "path": "changelog.md",
+      "claim": "Historical ability ref is retained as archive/provenance.",
+      "verified": "Live branch inventory contains only main; no ability branch ref exists."
+    },
+    {
+      "path": ".github/workflows/ability.yml",
+      "claim": "Push trigger still includes ability and integration/**.",
+      "verified": "Live branch inventory has only main; dedicated ability/integration development lanes are retired."
+    }
+  ],
+  "i00_change_scope": {
+    "only_allowed_path": "docs/infra-bootstrap/I00_BASELINE.json",
+    "product_functional_changes": false,
+    "workflow_changes": false,
+    "old_docs_modified_or_deleted": false
   },
   "unknowns": [
     {
-      "field": "authoritative_checkpoints.last_live_evidenced.sha",
+      "field": "product.last_live_evidenced.sha",
       "value": "UNKNOWN",
       "reason": "No exact-SHA live-smoke provenance found."
     },
     {
       "field": "artifact.final_content_commit_sha_inside_self",
       "value": "UNKNOWN",
-      "reason": "A Git commit SHA is content-addressed and cannot be embedded as its own final SHA in a single immutable file without changing that SHA. The exact PR head and merged commit must be resolved from GitHub after creation/merge and retained as external provenance."
+      "reason": "A Git commit SHA cannot be embedded as its own final content-addressed SHA without changing the content. Resolve exact artifact/merge commit externally after merge."
+    },
+    {
+      "field": "github_connector_pull_request_write_scope_after_repository_prs_are_enabled",
+      "value": "UNKNOWN",
+      "reason": "PR creation returned HTTP 403 while repository has_pull_requests=false, so connector write scope cannot be isolated from the repository-level PR-disable setting inside I00."
     }
   ],
-  "provenance": {
-    "github_api_facts": [
-      "GET /repos/Dsamofalov/hwm_predictor",
-      "GET /repos/Dsamofalov/hwm_predictor/branches",
-      "GET /repos/Dsamofalov/hwm_predictor/branches/main",
-      "GET /repos/Dsamofalov/hwm_predictor/rulesets?includes_parents=true",
-      "GET /repos/Dsamofalov/hwm_predictor/actions/runs/31702086682",
-      "GET /repos/Dsamofalov/hwm_predictor/actions/runs/31702086715",
-      "GET /repos/Dsamofalov/hwm_predictor/actions/runs/31702086688",
-      "GET /repos/Dsamofalov/hwm_predictor/actions/runs/31697180629",
-      "GET /repos/Dsamofalov/hwm_predictor/commits/e69592eaa9461825e231cc73656d1e58b9ac4ffd",
-      "GET /repos/Dsamofalov/hwm_predictor/commits/7a68af2bd92dd85f609f5e8735048f7261fbb36b",
-      "GET /repos/Dsamofalov/hwm_predictor/commits/3df0d5ee4434d3cc401dba1b765a4dca068c15c1"
-    ],
-    "repository_files_inspected": [
-      ".github/workflows/ci.yml",
-      ".github/workflows/ability.yml",
-      ".github/workflows/geometry-evidence.yml",
-      "docs/LIVE_VALIDATION.md",
-      "docs/MAIN_FRONT_STATUS.md",
-      "docs/MAIN_AGENT_TZ.md",
-      "docs/ABILITY_AGENT_TZ.md",
-      "docs/ability/AGENT_STATUS.md",
-      "README.md",
-      "changelog.md"
-    ],
-    "self_report_policy": "Historical/status prose was used only to locate potential drift or candidate provenance. Current SHA, CI conclusions, branch inventory, rulesets/protection and merge ancestry were resolved independently from GitHub API/workflow/status data."
-  },
+  "provenance_policy": "Current SHA, CI conclusions, branch inventory, governance and merge ancestry were resolved from GitHub API/workflow/status data. Historical/current-status prose was used only to locate drift or candidate identifiers, never as a substitute for GitHub evidence.",
   "artifact": {
     "path": "docs/infra-bootstrap/I00_BASELINE.json",
     "task_branch": "agent/infra-i00-baseline",
     "source_base_sha": "8967ed5b29cc17d7d7dfdafdf8bb31f5e39fe6f8",
     "final_content_commit_sha_inside_self": "UNKNOWN",
-    "immutability": "After merge this file is immutable bootstrap provenance and must not be maintained as current project status.",
-    "next_owner": "I01 imports this exact object and records source repository/path/commit plus SHA-256 without mutating the product-repository original."
+    "immutability": "After merge this file is immutable bootstrap provenance and must not become a manually maintained current-status file.",
+    "i01_import_rule": "Import this exact object into hwm-control baseline storage and record original repo/path/commit plus SHA-256 without mutating this product-repository original."
   }
 }
