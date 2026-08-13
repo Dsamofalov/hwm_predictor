@@ -29,7 +29,7 @@ SPECIAL_DIRECT_DAMAGE_CODES = frozenset({"mfs", "ltn", "ice", "mar", "swm"})
 STATUS_WIRE_TO_BASE = {
     "fst": "fast", "slw": "slow", "bls": "bless", "crs": "curse",
     "stn": "stoneskin", "dfm": "deflect_missile", "rgm": "righteous_might",
-    "cnf": "confusion", "sff": "suffering", "ray": "dray",
+    "cnf": "confusion", "sff": "suffering",
 }
 
 
@@ -361,6 +361,15 @@ def _spellbook_status_matches(entity: RawEntity, wire: str, mana_cost: int) -> l
 def _observed_shieldbash_proc(
     commands: list["LowLevelCommand"], entities: dict[int, RawEntity], actor_uid: int | None
 ) -> tuple[bool, int | None]:
+    """Recognize the independently recovered Shield Bash wire marker.
+
+    Across the supplied 866-battle raw corpus, `o<actor_uid>` appears in 123 attack
+    decisions; 119/123 actors carry `shieldbash`. Conditioning on a shieldbash melee
+    attacker makes the marker 119/119 precise, and no marker is observed against the
+    three mechanical targets in that subset. The marker therefore identifies the
+    *observed proc*, not its probability. Probability is learned separately with a
+    temporal held-out gate in the ProcModel.
+    """
     if actor_uid is None:
         return False, None
     actor = entities.get(int(actor_uid))
@@ -382,6 +391,13 @@ def _validated_pawstrike_i(
     command: "LowLevelCommand", entities: dict[int, RawEntity],
     *, decision_actor_uid: int | None = None, commands: list["LowLevelCommand"] | None = None,
 ) -> bool:
+    """Validate I<affected3><source4> as the observed Paw Strike ATB reset.
+
+    Current corpus evidence: 150/150 Paw Strike procs contain an I-record whose
+    four-digit source equals the attacking Paw Strike carrier, paired with primary
+    target FORCED_POSITION. The source relationship is retained even when the
+    forced-position coordinate equals the previous canonical anchor.
+    """
     if command.opcode != "I_RECORD" or command.actor_uid is None or command.target_uid is None:
         return False
     affected = entities.get(int(command.actor_uid))
@@ -404,6 +420,12 @@ def _validated_pawstrike_i(
 
 
 def _validated_mighty_slam(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the corpus-proven Mighty Slam activation marker.
+
+    All 32 observed records are `Smsl` + actor3 + twelve zeroes, occur on a living
+    carrier of `mightyslam`, and are followed by ordinary DAMAGE / optional
+    FORCED_POSITION records that remain the authoritative observed transition.
+    """
     if command.opcode != "SPECIAL" or command.code != "msl" or command.actor_uid is None:
         return False
     actor = entities.get(int(command.actor_uid))
@@ -414,6 +436,13 @@ def _validated_mighty_slam(command: "LowLevelCommand", entities: dict[int, RawEn
 
 
 def _validated_gribbomb_bomb(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the exact observed Gribbomb self-destruction marker.
+
+    Whole-corpus evidence contains exactly one carrier-sourced `Sbom` activation and the
+    server tooltip independently defines it as self-destruction. This validator proves
+    only the carrier removal transition. Neighbor DAMAGE records remain authoritative for
+    their observed HP deltas; no predictive Earth-damage formula is inferred here.
+    """
     if command.opcode != "SPECIAL" or command.code != "bom" or command.actor_uid is None:
         return False
     actor = entities.get(int(command.actor_uid))
@@ -424,6 +453,11 @@ def _validated_gribbomb_bomb(command: "LowLevelCommand", entities: dict[int, Raw
 
 
 def _validated_mana_feed(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate the corpus-proven Smfd Mana Feed record.
+
+    All 42 observed records use actor3,own_hero3,amount2,0000000. The amount equals
+    min(current stack count, current creature mana), matching the reference mechanic.
+    """
     if command.opcode != "SPECIAL" or command.code != "mfd":
         return False
     if command.actor_uid is None or command.target_uid is None or command.amount is None:
@@ -439,6 +473,13 @@ def _validated_mana_feed(command: "LowLevelCommand", entities: dict[int, RawEnti
 
 
 def _validated_weakeningstrike(command: "LowLevelCommand", entities: dict[int, RawEntity]) -> bool:
+    """Validate W<actor><target> as Weakening Strike.
+
+    New raw-corpus evidence: W records occur in 266/267 attacks by actors carrying
+    `weakeningstrike`, versus ~0.28% of other attacks. The fixed-width record is
+    actor3,target3 and the reference mechanic is an unconditional -4 Attack/-4 Defense
+    after a successful attack. `armoured` blocks only the defense-reduction component.
+    """
     if command.opcode != "W_RECORD" or command.actor_uid is None or command.target_uid is None:
         return False
     actor=entities.get(int(command.actor_uid)); target=entities.get(int(command.target_uid))
@@ -448,6 +489,13 @@ def _validated_weakeningstrike(command: "LowLevelCommand", entities: dict[int, R
 def _decision_semantic_unresolved_flags(
     commands: list["LowLevelCommand"], entities: dict[int, RawEntity], actor_uid: int | None
 ) -> list[bool]:
+    """Classify semantic uncertainty with decision context.
+
+    Status S-records are exact only when the first non-zero mana field uniquely identifies
+    a selectable spell in the active hero's embedded server spellbook.  Subsequent zero-cost
+    records with the same wire code in the same decision are then exact mass-result records.
+    Triggered Sxxx effects without that evidence remain unresolved.
+    """
     flags: list[bool] = []
     exact_status_wire: str | None = None
     actor = entities.get(actor_uid) if actor_uid is not None else None
@@ -543,8 +591,16 @@ def _decision_semantic_unresolved_flags(
                 and t_actor.owner != t_target.owner
             )
         elif c.opcode == "OPAQUE_SHORT" and shieldbash_proc and c.raw == shieldbash_marker:
+            # `o<actor>` is the observed Shield Bash proc marker for a shieldbash melee
+            # attacker. Its probability/initiative consequence is modeled separately.
             unresolved = False
         elif c.opcode == "U_RECORD":
+            # Independently recovered Endurance update. Across the new 866-battle corpus,
+            # 83/83 uDDD records referring to an `endurance` stack occur immediately before
+            # that same UID's next activation. A base-speed-4 stack receives at most four
+            # such records, exactly until the server tooltip's cap of speed 8; after the cap
+            # the stack keeps acting but no more u-record is emitted. Other uDDD records are
+            # mass reset/initiative mechanics and remain semantic-risk.
             u_actor = entities.get(int(c.actor_uid)) if c.actor_uid is not None else None
             unresolved = not bool(
                 u_actor and "endurance" in set(u_actor.abilities) and float(u_actor.speed) < 8.0
@@ -552,6 +608,8 @@ def _decision_semantic_unresolved_flags(
         elif c is exact_phantom:
             unresolved = False
         elif c.opcode == "P_RECORD" and exact_phantom_clone is not None and c.actor_uid == exact_phantom_clone:
+            # P<clone><sprite/model> is state-neutral in every exact Sphm decision; the
+            # following authoritative M-record contains the actual spawned entity state.
             unresolved = False
         flags.append(unresolved)
     return flags
@@ -560,6 +618,14 @@ def _decision_semantic_unresolved_flags(
 def command_semantically_unresolved(
     command: "LowLevelCommand", entities: dict[int, RawEntity] | None = None
 ) -> bool:
+    """Whether a structurally decoded record still has unresolved game semantics.
+
+    `SPECIAL` is generally conservative, but the new raw corpus independently proves one
+    useful exception: Spsc mode 062 is the standard single-target hero basic attack. Its
+    HP delta is explicit and its damage formula matches 16 + 4*hero.max_count in 50/50
+    observations. Other Spsc modes remain unresolved because they encode different
+    hero/faction mechanics.
+    """
     if command.opcode not in SEMANTIC_UNRESOLVED_OPCODES:
         return False
     if command.opcode == "SPECIAL" and command.code == "psc" and command.value == 62:
@@ -625,6 +691,9 @@ class Replay:
     parse_warnings: list[str] = field(default_factory=list)
 
 
+# The 24 fixed six-character fields are visible in every M record in the new raw corpus.
+# Semantic names are derived from cross-battle invariants and are deliberately kept next
+# to raw_fields so future protocol revisions can be audited without information loss.
 def parse_entity_record(raw: str) -> RawEntity:
     m = re.match(r"/?M(\d{3}):(.+)", raw, re.S)
     if not m:
@@ -638,7 +707,12 @@ def parse_entity_record(raw: str) -> RawEntity:
     if len(raw_fields) != 24:
         raise ValueError(f"M{uid:03d}: expected 24 fixed fields")
     tail = rest[144:]
+
     vals = [_num(x) for x in raw_fields]
+
+    # Tail grammar: ...|sprite|[client-version]|localized-name|ability|...|~magic^mods
+    # Hero records can carry an opaque perk prefix before sprite; locating [version] avoids
+    # guessing the prefix grammar.
     parts = tail.split("|") if tail else []
     version_idx = next((i for i, p in enumerate(parts) if p.startswith("[") and p.endswith("]")), -1)
     sprite = version = name = ""
@@ -655,8 +729,10 @@ def parse_entity_record(raw: str) -> RawEntity:
                 break
             if p:
                 abilities.append(p)
+
     run_match = re.search(r"\^.*?run(\d{12})", tail)
     run_modifier = run_match.group(1) if run_match else ""
+
     return RawEntity(
         uid=uid,
         owner=_int(raw_fields[0]),
@@ -691,14 +767,21 @@ def parse_entity_record(raw: str) -> RawEntity:
         raw_tail=tail,
         raw_fields=raw_fields,
         alive=_int(raw_fields[12]) > 0,
+        # Every Sphm-created clone in the new 866-battle corpus carries a post-^
+        # phmXXXXXXXXXXXX modifier. Parse the modifier itself rather than names/creature IDs.
         is_phantom=bool(re.search(r"(?:\^|[A-Za-z_]{3}\d{12})phm\d{12}", tail) or re.search(r"\^.*phm\d{12}", tail)),
         run_modifier=run_modifier,
+        # New 866-battle corpus: 501/501 rune-capable initial entities carry exactly
+        # run100000000001; all 102 observed Srn2 activations come from that set and no
+        # UID activates Srn2 more than once. Keep raw value for protocol drift auditing.
         rune_speed_available=run_modifier == "100000000001",
     )
 
 
 def _entity_record_end(text: str, start: int) -> int:
-    fixed_end = start + 5 + 144
+    # M record contains a fixed block followed by textual traits and terminates its magic
+    # section with ^. After ^ there may be repeated 3-char modifier key + 12 digit values.
+    fixed_end = start + 5 + 144  # Mddd: + fixed block
     if fixed_end > len(text):
         return len(text)
     caret = text.find("^", fixed_end)
@@ -721,7 +804,9 @@ def parse_initial_entities(init_payload: str) -> tuple[dict[int, RawEntity], lis
         state_part = sections[2] if len(sections) >= 3 else sections[-1]
     else:
         state_part = init_payload
+
     entities: dict[int, RawEntity] = {}
+    # Semicolon is the reliable record separator in init payloads.
     for rec in state_part.split(";"):
         candidate = rec[1:] if rec.startswith("/M") else rec
         if not candidate.startswith("M") or len(candidate) < 5 or candidate[4] != ":":
@@ -767,12 +852,20 @@ def _parse_float_loose(raw: str) -> float | None:
 
 
 def parse_commands(text: str) -> list[LowLevelCommand]:
+    """Lossless-ish scanner for the compact turn protocol.
+
+    It gives exact semantics to records whose grammar is stable across the 866-battle corpus
+    and retains every unknown byte as UNKNOWN. Special S records are preserved structurally
+    without pretending to know their mechanic.
+    """
     out: list[LowLevelCommand] = []
     i = 0
     n = len(text)
+
     def unknown(start: int, end: int) -> None:
         if end > start:
             out.append(LowLevelCommand("UNKNOWN", text[start:end]))
+
     while i < n:
         if text[i] == ";":
             i += 1
@@ -780,6 +873,8 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
         if text.startswith("f<", i) or text.startswith("f_en<", i):
             out.append(LowLevelCommand("RESULT", text[i:]))
             break
+
+        # Spawn/new-object record.
         if text[i] == "M" and i + 5 <= n and text[i + 4] == ":" and text[i + 1:i + 4].isdigit():
             end = _entity_record_end(text, i)
             raw = text[i:end]
@@ -790,6 +885,9 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                 out.append(LowLevelCommand("UNKNOWN", raw))
             i = end
             continue
+
+        # S + exactly three-char mechanic code + numeric payload. This is a server mechanic
+        # record; we expose the code and first uid-like field but do not invent its meaning.
         if text[i] == "S" and i + 4 <= n and re.match(r"[A-Za-z0-9_-]{3}", text[i + 1:i + 4]):
             j = i + 4
             while j < n and (text[j].isdigit() or text[j] in ".+-"):
@@ -805,43 +903,130 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                 and numeric[:6].isdigit() and numeric[6] == "-"
                 and numeric[7:9].isdigit() and numeric[9:15].isdigit()
             ):
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), amount=int(numeric[9:15]), value=int(numeric[8]), code=code))
+                # Independently recovered on 434/434 raw records:
+                # caster3,target3,flag+effective-mana3,authoritative-heal6.
+                # The observed middle field is -19/-17/-16; its final digit is the
+                # effective mana cost and never exceeds raisedead's server base cost.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]),
+                    target_uid=int(numeric[3:6]), amount=int(numeric[9:15]),
+                    value=int(numeric[8]), code=code,
+                ))
             elif code == "phm" and len(numeric) == 15 and numeric.isdigit():
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[8:11]), amount=int(numeric[3:6]), value=int(numeric[6:8]), duration=int(numeric[11:15]), code=code))
+                # Independently recovered from 250/250 records:
+                # caster3,clone_uid3,effective_mana2,source_uid3,trailer4.  Trailer is
+                # 0000 in all observations.  target_uid intentionally means the cloned
+                # SOURCE stack; amount carries the newly spawned clone UID.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]),
+                    target_uid=int(numeric[8:11]), amount=int(numeric[3:6]),
+                    value=int(numeric[6:8]), duration=int(numeric[11:15]), code=code,
+                ))
             elif code == "car" and len(numeric) == 15 and numeric.isdigit():
-                out.append(LowLevelCommand("CARRIER_RELOCATE", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), x=int(numeric[10:12]), y=int(numeric[12:14]), amount=int(numeric[6:10]), duration=int(numeric[14]), code=code, value=0))
+                # 102/102 corpus layout: actor3,target3,actor_x2,actor_y2,dest_x2,dest_y2,flag1.
+                out.append(LowLevelCommand(
+                    "CARRIER_RELOCATE", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]),
+                    x=int(numeric[10:12]), y=int(numeric[12:14]), amount=int(numeric[6:10]),
+                    duration=int(numeric[14]), code=code, value=0,
+                ))
             elif code == "rn2" and len(numeric) == 15 and numeric.isdigit():
+                # Independently recovered from the new raw corpus. Layout is actor3 +
+                # 12-digit state. 102 non-zero records activate a one-action movement
+                # rune; 101 zero records clear it after that action. Every activation
+                # actor carries initial modifier run100000000001, no UID activates twice,
+                # and the following same-actor destination is reachable by ordinary BFS
+                # with max distance 2*speed in 100/100 cases.
                 state12 = numeric[3:15]
-                out.append(LowLevelCommand("RUNE_SPEED_CLEAR" if state12 == "000000000000" else "RUNE_SPEED_ACTIVATE", raw, actor_uid=int(numeric[:3]), code=code, amount=int(state12)))
+                out.append(LowLevelCommand(
+                    "RUNE_SPEED_CLEAR" if state12 == "000000000000" else "RUNE_SPEED_ACTIVATE",
+                    raw, actor_uid=int(numeric[:3]), code=code, amount=int(state12),
+                ))
             elif code == "tel" and len(numeric) == 15 and numeric.isdigit():
-                out.append(LowLevelCommand("TELEPORT", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), x=int(numeric[6:8]), y=int(numeric[8:10]), amount=int(numeric[10:15]), code=code))
+                # Corpus invariant (3/3 records): caster3,target3,x2,y2,param5. The
+                # target's next observed board position equals x/y in every case.
+                out.append(LowLevelCommand(
+                    "TELEPORT", raw, actor_uid=int(numeric[:3]),
+                    target_uid=int(numeric[3:6]), x=int(numeric[6:8]), y=int(numeric[8:10]),
+                    amount=int(numeric[10:15]), code=code,
+                ))
             elif code in STATUS_WIRE_TO_BASE and len(numeric) == 15 and numeric.isdigit():
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), value=float(int(numeric[6:8])), duration=int(numeric[8:12]) // 100, amount=int(numeric[12:15]), code=code))
+                # Independently recovered layout: caster3,target3,mana2,duration_x100(4),
+                # magnitude3.  Selection semantics are resolved later at decision scope because
+                # mass-cast follow-up targets carry mana=00.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw,
+                    actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]),
+                    value=float(int(numeric[6:8])), duration=int(numeric[8:12]) // 100,
+                    amount=int(numeric[12:15]), code=code,
+                ))
             elif code == "msl" and len(numeric) == 15 and numeric.isdigit() and numeric[3:] == "000000000000":
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), duration=0, code=code))
+                # Mighty Slam activation marker: actor3 + zero trailer. Damage targets
+                # and knockback are carried by the following d/b records.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]), duration=0, code=code,
+                ))
             elif code == "mfd" and len(numeric) == 15 and numeric.isdigit() and numeric[8:] == "0000000":
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), amount=int(numeric[6:8]), duration=0, code=code))
+                # Mana Feed: actor3,own_hero3,amount2,0000000. Exactness is gated
+                # against actor ability/owner/count/mana before the state mutation.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]),
+                    amount=int(numeric[6:8]), duration=0, code=code,
+                ))
             elif code == "rgl" and len(numeric) == 15 and numeric.isdigit() and numeric[:3] == "000":
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[3:6]), amount=int(numeric[6:15]), code=code))
+                # Mana Drain's heal result uses 000,source_uid3,heal9. Other mechanics can
+                # share the rgl code, so semantic exactness is gated later by `manadrain`.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[3:6]),
+                    amount=int(numeric[6:15]), code=code,
+                ))
             elif code in {"enr", "blt"} and len(numeric) == 15 and numeric.isdigit() and numeric[3:12] == "100000000":
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), amount=int(numeric[12:15]), code=code))
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]),
+                    amount=int(numeric[12:15]), code=code,
+                ))
             elif code in {"btt", "tob"} and len(numeric) == 15 and numeric.isdigit() and numeric[6:15] == "000000000":
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), amount=int(numeric[3:6]), code=code))
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]), amount=int(numeric[3:6]), code=code,
+                ))
             elif code in {"sta", "wnd"} and len(numeric) == 15 and numeric[:6].isdigit():
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), code=code))
+                # Observed proc-state records from the new raw corpus. Layout begins
+                # actor3,target3; the remaining nine characters are proc telemetry.
+                # Persistent semantics are validated at decision scope against the
+                # server-declared ability of the acting stack.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]),
+                    target_uid=int(numeric[3:6]), code=code,
+                ))
             elif code == "psc" and len(numeric) == 15 and numeric[:12].isdigit():
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=int(numeric[:3]), target_uid=int(numeric[3:6]), amount=int(numeric[6:12]), code=code, value=int(numeric[12:15])))
+                # 585/585 records have caster3,target3,damage6,mode3. The target exists
+                # in every case. Hero physical actions often carry no d-record at all,
+                # while Archlich mode 064 is the extra death-cloud target delta. The last
+                # signed mode remains semantic-risk; only the HP delta is exact-core.
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=int(numeric[:3]),
+                    target_uid=int(numeric[3:6]), amount=int(numeric[6:12]), code=code,
+                    value=int(numeric[12:15]),
+                ))
             else:
                 target_uid = None
                 amount = None
+                # A small, evidence-gated subset of specials has a stable
+                # caster3,target3,param3,damage6 layout.  Decode the useful state delta
+                # while still keeping opcode SPECIAL so semantic uncertainty for possible
+                # secondary effects remains visible to the planner.
                 effective_cost = None
                 if code in SPECIAL_DIRECT_DAMAGE_CODES and len(numeric) == 15 and numeric.isdigit():
                     target_uid = int(numeric[3:6])
                     effective_cost = int(numeric[6:9])
                     amount = int(numeric[9:15])
-                out.append(LowLevelCommand("SPECIAL", raw, actor_uid=uid, target_uid=target_uid, amount=amount, code=code, value=effective_cost))
+                out.append(LowLevelCommand(
+                    "SPECIAL", raw, actor_uid=uid, target_uid=target_uid,
+                    amount=amount, code=code, value=effective_cost,
+                ))
             i = j
             continue
+
+        # Luck/morale/critical markers terminate with ^.
         if text[i] == "l" and i + 4 <= n and text[i + 1:i + 4].isdigit():
             caret = text.find("^", i + 4)
             if caret >= 0:
@@ -849,6 +1034,18 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                 out.append(LowLevelCommand("PROC", raw, actor_uid=int(text[i + 1:i + 4]), code=text[i + 4:caret]))
                 i = caret + 1
                 continue
+
+        # Opaque-but-structurally-stable records discovered independently across the
+        # supplied 866-battle corpus.  We deliberately do NOT assign game semantics to
+        # these yet; the important distinction is that they are complete records rather
+        # than tokenizer failures.  Keeping them structured prevents an unrelated byte
+        # from poisoning the whole decision row while still preserving the raw payload.
+        #
+        # Examples observed repeatedly:
+        #   &001, o013, p016, k003
+        #   A003004, B0081209
+        #   b0180919, r0171008
+        #   s023070100015
         if text[i] in "&opk" and i + 4 <= n and text[i + 1:i + 4].isdigit():
             raw = text[i:i + 4]
             out.append(LowLevelCommand("OPAQUE_SHORT", raw, actor_uid=int(raw[1:4])))
@@ -866,14 +1063,24 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
             continue
         if text[i] in "br" and i + 8 <= n and text[i + 1:i + 8].isdigit():
             raw = text[i:i + 8]
+            # b/r records are forced-position updates: uid + x2 + y2. Across the corpus
+            # coordinates are always board-plausible; differences from current position are
+            # predominantly one-cell knockback/recoil and no ordinary m-record follows.
             out.append(LowLevelCommand("FORCED_POSITION", raw, actor_uid=int(raw[1:4]), x=int(raw[4:6]), y=int(raw[6:8]), code=raw[0]))
             i += 8
             continue
         if text[i] == "s" and i + 13 <= n and text[i + 1:i + 13].isdigit():
             raw = text[i:i + 13]
+            # Corpus invariant: sDDDXXYYNNNNN follows a spawned MDDD record. The M record
+            # uses x=200/count=-1 placeholders; this record supplies board position/count.
             out.append(LowLevelCommand("SPAWN_POSITION", raw, actor_uid=int(raw[1:4]), x=int(raw[4:6]), y=int(raw[6:8]), amount=int(raw[8:13])))
             i += 13
             continue
+
+        # Several server mechanics emit a lowercase three-character tag followed by a
+        # signed/unsigned numeric value, often directly after an S... record.  This must
+        # be recognized BEFORE single-letter commands such as `w`, otherwise a value like
+        # `slw737.81` is incorrectly split into `sl` + WAIT(737) + `.81`.
         core_numeric_prefix = text[i] in "mdiwhuzx" and i + 1 < n and text[i + 1].isdigit()
         if text[i].islower() and not core_numeric_prefix and i + 4 <= n:
             mm = re.match(r"([a-z][a-z0-9]{2})([-+]?\d+(?:\.\d+)?)", text[i:])
@@ -882,6 +1089,8 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
                 out.append(LowLevelCommand("OPAQUE_EFFECT", raw, code=mm.group(1), value=_parse_float_loose(mm.group(2))))
                 i += len(raw)
                 continue
+
+        # Stable fixed-width records.
         if text[i] == "m" and i + 8 <= n and text[i + 1:i + 8].isdigit():
             raw = text[i:i + 8]
             out.append(LowLevelCommand("MOVE", raw, actor_uid=int(raw[1:4]), x=int(raw[4:6]), y=int(raw[6:8])))
@@ -934,20 +1143,31 @@ def parse_commands(text: str) -> list[LowLevelCommand]:
             continue
         if text[i] == "I" and i + 8 <= n and text[i + 1:i + 8].isdigit():
             raw = text[i:i + 8]
-            out.append(LowLevelCommand("I_RECORD", raw, actor_uid=int(raw[1:4]), target_uid=int(raw[4:8])))
+            # I<affected_uid3><source_uid4>. `target_uid` intentionally stores the
+            # source because LowLevelCommand has no dedicated source_uid field.
+            out.append(LowLevelCommand(
+                "I_RECORD", raw, actor_uid=int(raw[1:4]), target_uid=int(raw[4:8])
+            ))
             i += 8
             continue
-        for opcode, opname, width in (("T", "T_RECORD", 7), ("R", "R_RECORD", 7), ("V", "V_RECORD", 7), ("F", "F_RECORD", 7), ("Y", "Y_RECORD", 10), ("x", "X_RECORD", 10)):
+        for opcode, opname, width in (
+            ("T", "T_RECORD", 7),
+            ("R", "R_RECORD", 7), ("V", "V_RECORD", 7), ("F", "F_RECORD", 7),
+            ("Y", "Y_RECORD", 10), ("x", "X_RECORD", 10),
+        ):
             if text[i] == opcode and i + width <= n and text[i + 1:i + 4].isdigit():
                 raw = text[i:i + width]
                 out.append(LowLevelCommand(opname, raw, actor_uid=int(raw[1:4])))
                 i += width
                 break
         else:
+            # Preserve one unknown byte; adjacent unknowns are merged afterwards.
             out.append(LowLevelCommand("UNKNOWN", text[i]))
             i += 1
             continue
         continue
+
+    # Merge adjacent UNKNOWN bytes so reports stay readable.
     merged: list[LowLevelCommand] = []
     for c in out:
         if c.opcode == "UNKNOWN" and merged and merged[-1].opcode == "UNKNOWN":
@@ -962,6 +1182,11 @@ def parse_turns(turns_payload: str) -> list[TurnRecord]:
 
 
 def _perspective_owner(entities: dict[int, RawEntity]) -> int | None:
+    # In the supplied PvE corpus the human/player side is owner=1 in every one of the
+    # 866 battles, but the player's hero is NOT always M001.  Earlier bootstrap code used
+    # M001 as the perspective anchor and silently inverted 58 battles where M001 belonged
+    # to owner=2.  Prefer an owner=1 hero, then any owner=1 entity.  Only use a generic
+    # fallback for future/foreign modes where owner=1 is genuinely absent.
     player_heroes = sorted((e for e in entities.values() if e.owner == 1 and e.is_hero), key=lambda e: e.uid)
     if player_heroes:
         return 1
@@ -977,6 +1202,7 @@ def _player_won(init_payload: str, entities: dict[int, RawEntity], owner: int | 
     hero_names = [e.name for e in entities.values() if e.owner == owner and e.is_hero and e.name]
     if not hero_names:
         return None
+    # Result section before |#f_en is Russian and explicitly separates winning/losing sides.
     section = init_payload.split("|#", 1)[0]
     win_end = section.find("Проигравшая сторона")
     win_section = section[:win_end] if win_end >= 0 else section
@@ -985,6 +1211,7 @@ def _player_won(init_payload: str, entities: dict[int, RawEntity], owner: int | 
         return True
     if any(name in lose_section for name in hero_names):
         return False
+    # English fallback.
     if "|#f_en" in init_payload:
         en = init_payload.split("|#f_en", 1)[1].split("|#", 1)[0]
         de = en.find("Defeated")
@@ -1076,7 +1303,14 @@ def _observed_reachable(state, actor) -> set[tuple[int, int]]:
         return set()
     abilities = set(_observed_value(actor, "abilities", []) or [])
     if "flyer" in abilities:
-        return {(x, y) for y in range(1, 21) for x in range(1, 13) if (x, y) != start and max(abs(x-start[0]), abs(y-start[1])) <= speed and _observed_can_place(state, actor, (x, y))}
+        return {
+            (x, y)
+            for y in range(1, 21)
+            for x in range(1, 13)
+            if (x, y) != start
+            and max(abs(x-start[0]), abs(y-start[1])) <= speed
+            and _observed_can_place(state, actor, (x, y))
+        }
     seen = {start}
     front = [start]
     out: set[tuple[int, int]] = set()
@@ -1099,15 +1333,26 @@ def _observed_reachable(state, actor) -> set[tuple[int, int]]:
     return out
 
 
-def _resolve_special_free_unique_melee_anchor(state, actor_uid: int, target_uid: int | None, raw_x: int, raw_y: int, commands: list[LowLevelCommand]) -> tuple[int, int]:
+def _resolve_special_free_unique_melee_anchor(
+    state,
+    actor_uid: int,
+    target_uid: int | None,
+    raw_x: int,
+    raw_y: int,
+    commands: list[LowLevelCommand],
+) -> tuple[int, int]:
     actor = _observed_entity_by_uid(state, actor_uid)
     target = _observed_entity_by_uid(state, int(target_uid)) if target_uid is not None else None
     if actor is None or target is None or not bool(_observed_value(actor, "alive", True)) or not bool(_observed_value(target, "alive", True)):
         return raw_x, raw_y
     raw = (raw_x, raw_y)
     canonical = _observed_big_anchor(state, actor, raw)
+    # Main-decoder correction only. Any SPECIAL record keeps the existing generic/raw path;
+    # those decisions remain owned by exact/ability-specific semantics.
     if any(c.opcode == "SPECIAL" for c in commands):
         return canonical
+    # Unique landing inference is allowed only when the raw anchor itself intersects a
+    # visible live stack. Non-colliding but surprising movement remains untouched.
     if not _observed_anchor_blocked(state, actor, raw):
         return canonical
     if _observed_can_place(state, actor, canonical) and _entities_adjacent(actor, canonical[0], canonical[1], target):
@@ -1120,13 +1365,20 @@ def _resolve_special_free_unique_melee_anchor(state, actor_uid: int, target_uid:
         if _entities_adjacent(actor, p[0], p[1], target):
             landings.append(p)
     landings = list(dict.fromkeys(landings))
-    near_raw = [candidate for candidate in landings if max(abs(candidate[0] - raw[0]), abs(candidate[1] - raw[1])) <= 1]
+    near_raw = [
+        candidate for candidate in landings
+        if max(abs(candidate[0] - raw[0]), abs(candidate[1] - raw[1])) <= 1
+    ]
     if len(near_raw) == 1:
         return near_raw[0]
     return canonical
 
 
 def _attack_move(actor_uid: int, cmds: list[LowLevelCommand]) -> LowLevelCommand | None:
+    """Last actor MOVE before the first actor DAMAGE: actual attack anchor.
+
+    This differs from the final MOVE for strike-and-return / recoil / post-attack movement.
+    """
     last_move = None
     for c in cmds:
         if c.opcode == "MOVE" and c.actor_uid == actor_uid:
@@ -1153,6 +1405,7 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     final_move = moves[-1] if moves else None
     attack_move = _attack_move(actor_uid, cmds) if dealt else None
     action_move = attack_move if dealt else final_move
+    changed = bool(actor and action_move and (actor.x, actor.y) != (action_move.x, action_move.y))
     phantom = next((c for c in specials if c.code == "phm" and c.target_uid is not None), None)
     target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (mana_feed.target_uid if mana_feed else (phantom.target_uid if phantom else None))))
     target = state.entities.get(target_uid) if target_uid is not None else None
@@ -1161,11 +1414,20 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in cmds)
     shooter = bool(actor and (actor.shots > 0 or "shooter" in set(actor.abilities)))
     current_adjacent_target = bool(actor and target and _entities_adjacent(actor, actor.x, actor.y, target))
-    shooter_blocked = bool(actor and any(other.alive and not other.is_hero and "hidden" not in set(other.abilities) and other.owner != actor.owner and _entities_adjacent(actor, actor.x, actor.y, other) for other in state.entities.values()))
+    shooter_blocked = bool(actor and any(
+        other.alive and not other.is_hero and "hidden" not in set(other.abilities)
+        and other.owner != actor.owner and _entities_adjacent(actor, actor.x, actor.y, other)
+        for other in state.entities.values()
+    ))
     ranged_marker_legal = bool(actor and actor.shots > 0 and not shooter_blocked)
-    shooter_collision_marker = bool(shooter and ordinary and action_move is not None and _observed_anchor_blocked(state.entities, actor, (ax, ay)) and (current_adjacent_target or ranged_marker_legal))
+    shooter_collision_marker = bool(
+        shooter and ordinary and action_move is not None
+        and _observed_anchor_blocked(state.entities, actor, (ax, ay))
+        and (current_adjacent_target or ranged_marker_legal)
+    )
     adjacency_x, adjacency_y = (actor.x, actor.y) if shooter_collision_marker and actor else (ax, ay)
     adjacent = bool(actor and target and _entities_adjacent(actor, adjacency_x, adjacency_y, target))
+
     if mighty_slam:
         typ = "ABILITY"
     elif waits:
@@ -1186,10 +1448,14 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
     elif carriers:
         typ = "ABILITY"
     elif any(c.opcode == "PROC" and c.code == "badmorale" for c in cmds):
+        # Bad morale consumes the creature turn without a player/PvE policy choice.
         typ = "FORCED_EVENT"
     elif rune_speed_activations:
         typ = "ABILITY"
     elif any(c.opcode in {"Y_RECORD", "Z_RECORD", "X_RECORD"} for c in cmds):
+        # Corpus-only inference: Y is observed on invisibility creatures; z/x on siphonmana.
+        # We classify only the high-level action family (ABILITY), while the exact state
+        # mutation remains semantic uncertainty until independently decoded.
         typ = "ABILITY"
     elif any(c.opcode in {"SPAWN_ENTITY", "P_RECORD"} for c in cmds):
         typ = "HERO_ACTION" if actor and actor.is_hero else "ABILITY"
@@ -1204,23 +1470,117 @@ def _action_from_commands(actor_uid: int, cmds: list[LowLevelCommand], state: Ba
         typ = "MOVE"
     elif final_move and actor and (actor.x, actor.y) == (final_move.x, final_move.y):
         typ = "PASS"
-    elif actor and actor.is_hero and len(cmds) == 1 and cmds[0].opcode == "STATE" and cmds[0].actor_uid == actor_uid and cmds[0].code == "0100":
+    elif (
+        actor
+        and actor.is_hero
+        and len(cmds) == 1
+        and cmds[0].opcode == "STATE"
+        and cmds[0].actor_uid == actor_uid
+        and cmds[0].code == "0100"
+    ):
+        # Only one such no-op decision exists in the 866-battle corpus. `i...0100` is the
+        # normal end-of-action marker, so the raw protocol alone cannot prove whether this
+        # is DEFEND or another no-op. HeroesWM exposes a defend action; retain the useful
+        # high-level label but keep it explicitly corpus-inferred in reports/tests.
         typ = "DEFEND"
     else:
         typ = "UNKNOWN"
+
     destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
     resolved_melee = None
     if typ == "MELEE_ATTACK" and shooter_collision_marker and actor is not None:
         resolved_melee = (actor.x, actor.y)
     elif typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
-        resolved_melee = _resolve_special_free_unique_melee_anchor(state.entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds)
+        resolved_melee = _resolve_special_free_unique_melee_anchor(
+            state.entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
+        )
     destination_x = resolved_melee[0] if resolved_melee is not None else (destination_move.x if destination_move else None)
     destination_y = resolved_melee[1] if resolved_melee is not None else (destination_move.y if destination_move else None)
-    return (typ, target_uid, teleports[0].x if teleports else (carriers[0].x if carriers else destination_x), teleports[0].y if teleports else (carriers[0].y if carriers else destination_y), first_move.x if first_move else None, first_move.y if first_move else None, special_codes)
+    return (
+        typ, target_uid,
+        teleports[0].x if teleports else (carriers[0].x if carriers else destination_x),
+        teleports[0].y if teleports else (carriers[0].y if carriers else destination_y),
+        first_move.x if first_move else None, first_move.y if first_move else None,
+        special_codes,
+    )
 
 
-def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppress_actor_move_uid: int | None = None) -> None:
+
+def _entity_blocks_cell(e: RawEntity) -> bool:
+    # Hidden stacks are observed sharing raw coordinates with visible combatants in the
+    # supplied corpus; treating them as ordinary blockers creates false overlap failures.
+    return e.alive and not e.is_hero and "hidden" not in e.abilities
+
+
+def _occupied_cells_for_anchor(e: RawEntity, x: int, y: int) -> set[tuple[int, int]]:
+    size = 2 if e.is_big else 1
+    return {(x + dx, y + dy) for dx in range(size) for dy in range(size)}
+
+
+def _resolve_observed_big_anchor(
+    entities: dict[int, RawEntity], e: RawEntity, raw_x: int, raw_y: int
+) -> tuple[int, int]:
+    """Resolve an overloaded m-record cell to a canonical 2x2 top-left anchor.
+
+    Static M records are overwhelmingly consistent with top-left anchors.  During actions,
+    however, a large stack can emit mXXYY where using XX,YY directly as top-left would put
+    it on top of another visible stack.  Interpret the raw cell as one of the four cells
+    occupied by the destination 2x2 footprint *only when direct placement is impossible*.
+    This preserves the raw coordinate convention in ordinary cases and avoids guessing
+    when multiple interpretations remain equally plausible.
+    """
+    if not e.is_big:
+        return raw_x, raw_y
+
+    blockers: set[tuple[int, int]] = set()
+    for other in entities.values():
+        if other.uid == e.uid or not _entity_blocks_cell(other):
+            continue
+        blockers.update(_occupied_cells_for_anchor(other, other.x, other.y))
+
+    def legal(anchor: tuple[int, int]) -> bool:
+        x, y = anchor
+        if x < 1 or y < 1:
+            return False
+        return not (_occupied_cells_for_anchor(e, x, y) & blockers)
+
+    direct = (raw_x, raw_y)
+    if legal(direct):
+        return direct
+
+    candidates = [
+        (raw_x, raw_y),
+        (raw_x - 1, raw_y),
+        (raw_x, raw_y - 1),
+        (raw_x - 1, raw_y - 1),
+    ]
+    legal_candidates = [c for c in candidates if legal(c)]
+    if not legal_candidates:
+        return direct
+
+    # Preserve continuity with the previous canonical top-left anchor.  Chebyshev distance
+    # matches the square-grid movement metric; Manhattan distance and candidate order are
+    # deterministic tie breakers, not additional game-mechanic assumptions.
+    def score(c: tuple[int, int]) -> tuple[int, int, int]:
+        dx, dy = abs(c[0] - e.x), abs(c[1] - e.y)
+        return max(dx, dy), dx + dy, candidates.index(c)
+
+    return min(legal_candidates, key=score)
+
+
+def _apply_command(
+    entities: dict[int, RawEntity],
+    c: LowLevelCommand,
+    *,
+    suppress_actor_move_uid: int | None = None,
+) -> None:
     if c.opcode == "MOVE" and c.actor_uid in entities and c.x is not None and c.y is not None:
+        # `mUUUXXYY` is overloaded by the battle protocol.  For a true MOVE or a
+        # melee attack it is the actor's board position, but ordinary ranged attacks,
+        # WAIT/DEFEND and many casts also emit an m-record without actually relocating
+        # the stack.  Context is only known after the complete decision chunk has been
+        # seen, so callers may suppress the active actor's m-record while still applying
+        # reaction/forced movement records belonging to other UIDs.
         if suppress_actor_move_uid is not None and c.actor_uid == suppress_actor_move_uid:
             return
         e = entities[c.actor_uid]
@@ -1247,6 +1607,8 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
         entities[c.target_uid].x = c.x
         entities[c.target_uid].y = c.y
     elif c.opcode == "SPECIAL" and c.code == "phm" and _validated_phantom_forces(c, entities):
+        # SPAWN_ENTITY immediately before Sphm is authoritative for clone stats/position.
+        # Sphm contributes the validated source link and effective mana consumption.
         actor = entities[int(c.actor_uid)]
         actor.mana = max(0, actor.mana - int(c.value or 0))
     elif c.opcode == "SPECIAL" and c.code == "rsd" and _validated_raise_dead(c, entities):
@@ -1259,6 +1621,8 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
         actor.effects["msl"] = "observed:Smsl cooldown"
         actor.effect_turns["msl"] = 3
     elif c.opcode == "SPECIAL" and c.code == "bom" and _validated_gribbomb_bomb(c, entities):
+        # Exact observed self-destruction only. Adjacent target HP deltas are still applied
+        # exclusively from the following raw DAMAGE records; no Earth-damage formula lives here.
         actor = entities[int(c.actor_uid)]
         actor.count = 0
         actor.top_hp = 0
@@ -1271,10 +1635,16 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
         if "manadrain" in set(actor.abilities) and actor.max_hp > 0 and int(c.amount) % int(actor.max_hp) == 0:
             actor.apply_heal(int(c.amount))
     elif c.opcode == "I_RECORD" and _validated_pawstrike_i(c, entities):
+        # Exact observed consequence. Physical displacement is authoritative in the
+        # preceding b/B record; ATB reset happens even if that displacement is blocked.
         entities[int(c.actor_uid)].atb = 0.0
     elif c.opcode == "Z_RECORD" and c.actor_uid in entities and c.target_uid in entities and c.amount is not None:
         actor=entities[c.actor_uid]; target=entities[c.target_uid]
-        if "manadrain" in set(actor.abilities) and "caster" in set(target.abilities) and "statix" not in set(target.abilities) and "warmachine" not in set(target.abilities) and 0 <= int(c.amount) <= max(0,int(target.mana)):
+        if (
+            "manadrain" in set(actor.abilities) and "caster" in set(target.abilities)
+            and "statix" not in set(target.abilities) and "warmachine" not in set(target.abilities)
+            and 0 <= int(c.amount) <= max(0,int(target.mana))
+        ):
             target.mana=max(0,int(target.mana)-int(c.amount))
     elif c.opcode == "SPECIAL" and c.code in {"enr", "blt"} and c.actor_uid in entities and c.amount is not None:
         actor = entities[c.actor_uid]
@@ -1297,13 +1667,18 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
             target.effects[key] = c.raw
             target.effect_turns[key] = 1 if c.code == "sta" else 2
     elif c.opcode == "SPECIAL" and c.code in STATUS_WIRE_TO_BASE and c.target_uid in entities:
+        # Raw observed magnitude/duration are authoritative for the current state.  Only a
+        # unique spellbook+nonzero-cost match is allowed to mutate observed hero mana.
         target = entities[c.target_uid]
         target.effects[c.code] = c.raw
         if c.actor_uid in entities and c.value and c.value > 0:
             actor = entities[c.actor_uid]
             if _spellbook_status_matches(actor, c.code, int(c.value)):
                 actor.mana = max(0, actor.mana - int(c.value))
-    elif c.opcode == "SPECIAL" and (c.code in SPECIAL_DIRECT_DAMAGE_CODES or c.code == "psc") and c.target_uid in entities and c.amount is not None:
+    elif (
+        c.opcode == "SPECIAL" and (c.code in SPECIAL_DIRECT_DAMAGE_CODES or c.code == "psc")
+        and c.target_uid in entities and c.amount is not None
+    ):
         entities[c.target_uid].apply_damage(abs(int(c.amount)))
         if c.code in SPECIAL_DIRECT_DAMAGE_CODES and c.actor_uid in entities and c.value is not None:
             actor = entities[c.actor_uid]
@@ -1316,6 +1691,9 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
         target.x, target.y = int(c.x), int(c.y)
     elif c.opcode == "RUNE_SPEED_ACTIVATE" and c.actor_uid in entities:
         e = entities[c.actor_uid]
+        # Exact only for server-declared rune-capable stacks; semantic gating handles
+        # malformed/drifted records separately. Activation consumes the one observed use
+        # and grants the immediately following action a 2x movement budget.
         if e.rune_speed_available and not e.rune_speed_consumed:
             e.rune_speed_active = True
             e.rune_speed_consumed = True
@@ -1331,26 +1709,99 @@ def _apply_command(entities: dict[int, RawEntity], c: LowLevelCommand, *, suppre
         if "endurance" in set(e.abilities) and float(e.speed) < 8.0:
             e.speed = min(8.0, float(e.speed) + 1.0)
     elif c.opcode == "HIDE_OR_DEATH" and c.actor_uid in entities:
+        # Corpus invariant: across all 607 observed hNNN records, the referenced UID never
+        # receives another ordinary board action afterwards. Treat it as removal/death.
         e = entities[c.actor_uid]
         e.count = 0
         e.top_hp = 0
         e.alive = False
     elif c.opcode == "SPECIAL" and c.actor_uid in entities:
+        # Store the latest raw server record for the mechanic code. This is intentionally
+        # descriptive, not an attempted reimplementation of the mechanic.
         entities[c.actor_uid].effects[c.code] = c.raw
 
 
-def _apply_decision_commands(entities: dict[int, RawEntity], actor_uid: int, action_type: str, commands: list[LowLevelCommand]) -> None:
-    suppress = actor_uid if action_type not in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
+
+def _decision_actor_move_is_position(action_type: str) -> bool:
+    """Whether active-actor MOVE records are confirmed to mutate final board position.
+
+    The supplied raw corpus proves that m-records are contextual: 10,625/10,627 ranged
+    attacks contain one, as do most WAIT/DEFEND actions, although those actions do not
+    normally move the stack.  MOVE and melee actions do use m as board movement.
+    Generic ABILITY keeps it for now because many observed mobility abilities encode
+    their relocation this way; those rows remain semantically unresolved until exact
+    ability plugins are added.
+    """
+    return action_type in {"MOVE", "MELEE_ATTACK", "ABILITY"}
+
+
+def _apply_decision_commands(
+    entities: dict[int, RawEntity],
+    actor_uid: int,
+    action_type: str,
+    commands: list[LowLevelCommand],
+) -> None:
+    attack_move = _attack_move(actor_uid, commands) if action_type == "MELEE_ATTACK" else None
+    actor_for_move = entities.get(actor_uid)
+    first_damage = next((c for c in commands if c.opcode == "DAMAGE" and c.actor_uid == actor_uid), None)
+    target_for_move = entities.get(int(first_damage.target_uid)) if first_damage is not None and first_damage.target_uid is not None else None
+    ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in commands)
+    shooter_collision_marker = bool(
+        actor_for_move is not None and target_for_move is not None and ordinary and attack_move is not None
+        and (actor_for_move.shots > 0 or "shooter" in set(actor_for_move.abilities))
+        and attack_move.x is not None and attack_move.y is not None
+        and _observed_anchor_blocked(entities, actor_for_move, (attack_move.x, attack_move.y))
+        and _entities_adjacent(actor_for_move, actor_for_move.x, actor_for_move.y, target_for_move)
+    )
+    suppress = actor_uid if shooter_collision_marker or not _decision_actor_move_is_position(action_type) else None
+    actor_before_pos = (entities[actor_uid].x, entities[actor_uid].y) if actor_uid in entities else None
+    shieldbash_proc, shieldbash_target = _observed_shieldbash_proc(commands, entities, actor_uid)
+    corrected_attack_anchor = None
+    if not shooter_collision_marker and attack_move is not None and attack_move.x is not None and attack_move.y is not None and first_damage is not None:
+        corrected_attack_anchor = _resolve_special_free_unique_melee_anchor(
+            entities, actor_uid, first_damage.target_uid, attack_move.x, attack_move.y, commands
+        )
     for c in commands:
-        _apply_command(entities, c, suppress_actor_move_uid=suppress)
+        applied = c
+        if c is attack_move and corrected_attack_anchor is not None and (c.x, c.y) != corrected_attack_anchor:
+            applied = copy.copy(c)
+            applied.x, applied.y = corrected_attack_anchor
+        _apply_command(entities, applied, suppress_actor_move_uid=suppress)
+    if actor_uid in entities and "entrenchment" in set(entities[actor_uid].abilities):
+        actor=entities[actor_uid]
+        moved = actor_before_pos is not None and (actor.x,actor.y) != actor_before_pos
+        if moved:
+            actor.effects.pop("proc_entrenchment",None); actor.effect_values.pop("proc_entrenchment",None)
+        else:
+            actor.effects["proc_entrenchment"]="observed:stationary action"; actor.effect_values["proc_entrenchment"]=0.5
+
+    if action_type == "MELEE_ATTACK" and shieldbash_proc and shieldbash_target in entities:
+        target = entities[int(shieldbash_target)]
+        if target.alive:
+            # Observed marker only. This tag persists until that target is activated, so
+            # next-actor training can learn the actual initiative delay without inventing
+            # a fixed ATB delta.
+            target.effects["proc_shieldbash"] = "observed:o"
+
+    # The wire stream does not emit an explicit ammo counter delta for ordinary shots.
+    # The new raw corpus gives an independent cross-check through Phantom Forces: the
+    # authoritative spawned clone carries the source stack's current remaining shots.
+    # Decrementing one shot per ranged decision (two for the server ability `doubleshoot`)
+    # reproduces that value in 238/250 observed clone spawns; the remaining 12 differ by
+    # exactly one and belong to still-semantic special-action histories.
     if action_type == "RANGED_ATTACK" and actor_uid in entities:
         actor = entities[actor_uid]
         if actor.shots > 0:
             spent = 2 if "doubleshoot" in set(actor.abilities) else 1
             actor.shots = max(0, actor.shots - spent)
 
-
 def _tick_observed_activation_effects(e: RawEntity) -> None:
+    """Expire target-activation-counted proc effects after the stack acts.
+
+    Stoning lasts through one affected activation; Crippling Wound through two.
+    We keep base speed/initiative immutable and expose the duration in compact state,
+    so downstream feature code can apply the modifier without irreversible drift.
+    """
     for key in ("proc_stone", "proc_cripple", "msl"):
         if key not in e.effect_turns:
             continue
@@ -1370,15 +1821,35 @@ def build_decisions(battle_id: str, entities: dict[int, RawEntity], turns: list[
         state_before: BattleSnapshot | None = None
         if active_uid is not None:
             state_before = BattleSnapshot(battle_id, decision_index, turn.server_turn, active_uid, perspective_owner, copy.deepcopy(working))
+
         for cmd in turn.commands:
             if cmd.opcode == "ACTIVATE":
+                # Everything since the previous ACTIVATE belongs to the currently active unit.
                 if active_uid is not None and pending and state_before is not None:
                     action_type, target, dx, dy, fx, fy, scodes = _action_from_commands(active_uid, pending, state_before)
                     _apply_decision_commands(working, active_uid, action_type, pending)
                     after = BattleSnapshot(battle_id, decision_index, turn.server_turn, cmd.actor_uid, perspective_owner, copy.deepcopy(working))
                     actor_owner = state_before.entities.get(active_uid).owner if active_uid in state_before.entities else None
                     side = "PLAYER" if perspective_owner is not None and actor_owner == perspective_owner else "PVE"
-                    decisions.append(Decision(battle_id=battle_id, decision_index=decision_index, server_turn=turn.server_turn, actor_uid=active_uid, actor_owner=actor_owner, perspective_owner=perspective_owner, side=side, action_type=action_type, target_uid=target, destination_x=dx, destination_y=dy, first_move_x=fx, first_move_y=fy, special_codes=scodes, raw="".join(c.raw for c in pending), state_before=state_before, state_after=after))
+                    decisions.append(Decision(
+                        battle_id=battle_id,
+                        decision_index=decision_index,
+                        server_turn=turn.server_turn,
+                        actor_uid=active_uid,
+                        actor_owner=actor_owner,
+                        perspective_owner=perspective_owner,
+                        side=side,
+                        action_type=action_type,
+                        target_uid=target,
+                        destination_x=dx,
+                        destination_y=dy,
+                        first_move_x=fx,
+                        first_move_y=fy,
+                        special_codes=scodes,
+                        raw="".join(c.raw for c in pending),
+                        state_before=state_before,
+                        state_after=after,
+                    ))
                     decision_index += 1
                 if active_uid is not None and active_uid in working:
                     _tick_observed_activation_effects(working[active_uid])
@@ -1390,15 +1861,159 @@ def build_decisions(battle_id: str, entities: dict[int, RawEntity], turns: list[
                 pending = []
                 state_before = BattleSnapshot(battle_id, decision_index, turn.server_turn, active_uid, perspective_owner, copy.deepcopy(working)) if active_uid is not None else None
                 continue
+
             pending.append(cmd)
+            # Mutations are applied only once the full decision is known.  This is required
+            # to disambiguate contextual m-records from real movement.
+
+        # Do not force-finalize a trailing chunk without a following ACTIVATE. In this protocol
+        # the final chunk frequently contains only battle-result text, while the meaningful action
+        # is finalized by the preceding C record.
+
     return decisions
 
 
+
 def _compact_state(entities: dict[int, RawEntity]) -> list[dict]:
+    """Return a small immutable representation of the current observed state.
+
+    This is intentionally a list of primitives instead of a deepcopy of RawEntity objects.
+    Corpus building writes each record immediately, so memory stays O(one battle).
+    """
     return [entities[uid].compact() for uid in sorted(entities)]
 
 
-def iter_compact_decisions(battle_id: str, entities: dict[int, RawEntity], turns: list[TurnRecord], perspective_owner: int | None, *, player_won: bool | None = None) -> Iterator[dict]:
+def _action_from_compact(
+    actor_uid: int,
+    cmds: list[LowLevelCommand],
+    before_entities: list[dict],
+) -> tuple[str, int | None, int | None, int | None, int | None, int | None, list[str]]:
+    by_uid = {int(e["uid"]): e for e in before_entities}
+    actor = by_uid.get(actor_uid)
+    moves = [c for c in cmds if c.opcode == "MOVE" and c.actor_uid == actor_uid]
+    dealt = [c for c in cmds if c.opcode == "DAMAGE" and c.actor_uid == actor_uid]
+    waits = [c for c in cmds if c.opcode == "WAIT" and c.actor_uid == actor_uid]
+    defends = [c for c in cmds if c.opcode == "DEFEND" and c.actor_uid == actor_uid]
+    teleports = [c for c in cmds if c.opcode == "TELEPORT" and c.actor_uid == actor_uid]
+    specials = [c for c in cmds if c.opcode == "SPECIAL"]
+    mana_feed = next((c for c in specials if c.code == "mfd" and c.actor_uid == actor_uid and c.target_uid is not None), None)
+    mighty_slam = next((c for c in specials if c.code == "msl" and c.actor_uid == actor_uid), None)
+    rune_speed_activations = [c for c in cmds if c.opcode == "RUNE_SPEED_ACTIVATE"]
+    carriers = [c for c in cmds if c.opcode == "CARRIER_RELOCATE"]
+    special_codes = [c.code for c in specials] + (["car"] if carriers else []) + (["rn2"] if rune_speed_activations else []) + (["tel"] if teleports else [])
+    first_move = moves[0] if moves else None
+    final_move = moves[-1] if moves else None
+    attack_move = _attack_move(actor_uid, cmds) if dealt else None
+    action_move = attack_move if dealt else final_move
+    phantom = next((c for c in specials if c.code == "phm" and c.target_uid is not None), None)
+    target_uid = dealt[0].target_uid if dealt else (teleports[0].target_uid if teleports else (carriers[0].target_uid if carriers else (mana_feed.target_uid if mana_feed else (phantom.target_uid if phantom else None))))
+    target = by_uid.get(int(target_uid)) if target_uid is not None else None
+    ax = action_move.x if action_move else (int(actor["x"]) if actor else 0)
+    ay = action_move.y if action_move else (int(actor["y"]) if actor else 0)
+    abilities = set(actor.get("abilities", [])) if actor else set()
+    ordinary = not any(c.opcode == "SPECIAL" and c.code != "def" for c in cmds)
+    shooter = bool(actor and (int(actor.get("shots", 0)) > 0 or "shooter" in abilities))
+    current_adjacent_target = bool(
+        actor and target and _entities_adjacent(actor, int(actor["x"]), int(actor["y"]), target)
+    )
+    shooter_blocked = bool(actor and any(
+        other.get("alive", True) and not other.get("is_hero") and not other.get("is_hidden", False)
+        and int(other.get("owner", 0)) != int(actor.get("owner", 0))
+        and _entities_adjacent(actor, int(actor["x"]), int(actor["y"]), other)
+        for other in before_entities if int(other.get("uid", -1)) != int(actor.get("uid", -2))
+    ))
+    ranged_marker_legal = bool(actor and int(actor.get("shots", 0)) > 0 and not shooter_blocked)
+    shooter_collision_marker = bool(
+        shooter and ordinary and action_move is not None
+        and _observed_anchor_blocked(before_entities, actor, (ax, ay))
+        and (current_adjacent_target or ranged_marker_legal)
+    )
+    adjacency_x, adjacency_y = (int(actor["x"]), int(actor["y"])) if shooter_collision_marker and actor else (ax, ay)
+    adjacent = bool(actor and target and _entities_adjacent(actor, adjacency_x, adjacency_y, target))
+
+    if mighty_slam:
+        typ = "ABILITY"
+    elif waits:
+        typ = "WAIT"
+    elif defends:
+        typ = "DEFEND"
+    elif dealt:
+        if actor and bool(actor.get("is_hero")):
+            typ = "HERO_ACTION"
+        elif actor and (int(actor.get("shots", 0)) > 0 or "shooter" in abilities) and not adjacent:
+            typ = "RANGED_ATTACK"
+        else:
+            typ = "MELEE_ATTACK"
+    elif teleports:
+        typ = "HERO_ACTION" if actor and bool(actor.get("is_hero")) else "ABILITY"
+    elif mana_feed:
+        typ = "ABILITY"
+    elif carriers:
+        typ = "ABILITY"
+    elif any(c.opcode == "PROC" and c.code == "badmorale" for c in cmds):
+        typ = "FORCED_EVENT"
+    elif rune_speed_activations:
+        typ = "ABILITY"
+    elif any(c.opcode in {"Y_RECORD", "Z_RECORD", "X_RECORD"} for c in cmds):
+        typ = "ABILITY"
+    elif any(c.opcode in {"SPAWN_ENTITY", "P_RECORD"} for c in cmds):
+        typ = "HERO_ACTION" if actor and bool(actor.get("is_hero")) else "ABILITY"
+    elif specials:
+        if actor and bool(actor.get("is_hero")):
+            typ = "HERO_ACTION"
+        elif actor and ("caster" in abilities or int(actor.get("mana", 0)) > 0):
+            typ = "CAST_OR_ABILITY"
+        else:
+            typ = "ABILITY"
+    elif final_move and actor and (int(actor["x"]), int(actor["y"])) != (final_move.x, final_move.y):
+        typ = "MOVE"
+    elif final_move and actor and (int(actor["x"]), int(actor["y"])) == (final_move.x, final_move.y):
+        typ = "PASS"
+    elif (
+        actor
+        and bool(actor.get("is_hero"))
+        and len(cmds) == 1
+        and cmds[0].opcode == "STATE"
+        and cmds[0].actor_uid == actor_uid
+        and cmds[0].code == "0100"
+    ):
+        typ = "DEFEND"
+    else:
+        typ = "UNKNOWN"
+
+    destination_move = action_move if typ in {"MOVE", "MELEE_ATTACK", "ABILITY"} else None
+    resolved_melee = None
+    if typ == "MELEE_ATTACK" and shooter_collision_marker and actor is not None:
+        resolved_melee = (int(actor["x"]), int(actor["y"]))
+    elif typ == "MELEE_ATTACK" and attack_move is not None and attack_move.x is not None and attack_move.y is not None:
+        resolved_melee = _resolve_special_free_unique_melee_anchor(
+            before_entities, actor_uid, target_uid, attack_move.x, attack_move.y, cmds
+        )
+    destination_x = resolved_melee[0] if resolved_melee is not None else (destination_move.x if destination_move else None)
+    destination_y = resolved_melee[1] if resolved_melee is not None else (destination_move.y if destination_move else None)
+    return (
+        typ, target_uid,
+        teleports[0].x if teleports else (carriers[0].x if carriers else destination_x),
+        teleports[0].y if teleports else (carriers[0].y if carriers else destination_y),
+        first_move.x if first_move else None, first_move.y if first_move else None,
+        special_codes,
+    )
+
+
+def iter_compact_decisions(
+    battle_id: str,
+    entities: dict[int, RawEntity],
+    turns: list[TurnRecord],
+    perspective_owner: int | None,
+    *,
+    player_won: bool | None = None,
+) -> Iterator[dict]:
+    """Yield compact S->A->S' records without materializing all battle snapshots.
+
+    Exact core mutations currently applied from raw protocol: movement, damage and spawn.
+    All special/unknown records remain attached to the row for future mechanics plugins.
+    The iterator never treats the old historical state parser as ground truth.
+    """
     working = copy.deepcopy(entities)
     active_uid: int | None = None
     pending: list[LowLevelCommand] = []
@@ -1406,21 +2021,55 @@ def iter_compact_decisions(battle_id: str, entities: dict[int, RawEntity], turns
     decision_index = 0
     semantic_unresolved_total = 0
     semantic_unresolved_before = 0
+
     for turn in turns:
         for cmd in turn.commands:
             if cmd.opcode == "ACTIVATE":
                 if active_uid is not None and pending and before_entities is not None:
-                    state = BattleSnapshot(battle_id, decision_index, turn.server_turn, active_uid, perspective_owner, {int(e["uid"]): working[int(e["uid"])] for e in before_entities if int(e["uid"]) in working})
-                    action_type, target, dx, dy, fx, fy, scodes = _action_from_commands(active_uid, pending, state)
+                    action_type, target, dx, dy, fx, fy, scodes = _action_from_compact(
+                        active_uid, pending, before_entities
+                    )
                     actor_before = next((e for e in before_entities if int(e["uid"]) == active_uid), None)
                     actor_owner = int(actor_before["owner"]) if actor_before is not None else None
-                    side = "PLAYER" if perspective_owner is not None and actor_owner == perspective_owner else "PVE"
+                    side = (
+                        "PLAYER"
+                        if perspective_owner is not None and actor_owner == perspective_owner
+                        else "PVE"
+                    )
                     semantic_flags = _decision_semantic_unresolved_flags(pending, working, active_uid)
                     current_unresolved = sum(semantic_flags)
                     _apply_decision_commands(working, active_uid, action_type, pending)
-                    yield {"battle_id": battle_id, "decision_index": decision_index, "server_turn": turn.server_turn, "actor_uid": active_uid, "actor_owner": actor_owner, "perspective_owner": perspective_owner, "side": side, "action_type": action_type, "target_uid": target, "destination_x": dx, "destination_y": dy, "first_move_x": fx, "first_move_y": fy, "special_codes": scodes, "raw": "".join(c.raw for c in pending), "raw_opcodes": [c.opcode for c in pending], "has_unknown_command": any(c.opcode == "UNKNOWN" for c in pending), "semantic_unresolved_opcodes": [c.opcode for c, unresolved in zip(pending, semantic_flags) if unresolved], "semantic_unresolved_records_before": semantic_unresolved_before, "semantic_unresolved_records_after": semantic_unresolved_total + current_unresolved, "state_semantically_exact_core": semantic_unresolved_before == 0, "player_won": player_won, "state_before": before_entities, "state_after": _compact_state(working)}
+                    yield {
+                        "battle_id": battle_id,
+                        "decision_index": decision_index,
+                        "server_turn": turn.server_turn,
+                        "actor_uid": active_uid,
+                        "actor_owner": actor_owner,
+                        "perspective_owner": perspective_owner,
+                        "side": side,
+                        "action_type": action_type,
+                        "target_uid": target,
+                        "destination_x": dx,
+                        "destination_y": dy,
+                        "first_move_x": fx,
+                        "first_move_y": fy,
+                        "special_codes": scodes,
+                        "raw": "".join(c.raw for c in pending),
+                        "raw_opcodes": [c.opcode for c in pending],
+                        "has_unknown_command": any(c.opcode == "UNKNOWN" for c in pending),
+                        "semantic_unresolved_opcodes": [
+                            c.opcode for c, unresolved in zip(pending, semantic_flags) if unresolved
+                        ],
+                        "semantic_unresolved_records_before": semantic_unresolved_before,
+                        "semantic_unresolved_records_after": semantic_unresolved_total + current_unresolved,
+                        "state_semantically_exact_core": semantic_unresolved_before == 0,
+                        "player_won": player_won,
+                        "state_before": before_entities,
+                        "state_after": _compact_state(working),
+                    }
                     decision_index += 1
                     semantic_unresolved_total += current_unresolved
+
                 if active_uid is not None and active_uid in working:
                     _tick_observed_activation_effects(working[active_uid])
                 active_uid = cmd.actor_uid
@@ -1432,18 +2081,25 @@ def iter_compact_decisions(battle_id: str, entities: dict[int, RawEntity], turns
                 before_entities = _compact_state(working) if active_uid is not None else None
                 semantic_unresolved_before = semantic_unresolved_total
                 continue
+
             pending.append(cmd)
+            # Semantic uncertainty is resolved at decision scope because mass status casts
+            # require the first non-zero mana record to classify later zero-cost records.
+            # Delay state mutation until the action type is known; see contextual m-record
+            # handling in _apply_decision_commands().
 
 
 def iter_battle_decisions(battle_dir: Path) -> Iterator[dict]:
+    """Parse one raw battle directory and stream compact decision records."""
     init_payload = (battle_dir / "init.txt").read_text(encoding="utf-8", errors="replace")
     turns_payload = (battle_dir / "turns0.txt").read_text(encoding="utf-8", errors="replace")
     entities, _warnings = parse_initial_entities(init_payload)
     turns = parse_turns(turns_payload)
     owner = _perspective_owner(entities)
     won = _player_won(init_payload, entities, owner)
-    yield from iter_compact_decisions(battle_dir.name, entities, turns, owner, player_won=won)
-
+    yield from iter_compact_decisions(
+        battle_dir.name, entities, turns, owner, player_won=won
+    )
 
 def parse_replay(battle_dir: Path) -> Replay:
     init_path = battle_dir / "init.txt"
@@ -1451,11 +2107,23 @@ def parse_replay(battle_dir: Path) -> Replay:
     init_payload = init_path.read_text(encoding="utf-8", errors="replace")
     turns_payload = turns_path.read_text(encoding="utf-8", errors="replace")
     battle_id = battle_dir.name
+
     entities, warnings = parse_initial_entities(init_payload)
     turns = parse_turns(turns_payload)
     owner = _perspective_owner(entities)
     decisions = build_decisions(battle_id, entities, turns, owner)
-    return Replay(battle_id=battle_id, initial_entities=entities, turns=turns, decisions=decisions, perspective_owner=owner, player_won=_player_won(init_payload, entities, owner), tooltips=parse_tooltips(init_payload), raw_init_sha256=hashlib.sha256(init_payload.encode("utf-8", "replace")).hexdigest(), raw_turns_sha256=hashlib.sha256(turns_payload.encode("utf-8", "replace")).hexdigest(), parse_warnings=warnings)
+    return Replay(
+        battle_id=battle_id,
+        initial_entities=entities,
+        turns=turns,
+        decisions=decisions,
+        perspective_owner=owner,
+        player_won=_player_won(init_payload, entities, owner),
+        tooltips=parse_tooltips(init_payload),
+        raw_init_sha256=hashlib.sha256(init_payload.encode("utf-8", "replace")).hexdigest(),
+        raw_turns_sha256=hashlib.sha256(turns_payload.encode("utf-8", "replace")).hexdigest(),
+        parse_warnings=warnings,
+    )
 
 
 def replay_to_summary(replay: Replay) -> dict:
@@ -1467,4 +2135,20 @@ def replay_to_summary(replay: Replay) -> dict:
             command_count += 1
             opcodes[c.opcode] = opcodes.get(c.opcode, 0) + 1
             unknown_commands += c.opcode == "UNKNOWN"
-    return {"battle_id": replay.battle_id, "entities": len(replay.initial_entities), "turn_records": len(replay.turns), "max_server_turn": max((t.server_turn for t in replay.turns), default=0), "decisions": len(replay.decisions), "player_decisions": sum(d.side == "PLAYER" for d in replay.decisions), "pve_decisions": sum(d.side == "PVE" for d in replay.decisions), "known_action_decisions": sum(d.action_type != "UNKNOWN" for d in replay.decisions), "unknown_action_decisions": sum(d.action_type == "UNKNOWN" for d in replay.decisions), "commands": command_count, "unknown_commands": unknown_commands, "command_opcodes": opcodes, "perspective_owner": replay.perspective_owner, "player_won": replay.player_won, "warnings": replay.parse_warnings}
+    return {
+        "battle_id": replay.battle_id,
+        "entities": len(replay.initial_entities),
+        "turn_records": len(replay.turns),
+        "max_server_turn": max((t.server_turn for t in replay.turns), default=0),
+        "decisions": len(replay.decisions),
+        "player_decisions": sum(d.side == "PLAYER" for d in replay.decisions),
+        "pve_decisions": sum(d.side == "PVE" for d in replay.decisions),
+        "known_action_decisions": sum(d.action_type != "UNKNOWN" for d in replay.decisions),
+        "unknown_action_decisions": sum(d.action_type == "UNKNOWN" for d in replay.decisions),
+        "commands": command_count,
+        "unknown_commands": unknown_commands,
+        "command_opcodes": opcodes,
+        "perspective_owner": replay.perspective_owner,
+        "player_won": replay.player_won,
+        "warnings": replay.parse_warnings,
+    }
