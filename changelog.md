@@ -16,6 +16,9 @@ Historical entries through **2026-08-11** are preserved verbatim in [`docs/chang
 - Commit: `8bd394edb26e6f17fb5fe1dc4cd05736250ef2e9` — `fix: recover local unique blocked melee landing`.
   - Narrowed SPECIAL-free blocked melee-marker recovery to the evidence-backed local-unique landing class identified by the corpus diagnostics, with matching Python and C++ protocol regressions.
   - Kept SPECIAL-owned decisions outside the generic repair path and preserved the existing conservative ambiguity handling; hosted full-corpus non-regression remains an external validation gate rather than an assumption.
+- Commit: `3367e802d9448bb008418e78f7a44f42ab99186c` — `test: isolate stationary friendly-marker geometry class`.
+  - Refined the corpus evidence for the next blocked-melee correction into an exact residual class: all raw-marker blockers must be same-owner, the attack must have exactly one physical damage target, the actor's current anchor must already be legal and target-adjacent, and neither the existing radius-1 nor radius-2 unique landing resolver may apply.
+  - The diagnostic additionally requires the current decoder to resolve away from the stationary anchor and the observed action to remain unrepresentable, preventing already-fixed shooter/unique-landing cases from being reclassified. Decoder/simulator semantics and all acceptance gates remain unchanged.
 
 ### M11 selector threshold canonicalization
 
