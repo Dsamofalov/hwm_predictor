@@ -1,7 +1,7 @@
 {
   "schema": "hwm-infra-baseline/bootstrap-v0",
   "baseline_id": "I00",
-  "captured_at": "2026-08-13T14:25:43Z",
+  "captured_at": "2026-08-13T17:46:14Z",
   "capture_timezone": "Europe/Berlin",
   "product_functional_development_frozen": true,
   "freeze_started_at": "2026-08-13T14:17:00Z",
@@ -102,8 +102,8 @@
     "active_rulesets": [],
     "required_checks_enforced": [],
     "auto_merge_enabled": false,
-    "delete_branch_on_merge_enabled": false,
-    "pull_requests_enabled": false,
+    "delete_branch_on_merge_enabled": true,
+    "pull_requests_enabled": true,
     "pull_request_creation_policy": "collaborators_only",
     "direct_push_exposure": true,
     "authenticated_permissions": {
@@ -119,7 +119,7 @@
       "rebase": true
     },
     "posture": "EXPOSED",
-    "posture_reason": "No branch protection/ruleset/required checks prevent direct push. Successful HWM status contexts are evidence on exact SHAs but are not enforced merge requirements. Repository API also reports has_pull_requests=false."
+    "posture_reason": "No branch protection/ruleset/required checks prevent direct push. Successful HWM status contexts are evidence on exact SHAs but are not enforced merge requirements. Pull requests are enabled with collaborators_only creation policy; this does not itself enforce PR-only delivery."
   },
   "workflow_branch_filters": [
     {
@@ -157,7 +157,7 @@
     {
       "path": "docs/MAIN_AGENT_TZ.md",
       "claim": "Last Geometry Evidence remains 31693648857 on 49bbe98e... with no newer geometry metric claimed.",
-      "verified": "Geometry Evidence 31702086688 succeeded on integrated main SHA 3df0d5ee...."
+      "verified": "Geometry Evidence 31702086688 succeeded on integrated main SHA 3df0d5ee4434d3cc401dba1b765a4dca068c15c1."
     },
     {
       "path": "changelog.md",
@@ -190,7 +190,7 @@
     {
       "field": "github_connector_pull_request_write_scope_after_repository_prs_are_enabled",
       "value": "UNKNOWN",
-      "reason": "PR creation returned HTTP 403 while repository has_pull_requests=false, so connector write scope cannot be isolated from the repository-level PR-disable setting inside I00."
+      "reason": "PR creation previously returned HTTP 403 before repository pull requests were enabled; connector PR write access has not yet been re-tested at this capture point."
     }
   ],
   "provenance_policy": "Current SHA, CI conclusions, branch inventory, governance and merge ancestry were resolved from GitHub API/workflow/status data. Historical/current-status prose was used only to locate drift or candidate identifiers, never as a substitute for GitHub evidence.",
