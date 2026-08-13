@@ -10,6 +10,7 @@ WORKFLOWS = ROOT / ".github" / "workflows"
 CI = WORKFLOWS / "ci.yml"
 ENTRYPOINT = ROOT / "scripts" / "ci_entrypoint_windows.ps1"
 CI_SCRIPT = ROOT / "scripts" / "ci_windows.ps1"
+MAIN_CI_SCRIPT = ROOT / "scripts" / "ci_main_windows.ps1"
 LOCAL_VALIDATE = ROOT / "scripts" / "validate_windows.ps1"
 
 
@@ -25,6 +26,8 @@ def test_all_workflow_yaml_parses():
 def test_main_ci_keeps_windows_bootstrap_out_of_yaml():
     text = CI.read_text(encoding="utf-8")
     lowered = text.lower()
+    with CI.open("r", encoding="utf-8") as fh:
+        jobs = yaml.safe_load(fh)["jobs"]
 
     assert "ubuntu-latest" not in lowered
     assert "windows-latest" not in lowered
@@ -32,19 +35,66 @@ def test_main_ci_keeps_windows_bootstrap_out_of_yaml():
     assert "hwm-windows" not in lowered
     assert "actions/setup-python" not in lowered
     assert "actions/setup-node" not in lowered
-    assert text.count("runs-on: windows-2022") == 2
-    assert ".\\scripts\\ci_entrypoint_windows.ps1 -Suite Core" in text
-    assert ".\\scripts\\ci_entrypoint_windows.ps1 -Suite Full" in text
+    assert jobs, "main CI must expose validation jobs"
+    assert all(job.get("runs-on") == "windows-2022" for job in jobs.values())
+    assert ".\\scripts\\ci_main_windows.ps1" in text
 
 
-def test_windows_ci_has_exactly_two_permanent_parallel_suites():
+def test_windows_ci_has_two_strict_aggregates_over_atomic_jobs():
     with CI.open("r", encoding="utf-8") as fh:
         parsed = yaml.safe_load(fh)
 
     jobs = parsed["jobs"]
-    assert set(jobs) == {"core", "full"}
-    assert jobs["core"]["runs-on"] == "windows-2022"
-    assert jobs["full"]["runs-on"] == "windows-2022"
+    assert {"core", "full"} <= set(jobs)
+    assert len(jobs) > 2, "Core/Full must aggregate independently scheduled atomic jobs"
+
+    expected_needs = {
+        "core": {
+            "core_pending",
+            "core_cpp_build",
+            "core_cpp_case",
+            "core_python_inventory",
+            "core_python_case",
+            "core_planner",
+            "core_runtime",
+            "core_extension",
+        },
+        "full": {
+            "full_pending",
+            "full_cpp_build",
+            "full_cpp_case",
+            "full_structural_budget",
+            "full_planner_benchmark",
+            "m11_verify",
+            "m11_temperature",
+        },
+    }
+    for aggregate, required in expected_needs.items():
+        job = jobs[aggregate]
+        assert job["runs-on"] == "windows-2022"
+        assert "always()" in job["if"]
+        assert required <= set(job["needs"])
+
+    # Dynamic matrices are execution representations of frozen inventories,
+    # not hard-coded correctness shard counts (TESTS_CANON.md).
+    assert "fromJSON(needs.core_cpp_build.outputs.cases)" in jobs["core_cpp_case"]["strategy"]["matrix"]["case"]
+    assert "fromJSON(needs.core_python_inventory.outputs.cases)" in jobs["core_python_case"]["strategy"]["matrix"]["case"]
+    assert "fromJSON(needs.full_cpp_build.outputs.cases)" in jobs["full_cpp_case"]["strategy"]["matrix"]["case"]
+
+
+def test_main_windows_ci_script_exposes_atomic_inventory_and_reducer_modes():
+    text = MAIN_CI_SCRIPT.read_text(encoding="utf-8")
+    for marker in (
+        "CppBuildInventory",
+        "CppCase",
+        "PythonInventory",
+        "PythonCase",
+        "CoreRuntimeCase",
+        "FullStructuralBudget",
+        "M11Evaluate",
+        "M11Verify",
+    ):
+        assert marker in text
 
 
 def test_windows_ci_entrypoint_preflights_powershell_syntax():
